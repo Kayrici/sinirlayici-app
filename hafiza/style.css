@@ -1,0 +1,843 @@
+/* =========================================================
+   3D HAFIZA OYUNU - NEON MOR & MACENTA TEMASI
+   Uygulama İçi Kutucuk (Widget) ve Tam Ekran Oyun Modu
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+    /* Kalıcı Neon Mor & Macenta Teması */
+    --bg-gradient: radial-gradient(circle at 50% 15%, #230d3d 0%, #0d0418 60%, #05010a 100%);
+    --surface-bg: rgba(26, 12, 44, 0.82);
+    --surface-border: rgba(217, 70, 239, 0.22);
+    --text-primary: #f5f3ff;
+    --text-secondary: #c084fc;
+    --accent: #d946ef;
+    --accent-glow: rgba(217, 70, 239, 0.45);
+    --accent-cyan: #06b6d4;
+    --cyan-glow: rgba(6, 182, 212, 0.6);
+    
+    /* Kart Ön Yüzü (Gri / Koyu Mor Mat) */
+    --card-front-bg: linear-gradient(145deg, #2a1645, #170b29);
+    --card-front-border: rgba(192, 132, 252, 0.25);
+    --card-front-shadow: 0 8px 18px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    
+    /* Kart Arka Yüzü (Döndüğünde Açılan Derin Siyah & Neon Işıltı) */
+    --card-back-bg: linear-gradient(145deg, #090214, #000000);
+    --card-back-border: #06b6d4;
+    --card-back-glow: 0 0 22px rgba(6, 182, 212, 0.75), inset 0 0 14px rgba(217, 70, 239, 0.4);
+    --card-glyph-color: #06b6d4;
+    
+    /* Durum Renkleri */
+    --color-correct: #10b981;
+    --color-correct-glow: 0 0 25px rgba(16, 185, 129, 0.8);
+    --color-wrong: #f43f5e;
+    --color-wrong-glow: 0 0 25px rgba(244, 63, 94, 0.8);
+    --color-gold: #fbbf24;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    touch-action: manipulation;
+}
+
+.viewport-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+}
+
+/* Ana Uygulama Konteyneri */
+.app-container {
+    width: 100%;
+    height: 100%;
+    max-width: 460px;
+    max-height: 900px;
+    background: var(--surface-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--surface-border);
+    border-radius: 36px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(217, 70, 239, 0.15);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-container.fullscreen-mode {
+    max-width: 680px;
+    max-height: 96vh;
+    border-radius: 24px;
+}
+
+.phone-notch-bar {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 6px;
+    flex-shrink: 0;
+}
+
+.notch-speaker {
+    width: 55px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 4px;
+}
+
+/* =========================================================
+   UYGULAMA ANA EKRANI VE KUTUCUK (LAUNCHER WIDGET)
+========================================================= */
+.app-home-view {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.home-title {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.home-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 3px;
+}
+
+/* KUTUCUK KARTI (UYGULAMANIZA EKLENECEK KUTUCUK) */
+.hafiza-launcher-card {
+    background: linear-gradient(135deg, rgba(217, 70, 239, 0.15) 0%, rgba(35, 13, 61, 0.7) 100%);
+    border: 1.5px solid rgba(217, 70, 239, 0.35);
+    border-radius: 22px;
+    padding: 18px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(217, 70, 239, 0.15);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.hafiza-launcher-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(217, 70, 239, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.hafiza-launcher-card:hover {
+    transform: translateY(-3px) scale(1.01);
+    border-color: var(--accent);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 30px var(--accent-glow);
+}
+
+.hafiza-launcher-card:active {
+    transform: scale(0.97);
+}
+
+.launcher-icon-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #d946ef, #7c3aed);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+    box-shadow: 0 8px 16px rgba(217, 70, 239, 0.4);
+    flex-shrink: 0;
+}
+
+.launcher-info {
+    flex: 1;
+}
+
+.launcher-title {
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.launcher-badge {
+    background: rgba(6, 182, 212, 0.2);
+    border: 1px solid var(--accent-cyan);
+    color: #67e8f9;
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.launcher-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    line-height: 1.35;
+}
+
+.launcher-action-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.hafiza-launcher-card:hover .launcher-action-btn {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--accent-glow);
+    transform: translateX(2px);
+}
+
+/* Bilgi Notu Kartı */
+.integration-hint-card {
+    margin-top: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(217, 70, 239, 0.3);
+    border-radius: 18px;
+    padding: 16px;
+    font-size: 0.84rem;
+    color: #c084fc;
+    line-height: 1.5;
+}
+
+.integration-hint-card strong {
+    color: #ffffff;
+}
+
+/* =========================================================
+   OYUN EKRANI KATMANI (KUTUCUĞA TIKLAYINCA AÇILAN EKRAN)
+========================================================= */
+.game-screen-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--surface-bg);
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(100%);
+    transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.25s ease;
+}
+
+.game-screen-layer.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Oyun Üst Çubuğu ve Geri Butonu */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 18px;
+    flex-shrink: 0;
+}
+
+.top-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.game-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    color: #ffffff;
+    text-shadow: 0 0 12px var(--accent-glow);
+}
+
+.nav-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--surface-border);
+    color: var(--text-primary);
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+}
+
+.icon-btn.back-btn {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    background: rgba(217, 70, 239, 0.15);
+    border-color: rgba(217, 70, 239, 0.4);
+}
+
+.icon-btn:hover {
+    background: rgba(217, 70, 239, 0.25);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.icon-btn:active {
+    transform: scale(0.92);
+}
+
+/* İstatistik Çubuğu */
+.stats-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 6px 18px;
+    flex-shrink: 0;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--surface-border);
+    border-radius: 16px;
+    padding: 7px 10px;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 2px;
+}
+
+.stat-value.highlight {
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.lives-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    font-size: 1.15rem;
+    margin-top: 2px;
+}
+
+.heart {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.heart.lost {
+    opacity: 0.2;
+    filter: grayscale(1);
+    transform: scale(0.75);
+}
+
+.heart.refilled {
+    animation: heartPop 0.5s ease;
+}
+
+@keyframes heartPop {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.35); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Durum Rozeti ve Zaman Çubuğu */
+.status-section {
+    padding: 4px 18px 8px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.status-badge {
+    background: rgba(217, 70, 239, 0.12);
+    border: 1px solid var(--accent);
+    color: #f5d0fe;
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    box-shadow: 0 0 18px var(--accent-glow);
+    transition: all 0.3s ease;
+}
+
+.status-badge.memorize {
+    background: rgba(6, 182, 212, 0.15);
+    border-color: var(--accent-cyan);
+    color: #67e8f9;
+    box-shadow: 0 0 18px var(--cyan-glow);
+}
+
+.status-badge.play {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: var(--color-correct);
+    color: #6ee7b7;
+    box-shadow: 0 0 18px rgba(16, 185, 129, 0.4);
+}
+
+.status-badge.bonus {
+    background: rgba(251, 191, 36, 0.2);
+    border-color: var(--color-gold);
+    color: #fde68a;
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+    animation: pulse 0.8s infinite alternate;
+}
+
+.timer-bar-container {
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.timer-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-cyan));
+    box-shadow: 0 0 10px var(--accent-cyan);
+    border-radius: 10px;
+}
+
+/* =========================================================
+   ANA OYUN ALANI (3D KARE MATRİSİ)
+========================================================= */
+.game-board-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 18px 24px 18px;
+    min-height: 0;
+    perspective: 1200px;
+}
+
+.matrix-grid {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1 / 1;
+    display: grid;
+    gap: 10px;
+    transform-style: preserve-3d;
+    transition: all 0.35s ease;
+    margin-top: -1.5cm;
+    margin-bottom: 1.5cm;
+}
+
+/* Dinamik Matris Boyutları */
+.matrix-grid[data-size="3"] { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.matrix-grid[data-size="4"] { grid-template-columns: repeat(4, 1fr); gap: 9px; }
+.matrix-grid[data-size="5"] { grid-template-columns: repeat(5, 1fr); gap: 7px; }
+.matrix-grid[data-size="6"] { grid-template-columns: repeat(6, 1fr); gap: 5px; }
+.matrix-grid[data-size="7"] { grid-template-columns: repeat(7, 1fr); gap: 4px; }
+
+/* 3D KARTLAR */
+.matrix-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    perspective: 1000px;
+    outline: none;
+    touch-action: manipulation;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+    border-radius: 14px;
+}
+
+.matrix-grid[data-size="6"] .card-inner,
+.matrix-grid[data-size="6"] .card-front,
+.matrix-grid[data-size="6"] .card-back { border-radius: 9px; }
+
+.matrix-grid[data-size="7"] .card-inner,
+.matrix-grid[data-size="7"] .card-front,
+.matrix-grid[data-size="7"] .card-back { border-radius: 7px; }
+
+.card-front, .card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--card-front-shadow);
+}
+
+.card-front {
+    background: var(--card-front-bg);
+    border: 2px solid var(--card-front-border);
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.card-front::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(217, 70, 239, 0.2);
+    border: 1px solid rgba(217, 70, 239, 0.35);
+}
+
+.matrix-card:hover .card-front {
+    border-color: rgba(217, 70, 239, 0.6);
+}
+
+.matrix-card:active .card-inner {
+    transform: scale(0.93);
+}
+
+.card-back {
+    background: var(--card-back-bg);
+    border: 2px solid var(--card-back-border);
+    box-shadow: var(--card-back-glow);
+    transform: rotateY(180deg);
+}
+
+.card-glyph {
+    width: 32%;
+    height: 32%;
+    border-radius: 5px;
+    background: var(--card-glyph-color);
+    box-shadow: 0 0 14px var(--card-glyph-color);
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
+}
+
+.matrix-card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.matrix-card.correct .card-back {
+    background: linear-gradient(145deg, #071f14, #000000);
+    border-color: var(--color-correct);
+    box-shadow: var(--color-correct-glow);
+}
+
+.matrix-card.correct .card-glyph {
+    background: #34d399;
+    box-shadow: 0 0 18px #34d399;
+    border-radius: 50%;
+    transform: rotate(0) scale(1.15);
+}
+
+.matrix-card.wrong .card-front {
+    background: linear-gradient(145deg, #380b18, #160208);
+    border-color: var(--color-wrong);
+    box-shadow: var(--color-wrong-glow);
+    animation: shake 0.45s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.matrix-card.missed .card-front {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-3px, 0, 0); }
+    20%, 80% { transform: translate3d(4px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+/* =========================================================
+   OYUN BİTTİ MODALI
+========================================================= */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(8, 2, 14, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    background: #170b28;
+    border: 1px solid var(--surface-border);
+    border-radius: 28px;
+    padding: 32px 24px;
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(217, 70, 239, 0.25);
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.active .modal-card {
+    transform: translateY(0) scale(1);
+}
+
+.modal-icon {
+    font-size: 3.2rem;
+    margin-bottom: 12px;
+}
+
+.modal-title {
+    font-size: 1.7rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 0 0 15px var(--accent-glow);
+}
+
+.modal-stats {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--surface-border);
+    border-radius: 18px;
+    padding: 16px;
+    width: 100%;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.modal-stat-box { text-align: center; }
+
+.modal-stat-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+.modal-stat-lbl {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.main-btn {
+    width: 100%;
+    max-width: 260px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #d946ef, #9333ea);
+    border: none;
+    color: #ffffff;
+    padding: 14px 24px;
+    border-radius: 18px;
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(217, 70, 239, 0.5);
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.main-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(217, 70, 239, 0.65);
+}
+
+.main-btn:active { transform: scale(0.96); }
+
+/* PC Deneme Çubuğu */
+.pc-helper-badge {
+    position: fixed;
+    bottom: 12px;
+    right: 14px;
+    background: rgba(13, 4, 24, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(217, 70, 239, 0.2);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+@media (max-width: 480px) {
+    .viewport-wrapper { padding: 0; }
+    .app-container {
+        border-radius: 0;
+        max-width: 100%;
+        max-height: 100%;
+        border: none;
+    }
+    .phone-notch-bar { display: none; }
+    .pc-helper-badge { display: none; }
+}
+
+/* Modal Köşe Geri Butonu ve İkincil Geri Tuşu */
+.modal-corner-back-btn {
+    position: absolute;
+    top: 10px;
+    left: 18px;
+    z-index: 110;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: rgba(23, 11, 40, 0.92);
+    border: 1px solid rgba(217, 70, 239, 0.5);
+    color: #ffffff;
+    font-size: 1.35rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+    transition: all 0.2s ease;
+}
+
+.modal-corner-back-btn:hover {
+    background: rgba(217, 70, 239, 0.3);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 22px rgba(217, 70, 239, 0.4);
+}
+
+.modal-corner-back-btn:active {
+    transform: scale(0.92);
+}
+
+.secondary-btn {
+    width: 100%;
+    max-width: 260px;
+    margin: 12px auto 0 auto;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #e2e8f0;
+    padding: 13px 22px;
+    border-radius: 16px;
+    font-family: inherit;
+    font-size: 0.96rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(217, 70, 239, 0.5);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(217, 70, 239, 0.3);
+}
+
+.secondary-btn:active {
+    transform: scale(0.96);
+}

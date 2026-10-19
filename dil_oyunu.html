@@ -1698,22 +1698,20 @@
 
     <!-- 3. TEST / QUIZ ALANI -->
     <section id="quizSection">
-      <div class="quiz-tracker-bar">
-        <div class="tracker-pill">
+      <div class="quiz-tracker-bar" style="justify-content: center; margin-bottom: 14px;">
+        <div class="tracker-pill" style="margin: 0 auto;">
           <span id="quizTrackerText">Soru 1 / 24</span>
         </div>
-        <button type="button" class="sound-toggle-btn" id="soundToggleBtn" onclick="toggleSound()" title="Ses Aç/Kapat">
-          🔊
-        </button>
+        <span id="soundToggleBtn" style="display: none;"></span>
       </div>
 
       <!-- Soru Kartı -->
-      <div class="target-word-card">
-        <span class="word-badge-tag" id="targetBadgeTag">HEDEF 24 SÎGA</span>
+      <div class="target-word-card" style="margin-bottom: 14px;">
+        <span class="word-badge-tag" id="targetBadgeTag" style="display: none;"></span>
         <div id="targetWordContainer">
           <h2 class="target-word-title arabic-font" id="targetWordText">نَصَرَ</h2>
         </div>
-        <p class="target-word-instruction" id="targetWordInstruction">Aşağıdaki 5 seçenekten doğru olanı seçin:</p>
+        <p class="target-word-instruction" id="targetWordInstruction" style="display: none;"></p>
       </div>
 
       <!-- 5 Seçenek Butonu -->

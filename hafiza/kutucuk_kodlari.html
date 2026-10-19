@@ -1,0 +1,115 @@
+﻿<!-- ========================================================================== -->
+<!-- 3D HAFIZA OYUNU - UYGULAMAYA KUTUCUK OLARAK EKLEME KODLARI                  -->
+<!-- Bu dosyayı kendi uygulamanızın kodlarına kolayca kopyalayabilirsiniz.       -->
+<!-- ========================================================================== -->
+
+<!-- ========================================================================== -->
+<!-- ADIM 1: UYGULAMANIZIN İÇİNE YERLEŞTİRECEĞİNİZ KUTUCUK (WIDGET) HTML'İ      -->
+<!-- (Bunu ana ekrana, Pomodoro veya Hatırlatıcı sayfasına yapıştırabilirsiniz)  -->
+<!-- ========================================================================== -->
+<div class="hafiza-launcher-card" onclick="openHafizaOyunu()">
+    <div class="launcher-icon-wrap">
+        🧠
+    </div>
+    <div class="launcher-info">
+        <div class="launcher-title">
+            <span>Hafıza Egzersizi</span>
+            <span class="launcher-badge">3D OYUN</span>
+        </div>
+        <p class="launcher-desc">Dönen kareleri aklında tut, zihnini canlandır ve bölümleri geç!</p>
+    </div>
+    <div class="launcher-action-btn">
+        ➔
+    </div>
+</div>
+
+
+<!-- ========================================================================== -->
+<!-- ADIM 2: OYUN EKRANI VE MODAL KATMANI                                      -->
+<!-- (Bunu uygulamanızın <body> etiketinin en altına yapıştırın)               -->
+<!-- ========================================================================== -->
+<section class="game-screen-layer" id="gameScreenLayer">
+    <header class="top-nav">
+        <div class="top-nav-left">
+            <button class="icon-btn back-btn" onclick="closeHafizaOyunu()" title="Geri">←</button>
+            <div class="game-title">Hafıza</div>
+        </div>
+        <div class="nav-actions">
+            <button class="icon-btn" id="soundBtn" title="Ses">🔊</button>
+        </div>
+    </header>
+
+    <section class="stats-bar">
+        <div class="stat-card">
+            <div class="stat-label">BÖLÜM</div>
+            <div class="stat-value highlight" id="levelDisplay">1</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">PUAN</div>
+            <div class="stat-value" id="scoreDisplay">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">CAN</div>
+            <div class="lives-container" id="livesDisplay">
+                <span class="heart">❤️</span>
+                <span class="heart">❤️</span>
+                <span class="heart">❤️</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="status-section">
+        <div class="status-badge memorize" id="statusBadge">
+            <span id="statusText">👀 Kareler Dönüyor...</span>
+        </div>
+        <div class="timer-bar-container">
+            <div class="timer-bar-fill" id="timerBarFill"></div>
+        </div>
+    </section>
+
+    <section class="game-board-area">
+        <div class="matrix-grid" id="matrixGrid" data-size="3"></div>
+    </section>
+
+    <div class="modal-overlay" id="gameOverModal">
+        <div class="modal-card">
+            <div class="modal-icon">💀</div>
+            <h2 class="modal-title">Oyun Bitti!</h2>
+            <div class="modal-stats">
+                <div class="modal-stat-box">
+                    <div class="modal-stat-val" id="finalScore">0</div>
+                    <div class="modal-stat-lbl">Toplam Puan</div>
+                </div>
+                <div class="modal-stat-box">
+                    <div class="modal-stat-val" id="finalLevel">1</div>
+                    <div class="modal-stat-lbl">Ulaşılan Bölüm</div>
+                </div>
+                <div class="modal-stat-box">
+                    <div class="modal-stat-val" id="finalStreak">0</div>
+                    <div class="modal-stat-lbl">En İyi Seri</div>
+                </div>
+                <div class="modal-stat-box">
+                    <div class="modal-stat-val" id="highScoreDisplay">0</div>
+                    <div class="modal-stat-lbl">En Yüksek Skor</div>
+                </div>
+            </div>
+            <button class="main-btn" id="restartBtn">Tekrar Oyna 🔄</button>
+        </div>
+    </div>
+</section>
+
+
+<!-- ========================================================================== -->
+<!-- ADIM 3: GEREKLİ JS VE CSS DOSYALARINI DAHİL ETME                          -->
+<!-- ========================================================================== -->
+<!-- 
+1. style.css dosyasını projenize bağlayın:
+   <link rel="stylesheet" href="style.css">
+
+2. audio.js ve game.js dosyalarını dahil edin:
+   <script src="audio.js"></script>
+   <script src="game.js"></script>
+
+Artık kutucuğa her tıklandığında oyun tam ekran açılarak hemen başlar! 
+Sol üstteki "←" butonu ile oyun kapanıp ana uygulamanıza geri dönülür.
+-->
