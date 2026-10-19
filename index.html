@@ -152,7 +152,7 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 760px;
+      max-width: 820px;
       margin: 0 auto;
       padding: 16px 14px 40px 14px;
       flex: 1;
@@ -161,7 +161,7 @@
     }
 
     /* ========================================================
-       1. OYUN ANA MENÜSÜ (MAIN MENU VIEW)
+       1. OYUN ANA MENÜSÜ (3 ANA MOD KARTI)
        ======================================================== */
     #mainMenuView {
       display: flex;
@@ -174,7 +174,7 @@
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.95));
       border: 1px solid var(--border-color);
       border-radius: 18px;
-      padding: 22px 20px;
+      padding: 20px 18px;
       text-align: center;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     }
@@ -188,35 +188,30 @@
       border-radius: 20px;
       font-size: 0.75rem;
       font-weight: 700;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       letter-spacing: 0.05em;
     }
 
     .menu-hero-banner h2 {
-      font-size: 1.45rem;
+      font-size: 1.35rem;
       font-weight: 800;
       color: #fff;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .menu-hero-banner p {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
-      max-width: 520px;
+      max-width: 580px;
       margin: 0 auto;
       line-height: 1.4;
     }
 
+    /* 3'lü Grid */
     .menu-cards-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 14px;
-    }
-
-    @media (max-width: 600px) {
-      .menu-cards-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     .menu-choice-card {
@@ -236,7 +231,7 @@
 
     .menu-choice-card:hover {
       background: var(--bg-card-hover);
-      border-color: rgba(99, 102, 241, 0.4);
+      border-color: rgba(99, 102, 241, 0.45);
       transform: translateY(-3px);
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
     }
@@ -244,31 +239,31 @@
     .choice-card-top {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
+      gap: 12px;
     }
 
     .choice-icon-box {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
       background: rgba(99, 102, 241, 0.18);
       border: 1px solid rgba(99, 102, 241, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       flex-shrink: 0;
     }
 
     .choice-texts h3 {
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       font-weight: 800;
       color: #fff;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .choice-texts p {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
       line-height: 1.35;
     }
@@ -277,33 +272,33 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
       padding-top: 6px;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .choice-features li {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-sub);
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
     }
 
     .btn-start-choice {
       width: 100%;
-      padding: 12px 16px;
+      padding: 11px 15px;
       background: linear-gradient(135deg, #6366f1, #8b5cf6);
       border: none;
       border-radius: 12px;
       color: #fff;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 7px;
       transition: all 0.2s;
       box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
     }
@@ -519,6 +514,50 @@
       color: var(--text-muted);
     }
 
+    /* KELİME MODU: SOLDAN SAĞA TEKİL / İKİLİ / ÇOĞUL VURGUSU */
+    .vocab-triplet-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      direction: ltr !important;
+      margin: 8px 0 12px 0;
+      flex-wrap: wrap;
+    }
+
+    .triplet-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 8px 14px;
+      min-width: 100px;
+    }
+
+    .triplet-sub-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #818cf8;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .triplet-arabic-text {
+      font-family: var(--font-arabic);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #ffffff;
+      direction: rtl;
+    }
+
+    .triplet-sep-symbol {
+      color: #94a3b8;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
     /* 5 Options Grid */
     .options-grid {
       display: flex;
@@ -586,6 +625,28 @@
       font-weight: 700;
       direction: rtl;
       color: #ffffff;
+    }
+
+    /* Şıklarda Soldan Sağa Tekil / İkili / Çoğul Formatı */
+    .option-text.arabic-triplet {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      direction: ltr !important;
+      font-family: var(--font-arabic);
+      font-size: 1.35rem;
+      color: #ffffff;
+    }
+
+    .triplet-part {
+      direction: rtl;
+      display: inline-block;
+    }
+
+    .triplet-divider {
+      color: #818cf8;
+      font-weight: 700;
+      font-size: 1.1rem;
     }
 
     .option-btn.correct-choice {
@@ -721,14 +782,14 @@
       margin: 0;
     }
 
-    /* 3 Sütunlu Zamir Satırları (Gâib, Gâibe, Muhatap, Muhataba) */
+    /* 3 Sütunlu Zamir Satırları */
     .emsile-row.cols-3 {
       grid-template-columns: repeat(3, 1fr);
       width: 100%;
       margin: 0;
     }
 
-    /* Zamir Tablosu 5. Satır (Mütekellim: Ben 1 sütun, Biz orta ve solu kaplasın -> span 2) */
+    /* Zamir Tablosu 5. Satır (Ben 1 sütun, Biz orta ve solu kaplasın -> span 2) */
     .emsile-row.zamir-row-5 {
       grid-template-columns: repeat(3, 1fr);
       width: 100%;
@@ -737,6 +798,14 @@
 
     .emsile-row.zamir-row-5 .card-span-2 {
       grid-column: span 2;
+    }
+
+    /* Kelime Modu Tablosu: Kartlar Tekil / İkili / Çoğul */
+    .vocab-grid-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      width: 100%;
     }
 
     @media (max-width: 520px) {
@@ -835,7 +904,7 @@
       color: rgba(148, 163, 184, 0.85);
     }
 
-    /* Arka Yüz: Anlamı ve Çevirisi (Kullanıcı İsteği) */
+    /* Arka Yüz: Anlamı ve Çevirisi */
     .flip-card-back {
       background: linear-gradient(135deg, #3730a3, #4f46e5);
       border: 1px solid rgba(255, 255, 255, 0.25);
@@ -885,6 +954,43 @@
       color: rgba(255, 255, 255, 0.7);
     }
 
+    /* Kelime Modu İçin Özel Kart Tasarımı */
+    .vocab-card-triplet {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      direction: ltr !important;
+      width: 100%;
+    }
+
+    .vct-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    .vct-lbl {
+      font-size: 0.55rem;
+      color: #a5b4fc;
+      font-weight: 700;
+    }
+
+    .vct-arabic {
+      font-family: var(--font-arabic);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      direction: rtl;
+    }
+
+    .vct-sep {
+      color: #64748b;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
     /* Yanlış Yapılan Kartı Vurgulama */
     .flip-card.missed-highlight .flip-card-front {
       border: 2px solid #ef4444;
@@ -918,7 +1024,7 @@
       border: 1px solid var(--border-color);
       border-radius: 18px;
       width: 100%;
-      max-width: 680px;
+      max-width: 720px;
       max-height: 85vh;
       display: flex;
       flex-direction: column;
@@ -989,11 +1095,42 @@
       font-family: var(--font-arabic);
       font-size: 1.15rem;
       direction: rtl;
-      max-width: 100px;
     }
 
     .word-edit-input:focus {
       border-color: var(--accent-primary);
+    }
+
+    .btn-add-word-row {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px dashed rgba(99, 102, 241, 0.4);
+      color: #c7d2fe;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-add-word-row:hover {
+      background: rgba(99, 102, 241, 0.25);
+      color: #fff;
+    }
+
+    .btn-del-word {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+      padding: 5px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
     }
 
     .modal-footer {
@@ -1071,7 +1208,7 @@
 
     <div class="header-title-box">
       <h1 id="headerMainTitle">Arapça Emsile ve Çekim Merkezi</h1>
-      <p id="headerSubTitle">24 Sîga & Zamir Çekimleri</p>
+      <p id="headerSubTitle">24 Sîga & Zamir Çekimleri & Kelime Bilgisi</p>
     </div>
 
     <div class="header-actions">
@@ -1088,9 +1225,9 @@
     <!-- 1. OYUN ANA MENÜSÜ -->
     <section id="mainMenuView">
       <div class="menu-hero-banner">
-        <span class="hero-badge">🎯 ARAPÇA ÇEKİM ÇALIŞMA ALANI</span>
+        <span class="hero-badge">🎯 ARAPÇA ÇALIŞMA MERKEZİ</span>
         <h2>Ne Çalışmak İstiyorsunuz?</h2>
-        <p>Aşağıdan istediğiniz oyun modunu seçin. Çekimler, sîga başlıkları veya Türkçe fiil manaları üzerinden çift yönlü çalışabilirsiniz.</p>
+        <p>Aşağıdan istediğiniz oyun modunu seçin. Çekimler, sîga başlıkları, fiil manaları veya Tekil / İkili / Çoğul kelime eşleştirmesi yapabilirsiniz.</p>
       </div>
 
       <div class="menu-cards-grid">
@@ -1101,11 +1238,11 @@
               <div class="choice-icon-box">📖</div>
               <div class="choice-texts">
                 <h3>24 Sîga Eşleştirme</h3>
-                <p>Emsile-i Muhtelife: Mâzi, Müzâri', Mastar, İsm-i Fâil ve tüm 24 kalıp.</p>
+                <p>Emsile-i Muhtelife: Mâzi, Müzâri', Mastar ve 24 kalıp.</p>
               </div>
             </div>
             <ul class="choice-features" style="margin-top: 14px;">
-              <li>✓ Arapça ➔ Sîga Başlığı & Türkçe Çeviri</li>
+              <li>✓ Arapça ➔ Sîga Başlığı & Fiil Çevirisi</li>
               <li>✓ Sîga Başlığı & Çeviri ➔ Arapça Çekim</li>
               <li>✓ Yanlışta 5 satırlı (5, 5, 4, 5, 5) 3D tablo</li>
               <li>✓ Asla Türkçe okunuş yazılmaz!</li>
@@ -1123,7 +1260,7 @@
               <div class="choice-icon-box">👤</div>
               <div class="choice-texts">
                 <h3>Zamirlere Göre Çekimler</h3>
-                <p>Emsile-i Muttaride: 24 sîganın her biri için 14 şahıs zamiri çekimi.</p>
+                <p>Emsile-i Muttaride: 24 sîganın her biri için 14 zamir çekimi.</p>
               </div>
             </div>
             <ul class="choice-features" style="margin-top: 14px;">
@@ -1135,6 +1272,28 @@
           </div>
           <button type="button" class="btn-start-choice">
             <span>Zamir Çekimlerini Aç 👤</span>
+          </button>
+        </div>
+
+        <!-- 3. Seçenek: KELİME MENÜSÜ (Tekil / İkili / Çoğul) - KULLANICI İSTEĞİ -->
+        <div class="menu-choice-card" onclick="startVocabGame()">
+          <div>
+            <div class="choice-card-top">
+              <div class="choice-icon-box" style="background: rgba(16, 185, 129, 0.18); border-color: rgba(16, 185, 129, 0.35);">📝</div>
+              <div class="choice-texts">
+                <h3>Kelime Bilgisi</h3>
+                <p>Müfred (Tekil), Tesniye (İkili) ve Cemi (Çoğul) kelime ezberleme.</p>
+              </div>
+            </div>
+            <ul class="choice-features" style="margin-top: 14px;">
+              <li>✓ Soldan sağa: Tekil / İkili / Çoğul</li>
+              <li>✓ Kelimeler ➔ Anlam veya Anlam ➔ Kelimeler</li>
+              <li>✓ 5 seçenekli test ve 3D flashcard tablosu</li>
+              <li>✓ Kelime ekleme ve düzenleme desteği</li>
+            </ul>
+          </div>
+          <button type="button" class="btn-start-choice" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);">
+            <span>Kelime Oyununu Başlat 📝</span>
           </button>
         </div>
       </div>
@@ -1171,7 +1330,9 @@
       <!-- Soru Kartı -->
       <div class="target-word-card">
         <span class="word-badge-tag" id="targetBadgeTag">HEDEF 24 SÎGA</span>
-        <h2 class="target-word-title arabic-font" id="targetWordText">نَصَرَ</h2>
+        <div id="targetWordContainer">
+          <h2 class="target-word-title arabic-font" id="targetWordText">نَصَرَ</h2>
+        </div>
         <p class="target-word-instruction" id="targetWordInstruction">Aşağıdaki 5 seçenekten doğru olanı seçin:</p>
       </div>
 
@@ -1188,7 +1349,7 @@
           <span class="table-banner-icon" id="tableBannerIcon">📖</span>
           <div class="table-banner-info">
             <h3 id="tableBannerTitle">Tablo</h3>
-            <p id="tableBannerDesc">Anlamını ve Türkçe çevirisini görmek için kartların üzerine dokunabilirsiniz.</p>
+            <p id="tableBannerDesc">Anlamını ve detaylarını görmek için kartların üzerine dokunabilirsiniz.</p>
           </div>
         </div>
         <button type="button" class="btn-continue" onclick="continueQuiz()">
@@ -1196,9 +1357,9 @@
         </button>
       </div>
 
-      <!-- Kart Satırları (Sağdan Sola Diziliş) -->
-      <div class="emsile-table-wrapper" id="emsileRowsWrapper">
-        <!-- JS ile 5 satırlı (5, 5, 4, 5, 5) veya Zamir tablosu basılır -->
+      <!-- Kart Satırları -->
+      <div id="emsileRowsWrapper">
+        <!-- JS ile 5 satırlı veya Zamir/Kelime tablosu basılır -->
       </div>
 
       <button type="button" class="btn-continue bottom-full" onclick="continueQuiz()">
@@ -1211,7 +1372,7 @@
   <div class="modal-overlay" id="editWordsModal">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 id="editModalTitle">✏️ 24 Emsile Kelimeleri, Anlamları ve Çevirilerini Düzenle</h3>
+        <h3 id="editModalTitle">✏️ Kelimeleri Düzenle</h3>
         <button type="button" class="modal-close-btn" onclick="closeEditWordsModal()">✕</button>
       </div>
       <div class="modal-body" id="editWordsListContainer">
@@ -1230,13 +1391,10 @@
   <!-- JAVASCRIPT OYUN MOTORU -->
   <script>
     // =========================================================================
-    // 1. TEMEL VERİLER (ASLA OKUNUŞ YAZILMAZ!)
-    // Kullanıcı İsteği:
-    // - Anlam: Fiil-i mâzî, Çeviri: Yardım etti (bir grup)
-    // - Kelime: نَصَرَ (diğer grup)
-    // - Çift yönlü soru: Çekim -> Anlam / Çeviri, veya Anlam / Çeviri -> Çekim
-    // - Soruda Arapça varsa şıklarda sadece BİR TANESİ (ya Anlam ya Çeviri) olur.
+    // 1. TEMEL VERİLER
     // =========================================================================
+
+    // A) 24 EMSİLE KELİMELERİ (Anlam + Türkçe Çeviri + Ek Bilgisi)
     const DEFAULT_EMSILE_24_WORDS = [
       { id: 1, word: "نَصَرَ", meaning: "Fiil-i mâzî", translation: "Yardım etti", extraHint: "-dı, -di" },
       { id: 2, word: "يَنْصُرُ", meaning: "Fiil-i müzâri'", translation: "Yardım ediyor / eder", extraHint: "-yor, -ar, -acak" },
@@ -1266,25 +1424,16 @@
 
     let EMSILE_24_WORDS = JSON.parse(JSON.stringify(DEFAULT_EMSILE_24_WORDS));
 
-    // B) 14 ŞAHIS ZAMİRİ ANLAMLARI VE KONUMLARI
+    // B) 14 ŞAHIS ZAMİRİ
     const PRONOUN_MEANINGS = [
-      "O (erkek)",         // 1: Müfred Müzekker Gâib
-      "O ikisi (erkek)",   // 2: Tesniye Müzekker Gâib
-      "Onlar (erkek)",     // 3: Cemi Müzekker Gâib
-      "O (kadın)",         // 4: Müfred Müennes Gâibe
-      "O ikisi (kadın)",   // 5: Tesniye Müennes Gâibe
-      "Onlar (kadın)",     // 6: Cemi Müennes Gâibe
-      "Sen (erkek)",       // 7: Müfred Müzekker Muhatap
-      "Siz ikiniz (erkek)",// 8: Tesniye Müzekker Muhatap
-      "Siz (erkek)",       // 9: Cemi Müzekker Muhatap
-      "Sen (kadın)",       // 10: Müfred Müennes Muhataba
-      "Siz ikiniz (kadın)",// 11: Tesniye Müennes Muhataba
-      "Siz (kadın)",       // 12: Cemi Müennes Muhataba
-      "Ben",               // 13: Mütekellim Vahde (1 sütun, tekil)
-      "Biz"                // 14: Mütekellim Maal-gayr (2 sütun kaplar)
+      "O (erkek)", "O ikisi (erkek)", "Onlar (erkek)",
+      "O (kadın)", "O ikisi (kadın)", "Onlar (kadın)",
+      "Sen (erkek)", "Siz ikiniz (erkek)", "Siz (erkek)",
+      "Sen (kadın)", "Siz ikiniz (kadın)", "Siz (kadın)",
+      "Ben", "Biz"
     ];
 
-    // C) 24 SÎGANIN HER BİRİ İÇİN 14 ŞAHIS ÇEKİMİ (Asla okunuş yok!)
+    // C) 24 SÎGANIN HER BİRİ İÇİN 14 ŞAHIS ÇEKİMİ
     const SIGA_CONJUGATIONS = {
       1: ["نَصَرَ", "نَصَرَا", "نَصَرُوا", "نَصَرَتْ", "نَصَرَتَا", "نَصَرْنَ", "نَصَرْتَ", "نَصَرْتُمَا", "نَصَرْتُمْ", "نَصَرْتِ", "نَصَرْتُمَا", "نَصَرْتُنَّ", "نَصَرْتُ", "نَصَرْنَا"],
       2: ["يَنْصُرُ", "يَنْصُرَانِ", "يَنْصُرُونَ", "تَنْصُرُ", "تَنْصُرَانِ", "يَنْصُرْنَ", "تَنْصُرُ", "تَنْصُرَانِ", "تَنْصُرُونَ", "تَنْصُرِينَ", "تَنْصُرَانِ", "تَنْصُرْنَ", "أَنْصُرُ", "نَنْصُرُ"],
@@ -1305,7 +1454,7 @@
       17: ["نَصْرَةً", "نَصْرَتَيْنِ", "نَصَرَاتٍ", "نَصْرَةً", "نَصْرَتَيْنِ", "نَصَرَاتٍ", "نَصْرَةً", "نَصْرَتَيْنِ", "نَصَرَاتٍ", "نَصْرَةً", "نَصْرَتَيْنِ", "نَصَرَاتٍ", "نَصْرَةً", "نَصْرَةً"],
       18: ["نِصْرَةً", "نِصْرَتَيْنِ", "نِصَرَاتٍ", "نِصْرَةً", "نِصْرَتَيْنِ", "نِصَرَاتٍ", "نِصْرَةً", "نِصْرَتَيْنِ", "نِصَرَاتٍ", "نِصْرَةً", "نِصْرَتَيْنِ", "نِصَرَاتٍ", "نِصْرَةً", "نِصْرَةً"],
       19: ["نُصَيْرٌ", "نُصَيْرَانِ", "نُصَيْرُونَ", "نُصَيْرَةٌ", "نُصَيْرَتَانِ", "نُصَيْرَاتٌ", "نُصَيْرٌ", "نُصَيْرَانِ", "نُصَيْرُونَ", "نُصَيْرَةٌ", "نُصَيْرَتَانِ", "نُصَيْرَاتٌ", "نُصَيْرٌ", "نُصَيْرُونَ"],
-      20: ["نَصْرِيٌّ", "نَصْرِيَّانِ", "نَصْرِيُّونَ", "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ", "نَصْرِيٌّ", "نَصْرِيَّanِ", "نَصْرِيُّونَ", "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ", "نَصْرِيٌّ", "نَصْرِيُّونَ"],
+      20: ["نَصْرِيٌّ", "نَصْرِيَّانِ", "نَصْرِيُّونَ", "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ", "نَصْرِيٌّ", "نَصْرِيَّانِ", "نَصْرِيُّونَ", "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ", "نَصْرِيٌّ", "نَصْرِيُّونَ"],
       21: ["نَصَّارٌ", "نَصَّارَانِ", "نَصَّارُونَ", "نَصَّارَةٌ", "نَصَّارَتَانِ", "نَصَّارَاتٌ", "نَصَّارٌ", "نَصَّارَانِ", "نَصَّارُونَ", "نَصَّارَةٌ", "نَصَّارَتَانِ", "نَصَّارَاتٌ", "نَصَّارٌ", "نَصَّارُونَ"],
       22: ["أَنْصَرُ", "أَنْصَرَانِ", "أَنْصَرُونَ", "نُصْرَى", "نُصْرَيَانِ", "نُصْرَيَاتٌ", "أَنْصَرُ", "أَنْصَرَانِ", "أَنْصَرُونَ", "نُصْرَى", "نُصْرَيَانِ", "نُصْرَيَاتٌ", "أَنْصَرُ", "أَنْصَرُونَ"],
       23: [
@@ -1317,6 +1466,17 @@
       ],
       24: ["أَنْصِرْ بِهِ", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِمْ", "أَنْصِرْ بِهَا", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِنَّ", "أَنْصِرْ بِكَ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُمْ", "أَنْصِرْ بِكِ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُنَّ", "أَنْصِرْ بِي", "أَنْصِرْ بِنَا"]
     };
+
+    // D) YENİ KELİME LİSTESİ: TEKİL / İKİLİ / ÇOĞUL (KULLANICI İSTEĞİ)
+    const DEFAULT_VOCABULARY_WORDS = [
+      { id: 1, singular: "كِتَابٌ", dual: "كِتَابَانِ", plural: "كُتُبٌ", meaning: "Kitap" },
+      { id: 2, singular: "قَلَمٌ", dual: "قَلَمَانِ", plural: "أَقْلَامٌ", meaning: "Kalem" },
+      { id: 3, singular: "بَيْتٌ", dual: "بَيْتَانِ", plural: "بُيُوتٌ", meaning: "Ev" },
+      { id: 4, singular: "طَالِبٌ", dual: "طَالِبَانِ", plural: "طُلَّابٌ", meaning: "Öğrenci" },
+      { id: 5, singular: "بَابٌ", dual: "بَابَانِ", plural: "أَبْوَابٌ", meaning: "Kapı" }
+    ];
+
+    let VOCABULARY_WORDS = JSON.parse(JSON.stringify(DEFAULT_VOCABULARY_WORDS));
 
     // =========================================================================
     // 2. SES SİSTEMİ
@@ -1409,7 +1569,7 @@
         if (btnMenu) btnMenu.style.display = "none";
         if (btnTable) btnTable.style.display = "none";
         if (headerTitle) headerTitle.textContent = "Arapça Emsile ve Çekim Merkezi";
-        if (headerSub) headerSub.textContent = "24 Sîga & Zamir Çekimleri";
+        if (headerSub) headerSub.textContent = "24 Sîga & Zamir Çekimleri & Kelime Bilgisi";
       } else if (screenId === 'sigaSelectionView') {
         if (btnMenu) btnMenu.style.display = "inline-flex";
         if (btnTable) btnTable.style.display = "none";
@@ -1419,9 +1579,13 @@
         if (btnMenu) btnMenu.style.display = "inline-flex";
         if (btnTable) btnTable.style.display = "inline-flex";
         if (headerTitle) {
-          headerTitle.textContent = (currentGameMode === 'emsile24')
-            ? "24 Sîga Oyunu"
-            : `${(EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || EMSILE_24_WORDS[0]).meaning} Çekimi`;
+          if (currentGameMode === 'emsile24') {
+            headerTitle.textContent = "24 Sîga Oyunu";
+          } else if (currentGameMode === 'vocab') {
+            headerTitle.textContent = "Kelime Oyunu (Tekil / İkili / Çoğul)";
+          } else {
+            headerTitle.textContent = `${(EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || EMSILE_24_WORDS[0]).meaning} Çekimi`;
+          }
         }
         if (headerSub) headerSub.textContent = "Çift yönlü soru-cevap testi";
       } else if (screenId === 'tableSection') {
@@ -1431,7 +1595,6 @@
     }
 
     function handleGoBackToApp() {
-      // Android WebView köprüsü varsa geri çağırır, yoksa bildirim verir
       if (window.AndroidBridge && typeof window.AndroidBridge.closeLanguageGame === 'function') {
         window.AndroidBridge.closeLanguageGame();
       } else {
@@ -1443,7 +1606,7 @@
     // =========================================================================
     // 4. OYUN DURUMU VE MODLARI
     // =========================================================================
-    let currentGameMode = 'emsile24'; // 'emsile24' | 'sigaPronouns'
+    let currentGameMode = 'emsile24'; // 'emsile24' | 'sigaPronouns' | 'vocab'
     let selectedSigaId = 1;
     let currentQuizWords = [];
     let shuffledIndices = [];
@@ -1451,7 +1614,7 @@
     let currentWord = null;
     let isAnswering = false;
     let lastMissedWordId = null;
-    let currentCorrectAnswerText = "";
+    let currentCorrectAnswerKey = "";
 
     // 1. Mod: 24 Sîga Oyunu Başlat
     function startEmsile24Game() {
@@ -1510,6 +1673,15 @@
       renderQuestion();
     }
 
+    // 3. Mod: KELİME MENÜSÜ OYUNU BAŞLAT (KULLANICI İSTEĞİ)
+    function startVocabGame() {
+      currentGameMode = 'vocab';
+      currentQuizWords = VOCABULARY_WORDS.slice();
+      initShuffledIndices();
+      showScreen("quizSection");
+      renderQuestion();
+    }
+
     function initShuffledIndices() {
       shuffledIndices = [];
       for (let i = 0; i < currentQuizWords.length; i++) shuffledIndices.push(i);
@@ -1521,13 +1693,10 @@
     }
 
     // =========================================================================
-    // 5. ÇİFT YÖNLÜ TEST SORUSU OLUŞTURMA (KULLANICI İSTEĞİ)
-    // Soru Türleri:
-    // 1) Soru: Arapça (نَصَرَ) -> Şıklar: Sîga Terimi (Fiil-i mâzî, ...)
-    // 2) Soru: Arapça (نَصَرَ) -> Şıklar: Türkçe Çeviri (Yardım etti, ...)
-    // 3) Soru: Sîga Terimi (Fiil-i mâzî) -> Şıklar: Arapça Çekim (نَصَرَ, ...)
-    // 4) Soru: Türkçe Çeviri (Yardım etti) -> Şıklar: Arapça Çekim (نَصَرَ, ...)
-    // Kural: Soruda Arapça varsa şıklarda sadece BİR TANESİ (anlam veya çeviri) olur!
+    // 5. TEST SORUSU OLUŞTURMA (TÜM MODLARDA ÇİFT YÖNLÜ)
+    // Kural:
+    // - Kelime Modunda: Soru ve Şıklarda soldan sağa Tekil / İkili / Çoğul
+    // - 24 Sîga Modunda: Arapça varsa şıklarda ya Anlam ya Çeviri (sadece birisi)
     // =========================================================================
     function renderQuestion() {
       if (shuffledIndices.length === 0) initShuffledIndices();
@@ -1536,7 +1705,7 @@
       const targetIdx = shuffledIndices[currentOrderIndex];
       currentWord = currentQuizWords[targetIdx];
 
-      const targetWordEl = document.getElementById("targetWordText");
+      const targetWordContainer = document.getElementById("targetWordContainer");
       const trackerEl = document.getElementById("quizTrackerText");
       const instructionEl = document.getElementById("targetWordInstruction");
       const badgeTag = document.getElementById("targetBadgeTag");
@@ -1545,8 +1714,55 @@
 
       let questionConfig = null;
 
-      if (currentGameMode === 'emsile24') {
-        // 4 Soru Türünden Rastgele Biri Seçilir
+      if (currentGameMode === 'vocab') {
+        // KELİME MODU: ÇİFT YÖNLÜ
+        // 1) Soru: Arapça Tekil / İkili / Çoğul ➔ Şıklar: Türkçe Anlam
+        // 2) Soru: Türkçe Anlam ➔ Şıklar: Arapça Tekil / İkili / Çoğul (Soldan Sağa)
+        const qTypes = ['VOCAB_ARABIC_TO_MEANING', 'VOCAB_MEANING_TO_ARABIC'];
+        const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
+
+        if (chosenType === 'VOCAB_ARABIC_TO_MEANING') {
+          questionConfig = {
+            mode: 'vocab_ar_to_tr',
+            badge: "KELİME ➔ TÜRKÇE ANLAMI",
+            instruction: "Bu kelimelerin (Tekil / İkili / Çoğul) Türkçe anlamı nedir?",
+            correctKey: currentWord.meaning,
+            choices: generateVocabChoices(currentWord, 'meaning')
+          };
+          targetWordContainer.innerHTML = `
+            <div class="vocab-triplet-display" dir="ltr">
+              <div class="triplet-col">
+                <span class="triplet-sub-label">TEKİL</span>
+                <span class="triplet-arabic-text">${currentWord.singular}</span>
+              </div>
+              <span class="triplet-sep-symbol">/</span>
+              <div class="triplet-col">
+                <span class="triplet-sub-label">İKİLİ (TESNİYE)</span>
+                <span class="triplet-arabic-text">${currentWord.dual}</span>
+              </div>
+              <span class="triplet-sep-symbol">/</span>
+              <div class="triplet-col">
+                <span class="triplet-sub-label">ÇOĞUL (CEMİ)</span>
+                <span class="triplet-arabic-text">${currentWord.plural}</span>
+              </div>
+            </div>
+          `;
+        } else {
+          // VOCAB_MEANING_TO_ARABIC
+          questionConfig = {
+            mode: 'vocab_tr_to_ar',
+            badge: "TÜRKÇE ANLAM ➔ TEKİL / İKİLİ / ÇOĞUL",
+            instruction: "Bu anlamın Tekil / İkili / Çoğul Arapça karşılığı hangisidir?",
+            correctKey: currentWord.id,
+            choices: generateVocabChoices(currentWord, 'arabic')
+          };
+          targetWordContainer.innerHTML = `
+            <h2 class="target-word-title latin-font">${escapeHtml(currentWord.meaning)}</h2>
+          `;
+        }
+
+      } else if (currentGameMode === 'emsile24') {
+        // 24 SÎGA MODU: 4 Çeşit Soru
         const qTypes = [
           'ARABIC_TO_MEANING',
           'ARABIC_TO_TRANSLATION',
@@ -1557,114 +1773,185 @@
 
         if (chosenType === 'ARABIC_TO_MEANING') {
           questionConfig = {
-            promptText: currentWord.word,
-            isPromptArabic: true,
+            mode: 'text_simple',
             badge: "ARAPÇA ➔ SÎGA BAŞLIĞI",
             instruction: "Bu kelimenin sîga terimi (başlığı) nedir?",
-            correctAnswer: currentWord.meaning,
+            correctKey: currentWord.meaning,
+            promptText: currentWord.word,
+            isPromptArabic: true,
             isChoiceArabic: false,
-            optionPool: EMSILE_24_WORDS.map(w => w.meaning)
+            choices: generateSimpleChoices(currentWord.meaning, EMSILE_24_WORDS.map(w => w.meaning))
           };
         } else if (chosenType === 'ARABIC_TO_TRANSLATION') {
           questionConfig = {
-            promptText: currentWord.word,
-            isPromptArabic: true,
+            mode: 'text_simple',
             badge: "ARAPÇA ➔ TÜRKÇE ÇEVİRİ",
             instruction: "Bu kelimenin Türkçe fiil manası (çevirisi) nedir?",
-            correctAnswer: currentWord.translation,
+            correctKey: currentWord.translation,
+            promptText: currentWord.word,
+            isPromptArabic: true,
             isChoiceArabic: false,
-            optionPool: EMSILE_24_WORDS.map(w => w.translation)
+            choices: generateSimpleChoices(currentWord.translation, EMSILE_24_WORDS.map(w => w.translation))
           };
         } else if (chosenType === 'MEANING_TO_ARABIC') {
           questionConfig = {
-            promptText: currentWord.meaning,
-            isPromptArabic: false,
+            mode: 'text_simple',
             badge: "SÎGA BAŞLIĞI ➔ ARAPÇA",
             instruction: "Bu sîga teriminin Arapça çekimi hangisidir?",
-            correctAnswer: currentWord.word,
+            correctKey: currentWord.word,
+            promptText: currentWord.meaning,
+            isPromptArabic: false,
             isChoiceArabic: true,
-            optionPool: EMSILE_24_WORDS.map(w => w.word)
+            choices: generateSimpleChoices(currentWord.word, EMSILE_24_WORDS.map(w => w.word))
           };
         } else {
           // TRANSLATION_TO_ARABIC
           questionConfig = {
-            promptText: currentWord.translation,
-            isPromptArabic: false,
+            mode: 'text_simple',
             badge: "TÜRKÇE ÇEVİRİ ➔ ARAPÇA",
             instruction: "Bu manaya gelen Arapça çekim hangisidir?",
-            correctAnswer: currentWord.word,
+            correctKey: currentWord.word,
+            promptText: currentWord.translation,
+            isPromptArabic: false,
             isChoiceArabic: true,
-            optionPool: EMSILE_24_WORDS.map(w => w.word)
+            choices: generateSimpleChoices(currentWord.word, EMSILE_24_WORDS.map(w => w.word))
           };
         }
+
+        targetWordContainer.innerHTML = `
+          <h2 class="target-word-title ${questionConfig.isPromptArabic ? 'arabic-font' : 'latin-font'}">${escapeHtml(questionConfig.promptText)}</h2>
+        `;
+
       } else {
-        // Zamirler Modu: Çift Yönlü (Çekim ➔ Zamir veya Zamir ➔ Çekim)
+        // ZAMİR MODU (Emsile-i Muttaride)
         const sigaObj = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || EMSILE_24_WORDS[0];
         const qTypes = ['ARABIC_TO_PRONOUN', 'PRONOUN_TO_ARABIC'];
         const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
 
         if (chosenType === 'ARABIC_TO_PRONOUN') {
           questionConfig = {
-            promptText: currentWord.word,
-            isPromptArabic: true,
+            mode: 'text_simple',
             badge: `${sigaObj.meaning.toUpperCase()} ➔ ZAMİR`,
             instruction: "Bu çekim hangi şahsa (zamire) aittir?",
-            correctAnswer: currentWord.meaning,
+            correctKey: currentWord.meaning,
+            promptText: currentWord.word,
+            isPromptArabic: true,
             isChoiceArabic: false,
-            optionPool: PRONOUN_MEANINGS.slice()
+            choices: generateSimpleChoices(currentWord.meaning, PRONOUN_MEANINGS.slice())
           };
         } else {
           questionConfig = {
-            promptText: currentWord.meaning,
-            isPromptArabic: false,
+            mode: 'text_simple',
             badge: `ZAMİR ➔ ${sigaObj.meaning.toUpperCase()}`,
             instruction: "Bu şahıs zamirine ait Arapça çekim hangisidir?",
-            correctAnswer: currentWord.word,
+            correctKey: currentWord.word,
+            promptText: currentWord.meaning,
+            isPromptArabic: false,
             isChoiceArabic: true,
-            optionPool: currentQuizWords.map(w => w.word)
+            choices: generateSimpleChoices(currentWord.word, currentQuizWords.map(w => w.word))
           };
         }
+
+        targetWordContainer.innerHTML = `
+          <h2 class="target-word-title ${questionConfig.isPromptArabic ? 'arabic-font' : 'latin-font'}">${escapeHtml(questionConfig.promptText)}</h2>
+        `;
       }
 
-      currentCorrectAnswerText = questionConfig.correctAnswer;
-
-      // Soru Kartını Doldur
+      currentCorrectAnswerKey = questionConfig.correctKey;
       if (badgeTag) badgeTag.textContent = questionConfig.badge;
       if (instructionEl) instructionEl.textContent = questionConfig.instruction;
-      if (targetWordEl) {
-        targetWordEl.textContent = questionConfig.promptText;
-        if (questionConfig.isPromptArabic) {
-          targetWordEl.className = "target-word-title arabic-font";
-        } else {
-          targetWordEl.className = "target-word-title latin-font";
-        }
-      }
 
-      // 5 Seçenek Oluştur (1 Doğru, 4 Farklı Çeldirici)
-      const distractors = questionConfig.optionPool.filter(opt => opt !== questionConfig.correctAnswer);
+      // Şıkları Bas
+      renderOptionsGrid(questionConfig);
+    }
+
+    // Basit Şık Üretici
+    function generateSimpleChoices(correctAnswer, pool) {
+      const distractors = pool.filter(opt => opt !== correctAnswer);
       for (let i = distractors.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [distractors[i], distractors[j]] = [distractors[j], distractors[i]];
       }
-      const chosenDistractors = distractors.slice(0, 4);
-
-      const choices = [questionConfig.correctAnswer, ...chosenDistractors];
-      for (let i = choices.length - 1; i > 0; i--) {
+      const chosen = [correctAnswer, ...distractors.slice(0, 4)];
+      for (let i = chosen.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [choices[i], choices[j]] = [choices[j], choices[i]];
+        [chosen[i], chosen[j]] = [chosen[j], chosen[i]];
       }
+      return chosen;
+    }
 
-      // Şıkları Ekrana Bas
+    // Kelime Modu Şık Üretici
+    function generateVocabChoices(targetWord, type) {
+      const otherWords = VOCABULARY_WORDS.filter(w => w.id !== targetWord.id);
+      for (let i = otherWords.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [otherWords[i], otherWords[j]] = [otherWords[j], otherWords[i]];
+      }
+      const list = [targetWord, ...otherWords.slice(0, 4)];
+      for (let i = list.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [list[i], list[j]] = [list[j], list[i]];
+      }
+      return list;
+    }
+
+    function renderOptionsGrid(cfg) {
       const grid = document.getElementById("optionsGrid");
-      if (grid) {
-        grid.innerHTML = "";
-        const letters = ["A", "B", "C", "D", "E"];
-        choices.forEach((choiceText, idx) => {
+      if (!grid) return;
+      grid.innerHTML = "";
+      const letters = ["A", "B", "C", "D", "E"];
+
+      if (cfg.mode === 'vocab_tr_to_ar') {
+        // Şıklar: Soldan Sağa Tekil / İkili / Çoğul
+        cfg.choices.forEach((choiceWord, idx) => {
           const btn = document.createElement("button");
           btn.className = "option-btn";
           btn.setAttribute("type", "button");
+          btn.setAttribute("data-key", choiceWord.id);
 
-          const arabicCls = questionConfig.isChoiceArabic ? "arabic-font" : "";
+          btn.innerHTML = `
+            <span class="option-letter">${letters[idx]}</span>
+            <div class="option-content-box">
+              <span class="option-text arabic-triplet" dir="ltr">
+                <span class="triplet-part">${escapeHtml(choiceWord.singular)}</span>
+                <span class="triplet-divider">/</span>
+                <span class="triplet-part">${escapeHtml(choiceWord.dual)}</span>
+                <span class="triplet-divider">/</span>
+                <span class="triplet-part">${escapeHtml(choiceWord.plural)}</span>
+              </span>
+            </div>
+          `;
+          btn.addEventListener("click", () => handleAnswer(choiceWord.id, btn));
+          grid.appendChild(btn);
+        });
+
+      } else if (cfg.mode === 'vocab_ar_to_tr') {
+        // Şıklar: Türkçe Anlamlar
+        cfg.choices.forEach((choiceWord, idx) => {
+          const btn = document.createElement("button");
+          btn.className = "option-btn";
+          btn.setAttribute("type", "button");
+          btn.setAttribute("data-key", choiceWord.meaning);
+
+          btn.innerHTML = `
+            <span class="option-letter">${letters[idx]}</span>
+            <div class="option-content-box">
+              <span class="option-text">${escapeHtml(choiceWord.meaning)}</span>
+            </div>
+          `;
+          btn.addEventListener("click", () => handleAnswer(choiceWord.meaning, btn));
+          grid.appendChild(btn);
+        });
+
+      } else {
+        // Standart Sîga veya Zamir Şıkları
+        cfg.choices.forEach((choiceText, idx) => {
+          const btn = document.createElement("button");
+          btn.className = "option-btn";
+          btn.setAttribute("type", "button");
+          btn.setAttribute("data-key", choiceText);
+
+          const arabicCls = cfg.isChoiceArabic ? "arabic-font" : "";
 
           btn.innerHTML = `
             <span class="option-letter">${letters[idx]}</span>
@@ -1678,35 +1965,31 @@
       }
     }
 
-    function handleAnswer(selectedChoice, clickedBtn) {
+    function handleAnswer(selectedKey, clickedBtn) {
       if (isAnswering) return;
       isAnswering = true;
 
-      const isCorrect = (selectedChoice === currentCorrectAnswerText);
+      const isCorrect = (String(selectedKey) === String(currentCorrectAnswerKey));
 
       if (isCorrect) {
-        // DOĞRU CEVAP
         clickedBtn.classList.add("correct-choice");
         playSound('correct');
         if (navigator.vibrate) navigator.vibrate(35);
 
-        // Doğru olunca hemen bir sonraki soruya geçer
         setTimeout(() => {
           currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
           renderQuestion();
         }, 380);
       } else {
-        // YANLIŞ CEVAP
         clickedBtn.classList.add("wrong-choice");
         playSound('wrong');
         if (navigator.vibrate) navigator.vibrate([60, 40, 60]);
 
-        // Doğru olan şıkkı yeşil renkle göster
+        // Doğru şıkkı yeşille göster
         const grid = document.getElementById("optionsGrid");
         if (grid) {
           grid.querySelectorAll(".option-btn").forEach(btn => {
-            const txt = btn.querySelector(".option-text");
-            if (txt && txt.textContent.trim() === currentCorrectAnswerText) {
+            if (String(btn.getAttribute("data-key")) === String(currentCorrectAnswerKey)) {
               btn.classList.add("correct-choice");
             }
           });
@@ -1714,7 +1997,6 @@
 
         lastMissedWordId = currentWord.id;
 
-        // Kullanıcı İsteği: Yanlış olunca tablonun açılması
         setTimeout(() => {
           showTableSection(lastMissedWordId);
         }, 650);
@@ -1752,19 +2034,80 @@
       if (!wrapper) return;
       wrapper.innerHTML = "";
 
-      if (currentGameMode === 'emsile24') {
+      if (currentGameMode === 'vocab') {
+        // KELİME TABLOSU: 3D FLASHCARDLAR
+        if (bannerIcon) bannerIcon.textContent = "📝";
+        if (bannerTitle) bannerTitle.textContent = "Kelime Kartları (Tekil / İkili / Çoğul)";
+        if (bannerDesc) bannerDesc.textContent = "Kartın ön yüzünde soldan sağa Tekil / İkili / Çoğul formlar, arkasında Türkçe anlamı yer alır.";
+
+        const gridDiv = document.createElement("div");
+        gridDiv.className = "vocab-grid-wrapper";
+
+        currentQuizWords.forEach(item => {
+          const isMissed = (highlightId && item.id === highlightId);
+          const card = document.createElement("div");
+          card.className = `flip-card ${isMissed ? 'missed-highlight' : ''}`;
+          card.setAttribute("data-id", item.id);
+
+          card.innerHTML = `
+            <div class="flip-card-inner">
+              <!-- Ön Yüz: Soldan Sağa Tekil / İkili / Çoğul -->
+              <div class="flip-card-front" style="padding: 10px 8px;">
+                <span class="card-id-tag">${item.id}</span>
+                <div class="vocab-card-triplet">
+                  <div class="vct-col">
+                    <span class="vct-lbl">Tekil</span>
+                    <span class="vct-arabic">${item.singular}</span>
+                  </div>
+                  <span class="vct-sep">/</span>
+                  <div class="vct-col">
+                    <span class="vct-lbl">İkili</span>
+                    <span class="vct-arabic">${item.dual}</span>
+                  </div>
+                  <span class="vct-sep">/</span>
+                  <div class="vct-col">
+                    <span class="vct-lbl">Çoğul</span>
+                    <span class="vct-arabic">${item.plural}</span>
+                  </div>
+                </div>
+                <div class="card-flip-hint">🔄 Anlamı Gör</div>
+              </div>
+              <!-- Arka Yüz: Türkçe Anlamı -->
+              <div class="flip-card-back">
+                <div class="card-meaning-text" style="font-size: 1.05rem;">${escapeHtml(item.meaning)}</div>
+                <div class="card-trans-text" style="color: #c7d2fe;">Tekil / İkili / Çoğul</div>
+                <span class="card-meaning-tag">ANLAMI ✓</span>
+              </div>
+            </div>
+          `;
+
+          card.addEventListener("click", () => {
+            card.classList.toggle("flipped");
+            playSound('flip');
+            if (navigator.vibrate) navigator.vibrate(25);
+          });
+
+          gridDiv.appendChild(card);
+        });
+
+        wrapper.appendChild(gridDiv);
+
+      } else if (currentGameMode === 'emsile24') {
         // 24 SÎGA TABLOSU (5, 5, 4, 5, 5)
         if (bannerIcon) bannerIcon.textContent = "📖";
         if (bannerTitle) bannerTitle.textContent = "24 Sîga Tablosu (Sağdan Sola)";
-        if (bannerDesc) bannerDesc.textContent = "Kartın arkasında sîga başlığı, altında ise Türkçe fiil çevirisi yer alır.";
+        if (bannerDesc) bannerDesc.textContent = "Kartın arkasında sîga başlığı, altında ise Türkçe fiil manası yer alır.";
 
         const rowDefinitions = [
           { rowNum: 1, count: 5, slice: [0, 5], className: "cols-5" },
           { rowNum: 2, count: 5, slice: [5, 10], className: "cols-5" },
-          { rowNum: 3, count: 4, slice: [10, 14], className: "cols-4" }, // Sağa yapışık
+          { rowNum: 3, count: 4, slice: [10, 14], className: "cols-4" },
           { rowNum: 4, count: 5, slice: [14, 19], className: "cols-5" },
           { rowNum: 5, count: 5, slice: [19, 24], className: "cols-5" }
         ];
+
+        const tableWrapper = document.createElement("div");
+        tableWrapper.className = "emsile-table-wrapper";
 
         rowDefinitions.forEach(def => {
           const rowItems = currentQuizWords.slice(def.slice[0], def.slice[1]);
@@ -1776,8 +2119,10 @@
             rowDiv.appendChild(createCardElement(item, highlightId));
           });
 
-          wrapper.appendChild(rowDiv);
+          tableWrapper.appendChild(rowDiv);
         });
+
+        wrapper.appendChild(tableWrapper);
 
       } else {
         // 14 ŞAHIS ZAMİR TABLOSU (3, 3, 3, 3, 2)
@@ -1786,6 +2131,9 @@
         if (bannerTitle) bannerTitle.textContent = `${sigaObj.meaning} - 14 Zamir Tablosu (Sağdan Sola)`;
         if (bannerDesc) bannerDesc.textContent = "Son satırda 'Ben' tekil sağda, 'Biz' sol ve ortayı kaplar.";
 
+        const tableWrapper = document.createElement("div");
+        tableWrapper.className = "emsile-table-wrapper";
+
         const zamirRows = [
           { rowNum: 1, slice: [0, 3] },
           { rowNum: 2, slice: [3, 6] },
@@ -1793,7 +2141,6 @@
           { rowNum: 4, slice: [9, 12] }
         ];
 
-        // 1..4. Satırlar (3 sütun)
         zamirRows.forEach(def => {
           const rowItems = currentQuizWords.slice(def.slice[0], def.slice[1]);
           const rowDiv = document.createElement("div");
@@ -1804,23 +2151,24 @@
             rowDiv.appendChild(createCardElement(item, highlightId));
           });
 
-          wrapper.appendChild(rowDiv);
+          tableWrapper.appendChild(rowDiv);
         });
 
-        // 5. Satır: Mütekellim (Sonda 2 Tane: Ben ve Biz)
         const row5Div = document.createElement("div");
         row5Div.className = "emsile-row zamir-row-5";
         row5Div.setAttribute("data-row", 5);
 
-        const itemBen = currentQuizWords[12]; // Ben
-        const itemBiz = currentQuizWords[13]; // Biz
+        const itemBen = currentQuizWords[12];
+        const itemBiz = currentQuizWords[13];
 
         const cardBen = createCardElement(itemBen, highlightId);
-        const cardBiz = createCardElement(itemBiz, highlightId, true); // span 2
+        const cardBiz = createCardElement(itemBiz, highlightId, true);
 
         row5Div.appendChild(cardBen);
         row5Div.appendChild(cardBiz);
-        wrapper.appendChild(row5Div);
+        tableWrapper.appendChild(row5Div);
+
+        wrapper.appendChild(tableWrapper);
       }
 
       if (highlightId) {
@@ -1839,19 +2187,16 @@
       card.className = `flip-card ${isSpan2 ? "card-span-2" : ""} ${isMissed ? "missed-highlight" : ""}`;
       card.setAttribute("data-id", item.id);
 
-      // Kullanıcı İsteği: Anlamı (Fiil-i mâzî) ve hemen altında çevirisi (Yardım etti)
       const transHtml = item.translation ? `<div class="card-trans-text">(${escapeHtml(item.translation)})</div>` : '';
       const extraHtml = item.extraHint ? `<div class="card-extra-hint">${escapeHtml(item.extraHint)}</div>` : '';
 
       card.innerHTML = `
         <div class="flip-card-inner">
-          <!-- Ön Yüz: Saf Arapça Çekim (Okunuş ASLA yazılmaz!) -->
           <div class="flip-card-front">
             <span class="card-id-tag">${item.id}</span>
             <div class="card-word-text">${item.word}</div>
             <div class="card-flip-hint">🔄 Anlamı ve Çevirisi</div>
           </div>
-          <!-- Arka Yüz: Sîga Terimi + Türkçe Fiil Çevirisi -->
           <div class="flip-card-back">
             <div class="card-meaning-text">${escapeHtml(item.meaning)}</div>
             ${transHtml}
@@ -1871,7 +2216,7 @@
     }
 
     // =========================================================================
-    // 7. KELİMELERİ VE ÇEVİRİLERİ DÜZENLE MODALI
+    // 7. KELİMELERİ DÜZENLE VE YENİ KELİME EKLE MODALI
     // =========================================================================
     function openEditWordsModal() {
       const container = document.getElementById("editWordsListContainer");
@@ -1879,26 +2224,68 @@
       if (!container) return;
       container.innerHTML = "";
 
-      if (titleEl) {
-        titleEl.textContent = (currentGameMode === 'emsile24')
-          ? "✏️ 24 Emsile Kelimeleri, Terimleri ve Çevirilerini Düzenle"
-          : "✏️ 14 Zamir Çekimini Düzenle";
+      if (currentGameMode === 'vocab') {
+        if (titleEl) titleEl.textContent = "✏️ Kelimeleri Düzenle (Tekil / İkili / Çoğul)";
+
+        VOCABULARY_WORDS.forEach((item, idx) => {
+          renderVocabEditRow(container, item, idx);
+        });
+
+        // "+ Yeni Kelime Ekle" butonu
+        const addBtn = document.createElement("button");
+        addBtn.type = "button";
+        addBtn.className = "btn-add-word-row";
+        addBtn.innerHTML = "➕ Yeni Kelime Ekle";
+        addBtn.addEventListener("click", () => {
+          const newIdx = container.querySelectorAll(".word-edit-row").length;
+          const newWord = { id: newIdx + 1, singular: "", dual: "", plural: "", meaning: "" };
+          renderVocabEditRow(container, newWord, newIdx);
+          container.scrollTop = container.scrollHeight;
+        });
+        container.appendChild(addBtn);
+
+      } else {
+        if (titleEl) {
+          titleEl.textContent = (currentGameMode === 'emsile24')
+            ? "✏️ 24 Emsile Kelimeleri, Terimleri ve Çevirilerini Düzenle"
+            : "✏️ 14 Zamir Çekimini Düzenle";
+        }
+
+        currentQuizWords.forEach((item, idx) => {
+          const row = document.createElement("div");
+          row.className = "word-edit-row";
+          row.innerHTML = `
+            <span class="word-edit-num">${idx + 1}.</span>
+            <input type="text" class="word-edit-input arabic-input" id="editWord_${idx}" value="${escapeHtml(item.word)}" placeholder="Arapça" />
+            <input type="text" class="word-edit-input" id="editMeaning_${idx}" value="${escapeHtml(item.meaning)}" placeholder="Sîga Başlığı" />
+            <input type="text" class="word-edit-input" id="editTrans_${idx}" value="${escapeHtml(item.translation || '')}" placeholder="Çeviri (örn: Yardım etti)" />
+            <input type="text" class="word-edit-input" id="editExtra_${idx}" value="${escapeHtml(item.extraHint || '')}" placeholder="Ek/Artı (örn: -dı, -di)" style="max-width: 100px;" />
+          `;
+          container.appendChild(row);
+        });
       }
 
-      currentQuizWords.forEach((item, idx) => {
-        const row = document.createElement("div");
-        row.className = "word-edit-row";
-        row.innerHTML = `
-          <span class="word-edit-num">${idx + 1}.</span>
-          <input type="text" class="word-edit-input arabic-input" id="editWord_${idx}" value="${escapeHtml(item.word)}" placeholder="Arapça" />
-          <input type="text" class="word-edit-input" id="editMeaning_${idx}" value="${escapeHtml(item.meaning)}" placeholder="Sîga Başlığı" />
-          <input type="text" class="word-edit-input" id="editTrans_${idx}" value="${escapeHtml(item.translation || '')}" placeholder="Çeviri (örn: Yardım etti)" />
-          <input type="text" class="word-edit-input" id="editExtra_${idx}" value="${escapeHtml(item.extraHint || '')}" placeholder="Ek/Artı (örn: -dı, -di)" style="max-width: 100px;" />
-        `;
-        container.appendChild(row);
-      });
-
       document.getElementById("editWordsModal").style.display = "flex";
+    }
+
+    function renderVocabEditRow(container, item, idx) {
+      const row = document.createElement("div");
+      row.className = "word-edit-row vocab-edit-row";
+      row.innerHTML = `
+        <span class="word-edit-num">${idx + 1}.</span>
+        <input type="text" class="word-edit-input arabic-input" data-field="singular" value="${escapeHtml(item.singular)}" placeholder="Tekil (Müfred)" />
+        <input type="text" class="word-edit-input arabic-input" data-field="dual" value="${escapeHtml(item.dual)}" placeholder="İkili (Tesniye)" />
+        <input type="text" class="word-edit-input arabic-input" data-field="plural" value="${escapeHtml(item.plural)}" placeholder="Çoğul (Cemi)" />
+        <input type="text" class="word-edit-input" data-field="meaning" value="${escapeHtml(item.meaning)}" placeholder="Türkçe Anlamı" />
+        <button type="button" class="btn-del-word" onclick="this.parentElement.remove()" title="Sil">✕</button>
+      `;
+      // Butondan önce ekle (eğer addBtn varsa)
+      const addBtn = container.querySelector(".btn-add-word-row");
+      if (addBtn) {
+        container.insertBefore(row, addBtn);
+      } else {
+        container.appendChild(row);
+      }
     }
 
     function closeEditWordsModal() {
@@ -1906,36 +2293,63 @@
     }
 
     function saveEditedWords() {
-      const updated = [];
-      for (let i = 0; i < currentQuizWords.length; i++) {
-        const wInput = document.getElementById(`editWord_${i}`);
-        const mInput = document.getElementById(`editMeaning_${i}`);
-        const tInput = document.getElementById(`editTrans_${i}`);
-        const eInput = document.getElementById(`editExtra_${i}`);
+      const container = document.getElementById("editWordsListContainer");
 
-        const wVal = (wInput ? wInput.value : "").trim() || currentQuizWords[i].word;
-        const mVal = (mInput ? mInput.value : "").trim() || currentQuizWords[i].meaning;
-        const tVal = (tInput ? tInput.value : "").trim() || (currentQuizWords[i].translation || mVal);
-        const eVal = (eInput ? eInput.value : "").trim();
-
-        updated.push({
-          id: i + 1,
-          word: wVal,
-          meaning: mVal,
-          translation: tVal,
-          extraHint: eVal
+      if (currentGameMode === 'vocab') {
+        const rows = container.querySelectorAll(".vocab-edit-row");
+        const updatedVocab = [];
+        rows.forEach((row, idx) => {
+          const s = (row.querySelector('[data-field="singular"]').value || "").trim();
+          const d = (row.querySelector('[data-field="dual"]').value || "").trim();
+          const p = (row.querySelector('[data-field="plural"]').value || "").trim();
+          const m = (row.querySelector('[data-field="meaning"]').value || "").trim();
+          if (s || m) {
+            updatedVocab.push({
+              id: idx + 1,
+              singular: s || "---",
+              dual: d || "---",
+              plural: p || "---",
+              meaning: m || "---"
+            });
+          }
         });
-      }
 
-      currentQuizWords = updated;
-      if (currentGameMode === 'emsile24') {
-        EMSILE_24_WORDS = JSON.parse(JSON.stringify(updated));
+        if (updatedVocab.length > 0) {
+          VOCABULARY_WORDS = updatedVocab;
+          currentQuizWords = VOCABULARY_WORDS.slice();
+        }
+      } else {
+        const updated = [];
+        for (let i = 0; i < currentQuizWords.length; i++) {
+          const wInput = document.getElementById(`editWord_${i}`);
+          const mInput = document.getElementById(`editMeaning_${i}`);
+          const tInput = document.getElementById(`editTrans_${i}`);
+          const eInput = document.getElementById(`editExtra_${i}`);
+
+          const wVal = (wInput ? wInput.value : "").trim() || currentQuizWords[i].word;
+          const mVal = (mInput ? mInput.value : "").trim() || currentQuizWords[i].meaning;
+          const tVal = (tInput ? tInput.value : "").trim() || (currentQuizWords[i].translation || mVal);
+          const eVal = (eInput ? eInput.value : "").trim();
+
+          updated.push({
+            id: i + 1,
+            word: wVal,
+            meaning: mVal,
+            translation: tVal,
+            extraHint: eVal
+          });
+        }
+
+        currentQuizWords = updated;
+        if (currentGameMode === 'emsile24') {
+          EMSILE_24_WORDS = JSON.parse(JSON.stringify(updated));
+        }
       }
 
       closeEditWordsModal();
       initShuffledIndices();
       renderQuestion();
-      showToast("✅ Kelimeler, anlamlar ve çeviriler başarıyla kaydedildi!");
+      showToast("✅ Kelimeler başarıyla kaydedildi!");
     }
 
     // =========================================================================
