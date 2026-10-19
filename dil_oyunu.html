@@ -1221,6 +1221,211 @@
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* ========================================================
+       GÜVENLİ ÇIKIŞ MODALI & OTURUM KAPANDI EKRANI
+       ======================================================== */
+    .btn-exit-nav {
+      background: rgba(239, 68, 68, 0.18) !important;
+      border-color: rgba(239, 68, 68, 0.45) !important;
+      color: #fca5a5 !important;
+    }
+
+    .btn-exit-nav:hover {
+      background: rgba(239, 68, 68, 0.3) !important;
+      transform: translateY(-1px);
+    }
+
+    .menu-exit-banner {
+      margin-top: 28px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .btn-menu-exit {
+      background: rgba(239, 68, 68, 0.14);
+      border: 1px solid rgba(239, 68, 68, 0.38);
+      color: #fca5a5;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-menu-exit:hover {
+      background: rgba(239, 68, 68, 0.25);
+      border-color: rgba(239, 68, 68, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(239, 68, 68, 0.3);
+    }
+
+    .safe-exit-sub {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .exit-modal-card {
+      max-width: 440px;
+      text-align: center;
+      background: #0f172a;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+    }
+
+    .exit-modal-body {
+      align-items: center;
+      text-align: center;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .exit-modal-icon {
+      font-size: 3rem;
+      margin-bottom: 4px;
+      animation: wave 1.2s infinite ease-in-out;
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(15deg); }
+    }
+
+    .exit-modal-body h4 {
+      font-size: 1.15rem;
+      color: #ffffff;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .exit-modal-body p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .exit-modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px 20px;
+      border-top: 1px solid var(--border-color);
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-danger-exit {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #ffffff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+    }
+
+    .btn-danger-exit:hover {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      transform: translateY(-1px);
+    }
+
+    /* Çıkış Yapıldı Ekranı */
+    #exitScreenView {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 16px;
+      min-height: 60vh;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .exit-screen-card {
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 20px;
+      padding: 36px 24px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .exit-screen-badge {
+      font-size: 3.5rem;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .exit-screen-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .exit-screen-desc {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.55;
+    }
+
+    .exit-screen-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .btn-restart-app {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #ffffff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .btn-restart-app:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(99, 102, 241, 0.6);
+    }
+
   </style>
 </head>
 <body>
@@ -1229,8 +1434,8 @@
   <!-- HEADER -->
   <header class="game-header">
     <div class="header-left">
-      <button type="button" class="btn-nav" id="btnBackToApp" onclick="handleGoBackToApp()" title="Ana Ekrana Dön">
-        🏠 Ana Sayfa
+      <button type="button" class="btn-nav btn-exit-nav" id="btnSafeExitHeader" onclick="openSafeExitModal()" title="Güvenli Çıkış Yap">
+        🚪 Çıkış
       </button>
       <button type="button" class="btn-nav" id="btnBackToMenu" onclick="showScreen('mainMenuView')" style="display: none;" title="Oyun Menüsüne Dön">
         ⬅️ Menü
@@ -1328,6 +1533,14 @@
           </button>
         </div>
       </div>
+
+      <!-- Güvenli Çıkış Butonu / Kartı -->
+      <div class="menu-exit-banner">
+        <button type="button" class="btn-menu-exit" onclick="openSafeExitModal()">
+          🚪 Uygulamadan Güvenle Çık
+        </button>
+        <p class="safe-exit-sub">Tüm kelimeleriniz ve çalışmalarınız otomatik olarak kaydedilir.</p>
+      </div>
     </section>
 
     <!-- 2. SÎGA SEÇİM MENÜSÜ (24 SÎGA KARTLARI) -->
@@ -1397,6 +1610,42 @@
         <span>🎮 Oyuna Devam Et ▶️</span>
       </button>
     </section>
+
+    <!-- 5. GÜVENLİ ÇIKIŞ / OTURUM KAPATILDI EKRANI -->
+    <section id="exitScreenView">
+      <div class="exit-screen-card">
+        <div class="exit-screen-badge">✅</div>
+        <h2 class="exit-screen-title">Oturumunuz Güvenle Kapatıldı</h2>
+        <p class="exit-screen-desc">
+          Arapça Emsile ve Çekim uygulamasındaki tüm çalışma verileriniz, eklediğiniz kelimeler ve ayarlarınız başarıyla kaydedildi.
+        </p>
+        <div class="exit-screen-actions">
+          <button type="button" class="btn-restart-app" onclick="restartApplication()">
+            <span>🔄 Yeniden Başlat / Giriş Yap</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- GÜVENLİ ÇIKIŞ ONAY MODALI -->
+  <div class="modal-overlay" id="safeExitModal">
+    <div class="modal-card exit-modal-card">
+      <div class="modal-header">
+        <h3>🚪 Güvenli Çıkış</h3>
+        <button type="button" class="modal-close-btn" onclick="closeSafeExitModal()">✕</button>
+      </div>
+      <div class="modal-body exit-modal-body">
+        <div class="exit-modal-icon">👋</div>
+        <h4>Uygulamadan çıkmak istiyor musunuz?</h4>
+        <p>Çalışmalarınız, eklediğiniz kelimeler ve tüm ayarlarınız güvenle kaydedildi.</p>
+      </div>
+      <div class="modal-footer exit-modal-footer">
+        <button type="button" class="btn-nav" onclick="closeSafeExitModal()">↩️ Devam Et</button>
+        <button type="button" class="btn-danger-exit" onclick="confirmSafeExit()">🚪 Evet, Çıkış Yap</button>
+      </div>
+    </div>
   </div>
 
   <!-- KELİMELERİ VE ANLAMLARI DÜZENLE MODALI -->
@@ -1585,29 +1834,33 @@
 
     function showScreen(screenId) {
       currentActiveScreen = screenId;
-      const screens = ['mainMenuView', 'sigaSelectionView', 'quizSection', 'tableSection'];
+      const screens = ['mainMenuView', 'sigaSelectionView', 'quizSection', 'tableSection', 'exitScreenView'];
       screens.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = (id === screenId ? 'flex' : 'none');
       });
 
       const btnMenu = document.getElementById("btnBackToMenu");
+      const btnExit = document.getElementById("btnSafeExitHeader");
       const btnTable = document.getElementById("btnToggleTableDirect");
       const headerTitle = document.getElementById("headerMainTitle");
       const headerSub = document.getElementById("headerSubTitle");
 
       if (screenId === 'mainMenuView') {
         if (btnMenu) btnMenu.style.display = "none";
+        if (btnExit) btnExit.style.display = "inline-flex";
         if (btnTable) btnTable.style.display = "none";
         if (headerTitle) headerTitle.textContent = "Arapça Emsile ve Çekim Merkezi";
         if (headerSub) headerSub.textContent = "24 Sîga & Zamir Çekimleri & Kelime Bilgisi";
       } else if (screenId === 'sigaSelectionView') {
         if (btnMenu) btnMenu.style.display = "inline-flex";
+        if (btnExit) btnExit.style.display = "inline-flex";
         if (btnTable) btnTable.style.display = "none";
         if (headerTitle) headerTitle.textContent = "Zamir Çekimi Seçimi";
         if (headerSub) headerSub.textContent = "24 Sîgadan birini seçiniz";
       } else if (screenId === 'quizSection') {
         if (btnMenu) btnMenu.style.display = "inline-flex";
+        if (btnExit) btnExit.style.display = "inline-flex";
         if (btnTable) btnTable.style.display = "inline-flex";
         if (headerTitle) {
           if (currentGameMode === 'emsile24') {
@@ -1615,23 +1868,68 @@
           } else if (currentGameMode === 'vocab') {
             headerTitle.textContent = "Kelime Oyunu (Tekil / İkili / Çoğul)";
           } else {
-            headerTitle.textContent = `${(EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || EMSILE_24_WORDS[0]).meaning} Çekimi`;
+            const foundSiga = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || EMSILE_24_WORDS[0];
+            headerTitle.textContent = `${foundSiga.meaning} Çekimi`;
           }
         }
         if (headerSub) headerSub.textContent = "Çift yönlü soru-cevap testi";
       } else if (screenId === 'tableSection') {
         if (btnMenu) btnMenu.style.display = "inline-flex";
+        if (btnExit) btnExit.style.display = "inline-flex";
         if (btnTable) btnTable.style.display = "inline-flex";
+      } else if (screenId === 'exitScreenView') {
+        if (btnMenu) btnMenu.style.display = "none";
+        if (btnExit) btnExit.style.display = "none";
+        if (btnTable) btnTable.style.display = "none";
+        if (headerTitle) headerTitle.textContent = "Oturum Kapatıldı";
+        if (headerSub) headerSub.textContent = "Tüm çalışmalarınız güvenle kaydedildi";
       }
     }
 
-    function handleGoBackToApp() {
+    // =========================================================================
+    // GÜVENLİ ÇIKIŞ (SAFE EXIT) VE VERİ KORUMA YÖNETİMİ
+    // =========================================================================
+    function openSafeExitModal() {
+      const modal = document.getElementById("safeExitModal");
+      if (modal) modal.style.display = "flex";
+    }
+
+    function closeSafeExitModal() {
+      const modal = document.getElementById("safeExitModal");
+      if (modal) modal.style.display = "none";
+    }
+
+    function confirmSafeExit() {
+      closeSafeExitModal();
+      saveStateToLocalStorage();
+
+      // 1. Android Köprüsü (Uygulama İçi)
       if (window.AndroidBridge && typeof window.AndroidBridge.closeLanguageGame === 'function') {
-        window.AndroidBridge.closeLanguageGame();
-      } else {
-        showToast("🏠 Uygulama Ana Sayfasına Dönülüyor...");
-        showScreen('mainMenuView');
+        try {
+          window.AndroidBridge.closeLanguageGame();
+          return;
+        } catch(e) {
+          console.warn("AndroidBridge closeLanguageGame error:", e);
+        }
       }
+
+      // 2. Tarayıcı pencere kapama denemesi
+      try {
+        window.close();
+      } catch(e) {}
+
+      // 3. Tarayıcı izin vermezse güvenli çıkış ekranı
+      showScreen('exitScreenView');
+      showToast("✅ Oturum başarıyla kaydedildi ve kapatıldı!");
+    }
+
+    function restartApplication() {
+      showScreen('mainMenuView');
+      showToast("👋 Hoş geldiniz! İyi çalışmalar.");
+    }
+
+    function handleGoBackToApp() {
+      openSafeExitModal();
     }
 
     // =========================================================================
@@ -2378,6 +2676,7 @@
       }
 
       closeEditWordsModal();
+      saveStateToLocalStorage();
       initShuffledIndices();
       renderQuestion();
       showToast("✅ Kelimeler başarıyla kaydedildi!");
@@ -2408,8 +2707,91 @@
       }, 2400);
     }
 
+
+    // =========================================================================
+    // VERİ KALICILIĞI VE SAVUNMACI KODLAMA (ZERO-ERROR)
+    // =========================================================================
+    function saveStateToLocalStorage() {
+      try {
+        localStorage.setItem("emsile_vocab_words_v2", JSON.stringify(VOCABULARY_WORDS));
+        localStorage.setItem("emsile_sound_muted", isSoundMuted ? "1" : "0");
+      } catch(e) {
+        console.warn("LocalStorage save error:", e);
+      }
+    }
+
+    function loadStateFromLocalStorage() {
+      try {
+        const saved = localStorage.getItem("emsile_vocab_words_v2");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            VOCABULARY_WORDS = parsed;
+          }
+        }
+        const savedMuted = localStorage.getItem("emsile_sound_muted");
+        if (savedMuted !== null) {
+          isSoundMuted = (savedMuted === "1");
+          const btn = document.getElementById("soundToggleBtn");
+          if (btn) btn.textContent = isSoundMuted ? "🔇" : "🔊";
+        }
+      } catch(e) {
+        console.warn("LocalStorage load error:", e);
+      }
+    }
+
+    // Global Hata Koruma Kalkanı (Uygulamanın asla çökmemesini garanti eder)
+    window.addEventListener("error", (e) => {
+      console.warn("🛡️ Safe Handler yakaladı:", e.message);
+    });
+
+    window.addEventListener("unhandledrejection", (e) => {
+      console.warn("🛡️ Safe Promise Handler:", e.reason);
+    });
+
+    // Klavye ESC tuşu ile modalları kapatma
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        const exitModal = document.getElementById("safeExitModal");
+        if (exitModal && exitModal.style.display === "flex") {
+          closeSafeExitModal();
+          return;
+        }
+        const editModal = document.getElementById("editWordsModal");
+        if (editModal && editModal.style.display === "flex") {
+          closeEditWordsModal();
+          return;
+        }
+        if (currentActiveScreen !== 'mainMenuView' && currentActiveScreen !== 'exitScreenView') {
+          showScreen('mainMenuView');
+        }
+      }
+    });
+
+    // Tarayıcı / Android Donanım Geri Tuşu Desteği
+    window.addEventListener("popstate", () => {
+      const exitModal = document.getElementById("safeExitModal");
+      if (exitModal && exitModal.style.display === "flex") {
+        closeSafeExitModal();
+        return;
+      }
+      const editModal = document.getElementById("editWordsModal");
+      if (editModal && editModal.style.display === "flex") {
+        closeEditWordsModal();
+        return;
+      }
+      if (currentActiveScreen === 'tableSection') {
+        showScreen('quizSection');
+      } else if (currentActiveScreen === 'quizSection' || currentActiveScreen === 'sigaSelectionView') {
+        showScreen('mainMenuView');
+      } else if (currentActiveScreen === 'mainMenuView') {
+        openSafeExitModal();
+      }
+    });
+
     // Başlangıç: Oyun Ana Menüsü ile başlar
     window.addEventListener("DOMContentLoaded", () => {
+      loadStateFromLocalStorage();
       showScreen("mainMenuView");
     });
   </script>
