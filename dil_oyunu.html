@@ -1426,6 +1426,37 @@
       box-shadow: 0 6px 18px rgba(99, 102, 241, 0.6);
     }
 
+
+    /* Arama ve Filtreleme Kutusu */
+    .table-search-box {
+      width: 100%;
+      margin: 8px 0 16px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .table-search-input {
+      width: 100%;
+      max-width: 520px;
+      background: rgba(30, 41, 59, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+      padding: 10px 18px;
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    .table-search-input:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.45);
+      background: rgba(30, 41, 59, 0.95);
+    }
+
   </style>
 </head>
 <body>
@@ -1517,8 +1548,8 @@
             <div class="choice-card-top">
               <div class="choice-icon-box" style="background: rgba(16, 185, 129, 0.18); border-color: rgba(16, 185, 129, 0.35);">📝</div>
               <div class="choice-texts">
-                <h3>Kelime Bilgisi</h3>
-                <p>Müfred (Tekil), Tesniye (İkili) ve Cemi (Çoğul) kelime ezberleme.</p>
+                <h3>Kur'an'da En Çok Geçen 100 Kelime</h3>
+                <p>Kur'an-ı Kerim'de en sık zikredilen 100 isim: Tekil, İkili ve Çoğul halleriyle.</p>
               </div>
             </div>
             <ul class="choice-features" style="margin-top: 14px;">
@@ -1749,12 +1780,107 @@
 
     // D) YENİ KELİME LİSTESİ: TEKİL / İKİLİ / ÇOĞUL (KULLANICI İSTEĞİ)
     const DEFAULT_VOCABULARY_WORDS = [
-      { id: 1, singular: "كِتَابٌ", dual: "كِتَابَانِ", plural: "كُتُبٌ", meaning: "Kitap" },
-      { id: 2, singular: "قَلَمٌ", dual: "قَلَمَانِ", plural: "أَقْلَامٌ", meaning: "Kalem" },
-      { id: 3, singular: "بَيْتٌ", dual: "بَيْتَانِ", plural: "بُيُوتٌ / أَبْيَاتٌ", meaning: "Ev" },
-      { id: 4, singular: "طَالِبٌ", dual: "طَالِبَانِ", plural: "طُلَّابٌ / طَلَبَةٌ", meaning: "Öğrenci" },
-      { id: 5, singular: "بَابٌ", dual: "بَابَانِ", plural: "أَبْوَابٌ / بِيبَانٌ", meaning: "Kapı" }
-    ];
+  { id: 1, singular: "رَبٌّ", dual: "رَبَّانِ", plural: "أَرْبَابٌ", meaning: "Rab, Terbiye Eden, Efendi" },
+  { id: 2, singular: "آيَةٌ", dual: "آيَتَانِ", plural: "آيَاتٌ", meaning: "Ayet, Delil, Mucize" },
+  { id: 3, singular: "كِتَابٌ", dual: "كِتَابَانِ", plural: "كُتُبٌ", meaning: "Kitap, Yazılı Belge" },
+  { id: 4, singular: "رَسُولٌ", dual: "رَسُولَانِ", plural: "رُسُلٌ", meaning: "Elçi, Peygamber" },
+  { id: 5, singular: "نَبِيٌّ", dual: "نَبِيَّانِ", plural: "أَنْبِيَاءُ / نَبِيُّونَ", meaning: "Peygamber, Nebi" },
+  { id: 6, singular: "يَوْمٌ", dual: "يَوْمَانِ", plural: "أَيَّامٌ", meaning: "Gün, Vakit" },
+  { id: 7, singular: "سَمَاءٌ", dual: "سَمَاوَانِ", plural: "سَمَاوَاتٌ", meaning: "Gök, Gökyüzü" },
+  { id: 8, singular: "أَرْضٌ", dual: "أَرْضَانِ", plural: "أَرَاضٍ / أَرْضُونَ", meaning: "Yer, Yeryüzü" },
+  { id: 9, singular: "نَفْسٌ", dual: "نَفْسَانِ", plural: "أَنْفُسٌ / نُفُوسٌ", meaning: "Nefis, Can, Kişi" },
+  { id: 10, singular: "قَوْمٌ", dual: "قَوْمَانِ", plural: "أَقْوَامٌ", meaning: "Kavim, Topluluk, Halk" },
+  { id: 11, singular: "عَبْدٌ", dual: "عَبْدَانِ", plural: "عِبَادٌ / عَبِيدٌ", meaning: "Kul, Köle" },
+  { id: 12, singular: "قَلْبٌ", dual: "قَلْبَانِ", plural: "قُلُوبٌ", meaning: "Kalp, Gönül" },
+  { id: 13, singular: "عَذَابٌ", dual: "عَذَابَانِ", plural: "أَعْذِبَةٌ", meaning: "Azap, Şiddetli Ceza" },
+  { id: 14, singular: "جَنَّةٌ", dual: "جَنَّتَانِ", plural: "جَنَّاتٌ", meaning: "Cennet, Bahçe" },
+  { id: 15, singular: "نَارٌ", dual: "نَارَانِ", plural: "نِيرَانٌ", meaning: "Ateş, Cehennem" },
+  { id: 16, singular: "حَقٌّ", dual: "حَقَّانِ", plural: "حُقُوقٌ", meaning: "Hak, Gerçek, Doğru" },
+  { id: 17, singular: "سَبِيلٌ", dual: "سَبِيلَانِ", plural: "سُبُلٌ", meaning: "Yol, Yöntem" },
+  { id: 18, singular: "أَمْرٌ", dual: "أَمْرَانِ", plural: "أُمُورٌ / أَوَامِرُ", meaning: "İş, Emir, Buyruk" },
+  { id: 19, singular: "شَيْءٌ", dual: "شَيْئَانِ", plural: "أَشْيَاءُ", meaning: "Şey, Nesne, Varlık" },
+  { id: 20, singular: "مَالٌ", dual: "مَالَانِ", plural: "أَمْوَالٌ", meaning: "Mal, Servet, Mülk" },
+  { id: 21, singular: "وَلَدٌ", dual: "وَلَدَانِ", plural: "أَوْلَادٌ / وِلْدَانٌ", meaning: "Çocuk, Evlat" },
+  { id: 22, singular: "عِلْمٌ", dual: "عِلْمَانِ", plural: "عُلُومٌ", meaning: "İlim, Bilgi" },
+  { id: 23, singular: "عَمَلٌ", dual: "عَمَلَانِ", plural: "أَعْمَالٌ", meaning: "Amel, İş, Eylem" },
+  { id: 24, singular: "أَهْلٌ", dual: "أَهْلَانِ", plural: "أَهْلُونَ / أَهَالٍ", meaning: "Aile, Halk, Ehil" },
+  { id: 25, singular: "بَيْتٌ", dual: "بَيْتَانِ", plural: "بُيُوتٌ / أَبْيَاتٌ", meaning: "Ev, Beyt" },
+  { id: 26, singular: "بَابٌ", dual: "بَابَانِ", plural: "أَبْوَابٌ / بِيبَانٌ", meaning: "Kapı, Giriş" },
+  { id: 27, singular: "مَلَكٌ", dual: "مَلَكَانِ", plural: "مَلَائِكَةٌ", meaning: "Melek" },
+  { id: 28, singular: "إِنْسَانٌ", dual: "إِنْسَانَانِ", plural: "نَاسٌ / أَنَاسِيُّ", meaning: "İnsan" },
+  { id: 29, singular: "دِينٌ", dual: "دِينَانِ", plural: "أَدْيَانٌ", meaning: "Din, Hesap, Hüküm" },
+  { id: 30, singular: "قَوْلٌ", dual: "قَوْلَانِ", plural: "أَقْوَالٌ / أَقَاوِيلُ", meaning: "Söz, Kelam" },
+  { id: 31, singular: "يَدٌ", dual: "يَدَانِ", plural: "أَيْدٍ / أَيَادٍ", meaning: "El, Güç" },
+  { id: 32, singular: "عَيْنٌ", dual: "عَيْنَانِ", plural: "أَعْيُنٌ / عُيُونٌ", meaning: "Göz, Pınar, Kaynak" },
+  { id: 33, singular: "أُذُنٌ", dual: "أُذُنَانِ", plural: "آذَانٌ", meaning: "Kulak" },
+  { id: 34, singular: "لِسَانٌ", dual: "لِسَانَانِ", plural: "أَلْسِنَةٌ", meaning: "Dil, Lisan" },
+  { id: 35, singular: "وَجْهٌ", dual: "وَجْهَانِ", plural: "وُجُوهٌ / أَوْجُهٌ", meaning: "Yüz, Çehre, Taraf" },
+  { id: 36, singular: "رِجْلٌ", dual: "رِجْلَانِ", plural: "أَرْجُلٌ", meaning: "Ayak" },
+  { id: 37, singular: "صَدْرٌ", dual: "صَدْرَانِ", plural: "صُدُورٌ", meaning: "Göğüs, Sine, Kalp" },
+  { id: 38, singular: "بَصَرٌ", dual: "بَصَرَانِ", plural: "أَبْصَارٌ", meaning: "Göz, Görme Yetisi" },
+  { id: 39, singular: "سَمْعٌ", dual: "سَمْعَانِ", plural: "أَسْمَاعٌ", meaning: "İşitme, Kulak" },
+  { id: 40, singular: "رَأْسٌ", dual: "رَأْسَانِ", plural: "رُؤُوسٌ", meaning: "Baş, Kafa" },
+  { id: 41, singular: "شَمْسٌ", dual: "شَمْسَانِ", plural: "شُمُوسٌ", meaning: "Güneş" },
+  { id: 42, singular: "قَمَرٌ", dual: "قَمَرَانِ", plural: "أَقْمَارٌ", meaning: "Ay, Kamer" },
+  { id: 43, singular: "نَجْمٌ", dual: "نَجْمَانِ", plural: "نُجُومٌ / أَنْجُمٌ", meaning: "Yıldız" },
+  { id: 44, singular: "لَيْلٌ", dual: "لَيْلَانِ", plural: "لَيَالٍ", meaning: "Gece" },
+  { id: 45, singular: "نَهَارٌ", dual: "نَهَارَانِ", plural: "أَنْهُرٌ / نُهُرٌ", meaning: "Gündüz" },
+  { id: 46, singular: "نُورٌ", dual: "نُورَانِ", plural: "أَنْوَارٌ", meaning: "Nur, Işık, Aydınlık" },
+  { id: 47, singular: "ظُلْمَةٌ", dual: "ظُلْمَتَانِ", plural: "ظُلُمَاتٌ", meaning: "Karanlık" },
+  { id: 48, singular: "مَاءٌ", dual: "مَاءَانِ", plural: "مِيَاهٌ / أَمْوَاهٌ", meaning: "Su" },
+  { id: 49, singular: "رِيحٌ", dual: "رِيحَانِ", plural: "رِيَاحٌ / أَرْيَاحٌ", meaning: "Rüzgar" },
+  { id: 50, singular: "بَحْرٌ", dual: "بَحْرَانِ", plural: "بِحَارٌ / أَبْحُرٌ", meaning: "Deniz" },
+  { id: 51, singular: "جَبَلٌ", dual: "جَبَلَانِ", plural: "جِبَالٌ", meaning: "Dağ" },
+  { id: 52, singular: "نَهْرٌ", dual: "نَهْرَانِ", plural: "أَنْهَارٌ", meaning: "Nehir, Irmak" },
+  { id: 53, singular: "شَجَرَةٌ", dual: "شَجَرَتَانِ", plural: "أَشْجَارٌ / شَجَرٌ", meaning: "Ağaç" },
+  { id: 54, singular: "ثَمَرَةٌ", dual: "ثَمَرَتَانِ", plural: "ثَمَرَاتٌ / ثَمَرٌ", meaning: "Meyve, Ürün" },
+  { id: 55, singular: "طَعَامٌ", dual: "طَعَامَانِ", plural: "أَطْعِمَةٌ", meaning: "Yemek, Yiyecek" },
+  { id: 56, singular: "مَوْتٌ", dual: "مَوْتَانِ", plural: "أَمْوَاتٌ", meaning: "Ölüm" },
+  { id: 57, singular: "حَيَاةٌ", dual: "حَيَاتَانِ", plural: "حَيَوَاتٌ", meaning: "Hayat, Yaşam" },
+  { id: 58, singular: "دُنْيَا", dual: "دُنْيَيَانِ", plural: "دُنًى", meaning: "Dünya, Yakın Hayat" },
+  { id: 59, singular: "آخِرَةٌ", dual: "آخِرَتَانِ", plural: "آخِرَاتٌ", meaning: "Ahiret, Son Hayat" },
+  { id: 60, singular: "سَاعَةٌ", dual: "سَاعَتَانِ", plural: "سَاعَاتٌ", meaning: "Kıyamet Vakti, Saat" },
+  { id: 61, singular: "أَجْرٌ", dual: "أَجْرَانِ", plural: "أُجُورٌ", meaning: "Mükafat, Ücret, Sevap" },
+  { id: 62, singular: "فَضْلٌ", dual: "فَضْلَانِ", plural: "فُضُولٌ / أَفْضَالٌ", meaning: "Lütuf, İhsan, Erdem" },
+  { id: 63, singular: "رَحْمَةٌ", dual: "رَحْمَتَانِ", plural: "رَحَمَاتٌ", meaning: "Rahmet, Merhamet" },
+  { id: 64, singular: "نِعْمَةٌ", dual: "نِعْمَتَانِ", plural: "نِعَمٌ / أَنْعُمٌ", meaning: "Nimet, İyilik, İkram" },
+  { id: 65, singular: "حَسَنَةٌ", dual: "حَسَنَتَانِ", plural: "حَسَنَاتٌ", meaning: "İyilik, Sevap, Güzellik" },
+  { id: 66, singular: "سَيِّئَةٌ", dual: "سَيِّئَتَانِ", plural: "سَيِّئَاتٌ", meaning: "Kötülük, Günah" },
+  { id: 67, singular: "ذَنْبٌ", dual: "ذَنْبَانِ", plural: "ذُنُوبٌ", meaning: "Günah, Kusur" },
+  { id: 68, singular: "خَطِيئَةٌ", dual: "خَطِيئَتَانِ", plural: "خَطَايَا / خَطِيئَاتٌ", meaning: "Hata, Büyük Günah" },
+  { id: 69, singular: "ظُلْمٌ", dual: "ظُلْمَانِ", plural: "مَظَالِمُ", meaning: "Zulüm, Haksızlık" },
+  { id: 70, singular: "إِثْمٌ", dual: "إِثْمَانِ", plural: "آثَامٌ", meaning: "Vebal, Ağır Günah" },
+  { id: 71, singular: "مُؤْمِنٌ", dual: "مُؤْمِنَانِ", plural: "مُؤْمِنُونَ / مُؤْمِنِينَ", meaning: "Mümin, İman Eden" },
+  { id: 72, singular: "كَافِرٌ", dual: "كَافِرَانِ", plural: "كَافِرُونَ / كُفَّارٌ", meaning: "Kâfir, İnkârcı" },
+  { id: 73, singular: "مُنَافِقٌ", dual: "مُنَافِقَانِ", plural: "مُنَافِقُونَ / مُنَافِقِينَ", meaning: "Münafık, İkiyüzlü" },
+  { id: 74, singular: "مُشْرِكٌ", dual: "مُشْرِكَانِ", plural: "مُشْرِكُونَ / مُشْرِكِينَ", meaning: "Müşrik, Ortak Koşan" },
+  { id: 75, singular: "ظَالِمٌ", dual: "ظَالِمَانِ", plural: "ظَالِمُونَ / ظَلَمَةٌ", meaning: "Zalim, Haksızlık Eden" },
+  { id: 76, singular: "فَاسِقٌ", dual: "فَاسِقَانِ", plural: "فَاسِقُونَ / فُسَّاقٌ", meaning: "Fasık, Yoldan Çıkan" },
+  { id: 77, singular: "صَالِحٌ", dual: "صَالِحَانِ", plural: "صَالِحُونَ / صُلَحَاءُ", meaning: "Salih, Dürüst, İyi Kimse" },
+  { id: 78, singular: "صَادِقٌ", dual: "صَادِقَانِ", plural: "صَادِقُونَ / صُدَقَاءُ", meaning: "Sadık, Doğru Sözlü" },
+  { id: 79, singular: "صَابِرٌ", dual: "صَابِرَانِ", plural: "صَابِرُونَ", meaning: "Sabreden, Sabırlı" },
+  { id: 80, singular: "شَاكِرٌ", dual: "شَاكِرَانِ", plural: "شَاكِرُونَ / شُكَّارٌ", meaning: "Şükreden, Kıymet Bilen" },
+  { id: 81, singular: "مُحْسِنٌ", dual: "مُحْسِنَانِ", plural: "مُحْسِنُونَ / مُحْسِنِينَ", meaning: "Muhsin, İyilik Yapan" },
+  { id: 82, singular: "شَهِيدٌ", dual: "شَهِيدَانِ", plural: "شُهَدَاءُ", meaning: "Şahit, Şehit, Tanık" },
+  { id: 83, singular: "عَالِمٌ", dual: "عَالِمَانِ", plural: "عُلَمَاءُ", meaning: "Âlim, Bilen" },
+  { id: 84, singular: "عَدُوٌّ", dual: "عَدُوَّانِ", plural: "أَعْدَاءٌ", meaning: "Düşman" },
+  { id: 85, singular: "وَلِيٌّ", dual: "وَلِيَّانِ", plural: "أَوْلِيَاءُ", meaning: "Veli, Dost, Koruyucu" },
+  { id: 86, singular: "نَصِيرٌ", dual: "نَصِيرَانِ", plural: "أَنْصَارٌ", meaning: "Yardımcı, Destekçi" },
+  { id: 87, singular: "سُلْطَانٌ", dual: "سُلْطَانَانِ", plural: "سَلَاطِينُ", meaning: "Kesin Delil, Güç, Yetki" },
+  { id: 88, singular: "بَيِّنَةٌ", dual: "بَيِّنَتَانِ", plural: "بَيِّنَاتٌ", meaning: "Açık Delil, Belge" },
+  { id: 89, singular: "حِكْمَةٌ", dual: "حِكْمَتَانِ", plural: "حِكَمٌ", meaning: "Hikmet, Derin Anlayış" },
+  { id: 90, singular: "كَلِمَةٌ", dual: "كَلِمَتَانِ", plural: "كَلِمَاتٌ / كَلِمٌ", meaning: "Kelime, İlahi Söz" },
+  { id: 91, singular: "حَدِيثٌ", dual: "حَدِيثَانِ", plural: "أَحَادِيثُ", meaning: "Söz, Haber, Anlatı" },
+  { id: 92, singular: "مَسْجِدٌ", dual: "مَسْجِدَانِ", plural: "مَسَاجِدُ", meaning: "Mescit, İbadet Yeri" },
+  { id: 93, singular: "مَدِينَةٌ", dual: "مَدِينَتَانِ", plural: "مُدُنٌ / مَدَائِنُ", meaning: "Şehir, Medine" },
+  { id: 94, singular: "قَرْيَةٌ", dual: "قَرْيَتَانِ", plural: "قُرًى", meaning: "Belde, Köy, Yerleşim" },
+  { id: 95, singular: "دَارٌ", dual: "دَارَانِ", plural: "دِيَارٌ / دُورٌ", meaning: "Yurt, Diyar, Konut" },
+  { id: 96, singular: "أُمٌّ", dual: "أُمَّانِ", plural: "أُمَّهَاتٌ", meaning: "Anne, Valide" },
+  { id: 97, singular: "أَبٌ", dual: "أَبَوَانِ", plural: "آبَاءٌ", meaning: "Baba, Ata" },
+  { id: 98, singular: "أَخٌ", dual: "أَخَوَانِ", plural: "إِخْوَةٌ / إِخْوَانٌ", meaning: "Erkek Kardeş, Din Kardeşi" },
+  { id: 99, singular: "أُخْتٌ", dual: "أُخْتَانِ", plural: "أَخَوَاتٌ", meaning: "Kız Kardeş" },
+  { id: 100, singular: "زَوْجٌ", dual: "زَوْجَانِ", plural: "أَزْوَاجٌ", meaning: "Eş, Çift" }
+];
 
     let VOCABULARY_WORDS = JSON.parse(JSON.stringify(DEFAULT_VOCABULARY_WORDS));
 
@@ -2366,11 +2492,20 @@
       if (currentGameMode === 'vocab') {
         // KELİME TABLOSU: 3D FLASHCARDLAR
         if (bannerIcon) bannerIcon.textContent = "📝";
-        if (bannerTitle) bannerTitle.textContent = "Kelime Kartları (Tekil / İkili / Çoğul)";
+        if (bannerTitle) bannerTitle.textContent = "Kur'an'da En Çok Geçen 100 İsim (Tekil / İkili / Çoğul)";
         if (bannerDesc) bannerDesc.textContent = "Kartın ön yüzünde sağdan sola Tekil / İkili / Çoğul formlar, arkasında Türkçe anlamı yer alır.";
+
+        // 100 Kelime İçin Hızlı Canlı Arama Çubuğu
+        const searchBox = document.createElement("div");
+        searchBox.className = "table-search-box";
+        searchBox.innerHTML = `
+          <input type="text" class="table-search-input" id="vocabTableSearchInput" placeholder="🔍 100 Kur'an kelimesinde ara (Arapça veya Türkçe)..." />
+        `;
+        wrapper.appendChild(searchBox);
 
         const gridDiv = document.createElement("div");
         gridDiv.className = "vocab-grid-wrapper";
+        gridDiv.id = "vocabCardsGrid";
 
         currentQuizWords.forEach(item => {
           const isMissed = (highlightId && item.id === highlightId);
@@ -2420,6 +2555,18 @@
         });
 
         wrapper.appendChild(gridDiv);
+
+        const searchInput = searchBox.querySelector("#vocabTableSearchInput");
+        if (searchInput) {
+          searchInput.addEventListener("input", (e) => {
+            const q = (e.target.value || "").trim().toLowerCase();
+            const cards = gridDiv.querySelectorAll(".flip-card");
+            cards.forEach(c => {
+              const txt = c.textContent.toLowerCase();
+              c.style.display = (!q || txt.includes(q)) ? "" : "none";
+            });
+          });
+        }
 
       } else if (currentGameMode === 'emsile24') {
         // 24 SÎGA TABLOSU (5, 5, 4, 5, 5)
@@ -2713,7 +2860,7 @@
     // =========================================================================
     function saveStateToLocalStorage() {
       try {
-        localStorage.setItem("emsile_vocab_words_v2", JSON.stringify(VOCABULARY_WORDS));
+        localStorage.setItem("emsile_vocab_words_quran_100_v1", JSON.stringify(VOCABULARY_WORDS));
         localStorage.setItem("emsile_sound_muted", isSoundMuted ? "1" : "0");
       } catch(e) {
         console.warn("LocalStorage save error:", e);
@@ -2722,7 +2869,7 @@
 
     function loadStateFromLocalStorage() {
       try {
-        const saved = localStorage.getItem("emsile_vocab_words_v2");
+        const saved = localStorage.getItem("emsile_vocab_words_quran_100_v1");
         if (saved) {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed) && parsed.length > 0) {
