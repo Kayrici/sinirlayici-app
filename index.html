@@ -449,22 +449,112 @@
     /* 5 KELİMEYİ EŞİT DAĞITAN SATIR (1., 2., 4., 5. Satırlar) */
     .emsile-row.cols-5 {
       grid-template-columns: repeat(5, 1fr);
+      width: 100%;
+      margin: 0;
     }
 
-    /* 4 KELİMEYİ EŞİT DAĞITAN SATIR (3. Satır: 11..14) */
+    /* 4 KELİMEYİ SAĞA YAPIŞTIRAN SATIR (3. Satır: 11..14) - KULLANICI İSTEĞİ */
+    /* 5 sütunluk ızgarada ilk 4 sütuna yerleşir, sol sütun boş kalır -> Sağa yapışık! */
     .emsile-row.cols-4 {
-      grid-template-columns: repeat(4, 1fr);
-      width: 80%; /* 5 kartla aynı kart genişliğini korumak için */
-      margin: 0 auto;
+      grid-template-columns: repeat(5, 1fr);
+      width: 100%;
+      margin: 0;
+    }
+
+    /* ZAMİR TABLOSU 3 SÜTUNLU SATIRLAR (Gâib, Gâibe, Muhâtap, Muhâtaba) */
+    .emsile-row.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+      margin: 0;
+    }
+
+    /* ZAMİR TABLOSU 5. SATIR (Mütekellim: Ben tek sütun, Biz orta ve solu kaplasın) */
+    .emsile-row.zamir-row-5 {
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+      margin: 0;
+    }
+
+    .emsile-row.zamir-row-5 .card-span-2 {
+      grid-column: span 2;
     }
 
     @media (max-width: 540px) {
-      .emsile-row.cols-4 {
-        width: 100%;
-      }
       .emsile-row {
         gap: 6px;
       }
+    }
+
+    /* Mod Seçici Tab Bar */
+    .mode-tabs-wrapper {
+      width: 100%;
+      max-width: 540px;
+      margin: 10px auto 4px auto;
+      padding: 0 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .mode-tabs {
+      display: flex;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 4px;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .mode-tab {
+      flex: 1;
+      padding: 8px 10px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .mode-tab:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .mode-tab.active {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+    }
+
+    .zamir-layout-toggle-bar {
+      display: none;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .btn-zamir-toggle {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      color: #cbd5e1;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-zamir-toggle:hover {
+      background: rgba(99, 102, 241, 0.28);
+      color: #fff;
     }
 
     /* 3D Flip Card Container */
@@ -766,10 +856,10 @@
   <!-- Üst Bar -->
   <header class="game-header">
     <div class="header-brand">
-      <div class="brand-icon-box">📖</div>
+      <div class="brand-icon-box" id="headerBrandIcon">📖</div>
       <div class="brand-texts">
-        <h1>Emsile-i Muhtelife</h1>
-        <p>24 Sîga Kelime Eşleştirme</p>
+        <h1 id="headerMainTitle">Emsile-i Muhtelife</h1>
+        <p id="headerSubTitle">24 Sîga Kelime Eşleştirme</p>
       </div>
     </div>
     <div class="header-actions">
@@ -777,10 +867,22 @@
         ✏️ Düzenle
       </button>
       <button type="button" class="btn-header primary" id="btnToggleTable" onclick="toggleTableDirectly()">
-        📚 24 Tablo
+        📚 Tablo
       </button>
     </div>
   </header>
+
+  <!-- MOD SEÇİCİ TAB BAR (Emsile 24 Sîga & Zamir Tablosu 14 Zamir) -->
+  <div class="mode-tabs-wrapper">
+    <div class="mode-tabs">
+      <button type="button" class="mode-tab active" id="btnModeEmsile" onclick="setGameMode('emsile')">
+        📖 Emsile (24 Sîga)
+      </button>
+      <button type="button" class="mode-tab" id="btnModeZamir" onclick="setGameMode('zamir')">
+        👤 Zamirler (14 Zamir)
+      </button>
+    </div>
+  </div>
 
   <!-- Ana Oyun Kapsayıcısı -->
   <main class="game-container">
@@ -796,9 +898,9 @@
 
       <!-- Soru Kartı -->
       <div class="target-word-card">
-        <span class="word-badge-tag">HEDEF KELİME</span>
+        <span class="word-badge-tag" id="targetBadgeTag">HEDEF KELİME</span>
         <h2 class="target-word-title" id="targetWordText">نَصَرَ</h2>
-        <p class="target-word-instruction">Aşağıdaki 5 seçenekten doğru Türkçe anlamını seçin:</p>
+        <p class="target-word-instruction">Aşağıdaki 5 seçenekten doğru Türkçe karşılığını seçin:</p>
       </div>
 
       <!-- 5 Şıklı Seçenekler Grid -->
@@ -807,14 +909,14 @@
       </div>
     </section>
 
-    <!-- 2. BÖLÜM: 24 KELİME 3D FLASHCARD TABLOSU (SAĞDAN SOLA: 5-5-4-5-5) -->
+    <!-- 2. BÖLÜM: 3D FLASHCARD TABLOSU (SAĞDAN SOLA) -->
     <section id="tableSection">
       <div class="table-banner">
         <div class="table-banner-left">
-          <div class="table-banner-icon">📚</div>
+          <div class="table-banner-icon" id="tableBannerIcon">📚</div>
           <div class="table-banner-info">
-            <h3>24 Sîga Tablosu (Sağdan Sola)</h3>
-            <p>Anlamını görmek istediğiniz karta dokunun, kart ters dönecektir.</p>
+            <h3 id="tableBannerTitle">24 Sîga Tablosu (Sağdan Sola)</h3>
+            <p id="tableBannerDesc">Anlamını görmek istediğiniz karta dokunun, kart ters dönecektir.</p>
           </div>
         </div>
         <button type="button" class="btn-continue" onclick="continueQuiz()">
@@ -822,9 +924,16 @@
         </button>
       </div>
 
-      <!-- 5 SATIR KAPSAYICISI (SAĞDAN SOLA: 5, 5, 4, 5, 5) -->
+      <!-- Zamir tablosu son satır düzeni hızlı değiştirici (Kullanıcı İsteği) -->
+      <div class="zamir-layout-toggle-bar" id="zamirLayoutBar">
+        <button type="button" class="btn-zamir-toggle" id="btnToggleZamirLayout" onclick="toggleZamirLayout()">
+          🔄 Son Satır: Ben (Sağda) | Biz (Sol + Orta Kaplar)
+        </button>
+      </div>
+
+      <!-- SATIRLAR KAPSAYICISI -->
       <div class="emsile-table-wrapper" id="emsileRowsWrapper">
-        <!-- JS ile 5 satır basılır -->
+        <!-- JS ile dinamik satırlar basılır -->
       </div>
 
       <button type="button" class="btn-continue bottom-full" onclick="continueQuiz()">
@@ -892,7 +1001,34 @@
       { id: 24, word: "أَنْصِرْ بِهِ", meaning: "Fiil-i taaccüb-i sânî", row: 5 }
     ];
 
-    // 2. SES SENTEZLEYİCİSİ (Web Audio API - %100 Çevrimdışı)
+    // 2. KELİME LİSTESİ: ZAMİR TABLOSU (14 Zamir - Munfasıl Şahıs Zamirleri)
+    const ZAMIR_14_WORDS = [
+      // 1. SATIR: Gâib (3 Zamir - Sağdan Sola: Hüve, Hümâ, Hüm)
+      { id: 1, word: "هُوَ", meaning: "Gâib (Tekil Erkek / O)", row: 1 },
+      { id: 2, word: "هُمَا", meaning: "Gâib (İkil Erkek / O ikisi)", row: 1 },
+      { id: 3, word: "هُمْ", meaning: "Gâib (Çoğul Erkek / Onlar)", row: 1 },
+
+      // 2. SATIR: Gâibe (3 Zamir - Sağdan Sola: Hiye, Hümâ, Hünne)
+      { id: 4, word: "هِيَ", meaning: "Gâibe (Tekil Kadın / O)", row: 2 },
+      { id: 5, word: "هُمَا", meaning: "Gâibe (İkil Kadın / O ikisi)", row: 2 },
+      { id: 6, word: "هُنَّ", meaning: "Gâibe (Çoğul Kadın / Onlar)", row: 2 },
+
+      // 3. SATIR: Muhâtap (3 Zamir - Sağdan Sola: Ente, Entümâ, Entüm)
+      { id: 7, word: "أَنْتَ", meaning: "Muhâtap (Tekil Erkek / Sen)", row: 3 },
+      { id: 8, word: "أَنْتُمَا", meaning: "Muhâtap (İkil Erkek / Siz ikiniz)", row: 3 },
+      { id: 9, word: "أَنْتُمْ", meaning: "Muhâtap (Çoğul Erkek / Sizler)", row: 3 },
+
+      // 4. SATIR: Muhâtaba (3 Zamir - Sağdan Sola: Enti, Entümâ, Entünne)
+      { id: 10, word: "أَنْتِ", meaning: "Muhâtaba (Tekil Kadın / Sen)", row: 4 },
+      { id: 11, word: "أَنْتُمَا", meaning: "Muhâtaba (İkil Kadın / Siz ikiniz)", row: 4 },
+      { id: 12, word: "أَنْتُنَّ", meaning: "Muhâtaba (Çoğul Kadın / Sizler)", row: 4 },
+
+      // 5. SATIR: Mütekellim (Sonda 2 Zamir: Ben tekil, Biz ikil ve çoğul)
+      { id: 13, word: "أَنَا", meaning: "Mütekellim (Tekil / Ben)", row: 5 },
+      { id: 14, word: "نَحْنُ", meaning: "Mütekellim (İkil ve Çoğul / Biz)", row: 5 }
+    ];
+
+    // 3. SES SENTEZLEYİCİSİ (Web Audio API - %100 Çevrimdışı)
     let isSoundMuted = false;
     let audioCtx = null;
 
@@ -957,8 +1093,12 @@
       showToast(isSoundMuted ? "Ses kapatıldı" : "Ses açıldı");
     }
 
-    // 3. OYUN YÖNETİCİSİ
-    let words = EMSILE_24_WORDS.slice();
+    // 4. OYUN YÖNETİCİSİ VE MOD YÖNETİMİ
+    let currentMode = 'emsile'; // 'emsile' | 'zamir'
+    let zamirLayout = 'ben_right_biz_left'; // 'ben_right_biz_left' (Ben Sağda, Biz Sol+Orta) | 'ben_left_biz_right' (Ben Solda, Biz Sağ+Orta)
+    let emsileWords = EMSILE_24_WORDS.slice();
+    let zamirWords = ZAMIR_14_WORDS.slice();
+    let words = emsileWords;
     let shuffledIndices = [];
     let currentOrderIndex = 0;
     let currentWord = null;
@@ -970,16 +1110,95 @@
         localStorage.removeItem("sinirlayici_custom_lang_words_v1");
         localStorage.removeItem("sinirlayici_custom_lang_words_v2");
         localStorage.removeItem("sinirlayici_custom_lang_words_v3");
-        const raw = localStorage.getItem("sinirlayici_custom_lang_words_v4");
-        if (raw) {
-          const parsed = JSON.parse(raw);
+
+        // Emsile Kelimeleri
+        const rawEmsile = localStorage.getItem("sinirlayici_custom_lang_words_v4");
+        if (rawEmsile) {
+          const parsed = JSON.parse(rawEmsile);
           if (Array.isArray(parsed) && parsed.length === 24) {
-            words = parsed;
-            return;
+            emsileWords = parsed;
           }
         }
+
+        // Zamir Kelimeleri
+        const rawZamir = localStorage.getItem("sinirlayici_custom_zamir_words_v1");
+        if (rawZamir) {
+          const parsedZamir = JSON.parse(rawZamir);
+          if (Array.isArray(parsedZamir) && parsedZamir.length === 14) {
+            zamirWords = parsedZamir;
+          }
+        }
+
+        const savedLayout = localStorage.getItem("sinirlayici_zamir_layout_pref");
+        if (savedLayout) zamirLayout = savedLayout;
       } catch(e) {}
-      words = EMSILE_24_WORDS.slice();
+      words = (currentMode === 'emsile' ? emsileWords : zamirWords);
+    }
+
+    function setGameMode(mode) {
+      if (currentMode === mode) return;
+      currentMode = mode;
+
+      const tabEmsile = document.getElementById("btnModeEmsile");
+      const tabZamir = document.getElementById("btnModeZamir");
+      const brandIcon = document.getElementById("headerBrandIcon");
+      const mainTitle = document.getElementById("headerMainTitle");
+      const subTitle = document.getElementById("headerSubTitle");
+      const bannerIcon = document.getElementById("tableBannerIcon");
+      const bannerTitle = document.getElementById("tableBannerTitle");
+      const bannerDesc = document.getElementById("tableBannerDesc");
+      const zamirBar = document.getElementById("zamirLayoutBar");
+
+      if (mode === 'emsile') {
+        if (tabEmsile) tabEmsile.classList.add("active");
+        if (tabZamir) tabZamir.classList.remove("active");
+        if (brandIcon) brandIcon.textContent = "📖";
+        if (mainTitle) mainTitle.textContent = "Emsile-i Muhtelife";
+        if (subTitle) subTitle.textContent = "24 Sîga Kelime Eşleştirme";
+        if (bannerIcon) bannerIcon.textContent = "📚";
+        if (bannerTitle) bannerTitle.textContent = "24 Sîga Tablosu (Sağdan Sola)";
+        if (bannerDesc) bannerDesc.textContent = "3. Satırdaki 4 kelime sağa yapışıktır (11-14).";
+        if (zamirBar) zamirBar.style.display = "none";
+        words = emsileWords;
+      } else {
+        if (tabEmsile) tabEmsile.classList.remove("active");
+        if (tabZamir) tabZamir.classList.add("active");
+        if (brandIcon) brandIcon.textContent = "👤";
+        if (mainTitle) mainTitle.textContent = "Zamir Tablosu";
+        if (subTitle) subTitle.textContent = "14 Şahıs Zamiri Eşleştirme";
+        if (bannerIcon) bannerIcon.textContent = "👤";
+        if (bannerTitle) bannerTitle.textContent = "14 Zamir Tablosu (Sağdan Sola)";
+        if (bannerDesc) bannerDesc.textContent = "Son satırda 'Ben' tek sütun, 'Biz' iki sütunu (orta ve sol) kaplar.";
+        if (zamirBar) zamirBar.style.display = "flex";
+        words = zamirWords;
+        updateZamirToggleButtonText();
+      }
+
+      initShuffledIndices();
+      renderQuestion();
+      showToast(mode === 'emsile' ? "📖 Emsile Modu Açıldı" : "👤 Zamir Tablosu Modu Açıldı");
+    }
+
+    function toggleZamirLayout() {
+      zamirLayout = (zamirLayout === 'ben_right_biz_left' ? 'ben_left_biz_right' : 'ben_right_biz_left');
+      try {
+        localStorage.setItem("sinirlayici_zamir_layout_pref", zamirLayout);
+      } catch(e) {}
+      updateZamirToggleButtonText();
+      render24Cards(null);
+      showToast(zamirLayout === 'ben_right_biz_left' 
+        ? "Düzen: Ben Sağda | Biz Sol ve Ortayı Kaplar" 
+        : "Düzen: Ben Solda Yapışık | Biz Sağ ve Ortayı Kaplar");
+    }
+
+    function updateZamirToggleButtonText() {
+      const btn = document.getElementById("btnToggleZamirLayout");
+      if (!btn) return;
+      if (zamirLayout === 'ben_right_biz_left') {
+        btn.textContent = "🔄 Son Satır: Ben (Sağda) | Biz (Sol + Orta Kaplar)";
+      } else {
+        btn.textContent = "🔄 Son Satır: Ben (Solda Yapışık) | Biz (Sağ + Orta)";
+      }
     }
 
     function initShuffledIndices() {
@@ -1076,7 +1295,7 @@
 
         lastMissedWordId = currentWord.id;
 
-        // Kullanıcı İsteği: Yanlış seçilirse 24 kelimelik interaktif 3D tablo açılır
+        // Kullanıcı İsteği: Yanlış seçilirse 3D tablo açılır
         setTimeout(() => {
           showTableSection(lastMissedWordId);
         }, 650);
@@ -1105,68 +1324,86 @@
       }
     }
 
-    // 24 KELİME 3D TABLOSU: SAĞDAN SOLA, 5 SATIR (5, 5, 4, 5, 5)
+    // 3D FLASHCARD TABLOSU: SAĞDAN SOLA
+    // Emsile Modu: 5 satır (5, 5, 4, 5, 5) -> 3. Satırdaki 4 kelime SAĞA YAPIŞIK!
+    // Zamir Modu: 5 satır (3, 3, 3, 3, 2) -> Son satırda Ben 1 sütun, Biz 2 sütun (sol + orta) kaplar!
     function render24Cards(highlightId = null) {
       const wrapper = document.getElementById("emsileRowsWrapper");
       if (!wrapper) return;
       wrapper.innerHTML = "";
 
-      // 5 satırın eleman aralıkları:
-      // Satır 1: 0..4 (5 eleman)
-      // Satır 2: 5..9 (5 eleman)
-      // Satır 3: 10..13 (4 eleman)
-      // Satır 4: 14..18 (5 eleman)
-      // Satır 5: 19..23 (5 eleman)
-      const rowDefinitions = [
-        { rowNum: 1, count: 5, slice: [0, 5] },
-        { rowNum: 2, count: 5, slice: [5, 10] },
-        { rowNum: 3, count: 4, slice: [10, 14] },
-        { rowNum: 4, count: 5, slice: [14, 19] },
-        { rowNum: 5, count: 5, slice: [19, 24] }
-      ];
+      if (currentMode === 'emsile') {
+        // EMSİLE-İ MUHTELİFE (24 SÎGA: 5, 5, 4, 5, 5)
+        const rowDefinitions = [
+          { rowNum: 1, count: 5, slice: [0, 5], className: "cols-5" },
+          { rowNum: 2, count: 5, slice: [5, 10], className: "cols-5" },
+          { rowNum: 3, count: 4, slice: [10, 14], className: "cols-4" }, // Sağa yapışık
+          { rowNum: 4, count: 5, slice: [14, 19], className: "cols-5" },
+          { rowNum: 5, count: 5, slice: [19, 24], className: "cols-5" }
+        ];
 
-      rowDefinitions.forEach(def => {
-        const rowItems = words.slice(def.slice[0], def.slice[1]);
-        const rowDiv = document.createElement("div");
-        rowDiv.className = `emsile-row cols-${def.count}`;
-        rowDiv.setAttribute("data-row", def.rowNum);
+        rowDefinitions.forEach(def => {
+          const rowItems = words.slice(def.slice[0], def.slice[1]);
+          const rowDiv = document.createElement("div");
+          rowDiv.className = `emsile-row ${def.className}`;
+          rowDiv.setAttribute("data-row", def.rowNum);
 
-        // Not: direction: rtl olduğu için soldan sağa eklediğimiz elemanlar ekranda SAĞDAN SOLA sıralanır!
-        // İlk eleman (Örn: نَصَرَ) EN SAĞDA yer alır.
-        rowItems.forEach(item => {
-          const isMissed = (highlightId && item.id === highlightId);
-          const card = document.createElement("div");
-          card.className = `flip-card ${isMissed ? "missed-highlight" : ""}`;
-          card.setAttribute("data-id", item.id);
-
-          card.innerHTML = `
-            <div class="flip-card-inner">
-              <!-- Ön Yüz: Arapça Kelime (Sağdan Sola) -->
-              <div class="flip-card-front">
-                <span class="card-id-tag">${item.id}</span>
-                <div class="card-word-text">${item.word}</div>
-                <div class="card-flip-hint">🔄 Anlamı</div>
-              </div>
-              <!-- Arka Yüz: Türkçe Anlamı -->
-              <div class="flip-card-back">
-                <div class="card-meaning-text">${escapeHtml(item.meaning)}</div>
-                <span class="card-meaning-tag">ANLAMI ✓</span>
-              </div>
-            </div>
-          `;
-
-          // Tıklandığında 3D ters dönme
-          card.addEventListener("click", () => {
-            card.classList.toggle("flipped");
-            playSound('flip');
-            if (navigator.vibrate) navigator.vibrate(25);
+          // direction: rtl sayesinde ilk eleman EN SAĞDA yer alır.
+          // 4 elemanlı satırda 5. sol hücre boş kalır -> Sağa yapışık olur!
+          rowItems.forEach(item => {
+            rowDiv.appendChild(createCardElement(item, highlightId));
           });
 
-          rowDiv.appendChild(card);
+          wrapper.appendChild(rowDiv);
+        });
+      } else {
+        // ZAMİR TABLOSU (14 ZAMİR: 3, 3, 3, 3, 2)
+        const zamirRows = [
+          { rowNum: 1, title: "Gâib (3. Şahıs Müzekker)", slice: [0, 3] },
+          { rowNum: 2, title: "Gâibe (3. Şahıs Müennes)", slice: [3, 6] },
+          { rowNum: 3, title: "Muhâtap (2. Şahıs Müzekker)", slice: [6, 9] },
+          { rowNum: 4, title: "Muhâtaba (2. Şahıs Müennes)", slice: [9, 12] }
+        ];
+
+        // İlk 4 Satır (3'er sütun)
+        zamirRows.forEach(def => {
+          const rowItems = words.slice(def.slice[0], def.slice[1]);
+          const rowDiv = document.createElement("div");
+          rowDiv.className = "emsile-row cols-3";
+          rowDiv.setAttribute("data-row", def.rowNum);
+
+          rowItems.forEach(item => {
+            rowDiv.appendChild(createCardElement(item, highlightId));
+          });
+
+          wrapper.appendChild(rowDiv);
         });
 
-        wrapper.appendChild(rowDiv);
-      });
+        // 5. Satır: Mütekellim (Sonda 2 Tane: Ben ve Biz)
+        // KULLANICI İSTEĞİ: "ben seçeneği sola yapışık. biz seçeneği sol ve ortayı kaplasın"
+        const row5Div = document.createElement("div");
+        row5Div.className = "emsile-row zamir-row-5";
+        row5Div.setAttribute("data-row", 5);
+
+        const itemBen = words[12]; // أَنَا (Ben)
+        const itemBiz = words[13]; // نَحْنُ (Biz)
+
+        if (zamirLayout === 'ben_right_biz_left') {
+          // Ben: Sağda (1 sütun), Biz: Orta ve Sol (2 sütun kaplar)
+          const cardBen = createCardElement(itemBen, highlightId);
+          const cardBiz = createCardElement(itemBiz, highlightId, true); // span-2
+          row5Div.appendChild(cardBen);
+          row5Div.appendChild(cardBiz);
+        } else {
+          // Ben: Solda yapışık (1 sütun), Biz: Sağ ve Orta (2 sütun kaplar)
+          const cardBiz = createCardElement(itemBiz, highlightId, true); // span-2
+          const cardBen = createCardElement(itemBen, highlightId);
+          row5Div.appendChild(cardBiz);
+          row5Div.appendChild(cardBen);
+        }
+
+        wrapper.appendChild(row5Div);
+      }
 
       if (highlightId) {
         setTimeout(() => {
@@ -1178,11 +1415,49 @@
       }
     }
 
-    // 4. KELİMELERİ DÜZENLE MODALI
+    function createCardElement(item, highlightId = null, isSpan2 = false) {
+      const isMissed = (highlightId && item.id === highlightId);
+      const card = document.createElement("div");
+      card.className = `flip-card ${isSpan2 ? "card-span-2" : ""} ${isMissed ? "missed-highlight" : ""}`;
+      card.setAttribute("data-id", item.id);
+
+      card.innerHTML = `
+        <div class="flip-card-inner">
+          <!-- Ön Yüz: Arapça Kelime (Sağdan Sola) -->
+          <div class="flip-card-front">
+            <span class="card-id-tag">${item.id}</span>
+            <div class="card-word-text">${item.word}</div>
+            <div class="card-flip-hint">🔄 Anlamı</div>
+          </div>
+          <!-- Arka Yüz: Türkçe Karşılığı -->
+          <div class="flip-card-back">
+            <div class="card-meaning-text">${escapeHtml(item.meaning)}</div>
+            <span class="card-meaning-tag">ANLAMI ✓</span>
+          </div>
+        </div>
+      `;
+
+      card.addEventListener("click", () => {
+        card.classList.toggle("flipped");
+        playSound('flip');
+        if (navigator.vibrate) navigator.vibrate(25);
+      });
+
+      return card;
+    }
+
+    // 5. KELİMELERİ DÜZENLE MODALI
     function openEditWordsModal() {
       const container = document.getElementById("editWordsListContainer");
       if (!container) return;
       container.innerHTML = "";
+
+      const titleEl = document.querySelector("#editWordsModal .modal-header h3");
+      if (titleEl) {
+        titleEl.textContent = (currentMode === 'emsile')
+          ? "✏️ 24 Emsile Kelimesini Düzenle"
+          : "✏️ 14 Zamir Kelimesini Düzenle";
+      }
 
       words.forEach((item, idx) => {
         const row = document.createElement("div");
@@ -1204,26 +1479,37 @@
 
     function saveEditedWords() {
       const updated = [];
-      for (let i = 0; i < 24; i++) {
+      const defaultList = (currentMode === 'emsile' ? EMSILE_24_WORDS : ZAMIR_14_WORDS);
+
+      for (let i = 0; i < words.length; i++) {
         const wInput = document.getElementById(`editWord_${i}`);
         const mInput = document.getElementById(`editMeaning_${i}`);
-        const wVal = (wInput ? wInput.value : "").trim() || EMSILE_24_WORDS[i].word;
-        const mVal = (mInput ? mInput.value : "").trim() || EMSILE_24_WORDS[i].meaning;
+        const wVal = (wInput ? wInput.value : "").trim() || defaultList[i].word;
+        const mVal = (mInput ? mInput.value : "").trim() || defaultList[i].meaning;
         updated.push({ id: i + 1, word: wVal, meaning: mVal });
       }
 
-      words = updated;
-      try {
-        localStorage.setItem("sinirlayici_custom_lang_words_v4", JSON.stringify(updated));
-      } catch(e) {}
+      if (currentMode === 'emsile') {
+        emsileWords = updated;
+        words = emsileWords;
+        try {
+          localStorage.setItem("sinirlayici_custom_lang_words_v4", JSON.stringify(updated));
+        } catch(e) {}
+      } else {
+        zamirWords = updated;
+        words = zamirWords;
+        try {
+          localStorage.setItem("sinirlayici_custom_zamir_words_v1", JSON.stringify(updated));
+        } catch(e) {}
+      }
 
       closeEditWordsModal();
       initShuffledIndices();
       renderQuestion();
-      showToast("✅ Emsile kelimeleri başarıyla kaydedildi!");
+      showToast("✅ Kelimeler başarıyla kaydedildi!");
     }
 
-    // 5. YARDIMCI FONKSİYONLAR
+    // 6. YARDIMCI FONKSİYONLAR
     function escapeHtml(str) {
       if (!str) return "";
       return String(str)
