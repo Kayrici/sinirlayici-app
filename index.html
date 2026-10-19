@@ -501,12 +501,17 @@
 
     .target-word-title.latin-font {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.85rem;
-      font-weight: 800;
+      font-size: 1.15rem;
+      font-weight: 700;
       color: #f8fafc;
       direction: ltr;
-      line-height: 1.25;
-      padding: 4px 10px;
+      line-height: 1.5;
+      padding: 10px 14px;
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      max-width: 640px;
+      margin: 0 auto;
     }
 
     .target-word-instruction {
@@ -570,10 +575,10 @@
       background: rgba(26, 34, 53, 0.65);
       border: 1px solid var(--border-color);
       border-radius: 14px;
-      padding: 13px 18px;
+      padding: 12px 16px;
       display: flex;
-      align-items: center;
-      gap: 14px;
+      align-items: flex-start;
+      gap: 12px;
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       color: #fff;
@@ -600,6 +605,7 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      margin-top: 2px;
       transition: all 0.2s;
     }
 
@@ -798,6 +804,28 @@
 
     .emsile-row.zamir-row-5 .card-span-2 {
       grid-column: span 2;
+    }
+
+    
+    /* Kelime Tablosu Zengin Ehl-i Sünnet / Müfredât Anlamları Stili */
+    .vocab-grid-wrapper .flip-card {
+      height: 136px;
+    }
+
+    .vocab-grid-wrapper .flip-card-back {
+      padding: 8px 8px 18px 8px !important;
+      justify-content: center !important;
+    }
+
+    .vocab-grid-wrapper .card-meaning-text {
+      font-size: 0.76rem !important;
+      line-height: 1.35 !important;
+      font-weight: 600 !important;
+      max-height: 84px !important;
+      overflow-y: auto !important;
+      scrollbar-width: thin;
+      padding: 0 4px;
+      color: #ffffff;
     }
 
     /* Kelime Modu Tablosu: Kartlar Tekil / İkili / Çoğul */
@@ -1868,106 +1896,106 @@
 
     // D) YENİ KELİME LİSTESİ: TEKİL / İKİLİ / ÇOĞUL (KULLANICI İSTEĞİ)
     const DEFAULT_VOCABULARY_WORDS = [
-  { id: 1, singular: "رَبٌّ", dual: "رَبَّانِ", plural: "أَرْبَابٌ", meaning: "Rab, Terbiye Eden, Efendi" },
-  { id: 2, singular: "آيَةٌ", dual: "آيَتَانِ", plural: "آيَاتٌ", meaning: "Ayet, Delil, Mucize" },
-  { id: 3, singular: "كِتَابٌ", dual: "كِتَابَانِ", plural: "كُتُبٌ", meaning: "Kitap, Yazılı Belge" },
-  { id: 4, singular: "رَسُولٌ", dual: "رَسُولَانِ", plural: "رُسُلٌ", meaning: "Elçi, Peygamber" },
-  { id: 5, singular: "نَبِيٌّ", dual: "نَبِيَّانِ", plural: "أَنْبِيَاءُ / نَبِيُّونَ", meaning: "Peygamber, Nebi" },
-  { id: 6, singular: "يَوْمٌ", dual: "يَوْمَانِ", plural: "أَيَّامٌ", meaning: "Gün, Vakit" },
-  { id: 7, singular: "سَمَاءٌ", dual: "سَمَاوَانِ", plural: "سَمَاوَاتٌ", meaning: "Gök, Gökyüzü" },
-  { id: 8, singular: "أَرْضٌ", dual: "أَرْضَانِ", plural: "أَرَاضٍ / أَرْضُونَ", meaning: "Yer, Yeryüzü" },
-  { id: 9, singular: "نَفْسٌ", dual: "نَفْسَانِ", plural: "أَنْفُسٌ / نُفُوسٌ", meaning: "Nefis, Can, Kişi" },
-  { id: 10, singular: "قَوْمٌ", dual: "قَوْمَانِ", plural: "أَقْوَامٌ", meaning: "Kavim, Topluluk, Halk" },
-  { id: 11, singular: "عَبْدٌ", dual: "عَبْدَانِ", plural: "عِبَادٌ / عَبِيدٌ", meaning: "Kul, Köle" },
-  { id: 12, singular: "قَلْبٌ", dual: "قَلْبَانِ", plural: "قُلُوبٌ", meaning: "Kalp, Gönül" },
-  { id: 13, singular: "عَذَابٌ", dual: "عَذَابَانِ", plural: "أَعْذِبَةٌ", meaning: "Azap, Şiddetli Ceza" },
-  { id: 14, singular: "جَنَّةٌ", dual: "جَنَّتَانِ", plural: "جَنَّاتٌ", meaning: "Cennet, Bahçe" },
-  { id: 15, singular: "نَارٌ", dual: "نَارَانِ", plural: "نِيرَانٌ", meaning: "Ateş, Cehennem" },
-  { id: 16, singular: "حَقٌّ", dual: "حَقَّانِ", plural: "حُقُوقٌ", meaning: "Hak, Gerçek, Doğru" },
-  { id: 17, singular: "سَبِيلٌ", dual: "سَبِيلَانِ", plural: "سُبُلٌ", meaning: "Yol, Yöntem" },
-  { id: 18, singular: "أَمْرٌ", dual: "أَمْرَانِ", plural: "أُمُورٌ / أَوَامِرُ", meaning: "İş, Emir, Buyruk" },
-  { id: 19, singular: "شَيْءٌ", dual: "شَيْئَانِ", plural: "أَشْيَاءُ", meaning: "Şey, Nesne, Varlık" },
-  { id: 20, singular: "مَالٌ", dual: "مَالَانِ", plural: "أَمْوَالٌ", meaning: "Mal, Servet, Mülk" },
-  { id: 21, singular: "وَلَدٌ", dual: "وَلَدَانِ", plural: "أَوْلَادٌ / وِلْدَانٌ", meaning: "Çocuk, Evlat" },
-  { id: 22, singular: "عِلْمٌ", dual: "عِلْمَانِ", plural: "عُلُومٌ", meaning: "İlim, Bilgi" },
-  { id: 23, singular: "عَمَلٌ", dual: "عَمَلَانِ", plural: "أَعْمَالٌ", meaning: "Amel, İş, Eylem" },
-  { id: 24, singular: "أَهْلٌ", dual: "أَهْلَانِ", plural: "أَهْلُونَ / أَهَالٍ", meaning: "Aile, Halk, Ehil" },
-  { id: 25, singular: "بَيْتٌ", dual: "بَيْتَانِ", plural: "بُيُوتٌ / أَبْيَاتٌ", meaning: "Ev, Beyt" },
-  { id: 26, singular: "بَابٌ", dual: "بَابَانِ", plural: "أَبْوَابٌ / بِيبَانٌ", meaning: "Kapı, Giriş" },
-  { id: 27, singular: "مَلَكٌ", dual: "مَلَكَانِ", plural: "مَلَائِكَةٌ", meaning: "Melek" },
-  { id: 28, singular: "إِنْسَانٌ", dual: "إِنْسَانَانِ", plural: "نَاسٌ / أَنَاسِيُّ", meaning: "İnsan" },
-  { id: 29, singular: "دِينٌ", dual: "دِينَانِ", plural: "أَدْيَانٌ", meaning: "Din, Hesap, Hüküm" },
-  { id: 30, singular: "قَوْلٌ", dual: "قَوْلَانِ", plural: "أَقْوَالٌ / أَقَاوِيلُ", meaning: "Söz, Kelam" },
-  { id: 31, singular: "يَدٌ", dual: "يَدَانِ", plural: "أَيْدٍ / أَيَادٍ", meaning: "El, Güç" },
-  { id: 32, singular: "عَيْنٌ", dual: "عَيْنَانِ", plural: "أَعْيُنٌ / عُيُونٌ", meaning: "Göz, Pınar, Kaynak" },
-  { id: 33, singular: "أُذُنٌ", dual: "أُذُنَانِ", plural: "آذَانٌ", meaning: "Kulak" },
-  { id: 34, singular: "لِسَانٌ", dual: "لِسَانَانِ", plural: "أَلْسِنَةٌ", meaning: "Dil, Lisan" },
-  { id: 35, singular: "وَجْهٌ", dual: "وَجْهَانِ", plural: "وُجُوهٌ / أَوْجُهٌ", meaning: "Yüz, Çehre, Taraf" },
-  { id: 36, singular: "رِجْلٌ", dual: "رِجْلَانِ", plural: "أَرْجُلٌ", meaning: "Ayak" },
-  { id: 37, singular: "صَدْرٌ", dual: "صَدْرَانِ", plural: "صُدُورٌ", meaning: "Göğüs, Sine, Kalp" },
-  { id: 38, singular: "بَصَرٌ", dual: "بَصَرَانِ", plural: "أَبْصَارٌ", meaning: "Göz, Görme Yetisi" },
-  { id: 39, singular: "سَمْعٌ", dual: "سَمْعَانِ", plural: "أَسْمَاعٌ", meaning: "İşitme, Kulak" },
-  { id: 40, singular: "رَأْسٌ", dual: "رَأْسَانِ", plural: "رُؤُوسٌ", meaning: "Baş, Kafa" },
-  { id: 41, singular: "شَمْسٌ", dual: "شَمْسَانِ", plural: "شُمُوسٌ", meaning: "Güneş" },
-  { id: 42, singular: "قَمَرٌ", dual: "قَمَرَانِ", plural: "أَقْمَارٌ", meaning: "Ay, Kamer" },
-  { id: 43, singular: "نَجْمٌ", dual: "نَجْمَانِ", plural: "نُجُومٌ / أَنْجُمٌ", meaning: "Yıldız" },
-  { id: 44, singular: "لَيْلٌ", dual: "لَيْلَانِ", plural: "لَيَالٍ", meaning: "Gece" },
-  { id: 45, singular: "نَهَارٌ", dual: "نَهَارَانِ", plural: "أَنْهُرٌ / نُهُرٌ", meaning: "Gündüz" },
-  { id: 46, singular: "نُورٌ", dual: "نُورَانِ", plural: "أَنْوَارٌ", meaning: "Nur, Işık, Aydınlık" },
-  { id: 47, singular: "ظُلْمَةٌ", dual: "ظُلْمَتَانِ", plural: "ظُلُمَاتٌ", meaning: "Karanlık" },
-  { id: 48, singular: "مَاءٌ", dual: "مَاءَانِ", plural: "مِيَاهٌ / أَمْوَاهٌ", meaning: "Su" },
-  { id: 49, singular: "رِيحٌ", dual: "رِيحَانِ", plural: "رِيَاحٌ / أَرْيَاحٌ", meaning: "Rüzgar" },
-  { id: 50, singular: "بَحْرٌ", dual: "بَحْرَانِ", plural: "بِحَارٌ / أَبْحُرٌ", meaning: "Deniz" },
-  { id: 51, singular: "جَبَلٌ", dual: "جَبَلَانِ", plural: "جِبَالٌ", meaning: "Dağ" },
-  { id: 52, singular: "نَهْرٌ", dual: "نَهْرَانِ", plural: "أَنْهَارٌ", meaning: "Nehir, Irmak" },
-  { id: 53, singular: "شَجَرَةٌ", dual: "شَجَرَتَانِ", plural: "أَشْجَارٌ / شَجَرٌ", meaning: "Ağaç" },
-  { id: 54, singular: "ثَمَرَةٌ", dual: "ثَمَرَتَانِ", plural: "ثَمَرَاتٌ / ثَمَرٌ", meaning: "Meyve, Ürün" },
-  { id: 55, singular: "طَعَامٌ", dual: "طَعَامَانِ", plural: "أَطْعِمَةٌ", meaning: "Yemek, Yiyecek" },
-  { id: 56, singular: "مَوْتٌ", dual: "مَوْتَانِ", plural: "أَمْوَاتٌ", meaning: "Ölüm" },
-  { id: 57, singular: "حَيَاةٌ", dual: "حَيَاتَانِ", plural: "حَيَوَاتٌ", meaning: "Hayat, Yaşam" },
-  { id: 58, singular: "دُنْيَا", dual: "دُنْيَيَانِ", plural: "دُنًى", meaning: "Dünya, Yakın Hayat" },
-  { id: 59, singular: "آخِرَةٌ", dual: "آخِرَتَانِ", plural: "آخِرَاتٌ", meaning: "Ahiret, Son Hayat" },
-  { id: 60, singular: "سَاعَةٌ", dual: "سَاعَتَانِ", plural: "سَاعَاتٌ", meaning: "Kıyamet Vakti, Saat" },
-  { id: 61, singular: "أَجْرٌ", dual: "أَجْرَانِ", plural: "أُجُورٌ", meaning: "Mükafat, Ücret, Sevap" },
-  { id: 62, singular: "فَضْلٌ", dual: "فَضْلَانِ", plural: "فُضُولٌ / أَفْضَالٌ", meaning: "Lütuf, İhsan, Erdem" },
-  { id: 63, singular: "رَحْمَةٌ", dual: "رَحْمَتَانِ", plural: "رَحَمَاتٌ", meaning: "Rahmet, Merhamet" },
-  { id: 64, singular: "نِعْمَةٌ", dual: "نِعْمَتَانِ", plural: "نِعَمٌ / أَنْعُمٌ", meaning: "Nimet, İyilik, İkram" },
-  { id: 65, singular: "حَسَنَةٌ", dual: "حَسَنَتَانِ", plural: "حَسَنَاتٌ", meaning: "İyilik, Sevap, Güzellik" },
-  { id: 66, singular: "سَيِّئَةٌ", dual: "سَيِّئَتَانِ", plural: "سَيِّئَاتٌ", meaning: "Kötülük, Günah" },
-  { id: 67, singular: "ذَنْبٌ", dual: "ذَنْبَانِ", plural: "ذُنُوبٌ", meaning: "Günah, Kusur" },
-  { id: 68, singular: "خَطِيئَةٌ", dual: "خَطِيئَتَانِ", plural: "خَطَايَا / خَطِيئَاتٌ", meaning: "Hata, Büyük Günah" },
-  { id: 69, singular: "ظُلْمٌ", dual: "ظُلْمَانِ", plural: "مَظَالِمُ", meaning: "Zulüm, Haksızlık" },
-  { id: 70, singular: "إِثْمٌ", dual: "إِثْمَانِ", plural: "آثَامٌ", meaning: "Vebal, Ağır Günah" },
-  { id: 71, singular: "مُؤْمِنٌ", dual: "مُؤْمِنَانِ", plural: "مُؤْمِنُونَ / مُؤْمِنِينَ", meaning: "Mümin, İman Eden" },
-  { id: 72, singular: "كَافِرٌ", dual: "كَافِرَانِ", plural: "كَافِرُونَ / كُفَّارٌ", meaning: "Kâfir, İnkârcı" },
-  { id: 73, singular: "مُنَافِقٌ", dual: "مُنَافِقَانِ", plural: "مُنَافِقُونَ / مُنَافِقِينَ", meaning: "Münafık, İkiyüzlü" },
-  { id: 74, singular: "مُشْرِكٌ", dual: "مُشْرِكَانِ", plural: "مُشْرِكُونَ / مُشْرِكِينَ", meaning: "Müşrik, Ortak Koşan" },
-  { id: 75, singular: "ظَالِمٌ", dual: "ظَالِمَانِ", plural: "ظَالِمُونَ / ظَلَمَةٌ", meaning: "Zalim, Haksızlık Eden" },
-  { id: 76, singular: "فَاسِقٌ", dual: "فَاسِقَانِ", plural: "فَاسِقُونَ / فُسَّاقٌ", meaning: "Fasık, Yoldan Çıkan" },
-  { id: 77, singular: "صَالِحٌ", dual: "صَالِحَانِ", plural: "صَالِحُونَ / صُلَحَاءُ", meaning: "Salih, Dürüst, İyi Kimse" },
-  { id: 78, singular: "صَادِقٌ", dual: "صَادِقَانِ", plural: "صَادِقُونَ / صُدَقَاءُ", meaning: "Sadık, Doğru Sözlü" },
-  { id: 79, singular: "صَابِرٌ", dual: "صَابِرَانِ", plural: "صَابِرُونَ", meaning: "Sabreden, Sabırlı" },
-  { id: 80, singular: "شَاكِرٌ", dual: "شَاكِرَانِ", plural: "شَاكِرُونَ / شُكَّارٌ", meaning: "Şükreden, Kıymet Bilen" },
-  { id: 81, singular: "مُحْسِنٌ", dual: "مُحْسِنَانِ", plural: "مُحْسِنُونَ / مُحْسِنِينَ", meaning: "Muhsin, İyilik Yapan" },
-  { id: 82, singular: "شَهِيدٌ", dual: "شَهِيدَانِ", plural: "شُهَدَاءُ", meaning: "Şahit, Şehit, Tanık" },
-  { id: 83, singular: "عَالِمٌ", dual: "عَالِمَانِ", plural: "عُلَمَاءُ", meaning: "Âlim, Bilen" },
-  { id: 84, singular: "عَدُوٌّ", dual: "عَدُوَّانِ", plural: "أَعْدَاءٌ", meaning: "Düşman" },
-  { id: 85, singular: "وَلِيٌّ", dual: "وَلِيَّانِ", plural: "أَوْلِيَاءُ", meaning: "Veli, Dost, Koruyucu" },
-  { id: 86, singular: "نَصِيرٌ", dual: "نَصِيرَانِ", plural: "أَنْصَارٌ", meaning: "Yardımcı, Destekçi" },
-  { id: 87, singular: "سُلْطَانٌ", dual: "سُلْطَانَانِ", plural: "سَلَاطِينُ", meaning: "Kesin Delil, Güç, Yetki" },
-  { id: 88, singular: "بَيِّنَةٌ", dual: "بَيِّنَتَانِ", plural: "بَيِّنَاتٌ", meaning: "Açık Delil, Belge" },
-  { id: 89, singular: "حِكْمَةٌ", dual: "حِكْمَتَانِ", plural: "حِكَمٌ", meaning: "Hikmet, Derin Anlayış" },
-  { id: 90, singular: "كَلِمَةٌ", dual: "كَلِمَتَانِ", plural: "كَلِمَاتٌ / كَلِمٌ", meaning: "Kelime, İlahi Söz" },
-  { id: 91, singular: "حَدِيثٌ", dual: "حَدِيثَانِ", plural: "أَحَادِيثُ", meaning: "Söz, Haber, Anlatı" },
-  { id: 92, singular: "مَسْجِدٌ", dual: "مَسْجِدَانِ", plural: "مَسَاجِدُ", meaning: "Mescit, İbadet Yeri" },
-  { id: 93, singular: "مَدِينَةٌ", dual: "مَدِينَتَانِ", plural: "مُدُنٌ / مَدَائِنُ", meaning: "Şehir, Medine" },
-  { id: 94, singular: "قَرْيَةٌ", dual: "قَرْيَتَانِ", plural: "قُرًى", meaning: "Belde, Köy, Yerleşim" },
-  { id: 95, singular: "دَارٌ", dual: "دَارَانِ", plural: "دِيَارٌ / دُورٌ", meaning: "Yurt, Diyar, Konut" },
-  { id: 96, singular: "أُمٌّ", dual: "أُمَّانِ", plural: "أُمَّهَاتٌ", meaning: "Anne, Valide" },
-  { id: 97, singular: "أَبٌ", dual: "أَبَوَانِ", plural: "آبَاءٌ", meaning: "Baba, Ata" },
-  { id: 98, singular: "أَخٌ", dual: "أَخَوَانِ", plural: "إِخْوَةٌ / إِخْوَانٌ", meaning: "Erkek Kardeş, Din Kardeşi" },
-  { id: 99, singular: "أُخْتٌ", dual: "أُخْتَانِ", plural: "أَخَوَاتٌ", meaning: "Kız Kardeş" },
-  { id: 100, singular: "زَوْجٌ", dual: "زَوْجَانِ", plural: "أَزْوَاجٌ", meaning: "Eş, Çift" }
+  { id: 1, singular: "رَبٌّ", dual: "رَبَّانِ", plural: "أَرْبَابٌ", meaning: "Rab: Bir şeyi kemâle erinceye kadar derece derece terbiye eden; mutlak mâlik, efendi, rızık veren ve varlığı yöneten (el-Müfredât / Fâtiha 1/2)" },
+  { id: 2, singular: "آيَةٌ", dual: "آيَتَانِ", plural: "آيَاتٌ", meaning: "Âyet: Allah'ın varlık, birlik ve kudretine delalet eden apaçık delil, peygamber mucizesi, ibret ve Kur'an'ın her bir vahiy cümlesi (el-Müfredât / Bakara 2/252)" },
+  { id: 3, singular: "كِتَابٌ", dual: "كِتَابَانِ", plural: "كُتُبٌ", meaning: "Kitap: Yazılı vahiy, Kur'an-ı Kerim, kesin ilahî hüküm, farz kılınan emir ve amel defteri (el-Müfredât / Nisâ 4/103)" },
+  { id: 4, singular: "رَسُولٌ", dual: "رَسُولَانِ", plural: "رُسُلٌ", meaning: "Resûl: Kendisine kitap ve şeriat verilerek insanları hak dine davet ve tebliğle vazifelendirilen ilahî elçi, peygamber (el-Müfredât / Âl-i İmrân 3/144)" },
+  { id: 5, singular: "نَبِيٌّ", dual: "نَبِيَّانِ", plural: "أَنْبِيَاءُ / نَبِيُّونَ", meaning: "Nebî: Allah'tan vahiy ve gayb haberi alan, şanı ve manevî mertebesi yüce olan peygamber (el-Müfredât / Ahzâb 33/40)" },
+  { id: 6, singular: "يَوْمٌ", dual: "يَوْمَانِ", plural: "أَيَّامٌ", meaning: "Yevm: Gün, vakit, zaman; ayetlerde özellikle hesap, diriliş ve ceza günü olan Kıyamet Günü (el-Müfredât / Fâtiha 1/4)" },
+  { id: 7, singular: "سَمَاءٌ", dual: "سَمَاوَانِ", plural: "سَمَاوَاتٌ", meaning: "Semâ: Yeryüzünü kuşatan yüksek gök, semavat; yağmur, rahmet ve vahyin indiği ulvî alem (el-Müfredât / Bakara 2/22)" },
+  { id: 8, singular: "أَرْضٌ", dual: "أَرْضَانِ", plural: "أَرَاضٍ / أَرْضُونَ", meaning: "Arz: İnsan ve canlıların üzerinde yaşadığı yeryüzü, zemin ve nimetlerle donatılmış yer küre (el-Müfredât / Bakara 2/29)" },
+  { id: 9, singular: "نَفْسٌ", dual: "نَفْسَانِ", plural: "أَنْفُسٌ / نُفُوسٌ", meaning: "Nefis: İnsanın bizzat kendisi, zâtı, canı, ruhu; şehevî heveslerin ve manevî tezkiyenin mahalli (el-Müfredât / Şems 91/7-8)" },
+  { id: 10, singular: "قَوْمٌ", dual: "قَوْمَانِ", plural: "أَقْوَامٌ", meaning: "Kavim: Bir gaye ve bağ etrafında kenetlenen insan topluluğu, bir peygambere muhatap olan halk ve millet (el-Müfredât / Yûnus 10/75)" },
+  { id: 11, singular: "عَبْدٌ", dual: "عَبْدَانِ", plural: "عِبَادٌ / عَبِيدٌ", meaning: "Kul: Allah'a mutlak teslimiyet, sevgi ve itaatle boyun eğip ibadet eden insan; köle (el-Müfredât / İsrâ 17/1)" },
+  { id: 12, singular: "قَلْبٌ", dual: "قَلْبَانِ", plural: "قُلُوبٌ", meaning: "Kalp: İmanın, aklın, basiretin, niyetin ve ilahî feyzin mahalli olan manevî merkez, gönül (el-Müfredât / Hac 22/46)" },
+  { id: 13, singular: "عَذَابٌ", dual: "عَذَابَانِ", plural: "أَعْذِبَةٌ", meaning: "Azap: İnsana elem ve ızdırap veren şiddetli ceza; günahkârların ahirette çarptırılacağı elem verici karşılık (el-Müfredât / Bakara 2/7)" },
+  { id: 14, singular: "جَنَّةٌ", dual: "جَنَّتَانِ", plural: "جَنَّاتٌ", meaning: "Cennet: Takva sahibi müminler için ahirette hazırlanan ebedî nimet, huzur, cemalullah ve saadet yurdu; bahçe (el-Müfredât / Tevbe 9/72)" },
+  { id: 15, singular: "نَارٌ", dual: "نَارَانِ", plural: "نِيرَانٌ", meaning: "Nâr: Ateş; ayetlerde inkârcıların ve zalimlerin içine atılacağı yakıcı Cehennem ateşi ve azabı (el-Müfredât / Bakara 2/24)" },
+  { id: 16, singular: "حَقٌّ", dual: "حَقَّانِ", plural: "حُقُوقٌ", meaning: "Hak: Şüphe götürmez mutlak gerçek, adalet, sabit doğru; Allah Teâlâ'nın yüce ismi ve Kur'an'ın bildirdiği hakikat (el-Müfredât / Yûnus 10/32)" },
+  { id: 17, singular: "سَبِيلٌ", dual: "سَبِيلَانِ", plural: "سُبُلٌ", meaning: "Sebîl: Yol, gidişat; ayetlerde özellikle Allah'ın rızasına, cihadına ve hak dinine ulaştıran dosdoğru yol (el-Müfredât / Bakara 2/154)" },
+  { id: 18, singular: "أَمْرٌ", dual: "أَمْرَانِ", plural: "أُمُورٌ / أَوَامِرُ", meaning: "Emir: İlahî buyruk, ferman, hüküm; aynı zamanda iş, durum, kaza ve kader tecellisi (el-Müfredât / Şûrâ 42/53)" },
+  { id: 19, singular: "شَيْءٌ", dual: "شَيْئَانِ", plural: "أَشْيَاءُ", meaning: "Şey: Varlık, yaratılmış olan her bir nesne, mevcut olan ve bilinen her şey (el-Müfredât / Zümer 39/62)" },
+  { id: 20, singular: "مَالٌ", dual: "مَالَانِ", plural: "أَمْوَالٌ", meaning: "Mal: İnsanın sahip olduğu dünya serveti, mülk, meta; imtihan ve infak vesilesi (el-Müfredât / Enfâl 8/28)" },
+  { id: 21, singular: "وَلَدٌ", dual: "وَلَدَانِ", plural: "أَوْلَادٌ / وِلْدَانٌ", meaning: "Veled: Çocuk, evlat; insanın neslini devam ettiren ve dünya hayatının süsü olan zürriyet (el-Müfredât / Kehf 18/46)" },
+  { id: 22, singular: "عِلْمٌ", dual: "عِلْمَانِ", plural: "عُلُومٌ", meaning: "İlim: Bir şeyin hakikatini kesin delille bilmek; vahiy bilgisi, hak ve hikmet marifeti (el-Müfredât / İsrâ 17/85)" },
+  { id: 23, singular: "عَمَلٌ", dual: "عَمَلَانِ", plural: "أَعْمَالٌ", meaning: "Amel: İrade ve niyetle yapılan eylem, iş, fiil; ahirette karşılığı verilecek hayır veya şer ameller (el-Müfredât / Kehf 18/110)" },
+  { id: 24, singular: "أَهْلٌ", dual: "أَهْلَانِ", plural: "أَهْلُونَ / أَهَالٍ", meaning: "Ehil: Aile, ev halkı, soydaşlar; aynı zamanda bir kitaba ve inanca mensup olan zümre (Ehl-i Beyt, Ehl-i Kitap) (el-Müfredât / Ahzâb 33/33)" },
+  { id: 25, singular: "بَيْتٌ", dual: "بَيْتَانِ", plural: "بُيُوتٌ / أَبْيَاتٌ", meaning: "Beyt: Ev, mesken, barınak; ayetlerde özellikle yeryüzünün ilk ve en kutsal mabedi olan Kâbe-i Muazzama (el-Müfredât / Âl-i İmrân 3/96)" },
+  { id: 26, singular: "بَابٌ", dual: "بَابَانِ", plural: "أَبْوَابٌ / بِيبَانٌ", meaning: "Kapı: Giriş ve çıkış yeri; ayetlerde semanın, Cennetin, Cehennemin ve ilahî rahmetin açılan kapıları (el-Müfredât / Zümer 39/73)" },
+  { id: 27, singular: "مَلَكٌ", dual: "مَلَكَانِ", plural: "مَلَائِكَةٌ", meaning: "Melek: Allah Teâlâ'nın nurdan yarattığı, emirlere asla isyan etmeyen, ilahî vazifeleri icra eden ruhanî varlık (el-Müfredât / Tahrîm 66/6)" },
+  { id: 28, singular: "إِنْسَانٌ", dual: "إِنْسَانَانِ", plural: "نَاسٌ / أَنَاسِيُّ", meaning: "İnsan: Akıl, vicdan ve emaneti yüklenen, yaratılışı ahsen-i takvîm üzere olan beşer (el-Müfredât / Tîn 95/4)" },
+  { id: 29, singular: "دِينٌ", dual: "دِينَانِ", plural: "أَدْيَانٌ", meaning: "Din: İtaat, ceza ve mükâfat nizamı, hesap; Allah'ın peygamberleri vasıtasıyla bildirdiği hak şeriat ve inanç yolu (el-Müfredât / Âl-i İmrân 3/19)" },
+  { id: 30, singular: "قَوْلٌ", dual: "قَوْلَانِ", plural: "أَقْوَالٌ / أَقَاوِيلُ", meaning: "Söz: Kelam, lafız, ifade; ayetlerde tevhid kelimesi, hakkı beyan eden söz veya peygamberlere vahyedilen ağır hitap (el-Müfredât / Müzzemmil 73/5)" },
+  { id: 31, singular: "يَدٌ", dual: "يَدَانِ", plural: "أَيْدٍ / أَيَادٍ", meaning: "El: Organ olan el; ayetlerde güç, kudret, nimet, tasarruf ve ilahî inayet (el-Müfredât / Fetih 48/10)" },
+  { id: 32, singular: "عَيْنٌ", dual: "عَيْنَانِ", plural: "أَعْيُنٌ / عُيُونٌ", meaning: "Göz / Pınar: Görme organı; yeryüzünden kaynayan su pınarı; ilahî gözetim ve hıfz (el-Müfredât / Tâhâ 20/39)" },
+  { id: 33, singular: "أُذُنٌ", dual: "أُذُنَانِ", plural: "آذَانٌ", meaning: "Kulak: İşitme organı; ayetlerde vahyi ve hakkı dinleyip ibret alma vasıtası (el-Müfredât / Mâide 5/45)" },
+  { id: 34, singular: "لِسَانٌ", dual: "لِسَانَانِ", plural: "أَلْسِنَةٌ", meaning: "Dil / Lisan: Konuşma organı, lisan, lehçe; güzel bir nam ile anılma (lisân-ı sıdk) ve hakikat tercümanı (el-Müfredât / Şuarâ 26/84)" },
+  { id: 35, singular: "وَجْهٌ", dual: "وَجْهَانِ", plural: "وُجُوهٌ / أَوْجُهٌ", meaning: "Yüz / Vech: Çehre, taraf, istikamet; ayetlerde Allah'ın zâtı ve yüce rızası (el-Müfredât / Kasas 28/88)" },
+  { id: 36, singular: "رِجْلٌ", dual: "رِجْلَانِ", plural: "أَرْجُلٌ", meaning: "Ayak: Yürüme organı; hak yolda sebat etme veya günah mahalline gitme aleti (el-Müfredât / Yâsîn 36/65)" },
+  { id: 37, singular: "صَدْرٌ", dual: "صَدْرَانِ", plural: "صُدُورٌ", meaning: "Göğüs / Sadr: Kalbin mahalli olan sine, bağır; imanın genişliği (inşirah) yahut vesvese ve kinin barındığı yer (el-Müfredât / İnşirâh 94/1)" },
+  { id: 38, singular: "بَصَرٌ", dual: "بَصَرَانِ", plural: "أَبْصَارٌ", meaning: "Basar: Göz nuru, görme hassası; kalbî basiret ve ibret nazarıyla bakış (el-Müfredât / Mülk 67/3-4)" },
+  { id: 39, singular: "سَمْعٌ", dual: "سَمْعَانِ", plural: "أَسْمَاعٌ", meaning: "İşitme / Sem': Kulak vasıtasıyla sesleri ve ilahî hitabı duyup kabul etme yetisi (el-Müfredât / Bakara 2/7)" },
+  { id: 40, singular: "رَأْسٌ", dual: "رَأْسَانِ", plural: "رُؤُوسٌ", meaning: "Baş / Re's: Bedenin tepe noktası, kafa; ayetlerde abdestte mesh edilen uzuv veya bir topluluğun başı (el-Müfredât / Mâide 5/6)" },
+  { id: 41, singular: "شَمْسٌ", dual: "شَمْسَانِ", plural: "شُمُوسٌ", meaning: "Güneş: Âlemi aydınlatıp ısıtan kandil; ilahî kudret ve dakik nizamın apaçık delili (el-Müfredât / Şems 91/1)" },
+  { id: 42, singular: "قَمَرٌ", dual: "قَمَرَانِ", plural: "أَقْمَارٌ", meaning: "Ay / Kamer: Gecenin aydınlığı, menzillere göre hilalden dolunaya dönen takvim ve vakit ölçüsü (el-Müfredât / Yâsîn 36/39)" },
+  { id: 43, singular: "نَجْمٌ", dual: "نَجْمَانِ", plural: "نُجُومٌ / أَنْجُمٌ", meaning: "Yıldız: Semayı süsleyen ışıklı gök cismi; karanlıklarda yol bulma rehberi (el-Müfredât / Necm 53/1)" },
+  { id: 44, singular: "لَيْلٌ", dual: "لَيْلَانِ", plural: "لَيَالٍ", meaning: "Gece: Karanlığın yeryüzünü bürüdüğü dinlenme, tefekkür, ibadet ve sükûn vakti (el-Müfredât / Leyl 92/1)" },
+  { id: 45, singular: "نَهَارٌ", dual: "نَهَارَانِ", plural: "أَنْهُرٌ / نُهُرٌ", meaning: "Gündüz: Güneş ışığıyla aydınlanan, maişet ve çalışma vakti (el-Müfredât / İsrâ 17/12)" },
+  { id: 46, singular: "نُورٌ", dual: "نُورَانِ", plural: "أَنْوَارٌ", meaning: "Nur: Karanlıkları dağıtan aydınlık; imanın, vahyin ve hidayetin kalbi aydınlatan ilahî feyzi (el-Müfredât / Nûr 24/35)" },
+  { id: 47, singular: "ظُلْمَةٌ", dual: "ظُلْمَتَانِ", plural: "ظُلُمَاتٌ", meaning: "Karanlık: Maddî karanlık; ayetlerde özellikle şirk, inkâr ve cehaletin kalbi saran manevî zifiri (el-Müfredât / Bakara 2/17)" },
+  { id: 48, singular: "مَاءٌ", dual: "مَاءَانِ", plural: "مِيَاهٌ / أَمْوَاهٌ", meaning: "Su: Her canlı varlığın hayat bulduğu aziz nimet; gökten inen temizleyici rahmet (el-Müfredât / Enbiyâ 21/30)" },
+  { id: 49, singular: "رِيحٌ", dual: "رِيحَانِ", plural: "رِيَاحٌ / أَرْيَاحٌ", meaning: "Rüzgar: Rahmet bulutlarını sevk eden müjdeci yel; yahut inkârcılara gönderilen helak edici kasırga (el-Müfredât / Rûm 30/46)" },
+  { id: 50, singular: "بَحْرٌ", dual: "بَحْرَانِ", plural: "بِحَارٌ / أَبْحُرٌ", meaning: "Deniz: Uçsuz bucaksız engin su; üzerinde gemilerin akıp gittiği, taze rızık ve inciler barındıran azametli ayet (el-Müfredât / Nahl 16/14)" },
+  { id: 51, singular: "جَبَلٌ", dual: "جَبَلَانِ", plural: "جِبَالٌ", meaning: "Dağ: Yeryüzünü sarsıntıdan koruyan kazıklar hükmünde yüce ve sarp kaya kütlesi (el-Müfredât / Nebe 78/7)" },
+  { id: 52, singular: "نَهْرٌ", dual: "نَهْرَانِ", plural: "أَنْهَارٌ", meaning: "Nehir: Yatağında çağlayarak akan ırmak; Cennette müminlerin köşkleri altından akan kevser, süt, bal ve su nehirleri (el-Müfredât / Bakara 2/25)" },
+  { id: 53, singular: "شَجَرَةٌ", dual: "شَجَرَتَانِ", plural: "أَشْجَارٌ / شَجَرٌ", meaning: "Ağaç: Kökü yerde dalları gökte bitki; ayetlerde imanın kökleşmesini temsil eden mübarek misal (el-Müfredât / İbrâhîm 14/24)" },
+  { id: 54, singular: "ثَمَرَةٌ", dual: "ثَمَرَتَانِ", plural: "ثَمَرَاتٌ / ثَمَرٌ", meaning: "Meyve / Semere: Ağaç ve bitkilerin verdiği ürün; amellerin ahiretteki tatlı hasılatı ve ilahî rızık (el-Müfredât / Bakara 2/126)" },
+  { id: 55, singular: "طَعَامٌ", dual: "طَعَامَانِ", plural: "أَطْعِمَةٌ", meaning: "Yiyecek / Taâm: İnsanın beslendiği gıda ve rızık; yoksulu ve yetimi doyurma vecibesi (el-Müfredât / Mâûn 107/3)" },
+  { id: 56, singular: "مَوْتٌ", dual: "مَوْتَانِ", plural: "أَمْوَاتٌ", meaning: "Ölüm: Ruhun bedenden ayrılmasıyla dünya imtihanının sona ermesi ve ahirete intikal (el-Müfredât / Âl-i İmrân 3/185)" },
+  { id: 57, singular: "حَيَاةٌ", dual: "حَيَاتَانِ", plural: "حَيَوَاتٌ", meaning: "Hayat: Canlılık, dirilik; ayetlerde asıl kalıcı ve hakiki varoluş olan ahiret yurdu (Dârü'l-Hayavân) (el-Müfredât / Ankebût 29/64)" },
+  { id: 58, singular: "دُنْيَا", dual: "دُنْيَيَانِ", plural: "دُنًى", meaning: "Dünya: Ahirete nispetle çok yakın, fani, geçici ve bir imtihan sahnesi olan ilk hayat (el-Müfredât / Hadîd 57/20)" },
+  { id: 59, singular: "آخِرَةٌ", dual: "آخِرَتَانِ", plural: "آخِرَاتٌ", meaning: "Ahiret: Dünyadan sonra gelecek olan ebedî, hakiki ve zevalsiz hesap yurdu (el-Müfredât / Duhâ 93/4)" },
+  { id: 60, singular: "سَاعَةٌ", dual: "سَاعَتَانِ", plural: "سَاعَاتٌ", meaning: "Kıyamet Vakti / Saat: Vakit dilimi; ayetlerde kâinat nizamının bir anda altüst olacağı dehşetli Kıyamet anı (el-Müfredât / Kamer 54/1)" },
+  { id: 61, singular: "أَجْرٌ", dual: "أَجْرَانِ", plural: "أُجُورٌ", meaning: "Ecir / Mükâfat: İman ve salih amellere Allah katında lütfedilen tükenmez hayır ve sevap (el-Müfredât / Fussilet 41/8)" },
+  { id: 62, singular: "فَضْلٌ", dual: "فَضْلَانِ", plural: "فُضُولٌ / أَفْضَالٌ", meaning: "Lütuf / Fazl: Allah'ın kullarına sırf cömertliğiyle bahşettiği bol ihsan, üstünlük ve bereket (el-Müfredât / Bakara 2/105)" },
+  { id: 63, singular: "رَحْمَةٌ", dual: "رَحْمَتَانِ", plural: "رَحَمَاتٌ", meaning: "Rahmet: Allah'ın her şeyi kuşatan sınırsız merhameti, şefkati, bağışlaması ve lütfu (el-Müfredât / A'râf 7/156)" },
+  { id: 64, singular: "نِعْمَةٌ", dual: "نِعْمَتَانِ", plural: "نِعَمٌ / أَنْعُمٌ", meaning: "Nimet: Saymakla bitirilemeyen maddî ve manevî ilahî bağış, sıhhat, hidayet ve ihsan (el-Müfredât / İbrâhîm 14/34)" },
+  { id: 65, singular: "حَسَنَةٌ", dual: "حَسَنَتَانِ", plural: "حَسَنَاتٌ", meaning: "Hasene: Allah rızasına uygun hayır amel, güzellik, dünyada afiyet ve ahirette Cennet sevabı (el-Müfredât / Bakara 2/201)" },
+  { id: 66, singular: "سَيِّئَةٌ", dual: "سَيِّئَتَانِ", plural: "سَيِّئَاتٌ", meaning: "Seyyie: Şeriatın kınadığı günah, çirkin fiil, fenalık ve bunların ahiretteki acı cezası (el-Müfredât / Nisâ 4/79)" },
+  { id: 67, singular: "ذَنْبٌ", dual: "ذَنْبَانِ", plural: "ذُنُوبٌ", meaning: "Günah / Zenb: Kişinin peşini bırakmayan vebal, ilahî sınırlara aykırı düşen suç ve isyan (el-Müfredât / Şûrâ 42/37)" },
+  { id: 68, singular: "خَطِيئَةٌ", dual: "خَطِيئَتَانِ", plural: "خَطَايَا / خَطِيئَاتٌ", meaning: "Hatîe: İnsanı kuşatan büyük günah, kasten veya gafletle işlenen ağır cürüm (el-Müfredât / Bakara 2/81)" },
+  { id: 69, singular: "ظُلْمٌ", dual: "ظُلْمَانِ", plural: "مَظَالِمُ", meaning: "Zulüm: Bir şeyi yerinden saptırıp haddi aşmak, haksızlık; en büyük zulüm ise Allah'a şirk koşmaktır (el-Müfredât / Lokmân 31/13)" },
+  { id: 70, singular: "إِثْمٌ", dual: "إِثْمَانِ", plural: "آثَامٌ", meaning: "İsm: İnsanı hayırdan geri bırakan, vicdanı rahatsız eden ve cezayı gerektiren ağır günah (el-Müfredât / Bakara 2/219)" },
+  { id: 71, singular: "مُؤْمِنٌ", dual: "مُؤْمِنَانِ", plural: "مُؤْمِنُونَ / مُؤْمِنِينَ", meaning: "Mümin: Allah'a, meleklerine, kitaplarına ve ahirete ihlasla iman edip güvene eren samimi kul (el-Müfredât / Enfâl 8/2)" },
+  { id: 72, singular: "كَافِرٌ", dual: "كَافِرَانِ", plural: "كَافِرُونَ / كُفَّارٌ", meaning: "Kâfir: Hakkı, tevhid delillerini ve nimetleri bile bile inkâr edip üzerini örten nankör (el-Müfredât / Bakara 2/6)" },
+  { id: 73, singular: "مُنَافِقٌ", dual: "مُنَافِقَانِ", plural: "مُنَافِقُونَ / مُنَافِقِينَ", meaning: "Münafık: Dıştan inanmış görünüp içinde inkâr ve nifak besleyen, dinde sahtekâr ikiyüzlü kimse (el-Müfredât / Nisâ 4/145)" },
+  { id: 74, singular: "مُشْرِكٌ", dual: "مُشْرِكَانِ", plural: "مُشْرِكُونَ / مُشْرِكِينَ", meaning: "Müşrik: İlahlıkta, yaratmada ve ibadette Allah'a putları veya başka şeyleri ortak koşan (el-Müfredât / Tevbe 9/28)" },
+  { id: 75, singular: "ظَالِمٌ", dual: "ظَالِمَانِ", plural: "ظَالِمُونَ / ظَلَمَةٌ", meaning: "Zalim: İlahi sınırları çiğneyen, hakkı gasbeden ve inkârla kendi nefsine yazık eden kimse (el-Müfredât / Bakara 2/165)" },
+  { id: 76, singular: "فَاسِقٌ", dual: "فَاسِقَانِ", plural: "فَاسِقُونَ / فُسَّاقٌ", meaning: "Fasık: Allah'a itaatten büsbütün çıkıp günahı aşikare işleyen, yoldan sapmış kimse (el-Müfredât / Secde 32/18)" },
+  { id: 77, singular: "صَالِحٌ", dual: "صَالِحَانِ", plural: "صَالِحُونَ / صُلَحَاءُ", meaning: "Salih: İtikadı temiz, ameli Allah'ın rızasına uygun, iyilik ve ıslah üzere yaşayan dürüst kimse (el-Müfredât / Âl-i İmrân 3/114)" },
+  { id: 78, singular: "صَادِقٌ", dual: "صَادِقَانِ", plural: "صَادِقُونَ / صُدَقَاءُ", meaning: "Sadık: Sözünde ve inancında dosdoğru olan, ahdine vefa gösteren dürüst ve sadakatli mümin (el-Müfredât / Ahzâb 33/23)" },
+  { id: 79, singular: "صَابِرٌ", dual: "صَابِرَانِ", plural: "صَابِرُونَ", meaning: "Sabırlı / Sâbir: İbadette sebat eden, günahlara karşı direnen ve musibet anında metanetini koruyan kul (el-Müfredât / Bakara 2/155)" },
+  { id: 80, singular: "شَاكِرٌ", dual: "شَاكِرَانِ", plural: "شَاكِرُونَ / شُكَّارٌ", meaning: "Şükreden / Şâkir: Verilen nimetlerin kadrini bilip Allah'a hamd ile itaat eden kadirşinas kul (el-Müfredât / Nahl 16/121)" },
+  { id: 81, singular: "مُحْسِنٌ", dual: "مُحْسِنَانِ", plural: "مُحْسِنُونَ / مُحْسِنِينَ", meaning: "Muhsin: Allah'ı görür gibi ihlasla ibadet eden, işini mükemmel yapan ve insanlara iyilik saçan (el-Müfredât / Bakara 2/112)" },
+  { id: 82, singular: "شَهِيدٌ", dual: "شَهِيدَانِ", plural: "شُهَدَاءُ", meaning: "Şehit / Şahit: Hakikate tanıklık eden şahit; Allah yolunda canını feda ederek şehadet mertebesine eren mümin (el-Müfredât / Âl-i İmrân 3/140)" },
+  { id: 83, singular: "عَالِمٌ", dual: "عَالِمَانِ", plural: "عُلَمَاءُ", meaning: "Âlim: Hakikati kavrayan, ilmiyle amel eden ve Allah'tan hakkıyla haşyet duyan basiretli zat (el-Müfredât / Fâtır 35/28)" },
+  { id: 84, singular: "عَدُوٌّ", dual: "عَدُوَّانِ", plural: "أَعْدَاءٌ", meaning: "Düşman: İnsanın helakini ve kötülüğünü isteyen açık hasım; ayetlerde özellikle apaçık düşman olan Şeytan (el-Müfredât / Bakara 2/168)" },
+  { id: 85, singular: "وَلِيٌّ", dual: "وَلِيَّانِ", plural: "أَوْلِيَاءُ", meaning: "Veli / Dost: Koruyan, yardım eden, yakın dost; Allah'ın himayesine sığınan ve O'nun sevgisine mazhar olan takva ehli (el-Müfredât / Yûnus 10/62)" },
+  { id: 86, singular: "نَصِيرٌ", dual: "نَصِيرَانِ", plural: "أَنْصَارٌ", meaning: "Nasîr: Zorluk ve düşmanlık karşısında imdada yetişip zafer ve destek bahşeden yardımcı (el-Müfredât / Hac 22/78)" },
+  { id: 87, singular: "سُلْطَانٌ", dual: "سُلْطَانَانِ", plural: "سَلَاطِينُ", meaning: "Sultan: Şüpheleri yok eden sarsılmaz hüccet, kesin delil, kudret ve hükümranlık (el-Müfredât / İsrâ 17/33)" },
+  { id: 88, singular: "بَيِّنَةٌ", dual: "بَيِّنَتَانِ", plural: "بَيِّنَاتٌ", meaning: "Beyyine: Şüpheye yer bırakmayacak kadar net, apaçık ilahî delil, peygamber mucizesi ve vahiy (el-Müfredât / Beyyine 98/1)" },
+  { id: 89, singular: "حِكْمَةٌ", dual: "حِكْمَتَانِ", plural: "حِكَمٌ", meaning: "Hikmet: Eşyanın hakikatini bilip gereğince doğru hareket etmek, her şeyi yerli yerine koymak ve sünnet ilmi (el-Müfredât / Bakara 2/269)" },
+  { id: 90, singular: "كَلِمَةٌ", dual: "كَلِمَتَانِ", plural: "كَلِمَاتٌ / كَلِمٌ", meaning: "Kelime: İlahi irade fermanı, tevhid sözü (lâ ilâhe illallâh) ve Allah'ın kesinleşmiş vaad ve hükmü (el-Müfredât / Sâffât 37/171)" },
+  { id: 91, singular: "حَدِيثٌ", dual: "حَدِيثَانِ", plural: "أَحَادِيثُ", meaning: "Hadis / Söz: Haber, söz, anlatı; ayetlerde Kur'an-ı Kerim (ahsenü'l-hadîs: sözün en güzeli) ve ibretli kıssalar (el-Müfredât / Zümer 39/23)" },
+  { id: 92, singular: "مَسْجِدٌ", dual: "مَسْجِدَانِ", plural: "مَسَاجِدُ", meaning: "Mescit: Allah Teâlâ'ya secde ve ibadet edilen mukaddes mabet, cami (el-Müfredât / Cin 72/18)" },
+  { id: 93, singular: "مَدِينَةٌ", dual: "مَدِينَتَانِ", plural: "مُدُنٌ / مَدَائِنُ", meaning: "Medine / Şehir: Nüfusun toplandığı medenî şehir; hususiyle hicret yurdu olan Medine-i Münevvere (el-Müfredât / Tevbe 9/101)" },
+  { id: 94, singular: "قَرْيَةٌ", dual: "قَرْيَتَانِ", plural: "قُرًى", meaning: "Karye / Belde: İnsanların ikamet ettiği yerleşim birimi, köy, şehir; ayetlerde peygamber gönderilen beldeler (el-Müfredât / İsrâ 17/16)" },
+  { id: 95, singular: "دَارٌ", dual: "دَارَانِ", plural: "دِيَارٌ / دُورٌ", meaning: "Yurt / Dâr: Ev, konut, yurt; ayetlerde selamet yurdu olan Cennet (Dârü's-Selâm) ve ebedî ahiret konağı (el-Müfredât / Yûnus 10/25)" },
+  { id: 96, singular: "أُمٌّ", dual: "أُمَّانِ", plural: "أُمَّهَاتٌ", meaning: "Anne / Ümm: Varlığın aslı, kaynağı ve validesi; ayetlerde ana kitap (Levh-i Mahfuz) ve hürmete en layık valide (el-Müfredât / Lokmân 31/14)" },
+  { id: 97, singular: "أَبٌ", dual: "أَبَوَانِ", plural: "آبَاءٌ", meaning: "Baba / Eb: İnsanın dünyaya gelişine vesile olan peder, ata, dedeler ve peygamber atalar (el-Müfredât / Yûsuf 12/38)" },
+  { id: 98, singular: "أَخٌ", dual: "أَخَوَانِ", plural: "إِخْوَةٌ / إِخْوَانٌ", meaning: "Kardeş / Ah: Öz kardeş; ayetlerde aynı zamanda kalpleri birbirine kaynaştırılmış din kardeşi (el-Müfredât / Hucurât 49/10)" },
+  { id: 99, singular: "أُخْتٌ", dual: "أُخْتَانِ", plural: "أَخَوَاتٌ", meaning: "Kız Kardeş: Nesep bağıyla bağlı kız kardeş; şefkat ve sıla-i rahim muhatabı (el-Müfredât / Nisâ 4/12)" },
+  { id: 100, singular: "زَوْجٌ", dual: "زَوْجَانِ", plural: "أَزْوَاجٌ", meaning: "Eş / Zevc: Birbirini tamamlayan eş, hanım veya koca; kâinatta çift olarak yaratılan her bir varlık (el-Müfredât / Rûm 30/21)" }
 ];
 
     let VOCABULARY_WORDS = JSON.parse(JSON.stringify(DEFAULT_VOCABULARY_WORDS));
@@ -2649,7 +2677,7 @@
               </div>
               <!-- Arka Yüz: Türkçe Anlamı -->
               <div class="flip-card-back">
-                <div class="card-meaning-text" style="font-size: 1.05rem;">${escapeHtml(item.meaning)}</div>
+                <div class="card-meaning-text">${escapeHtml(item.meaning)}</div>
                 <div class="card-trans-text" style="color: #c7d2fe;">Sağdan Sola: Tekil / İkili / Çoğul</div>
                 <span class="card-meaning-tag">ANLAMI ✓</span>
               </div>
@@ -2971,7 +2999,7 @@
     // =========================================================================
     function saveStateToLocalStorage() {
       try {
-        localStorage.setItem("emsile_vocab_words_quran_100_v1", JSON.stringify(VOCABULARY_WORDS));
+        localStorage.setItem("emsile_vocab_words_sunnah_100_v2", JSON.stringify(VOCABULARY_WORDS));
         localStorage.setItem("emsile_sound_muted", isSoundMuted ? "1" : "0");
       } catch(e) {
         console.warn("LocalStorage save error:", e);
@@ -2980,7 +3008,7 @@
 
     function loadStateFromLocalStorage() {
       try {
-        const saved = localStorage.getItem("emsile_vocab_words_quran_100_v1");
+        const saved = localStorage.getItem("emsile_vocab_words_sunnah_100_v2");
         if (saved) {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed) && parsed.length > 0) {
