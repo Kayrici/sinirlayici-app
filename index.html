@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Dil Öğrenme - Emsile 24 Sîga Kelime Eşleştirme Oyunu</title>
+  <title>Arapça Emsile ve Çekim Merkezi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -49,9 +49,9 @@
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 650px;
-      height: 350px;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, rgba(168, 85, 247, 0.08) 45%, transparent 70%);
+      width: 700px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.08) 45%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -61,194 +61,452 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(9, 13, 22, 0.9);
+      background: rgba(9, 13, 22, 0.92);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-color);
-      padding: 12px 18px;
+      padding: 10px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-    }
-
-    .header-brand {
-      display: flex;
-      align-items: center;
       gap: 10px;
     }
 
-    .brand-icon-box {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(168, 85, 247, 0.25));
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      box-shadow: 0 0 16px rgba(99, 102, 241, 0.3);
-      flex-shrink: 0;
-    }
-
-    .brand-texts h1 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -0.01em;
-      line-height: 1.2;
-    }
-
-    .brand-texts p {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .header-actions {
+    .header-left {
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .btn-header {
-      background: rgba(255, 255, 255, 0.06);
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--border-color);
-      color: var(--text-sub);
+      color: #fff;
+      padding: 7px 12px;
       border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-nav:hover {
+      background: rgba(255, 255, 255, 0.16);
+      transform: translateY(-1px);
+    }
+
+    .header-title-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-title-box h1 {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .header-title-box p {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
       display: flex;
       align-items: center;
       gap: 6px;
+    }
+
+    .btn-header-action {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      color: #e2e8f0;
+      padding: 7px 11px;
+      border-radius: 9px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
       transition: all 0.2s;
+      white-space: nowrap;
     }
 
-    .btn-header:hover {
-      background: rgba(255, 255, 255, 0.12);
+    .btn-header-action:hover {
+      background: rgba(99, 102, 241, 0.3);
       color: #fff;
-      border-color: rgba(255, 255, 255, 0.2);
     }
 
-    .btn-header.primary {
-      background: rgba(99, 102, 241, 0.18);
-      border-color: rgba(99, 102, 241, 0.45);
-      color: #a5b4fc;
-    }
-
-    .btn-header.primary:hover {
-      background: rgba(99, 102, 241, 0.35);
+    .btn-header-action.primary {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border: none;
       color: #fff;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
     }
 
     /* Main Container */
-    main.game-container {
+    .game-container {
       position: relative;
-      z-index: 10;
-      flex: 1;
+      z-index: 1;
+      width: 100%;
       max-width: 760px;
-      width: 100%;
       margin: 0 auto;
-      padding: 16px 14px 40px;
+      padding: 16px 14px 40px 14px;
+      flex: 1;
       display: flex;
       flex-direction: column;
     }
 
-    /* ============================================================ */
-    /* 1. QUIZ BÖLÜMÜ                                               */
-    /* ============================================================ */
-    #quizSection {
+    /* ========================================================
+       1. OYUN ANA MENÜSÜ (MAIN MENU VIEW)
+       ======================================================== */
+    #mainMenuView {
       display: flex;
       flex-direction: column;
-      animation: fadeIn 0.25s ease-out;
-      max-width: 540px;
-      margin: 0 auto;
-      width: 100%;
+      gap: 16px;
+      animation: fadeIn 0.3s ease;
     }
 
-    .quiz-tracker-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      padding: 0 4px;
+    .menu-hero-banner {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.95));
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 22px 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     }
 
-    .tracker-pill {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: #818cf8;
-      background: rgba(99, 102, 241, 0.12);
-      border: 1px solid rgba(99, 102, 241, 0.25);
+    .hero-badge {
+      display: inline-block;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #a5b4fc;
       padding: 4px 12px;
       border-radius: 20px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.05em;
     }
 
-    .sound-toggle-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
+    .menu-hero-banner h2 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+
+    .menu-hero-banner p {
+      font-size: 0.86rem;
+      color: var(--text-sub);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.45;
+    }
+
+    .menu-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .menu-cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .menu-choice-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
       cursor: pointer;
-      font-size: 1.1rem;
-      padding: 4px 8px;
-      border-radius: 8px;
-    }
-
-    /* Soru Kartı */
-    .target-word-card {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.75), rgba(15, 23, 42, 0.9));
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 22px;
-      padding: 30px 20px 26px;
-      text-align: center;
-      margin-bottom: 20px;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
     }
 
-    .target-word-card::after {
+    .menu-choice-card::before {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+      background: linear-gradient(90deg, #6366f1, #a855f7);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .menu-choice-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    }
+
+    .menu-choice-card:hover::before {
+      opacity: 1;
+    }
+
+    .choice-card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .choice-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(99, 102, 241, 0.18);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .choice-texts h3 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .choice-texts p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .choice-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-top: 4px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .choice-features li {
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-start-choice {
+      width: 100%;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-start-choice:hover {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+    }
+
+    /* ========================================================
+       2. SÎGA SEÇİM MENÜSÜ (SIGA SELECTION VIEW)
+       ======================================================== */
+    #sigaSelectionView {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .siga-selection-banner {
+      background: rgba(26, 34, 53, 0.75);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .siga-banner-texts h2 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+
+    .siga-banner-texts p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .siga-grid-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+    }
+
+    .siga-item-card {
+      background: rgba(26, 34, 53, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .siga-item-card:hover {
+      background: rgba(35, 46, 70, 0.9);
+      border-color: rgba(99, 102, 241, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .siga-badge-num {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .siga-item-arabic {
+      font-family: var(--font-arabic);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #fff;
+      direction: rtl;
+      margin-top: 4px;
+    }
+
+    .siga-item-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #818cf8;
+      line-height: 1.25;
+    }
+
+    /* ========================================================
+       3. QUIZ BÖLÜMÜ (5 ŞIKLI TEST)
+       ======================================================== */
+    #quizSection {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .quiz-tracker-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .tracker-pill {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #a5b4fc;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sound-toggle-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sound-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Target Word Card */
+    .target-word-card {
+      background: linear-gradient(135deg, rgba(26, 34, 53, 0.9), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 20px;
+      padding: 26px 18px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      position: relative;
     }
 
     .word-badge-tag {
+      display: inline-block;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #c7d2fe;
+      padding: 4px 12px;
+      border-radius: 20px;
       font-size: 0.72rem;
       font-weight: 700;
-      color: #a5b4fc;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 6px;
-      display: inline-block;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
     }
 
     .target-word-title {
       font-family: var(--font-arabic);
-      font-size: 3.2rem;
+      font-size: 2.7rem;
       font-weight: 700;
       color: #ffffff;
-      line-height: 1.3;
-      margin: 6px 0 12px 0;
-      text-shadow: 0 2px 18px rgba(99, 102, 241, 0.5);
+      margin-bottom: 8px;
       direction: rtl;
+      line-height: 1.35;
+      text-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
     }
 
     .target-word-instruction {
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
     }
 
-    /* 5 Seçenek Butonları */
+    /* 5 Options Grid */
     .options-grid {
       display: flex;
       flex-direction: column;
@@ -256,146 +514,140 @@
     }
 
     .option-btn {
-      background: var(--bg-card);
+      width: 100%;
+      background: rgba(26, 34, 53, 0.65);
       border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 14px 16px;
+      border-radius: 14px;
+      padding: 13px 18px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       cursor: pointer;
-      color: #ffffff;
-      font-size: 0.95rem;
-      font-weight: 600;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      color: #fff;
+      font-family: inherit;
       text-align: left;
-      transition: all 0.16s ease;
-      min-height: 54px;
-      position: relative;
     }
 
-    .option-btn:hover {
-      background: var(--bg-card-hover);
-      border-color: rgba(99, 102, 241, 0.4);
-      transform: translateY(-1px);
-    }
-
-    .option-btn:active {
-      transform: scale(0.98);
+    .option-btn:hover:not(:disabled) {
+      background: rgba(35, 46, 70, 0.9);
+      border-color: rgba(99, 102, 241, 0.45);
+      transform: translateX(4px);
     }
 
     .option-letter {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+      font-size: 0.85rem;
+      font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: #a5b4fc;
       flex-shrink: 0;
+      transition: all 0.2s;
     }
 
     .option-text {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: #f1f5f9;
       flex: 1;
-      word-break: break-word;
       line-height: 1.3;
     }
 
-    /* Seçenek Animasyonları */
     .option-btn.correct-choice {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.35), rgba(5, 150, 105, 0.45)) !important;
+      background: rgba(16, 185, 129, 0.2) !important;
       border-color: #10b981 !important;
-      color: #ffffff !important;
-      box-shadow: 0 0 25px rgba(16, 185, 129, 0.6) !important;
-      transform: scale(1.02);
-      animation: pulseGreen 0.35s ease;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.35) !important;
+    }
+
+    .option-btn.correct-choice .option-letter {
+      background: #10b981;
+      border-color: #10b981;
+      color: #fff;
     }
 
     .option-btn.wrong-choice {
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.4), rgba(185, 28, 28, 0.45)) !important;
+      background: rgba(239, 68, 68, 0.2) !important;
       border-color: #ef4444 !important;
-      color: #ffffff !important;
-      box-shadow: 0 0 25px rgba(239, 68, 68, 0.6) !important;
-      animation: shakeRed 0.4s ease;
+      animation: shake 0.35s ease;
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.35) !important;
     }
 
-    @keyframes pulseGreen {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.03); }
-      100% { transform: scale(1.02); }
+    .option-btn.wrong-choice .option-letter {
+      background: #ef4444;
+      border-color: #ef4444;
+      color: #fff;
     }
 
-    @keyframes shakeRed {
+    @keyframes shake {
       0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-8px); }
-      40%, 80% { transform: translateX(8px); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
     }
 
-    /* ============================================================ */
-    /* 2. 24 KELİME 3D FLASHCARD TABLOSU (SAĞDAN SOLA, 5-5-4-5-5)    */
-    /* ============================================================ */
+    /* ========================================================
+       4. TABLO BÖLÜMÜ (3D FLASHCARD TABLOLARI)
+       ======================================================== */
     #tableSection {
       display: none;
       flex-direction: column;
-      animation: fadeIn 0.25s ease-out;
-      width: 100%;
+      gap: 14px;
+      animation: fadeIn 0.3s ease;
     }
 
     .table-banner {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      border-radius: 18px;
-      padding: 14px 18px;
+      background: rgba(26, 34, 53, 0.75);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 12px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 16px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      gap: 12px;
     }
 
     .table-banner-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .table-banner-icon {
-      font-size: 1.8rem;
-      filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.4));
+      font-size: 1.6rem;
     }
 
     .table-banner-info h3 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #fbbf24;
-      margin-bottom: 2px;
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
     }
 
     .table-banner-info p {
-      font-size: 0.74rem;
-      color: #cbd5e1;
-      line-height: 1.3;
+      font-size: 0.75rem;
+      color: var(--text-muted);
     }
 
     .btn-continue {
       background: linear-gradient(135deg, #10b981, #059669);
-      color: #ffffff;
       border: none;
-      border-radius: 12px;
-      padding: 10px 16px;
-      font-size: 0.85rem;
-      font-weight: 800;
+      color: #fff;
+      padding: 9px 16px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
       cursor: pointer;
-      white-space: nowrap;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
-      transition: all 0.16s ease;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
     }
 
     .btn-continue:hover {
@@ -403,40 +655,20 @@
       transform: translateY(-1px);
     }
 
-    .btn-continue:active {
-      transform: scale(0.96);
-    }
-
     .btn-continue.bottom-full {
       width: 100%;
-      padding: 15px;
-      font-size: 0.98rem;
+      padding: 12px 18px;
       justify-content: center;
-      margin-top: 18px;
+      font-size: 0.92rem;
+      margin-top: 8px;
     }
 
-    /* 5 SATIR KAPSAYICISI (SAĞDAN SOLA DİZİLİŞ) */
+    /* Tablo Izgara Kapsayıcısı */
     .emsile-table-wrapper {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       width: 100%;
-    }
-
-    .emsile-row-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 2px 6px;
-      direction: rtl;
-    }
-
-    .emsile-row-title {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: #818cf8;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
     }
 
     .emsile-row {
@@ -446,29 +678,28 @@
       width: 100%;
     }
 
-    /* 5 KELİMEYİ EŞİT DAĞITAN SATIR (1., 2., 4., 5. Satırlar) */
+    /* 5 Sütunlu Emsile Satırları */
     .emsile-row.cols-5 {
       grid-template-columns: repeat(5, 1fr);
       width: 100%;
       margin: 0;
     }
 
-    /* 4 KELİMEYİ SAĞA YAPIŞTIRAN SATIR (3. Satır: 11..14) - KULLANICI İSTEĞİ */
-    /* 5 sütunluk ızgarada ilk 4 sütuna yerleşir, sol sütun boş kalır -> Sağa yapışık! */
+    /* 4 Kelimeli 3. Satır (Sağa yapışık: 5 sütunda ilk 4 hücreye yerleşir, sol hücre boş kalır) */
     .emsile-row.cols-4 {
       grid-template-columns: repeat(5, 1fr);
       width: 100%;
       margin: 0;
     }
 
-    /* ZAMİR TABLOSU 3 SÜTUNLU SATIRLAR (Gâib, Gâibe, Muhâtap, Muhâtaba) */
+    /* 3 Sütunlu Zamir Satırları (Gâib, Gâibe, Muhatap, Muhataba) */
     .emsile-row.cols-3 {
       grid-template-columns: repeat(3, 1fr);
       width: 100%;
       margin: 0;
     }
 
-    /* ZAMİR TABLOSU 5. SATIR (Mütekellim: Ben tek sütun, Biz orta ve solu kaplasın) */
+    /* Zamir Tablosu 5. Satır (Mütekellim: Ben 1 sütun, Biz orta ve solu kaplasın -> span 2) */
     .emsile-row.zamir-row-5 {
       grid-template-columns: repeat(3, 1fr);
       width: 100%;
@@ -479,85 +710,13 @@
       grid-column: span 2;
     }
 
-    @media (max-width: 540px) {
+    @media (max-width: 520px) {
       .emsile-row {
         gap: 6px;
       }
     }
 
-    /* Mod Seçici Tab Bar */
-    .mode-tabs-wrapper {
-      width: 100%;
-      max-width: 540px;
-      margin: 10px auto 4px auto;
-      padding: 0 16px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .mode-tabs {
-      display: flex;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 4px;
-      gap: 6px;
-      width: 100%;
-    }
-
-    .mode-tab {
-      flex: 1;
-      padding: 8px 10px;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      font-weight: 700;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .mode-tab:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .mode-tab.active {
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
-    }
-
-    .zamir-layout-toggle-bar {
-      display: none;
-      justify-content: center;
-      margin-bottom: 12px;
-    }
-
-    .btn-zamir-toggle {
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      color: #cbd5e1;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-zamir-toggle:hover {
-      background: rgba(99, 102, 241, 0.28);
-      color: #fff;
-    }
-
-    /* 3D Flip Card Container */
+    /* 3D Flip Card */
     .flip-card {
       perspective: 1000px;
       -webkit-perspective: 1000px;
@@ -565,6 +724,12 @@
       cursor: pointer;
       user-select: none;
       -webkit-user-select: none;
+    }
+
+    @media (max-width: 420px) {
+      .flip-card {
+        height: 86px;
+      }
     }
 
     .flip-card-inner {
@@ -600,7 +765,7 @@
       text-align: center;
     }
 
-    /* Ön Yüz: Arapça Kelime */
+    /* Ön Yüz: Arapça */
     .flip-card-front {
       background: rgba(30, 41, 59, 0.9);
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -612,91 +777,85 @@
     .card-id-tag {
       position: absolute;
       top: 4px;
-      right: 6px; /* Sağdan sola olduğu için sağ üst köşe */
-      font-size: 0.62rem;
+      left: 6px;
+      font-size: 0.65rem;
       font-weight: 700;
-      color: #94a3b8;
-      opacity: 0.85;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: rgba(255, 255, 255, 0.4);
     }
 
     .card-word-text {
       font-family: var(--font-arabic);
-      font-size: 1.38rem;
+      font-size: 1.4rem;
       font-weight: 700;
-      color: #ffffff;
-      word-break: keep-all;
-      line-height: 1.25;
       direction: rtl;
+      line-height: 1.25;
+      color: #ffffff;
     }
 
     @media (max-width: 420px) {
       .card-word-text {
-        font-size: 1.2rem;
-      }
-      .flip-card {
-        height: 86px;
+        font-size: 1.25rem;
       }
     }
 
     .card-flip-hint {
-      font-size: 0.6rem;
-      color: #a5b4fc;
-      margin-top: 3px;
+      position: absolute;
+      bottom: 4px;
+      font-size: 0.62rem;
       font-weight: 600;
-    }
-
-    /* Yanlış bilinen kelimeyi parlat */
-    .flip-card.missed-highlight .flip-card-front {
-      border: 2px solid #ef4444;
-      background: rgba(239, 68, 68, 0.22);
-      box-shadow: 0 0 18px rgba(239, 68, 68, 0.7);
-      animation: glowRed 1.4s infinite alternate;
-    }
-
-    @keyframes glowRed {
-      0% { box-shadow: 0 0 6px rgba(239, 68, 68, 0.5); }
-      100% { box-shadow: 0 0 22px rgba(239, 68, 68, 0.95); }
+      color: rgba(148, 163, 184, 0.8);
     }
 
     /* Arka Yüz: Anlamı */
     .flip-card-back {
-      background: linear-gradient(135deg, #10b981, #059669);
+      background: linear-gradient(135deg, #4338ca, #6366f1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       color: #ffffff;
-      border: 1px solid rgba(52, 211, 153, 0.7);
-      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
       transform: rotateY(180deg);
       -webkit-transform: rotateY(180deg);
-      direction: ltr; /* Türkçe anlamlar soldan sağa */
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+      position: relative;
     }
 
     .card-meaning-text {
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       font-weight: 700;
-      color: #ffffff;
-      word-break: break-word;
       line-height: 1.25;
-      padding: 0 2px;
+      padding: 0 3px;
+      color: #ffffff;
     }
 
     .card-meaning-tag {
+      position: absolute;
+      bottom: 4px;
       font-size: 0.58rem;
-      font-weight: 700;
-      background: rgba(0, 0, 0, 0.25);
-      padding: 2px 5px;
-      border-radius: 5px;
-      margin-top: 4px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.75);
     }
 
-    /* ============================================================ */
-    /* MODAL: KELİMELERİ DÜZENLE                                    */
-    /* ============================================================ */
+    /* Yanlış Yapılan Kartı Vurgulama */
+    .flip-card.missed-highlight .flip-card-front {
+      border: 2px solid #ef4444;
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.6);
+      animation: pulseBorder 1.5s infinite;
+    }
+
+    @keyframes pulseBorder {
+      0%, 100% { border-color: #ef4444; }
+      50% { border-color: #f87171; }
+    }
+
+    /* ========================================================
+       5. MODAL VE TOAST
+       ======================================================== */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      z-index: 100;
-      background: rgba(0, 0, 0, 0.78);
+      background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 999;
       display: none;
       align-items: center;
       justify-content: center;
@@ -704,20 +863,20 @@
     }
 
     .modal-card {
-      background: #111827;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      max-width: 520px;
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
       width: 100%;
+      max-width: 580px;
       max-height: 85vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
-      animation: modalScale 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      animation: modalScale 0.25s ease;
     }
 
     .modal-header {
-      padding: 16px 20px;
+      padding: 14px 18px;
       border-bottom: 1px solid var(--border-color);
       display: flex;
       align-items: center;
@@ -725,66 +884,70 @@
     }
 
     .modal-header h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
+      font-size: 1rem;
+      font-weight: 800;
       color: #fff;
     }
 
     .btn-close-modal {
-      background: none;
+      background: transparent;
       border: none;
       color: var(--text-muted);
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       cursor: pointer;
       padding: 4px;
+      line-height: 1;
     }
 
     .modal-body {
-      padding: 16px 20px;
+      padding: 16px;
       overflow-y: auto;
       flex: 1;
-    }
-
-    .modal-footer {
-      padding: 14px 20px;
-      border-top: 1px solid var(--border-color);
       display: flex;
+      flex-direction: column;
       gap: 10px;
     }
 
-    .btn-modal-save {
-      flex: 1;
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 12px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      cursor: pointer;
+    .modal-footer {
+      padding: 12px 18px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
     }
 
     .btn-modal-cancel {
       background: rgba(255, 255, 255, 0.08);
-      color: var(--text-sub);
       border: 1px solid var(--border-color);
+      color: #cbd5e1;
+      padding: 8px 16px;
       border-radius: 10px;
-      padding: 12px 16px;
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-modal-save {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border: none;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
       cursor: pointer;
     }
 
     .word-edit-row {
       display: flex;
-      gap: 8px;
       align-items: center;
-      margin-bottom: 8px;
+      gap: 8px;
     }
 
     .word-edit-num {
-      width: 24px;
-      font-size: 0.74rem;
+      width: 26px;
+      font-size: 0.78rem;
       font-weight: 700;
       color: var(--text-muted);
       text-align: right;
@@ -825,7 +988,7 @@
       border-radius: 30px;
       font-size: 0.85rem;
       font-weight: 600;
-      z-index: 999;
+      z-index: 9999;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s;
       opacity: 0;
@@ -853,44 +1016,111 @@
 
   <div class="ambient-glow"></div>
 
-  <!-- Üst Bar -->
+  <!-- Üst Bar (Header): Her Ekrana Uyarlanan Dinamik Başlık ve Navigasyon -->
   <header class="game-header">
-    <div class="header-brand">
-      <div class="brand-icon-box" id="headerBrandIcon">📖</div>
-      <div class="brand-texts">
-        <h1 id="headerMainTitle">Emsile-i Muhtelife</h1>
-        <p id="headerSubTitle">24 Sîga Kelime Eşleştirme</p>
-      </div>
+    <div class="header-left">
+      <button type="button" class="btn-nav" id="btnHeaderHome" onclick="returnToAppHome()" title="Uygulama Ana Sayfasına Dön">
+        🏠 Ana Sayfa
+      </button>
+      <button type="button" class="btn-nav" id="btnHeaderMenu" onclick="returnToMainMenu()" title="Oyun Menüsüne Dön" style="display: none;">
+        ⬅️ Menü
+      </button>
     </div>
+
+    <div class="header-title-box">
+      <h1 id="headerMainTitle">Arapça Emsile ve Çekimler</h1>
+      <p id="headerSubTitle">Öğrenme ve Eşleştirme Merkezi</p>
+    </div>
+
     <div class="header-actions">
-      <button type="button" class="btn-header" onclick="openEditWordsModal()" title="Kelimeleri Düzenle">
+      <button type="button" class="btn-header-action" id="btnHeaderEdit" onclick="openEditWordsModal()" title="Kelimeleri Düzenle" style="display: none;">
         ✏️ Düzenle
       </button>
-      <button type="button" class="btn-header primary" id="btnToggleTable" onclick="toggleTableDirectly()">
+      <button type="button" class="btn-header-action primary" id="btnHeaderTable" onclick="toggleTableDirectly()" title="Tabloyu Aç" style="display: none;">
         📚 Tablo
       </button>
     </div>
   </header>
 
-  <!-- MOD SEÇİCİ TAB BAR (Emsile 24 Sîga & Zamir Tablosu 14 Zamir) -->
-  <div class="mode-tabs-wrapper">
-    <div class="mode-tabs">
-      <button type="button" class="mode-tab active" id="btnModeEmsile" onclick="setGameMode('emsile')">
-        📖 Emsile (24 Sîga)
-      </button>
-      <button type="button" class="mode-tab" id="btnModeZamir" onclick="setGameMode('zamir')">
-        👤 Zamirler (14 Zamir)
-      </button>
-    </div>
-  </div>
-
   <!-- Ana Oyun Kapsayıcısı -->
   <main class="game-container">
 
-    <!-- 1. BÖLÜM: QUIZ (5 ŞIKLI TEST) -->
+    <!-- ========================================================
+         1. OYUN ANA MENÜSÜ (2 MENÜ KARTI)
+         ======================================================== -->
+    <section id="mainMenuView">
+      <div class="menu-hero-banner">
+        <span class="hero-badge">ARAPÇA SARF VE EMSİLE EĞİTİMİ</span>
+        <h2>Ne Çalışmak İstersiniz?</h2>
+        <p>Aşağıdaki menülerden 24 temel sîgayı veya her sîganın zamirlere göre çekimlerini çalışabilirsiniz.</p>
+      </div>
+
+      <div class="menu-cards-grid">
+        <!-- 1. Menü: 24 Sîga Eşleştirme Oyunu -->
+        <div class="menu-choice-card" onclick="startEmsileGame()">
+          <div class="choice-card-top">
+            <div class="choice-icon-box">📖</div>
+            <div class="choice-texts">
+              <h3>24 Sîga Oyunu</h3>
+              <p>Emsile-i Muhtelife'nin 24 temel kelimesini sadece bold sîga başlıklarıyla eşleştirin.</p>
+            </div>
+          </div>
+          <ul class="choice-features">
+            <li>✨ Mâzi, Müzâri, Mastar, Fâil, Mef'ûl vb.</li>
+            <li>✨ Yanlışta 24'lü Tablo (3. Satır Sağa Yapışık)</li>
+            <li>✨ Asla Türkçe okunuş yer almaz</li>
+          </ul>
+          <button type="button" class="btn-start-choice">
+            <span>🎮 24 Sîga Oyununu Başlat ▶️</span>
+          </button>
+        </div>
+
+        <!-- 2. Menü: Zamirlere Göre Çekimler -->
+        <div class="menu-choice-card" onclick="openSigaSelectionMenu()">
+          <div class="choice-card-top">
+            <div class="choice-icon-box">👤</div>
+            <div class="choice-texts">
+              <h3>Zamirlere Göre Çekim</h3>
+              <p>24 sîganın her birinin 14 şahsa (zamire) göre çekimlerini test edin.</p>
+            </div>
+          </div>
+          <ul class="choice-features">
+            <li>✨ 24 sîgadan istediğinizi seçip çalışma</li>
+            <li>✨ Ben, Biz, Sen, O vb. zamir eşleştirmeleri</li>
+            <li>✨ Yanlışta 14 Haneli Çekim Tablosu</li>
+          </ul>
+          <button type="button" class="btn-start-choice">
+            <span>📑 Sîga Seç ve Oyna ▶️</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         2. SÎGA SEÇİM MENÜSÜ (24 SÎGA LİSTESİ)
+         ======================================================== -->
+    <section id="sigaSelectionView">
+      <div class="siga-selection-banner">
+        <div class="siga-banner-texts">
+          <h2>👤 Çekim Yapılacak Sîgayı Seçin</h2>
+          <p>Hangi sîganın 14 şahıs çekimini çalışmak istiyorsanız üzerine dokunun:</p>
+        </div>
+        <button type="button" class="btn-nav" onclick="returnToMainMenu()">
+          ⬅️ Menüye Dön
+        </button>
+      </div>
+
+      <div class="siga-grid-list" id="sigaSelectionGrid">
+        <!-- JS ile 24 sîga butonu basılır -->
+      </div>
+    </section>
+
+    <!-- ========================================================
+         3. QUIZ BÖLÜMÜ (5 ŞIKLI TEST)
+         ======================================================== -->
     <section id="quizSection">
       <div class="quiz-tracker-bar">
-        <span class="tracker-pill" id="quizTrackerText">Kelime 1 / 24</span>
+        <span class="tracker-pill" id="quizTrackerText">Soru 1 / 14</span>
         <button type="button" class="sound-toggle-btn" id="soundToggleBtn" onclick="toggleSound()" title="Ses Aç/Kapat">
           🔊
         </button>
@@ -899,8 +1129,8 @@
       <!-- Soru Kartı -->
       <div class="target-word-card">
         <span class="word-badge-tag" id="targetBadgeTag">HEDEF KELİME</span>
-        <h2 class="target-word-title" id="targetWordText">نَصَرَ</h2>
-        <p class="target-word-instruction">Aşağıdaki 5 seçenekten doğru Türkçe karşılığını seçin:</p>
+        <h2 class="target-word-title" id="targetWordText">نَصَرْتُ</h2>
+        <p class="target-word-instruction" id="targetWordInstruction">Aşağıdaki 5 seçenekten doğru Türkçe zamir karşılığını seçin:</p>
       </div>
 
       <!-- 5 Şıklı Seçenekler Grid -->
@@ -909,25 +1139,20 @@
       </div>
     </section>
 
-    <!-- 2. BÖLÜM: 3D FLASHCARD TABLOSU (SAĞDAN SOLA) -->
+    <!-- ========================================================
+         4. 3D FLASHCARD TABLOSU BÖLÜMÜ
+         ======================================================== -->
     <section id="tableSection">
       <div class="table-banner">
         <div class="table-banner-left">
           <div class="table-banner-icon" id="tableBannerIcon">📚</div>
           <div class="table-banner-info">
-            <h3 id="tableBannerTitle">24 Sîga Tablosu (Sağdan Sola)</h3>
+            <h3 id="tableBannerTitle">Tablo</h3>
             <p id="tableBannerDesc">Anlamını görmek istediğiniz karta dokunun, kart ters dönecektir.</p>
           </div>
         </div>
         <button type="button" class="btn-continue" onclick="continueQuiz()">
-          <span>🎮 Devam Et ▶️</span>
-        </button>
-      </div>
-
-      <!-- Zamir tablosu son satır düzeni hızlı değiştirici (Kullanıcı İsteği) -->
-      <div class="zamir-layout-toggle-bar" id="zamirLayoutBar">
-        <button type="button" class="btn-zamir-toggle" id="btnToggleZamirLayout" onclick="toggleZamirLayout()">
-          🔄 Son Satır: Ben (Sağda) | Biz (Sol + Orta Kaplar)
+          <span>🎮 Oyuna Devam Et ▶️</span>
         </button>
       </div>
 
@@ -947,11 +1172,11 @@
   <div class="modal-overlay" id="editWordsModal">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>✏️ 24 Kelime ve Anlamlarını Düzenle</h3>
+        <h3 id="editModalTitle">✏️ Kelimeleri Düzenle</h3>
         <button type="button" class="btn-close-modal" onclick="closeEditWordsModal()">✕</button>
       </div>
       <div class="modal-body" id="editWordsListContainer">
-        <!-- 24 satır input buraya doldurulur -->
+        <!-- Dinamik inputlar buraya doldurulur -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn-modal-cancel" onclick="closeEditWordsModal()">İptal</button>
@@ -963,72 +1188,280 @@
   <div id="toastMessage"></div>
 
   <script>
-    // 1. KELİME LİSTESİ: EMSİLE-İ MUHTELİFE (24 Sîga)
-    // NOT: Kullanıcı isteği doğrultusunda baştaki 'fehüve', 've zâke' gibi ekler kaldırılmıştır.
+    // =========================================================================
+    // 1. VERİ SETLERİ (ASLA TÜRKÇE OKUNUŞ YER ALMAZ!)
+    // =========================================================================
+
+    // A) 24 SÎGA LİSTESİ (Emsile-i Muhtelife) - Yalnızca bold sîga başlıkları!
     const EMSILE_24_WORDS = [
-      // 1. SATIR (5 Kelime - Sağdan Sola)
-      { id: 1, word: "نَصَرَ", meaning: "Mâzi fiil", row: 1 },
-      { id: 2, word: "يَنْصُرُ", meaning: "Müzâri' fiil", row: 1 },
-      { id: 3, word: "نَصْرًا", meaning: "Mastar", row: 1 },
-      { id: 4, word: "نَاصِرٌ", meaning: "İsm-i fâil", row: 1 },
-      { id: 5, word: "مَنْصُورٌ", meaning: "İsm-i mef'ûl", row: 1 },
-
-      // 2. SATIR (5 Kelime - Sağdan Sola)
-      { id: 6, word: "لَمْ يَنْصُرْ", meaning: "Cahd-ı mutlak", row: 2 },
-      { id: 7, word: "لَمَّا يَنْصُرْ", meaning: "Cahd-ı müstağrak", row: 2 },
-      { id: 8, word: "مَا يَنْصُرُ", meaning: "Nefy-i hâl", row: 2 },
-      { id: 9, word: "لَا يَنْصُرُ", meaning: "Nefy-i istikbâl", row: 2 },
-      { id: 10, word: "لَنْ يَنْصَرَ", meaning: "Te'kîd-i nefy-i istikbâl", row: 2 },
-
-      // 3. SATIR (4 Kelime - Sağdan Sola)
-      { id: 11, word: "لِيَنْصُرْ", meaning: "Emr-i gâib", row: 3 },
-      { id: 12, word: "لَا يَنْصُرْ", meaning: "Nehy-i gâib", row: 3 },
-      { id: 13, word: "أُنْصُرْ", meaning: "Emr-i hâzır", row: 3 },
-      { id: 14, word: "لَا تَنْصُرْ", meaning: "Nehy-i hâzır", row: 3 },
-
-      // 4. SATIR (5 Kelime - Sağdan Sola)
-      { id: 15, word: "مَنْصَرٌ", meaning: "İsm-i zaman, ism-i mekân, masdar-ı mimi", row: 4 },
-      { id: 16, word: "مِنْصَرٌ", meaning: "İsm-i âlet", row: 4 },
-      { id: 17, word: "نَصْرَةً", meaning: "Masdar-ı binâ-i merre", row: 4 },
-      { id: 18, word: "نِصْرَةً", meaning: "Masdar-ı binâ-i nev'", row: 4 },
-      { id: 19, word: "نُصَيْرٌ", meaning: "İsm-i tasgîr", row: 4 },
-
-      // 5. SATIR (5 Kelime - Sağdan Sola)
-      { id: 20, word: "نَصْرِيٌّ", meaning: "İsm-i mensûb", row: 5 },
-      { id: 21, word: "نَصَّارٌ", meaning: "Mübalağalı ism-i fâil", row: 5 },
-      { id: 22, word: "أَنْصَرُ", meaning: "İsm-i tafdîl", row: 5 },
-      { id: 23, word: "مَا أَنْصَرَهُ", meaning: "Fiil-i taaccüb-i evvel", row: 5 },
-      { id: 24, word: "أَنْصِرْ بِهِ", meaning: "Fiil-i taaccüb-i sânî", row: 5 }
+      { id: 1, word: "نَصَرَ", meaning: "Mâzi fiil", root: "نَصَرَ" },
+      { id: 2, word: "يَنْصُرُ", meaning: "Müzâri' fiil", root: "يَنْصُرُ" },
+      { id: 3, word: "نَصْرًا", meaning: "Mastar", root: "نَصْرًا" },
+      { id: 4, word: "نَاصِرٌ", meaning: "İsm-i fâil", root: "نَاصِرٌ" },
+      { id: 5, word: "مَنْصُورٌ", meaning: "İsm-i mef'ûl", root: "مَنْصُورٌ" },
+      { id: 6, word: "لَمْ يَنْصُرْ", meaning: "Cahd-ı mutlak", root: "لَمْ يَنْصُرْ" },
+      { id: 7, word: "لَمَّا يَنْصُرْ", meaning: "Cahd-ı müstağrak", root: "لَمَّا يَنْصُرْ" },
+      { id: 8, word: "مَا يَنْصُرُ", meaning: "Nefy-i hâl", root: "مَا يَنْصُرُ" },
+      { id: 9, word: "لَا يَنْصُرُ", meaning: "Nefy-i istikbâl", root: "لَا يَنْصُرُ" },
+      { id: 10, word: "لَنْ يَنْصَرَ", meaning: "Te'kîd-i nefy-i istikbâl", root: "لَنْ يَنْصَرَ" },
+      { id: 11, word: "لِيَنْصُرْ", meaning: "Emr-i gâib", root: "لِيَنْصُرْ" },
+      { id: 12, word: "لَا يَنْصُرْ", meaning: "Nehy-i gâib", root: "لَا يَنْصُرْ" },
+      { id: 13, word: "أُنْصُرْ", meaning: "Emr-i hâzır", root: "أُنْصُرْ" },
+      { id: 14, word: "لَا تَنْصُرْ", meaning: "Nehy-i hâzır", root: "لَا تَنْصُرْ" },
+      { id: 15, word: "مَنْصَرٌ", meaning: "İsm-i zaman, ism-i mekân, masdar-ı mimi", root: "مَنْصَرٌ" },
+      { id: 16, word: "مِنْصَرٌ", meaning: "İsm-i âlet", root: "مِنْصَرٌ" },
+      { id: 17, word: "نَصْرَةً", meaning: "Masdar-ı binâ-i merre", root: "نَصْرَةً" },
+      { id: 18, word: "نِصْرَةً", meaning: "Masdar-ı binâ-i nev'", root: "نِصْرَةً" },
+      { id: 19, word: "نُصَيْرٌ", meaning: "İsm-i tasgîr", root: "نُصَيْرٌ" },
+      { id: 20, word: "نَصْرِيٌّ", meaning: "İsm-i mensûb", root: "نَصْرِيٌّ" },
+      { id: 21, word: "نَصَّارٌ", meaning: "Mübalağalı ism-i fâil", root: "نَصَّارٌ" },
+      { id: 22, word: "أَنْصَرُ", meaning: "İsm-i tafdîl", root: "أَنْصَرُ" },
+      { id: 23, word: "مَا أَنْصَرَهُ", meaning: "Fiil-i taaccüb-i evvel", root: "مَا أَنْصَرَهُ" },
+      { id: 24, word: "أَنْصِرْ بِهِ", meaning: "Fiil-i taaccüb-i sânî", root: "أَنْصِرْ بِهِ" }
     ];
 
-    // 2. KELİME LİSTESİ: ZAMİR TABLOSU (14 Zamir - Munfasıl Şahıs Zamirleri)
-    const ZAMIR_14_WORDS = [
-      // 1. SATIR: Gâib (3 Zamir - Sağdan Sola: Hüve, Hümâ, Hüm)
-      { id: 1, word: "هُوَ", meaning: "Gâib (Tekil Erkek / O)", row: 1 },
-      { id: 2, word: "هُمَا", meaning: "Gâib (İkil Erkek / O ikisi)", row: 1 },
-      { id: 3, word: "هُمْ", meaning: "Gâib (Çoğul Erkek / Onlar)", row: 1 },
-
-      // 2. SATIR: Gâibe (3 Zamir - Sağdan Sola: Hiye, Hümâ, Hünne)
-      { id: 4, word: "هِيَ", meaning: "Gâibe (Tekil Kadın / O)", row: 2 },
-      { id: 5, word: "هُمَا", meaning: "Gâibe (İkil Kadın / O ikisi)", row: 2 },
-      { id: 6, word: "هُنَّ", meaning: "Gâibe (Çoğul Kadın / Onlar)", row: 2 },
-
-      // 3. SATIR: Muhâtap (3 Zamir - Sağdan Sola: Ente, Entümâ, Entüm)
-      { id: 7, word: "أَنْتَ", meaning: "Muhâtap (Tekil Erkek / Sen)", row: 3 },
-      { id: 8, word: "أَنْتُمَا", meaning: "Muhâtap (İkil Erkek / Siz ikiniz)", row: 3 },
-      { id: 9, word: "أَنْتُمْ", meaning: "Muhâtap (Çoğul Erkek / Sizler)", row: 3 },
-
-      // 4. SATIR: Muhâtaba (3 Zamir - Sağdan Sola: Enti, Entümâ, Entünne)
-      { id: 10, word: "أَنْتِ", meaning: "Muhâtaba (Tekil Kadın / Sen)", row: 4 },
-      { id: 11, word: "أَنْتُمَا", meaning: "Muhâtaba (İkil Kadın / Siz ikiniz)", row: 4 },
-      { id: 12, word: "أَنْتُنَّ", meaning: "Muhâtaba (Çoğul Kadın / Sizler)", row: 4 },
-
-      // 5. SATIR: Mütekellim (Sonda 2 Zamir: Ben tekil, Biz ikil ve çoğul)
-      { id: 13, word: "أَنَا", meaning: "Mütekellim (Tekil / Ben)", row: 5 },
-      { id: 14, word: "نَحْنُ", meaning: "Mütekellim (İkil ve Çoğul / Biz)", row: 5 }
+    // B) 14 ŞAHIS ZAMİRİ ANLAMLARI VE KONUMLARI
+    // 1..3: Gâib (Eril), 4..6: Gâibe (Dişil), 7..9: Muhatap (Eril), 10..12: Muhataba (Dişil), 13..14: Mütekellim
+    const PRONOUN_MEANINGS = [
+      "O (erkek)",              // 1. Gaib Tekil
+      "O ikisi (erkek)",        // 2. Gaib İkil
+      "Onlar (erkek)",          // 3. Gaib Çoğul
+      "O (kadın)",              // 4. Gaibe Tekil
+      "O ikisi (kadın)",        // 5. Gaibe İkil
+      "Onlar (kadın)",          // 6. Gaibe Çoğul
+      "Sen (erkek)",            // 7. Muhatap Tekil
+      "Siz ikiniz (erkek)",     // 8. Muhatap İkil
+      "Siz (erkek)",            // 9. Muhatap Çoğul
+      "Sen (kadın)",            // 10. Muhataba Tekil
+      "Siz ikiniz (kadın)",     // 11. Muhataba İkil
+      "Siz (kadın)",            // 12. Muhataba Çoğul
+      "Ben",                    // 13. Mütekellim Tekil
+      "Biz"                     // 14. Mütekellim Çoğul/İkil
     ];
 
-    // 3. SES SENTEZLEYİCİSİ (Web Audio API - %100 Çevrimdışı)
+    // C) 24 SÎGANIN HER BİRİNİN 14 ŞAHSA GÖRE ÇEKİMLERİ (Emsile-i Muttaride)
+    // Asla okunuş yazılmaz!
+    const SIGA_CONJUGATIONS = {
+      // 1. MÂZİ FİİL (Kullanıcının gönderdiği fotoğraftaki tam tablo)
+      1: [
+        "نَصَرَ", "نَصَرَا", "نَصَرُوا",
+        "نَصَرَتْ", "نَصَرَتَا", "نَصَرْنَ",
+        "نَصَرْتَ", "نَصَرْتُمَا", "نَصَرْتُمْ",
+        "نَصَرْتِ", "نَصَرْتُمَا", "نَصَرْتُنَّ",
+        "نَصَرْتُ", "نَصَرْنَا"
+      ],
+
+      // 2. MÜZÂRİ' FİİL
+      2: [
+        "يَنْصُرُ", "يَنْصُرَانِ", "يَنْصُرُونَ",
+        "تَنْصُرُ", "تَنْصُرَانِ", "يَنْصُرْنَ",
+        "تَنْصُرُ", "تَنْصُرَانِ", "تَنْصُرُونَ",
+        "تَنْصُرِينَ", "تَنْصُرَانِ", "تَنْصُرْنَ",
+        "أَنْصُرُ", "نَنْصُرُ"
+      ],
+
+      // 3. MASTAR (Mastar formları ve şahıs ilişkileri)
+      3: [
+        "نَصْرُهُ", "نَصْرُهُمَا", "نَصْرُهُمْ",
+        "نَصْرُهَا", "نَصْرُهُمَا", "نَصْرُهُنَّ",
+        "نَصْرُكَ", "نَصْرُكُمَا", "نَصْرُكُمْ",
+        "نَصْرُكِ", "نَصْرُكُمَا", "نَصْرُكُنَّ",
+        "نَصْرِي", "نَصْرُنَا"
+      ],
+
+      // 4. İSM-İ FÂİL
+      4: [
+        "نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ",
+        "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ",
+        "نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ",
+        "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ",
+        "أَنَا نَاصِرٌ", "نَحْنُ نَاصِرُونَ"
+      ],
+
+      // 5. İSM-İ MEF'ÛL
+      5: [
+        "مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ",
+        "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ",
+        "مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ",
+        "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ",
+        "أَنَا مَنْصُورٌ", "نَحْنُ مَنْصُورُونَ"
+      ],
+
+      // 6. CAHD-I MUTLAK (لَمْ يَنْصُرْ)
+      6: [
+        "لَمْ يَنْصُرْ", "لَمْ يَنْصُرَا", "لَمْ يَنْصُرُوا",
+        "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ يَنْصُرْنَ",
+        "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرُوا",
+        "لَمْ تَنْصُرِي", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرْنَ",
+        "لَمْ أَنْصُرْ", "لَمْ نَنْصُرْ"
+      ],
+
+      // 7. CAHD-I MÜSTAĞRAK (لَمَّا يَنْصُرْ)
+      7: [
+        "لَمَّا يَنْصُرْ", "لَمَّا يَنْصُرَا", "لَمَّا يَنْصُرُوا",
+        "لَمَّا تَنْصُرْ", "لَمَّا تَنْصُرَا", "لَمَّا يَنْصُرْنَ",
+        "لَمَّا تَنْصُرْ", "لَمَّا تَنْصُرَا", "لَمَّا تَنْصُرُوا",
+        "لَمَّا تَنْصُرِي", "لَمَّا تَنْصُرَا", "لَمَّا تَنْصُرْنَ",
+        "لَمَّا أَنْصُرْ", "لَمَّا نَنْصُرْ"
+      ],
+
+      // 8. NEFY-İ HÂL (مَا يَنْصُرُ)
+      8: [
+        "مَا يَنْصُرُ", "مَا يَنْصُرَانِ", "مَا يَنْصُرُونَ",
+        "مَا تَنْصُرُ", "مَا تَنْصُرَانِ", "مَا يَنْصُرْنَ",
+        "مَا تَنْصُرُ", "مَا تَنْصُرَانِ", "مَا تَنْصُرُونَ",
+        "مَا تَنْصُرِينَ", "مَا تَنْصُرَانِ", "مَا تَنْصُرْنَ",
+        "مَا أَنْصُرُ", "مَا نَنْصُرُ"
+      ],
+
+      // 9. NEFY-İ İSTİKBÂL (لَا يَنْصُرُ)
+      9: [
+        "لَا يَنْصُرُ", "لَا يَنْصُرَانِ", "لَا يَنْصُرُونَ",
+        "لَا تَنْصُرُ", "لَا تَنْصُرَانِ", "لَا يَنْصُرْنَ",
+        "لَا تَنْصُرُ", "لَا تَنْصُرَانِ", "لَا تَنْصُرُونَ",
+        "لَا تَنْصُرِينَ", "لَا تَنْصُرَانِ", "لَا تَنْصُرْنَ",
+        "لَا أَنْصُرُ", "لَا نَنْصُرُ"
+      ],
+
+      // 10. TE'KÎD-İ NEFY-İ İSTİKBÂL (لَنْ يَنْصَرَ)
+      10: [
+        "لَنْ يَنْصَرَ", "لَنْ يَنْصَرَا", "لَنْ يَنْصَرُوا",
+        "لَنْ تَنْصَرَ", "لَنْ تَنْصَرَا", "لَنْ يَنْصَرْنَ",
+        "لَنْ تَنْصَرَ", "لَنْ تَنْصَرَا", "لَنْ تَنْصَرُوا",
+        "لَنْ تَنْصَرِي", "لَنْ تَنْصَرَا", "لَنْ تَنْصَرْنَ",
+        "لَنْ أَنْصَرَ", "لَنْ نَنْصَرَ"
+      ],
+
+      // 11. EMR-İ GÂİB (لِيَنْصُرْ)
+      11: [
+        "لِيَنْصُرْ", "لِيَنْصُرَا", "لِيَنْصُرُوا",
+        "لِتَنْصُرْ", "لِتَنْصُرَا", "لِيَنْصُرْنَ",
+        "لِتَنْصُرْ", "لِتَنْصُرَا", "لِتَنْصُرُوا",
+        "لِتَنْصُرِي", "لِتَنْصُرَا", "لِتَنْصُرْنَ",
+        "لِأَنْصُرْ", "لِنَنْصُرْ"
+      ],
+
+      // 12. NEHY-İ GÂİB (لَا يَنْصُرْ)
+      12: [
+        "لَا يَنْصُرْ", "لَا يَنْصُرَا", "لَا يَنْصُرُوا",
+        "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا يَنْصُرْنَ",
+        "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا تَنْصُرُوا",
+        "لَا تَنْصُرِي", "لَا تَنْصُرَا", "لَا تَنْصُرْنَ",
+        "لَا أَنْصُرْ", "لَا نَنْصُرْ"
+      ],
+
+      // 13. EMR-İ HÂZIR (أُنْصُرْ)
+      13: [
+        "لِيَنْصُرْ", "لِيَنْصُرَا", "لِيَنْصُرُوا",
+        "لِتَنْصُرْ", "لِتَنْصُرَا", "لِيَنْصُرْنَ",
+        "أُنْصُرْ", "أُنْصُرَا", "أُنْصُرُوا",
+        "أُنْصُرِي", "أُنْصُرَا", "أُنْصُرْنَ",
+        "أَنَا نَاصِرٌ", "نَحْنُ نَاصِرُونَ"
+      ],
+
+      // 14. NEHY-İ HÂZIR (لَا تَنْصُرْ)
+      14: [
+        "لَا يَنْصُرْ", "لَا يَنْصُرَا", "لَا يَنْصُرُوا",
+        "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا يَنْصُرْنَ",
+        "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا تَنْصُرُوا",
+        "لَا تَنْصُرِي", "لَا تَنْصُرَا", "لَا تَنْصُرْنَ",
+        "لَا أَنْصُرْ", "لَا نَنْصُرْ"
+      ],
+
+      // 15. İSM-İ ZAMAN / MEKÂN / MASDAR-I MİMİ (مَنْصَرٌ)
+      15: [
+        "مَنْصَرُهُ", "مَنْصَرُهُمَا", "مَنْصَرُهُمْ",
+        "مَنْصَرُهَا", "مَنْصَرُهُمَا", "مَنْصَرُهُنَّ",
+        "مَنْصَرُكَ", "مَنْصَرُكُمَا", "مَنْصَرُكُمْ",
+        "مَنْصَرُكِ", "مَنْصَرُكُمَا", "مَنْصَرُكُنَّ",
+        "مَنْصَرِي", "مَنْصَرُنَا"
+      ],
+
+      // 16. İSM-İ ÂLET (مِنْصَرٌ)
+      16: [
+        "مِنْصَرُهُ", "مِنْصَرُهُمَا", "مِنْصَرُهُمْ",
+        "مِنْصَرُهَا", "مِنْصَرُهُمَا", "مِنْصَرُهُنَّ",
+        "مِنْصَرُكَ", "مِنْصَرُكُمَا", "مِنْصَرُكُمْ",
+        "مِنْصَرُكِ", "مِنْصَرُكُمَا", "مِنْصَرُكُنَّ",
+        "مِنْصَرِي", "مِنْصَرُنَا"
+      ],
+
+      // 17. MASDAR-I BİNÂ-İ MERRE (نَصْرَةً)
+      17: [
+        "نَصْرَتُهُ", "نَصْرَتُهُمَا", "نَصْرَتُهُمْ",
+        "نَصْرَتُهَا", "نَصْرَتُهُمَا", "نَصْرَتُهُنَّ",
+        "نَصْرَتُكَ", "نَصْرَتُكُمَا", "نَصْرَتُكُمْ",
+        "نَصْرَتُكِ", "نَصْرَتُكُمَا", "نَصْرَتُكُنَّ",
+        "نَصْرَتِي", "نَصْرَتُنَا"
+      ],
+
+      // 18. MASDAR-I BİNÂ-İ NEV' (نِصْرَةً)
+      18: [
+        "نِصْرَتُهُ", "نِصْرَتُهُمَا", "نِصْرَتُهُمْ",
+        "نِصْرَتُهَا", "نِصْرَتُهُمَا", "نِصْرَتُهُنَّ",
+        "نِصْرَتُكَ", "نِصْرَتُكُمَا", "نِصْرَتُكُمْ",
+        "نِصْرَتُكِ", "نِصْرَتُكُمَا", "نِصْرَتُكُنَّ",
+        "نِصْرَتِي", "نِصْرَتُنَا"
+      ],
+
+      // 19. İSM-İ TASGÎR (نُصَيْرٌ)
+      19: [
+        "نُصَيْرٌ", "نُصَيْرَانِ", "نُصَيْرُونَ",
+        "نُصَيْرَةٌ", "نُصَيْرَتَانِ", "نُصَيْرَاتٌ",
+        "نُصَيْرٌ", "نُصَيْرَانِ", "نُصَيْرُونَ",
+        "نُصَيْرَةٌ", "نُصَيْرَتَانِ", "نُصَيْرَاتٌ",
+        "أَنَا نُصَيْرٌ", "نَحْنُ نُصَيْرُونَ"
+      ],
+
+      // 20. İSM-İ MENSÛB (نَصْرِيٌّ)
+      20: [
+        "نَصْرِيٌّ", "نَصْرِيَّانِ", "نَصْرِيُّونَ",
+        "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ",
+        "نَصْرِيٌّ", "نَصْرِيَّانِ", "نَصْرِيُّونَ",
+        "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ",
+        "أَنَا نَصْرِيٌّ", "نَحْنُ نَصْرِيُّونَ"
+      ],
+
+      // 21. MÜBALAĞALI İSM-İ FÂİL (نَصَّارٌ)
+      21: [
+        "نَصَّارٌ", "نَصَّارَانِ", "نَصَّارُونَ",
+        "نَصَّارَةٌ", "نَصَّارَتَانِ", "نَصَّارَاتٌ",
+        "نَصَّارٌ", "نَصَّارَانِ", "نَصَّارُونَ",
+        "نَصَّارَةٌ", "نَصَّارَتَانِ", "نَصَّارَاتٌ",
+        "أَنَا نَصَّارٌ", "نَحْنُ نَصَّارُونَ"
+      ],
+
+      // 22. İSM-İ TAFDÎL (أَنْصَرُ)
+      22: [
+        "أَنْصَرُ", "أَنْصَرَانِ", "أَنْصَرُونَ",
+        "نُصْرَى", "نُصْرَيَانِ", "نُصْرَيَاتٌ",
+        "أَنْصَرُ", "أَنْصَرَانِ", "أَنْصَرُونَ",
+        "نُصْرَى", "نُصْرَيَانِ", "نُصْرَيَاتٌ",
+        "أَنَا أَنْصَرُ", "نَحْنُ أَنْصَرُونَ"
+      ],
+
+      // 23. FİİL-İ TAACCÜB-İ EVVEL (مَا أَنْصَرَهُ)
+      23: [
+        "مَا أَنْصَرَهُ", "مَا أَنْصَرَهُمَا", "مَا أَنْصَرَهُمْ",
+        "مَا أَنْصَرَهَا", "مَا أَنْصَرَهُمَا", "مَا أَنْصَرَهُنَّ",
+        "مَا أَنْصَرَكَ", "مَا أَنْصَرَكُمَا", "مَا أَنْصَرَكُمْ",
+        "مَا أَنْصَرَكِ", "مَا أَنْصَرَكُمَا", "مَا أَنْصَرَكُنَّ",
+        "مَا أَنْصَرَنِي", "مَا أَنْصَرَنَا"
+      ],
+
+      // 24. FİİL-İ TAACCÜB-İ SÂNÎ (أَنْصِرْ بِهِ)
+      24: [
+        "أَنْصِرْ بِهِ", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِمْ",
+        "أَنْصِرْ بِهَا", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِنَّ",
+        "أَنْصِرْ بِكَ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُمْ",
+        "أَنْصِرْ بِكِ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُنَّ",
+        "أَنْصِرْ بِي", "أَنْصِرْ بِنَا"
+      ]
+    };
+
+    // =========================================================================
+    // 2. SES SENTEZLEYİCİSİ (Web Audio API - %100 Çevrimdışı)
+    // =========================================================================
     let isSoundMuted = false;
     let audioCtx = null;
 
@@ -1093,117 +1526,156 @@
       showToast(isSoundMuted ? "Ses kapatıldı" : "Ses açıldı");
     }
 
-    // 4. OYUN YÖNETİCİSİ VE MOD YÖNETİMİ
-    let currentMode = 'emsile'; // 'emsile' | 'zamir'
-    let zamirLayout = 'ben_right_biz_left'; // 'ben_right_biz_left' (Ben Sağda, Biz Sol+Orta) | 'ben_left_biz_right' (Ben Solda, Biz Sağ+Orta)
-    let emsileWords = EMSILE_24_WORDS.slice();
-    let zamirWords = ZAMIR_14_WORDS.slice();
-    let words = emsileWords;
+    // =========================================================================
+    // 3. OYUN YÖNETİCİSİ VE EKRAN DURUMLARI
+    // =========================================================================
+    let currentGameMode = 'emsile24'; // 'emsile24' | 'sigaPronouns'
+    let selectedSigaId = 1;          // Zamir çekimi yapılan sîga ID'si (1..24)
+    let currentQuizWords = [];       // O anki quizin kelime listesi
     let shuffledIndices = [];
     let currentOrderIndex = 0;
     let currentWord = null;
     let isAnswering = false;
     let lastMissedWordId = null;
 
-    function loadCustomWords() {
-      try {
-        localStorage.removeItem("sinirlayici_custom_lang_words_v1");
-        localStorage.removeItem("sinirlayici_custom_lang_words_v2");
-        localStorage.removeItem("sinirlayici_custom_lang_words_v3");
+    // A) NAVİGASYON FONKSİYONLARI
+    function showScreen(screenId) {
+      document.getElementById("mainMenuView").style.display = "none";
+      document.getElementById("sigaSelectionView").style.display = "none";
+      document.getElementById("quizSection").style.display = "none";
+      document.getElementById("tableSection").style.display = "none";
 
-        // Emsile Kelimeleri
-        const rawEmsile = localStorage.getItem("sinirlayici_custom_lang_words_v4");
-        if (rawEmsile) {
-          const parsed = JSON.parse(rawEmsile);
-          if (Array.isArray(parsed) && parsed.length === 24) {
-            emsileWords = parsed;
-          }
-        }
+      const targetEl = document.getElementById(screenId);
+      if (targetEl) targetEl.style.display = "flex";
 
-        // Zamir Kelimeleri
-        const rawZamir = localStorage.getItem("sinirlayici_custom_zamir_words_v1");
-        if (rawZamir) {
-          const parsedZamir = JSON.parse(rawZamir);
-          if (Array.isArray(parsedZamir) && parsedZamir.length === 14) {
-            zamirWords = parsedZamir;
-          }
-        }
-
-        const savedLayout = localStorage.getItem("sinirlayici_zamir_layout_pref");
-        if (savedLayout) zamirLayout = savedLayout;
-      } catch(e) {}
-      words = (currentMode === 'emsile' ? emsileWords : zamirWords);
-    }
-
-    function setGameMode(mode) {
-      if (currentMode === mode) return;
-      currentMode = mode;
-
-      const tabEmsile = document.getElementById("btnModeEmsile");
-      const tabZamir = document.getElementById("btnModeZamir");
-      const brandIcon = document.getElementById("headerBrandIcon");
+      // Header butonlarını ekrana göre güncelle
+      const btnHome = document.getElementById("btnHeaderHome");
+      const btnMenu = document.getElementById("btnHeaderMenu");
+      const btnEdit = document.getElementById("btnHeaderEdit");
+      const btnTable = document.getElementById("btnHeaderTable");
       const mainTitle = document.getElementById("headerMainTitle");
       const subTitle = document.getElementById("headerSubTitle");
-      const bannerIcon = document.getElementById("tableBannerIcon");
-      const bannerTitle = document.getElementById("tableBannerTitle");
-      const bannerDesc = document.getElementById("tableBannerDesc");
-      const zamirBar = document.getElementById("zamirLayoutBar");
 
-      if (mode === 'emsile') {
-        if (tabEmsile) tabEmsile.classList.add("active");
-        if (tabZamir) tabZamir.classList.remove("active");
-        if (brandIcon) brandIcon.textContent = "📖";
-        if (mainTitle) mainTitle.textContent = "Emsile-i Muhtelife";
-        if (subTitle) subTitle.textContent = "24 Sîga Kelime Eşleştirme";
-        if (bannerIcon) bannerIcon.textContent = "📚";
-        if (bannerTitle) bannerTitle.textContent = "24 Sîga Tablosu (Sağdan Sola)";
-        if (bannerDesc) bannerDesc.textContent = "3. Satırdaki 4 kelime sağa yapışıktır (11-14).";
-        if (zamirBar) zamirBar.style.display = "none";
-        words = emsileWords;
-      } else {
-        if (tabEmsile) tabEmsile.classList.remove("active");
-        if (tabZamir) tabZamir.classList.add("active");
-        if (brandIcon) brandIcon.textContent = "👤";
-        if (mainTitle) mainTitle.textContent = "Zamir Tablosu";
-        if (subTitle) subTitle.textContent = "14 Şahıs Zamiri Eşleştirme";
-        if (bannerIcon) bannerIcon.textContent = "👤";
-        if (bannerTitle) bannerTitle.textContent = "14 Zamir Tablosu (Sağdan Sola)";
-        if (bannerDesc) bannerDesc.textContent = "Son satırda 'Ben' tek sütun, 'Biz' iki sütunu (orta ve sol) kaplar.";
-        if (zamirBar) zamirBar.style.display = "flex";
-        words = zamirWords;
-        updateZamirToggleButtonText();
+      if (screenId === "mainMenuView") {
+        btnHome.style.display = "inline-flex";
+        btnMenu.style.display = "none";
+        btnEdit.style.display = "none";
+        btnTable.style.display = "none";
+        mainTitle.textContent = "Arapça Emsile ve Çekimler";
+        subTitle.textContent = "Öğrenme ve Eşleştirme Merkezi";
+      } else if (screenId === "sigaSelectionView") {
+        btnHome.style.display = "inline-flex";
+        btnMenu.style.display = "inline-flex";
+        btnEdit.style.display = "none";
+        btnTable.style.display = "none";
+        mainTitle.textContent = "Zamir Çekimi Seçimi";
+        subTitle.textContent = "24 Sîgadan Birini Seçin";
+      } else if (screenId === "quizSection" || screenId === "tableSection") {
+        btnHome.style.display = "inline-flex";
+        btnMenu.style.display = "inline-flex";
+        btnEdit.style.display = "inline-flex";
+        btnTable.style.display = "inline-flex";
+
+        if (currentGameMode === 'emsile24') {
+          mainTitle.textContent = "24 Sîga Oyunu";
+          subTitle.textContent = "Emsile-i Muhtelife Başlıkları";
+        } else {
+          const sigaObj = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || EMSILE_24_WORDS[0];
+          mainTitle.textContent = `${sigaObj.meaning} Çekimi`;
+          subTitle.textContent = `14 Zamir Çekimi (${sigaObj.word})`;
+        }
       }
-
-      initShuffledIndices();
-      renderQuestion();
-      showToast(mode === 'emsile' ? "📖 Emsile Modu Açıldı" : "👤 Zamir Tablosu Modu Açıldı");
     }
 
-    function toggleZamirLayout() {
-      zamirLayout = (zamirLayout === 'ben_right_biz_left' ? 'ben_left_biz_right' : 'ben_right_biz_left');
+    // Uygulama Ana Sayfasına Dönüş (WebView veya Standalone)
+    function returnToAppHome() {
       try {
-        localStorage.setItem("sinirlayici_zamir_layout_pref", zamirLayout);
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'closeGame' }, '*');
+        }
+        if (typeof window.closeLanguageGameModal === 'function') {
+          window.closeLanguageGameModal();
+          return;
+        }
+        if (window.AndroidBridge && typeof window.AndroidBridge.closeGame === 'function') {
+          window.AndroidBridge.closeGame();
+          return;
+        }
       } catch(e) {}
-      updateZamirToggleButtonText();
-      render24Cards(null);
-      showToast(zamirLayout === 'ben_right_biz_left' 
-        ? "Düzen: Ben Sağda | Biz Sol ve Ortayı Kaplar" 
-        : "Düzen: Ben Solda Yapışık | Biz Sağ ve Ortayı Kaplar");
+      showToast("🏠 Uygulama ana sayfasına dönülüyor...");
+      showScreen("mainMenuView");
     }
 
-    function updateZamirToggleButtonText() {
-      const btn = document.getElementById("btnToggleZamirLayout");
-      if (!btn) return;
-      if (zamirLayout === 'ben_right_biz_left') {
-        btn.textContent = "🔄 Son Satır: Ben (Sağda) | Biz (Sol + Orta Kaplar)";
-      } else {
-        btn.textContent = "🔄 Son Satır: Ben (Solda Yapışık) | Biz (Sağ + Orta)";
+    // Doğrudan Oyun Ana Menüsüne Dönüş
+    function returnToMainMenu() {
+      showScreen("mainMenuView");
+    }
+
+    // =========================================================================
+    // 4. MOD 1: 24 SÎGA OYUNU (EMSILE-I MUHTELIFE)
+    // =========================================================================
+    function startEmsileGame() {
+      currentGameMode = 'emsile24';
+      currentQuizWords = EMSILE_24_WORDS.slice();
+      initShuffledIndices();
+      showScreen("quizSection");
+      renderQuestion();
+    }
+
+    // =========================================================================
+    // 5. MOD 2: ZAMİRLERE GÖRE ÇEKİM MENÜSÜ VE OYUNU
+    // =========================================================================
+    function openSigaSelectionMenu() {
+      renderSigaSelectionGrid();
+      showScreen("sigaSelectionView");
+    }
+
+    function renderSigaSelectionGrid() {
+      const grid = document.getElementById("sigaSelectionGrid");
+      if (!grid) return;
+      grid.innerHTML = "";
+
+      EMSILE_24_WORDS.forEach(siga => {
+        const card = document.createElement("div");
+        card.className = "siga-item-card";
+        card.innerHTML = `
+          <span class="siga-badge-num">${siga.id}</span>
+          <div class="siga-item-arabic">${siga.word}</div>
+          <div class="siga-item-title">${escapeHtml(siga.meaning)}</div>
+        `;
+        card.addEventListener("click", () => startSigaPronounGame(siga.id));
+        grid.appendChild(card);
+      });
+    }
+
+    function startSigaPronounGame(sigaId) {
+      currentGameMode = 'sigaPronouns';
+      selectedSigaId = sigaId;
+
+      const forms = SIGA_CONJUGATIONS[sigaId] || SIGA_CONJUGATIONS[1];
+      const pronounList = [];
+
+      for (let i = 0; i < 14; i++) {
+        pronounList.push({
+          id: i + 1,
+          word: forms[i] || forms[0],
+          meaning: PRONOUN_MEANINGS[i],
+          row: (i < 3 ? 1 : i < 6 ? 2 : i < 9 ? 3 : i < 12 ? 4 : 5)
+        });
       }
+
+      currentQuizWords = pronounList;
+      initShuffledIndices();
+      showScreen("quizSection");
+      renderQuestion();
     }
 
+    // =========================================================================
+    // 6. QUIZ SORU VE CEVAP MANTIĞI
+    // =========================================================================
     function initShuffledIndices() {
       shuffledIndices = [];
-      for (let i = 0; i < words.length; i++) shuffledIndices.push(i);
+      for (let i = 0; i < currentQuizWords.length; i++) shuffledIndices.push(i);
       for (let i = shuffledIndices.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffledIndices[i], shuffledIndices[j]] = [shuffledIndices[j], shuffledIndices[i]];
@@ -1216,19 +1688,36 @@
       isAnswering = false;
 
       const targetIdx = shuffledIndices[currentOrderIndex];
-      currentWord = words[targetIdx];
+      currentWord = currentQuizWords[targetIdx];
 
-      // Başlık ve Sayaç
+      // Başlık, Soru ve Sayaç
       const targetWordEl = document.getElementById("targetWordText");
       const trackerEl = document.getElementById("quizTrackerText");
+      const instructionEl = document.getElementById("targetWordInstruction");
+      const badgeTag = document.getElementById("targetBadgeTag");
+
       if (targetWordEl) targetWordEl.textContent = currentWord.word;
-      if (trackerEl) trackerEl.textContent = `Soru ${currentOrderIndex + 1} / ${words.length}`;
+      if (trackerEl) trackerEl.textContent = `Soru ${currentOrderIndex + 1} / ${currentQuizWords.length}`;
+
+      if (currentGameMode === 'emsile24') {
+        if (badgeTag) badgeTag.textContent = "HEDEF 24 SÎGA";
+        if (instructionEl) instructionEl.textContent = "Aşağıdaki 5 seçenekten doğru sîga başlığını seçin:";
+      } else {
+        const sigaObj = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || EMSILE_24_WORDS[0];
+        if (badgeTag) badgeTag.textContent = `${sigaObj.meaning.toUpperCase()} ÇEKİMİ`;
+        if (instructionEl) instructionEl.textContent = "Bu çekim hangi şahsa (zamire) aittir? Doğru şıkkı seçin:";
+      }
 
       // 5 Seçenek Oluştur (1 Doğru, 4 Çeldirici)
-      const distractors = words
-        .filter(w => w.id !== currentWord.id)
-        .map(w => w.meaning);
+      // Çeldiricileri havuzdan seç
+      let optionPool = [];
+      if (currentGameMode === 'emsile24') {
+        optionPool = EMSILE_24_WORDS.map(w => w.meaning);
+      } else {
+        optionPool = PRONOUN_MEANINGS.slice();
+      }
 
+      const distractors = optionPool.filter(m => m !== currentWord.meaning);
       for (let i = distractors.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [distractors[i], distractors[j]] = [distractors[j], distractors[i]];
@@ -1271,18 +1760,18 @@
         playSound('correct');
         if (navigator.vibrate) navigator.vibrate(35);
 
-        // İstatistik tutulmaz; doğrudan bir sonraki soruya geçilir
+        // Doğru olunca hemen bir sonraki soruya geçer
         setTimeout(() => {
-          currentOrderIndex = (currentOrderIndex + 1) % words.length;
+          currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
           renderQuestion();
-        }, 400);
+        }, 380);
       } else {
         // YANLIŞ CEVAP
         clickedBtn.classList.add("wrong-choice");
         playSound('wrong');
         if (navigator.vibrate) navigator.vibrate([60, 40, 60]);
 
-        // Doğru şıkkı yeşille göster
+        // Doğru olan şıkkı yeşil renkle göster
         const grid = document.getElementById("optionsGrid");
         if (grid) {
           grid.querySelectorAll(".option-btn").forEach(btn => {
@@ -1295,23 +1784,24 @@
 
         lastMissedWordId = currentWord.id;
 
-        // Kullanıcı İsteği: Yanlış seçilirse 3D tablo açılır
+        // Kullanıcı İsteği: Yanlış olunca ilgili tablonun açılması
         setTimeout(() => {
           showTableSection(lastMissedWordId);
         }, 650);
       }
     }
 
+    // =========================================================================
+    // 7. 3D FLASHCARD TABLOLARI
+    // =========================================================================
     function showTableSection(highlightId = null) {
-      document.getElementById("quizSection").style.display = "none";
-      document.getElementById("tableSection").style.display = "flex";
-      render24Cards(highlightId);
+      showScreen("tableSection");
+      renderActiveTable(highlightId);
     }
 
     function continueQuiz() {
-      document.getElementById("tableSection").style.display = "none";
-      document.getElementById("quizSection").style.display = "flex";
-      currentOrderIndex = (currentOrderIndex + 1) % words.length;
+      showScreen("quizSection");
+      currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
       renderQuestion();
     }
 
@@ -1324,16 +1814,20 @@
       }
     }
 
-    // 3D FLASHCARD TABLOSU: SAĞDAN SOLA
-    // Emsile Modu: 5 satır (5, 5, 4, 5, 5) -> 3. Satırdaki 4 kelime SAĞA YAPIŞIK!
-    // Zamir Modu: 5 satır (3, 3, 3, 3, 2) -> Son satırda Ben 1 sütun, Biz 2 sütun (sol + orta) kaplar!
-    function render24Cards(highlightId = null) {
+    function renderActiveTable(highlightId = null) {
       const wrapper = document.getElementById("emsileRowsWrapper");
+      const bannerTitle = document.getElementById("tableBannerTitle");
+      const bannerDesc = document.getElementById("tableBannerDesc");
+      const bannerIcon = document.getElementById("tableBannerIcon");
       if (!wrapper) return;
       wrapper.innerHTML = "";
 
-      if (currentMode === 'emsile') {
-        // EMSİLE-İ MUHTELİFE (24 SÎGA: 5, 5, 4, 5, 5)
+      if (currentGameMode === 'emsile24') {
+        // 24 SÎGA TABLOSU (5, 5, 4, 5, 5)
+        if (bannerIcon) bannerIcon.textContent = "📖";
+        if (bannerTitle) bannerTitle.textContent = "24 Sîga Tablosu (Sağdan Sola)";
+        if (bannerDesc) bannerDesc.textContent = "3. Satırdaki 4 kelime sağa yapışıktır (11-14).";
+
         const rowDefinitions = [
           { rowNum: 1, count: 5, slice: [0, 5], className: "cols-5" },
           { rowNum: 2, count: 5, slice: [5, 10], className: "cols-5" },
@@ -1343,31 +1837,35 @@
         ];
 
         rowDefinitions.forEach(def => {
-          const rowItems = words.slice(def.slice[0], def.slice[1]);
+          const rowItems = currentQuizWords.slice(def.slice[0], def.slice[1]);
           const rowDiv = document.createElement("div");
           rowDiv.className = `emsile-row ${def.className}`;
           rowDiv.setAttribute("data-row", def.rowNum);
 
-          // direction: rtl sayesinde ilk eleman EN SAĞDA yer alır.
-          // 4 elemanlı satırda 5. sol hücre boş kalır -> Sağa yapışık olur!
           rowItems.forEach(item => {
             rowDiv.appendChild(createCardElement(item, highlightId));
           });
 
           wrapper.appendChild(rowDiv);
         });
+
       } else {
-        // ZAMİR TABLOSU (14 ZAMİR: 3, 3, 3, 3, 2)
+        // 14 ŞAHIS ZAMİR TABLOSU (3, 3, 3, 3, 2)
+        const sigaObj = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || EMSILE_24_WORDS[0];
+        if (bannerIcon) bannerIcon.textContent = "👤";
+        if (bannerTitle) bannerTitle.textContent = `${sigaObj.meaning} - 14 Zamir Tablosu (Sağdan Sola)`;
+        if (bannerDesc) bannerDesc.textContent = "Son satırda 'Ben' tekil sağda/solda yapışık, 'Biz' sol ve ortayı kaplar.";
+
         const zamirRows = [
-          { rowNum: 1, title: "Gâib (3. Şahıs Müzekker)", slice: [0, 3] },
-          { rowNum: 2, title: "Gâibe (3. Şahıs Müennes)", slice: [3, 6] },
-          { rowNum: 3, title: "Muhâtap (2. Şahıs Müzekker)", slice: [6, 9] },
-          { rowNum: 4, title: "Muhâtaba (2. Şahıs Müennes)", slice: [9, 12] }
+          { rowNum: 1, slice: [0, 3] },
+          { rowNum: 2, slice: [3, 6] },
+          { rowNum: 3, slice: [6, 9] },
+          { rowNum: 4, slice: [9, 12] }
         ];
 
-        // İlk 4 Satır (3'er sütun)
+        // 1..4. Satırlar (3 sütun)
         zamirRows.forEach(def => {
-          const rowItems = words.slice(def.slice[0], def.slice[1]);
+          const rowItems = currentQuizWords.slice(def.slice[0], def.slice[1]);
           const rowDiv = document.createElement("div");
           rowDiv.className = "emsile-row cols-3";
           rowDiv.setAttribute("data-row", def.rowNum);
@@ -1385,23 +1883,15 @@
         row5Div.className = "emsile-row zamir-row-5";
         row5Div.setAttribute("data-row", 5);
 
-        const itemBen = words[12]; // أَنَا (Ben)
-        const itemBiz = words[13]; // نَحْنُ (Biz)
+        const itemBen = currentQuizWords[12]; // Ben
+        const itemBiz = currentQuizWords[13]; // Biz
 
-        if (zamirLayout === 'ben_right_biz_left') {
-          // Ben: Sağda (1 sütun), Biz: Orta ve Sol (2 sütun kaplar)
-          const cardBen = createCardElement(itemBen, highlightId);
-          const cardBiz = createCardElement(itemBiz, highlightId, true); // span-2
-          row5Div.appendChild(cardBen);
-          row5Div.appendChild(cardBiz);
-        } else {
-          // Ben: Solda yapışık (1 sütun), Biz: Sağ ve Orta (2 sütun kaplar)
-          const cardBiz = createCardElement(itemBiz, highlightId, true); // span-2
-          const cardBen = createCardElement(itemBen, highlightId);
-          row5Div.appendChild(cardBiz);
-          row5Div.appendChild(cardBen);
-        }
+        // Sağdan sola dizilişte Ben sağda (1 sütun), Biz sol ve ortayı kaplar (span 2)
+        const cardBen = createCardElement(itemBen, highlightId);
+        const cardBiz = createCardElement(itemBiz, highlightId, true); // span 2
 
+        row5Div.appendChild(cardBen);
+        row5Div.appendChild(cardBiz);
         wrapper.appendChild(row5Div);
       }
 
@@ -1423,13 +1913,13 @@
 
       card.innerHTML = `
         <div class="flip-card-inner">
-          <!-- Ön Yüz: Arapça Kelime (Sağdan Sola) -->
+          <!-- Ön Yüz: Saf Arapça Çekim (Okunuş ASLA yazılmaz!) -->
           <div class="flip-card-front">
             <span class="card-id-tag">${item.id}</span>
             <div class="card-word-text">${item.word}</div>
             <div class="card-flip-hint">🔄 Anlamı</div>
           </div>
-          <!-- Arka Yüz: Türkçe Karşılığı -->
+          <!-- Arka Yüz: Anlamı / Şahıs Zamiri -->
           <div class="flip-card-back">
             <div class="card-meaning-text">${escapeHtml(item.meaning)}</div>
             <span class="card-meaning-tag">ANLAMI ✓</span>
@@ -1446,20 +1936,22 @@
       return card;
     }
 
-    // 5. KELİMELERİ DÜZENLE MODALI
+    // =========================================================================
+    // 8. KELİMELERİ DÜZENLE MODALI
+    // =========================================================================
     function openEditWordsModal() {
       const container = document.getElementById("editWordsListContainer");
+      const titleEl = document.getElementById("editModalTitle");
       if (!container) return;
       container.innerHTML = "";
 
-      const titleEl = document.querySelector("#editWordsModal .modal-header h3");
       if (titleEl) {
-        titleEl.textContent = (currentMode === 'emsile')
+        titleEl.textContent = (currentGameMode === 'emsile24')
           ? "✏️ 24 Emsile Kelimesini Düzenle"
-          : "✏️ 14 Zamir Kelimesini Düzenle";
+          : "✏️ 14 Zamir Çekimini Düzenle";
       }
 
-      words.forEach((item, idx) => {
+      currentQuizWords.forEach((item, idx) => {
         const row = document.createElement("div");
         row.className = "word-edit-row";
         row.innerHTML = `
@@ -1479,37 +1971,25 @@
 
     function saveEditedWords() {
       const updated = [];
-      const defaultList = (currentMode === 'emsile' ? EMSILE_24_WORDS : ZAMIR_14_WORDS);
-
-      for (let i = 0; i < words.length; i++) {
+      for (let i = 0; i < currentQuizWords.length; i++) {
         const wInput = document.getElementById(`editWord_${i}`);
         const mInput = document.getElementById(`editMeaning_${i}`);
-        const wVal = (wInput ? wInput.value : "").trim() || defaultList[i].word;
-        const mVal = (mInput ? mInput.value : "").trim() || defaultList[i].meaning;
-        updated.push({ id: i + 1, word: wVal, meaning: mVal });
+        const wVal = (wInput ? wInput.value : "").trim() || currentQuizWords[i].word;
+        const mVal = (mInput ? mInput.value : "").trim() || currentQuizWords[i].meaning;
+        updated.push({ id: i + 1, word: wVal, meaning: mVal, row: currentQuizWords[i].row });
       }
 
-      if (currentMode === 'emsile') {
-        emsileWords = updated;
-        words = emsileWords;
-        try {
-          localStorage.setItem("sinirlayici_custom_lang_words_v4", JSON.stringify(updated));
-        } catch(e) {}
-      } else {
-        zamirWords = updated;
-        words = zamirWords;
-        try {
-          localStorage.setItem("sinirlayici_custom_zamir_words_v1", JSON.stringify(updated));
-        } catch(e) {}
-      }
+      currentQuizWords = updated;
 
       closeEditWordsModal();
       initShuffledIndices();
       renderQuestion();
-      showToast("✅ Kelimeler başarıyla kaydedildi!");
+      showToast("✅ Kelimeler başarıyla güncellendi!");
     }
 
-    // 6. YARDIMCI FONKSİYONLAR
+    // =========================================================================
+    // 9. YARDIMCI FONKSİYONLAR
+    // =========================================================================
     function escapeHtml(str) {
       if (!str) return "";
       return String(str)
@@ -1532,11 +2012,9 @@
       }, 2400);
     }
 
-    // Başlangıç
+    // Başlangıç: Oyun Ana Menüsü ile başlar
     window.addEventListener("DOMContentLoaded", () => {
-      loadCustomWords();
-      initShuffledIndices();
-      renderQuestion();
+      showScreen("mainMenuView");
     });
   </script>
 </body>
