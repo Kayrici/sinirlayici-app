@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dil Öğrenme - 24 Kelime Eşleştirme Oyunu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #090d16;
+      --bg-card: rgba(26, 34, 53, 0.7);
+      --bg-card-hover: rgba(35, 46, 70, 0.9);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --accent-primary: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.4);
+      --accent-success: #10b981;
+      --accent-danger: #ef4444;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-sub: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Ambient Background Glow */
+    .ambient-glow {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, rgba(168, 85, 247, 0.08) 45%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Header */
+    header.game-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(9, 13, 22, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(168, 85, 247, 0.25));
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.3);
+      flex-shrink: 0;
+    }
+
+    .brand-texts h1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .brand-texts p {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-header {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      color: var(--text-sub);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-header:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-header.primary {
+      background: rgba(99, 102, 241, 0.18);
+      border-color: rgba(99, 102, 241, 0.45);
+      color: #a5b4fc;
+    }
+
+    .btn-header.primary:hover {
+      background: rgba(99, 102, 241, 0.35);
+      color: #fff;
+    }
+
+    /* Main Container */
+    main.game-container {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ============================================================ */
+    /* 1. QUIZ BÖLÜMÜ                                               */
+    /* ============================================================ */
+    #quizSection {
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .quiz-tracker-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding: 0 4px;
+    }
+
+    .tracker-pill {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #818cf8;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .sound-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
+
+    /* Soru Kartı */
+    .target-word-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.75), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 22px;
+      padding: 32px 20px;
+      text-align: center;
+      margin-bottom: 22px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .target-word-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+    }
+
+    .word-badge-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #a5b4fc;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .target-word-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      margin: 4px 0 10px 0;
+      text-shadow: 0 2px 14px rgba(99, 102, 241, 0.45);
+      word-break: break-word;
+    }
+
+    .target-word-instruction {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* 5 Seçenek Butonları */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      transition: all 0.16s ease;
+      min-height: 56px;
+      position: relative;
+    }
+
+    .option-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .option-btn:active {
+      transform: scale(0.98);
+    }
+
+    .option-letter {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #a5b4fc;
+      flex-shrink: 0;
+    }
+
+    .option-text {
+      flex: 1;
+      word-break: break-word;
+    }
+
+    /* Seçenek Animasyonları */
+    .option-btn.correct-choice {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.35), rgba(5, 150, 105, 0.45)) !important;
+      border-color: #10b981 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.6) !important;
+      transform: scale(1.02);
+      animation: pulseGreen 0.35s ease;
+    }
+
+    .option-btn.wrong-choice {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.4), rgba(185, 28, 28, 0.45)) !important;
+      border-color: #ef4444 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.6) !important;
+      animation: shakeRed 0.4s ease;
+    }
+
+    @keyframes pulseGreen {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1.02); }
+    }
+
+    @keyframes shakeRed {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    /* ============================================================ */
+    /* 2. 24 KELİME 3D FLASHCARD TABLOSU                             */
+    /* ============================================================ */
+    #tableSection {
+      display: none;
+      flex-direction: column;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .table-banner {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    .table-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .table-banner-icon {
+      font-size: 2rem;
+      filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.4));
+    }
+
+    .table-banner-info h3 {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: #fbbf24;
+      margin-bottom: 2px;
+    }
+
+    .table-banner-info p {
+      font-size: 0.76rem;
+      color: #cbd5e1;
+      line-height: 1.35;
+    }
+
+    .btn-continue {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+      transition: all 0.16s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-continue:hover {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-1px);
+    }
+
+    .btn-continue:active {
+      transform: scale(0.96);
+    }
+
+    .btn-continue.bottom-full {
+      width: 100%;
+      padding: 16px;
+      font-size: 1rem;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    /* 24 Kart Grid - Responsive */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    @media (min-width: 520px) {
+      .cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+    }
+
+    /* 3D Flip Card Container */
+    .flip-card {
+      perspective: 1000px;
+      -webkit-perspective: 1000px;
+      height: 105px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      border-radius: 14px;
+    }
+
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 8px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    /* Ön Yüz */
+    .flip-card-front {
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+
+    .card-id-tag {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #94a3b8;
+      opacity: 0.8;
+    }
+
+    .card-word-text {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #ffffff;
+      word-break: break-word;
+      line-height: 1.25;
+    }
+
+    .card-flip-hint {
+      font-size: 0.64rem;
+      color: #a5b4fc;
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* Yanlış bilinen kelimeyi parlat */
+    .flip-card.missed-highlight .flip-card-front {
+      border: 2px solid #ef4444;
+      background: rgba(239, 68, 68, 0.2);
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+      animation: glowRed 1.4s infinite alternate;
+    }
+
+    @keyframes glowRed {
+      0% { box-shadow: 0 0 8px rgba(239, 68, 68, 0.5); }
+      100% { box-shadow: 0 0 24px rgba(239, 68, 68, 0.95); }
+    }
+
+    /* Arka Yüz */
+    .flip-card-back {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      border: 1px solid rgba(52, 211, 153, 0.7);
+      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.45);
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+    }
+
+    .card-meaning-text {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #ffffff;
+      word-break: break-word;
+      line-height: 1.25;
+    }
+
+    .card-meaning-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 2px 6px;
+      border-radius: 6px;
+      margin-top: 4px;
+    }
+
+    /* ============================================================ */
+    /* MODAL: KELİMELERİ DÜZENLE                                    */
+    /* ============================================================ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      max-width: 500px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+      animation: modalScale 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-header h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .btn-close-modal {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .modal-body {
+      padding: 16px 20px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-footer {
+      padding: 14px 20px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-modal-save {
+      flex: 1;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-modal-cancel {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-sub);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .word-edit-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .word-edit-num {
+      width: 28px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .word-edit-input {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .word-edit-input:focus {
+      border-color: #818cf8;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Toast */
+    #toastMessage {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 999;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    #toastMessage.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes modalScale {
+      from { opacity: 0; transform: scale(0.94); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <!-- Üst Bar -->
+  <header class="game-header">
+    <div class="header-brand">
+      <div class="brand-icon-box">🎯</div>
+      <div class="brand-texts">
+        <h1>Dil Öğrenme</h1>
+        <p>24 Kelime Eşleştirme Oyunu</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="btn-header" onclick="openEditWordsModal()" title="Kelimeleri Düzenle">
+        ✏️ Düzenle
+      </button>
+      <button type="button" class="btn-header primary" id="btnToggleTable" onclick="toggleTableDirectly()">
+        📚 24 Tablo
+      </button>
+    </div>
+  </header>
+
+  <!-- Ana Oyun Kapsayıcısı -->
+  <main class="game-container">
+
+    <!-- 1. BÖLÜM: QUIZ (5 ŞIKLI TEST) -->
+    <section id="quizSection">
+      <div class="quiz-tracker-bar">
+        <span class="tracker-pill" id="quizTrackerText">Kelime 1 / 24</span>
+        <button type="button" class="sound-toggle-btn" id="soundToggleBtn" onclick="toggleSound()" title="Ses Aç/Kapat">
+          🔊
+        </button>
+      </div>
+
+      <!-- Soru Kartı -->
+      <div class="target-word-card">
+        <span class="word-badge-tag">HEDEF KELİME</span>
+        <h2 class="target-word-title" id="targetWordText">kelime_1</h2>
+        <p class="target-word-instruction">Aşağıdaki 5 seçenekten doğru Türkçe anlamını seçin:</p>
+      </div>
+
+      <!-- 5 Şıklı Seçenekler Grid -->
+      <div class="options-grid" id="optionsGrid">
+        <!-- JS ile dinamik doldurulur -->
+      </div>
+    </section>
+
+    <!-- 2. BÖLÜM: 24 KELİME 3D FLASHCARD TABLOSU -->
+    <section id="tableSection">
+      <div class="table-banner">
+        <div class="table-banner-left">
+          <div class="table-banner-icon">📚</div>
+          <div class="table-banner-info">
+            <h3>24 Kelime Tablosu (Flashcard)</h3>
+            <p>Anlamını görmek istediğiniz karta dokunun, kart ters dönecektir.</p>
+          </div>
+        </div>
+        <button type="button" class="btn-continue" onclick="continueQuiz()">
+          <span>🎮 Devam Et ▶️</span>
+        </button>
+      </div>
+
+      <!-- 24 3D Kart Grid -->
+      <div class="cards-grid" id="cardsGrid">
+        <!-- JS ile 24 kart basılır -->
+      </div>
+
+      <button type="button" class="btn-continue bottom-full" onclick="continueQuiz()">
+        <span>🎮 Oyuna Devam Et ▶️</span>
+      </button>
+    </section>
+
+  </main>
+
+  <!-- KELİMELERİ DÜZENLE MODALI -->
+  <div class="modal-overlay" id="editWordsModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>✏️ 24 Kelime ve Anlamlarını Düzenle</h3>
+        <button type="button" class="btn-close-modal" onclick="closeEditWordsModal()">✕</button>
+      </div>
+      <div class="modal-body" id="editWordsListContainer">
+        <!-- 24 satır input buraya doldurulur -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-modal-cancel" onclick="closeEditWordsModal()">İptal</button>
+        <button type="button" class="btn-modal-save" onclick="saveEditedWords()">Kaydet ve Uygula</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastMessage"></div>
+
+  <script>
+    // 1. KELİME LİSTESİ (24 Kelime)
+    const DEFAULT_WORDS = [
+      { id: 1, word: "kelime_1", meaning: "cevap_1" },
+      { id: 2, word: "kelime_2", meaning: "cevap_2" },
+      { id: 3, word: "kelime_3", meaning: "cevap_3" },
+      { id: 4, word: "kelime_4", meaning: "cevap_4" },
+      { id: 5, word: "kelime_5", meaning: "cevap_5" },
+      { id: 6, word: "kelime_6", meaning: "cevap_6" },
+      { id: 7, word: "kelime_7", meaning: "cevap_7" },
+      { id: 8, word: "kelime_8", meaning: "cevap_8" },
+      { id: 9, word: "kelime_9", meaning: "cevap_9" },
+      { id: 10, word: "kelime_10", meaning: "cevap_10" },
+      { id: 11, word: "kelime_11", meaning: "cevap_11" },
+      { id: 12, word: "kelime_12", meaning: "cevap_12" },
+      { id: 13, word: "kelime_13", meaning: "cevap_13" },
+      { id: 14, word: "kelime_14", meaning: "cevap_14" },
+      { id: 15, word: "kelime_15", meaning: "cevap_15" },
+      { id: 16, word: "kelime_16", meaning: "cevap_16" },
+      { id: 17, word: "kelime_17", meaning: "cevap_17" },
+      { id: 18, word: "kelime_18", meaning: "cevap_18" },
+      { id: 19, word: "kelime_19", meaning: "cevap_19" },
+      { id: 20, word: "kelime_20", meaning: "cevap_20" },
+      { id: 21, word: "kelime_21", meaning: "cevap_21" },
+      { id: 22, word: "kelime_22", meaning: "cevap_22" },
+      { id: 23, word: "kelime_23", meaning: "cevap_23" },
+      { id: 24, word: "kelime_24", meaning: "cevap_24" }
+    ];
+
+    // 2. SES SENTEZLEYİCİSİ (Web Audio API - %100 Çevrimdışı)
+    let isSoundMuted = false;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtx) audioCtx = new AudioCtx();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playSound(type) {
+      if (isSoundMuted) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        if (type === 'correct') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, now); // D5
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.14); // A5
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(now + 0.2);
+        } else if (type === 'wrong') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.exponentialRampToValueAtTime(130, now + 0.24);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(now + 0.24);
+        } else if (type === 'flip') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(280, now);
+          osc.frequency.exponentialRampToValueAtTime(540, now + 0.08);
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(now + 0.08);
+        }
+      } catch(e) {}
+    }
+
+    function toggleSound() {
+      isSoundMuted = !isSoundMuted;
+      const btn = document.getElementById("soundToggleBtn");
+      if (btn) btn.textContent = isSoundMuted ? "🔇" : "🔊";
+      showToast(isSoundMuted ? "Ses kapatıldı" : "Ses açıldı");
+    }
+
+    // 3. OYUN YÖNETİCİSİ
+    let words = DEFAULT_WORDS.slice();
+    let shuffledIndices = [];
+    let currentOrderIndex = 0;
+    let currentWord = null;
+    let isAnswering = false;
+    let lastMissedWordId = null;
+
+    function loadCustomWords() {
+      try {
+        const raw = localStorage.getItem("sinirlayici_custom_lang_words");
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length === 24) {
+            words = parsed;
+          }
+        }
+      } catch(e) {}
+    }
+
+    function initShuffledIndices() {
+      shuffledIndices = [];
+      for (let i = 0; i < words.length; i++) shuffledIndices.push(i);
+      for (let i = shuffledIndices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledIndices[i], shuffledIndices[j]] = [shuffledIndices[j], shuffledIndices[i]];
+      }
+      currentOrderIndex = 0;
+    }
+
+    function renderQuestion() {
+      if (shuffledIndices.length === 0) initShuffledIndices();
+      isAnswering = false;
+
+      const targetIdx = shuffledIndices[currentOrderIndex];
+      currentWord = words[targetIdx];
+
+      // Başlık ve Sayaç
+      const targetWordEl = document.getElementById("targetWordText");
+      const trackerEl = document.getElementById("quizTrackerText");
+      if (targetWordEl) targetWordEl.textContent = currentWord.word;
+      if (trackerEl) trackerEl.textContent = `Kelime ${currentOrderIndex + 1} / ${words.length}`;
+
+      // 5 Seçenek Oluştur (1 Doğru, 4 Çeldirici)
+      const distractors = words
+        .filter(w => w.id !== currentWord.id)
+        .map(w => w.meaning);
+
+      for (let i = distractors.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [distractors[i], distractors[j]] = [distractors[j], distractors[i]];
+      }
+      const chosenDistractors = distractors.slice(0, 4);
+
+      const choices = [currentWord.meaning, ...chosenDistractors];
+      for (let i = choices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [choices[i], choices[j]] = [choices[j], choices[i]];
+      }
+
+      const grid = document.getElementById("optionsGrid");
+      if (grid) {
+        grid.innerHTML = "";
+        const letters = ["A", "B", "C", "D", "E"];
+        choices.forEach((choice, idx) => {
+          const btn = document.createElement("button");
+          btn.className = "option-btn";
+          btn.setAttribute("type", "button");
+          btn.innerHTML = `
+            <span class="option-letter">${letters[idx]}</span>
+            <span class="option-text">${escapeHtml(choice)}</span>
+          `;
+          btn.addEventListener("click", () => handleAnswer(choice, btn));
+          grid.appendChild(btn);
+        });
+      }
+    }
+
+    function handleAnswer(selectedMeaning, clickedBtn) {
+      if (isAnswering) return;
+      isAnswering = true;
+
+      const isCorrect = (selectedMeaning === currentWord.meaning);
+
+      if (isCorrect) {
+        // DOĞRU CEVAP
+        clickedBtn.classList.add("correct-choice");
+        playSound('correct');
+        if (navigator.vibrate) navigator.vibrate(35);
+
+        // İstatistik tutulmaz; doğrudan bir sonraki soruya geçilir
+        setTimeout(() => {
+          currentOrderIndex = (currentOrderIndex + 1) % words.length;
+          renderQuestion();
+        }, 400);
+      } else {
+        // YANLIŞ CEVAP
+        clickedBtn.classList.add("wrong-choice");
+        playSound('wrong');
+        if (navigator.vibrate) navigator.vibrate([60, 40, 60]);
+
+        // Doğru şıkkı da göster
+        const grid = document.getElementById("optionsGrid");
+        if (grid) {
+          grid.querySelectorAll(".option-btn").forEach(btn => {
+            const txt = btn.querySelector(".option-text");
+            if (txt && txt.textContent.trim() === currentWord.meaning) {
+              btn.classList.add("correct-choice");
+            }
+          });
+        }
+
+        lastMissedWordId = currentWord.id;
+
+        // Kullanıcı İsteği: Yanlış seçilirse 24 kelimelik interaktif 3D tablo açılır
+        setTimeout(() => {
+          showTableSection(lastMissedWordId);
+        }, 650);
+      }
+    }
+
+    function showTableSection(highlightId = null) {
+      document.getElementById("quizSection").style.display = "none";
+      document.getElementById("tableSection").style.display = "flex";
+      render24Cards(highlightId);
+    }
+
+    function continueQuiz() {
+      document.getElementById("tableSection").style.display = "none";
+      document.getElementById("quizSection").style.display = "flex";
+      currentOrderIndex = (currentOrderIndex + 1) % words.length;
+      renderQuestion();
+    }
+
+    function toggleTableDirectly() {
+      const tableSec = document.getElementById("tableSection");
+      if (tableSec && tableSec.style.display !== "none") {
+        continueQuiz();
+      } else {
+        showTableSection(null);
+      }
+    }
+
+    function render24Cards(highlightId = null) {
+      const grid = document.getElementById("cardsGrid");
+      if (!grid) return;
+      grid.innerHTML = "";
+
+      words.forEach(item => {
+        const isMissed = (highlightId && item.id === highlightId);
+        const card = document.createElement("div");
+        card.className = `flip-card ${isMissed ? "missed-highlight" : ""}`;
+        card.setAttribute("data-id", item.id);
+
+        card.innerHTML = `
+          <div class="flip-card-inner">
+            <!-- Ön Yüz: Kelime -->
+            <div class="flip-card-front">
+              <span class="card-id-tag">#${item.id}</span>
+              <div class="card-word-text">${escapeHtml(item.word)}</div>
+              <div class="card-flip-hint">🔄 Anlamı Gör</div>
+            </div>
+            <!-- Arka Yüz: Anlamı -->
+            <div class="flip-card-back">
+              <div class="card-meaning-text">${escapeHtml(item.meaning)}</div>
+              <span class="card-meaning-tag">ANLAMI ✓</span>
+            </div>
+          </div>
+        `;
+
+        card.addEventListener("click", () => {
+          card.classList.toggle("flipped");
+          playSound('flip');
+          if (navigator.vibrate) navigator.vibrate(25);
+        });
+
+        grid.appendChild(card);
+      });
+
+      if (highlightId) {
+        setTimeout(() => {
+          const el = grid.querySelector(`.flip-card[data-id="${highlightId}"]`);
+          if (el && typeof el.scrollIntoView === 'function') {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 150);
+      }
+    }
+
+    // 4. KELİMELERİ DÜZENLE MODALI
+    function openEditWordsModal() {
+      const container = document.getElementById("editWordsListContainer");
+      if (!container) return;
+      container.innerHTML = "";
+
+      words.forEach((item, idx) => {
+        const row = document.createElement("div");
+        row.className = "word-edit-row";
+        row.innerHTML = `
+          <span class="word-edit-num">${idx + 1}.</span>
+          <input type="text" class="word-edit-input" id="editWord_${idx}" value="${escapeHtml(item.word)}" placeholder="Kelime" />
+          <input type="text" class="word-edit-input" id="editMeaning_${idx}" value="${escapeHtml(item.meaning)}" placeholder="Anlamı" />
+        `;
+        container.appendChild(row);
+      });
+
+      document.getElementById("editWordsModal").style.display = "flex";
+    }
+
+    function closeEditWordsModal() {
+      document.getElementById("editWordsModal").style.display = "none";
+    }
+
+    function saveEditedWords() {
+      const updated = [];
+      for (let i = 0; i < 24; i++) {
+        const wInput = document.getElementById(`editWord_${i}`);
+        const mInput = document.getElementById(`editMeaning_${i}`);
+        const wVal = (wInput ? wInput.value : "").trim() || `kelime_${i+1}`;
+        const mVal = (mInput ? mInput.value : "").trim() || `cevap_${i+1}`;
+        updated.push({ id: i + 1, word: wVal, meaning: mVal });
+      }
+
+      words = updated;
+      try {
+        localStorage.setItem("sinirlayici_custom_lang_words", JSON.stringify(updated));
+      } catch(e) {}
+
+      closeEditWordsModal();
+      initShuffledIndices();
+      renderQuestion();
+      showToast("✅ Kelimeler başarıyla kaydedildi!");
+    }
+
+    // 5. YARDIMCI FONKSİYONLAR
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const el = document.getElementById("toastMessage");
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add("show");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        el.classList.remove("show");
+      }, 2400);
+    }
+
+    // Başlangıç
+    window.addEventListener("DOMContentLoaded", () => {
+      loadCustomWords();
+      initShuffledIndices();
+      renderQuestion();
+    });
+  </script>
+</body>
+</html>
