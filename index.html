@@ -857,39 +857,39 @@
     // 1. KELİME LİSTESİ: EMSİLE-İ MUHTELİFE (24 Sîga)
     // NOT: Kullanıcı isteği doğrultusunda baştaki 'fehüve', 've zâke' gibi ekler kaldırılmıştır.
     const EMSILE_24_WORDS = [
-      // 1. SATIR (5 Kelime - Sağdan Sola: نَصَرَ -> يَنْصُرُ -> نَصْرًا -> نَاصِرٌ -> مَنْصُورٌ)
-      { id: 1, word: "نَصَرَ", meaning: "Yardım etti (Fiil-i Mâzi)", row: 1 },
-      { id: 2, word: "يَنْصُرُ", meaning: "Yardım eder / ediyor (Muzâri)", row: 1 },
-      { id: 3, word: "نَصْرًا", meaning: "Yardım etmek (Masdar)", row: 1 },
-      { id: 4, word: "نَاصِرٌ", meaning: "Yardım eden / edici (İsm-i Fâil)", row: 1 },
-      { id: 5, word: "مَنْصُورٌ", meaning: "Yardım edilen / olunmuş (İsm-i Mef'ûl)", row: 1 },
+      // 1. SATIR (5 Kelime - Sağdan Sola)
+      { id: 1, word: "نَصَرَ", meaning: "Mâzi fiil", row: 1 },
+      { id: 2, word: "يَنْصُرُ", meaning: "Müzâri' fiil", row: 1 },
+      { id: 3, word: "نَصْرًا", meaning: "Mastar", row: 1 },
+      { id: 4, word: "نَاصِرٌ", meaning: "İsm-i fâil", row: 1 },
+      { id: 5, word: "مَنْصُورٌ", meaning: "İsm-i mef'ûl", row: 1 },
 
-      // 2. SATIR (5 Kelime - Sağdan Sola: لَمْ يَنْصُرْ -> لَمَّا يَنْصُرْ -> مَا يَنْصُرُ -> لَا يَنْصُرُ -> لَنْ يَنْصَرَ)
-      { id: 6, word: "لَمْ يَنْصُرْ", meaning: "Yardım etmedi (Cahd-ı Mutlak)", row: 2 },
-      { id: 7, word: "لَمَّا يَنْصُرْ", meaning: "Henüz yardım etmedi (Cahd-ı Müstağrak)", row: 2 },
-      { id: 8, word: "مَا يَنْصُرُ", meaning: "Yardım etmiyor (Nefy-i Hâl)", row: 2 },
-      { id: 9, word: "لَا يَنْصُرُ", meaning: "Yardım etmez (Nefy-i İstikbâl)", row: 2 },
-      { id: 10, word: "لَنْ يَنْصَرَ", meaning: "Asla yardım etmeyecek (Tekîd-i Nefy)", row: 2 },
+      // 2. SATIR (5 Kelime - Sağdan Sola)
+      { id: 6, word: "لَمْ يَنْصُرْ", meaning: "Cahd-ı mutlak", row: 2 },
+      { id: 7, word: "لَمَّا يَنْصُرْ", meaning: "Cahd-ı müstağrak", row: 2 },
+      { id: 8, word: "مَا يَنْصُرُ", meaning: "Nefy-i hâl", row: 2 },
+      { id: 9, word: "لَا يَنْصُرُ", meaning: "Nefy-i istikbâl", row: 2 },
+      { id: 10, word: "لَنْ يَنْصَرَ", meaning: "Te'kîd-i nefy-i istikbâl", row: 2 },
 
-      // 3. SATIR (4 Kelime - Sağdan Sola: لِيَنْصُرْ -> لَا يَنْصُرْ -> أُنْصُرْ -> لَا تَنْصُرْ)
-      { id: 11, word: "لِيَنْصُرْ", meaning: "Yardım etsin (Emr-i Gāib)", row: 3 },
-      { id: 12, word: "لَا يَنْصُرْ", meaning: "Yardım etmesin (Nehy-i Gāib)", row: 3 },
-      { id: 13, word: "أُنْصُرْ", meaning: "Yardım et (Emr-i Hâzır)", row: 3 },
-      { id: 14, word: "لَا تَنْصُرْ", meaning: "Yardım etme (Nehy-i Hâzır)", row: 3 },
+      // 3. SATIR (4 Kelime - Sağdan Sola)
+      { id: 11, word: "لِيَنْصُرْ", meaning: "Emr-i gâib", row: 3 },
+      { id: 12, word: "لَا يَنْصُرْ", meaning: "Nehy-i gâib", row: 3 },
+      { id: 13, word: "أُنْصُرْ", meaning: "Emr-i hâzır", row: 3 },
+      { id: 14, word: "لَا تَنْصُرْ", meaning: "Nehy-i hâzır", row: 3 },
 
-      // 4. SATIR (5 Kelime - Sağdan Sola: مَنْصَرٌ -> مِنْصَرٌ -> نَصْرَةً -> نِصْرَةً -> نُصَيْرٌ)
-      { id: 15, word: "مَنْصَرٌ", meaning: "Yardım edecek zaman/mekân/etmek", row: 4 },
-      { id: 16, word: "مِنْصَرٌ", meaning: "Yardım edecek alet (İsm-i Âlet)", row: 4 },
-      { id: 17, word: "نَصْرَةً", meaning: "Bir kere yardım etmek (Masdar-ı Merre)", row: 4 },
-      { id: 18, word: "نِصْرَةً", meaning: "Bir çeşit yardım etmek (Masdar-ı Nev')", row: 4 },
-      { id: 19, word: "نُصَيْرٌ", meaning: "Azıcık yardım eden (İsm-i Tasgîr)", row: 4 },
+      // 4. SATIR (5 Kelime - Sağdan Sola)
+      { id: 15, word: "مَنْصَرٌ", meaning: "İsm-i zaman, ism-i mekân, masdar-ı mimi", row: 4 },
+      { id: 16, word: "مِنْصَرٌ", meaning: "İsm-i âlet", row: 4 },
+      { id: 17, word: "نَصْرَةً", meaning: "Masdar-ı binâ-i merre", row: 4 },
+      { id: 18, word: "نِصْرَةً", meaning: "Masdar-ı binâ-i nev'", row: 4 },
+      { id: 19, word: "نُصَيْرٌ", meaning: "İsm-i tasgîr", row: 4 },
 
-      // 5. SATIR (5 Kelime - Sağdan Sola: نَصْرِيٌّ -> نَصَّارٌ -> أَنْصَرُ -> مَا أَنْصَرَهُ -> أَنْصِرْ بِهِ)
-      { id: 20, word: "نَصْرِيٌّ", meaning: "Yardım etmeye mensup (İsm-i Mensûb)", row: 5 },
-      { id: 21, word: "نَصَّارٌ", meaning: "Çok yardım eden (Mübalağalı Fâil)", row: 5 },
-      { id: 22, word: "أَنْصَرُ", meaning: "En çok yardım eden (İsm-i Tafdîl)", row: 5 },
-      { id: 23, word: "مَا أَنْصَرَهُ", meaning: "Ne acayip yardım etti! (Taaccüb 1)", row: 5 },
-      { id: 24, word: "أَنْصِرْ بِهِ", meaning: "Ne hoş yardım etti! (Taaccüb 2)", row: 5 }
+      // 5. SATIR (5 Kelime - Sağdan Sola)
+      { id: 20, word: "نَصْرِيٌّ", meaning: "İsm-i mensûb", row: 5 },
+      { id: 21, word: "نَصَّارٌ", meaning: "Mübalağalı ism-i fâil", row: 5 },
+      { id: 22, word: "أَنْصَرُ", meaning: "İsm-i tafdîl", row: 5 },
+      { id: 23, word: "مَا أَنْصَرَهُ", meaning: "Fiil-i taaccüb-i evvel", row: 5 },
+      { id: 24, word: "أَنْصِرْ بِهِ", meaning: "Fiil-i taaccüb-i sânî", row: 5 }
     ];
 
     // 2. SES SENTEZLEYİCİSİ (Web Audio API - %100 Çevrimdışı)
@@ -967,7 +967,10 @@
 
     function loadCustomWords() {
       try {
-        const raw = localStorage.getItem("sinirlayici_custom_lang_words_v2");
+        localStorage.removeItem("sinirlayici_custom_lang_words_v1");
+        localStorage.removeItem("sinirlayici_custom_lang_words_v2");
+        localStorage.removeItem("sinirlayici_custom_lang_words_v3");
+        const raw = localStorage.getItem("sinirlayici_custom_lang_words_v4");
         if (raw) {
           const parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length === 24) {
@@ -1211,7 +1214,7 @@
 
       words = updated;
       try {
-        localStorage.setItem("sinirlayici_custom_lang_words_v2", JSON.stringify(updated));
+        localStorage.setItem("sinirlayici_custom_lang_words_v4", JSON.stringify(updated));
       } catch(e) {}
 
       closeEditWordsModal();
