@@ -1457,6 +1457,83 @@
       background: rgba(30, 41, 59, 0.95);
     }
 
+
+    /* Kelime Modu Yanlış Cevap Bildirimi ve Devam Et Butonu */
+    .quiz-feedback-bar {
+      margin-top: 18px;
+      width: 100%;
+      background: rgba(30, 41, 59, 0.95);
+      border: 1px solid rgba(239, 68, 68, 0.45);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 24px rgba(239, 68, 68, 0.22);
+    }
+
+    @keyframes slideUpFade {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feedback-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .feedback-icon {
+      font-size: 1.35rem;
+    }
+
+    .feedback-text {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fca5a5;
+    }
+
+    .btn-feedback-continue {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .btn-feedback-continue:hover {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.6);
+    }
+
+    @media (max-width: 520px) {
+      .quiz-feedback-bar {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+      .feedback-info {
+        justify-content: center;
+      }
+      .btn-feedback-continue {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1475,7 +1552,7 @@
 
     <div class="header-title-box">
       <h1 id="headerMainTitle">Arapça Emsile ve Çekim Merkezi</h1>
-      <p id="headerSubTitle">24 Sîga & Zamir Çekimleri & Kelime Bilgisi</p>
+      <p id="headerSubTitle">24 Sîga & Zamir Çekimleri & Kelime</p>
     </div>
 
     <div class="header-actions">
@@ -1548,8 +1625,8 @@
             <div class="choice-card-top">
               <div class="choice-icon-box" style="background: rgba(16, 185, 129, 0.18); border-color: rgba(16, 185, 129, 0.35);">📝</div>
               <div class="choice-texts">
-                <h3>Kur'an'da En Çok Geçen 100 Kelime</h3>
-                <p>Kur'an-ı Kerim'de en sık zikredilen 100 isim: Tekil, İkili ve Çoğul halleriyle.</p>
+                <h3>Kelime</h3>
+                <p>Kur'an-ı Kerim'de en çok geçen 100 kelime: Tekil, İkili ve Çoğul anlam eşleştirmesi.</p>
               </div>
             </div>
             <ul class="choice-features" style="margin-top: 14px;">
@@ -1614,6 +1691,17 @@
       <!-- 5 Seçenek Butonu -->
       <div class="options-grid" id="optionsGrid">
         <!-- JS ile dinamik butonlar üretilir -->
+      </div>
+
+      <!-- Yanlış Yapıldığında Çıkan Devam Et Barı (Kelime Modu İçin) -->
+      <div class="quiz-feedback-bar" id="quizFeedbackBar" style="display: none;">
+        <div class="feedback-info">
+          <span class="feedback-icon">❌</span>
+          <span class="feedback-text">Yanlış cevap! Doğru seçenek yeşille gösterildi.</span>
+        </div>
+        <button type="button" class="btn-feedback-continue" id="btnFeedbackContinue" onclick="advanceToNextQuestion()">
+          <span>Devam Et ▶️</span>
+        </button>
       </div>
     </section>
 
@@ -1977,7 +2065,7 @@
         if (btnExit) btnExit.style.display = "inline-flex";
         if (btnTable) btnTable.style.display = "none";
         if (headerTitle) headerTitle.textContent = "Arapça Emsile ve Çekim Merkezi";
-        if (headerSub) headerSub.textContent = "24 Sîga & Zamir Çekimleri & Kelime Bilgisi";
+        if (headerSub) headerSub.textContent = "24 Sîga & Zamir Çekimleri & Kelime";
       } else if (screenId === 'sigaSelectionView') {
         if (btnMenu) btnMenu.style.display = "inline-flex";
         if (btnExit) btnExit.style.display = "inline-flex";
@@ -2156,6 +2244,9 @@
     function renderQuestion() {
       if (shuffledIndices.length === 0) initShuffledIndices();
       isAnswering = false;
+
+      const feedbackBar = document.getElementById("quizFeedbackBar");
+      if (feedbackBar) feedbackBar.style.display = "none";
 
       const targetIdx = shuffledIndices[currentOrderIndex];
       currentWord = currentQuizWords[targetIdx];
@@ -2452,10 +2543,30 @@
 
         lastMissedWordId = currentWord.id;
 
-        setTimeout(() => {
-          showTableSection(lastMissedWordId);
-        }, 650);
+        if (currentGameMode === 'vocab') {
+          // KULLANICI İSTEĞİ:
+          // Kelime bölümünde yanlış yapılırsa tablo görünümüne gitme!
+          // Sorunun altında "Devam Et" seçeneği olsun, ona tıklanıldığında diğer soruya geçilsin.
+          const feedbackBar = document.getElementById("quizFeedbackBar");
+          if (feedbackBar) {
+            feedbackBar.style.display = "flex";
+            feedbackBar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        } else {
+          // 24 Sîga ve Zamir modlarında tablo görünümüne git
+          setTimeout(() => {
+            showTableSection(lastMissedWordId);
+          }, 650);
+        }
       }
+    }
+
+    function advanceToNextQuestion() {
+      const feedbackBar = document.getElementById("quizFeedbackBar");
+      if (feedbackBar) feedbackBar.style.display = "none";
+      isAnswering = false;
+      currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
+      renderQuestion();
     }
 
     // =========================================================================
@@ -2896,8 +3007,14 @@
       console.warn("🛡️ Safe Promise Handler:", e.reason);
     });
 
-    // Klavye ESC tuşu ile modalları kapatma
+    // Klavye ESC tuşu ile modalları kapatma, Enter/Boşluk ile Devam Et
     window.addEventListener("keydown", (e) => {
+      const feedbackBar = document.getElementById("quizFeedbackBar");
+      if ((e.key === "Enter" || e.key === " ") && feedbackBar && feedbackBar.style.display === "flex") {
+        e.preventDefault();
+        advanceToNextQuestion();
+        return;
+      }
       if (e.key === "Escape") {
         const exitModal = document.getElementById("safeExitModal");
         if (exitModal && exitModal.style.display === "flex") {
