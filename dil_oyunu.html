@@ -379,7 +379,7 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 6px;
+      gap: 4px;
       cursor: pointer;
       transition: all 0.2s ease;
       position: relative;
@@ -415,6 +415,17 @@
       font-weight: 700;
       color: #818cf8;
       line-height: 1.25;
+    }
+
+    .siga-item-hint {
+      font-size: 0.68rem;
+      color: #fde68a;
+      font-weight: 700;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-top: 2px;
     }
 
     /* ========================================================
@@ -551,12 +562,31 @@
       transition: all 0.2s;
     }
 
+    .option-content-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
     .option-text {
       font-size: 0.96rem;
       font-weight: 600;
       color: #f1f5f9;
-      flex: 1;
       line-height: 1.3;
+    }
+
+    .option-hint-pill {
+      background: rgba(251, 191, 36, 0.16);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      color: #fde68a;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
     }
 
     .option-btn.correct-choice {
@@ -825,6 +855,19 @@
       color: #ffffff;
     }
 
+    .card-extra-hint {
+      background: rgba(251, 191, 36, 0.2);
+      border: 1px solid rgba(251, 191, 36, 0.38);
+      color: #fef08a;
+      border-radius: 6px;
+      padding: 2px 5px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      margin-top: 3px;
+      max-width: 95%;
+      line-height: 1.2;
+    }
+
     .card-meaning-tag {
       position: absolute;
       bottom: 4px;
@@ -867,7 +910,7 @@
       border: 1px solid var(--border-color);
       border-radius: 18px;
       width: 100%;
-      max-width: 580px;
+      max-width: 620px;
       max-height: 85vh;
       display: flex;
       flex-direction: column;
@@ -942,15 +985,16 @@
     .word-edit-row {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .word-edit-num {
-      width: 26px;
+      width: 24px;
       font-size: 0.78rem;
       font-weight: 700;
       color: var(--text-muted);
       text-align: right;
+      flex-shrink: 0;
     }
 
     .word-edit-input {
@@ -960,7 +1004,7 @@
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #fff;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       outline: none;
     }
 
@@ -1062,11 +1106,12 @@
             <div class="choice-icon-box">📖</div>
             <div class="choice-texts">
               <h3>24 Sîga Oyunu</h3>
-              <p>Emsile-i Muhtelife'nin 24 temel kelimesini sadece bold sîga başlıklarıyla eşleştirin.</p>
+              <p>24 temel sîgayı bold başlıkları ve artı anlam ekleriyle (-yor, -ar, -maz vb.) eşleştirin.</p>
             </div>
           </div>
           <ul class="choice-features">
             <li>✨ Mâzi, Müzâri, Mastar, Fâil, Mef'ûl vb.</li>
+            <li>✨ Artı anlamlar: -yor, -ar, -acak, -mayacak, -maz vb.</li>
             <li>✨ Yanlışta 24'lü Tablo (3. Satır Sağa Yapışık)</li>
             <li>✨ Asla Türkçe okunuş yer almaz</li>
           </ul>
@@ -1130,7 +1175,7 @@
       <div class="target-word-card">
         <span class="word-badge-tag" id="targetBadgeTag">HEDEF KELİME</span>
         <h2 class="target-word-title" id="targetWordText">نَصَرْتُ</h2>
-        <p class="target-word-instruction" id="targetWordInstruction">Aşağıdaki 5 seçenekten doğru Türkçe zamir karşılığını seçin:</p>
+        <p class="target-word-instruction" id="targetWordInstruction">Aşağıdaki 5 seçenekten doğru Türkçe karşılığını seçin:</p>
       </div>
 
       <!-- 5 Şıklı Seçenekler Grid -->
@@ -1192,36 +1237,38 @@
     // 1. VERİ SETLERİ (ASLA TÜRKÇE OKUNUŞ YER ALMAZ!)
     // =========================================================================
 
-    // A) 24 SÎGA LİSTESİ (Emsile-i Muhtelife) - Yalnızca bold sîga başlıkları!
+    // A) 24 SÎGA LİSTESİ (Emsile-i Muhtelife)
+    // Kullanıcı İsteği:
+    // - En üst soldan 2. çekim (yensuru): Anlamı Fiil-i müzâri', artı anlam: -yor, -ar, -acak
+    // - Nefy-i istikbâl (la yensuru): Anlamı Nefy-i istikbâl, artı anlam: -mayacak, -maz, -mıyor
     const EMSILE_24_WORDS = [
-      { id: 1, word: "نَصَرَ", meaning: "Mâzi fiil", root: "نَصَرَ" },
-      { id: 2, word: "يَنْصُرُ", meaning: "Müzâri' fiil", root: "يَنْصُرُ" },
-      { id: 3, word: "نَصْرًا", meaning: "Mastar", root: "نَصْرًا" },
-      { id: 4, word: "نَاصِرٌ", meaning: "İsm-i fâil", root: "نَاصِرٌ" },
-      { id: 5, word: "مَنْصُورٌ", meaning: "İsm-i mef'ûl", root: "مَنْصُورٌ" },
-      { id: 6, word: "لَمْ يَنْصُرْ", meaning: "Cahd-ı mutlak", root: "لَمْ يَنْصُرْ" },
-      { id: 7, word: "لَمَّا يَنْصُرْ", meaning: "Cahd-ı müstağrak", root: "لَمَّا يَنْصُرْ" },
-      { id: 8, word: "مَا يَنْصُرُ", meaning: "Nefy-i hâl", root: "مَا يَنْصُرُ" },
-      { id: 9, word: "لَا يَنْصُرُ", meaning: "Nefy-i istikbâl", root: "لَا يَنْصُرُ" },
-      { id: 10, word: "لَنْ يَنْصَرَ", meaning: "Te'kîd-i nefy-i istikbâl", root: "لَنْ يَنْصَرَ" },
-      { id: 11, word: "لِيَنْصُرْ", meaning: "Emr-i gâib", root: "لِيَنْصُرْ" },
-      { id: 12, word: "لَا يَنْصُرْ", meaning: "Nehy-i gâib", root: "لَا يَنْصُرْ" },
-      { id: 13, word: "أُنْصُرْ", meaning: "Emr-i hâzır", root: "أُنْصُرْ" },
-      { id: 14, word: "لَا تَنْصُرْ", meaning: "Nehy-i hâzır", root: "لَا تَنْصُرْ" },
-      { id: 15, word: "مَنْصَرٌ", meaning: "İsm-i zaman, ism-i mekân, masdar-ı mimi", root: "مَنْصَرٌ" },
-      { id: 16, word: "مِنْصَرٌ", meaning: "İsm-i âlet", root: "مِنْصَرٌ" },
-      { id: 17, word: "نَصْرَةً", meaning: "Masdar-ı binâ-i merre", root: "نَصْرَةً" },
-      { id: 18, word: "نِصْرَةً", meaning: "Masdar-ı binâ-i nev'", root: "نِصْرَةً" },
-      { id: 19, word: "نُصَيْرٌ", meaning: "İsm-i tasgîr", root: "نُصَيْرٌ" },
-      { id: 20, word: "نَصْرِيٌّ", meaning: "İsm-i mensûb", root: "نَصْرِيٌّ" },
-      { id: 21, word: "نَصَّارٌ", meaning: "Mübalağalı ism-i fâil", root: "نَصَّارٌ" },
-      { id: 22, word: "أَنْصَرُ", meaning: "İsm-i tafdîl", root: "أَنْصَرُ" },
-      { id: 23, word: "مَا أَنْصَرَهُ", meaning: "Fiil-i taaccüb-i evvel", root: "مَا أَنْصَرَهُ" },
-      { id: 24, word: "أَنْصِرْ بِهِ", meaning: "Fiil-i taaccüb-i sânî", root: "أَنْصِرْ بِهِ" }
+      { id: 1, word: "نَصَرَ", meaning: "Mâzi fiil", extraHint: "-dı, -di", root: "نَصَرَ" },
+      { id: 2, word: "يَنْصُرُ", meaning: "Fiil-i müzâri'", extraHint: "-yor, -ar, -acak", root: "يَنْصُرُ" },
+      { id: 3, word: "نَصْرًا", meaning: "Mastar", extraHint: "-mak, -mek", root: "نَصْرًا" },
+      { id: 4, word: "نَاصِرٌ", meaning: "İsm-i fâil", extraHint: "-an, -en, -ıcı", root: "نَاصِرٌ" },
+      { id: 5, word: "مَنْصُورٌ", meaning: "İsm-i mef'ûl", extraHint: "-ılan, -ilmiş", root: "مَنْصُورٌ" },
+      { id: 6, word: "لَمْ يَنْصُرْ", meaning: "Cahd-ı mutlak", extraHint: "-madı, -medi", root: "لَمْ يَنْصُرْ" },
+      { id: 7, word: "لَمَّا يَنْصُرْ", meaning: "Cahd-ı müstağrak", extraHint: "henüz -madı", root: "لَمَّا يَنْصُرْ" },
+      { id: 8, word: "مَا يَنْصُرُ", meaning: "Nefy-i hâl", extraHint: "-mıyor, -miyor", root: "مَا يَنْصُرُ" },
+      { id: 9, word: "لَا يَنْصُرُ", meaning: "Nefy-i istikbâl", extraHint: "-mayacak, -maz, -mıyor", root: "لَا يَنْصُرُ" },
+      { id: 10, word: "لَنْ يَنْصَرَ", meaning: "Te'kîd-i nefy-i istikbâl", extraHint: "asla -mayacak", root: "لَنْ يَنْصَرَ" },
+      { id: 11, word: "لِيَنْصُرْ", meaning: "Emr-i gâib", extraHint: "-sın, -sin", root: "لِيَنْصُرْ" },
+      { id: 12, word: "لَا يَنْصُرْ", meaning: "Nehy-i gâib", extraHint: "-masın, -mesin", root: "لَا يَنْصُرْ" },
+      { id: 13, word: "أُنْصُرْ", meaning: "Emr-i hâzır", extraHint: "- (sen yap)", root: "أُنْصُرْ" },
+      { id: 14, word: "لَا تَنْصُرْ", meaning: "Nehy-i hâzır", extraHint: "-ma, -me", root: "لَا تَنْصُرْ" },
+      { id: 15, word: "مَنْصَرٌ", meaning: "İsm-i zaman, ism-i mekân, masdar-ı mimi", extraHint: "Zaman / Mekân / Mastar", root: "مَنْصَرٌ" },
+      { id: 16, word: "مِنْصَرٌ", meaning: "İsm-i âlet", extraHint: "Alet ismi", root: "مِنْصَرٌ" },
+      { id: 17, word: "نَصْرَةً", meaning: "Masdar-ı binâ-i merre", extraHint: "Bir kere yapma", root: "نَصْرَةً" },
+      { id: 18, word: "نِصْرَةً", meaning: "Masdar-ı binâ-i nev'", extraHint: "Bir tarz yapma", root: "نِصْرَةً" },
+      { id: 19, word: "نُصَيْرٌ", meaning: "İsm-i tasgîr", extraHint: "Küçültme (-cık)", root: "نُصَيْرٌ" },
+      { id: 20, word: "نَصْرِيٌّ", meaning: "İsm-i mensûb", extraHint: "Aitlik (-li, -sel)", root: "نَصْرِيٌّ" },
+      { id: 21, word: "نَصَّارٌ", meaning: "Mübalağalı ism-i fâil", extraHint: "Çok yapan", root: "نَصَّارٌ" },
+      { id: 22, word: "أَنْصَرُ", meaning: "İsm-i tafdîl", extraHint: "En / Daha çok", root: "أَنْصَرُ" },
+      { id: 23, word: "مَا أَنْصَرَهُ", meaning: "Fiil-i taaccüb-i evvel", extraHint: "Ne acayip ...!", root: "مَا أَنْصَرَهُ" },
+      { id: 24, word: "أَنْصِرْ بِهِ", meaning: "Fiil-i taaccüb-i sânî", extraHint: "Ne güzel / hoş ...!", root: "أَنْصِرْ بِهِ" }
     ];
 
     // B) 14 ŞAHIS ZAMİRİ ANLAMLARI VE KONUMLARI
-    // 1..3: Gâib (Eril), 4..6: Gâibe (Dişil), 7..9: Muhatap (Eril), 10..12: Muhataba (Dişil), 13..14: Mütekellim
     const PRONOUN_MEANINGS = [
       "O (erkek)",              // 1. Gaib Tekil
       "O ikisi (erkek)",        // 2. Gaib İkil
@@ -1240,223 +1287,31 @@
     ];
 
     // C) 24 SÎGANIN HER BİRİNİN 14 ŞAHSA GÖRE ÇEKİMLERİ (Emsile-i Muttaride)
-    // Asla okunuş yazılmaz!
     const SIGA_CONJUGATIONS = {
-      // 1. MÂZİ FİİL (Kullanıcının gönderdiği fotoğraftaki tam tablo)
-      1: [
-        "نَصَرَ", "نَصَرَا", "نَصَرُوا",
-        "نَصَرَتْ", "نَصَرَتَا", "نَصَرْنَ",
-        "نَصَرْتَ", "نَصَرْتُمَا", "نَصَرْتُمْ",
-        "نَصَرْتِ", "نَصَرْتُمَا", "نَصَرْتُنَّ",
-        "نَصَرْتُ", "نَصَرْنَا"
-      ],
-
-      // 2. MÜZÂRİ' FİİL
-      2: [
-        "يَنْصُرُ", "يَنْصُرَانِ", "يَنْصُرُونَ",
-        "تَنْصُرُ", "تَنْصُرَانِ", "يَنْصُرْنَ",
-        "تَنْصُرُ", "تَنْصُرَانِ", "تَنْصُرُونَ",
-        "تَنْصُرِينَ", "تَنْصُرَانِ", "تَنْصُرْنَ",
-        "أَنْصُرُ", "نَنْصُرُ"
-      ],
-
-      // 3. MASTAR (Mastar formları ve şahıs ilişkileri)
-      3: [
-        "نَصْرُهُ", "نَصْرُهُمَا", "نَصْرُهُمْ",
-        "نَصْرُهَا", "نَصْرُهُمَا", "نَصْرُهُنَّ",
-        "نَصْرُكَ", "نَصْرُكُمَا", "نَصْرُكُمْ",
-        "نَصْرُكِ", "نَصْرُكُمَا", "نَصْرُكُنَّ",
-        "نَصْرِي", "نَصْرُنَا"
-      ],
-
-      // 4. İSM-İ FÂİL
-      4: [
-        "نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ",
-        "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ",
-        "نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ",
-        "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ",
-        "أَنَا نَاصِرٌ", "نَحْنُ نَاصِرُونَ"
-      ],
-
-      // 5. İSM-İ MEF'ÛL
-      5: [
-        "مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ",
-        "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ",
-        "مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ",
-        "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ",
-        "أَنَا مَنْصُورٌ", "نَحْنُ مَنْصُورُونَ"
-      ],
-
-      // 6. CAHD-I MUTLAK (لَمْ يَنْصُرْ)
-      6: [
-        "لَمْ يَنْصُرْ", "لَمْ يَنْصُرَا", "لَمْ يَنْصُرُوا",
-        "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ يَنْصُرْنَ",
-        "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرُوا",
-        "لَمْ تَنْصُرِي", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرْنَ",
-        "لَمْ أَنْصُرْ", "لَمْ نَنْصُرْ"
-      ],
-
-      // 7. CAHD-I MÜSTAĞRAK (لَمَّا يَنْصُرْ)
-      7: [
-        "لَمَّا يَنْصُرْ", "لَمَّا يَنْصُرَا", "لَمَّا يَنْصُرُوا",
-        "لَمَّا تَنْصُرْ", "لَمَّا تَنْصُرَا", "لَمَّا يَنْصُرْنَ",
-        "لَمَّا تَنْصُرْ", "لَمَّا تَنْصُرَا", "لَمَّا تَنْصُرُوا",
-        "لَمَّا تَنْصُرِي", "لَمَّا تَنْصُرَا", "لَمَّا تَنْصُرْنَ",
-        "لَمَّا أَنْصُرْ", "لَمَّا نَنْصُرْ"
-      ],
-
-      // 8. NEFY-İ HÂL (مَا يَنْصُرُ)
-      8: [
-        "مَا يَنْصُرُ", "مَا يَنْصُرَانِ", "مَا يَنْصُرُونَ",
-        "مَا تَنْصُرُ", "مَا تَنْصُرَانِ", "مَا يَنْصُرْنَ",
-        "مَا تَنْصُرُ", "مَا تَنْصُرَانِ", "مَا تَنْصُرُونَ",
-        "مَا تَنْصُرِينَ", "مَا تَنْصُرَانِ", "مَا تَنْصُرْنَ",
-        "مَا أَنْصُرُ", "مَا نَنْصُرُ"
-      ],
-
-      // 9. NEFY-İ İSTİKBÂL (لَا يَنْصُرُ)
-      9: [
-        "لَا يَنْصُرُ", "لَا يَنْصُرَانِ", "لَا يَنْصُرُونَ",
-        "لَا تَنْصُرُ", "لَا تَنْصُرَانِ", "لَا يَنْصُرْنَ",
-        "لَا تَنْصُرُ", "لَا تَنْصُرَانِ", "لَا تَنْصُرُونَ",
-        "لَا تَنْصُرِينَ", "لَا تَنْصُرَانِ", "لَا تَنْصُرْنَ",
-        "لَا أَنْصُرُ", "لَا نَنْصُرُ"
-      ],
-
-      // 10. TE'KÎD-İ NEFY-İ İSTİKBÂL (لَنْ يَنْصَرَ)
-      10: [
-        "لَنْ يَنْصَرَ", "لَنْ يَنْصَرَا", "لَنْ يَنْصَرُوا",
-        "لَنْ تَنْصَرَ", "لَنْ تَنْصَرَا", "لَنْ يَنْصَرْنَ",
-        "لَنْ تَنْصَرَ", "لَنْ تَنْصَرَا", "لَنْ تَنْصَرُوا",
-        "لَنْ تَنْصَرِي", "لَنْ تَنْصَرَا", "لَنْ تَنْصَرْنَ",
-        "لَنْ أَنْصَرَ", "لَنْ نَنْصَرَ"
-      ],
-
-      // 11. EMR-İ GÂİB (لِيَنْصُرْ)
-      11: [
-        "لِيَنْصُرْ", "لِيَنْصُرَا", "لِيَنْصُرُوا",
-        "لِتَنْصُرْ", "لِتَنْصُرَا", "لِيَنْصُرْنَ",
-        "لِتَنْصُرْ", "لِتَنْصُرَا", "لِتَنْصُرُوا",
-        "لِتَنْصُرِي", "لِتَنْصُرَا", "لِتَنْصُرْنَ",
-        "لِأَنْصُرْ", "لِنَنْصُرْ"
-      ],
-
-      // 12. NEHY-İ GÂİB (لَا يَنْصُرْ)
-      12: [
-        "لَا يَنْصُرْ", "لَا يَنْصُرَا", "لَا يَنْصُرُوا",
-        "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا يَنْصُرْنَ",
-        "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا تَنْصُرُوا",
-        "لَا تَنْصُرِي", "لَا تَنْصُرَا", "لَا تَنْصُرْنَ",
-        "لَا أَنْصُرْ", "لَا نَنْصُرْ"
-      ],
-
-      // 13. EMR-İ HÂZIR (أُنْصُرْ)
-      13: [
-        "لِيَنْصُرْ", "لِيَنْصُرَا", "لِيَنْصُرُوا",
-        "لِتَنْصُرْ", "لِتَنْصُرَا", "لِيَنْصُرْنَ",
-        "أُنْصُرْ", "أُنْصُرَا", "أُنْصُرُوا",
-        "أُنْصُرِي", "أُنْصُرَا", "أُنْصُرْنَ",
-        "أَنَا نَاصِرٌ", "نَحْنُ نَاصِرُونَ"
-      ],
-
-      // 14. NEHY-İ HÂZIR (لَا تَنْصُرْ)
-      14: [
-        "لَا يَنْصُرْ", "لَا يَنْصُرَا", "لَا يَنْصُرُوا",
-        "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا يَنْصُرْنَ",
-        "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا تَنْصُرُوا",
-        "لَا تَنْصُرِي", "لَا تَنْصُرَا", "لَا تَنْصُرْنَ",
-        "لَا أَنْصُرْ", "لَا نَنْصُرْ"
-      ],
-
-      // 15. İSM-İ ZAMAN / MEKÂN / MASDAR-I MİMİ (مَنْصَرٌ)
-      15: [
-        "مَنْصَرُهُ", "مَنْصَرُهُمَا", "مَنْصَرُهُمْ",
-        "مَنْصَرُهَا", "مَنْصَرُهُمَا", "مَنْصَرُهُنَّ",
-        "مَنْصَرُكَ", "مَنْصَرُكُمَا", "مَنْصَرُكُمْ",
-        "مَنْصَرُكِ", "مَنْصَرُكُمَا", "مَنْصَرُكُنَّ",
-        "مَنْصَرِي", "مَنْصَرُنَا"
-      ],
-
-      // 16. İSM-İ ÂLET (مِنْصَرٌ)
-      16: [
-        "مِنْصَرُهُ", "مِنْصَرُهُمَا", "مِنْصَرُهُمْ",
-        "مِنْصَرُهَا", "مِنْصَرُهُمَا", "مِنْصَرُهُنَّ",
-        "مِنْصَرُكَ", "مِنْصَرُكُمَا", "مِنْصَرُكُمْ",
-        "مِنْصَرُكِ", "مِنْصَرُكُمَا", "مِنْصَرُكُنَّ",
-        "مِنْصَرِي", "مِنْصَرُنَا"
-      ],
-
-      // 17. MASDAR-I BİNÂ-İ MERRE (نَصْرَةً)
-      17: [
-        "نَصْرَتُهُ", "نَصْرَتُهُمَا", "نَصْرَتُهُمْ",
-        "نَصْرَتُهَا", "نَصْرَتُهُمَا", "نَصْرَتُهُنَّ",
-        "نَصْرَتُكَ", "نَصْرَتُكُمَا", "نَصْرَتُكُمْ",
-        "نَصْرَتُكِ", "نَصْرَتُكُمَا", "نَصْرَتُكُنَّ",
-        "نَصْرَتِي", "نَصْرَتُنَا"
-      ],
-
-      // 18. MASDAR-I BİNÂ-İ NEV' (نِصْرَةً)
-      18: [
-        "نِصْرَتُهُ", "نِصْرَتُهُمَا", "نِصْرَتُهُمْ",
-        "نِصْرَتُهَا", "نِصْرَتُهُمَا", "نِصْرَتُهُنَّ",
-        "نِصْرَتُكَ", "نِصْرَتُكُمَا", "نِصْرَتُكُمْ",
-        "نِصْرَتُكِ", "نِصْرَتُكُمَا", "نِصْرَتُكُنَّ",
-        "نِصْرَتِي", "نِصْرَتُنَا"
-      ],
-
-      // 19. İSM-İ TASGÎR (نُصَيْرٌ)
-      19: [
-        "نُصَيْرٌ", "نُصَيْرَانِ", "نُصَيْرُونَ",
-        "نُصَيْرَةٌ", "نُصَيْرَتَانِ", "نُصَيْرَاتٌ",
-        "نُصَيْرٌ", "نُصَيْرَانِ", "نُصَيْرُونَ",
-        "نُصَيْرَةٌ", "نُصَيْرَتَانِ", "نُصَيْرَاتٌ",
-        "أَنَا نُصَيْرٌ", "نَحْنُ نُصَيْرُونَ"
-      ],
-
-      // 20. İSM-İ MENSÛB (نَصْرِيٌّ)
-      20: [
-        "نَصْرِيٌّ", "نَصْرِيَّانِ", "نَصْرِيُّونَ",
-        "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ",
-        "نَصْرِيٌّ", "نَصْرِيَّانِ", "نَصْرِيُّونَ",
-        "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ",
-        "أَنَا نَصْرِيٌّ", "نَحْنُ نَصْرِيُّونَ"
-      ],
-
-      // 21. MÜBALAĞALI İSM-İ FÂİL (نَصَّارٌ)
-      21: [
-        "نَصَّارٌ", "نَصَّارَانِ", "نَصَّارُونَ",
-        "نَصَّارَةٌ", "نَصَّارَتَانِ", "نَصَّارَاتٌ",
-        "نَصَّارٌ", "نَصَّارَانِ", "نَصَّارُونَ",
-        "نَصَّارَةٌ", "نَصَّارَتَانِ", "نَصَّارَاتٌ",
-        "أَنَا نَصَّارٌ", "نَحْنُ نَصَّارُونَ"
-      ],
-
-      // 22. İSM-İ TAFDÎL (أَنْصَرُ)
-      22: [
-        "أَنْصَرُ", "أَنْصَرَانِ", "أَنْصَرُونَ",
-        "نُصْرَى", "نُصْرَيَانِ", "نُصْرَيَاتٌ",
-        "أَنْصَرُ", "أَنْصَرَانِ", "أَنْصَرُونَ",
-        "نُصْرَى", "نُصْرَيَانِ", "نُصْرَيَاتٌ",
-        "أَنَا أَنْصَرُ", "نَحْنُ أَنْصَرُونَ"
-      ],
-
-      // 23. FİİL-İ TAACCÜB-İ EVVEL (مَا أَنْصَرَهُ)
-      23: [
-        "مَا أَنْصَرَهُ", "مَا أَنْصَرَهُمَا", "مَا أَنْصَرَهُمْ",
-        "مَا أَنْصَرَهَا", "مَا أَنْصَرَهُمَا", "مَا أَنْصَرَهُنَّ",
-        "مَا أَنْصَرَكَ", "مَا أَنْصَرَكُمَا", "مَا أَنْصَرَكُمْ",
-        "مَا أَنْصَرَكِ", "مَا أَنْصَرَكُمَا", "مَا أَنْصَرَكُنَّ",
-        "مَا أَنْصَرَنِي", "مَا أَنْصَرَنَا"
-      ],
-
-      // 24. FİİL-İ TAACCÜB-İ SÂNÎ (أَنْصِرْ بِهِ)
-      24: [
-        "أَنْصِرْ بِهِ", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِمْ",
-        "أَنْصِرْ بِهَا", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِنَّ",
-        "أَنْصِرْ بِكَ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُمْ",
-        "أَنْصِرْ بِكِ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُنَّ",
-        "أَنْصِرْ بِي", "أَنْصِرْ بِنَا"
-      ]
+      1: ["نَصَرَ", "نَصَرَا", "نَصَرُوا", "نَصَرَتْ", "نَصَرَتَا", "نَصَرْنَ", "نَصَرْتَ", "نَصَرْتُمَا", "نَصَرْتُمْ", "نَصَرْتِ", "نَصَرْتُمَا", "نَصَرْتُنَّ", "نَصَرْتُ", "نَصَرْنَا"],
+      2: ["يَنْصُرُ", "يَنْصُرَانِ", "يَنْصُرُونَ", "تَنْصُرُ", "تَنْصُرَانِ", "يَنْصُرْنَ", "تَنْصُرُ", "تَنْصُرَانِ", "تَنْصُرُونَ", "تَنْصُرِينَ", "تَنْصُرَانِ", "تَنْصُرْنَ", "أَنْصُرُ", "نَنْصُرُ"],
+      3: ["نَصْرُهُ", "نَصْرُهُمَا", "نَصْرُهُمْ", "نَصْرُهَا", "نَصْرُهُمَا", "نَصْرُهُنَّ", "نَصْرُكَ", "نَصْرُكُمَا", "نَصْرُكُمْ", "نَصْرُكِ", "نَصْرُكُمَا", "نَصْرُكُنَّ", "نَصْرِي", "نَصْرُنَا"],
+      4: ["نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ", "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ", "نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ", "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ", "أَنَا نَاصِرٌ", "نَحْنُ نَاصِرُونَ"],
+      5: ["مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ", "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ", "مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ", "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ", "أَنَا مَنْصُورٌ", "نَحْنُ مَنْصُورُونَ"],
+      6: ["لَمْ يَنْصُرْ", "لَمْ يَنْصُرَا", "لَمْ يَنْصُرُوا", "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ يَنْصُرْنَ", "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرُوا", "لَمْ تَنْصُرِي", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرْنَ", "لَمْ أَنْصُرْ", "لَمْ نَنْصُرْ"],
+      7: ["لَمَّا يَنْصُرْ", "لَمَّا يَنْصُرَا", "لَمَّا يَنْصُرُوا", "لَمَّا تَنْصُرْ", "لَمَّا تَنْصُرَا", "لَمَّا يَنْصُرْنَ", "لَمَّا تَنْصُرْ", "لَمَّا تَنْصُرَا", "لَمَّا تَنْصُرُوا", "لَمَّا تَنْصُرِي", "لَمَّا تَنْصُرَا", "لَمَّا تَنْصُرْنَ", "لَمَّا أَنْصُرْ", "لَمَّا نَنْصُرْ"],
+      8: ["مَا يَنْصُرُ", "مَا يَنْصُرَانِ", "مَا يَنْصُرُونَ", "مَا تَنْصُرُ", "مَا تَنْصُرَانِ", "مَا يَنْصُرْنَ", "مَا تَنْصُرُ", "مَا تَنْصُرَانِ", "مَا تَنْصُرُونَ", "مَا تَنْصُرِينَ", "مَا تَنْصُرَانِ", "مَا تَنْصُرْنَ", "مَا أَنْصُرُ", "مَا نَنْصُرُ"],
+      9: ["لَا يَنْصُرُ", "لَا يَنْصُرَانِ", "لَا يَنْصُرُونَ", "لَا تَنْصُرُ", "لَا تَنْصُرَانِ", "لَا يَنْصُرْنَ", "لَا تَنْصُرُ", "لَا تَنْصُرَانِ", "لَا تَنْصُرُونَ", "لَا تَنْصُرِينَ", "لَا تَنْصُرَانِ", "لَا تَنْصُرْنَ", "لَا أَنْصُرُ", "لَا نَنْصُرُ"],
+      10: ["لَنْ يَنْصَرَ", "لَنْ يَنْصَرَا", "لَنْ يَنْصَرُوا", "لَنْ تَنْصَرَ", "لَنْ تَنْصَرَا", "لَنْ يَنْصَرْنَ", "لَنْ تَنْصَرَ", "لَنْ تَنْصَرَا", "لَنْ تَنْصَرُوا", "لَنْ تَنْصَرِي", "لَنْ تَنْصَرَا", "لَنْ تَنْصَرْنَ", "لَنْ أَنْصَرَ", "لَنْ نَنْصَرَ"],
+      11: ["لِيَنْصُرْ", "لِيَنْصُرَا", "لِيَنْصُرُوا", "لِتَنْصُرْ", "لِتَنْصُرَا", "لِيَنْصُرْنَ", "لِتَنْصُرْ", "لِتَنْصُرَا", "لِتَنْصُرُوا", "لِتَنْصُرِي", "لِتَنْصُرَا", "لِتَنْصُرْنَ", "لِأَنْصُرْ", "لِنَنْصُرْ"],
+      12: ["لَا يَنْصُرْ", "لَا يَنْصُرَا", "لَا يَنْصُرُوا", "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا يَنْصُرْنَ", "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا تَنْصُرُوا", "لَا تَنْصُرِي", "لَا تَنْصُرَا", "لَا تَنْصُرْنَ", "لَا أَنْصُرْ", "لَا نَنْصُرْ"],
+      13: ["لِيَنْصُرْ", "لِيَنْصُرَا", "لِيَنْصُرُوا", "لِتَنْصُرْ", "لِتَنْصُرَا", "لِيَنْصُرْنَ", "أُنْصُرْ", "أُنْصُرَا", "أُنْصُرُوا", "أُنْصُرِي", "أُنْصُرَا", "أُنْصُرْنَ", "أَنَا نَاصِرٌ", "نَحْنُ نَاصِرُونَ"],
+      14: ["لَا يَنْصُرْ", "لَا يَنْصُرَا", "لَا يَنْصُرُوا", "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا يَنْصُرْنَ", "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا تَنْصُرُوا", "لَا تَنْصُرِي", "لَا تَنْصُرَا", "لَا تَنْصُرْنَ", "لَا أَنْصُرْ", "لَا نَنْصُرْ"],
+      15: ["مَنْصَرُهُ", "مَنْصَرُهُمَا", "مَنْصَرُهُمْ", "مَنْصَرُهَا", "مَنْصَرُهُمَا", "مَنْصَرُهُنَّ", "مَنْصَرُكَ", "مَنْصَرُكُمَا", "مَنْصَرُكُمْ", "مَنْصَرُكِ", "مَنْصَرُكُمَا", "مَنْصَرُكُنَّ", "مَنْصَرِي", "مَنْصَرُنَا"],
+      16: ["مِنْصَرُهُ", "مِنْصَرُهُمَا", "مِنْصَرُهُمْ", "مِنْصَرُهَا", "مِنْصَرُهُمَا", "مِنْصَرُهُنَّ", "مِنْصَرُكَ", "مِنْصَرُكُمَا", "مِنْصَرُكُمْ", "مِنْصَرُكِ", "مِنْصَرُكُمَا", "مِنْصَرُكُنَّ", "مِنْصَرِي", "مِنْصَرُنَا"],
+      17: ["نَصْرَتُهُ", "نَصْرَتُهُمَا", "نَصْرَتُهُمْ", "نَصْرَتُهَا", "نَصْرَتُهُمَا", "نَصْرَتُهُنَّ", "نَصْرَتُكَ", "نَصْرَتُكُمَا", "نَصْرَتُكُمْ", "نَصْرَتُكِ", "نَصْرَتُكُمَا", "نَصْرَتُكُنَّ", "نَصْرَتِي", "نَصْرَتُنَا"],
+      18: ["نِصْرَتُهُ", "نِصْرَتُهُمَا", "نِصْرَتُهُمْ", "نِصْرَتُهَا", "نِصْرَتُهُمَا", "نِصْرَتُهُنَّ", "نِصْرَتُكَ", "نِصْرَتُكُمَا", "نِصْرَتُكُمْ", "نِصْرَتُكِ", "نِصْرَتُكُمَا", "نِصْرَتُكُنَّ", "نِصْرَتِي", "نِصْرَتُنَا"],
+      19: ["نُصَيْرٌ", "نُصَيْرَانِ", "نُصَيْرُونَ", "نُصَيْرَةٌ", "نُصَيْرَتَانِ", "نُصَيْرَاتٌ", "نُصَيْرٌ", "نُصَيْرَانِ", "نُصَيْرُونَ", "نُصَيْرَةٌ", "نُصَيْرَتَانِ", "نُصَيْرَاتٌ", "أَنَا نُصَيْرٌ", "نَحْنُ نُصَيْرُونَ"],
+      20: ["نَصْرِيٌّ", "نَصْرِيَّانِ", "نَصْرِيُّونَ", "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ", "نَصْرِيٌّ", "نَصْرِيَّanِ", "نَصْرِيُّونَ", "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ", "أَنَا نَصْرِيٌّ", "نَحْنُ نَصْرِيُّونَ"],
+      21: ["نَصَّارٌ", "نَصَّارَانِ", "نَصَّارُونَ", "نَصَّارَةٌ", "نَصَّارَتَانِ", "نَصَّارَاتٌ", "نَصَّارٌ", "نَصَّارَانِ", "نَصَّارُونَ", "نَصَّارَةٌ", "نَصَّارَتَانِ", "نَصَّارَاتٌ", "أَنَا نَصَّارٌ", "نَحْنُ نَصَّارُونَ"],
+      22: ["أَنْصَرُ", "أَنْصَرَانِ", "أَنْصَرُونَ", "نُصْرَى", "نُصْرَيَانِ", "نُصْرَيَاتٌ", "أَنْصَرُ", "أَنْصَرَانِ", "أَنْصَرُونَ", "نُصْرَى", "نُصْرَيَانِ", "نُصْرَيَاتٌ", "أَنَا أَنْصَرُ", "نَحْنُ أَنْصَرُونَ"],
+      23: ["مَا أَنْصَرَهُ", "مَا أَنْصَرَهُمَا", "مَا أَنْصَرَهُمْ", "مَا أَنْصَرَهَا", "مَا أَنْصَرَهُمَا", "مَا أَنْصَرَهُنَّ", "مَا أَنْصَرَكَ", "مَا أَنْصَرَكُمَا", "مَا أَنْصَرَكُمْ", "مَا أَنْصَرَكِ", "مَا أَنْصَرَكُمَا", "مَا أَنْصَرَكُنَّ", "مَا أَنْصَرَنِي", "مَا أَنْصَرَنَا"],
+      24: ["أَنْصِرْ بِهِ", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِمْ", "أَنْصِرْ بِهَا", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِنَّ", "أَنْصِرْ بِكَ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُمْ", "أَنْصِرْ بِكِ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُنَّ", "أَنْصِرْ بِي", "أَنْصِرْ بِنَا"]
     };
 
     // =========================================================================
@@ -1642,6 +1497,7 @@
           <span class="siga-badge-num">${siga.id}</span>
           <div class="siga-item-arabic">${siga.word}</div>
           <div class="siga-item-title">${escapeHtml(siga.meaning)}</div>
+          ${siga.extraHint ? `<div class="siga-item-hint">${escapeHtml(siga.extraHint)}</div>` : ''}
         `;
         card.addEventListener("click", () => startSigaPronounGame(siga.id));
         grid.appendChild(card);
@@ -1660,6 +1516,7 @@
           id: i + 1,
           word: forms[i] || forms[0],
           meaning: PRONOUN_MEANINGS[i],
+          extraHint: "",
           row: (i < 3 ? 1 : i < 6 ? 2 : i < 9 ? 3 : i < 12 ? 4 : 5)
         });
       }
@@ -1709,22 +1566,32 @@
       }
 
       // 5 Seçenek Oluştur (1 Doğru, 4 Çeldirici)
-      // Çeldiricileri havuzdan seç
       let optionPool = [];
       if (currentGameMode === 'emsile24') {
-        optionPool = EMSILE_24_WORDS.map(w => w.meaning);
+        optionPool = EMSILE_24_WORDS.map(w => ({
+          meaning: w.meaning,
+          extraHint: w.extraHint || ""
+        }));
       } else {
-        optionPool = PRONOUN_MEANINGS.slice();
+        optionPool = PRONOUN_MEANINGS.map(m => ({
+          meaning: m,
+          extraHint: ""
+        }));
       }
 
-      const distractors = optionPool.filter(m => m !== currentWord.meaning);
+      const distractors = optionPool.filter(o => o.meaning !== currentWord.meaning);
       for (let i = distractors.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [distractors[i], distractors[j]] = [distractors[j], distractors[i]];
       }
       const chosenDistractors = distractors.slice(0, 4);
 
-      const choices = [currentWord.meaning, ...chosenDistractors];
+      const targetChoice = {
+        meaning: currentWord.meaning,
+        extraHint: currentWord.extraHint || ""
+      };
+
+      const choices = [targetChoice, ...chosenDistractors];
       for (let i = choices.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [choices[i], choices[j]] = [choices[j], choices[i]];
@@ -1740,9 +1607,12 @@
           btn.setAttribute("type", "button");
           btn.innerHTML = `
             <span class="option-letter">${letters[idx]}</span>
-            <span class="option-text">${escapeHtml(choice)}</span>
+            <div class="option-content-box">
+              <span class="option-text">${escapeHtml(choice.meaning)}</span>
+              ${choice.extraHint ? `<span class="option-hint-pill">${escapeHtml(choice.extraHint)}</span>` : ''}
+            </div>
           `;
-          btn.addEventListener("click", () => handleAnswer(choice, btn));
+          btn.addEventListener("click", () => handleAnswer(choice.meaning, btn));
           grid.appendChild(btn);
         });
       }
@@ -1922,6 +1792,7 @@
           <!-- Arka Yüz: Anlamı / Şahıs Zamiri -->
           <div class="flip-card-back">
             <div class="card-meaning-text">${escapeHtml(item.meaning)}</div>
+            ${item.extraHint ? `<div class="card-extra-hint">${escapeHtml(item.extraHint)}</div>` : ''}
             <span class="card-meaning-tag">ANLAMI ✓</span>
           </div>
         </div>
@@ -1937,7 +1808,7 @@
     }
 
     // =========================================================================
-    // 8. KELİMELERİ DÜZENLE MODALI
+    // 8. KELİMELERİ DÜZENLE MODALI (Artı Anlam / Ek Bilgi Desteği)
     // =========================================================================
     function openEditWordsModal() {
       const container = document.getElementById("editWordsListContainer");
@@ -1947,7 +1818,7 @@
 
       if (titleEl) {
         titleEl.textContent = (currentGameMode === 'emsile24')
-          ? "✏️ 24 Emsile Kelimesini Düzenle"
+          ? "✏️ 24 Emsile Kelimesi ve Artı Anlamları Düzenle"
           : "✏️ 14 Zamir Çekimini Düzenle";
       }
 
@@ -1957,7 +1828,8 @@
         row.innerHTML = `
           <span class="word-edit-num">${idx + 1}.</span>
           <input type="text" class="word-edit-input arabic-input" id="editWord_${idx}" value="${escapeHtml(item.word)}" placeholder="Arapça" />
-          <input type="text" class="word-edit-input" id="editMeaning_${idx}" value="${escapeHtml(item.meaning)}" placeholder="Anlamı" />
+          <input type="text" class="word-edit-input" id="editMeaning_${idx}" value="${escapeHtml(item.meaning)}" placeholder="Başlık / Anlam" />
+          <input type="text" class="word-edit-input" id="editExtra_${idx}" value="${escapeHtml(item.extraHint || '')}" placeholder="Artı Anlam / Ekler (örn: -yor, -ar)" style="max-width: 140px;" />
         `;
         container.appendChild(row);
       });
@@ -1974,9 +1846,11 @@
       for (let i = 0; i < currentQuizWords.length; i++) {
         const wInput = document.getElementById(`editWord_${i}`);
         const mInput = document.getElementById(`editMeaning_${i}`);
+        const eInput = document.getElementById(`editExtra_${i}`);
         const wVal = (wInput ? wInput.value : "").trim() || currentQuizWords[i].word;
         const mVal = (mInput ? mInput.value : "").trim() || currentQuizWords[i].meaning;
-        updated.push({ id: i + 1, word: wVal, meaning: mVal, row: currentQuizWords[i].row });
+        const eVal = (eInput ? eInput.value : "").trim();
+        updated.push({ id: i + 1, word: wVal, meaning: mVal, extraHint: eVal, row: currentQuizWords[i].row });
       }
 
       currentQuizWords = updated;
@@ -1984,7 +1858,7 @@
       closeEditWordsModal();
       initShuffledIndices();
       renderQuestion();
-      showToast("✅ Kelimeler başarıyla güncellendi!");
+      showToast("✅ Kelimeler ve artı anlamlar başarıyla kaydedildi!");
     }
 
     // =========================================================================
