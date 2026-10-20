@@ -1125,6 +1125,86 @@ class LanguageGameEngine {
   }
 
   // ÇİFT YÖNLÜ TEST SORUSU OLUŞTURMA
+  // ==========================================
+  // ADAPTİF TEKRAR & İSTATİSTİK SİSTEMİ (LEITNER / SPACED REPETITION)
+  // ==========================================
+  loadVocabStats() {
+    try {
+      const saved = localStorage.getItem('vocab_adaptive_stats_v2');
+      this.vocabStats = saved ? JSON.parse(saved) : {};
+    } catch (_) {
+      this.vocabStats = {};
+    }
+  }
+
+  saveVocabStats() {
+    try {
+      localStorage.setItem('vocab_adaptive_stats_v2', JSON.stringify(this.vocabStats));
+    } catch (_) {}
+  }
+
+  getWordWeight(wordId) {
+    if (!this.vocabStats) this.loadVocabStats();
+    const st = this.vocabStats[wordId];
+    const streak = (st && typeof st.streak === 'number') ? st.streak : 0;
+    // KULLANICI KURALI:
+    // İlk 5 doğru cevapta bir değişiklik yok (1.0).
+    // Sonraki her doğru cevapta gelme olasılığı %30 azalsın (0.70 katı),
+    // sonraki doğru cevapta kalan olasılık tekrar %30 azalsın.
+    if (streak <= 5) {
+      return 1.0;
+    }
+    const reduced = Math.pow(0.70, streak - 5);
+    return Math.max(0.02, reduced); // Minimum %2 taban ağırlık
+  }
+
+  recordVocabAnswer(wordId, isCorrect) {
+    if (!this.vocabStats) this.loadVocabStats();
+    if (!this.vocabStats[wordId]) {
+      this.vocabStats[wordId] = { streak: 0, totalCorrect: 0, totalWrong: 0 };
+    }
+    const entry = this.vocabStats[wordId];
+    if (isCorrect) {
+      entry.streak = (entry.streak || 0) + 1;
+      entry.totalCorrect = (entry.totalCorrect || 0) + 1;
+    } else {
+      // KULLANICI KURALI:
+      // Herhangi bir noktada yanlış cevap verilirse olasılık değişimlerinin
+      // tamamı sıfırlansın ve normalde olduğu gibi (%100) olsun!
+      entry.streak = 0;
+      entry.totalWrong = (entry.totalWrong || 0) + 1;
+    }
+    this.saveVocabStats();
+  }
+
+  pickNextVocabIndex() {
+    if (!this.currentQuizWords || this.currentQuizWords.length === 0) return 0;
+    if (this.currentQuizWords.length === 1) return 0;
+
+    const weights = this.currentQuizWords.map(w => this.getWordWeight(w.id));
+    let totalWeight = 0;
+    for (let i = 0; i < weights.length; i++) {
+      if (this.currentWord && this.currentQuizWords[i].id === this.currentWord.id && this.currentQuizWords.length > 2) {
+        weights[i] *= 0.05; // Peş peşe aynı kelimenin gelmesini engelle
+      }
+      totalWeight += weights[i];
+    }
+
+    if (totalWeight <= 0) {
+      return Math.floor(Math.random() * this.currentQuizWords.length);
+    }
+
+    const rand = Math.random() * totalWeight;
+    let cumulative = 0;
+    for (let i = 0; i < weights.length; i++) {
+      cumulative += weights[i];
+      if (rand <= cumulative) {
+        return i;
+      }
+    }
+    return this.currentQuizWords.length - 1;
+  }
+
   renderQuestion() {
     if (this.shuffledIndices.length === 0) this.initShuffledIndices();
     this.isAnswering = false;
@@ -1132,7 +1212,14 @@ class LanguageGameEngine {
     const feedbackBar = document.getElementById("langQuizFeedbackBar");
     if (feedbackBar) feedbackBar.style.display = "none";
 
-    const targetIdx = this.shuffledIndices[this.currentOrderIndex];
+    let targetIdx;
+    if (this.currentGameMode === 'vocab') {
+      targetIdx = this.pickNextVocabIndex();
+      this.currentOrderIndex = targetIdx;
+    } else {
+      if (this.shuffledIndices.length === 0) this.initShuffledIndices();
+      targetIdx = this.shuffledIndices[this.currentOrderIndex];
+    }
     this.currentWord = this.currentQuizWords[targetIdx];
 
     const targetWordEl = document.getElementById("langTargetWord");
@@ -1140,7 +1227,24 @@ class LanguageGameEngine {
     const trackerEl = document.getElementById("langCurrentIndex");
     const captionEl = document.getElementById("langTargetCaption");
 
-    if (trackerEl) trackerEl.textContent = `${this.currentOrderIndex + 1} / ${this.currentQuizWords.length}`;
+    if (trackerEl) {
+      if (this.currentGameMode === 'vocab' && this.currentWord) {
+        const st = this.vocabStats ? this.vocabStats[this.currentWord.id] : null;
+        const streak = (st && typeof st.streak === 'number') ? st.streak : 0;
+        const weightPercent = Math.round(this.getWordWeight(this.currentWord.id) * 100);
+        let badgeText = "";
+        if (streak === 0) {
+          badgeText = "🌱 Yeni / Tekrar (%100)";
+        } else if (streak <= 5) {
+          badgeText = `🔥 ${streak}/5 Doğru (%100)`;
+        } else {
+          badgeText = `⭐ Seri ${streak} (Gelme: %${weightPercent})`;
+        }
+        trackerEl.innerHTML = `<span style="font-size:0.8rem; color:#818cf8; font-weight:800;">${badgeText}</span>`;
+      } else {
+        trackerEl.textContent = `${this.currentOrderIndex + 1} / ${this.currentQuizWords.length}`;
+      }
+    }
 
     let questionConfig = null;
 
@@ -1394,9 +1498,16 @@ class LanguageGameEngine {
       langSounds.playCorrect();
       /* vibration disabled */
 
+      if (this.currentGameMode === 'vocab' && this.currentWord) {
+        this.recordVocabAnswer(this.currentWord.id, true);
+      }
       setTimeout(() => {
-        this.currentOrderIndex = (this.currentOrderIndex + 1) % this.currentQuizWords.length;
-        this.renderQuestion();
+        if (this.currentGameMode === 'vocab') {
+          this.renderQuestion();
+        } else {
+          this.currentOrderIndex = (this.currentOrderIndex + 1) % this.currentQuizWords.length;
+          this.renderQuestion();
+        }
       }, 380);
     } else {
       clickedBtn.classList.add("wrong-choice");
@@ -1413,6 +1524,10 @@ class LanguageGameEngine {
       }
 
       this.lastMissedWordId = this.currentWord.id;
+
+      if (this.currentGameMode === 'vocab' && this.currentWord) {
+        this.recordVocabAnswer(this.currentWord.id, false);
+      }
 
       if (this.currentGameMode === 'vocab') {
         // KULLANICI İSTEĞİ: Kelime bölümünde yanlış yapılırsa tabloya gitme!
@@ -1665,8 +1780,12 @@ function advanceLanguageGameQuestion() {
   if (bar) bar.style.display = "none";
   if (window.languageGame) {
     window.languageGame.isAnswering = false;
-    window.languageGame.currentOrderIndex = (window.languageGame.currentOrderIndex + 1) % window.languageGame.currentQuizWords.length;
-    window.languageGame.renderQuestion();
+    if (window.languageGame.currentGameMode === 'vocab') {
+      window.languageGame.renderQuestion();
+    } else {
+      window.languageGame.currentOrderIndex = (window.languageGame.currentOrderIndex + 1) % window.languageGame.currentQuizWords.length;
+      window.languageGame.renderQuestion();
+    }
   }
 }
 window.advanceLanguageGameQuestion = advanceLanguageGameQuestion;
