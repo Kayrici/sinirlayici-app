@@ -2,3045 +2,1307 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Arapça Emsile ve Çekim Merkezi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg-main: #090d16;
-      --bg-card: rgba(26, 34, 53, 0.7);
-      --bg-card-hover: rgba(35, 46, 70, 0.9);
-      --border-color: rgba(255, 255, 255, 0.1);
-      --accent-primary: #6366f1;
-      --accent-glow: rgba(99, 102, 241, 0.4);
-      --accent-success: #10b981;
-      --accent-danger: #ef4444;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-sub: #cbd5e1;
-      --font-arabic: 'Amiri', 'Traditional Arabic', 'Scheherazade New', Tahoma, sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    /* Ambient Glow */
-    .ambient-glow {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 700px;
-      height: 380px;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.08) 45%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Header */
-    header.game-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(9, 13, 22, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-color);
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-nav {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--border-color);
-      color: #fff;
-      padding: 7px 12px;
-      border-radius: 10px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .btn-nav:hover {
-      background: rgba(255, 255, 255, 0.16);
-      transform: translateY(-1px);
-    }
-
-    .header-title-box {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .header-title-box h1 {
-      font-size: 0.98rem;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.2;
-    }
-
-    .header-title-box p {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .btn-header-action {
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      color: #e2e8f0;
-      padding: 7px 11px;
-      border-radius: 9px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-
-    .btn-header-action:hover {
-      background: rgba(99, 102, 241, 0.3);
-      color: #fff;
-    }
-
-    .btn-header-action.primary {
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      border: none;
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-    }
-
-    /* Main Container */
-    .game-container {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 16px 14px 40px 14px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ========================================================
-       1. OYUN ANA MENÜSÜ (3 ANA MOD KARTI)
-       ======================================================== */
-    #mainMenuView {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .menu-hero-banner {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.95));
-      border: 1px solid var(--border-color);
-      border-radius: 18px;
-      padding: 20px 18px;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: rgba(99, 102, 241, 0.2);
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      color: #a5b4fc;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: 0.05em;
-    }
-
-    .menu-hero-banner h2 {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 5px;
-    }
-
-    .menu-hero-banner p {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      max-width: 580px;
-      margin: 0 auto;
-      line-height: 1.4;
-    }
-
-    /* 3'lü Grid */
-    .menu-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 14px;
-    }
-
-    .menu-choice-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 18px;
-      padding: 20px 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 14px;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .menu-choice-card:hover {
-      background: var(--bg-card-hover);
-      border-color: rgba(99, 102, 241, 0.45);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
-    }
-
-    .choice-card-top {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .choice-icon-box {
-      width: 46px;
-      height: 46px;
-      border-radius: 13px;
-      background: rgba(99, 102, 241, 0.18);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.45rem;
-      flex-shrink: 0;
-    }
-
-    .choice-texts h3 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 3px;
-    }
-
-    .choice-texts p {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.35;
-    }
-
-    .choice-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      padding-top: 6px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .choice-features li {
-      font-size: 0.76rem;
-      color: var(--text-sub);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .btn-start-choice {
-      width: 100%;
-      padding: 11px 15px;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      border: none;
-      border-radius: 12px;
-      color: #fff;
-      font-size: 0.88rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      transition: all 0.2s;
-      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
-    }
-
-    .btn-start-choice:hover {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      transform: translateY(-1px);
-    }
-
-    /* ========================================================
-       2. SÎGA SEÇİM MENÜSÜ (24 SÎGA LİSTESİ - ZAMİR OYUNU İÇİN)
-       ======================================================== */
-    #sigaSelectionView {
-      display: none;
-      flex-direction: column;
-      gap: 14px;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .siga-selection-banner {
-      background: rgba(26, 34, 53, 0.75);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .siga-banner-texts h2 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 3px;
-    }
-
-    .siga-banner-texts p {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .siga-grid-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 10px;
-    }
-
-    .siga-item-card {
-      background: rgba(26, 34, 53, 0.6);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 12px 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 3px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      position: relative;
-    }
-
-    .siga-item-card:hover {
-      background: rgba(35, 46, 70, 0.9);
-      border-color: rgba(99, 102, 241, 0.5);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-    }
-
-    .siga-badge-num {
-      position: absolute;
-      top: 6px;
-      left: 8px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-
-    .siga-item-arabic {
-      font-family: var(--font-arabic);
-      font-size: 1.45rem;
-      font-weight: 700;
-      color: #fff;
-      direction: rtl;
-      margin-top: 4px;
-    }
-
-    .siga-item-title {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #818cf8;
-      line-height: 1.25;
-    }
-
-    .siga-item-trans {
-      font-size: 0.72rem;
-      color: #fef08a;
-      font-weight: 600;
-      line-height: 1.2;
-    }
-
-    .siga-item-hint {
-      font-size: 0.68rem;
-      color: #c7d2fe;
-      font-weight: 600;
-      background: rgba(99, 102, 241, 0.2);
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      padding: 1px 6px;
-      border-radius: 4px;
-      margin-top: 2px;
-    }
-
-    /* ========================================================
-       3. QUIZ BÖLÜMÜ (5 ŞIKLI TEST)
-       ======================================================== */
-    #quizSection {
-      display: none;
-      flex-direction: column;
-      gap: 16px;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .quiz-tracker-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .tracker-pill {
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      padding: 5px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #a5b4fc;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .sound-toggle-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--border-color);
-      color: #fff;
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .sound-toggle-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    /* Target Word Card */
-    .target-word-card {
-      background: linear-gradient(135deg, rgba(26, 34, 53, 0.9), rgba(15, 23, 42, 0.95));
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      border-radius: 20px;
-      padding: 24px 18px;
-      text-align: center;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-      position: relative;
-    }
-
-    .word-badge-tag {
-      display: inline-block;
-      background: rgba(99, 102, 241, 0.2);
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      color: #c7d2fe;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      margin-bottom: 10px;
-    }
-
-    .target-word-title {
-      margin-bottom: 8px;
-      text-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-    }
-
-    .target-word-title.arabic-font {
-      font-family: var(--font-arabic);
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: #ffffff;
-      direction: rtl;
-      line-height: 1.35;
-    }
-
-    .target-word-title.latin-font {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #f8fafc;
-      direction: ltr;
-      line-height: 1.5;
-      padding: 10px 14px;
-      background: rgba(15, 23, 42, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 12px;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    .target-word-instruction {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    /* KELİME MODU: SOLDAN SAĞA TEKİL / İKİLİ / ÇOĞUL VURGUSU */
-    .vocab-triplet-display {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      direction: ltr !important;
-      margin: 8px 0 12px 0;
-      flex-wrap: wrap;
-    }
-
-    .triplet-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: rgba(30, 41, 59, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 8px 14px;
-      min-width: 100px;
-    }
-
-    .triplet-sub-label {
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: #818cf8;
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
-    }
-
-    .triplet-arabic-text {
-      font-family: var(--font-arabic);
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #ffffff;
-      direction: rtl;
-    }
-
-    .triplet-sep-symbol {
-      color: #94a3b8;
-      font-size: 1.4rem;
-      font-weight: 700;
-    }
-
-    /* 5 Options Grid */
-    .options-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .option-btn {
-      width: 100%;
-      background: rgba(26, 34, 53, 0.65);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 12px 16px;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      color: #fff;
-      font-family: inherit;
-      text-align: left;
-    }
-
-    .option-btn:hover:not(:disabled) {
-      background: rgba(35, 46, 70, 0.9);
-      border-color: rgba(99, 102, 241, 0.45);
-      transform: translateX(4px);
-    }
-
-    .option-letter {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #cbd5e1;
-      font-size: 0.85rem;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-      transition: all 0.2s;
-    }
-
-    .option-content-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex: 1;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .option-text {
-      font-size: 0.96rem;
-      font-weight: 600;
-      color: #f1f5f9;
-      line-height: 1.3;
-    }
-
-    .option-text.arabic-font {
-      font-family: var(--font-arabic);
-      font-size: 1.55rem;
-      font-weight: 700;
-      direction: rtl;
-      color: #ffffff;
-    }
-
-    /* Şıklarda Soldan Sağa Tekil / İkili / Çoğul Formatı */
-    .option-text.arabic-triplet {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      direction: ltr !important;
-      font-family: var(--font-arabic);
-      font-size: 1.35rem;
-      color: #ffffff;
-    }
-
-    .triplet-part {
-      direction: rtl;
-      display: inline-block;
-    }
-
-    .triplet-divider {
-      color: #818cf8;
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-
-    .option-btn.correct-choice {
-      background: rgba(16, 185, 129, 0.2) !important;
-      border-color: #10b981 !important;
-      box-shadow: 0 0 16px rgba(16, 185, 129, 0.35) !important;
-    }
-
-    .option-btn.correct-choice .option-letter {
-      background: #10b981;
-      border-color: #10b981;
-      color: #fff;
-    }
-
-    .option-btn.wrong-choice {
-      background: rgba(239, 68, 68, 0.2) !important;
-      border-color: #ef4444 !important;
-      animation: shake 0.35s ease;
-      box-shadow: 0 0 16px rgba(239, 68, 68, 0.35) !important;
-    }
-
-    .option-btn.wrong-choice .option-letter {
-      background: #ef4444;
-      border-color: #ef4444;
-      color: #fff;
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-6px); }
-      40%, 80% { transform: translateX(6px); }
-    }
-
-    /* ========================================================
-       4. TABLO BÖLÜMÜ (3D FLASHCARD TABLOLARI)
-       ======================================================== */
-    #tableSection {
-      display: none;
-      flex-direction: column;
-      gap: 14px;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .table-banner {
-      background: rgba(26, 34, 53, 0.75);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .table-banner-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .table-banner-icon {
-      font-size: 1.6rem;
-    }
-
-    .table-banner-info h3 {
-      font-size: 0.96rem;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.25;
-    }
-
-    .table-banner-info p {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .btn-continue {
-      background: linear-gradient(135deg, #10b981, #059669);
-      border: none;
-      color: #fff;
-      padding: 9px 16px;
-      border-radius: 10px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-      transition: all 0.2s;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    }
-
-    .btn-continue:hover {
-      background: linear-gradient(135deg, #059669, #047857);
-      transform: translateY(-1px);
-    }
-
-    .btn-continue.bottom-full {
-      width: 100%;
-      padding: 12px 18px;
-      justify-content: center;
-      font-size: 0.92rem;
-      margin-top: 8px;
-    }
-
-    /* Tablo Izgara Kapsayıcısı */
-    .emsile-table-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      width: 100%;
-    }
-
-    .emsile-row {
-      display: grid;
-      direction: rtl; /* SAĞDAN SOLA DİZİLİŞ */
-      gap: 8px;
-      width: 100%;
-    }
-
-    /* 5 Sütunlu Emsile Satırları */
-    .emsile-row.cols-5 {
-      grid-template-columns: repeat(5, 1fr);
-      width: 100%;
-      margin: 0;
-    }
-
-    /* 4 Kelimeli 3. Satır (Sağa yapışık: 5 sütunda ilk 4 hücreye yerleşir, sol hücre boş kalır) */
-    .emsile-row.cols-4 {
-      grid-template-columns: repeat(5, 1fr);
-      width: 100%;
-      margin: 0;
-    }
-
-    /* 3 Sütunlu Zamir Satırları */
-    .emsile-row.cols-3 {
-      grid-template-columns: repeat(3, 1fr);
-      width: 100%;
-      margin: 0;
-    }
-
-    /* Zamir Tablosu 5. Satır (Ben 1 sütun, Biz orta ve solu kaplasın -> span 2) */
-    .emsile-row.zamir-row-5 {
-      grid-template-columns: repeat(3, 1fr);
-      width: 100%;
-      margin: 0;
-    }
-
-    .emsile-row.zamir-row-5 .card-span-2 {
-      grid-column: span 2;
-    }
-
-    
-    /* Kelime Tablosu Zengin Ehl-i Sünnet / Müfredât Anlamları Stili */
-    .vocab-grid-wrapper .flip-card {
-      height: 136px;
-    }
-
-    .vocab-grid-wrapper .flip-card-back {
-      padding: 8px 8px 18px 8px !important;
-      justify-content: center !important;
-    }
-
-    .vocab-grid-wrapper .card-meaning-text {
-      font-size: 0.76rem !important;
-      line-height: 1.35 !important;
-      font-weight: 600 !important;
-      max-height: 84px !important;
-      overflow-y: auto !important;
-      scrollbar-width: thin;
-      padding: 0 4px;
-      color: #ffffff;
-    }
-
-    /* Kelime Modu Tablosu: Kartlar Tekil / İkili / Çoğul */
-    .vocab-grid-wrapper {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 12px;
-      width: 100%;
-    }
-
-    @media (max-width: 520px) {
-      .emsile-row {
-        gap: 6px;
-      }
-    }
-
-    /* 3D Flip Card */
-    .flip-card {
-      perspective: 1000px;
-      -webkit-perspective: 1000px;
-      height: 104px;
-      cursor: pointer;
-      user-select: none;
-      -webkit-user-select: none;
-      position: relative;
-    }
-
-    @media (max-width: 420px) {
-      .flip-card {
-        height: 96px;
-      }
-    }
-
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-      transform-style: preserve-3d;
-      -webkit-transform-style: preserve-3d;
-      border-radius: 12px;
-    }
-
-    .flip-card.flipped .flip-card-inner {
-      transform: rotateY(180deg);
-      -webkit-transform: rotateY(180deg);
-    }
-
-    .flip-card-front,
-    .flip-card-back {
-      position: absolute !important;
-      top: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      bottom: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      -webkit-backface-visibility: hidden !important;
-      backface-visibility: hidden !important;
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 6px 6px 18px 6px;
-      box-sizing: border-box;
-      text-align: center;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Ön Yüz: Arapça */
-    .flip-card-front {
-      background: rgba(30, 41, 59, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: #ffffff;
-      transform: rotateY(0deg);
-      -webkit-transform: rotateY(0deg);
-      z-index: 2;
-    }
-
-    .card-id-tag {
-      position: absolute;
-      top: 4px;
-      left: 6px;
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.4);
-    }
-
-    .card-word-text {
-      font-family: var(--font-arabic);
-      font-size: 1.45rem;
-      font-weight: 700;
-      direction: rtl;
-      line-height: 1.25;
-      color: #ffffff;
-    }
-
-    @media (max-width: 420px) {
-      .card-word-text {
-        font-size: 1.28rem;
-      }
-    }
-
-    .card-flip-hint {
-      position: absolute;
-      bottom: 4px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.62rem;
-      font-weight: 600;
-      color: rgba(148, 163, 184, 0.85);
-      white-space: nowrap;
-    }
-
-    /* Arka Yüz: Anlamı ve Çevirisi (Aşağı kayma düzeltildi, tam merkezli) */
-    .flip-card-back {
-      background: linear-gradient(135deg, #3730a3, #4f46e5);
-      border: 1px solid rgba(165, 180, 252, 0.4);
-      color: #ffffff;
-      transform: rotateY(180deg);
-      -webkit-transform: rotateY(180deg);
-      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
-      z-index: 1;
-    }
-
-    .flip-card.flipped .flip-card-back {
-      z-index: 3;
-    }
-
-    .flip-card.flipped .flip-card-front {
-      z-index: 1;
-    }
-
-    .card-meaning-text {
-      font-size: 0.82rem;
-      font-weight: 800;
-      line-height: 1.25;
-      padding: 0 4px;
-      color: #ffffff;
-      max-width: 100%;
-      word-break: break-word;
-    }
-
-    .card-trans-text {
-      font-size: 0.72rem;
-      color: #fef08a;
-      font-weight: 700;
-      margin-top: 2px;
-      line-height: 1.18;
-      max-width: 100%;
-    }
-
-    .card-extra-hint {
-      background: rgba(251, 191, 36, 0.22);
-      border: 1px solid rgba(251, 191, 36, 0.4);
-      color: #fef08a;
-      border-radius: 5px;
-      padding: 1px 5px;
-      font-size: 0.62rem;
-      font-weight: 600;
-      margin-top: 2px;
-      max-width: 95%;
-      line-height: 1.15;
-    }
-
-    .card-meaning-tag {
-      position: absolute;
-      bottom: 4px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.56rem;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      color: rgba(255, 255, 255, 0.75);
-      white-space: nowrap;
-    }
-
-    /* Kelime Modu İçin Özel Kart Tasarımı (Tekil en sağda, Çoğul en solda) */
-    .vocab-card-triplet {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      gap: 4px;
-      direction: ltr !important;
-      width: 100%;
-      padding: 0 4px;
-    }
-
-    .vct-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .vct-lbl {
-      font-size: 0.58rem;
-      color: #a5b4fc;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .vct-arabic {
-      font-family: var(--font-arabic);
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #fff;
-      direction: rtl;
-      line-height: 1.25;
-      text-align: center;
-      word-break: keep-all;
-    }
-
-    .vct-sep {
-      color: #64748b;
-      font-weight: 700;
-      font-size: 0.85rem;
-      flex-shrink: 0;
-    }
-
-    /* Yanlış Yapılan Kartı Vurgulama */
-    .flip-card.missed-highlight .flip-card-front {
-      border: 2px solid #ef4444;
-      box-shadow: 0 0 16px rgba(239, 68, 68, 0.6);
-      animation: pulseBorder 1.5s infinite;
-    }
-
-    @keyframes pulseBorder {
-      0%, 100% { border-color: #ef4444; }
-      50% { border-color: #f87171; }
-    }
-
-    /* ========================================================
-       5. MODAL VE TOAST
-       ======================================================== */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-
-    .modal-card {
-      background: #0f172a;
-      border: 1px solid var(--border-color);
-      border-radius: 18px;
-      width: 100%;
-      max-width: 720px;
-      max-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    }
-
-    .modal-header {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .modal-header h3 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #fff;
-    }
-
-    .modal-close-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.3rem;
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    .modal-body {
-      padding: 16px 20px;
-      overflow-y: auto;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .word-edit-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(30, 41, 59, 0.5);
-      padding: 7px 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .word-edit-num {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      width: 22px;
-    }
-
-    .word-edit-input {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid var(--border-color);
-      color: #fff;
-      padding: 6px 9px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      outline: none;
-      flex: 1;
-    }
-
-    .word-edit-input.arabic-input {
-      font-family: var(--font-arabic);
-      font-size: 1.15rem;
-      direction: rtl;
-    }
-
-    .word-edit-input:focus {
-      border-color: var(--accent-primary);
-    }
-
-    .btn-add-word-row {
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px dashed rgba(99, 102, 241, 0.4);
-      color: #c7d2fe;
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 6px;
-      transition: all 0.2s;
-    }
-
-    .btn-add-word-row:hover {
-      background: rgba(99, 102, 241, 0.25);
-      color: #fff;
-    }
-
-    .btn-del-word {
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      color: #fca5a5;
-      padding: 5px 8px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.8rem;
-    }
-
-    .modal-footer {
-      padding: 14px 20px;
-      border-top: 1px solid var(--border-color);
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-    }
-
-    .btn-modal {
-      padding: 9px 18px;
-      border-radius: 10px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .btn-modal.cancel {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--border-color);
-      color: #cbd5e1;
-    }
-
-    .btn-modal.save {
-      background: linear-gradient(135deg, #10b981, #059669);
-      border: none;
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    }
-
-    .toast-message {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      opacity: 0;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: none;
-    }
-
-    .toast-message.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ========================================================
-       GÜVENLİ ÇIKIŞ MODALI & OTURUM KAPANDI EKRANI
-       ======================================================== */
-    .btn-exit-nav {
-      background: rgba(239, 68, 68, 0.18) !important;
-      border-color: rgba(239, 68, 68, 0.45) !important;
-      color: #fca5a5 !important;
-    }
-
-    .btn-exit-nav:hover {
-      background: rgba(239, 68, 68, 0.3) !important;
-      transform: translateY(-1px);
-    }
-
-    .menu-exit-banner {
-      margin-top: 28px;
-      margin-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-    }
-
-    .btn-menu-exit {
-      background: rgba(239, 68, 68, 0.14);
-      border: 1px solid rgba(239, 68, 68, 0.38);
-      color: #fca5a5;
-      padding: 12px 24px;
-      border-radius: 12px;
-      font-size: 0.92rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    }
-
-    .btn-menu-exit:hover {
-      background: rgba(239, 68, 68, 0.25);
-      border-color: rgba(239, 68, 68, 0.6);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(239, 68, 68, 0.3);
-    }
-
-    .safe-exit-sub {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
-    .exit-modal-card {
-      max-width: 440px;
-      text-align: center;
-      background: #0f172a;
-      border: 1px solid rgba(239, 68, 68, 0.35);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
-    }
-
-    .exit-modal-body {
-      align-items: center;
-      text-align: center;
-      padding: 24px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .exit-modal-icon {
-      font-size: 3rem;
-      margin-bottom: 4px;
-      animation: wave 1.2s infinite ease-in-out;
-    }
-
-    @keyframes wave {
-      0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(15deg); }
-    }
-
-    .exit-modal-body h4 {
-      font-size: 1.15rem;
-      color: #ffffff;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-
-    .exit-modal-body p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
-
-    .exit-modal-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 14px 20px;
-      border-top: 1px solid var(--border-color);
-      background: rgba(0, 0, 0, 0.2);
-    }
-
-    .btn-danger-exit {
-      background: linear-gradient(135deg, #ef4444, #dc2626);
-      color: #ffffff;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 10px;
-      font-size: 0.86rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
-    }
-
-    .btn-danger-exit:hover {
-      background: linear-gradient(135deg, #dc2626, #b91c1c);
-      transform: translateY(-1px);
-    }
-
-    /* Çıkış Yapıldı Ekranı */
-    #exitScreenView {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 40px 16px;
-      min-height: 60vh;
-      animation: fadeIn 0.4s ease;
-    }
-
-    .exit-screen-card {
-      background: rgba(30, 41, 59, 0.85);
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      border-radius: 20px;
-      padding: 36px 24px;
-      max-width: 480px;
-      width: 100%;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .exit-screen-badge {
-      font-size: 3.5rem;
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .exit-screen-title {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #ffffff;
-    }
-
-    .exit-screen-desc {
-      font-size: 0.9rem;
-      color: #cbd5e1;
-      line-height: 1.55;
-    }
-
-    .exit-screen-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 8px;
-    }
-
-    .btn-restart-app {
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      color: #ffffff;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 12px;
-      font-size: 0.92rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
-      transition: all 0.2s ease;
-    }
-
-    .btn-restart-app:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(99, 102, 241, 0.6);
-    }
-
-
-    /* Arama ve Filtreleme Kutusu */
-    .table-search-box {
-      width: 100%;
-      margin: 8px 0 16px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .table-search-input {
-      width: 100%;
-      max-width: 520px;
-      background: rgba(30, 41, 59, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 12px;
-      padding: 10px 18px;
-      color: #ffffff;
-      font-size: 0.9rem;
-      font-family: inherit;
-      outline: none;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-    }
-
-    .table-search-input:focus {
-      border-color: #6366f1;
-      box-shadow: 0 0 16px rgba(99, 102, 241, 0.45);
-      background: rgba(30, 41, 59, 0.95);
-    }
-
-
-    /* Kelime Modu Yanlış Cevap Bildirimi ve Devam Et Butonu */
-    .quiz-feedback-bar {
-      margin-top: 18px;
-      width: 100%;
-      background: rgba(30, 41, 59, 0.95);
-      border: 1px solid rgba(239, 68, 68, 0.45);
-      border-radius: 14px;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 8px 24px rgba(239, 68, 68, 0.22);
-    }
-
-    @keyframes slideUpFade {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .feedback-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .feedback-icon {
-      font-size: 1.35rem;
-    }
-
-    .feedback-text {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #fca5a5;
-    }
-
-    .btn-feedback-continue {
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: #ffffff;
-      border: none;
-      padding: 10px 22px;
-      border-radius: 10px;
-      font-size: 0.92rem;
-      font-weight: 800;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .btn-feedback-continue:hover {
-      background: linear-gradient(135deg, #059669, #047857);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.6);
-    }
-
-    @media (max-width: 520px) {
-      .quiz-feedback-bar {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-      }
-      .feedback-info {
-        justify-content: center;
-      }
-      .btn-feedback-continue {
-        justify-content: center;
-        width: 100%;
-      }
-    }
-
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Sınırlayıcı</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="ambient-glow"></div>
 
-  <!-- HEADER -->
-  <header class="game-header">
-    <div class="header-left">
-      <button type="button" class="btn-nav btn-exit-nav" id="btnSafeExitHeader" onclick="openSafeExitModal()" title="Güvenli Çıkış Yap">
-        🚪 Çıkış
-      </button>
-      <button type="button" class="btn-nav" id="btnBackToMenu" onclick="showScreen('mainMenuView')" style="display: none;" title="Oyun Menüsüne Dön">
-        ⬅️ Menü
-      </button>
+  <!-- Ekranda Yukarıdan Aşağı Kayan Bildirim (Heads-Up Dropdown Notification) -->
+  <div id="headsUpNotificationBanner" class="heads-up-banner" style="display: none;">
+    <div class="heads-up-card">
+      <div class="heads-up-top">
+        <div class="heads-up-brand">
+          <span class="heads-up-icon">🔔</span>
+          <span class="heads-up-app-title">Sınırlayıcı Hatırlatıcı</span>
+        </div>
+        <button class="heads-up-close" onclick="closeHeadsUpBanner()">✕</button>
+      </div>
+      <div class="heads-up-body">
+        <h4 id="headsUpTitle" class="heads-up-msg">Hatırlatıcı Mesajı</h4>
+        <p id="headsUpSub" class="heads-up-sub">Planlanan zaman geldi</p>
+      </div>
+      <div class="heads-up-actions">
+        <button id="btnNotifDone" class="btn-notif-action done" onclick="handleNotificationAction(true)">
+          ✅ Yaptım
+        </button>
+        <button id="btnNotifNotDone" class="btn-notif-action not-done" onclick="handleNotificationAction(false)">
+          ❌ Yapmadım
+        </button>
+      </div>
     </div>
+  </div>
 
-    <div class="header-title-box">
-      <h1 id="headerMainTitle" style="font-size: 1.3rem; font-weight: 800; color: #fff; margin: 0;">Arapça</h1>
+
+  <!-- Üst Başlık (Header): Uygulama simgesi + Sınırlayıcı Başlığı (Altyazı kaldırıldı) + Ayarlar butonu -->
+  <header class="app-header">
+    <div class="brand-wrapper">
+      <div class="brand-icon" id="brandClockIcon" title="Sınırlayıcı">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>Sınırlayıcı</h1>
+      </div>
     </div>
 
     <div class="header-actions">
-      <button type="button" class="btn-header-action" id="btnToggleTableDirect" onclick="toggleTableDirectly()" style="display: none;">
-        📖 Tabloyu Gör
-      </button>
-      <button type="button" class="btn-header-action" onclick="openEditWordsModal()">
-        ✏️ Düzenle
+      <div id="serviceStatusBadge" class="status-badge warning" onclick="handleServiceBadgeClick()">
+        <span class="status-dot"></span>
+        <span id="serviceStatusText">İzin Gerekli</span>
+      </div>
+      <button id="btnHeaderSettings" class="btn-header-gear" onclick="openSettingsView()" title="Ayarlar">
+        <span>⚙️ Ayarlar</span>
+        <span id="incomingBadge" class="tab-badge" style="display: none; background: #ef4444; margin-left: 4px;">0</span>
       </button>
     </div>
   </header>
 
-  <div class="game-container">
-    <!-- 1. OYUN ANA MENÜSÜ -->
-    <section id="mainMenuView">
-      <div class="menu-hero-banner">
-        <span class="hero-badge">🎯 ARAPÇA ÇALIŞMA MERKEZİ</span>
-        <h2>Ne Çalışmak İstiyorsunuz?</h2>
-        <p>Aşağıdan istediğiniz oyun modunu seçin. Çekimler, sîga başlıkları, fiil manaları veya Tekil / İkili / Çoğul kelime eşleştirmesi yapabilirsiniz.</p>
+  <!-- 80k+ Hafıza Oyunu Başarı Bannerı (15 Dakika Süreli) -->
+  <div id="hafizaScoreBanner" class="hafiza-score-banner" style="display: none;">
+    <div class="hafiza-banner-left">
+      <div class="hafiza-banner-icon">🏆</div>
+      <div class="hafiza-banner-info">
+        <div class="hafiza-banner-title">Hafıza Oyunu Rekoru</div>
+        <div class="hafiza-banner-score" id="hafizaScoreBannerValue">80.000 Puan Yapıldı! 🎉</div>
+      </div>
+    </div>
+    <div class="hafiza-banner-badge" id="hafizaScoreBannerTimer">⏱️ 15:00</div>
+  </div>
+
+  <!-- İzin Eksikse Görünen Uyarı Kutusu -->
+  <div id="permissionBanner" class="permission-banner" style="display: none;">
+    <div class="banner-header">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+      </svg>
+      <span>Erişilebilirlik İzni Gerekli</span>
+    </div>
+    <div class="banner-desc">
+      Sınırlayıcının süre dolduğunda hedef uygulamayı veya küçük ekranı (PiP) kapatıp sizi ana ekrana atabilmesi için Erişilebilirlik Hizmetini açmanız gerekmektedir.
+    </div>
+    <button class="banner-btn" onclick="openAccessibilitySettings()">İzni Etkinleştir</button>
+  </div>
+
+  <!-- Ana Sekmeler (Tam olarak 3 Sekme - Sağa kaydırmasız tüm ekrana sığar) -->
+  <nav class="nav-tabs fixed-three-tabs">
+    <button class="tab-btn active" id="tabBtnLimits" onclick="switchTab('limits')">
+      <span>⏱️ Sınırlayıcı</span>
+      <span id="limitsCountBadge" class="tab-badge">0</span>
+    </button>
+    <button class="tab-btn pomodoro-tab" id="tabBtnPomodoro" onclick="switchTab('pomodoro')">
+      <span>📖 Pomodoro</span>
+    </button>
+    <button class="tab-btn" id="tabBtnReminders" onclick="switchTab('reminders')">
+      <span>🔔 Hatırlatıcı</span>
+      <span id="remindersCountBadge" class="tab-badge">0</span>
+    </button>
+  </nav>
+
+  <!-- ========================================== -->
+  <!-- 1. SEKME: SINIRLAYICI                       -->
+  <!-- ========================================== -->
+  <main id="tabLimits" class="tab-content active">
+    <div class="section-title">
+      <span>Aktif Sınırlar</span>
+      <button class="btn-primary-sm btn-add-limit-hold" id="btnAddLimitTop">
+        <span class="hold-progress-bar"></span>
+        <span class="btn-text">+ Yeni Uygulama Sınırla</span>
+      </button>
+    </div>
+
+    <!-- Zamanlanmış Kilit Uyarısı (Mod açık olduğunda ortada görünür) -->
+    <div id="scheduledLockBanner" class="scheduled-lock-center-banner" style="display: none;" onclick="openScheduledLockModal()">
+      <div class="scheduled-lock-icon-wrap">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" class="scheduled-lock-svg">
+          <rect x="3" y="11" width="18" height="11" rx="3" stroke="#ef4444" stroke-width="2" fill="rgba(239, 68, 68, 0.2)"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="16" r="1.5" fill="#ef4444"/>
+        </svg>
+      </div>
+      <div class="scheduled-lock-content">
+        <h3 id="scheduledLockBannerText" class="scheduled-lock-title">Tüm uygulamalar 07:00 saatine kadar sınırlandırılmıştır</h3>
+        <p id="scheduledLockBannerSub" class="scheduled-lock-subtitle">Pomodoro izinleri ve istisnalar haricindeki uygulamalara giriş yasaktır.</p>
+      </div>
+      <div class="scheduled-lock-chip">Düzenle ⏱️</div>
+    </div>
+    
+    <div id="limitsList" class="card-list">
+      <!-- Dinamik olarak JS ile doldurulur (Paket adları gizlenmiştir) -->
+    </div>
+
+    <div id="emptyLimitsState" class="empty-state" style="display: none;">
+      <div class="empty-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <h3>Henüz Sınır Eklenmedi</h3>
+      <p>Kullanımını kısıtlamak istediğiniz uygulamaları seçip günlük veya mola sınırları koyun.</p>
+      
+    </div>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- 2. SEKME: POMODORO (KİTAP SİMGESİ İLE)      -->
+  <!-- ========================================== -->
+  <main id="tabPomodoro" class="tab-content">
+    <div class="pomodoro-card">
+      <div class="pomodoro-timer-circle" id="pomodoroCircle">
+        <div id="pomodoroTimeDisplay" class="pomodoro-time-display">25:00</div>
+        <div id="pomodoroStatusText" class="pomodoro-status-text">Odaklanmaya Hazır</div>
+      </div>
+
+      <div id="pomodoroSetupControls" class="config-group">
+        <label style="margin-bottom: 6px;">Odaklanma Süresi:</label>
+        <div class="chip-row" style="justify-content: center;">
+          <button type="button" class="time-chip" onclick="selectPomodoroDuration(1)">1 dk (Test)</button>
+          <button type="button" class="time-chip" onclick="selectPomodoroDuration(15)">15 dk</button>
+          <button type="button" class="time-chip selected" onclick="selectPomodoroDuration(25)">25 dk</button>
+          <button type="button" class="time-chip" onclick="selectPomodoroDuration(45)">45 dk</button>
+          <button type="button" class="time-chip" onclick="selectPomodoroDuration(60)">60 dk</button>
+        </div>
+      </div>
+
+      <button id="btnPomodoroToggle" class="btn-pomodoro-toggle start" onclick="togglePomodoroState()">
+        <span>▶️ Odaklanmayı Başlat</span>
+      </button>
+    </div>
+
+    <div class="pomodoro-allowed-box">
+      <!-- Arama Çubuğu -->
+      <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+        <input type="text" id="pomodoroSearchInput" class="search-input" style="padding: 8px 12px; font-size: 0.8rem;" placeholder="Uygulama ara..." oninput="filterPomodoroApps()">
+        <button class="btn-icon-subtle" onclick="resetPomodoroExceptions()">Sıfırla</button>
+      </div>
+
+      <!-- 1. BÖLÜM: İZİN VERİLMEYEN UYGULAMALAR (KİLİTLENECEK) -->
+      <div class="pomodoro-section-block">
+        <div class="pomodoro-section-header">
+          <div class="pomodoro-section-title blocked">
+            <span>⛔ İzin Verilmeyen Uygulamalar</span>
+            <span id="pomodoroBlockedCountBadge" class="tab-badge" style="background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4);">0</span>
+          </div>
+        </div>
+        <p class="pomodoro-section-subtitle">
+          Pomodoro aktif edildiğinde bu uygulamaların açılması engellenir ve kilitlenir.
+        </p>
+        <div id="pomodoroBlockedAppsList" class="pomodoro-apps-list">
+          <!-- JS ile doldurulur: Kilitlenecek uygulamalar -->
+        </div>
+      </div>
+
+      <!-- 2. BÖLÜM: İZİN VERİLEN UYGULAMALAR -->
+      <div class="pomodoro-section-block" style="margin-top: 18px;">
+        <div class="pomodoro-section-header">
+          <div class="pomodoro-section-title allowed">
+            <span>✅ İzin Verilen Uygulamalar</span>
+            <span id="pomodoroAllowedCountBadge" class="tab-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4);">0</span>
+          </div>
+        </div>
+        <p class="pomodoro-section-subtitle">
+          Pomodoro sırasında serbest olan uygulamalar (İstisnalar, arama, mesajlaşma ve sınırlayıcı).
+        </p>
+        <div id="pomodoroAllowedAppsList" class="pomodoro-apps-list">
+          <!-- JS ile doldurulur: İzin verilen uygulamalar -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- 3. SEKME: HATIRLATICI                       -->
+  <!-- ========================================== -->
+  <main id="tabReminders" class="tab-content">
+    <!-- Hatırlatıcı Kapsam Seçimi: Kendim vs Başkası İçin -->
+    <div class="reminder-scope-switcher">
+      <button id="scopeBtnSelf" class="scope-btn active" onclick="switchReminderScope('self')">
+        <span>👤 Kendim</span>
+        <span id="scopeSelfBadge" class="tab-badge" style="display: none; background: #ef4444; margin-left: 6px;">0</span>
+      </button>
+      <button id="scopeBtnOthers" class="scope-btn" onclick="switchReminderScope('others')">
+        <span>👥 Başkası İçin</span>
+      </button>
+    </div>
+
+    <!-- 1. KENDİM İÇİN HATIRLATICILAR BÖLÜMÜ -->
+    <div id="selfRemindersSection">
+      <!-- Gelen İstek Bildirim Kutusu (Kendim Seçeneği Altında Kullanıcıya Sunulur: Kabul Et / Kabul Etme) -->
+      <div id="incomingNoticeCard" class="incoming-requests-card" style="display: none;">
+        <div class="incoming-card-header">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.3rem;">📬</span>
+            <div>
+              <span class="incoming-header-title">Size Gelen Hatırlatıcı İsteği</span>
+              <p class="incoming-header-sub">Başkası tarafından size bir görev tanımlandı</p>
+            </div>
+          </div>
+          <span id="incomingNoticeCount" class="tab-badge" style="background: #ef4444;">0</span>
+        </div>
+        <div id="incomingNoticeList" class="incoming-items-container"></div>
+      </div>
+
+
+
+      <div class="section-title">
+        <span>Hatırlatıcılarım</span>
+        <button id="btnHeaderAddReminder" class="btn-primary-sm" style="display: none;" onclick="openAddReminderModal()">+ Yeni Hatırlatıcı Ekle</button>
+      </div>
+
+      <div id="remindersList" class="card-list">
+        <!-- Dinamik olarak JS ile doldurulur -->
+      </div>
+
+      <div id="emptyRemindersState" class="empty-state" style="display: none;">
+        <div class="empty-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </div>
+        <h3>Henüz Hatırlatıcı Eklenmedi</h3>
+        <button class="btn-primary" style="margin-top: 14px;" onclick="openAddReminderModal()">+ Yeni Hatırlatıcı Ekle</button>
+      </div>
+    </div>
+
+    <!-- 2. BAŞKASI İÇİN HATIRLATICILAR & CANLI TAKİP BÖLÜMÜ -->
+    <div id="othersRemindersSection" style="display: none;">
+      <div class="section-title">
+        <span>Başkasına Gönderilenler & Canlı Takip</span>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-icon-subtle" onclick="loadSentRequests(true)">🔄 Yenile</button>
+          <button class="btn-primary-sm" onclick="openSettingsViewAndFocusTarget()">+ Görev Gönder</button>
+        </div>
+      </div>
+
+      <!-- Gönderilen İstekler Listesi (Canlı İlerleme, Yüzde, İstatistik ve Çizgi Grafiği Butonu) -->
+      <div id="sentRemindersList" class="card-list"></div>
+
+      <div id="emptySentRemindersState" class="empty-state" style="display: none;">
+        <div class="empty-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 2L11 13"></path>
+            <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+          </svg>
+        </div>
+        <h3>Henüz Başkasına Görev Gönderilmedi</h3>
+        <p>Başkalarına hatırlatıcı görevi gönderip, yapıp yapmadıklarını canlı grafik ve yüzdelerle takip edebilirsiniz.</p>
+        <button class="btn-primary" style="margin-top: 14px;" onclick="openSettingsViewAndFocusTarget()">+ Başkası İçin Hatırlatıcı Belirle</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODAL: YENİ UYGULAMA SEÇ VE SINIRLA        -->
+  <!-- ========================================== -->
+  <div id="appPickerModal" class="modal-overlay" onclick="handleAppPickerOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+      <div class="modal-header">
+        <div>
+          <h3>Sınırlanacak Uygulamayı Seçin</h3>
+          <p style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">Kısıtlamak istediğiniz uygulamaya dokunun</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeAppPickerModal()">✕</button>
+      </div>
+
+      <div class="search-wrapper" style="margin-bottom: 12px;">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="appSearchInput" class="search-input" placeholder="Uygulama ara (örn. YouTube, Instagram)..." oninput="filterApps()">
+      </div>
+
+      <div id="installedAppsList" class="card-list" style="max-height: 60vh; overflow-y: auto;">
+        <!-- JS ile doldurulur (Paket adları tamamen gizlidir) -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: SINIR AYARLAMA (GÜNLÜK / ARALIK)   -->
+  <!-- ========================================== -->
+  <div id="configModal" class="modal-overlay" onclick="handleModalOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <div id="modalAppAvatarContainer">
+            <div id="modalAppAvatar" class="app-avatar">A</div>
+          </div>
+          <div>
+            <h3 id="modalAppName">Uygulama Adı</h3>
+            <div id="modalTodayUsedBadge" class="badge-today-used">Bugün Kullanılan: 0 dk</div>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeConfigModal()">✕</button>
+      </div>
+
+      <!-- Mod Seçimi: Günlük veya Aralık/Mola -->
+      <div class="mode-selector">
+        <button id="modeTabDaily" class="mode-tab-btn active" onclick="setModalMode('daily')">1. Günlük Limit</button>
+        <button id="modeTabInterval" class="mode-tab-btn" onclick="setModalMode('interval')">2. Aralık / Mola Limiti</button>
+      </div>
+
+      <!-- GÜNLÜK LİMİT AYARLARI -->
+      <div id="modeDailySettings">
+        <div class="config-group">
+          <label>Günlük Toplam Kullanım Süresi:</label>
+          <div class="chip-row">
+            <button type="button" class="time-chip" onclick="selectDailyMinutes(1)">1 dk (Test)</button>
+            <button type="button" class="time-chip" onclick="selectDailyMinutes(5)">5 dk</button>
+            <button type="button" class="time-chip" onclick="selectDailyMinutes(15)">15 dk</button>
+            <button type="button" class="time-chip selected" onclick="selectDailyMinutes(30)">30 dk</button>
+            <button type="button" class="time-chip" onclick="selectDailyMinutes(45)">45 dk</button>
+            <button type="button" class="time-chip" onclick="selectDailyMinutes(60)">1 saat</button>
+            <button type="button" class="time-chip" onclick="selectDailyMinutes(120)">2 saat</button>
+          </div>
+          <div class="custom-input-row" style="margin-top: 10px;">
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Özel Süre:</span>
+            <input type="number" id="inputDailyCustom" class="number-input" value="30" min="1" max="1440" oninput="onCustomDailyInput()">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">dakika</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARALIKLI / MOLA LİMİTİ AYARLARI -->
+      <div id="modeIntervalSettings" style="display: none;">
+        <div class="config-group">
+          <label>Kullanım Süresi (Uygulama Kaç Dakika Açık Kalabilsin?):</label>
+          <div class="chip-row">
+            <button type="button" class="time-chip" onclick="selectIntervalActive(1)">1 dk (Test)</button>
+            <button type="button" class="time-chip" onclick="selectIntervalActive(2)">2 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalActive(3)">3 dk</button>
+            <button type="button" class="time-chip selected" onclick="selectIntervalActive(5)">5 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalActive(10)">10 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalActive(15)">15 dk</button>
+          </div>
+          <div class="custom-input-row" style="margin-top: 8px;">
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Özel:</span>
+            <input type="number" id="inputActiveCustom" class="number-input" value="5" min="1" max="180" oninput="onCustomActiveInput()">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">dakika kullanım</span>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <label>Mola Süresi (Uygulama Kaç Dakika Kilitlensin?):</label>
+          <div class="chip-row">
+            <button type="button" class="time-chip" onclick="selectIntervalCooldown(1)">1 dk (Test)</button>
+            <button type="button" class="time-chip" onclick="selectIntervalCooldown(2)">2 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalCooldown(15)">15 dk</button>
+            <button type="button" class="time-chip selected" onclick="selectIntervalCooldown(25)">25 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalCooldown(30)">30 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalCooldown(45)">45 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalCooldown(60)">60 dk</button>
+          </div>
+          <div class="custom-input-row" style="margin-top: 8px;">
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Özel:</span>
+            <input type="number" id="inputCooldownCustom" class="number-input" value="25" min="1" max="1440" oninput="onCustomCooldownInput()">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">dakika mola</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dinamik Açıklama Kutusu -->
+      <div id="dynamicExplanation" class="explanation-box"></div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" onclick="closeConfigModal()">İptal</button>
+        <button type="button" class="btn-danger" id="btnDeleteLimitInModal" style="display: none;" onclick="deleteCurrentEditingLimit()">🗑️ Sınırı Kaldır</button>
+        <button type="button" class="btn-primary" id="btnSaveConfig" onclick="saveCurrentConfig()">Sınırlamayı Başlat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: HATIRLATICI EKLE / DÜZENLE         -->
+  <!-- ========================================== -->
+  <div id="reminderModal" class="modal-overlay" onclick="handleReminderModalOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="yellow-bell-badge">🔔</div>
+          <div>
+            <h3 id="reminderModalTitle">Yeni Hatırlatıcı Ekle</h3>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeReminderModal()">✕</button>
+      </div>
+
+      <input type="hidden" id="remInputId" value="">
+      <input type="hidden" id="remTargetUsername" value="">
+
+      <!-- Başkası İçin Hatırlatıcı İse Hedef Rozeti -->
+      <div id="remTargetUserNotice" style="display: none; background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.35); border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; font-size: 0.8rem; color: #cbd5e1; align-items: center; gap: 8px;">
+        <span style="font-size: 1.1rem;">👤</span>
+        <span>Bu hatırlatıcı <strong><span id="remTargetUserSpan" style="color: #38bdf8;">@hedef</span></strong> kullanıcısına gönderilecek ve onaylandığında onun telefonunda aktifleşecektir.</span>
+      </div>
+
+      <!-- 1. Hatırlatıcı Mesajı -->
+      <div class="config-group">
+        <label>Hatırlatma Mesajı:</label>
+        <textarea id="remInputMessage" class="text-input-field" rows="2" placeholder="Örn: Ders çalışmayı tamamla veya 2 bardak su iç!"></textarea>
+      </div>
+
+      <!-- 2. Tekrar Sıklığı Seçimi (4 Mod) -->
+      <div class="config-group">
+        <label>Hatırlatma Sıklığı:</label>
+        <div class="mode-grid-selector" style="grid-template-columns: repeat(4, 1fr);">
+          <button type="button" id="remTypePeriodic" class="mode-pill-btn" onclick="setReminderType('periodic')">
+            <span>⏱️ Aralıklı</span>
+          </button>
+          <button type="button" id="remTypeDaily" class="mode-pill-btn active" onclick="setReminderType('daily')">
+            <span>🌅 Her Gün</span>
+          </button>
+          <button type="button" id="remTypeWeekly" class="mode-pill-btn" onclick="setReminderType('weekly')">
+            <span>🗓️ Haftalık</span>
+          </button>
+          <button type="button" id="remTypeMonthly" class="mode-pill-btn" onclick="setReminderType('monthly')">
+            <span>📆 Her Ay</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3A. Periyodik Ayarlar -->
+      <div id="remPeriodicSettings" class="config-group" style="display: none;">
+        <label>Kaç Dakikada Bir Tekrarlansın?</label>
+        <div class="chip-row">
+          <button type="button" class="time-chip" onclick="selectReminderInterval(5)">5 dk (Test)</button>
+          <button type="button" class="time-chip" onclick="selectReminderInterval(15)">15 dk</button>
+          <button type="button" class="time-chip selected" onclick="selectReminderInterval(30)">30 dk</button>
+          <button type="button" class="time-chip" onclick="selectReminderInterval(60)">1 saat</button>
+          <button type="button" class="time-chip" onclick="selectReminderInterval(120)">2 saat</button>
+        </div>
+        <div class="custom-input-row" style="margin-top: 8px;">
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Özel Periyot:</span>
+          <input type="number" id="remInputIntervalCustom" class="number-input" value="30" min="1" max="1440">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">dakika</span>
+        </div>
+      </div>
+
+      <!-- 3B. Her Gün Ayarları -->
+      <div id="remDailySettings" class="config-group">
+        <label>Günün Hangi Saatinde Hatırlatılsın?</label>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <input type="time" id="remDailyTime" class="time-input-field" value="09:00">
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Her gün bu saatte bildirim gönderilir</span>
+        </div>
+      </div>
+
+      <!-- 3C. Haftalık Ayarları -->
+      <div id="remWeeklySettings" class="config-group" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <label style="margin-bottom: 0;">Haftanın Hangi Günleri?</label>
+          <div style="display: flex; gap: 6px;">
+            <button type="button" class="mini-tag-btn" onclick="setWeeklyPreset('weekdays')">Hafta İçi</button>
+            <button type="button" class="mini-tag-btn" onclick="setWeeklyPreset('weekend')">Hafta Sonu</button>
+            <button type="button" class="mini-tag-btn" onclick="setWeeklyPreset('all')">Tümü</button>
+          </div>
+        </div>
+        <div class="weekday-row">
+          <button type="button" class="weekday-btn selected" data-day="1" onclick="toggleWeeklyDay(1)">Pzt</button>
+          <button type="button" class="weekday-btn selected" data-day="2" onclick="toggleWeeklyDay(2)">Sal</button>
+          <button type="button" class="weekday-btn selected" data-day="3" onclick="toggleWeeklyDay(3)">Çar</button>
+          <button type="button" class="weekday-btn selected" data-day="4" onclick="toggleWeeklyDay(4)">Per</button>
+          <button type="button" class="weekday-btn selected" data-day="5" onclick="toggleWeeklyDay(5)">Cum</button>
+          <button type="button" class="weekday-btn" data-day="6" onclick="toggleWeeklyDay(6)">Cmt</button>
+          <button type="button" class="weekday-btn" data-day="7" onclick="toggleWeeklyDay(7)">Paz</button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;">
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-main);">Saat:</span>
+          <input type="time" id="remWeeklyTime" class="time-input-field" value="10:00">
+        </div>
+      </div>
+
+      <!-- 3D. Aylık Ayarları -->
+      <div id="remMonthlySettings" class="config-group" style="display: none;">
+        <label>Her Ayın Hangi Günü?</label>
+        <div style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+          <select id="remMonthlyDay" class="select-field" style="max-width: 180px;"></select>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-main);">Saat:</span>
+            <input type="time" id="remMonthlyTime" class="time-input-field" value="12:00">
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Durdurma & Sona Erme Ayarları -->
+      <div class="config-group">
+        <label>🛑 Hatırlatıcı Ne Zaman Dursun? (Sona Erme Kuralı):</label>
+        <div class="stop-rule-selector">
+          <button type="button" id="remStopCondNever" class="stop-rule-btn active" onclick="setReminderStopCondition('never')">
+            <span class="rule-icon">♾️</span>
+            <span class="rule-title">Süresiz</span>
+          </button>
+          <button type="button" id="remStopCondDate" class="stop-rule-btn" onclick="setReminderStopCondition('date')">
+            <span class="rule-icon">📅</span>
+            <span class="rule-title">..... Tarihine kadar</span>
+          </button>
+          <button type="button" id="remStopCondCount" class="stop-rule-btn" onclick="setReminderStopCondition('count')">
+            <span class="rule-icon">🔢</span>
+            <span class="rule-title">..... tekrarlanacak</span>
+          </button>
+        </div>
+
+        <!-- Tarih Paneli -->
+        <div id="remStopDatePanel" style="display: none; margin-top: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Hangi tarihe kadar:</span>
+            <input type="date" id="remStopDate" class="date-input-field">
+          </div>
+        </div>
+
+        <!-- Tekrar Sayısı Paneli -->
+        <div id="remStopCountPanel" style="display: none; margin-top: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Kaç tekrardan sonra dursun:</span>
+            <input type="number" id="remStopCount" class="number-input" value="5" min="1" max="500">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">tekrar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. İKİ AŞAMALI HATIRLATICI (Görevi Şimdi Hatırlat, Durumu İleri Saatte Sor) -->
+      <div class="config-group" style="margin-top: 10px;">
+        <div class="feature-toggle-card">
+          <div style="flex: 1;">
+            <div style="font-size: 0.84rem; font-weight: 700; color: #fff;">🕒 İki Aşamalı Hatırlatıcı</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.35; margin-top: 2px;">
+              Görevi saati geldiğinde hatırlatır; ileri bir saatte ise <em>"Görevi yaptınız mı?"</em> sorusuyla ikinci bildirim gönderir.
+            </div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="remAskLater" onchange="toggleAskLaterSection(this.checked)">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div id="askLaterTimePanel" style="display: none; margin-top: 10px; padding: 10px 12px; background: rgba(99,102,241,0.08); border-radius: 8px; border: 1px solid rgba(99,102,241,0.2);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-main);">Tamamlandı mı sorma saati:</span>
+            <input type="time" id="remAskTimeOfDay" class="time-input-field" value="18:00">
+          </div>
+          <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 6px;">
+            Örnek saat 14.00'da görevi hatırlatmak için bildirimi gelir, saat 18.00'da görevin yapılıp yapılmadığı ile ilgili bildirim gelir.
+          </p>
+        </div>
+      </div>
+
+      <!-- 6. Görev Yapıldığı Yapılmadığı Takibi -->
+      <div class="config-group" style="margin-top: 10px;">
+        <div class="feature-toggle-card">
+          <div style="flex: 1;">
+            <div style="font-size: 0.84rem; font-weight: 700; color: #fff;">📊 Görev Yapıldığı Yapılmadığı Takibi</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="remEnableTracking" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" onclick="closeReminderModal()">İptal</button>
+        <button type="button" id="btnSaveReminder" class="btn-primary" onclick="saveReminderFromModal()">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: DETAYLI İSTATİSTİK & ÇİZGİ GRAFİĞİ  -->
+  <!-- ========================================== -->
+  <div id="statsGraphModal" class="modal-overlay" onclick="handleGraphModalOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div>
+          <h3 id="graphModalReminderTitle">Hatırlatıcı Başarı Grafiği</h3>
+          <p id="graphModalSubtitle" style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">Gün gün tamamlanma durumu ve düşüş eğrileri</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeStatsGraphModal()">✕</button>
+      </div>
+
+      <!-- Bütüncül Yüzde ve Özet Rozeti -->
+      <div class="graph-summary-card">
+        <div class="graph-percentage-circle">
+          <span id="graphTotalPercentageText" class="pct-val">%0</span>
+          <span class="pct-lbl">Başarı</span>
+        </div>
+        <div class="graph-summary-details">
+          <div class="summary-stat-row">
+            <span class="stat-dot-green"></span>
+            <span id="graphDoneText">0 Gün Yapıldı</span>
+          </div>
+          <div class="summary-stat-row">
+            <span class="stat-dot-red"></span>
+            <span id="graphNotDoneText">0 Gün Yapılmadı (Düşüş Spike)</span>
+          </div>
+          <div id="graphTotalDaysText" style="font-size: 0.74rem; color: var(--text-sub); margin-top: 4px;">
+            Toplam 0 gün takip edildi
+          </div>
+        </div>
+      </div>
+
+      <!-- SVG Çizgi Grafiği Kutusu (Y-ekseni: Günler, X/Seviye: Yapıldı / Yapılmadı) -->
+      <div class="graph-viewport-box">
+        <div class="graph-y-labels">
+          <span class="y-lbl top">✅ Yapıldı</span>
+          <span class="y-lbl btm">❌ Yapılmadı</span>
+        </div>
+        <div id="graphSvgContainer" class="svg-chart-container">
+          <!-- JS ile dinamik SVG çizilir -->
+        </div>
+      </div>
+
+      <div id="graphRecentDaysList" class="graph-recent-days">
+        <!-- Son günlerin ayrıntılı listesi -->
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-primary" onclick="closeStatsGraphModal()">Kapat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- TAM EKRAN SAYFA: AYARLAR                   -->
+  <!-- ========================================== -->
+  <div id="settingsView" class="full-screen-page">
+    <div class="page-top-bar">
+      <button class="btn-page-back" onclick="closeSettingsView()" title="Geri">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <h2 class="page-title">Ayarlar</h2>
+      <button class="btn-page-profile" onclick="openProfileModal()" title="Profil & İzinler">
+        <span>👤 Profil</span>
+      </button>
+    </div>
+
+    <div class="page-scroll-content">
+      <!-- 1. İKİ KARE KUTUCUK (YAN YANA) -->
+      <div class="two-squares-grid" id="settingsTwoSquaresGrid">
+        <!-- Kare 1: Sınırlandırılmayacak Uygulamalar -->
+        <div class="square-nav-card" onclick="openWhitelistPage()">
+          <div class="square-icon-box green">🛡️</div>
+          <div class="square-card-label">Sınırlandırılmayacak Uygulamalar</div>
+          <div class="square-card-count" id="settingsWhitelistCount">0 İstisna</div>
+        </div>
+        <!-- Kare 2: Uygulama Hakkında -->
+        <div class="square-nav-card" onclick="openAboutPage()">
+          <div class="square-icon-box indigo">ℹ️</div>
+          <div class="square-card-label">Uygulama Hakkında</div>
+          <div class="square-card-count">İzin Rehberi</div>
+        </div>
+      </div>
+
+      <!-- 2. BAŞKASI İÇİN HATIRLATICI BELİRLE BÖLÜMÜ -->
+      <div class="settings-block">
+        <div class="settings-block-title-row">
+          <h3 class="settings-block-title">Başkası İçin Hatırlatıcı Belirle</h3>
+          <span id="remoteSystemStatusBadge" class="badge-status-pill active">Aktif</span>
+        </div>
+
+        <div class="target-user-card">
+          <label class="target-input-label">Hedef Kullanıcı Adı:</label>
+          <div class="target-input-group">
+            <div class="target-input-wrapper">
+              <span class="target-at-symbol">@</span>
+              <input type="text" id="targetUserInput" class="target-user-input" placeholder="kullanici_adi" oninput="onTargetUserInputChanged()">
+            </div>
+            <button id="btnTargetAction" class="btn-target-verify" onclick="handleTargetUserAction()">
+              Doğrula
+            </button>
+          </div>
+          <div id="targetUserFeedback" class="target-feedback-msg" style="display: none;"></div>
+        </div>
+      </div>
+
+      <!-- 3. HATIRLATICI GRUPLARIM BÖLÜMÜ -->
+      <div class="settings-block" style="margin-top: 22px;">
+        <div class="settings-block-title-row">
+          <h3 class="settings-block-title">Hatırlatıcı Gruplarım</h3>
+          <button class="btn-add-group-text" onclick="openCreateGroupModal()">+ Yeni Grup</button>
+        </div>
+        <div id="groupsListContainer" class="groups-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- TAM EKRAN SAYFA: SINIRLANDIRILMAYACAK UYGULAMALAR -->
+  <!-- ========================================== -->
+  <div id="whitelistView" class="full-screen-page">
+    <div class="page-top-bar">
+      <button class="btn-page-back" onclick="closeWhitelistPage()" title="Ayarlara Dön">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <h2 class="page-title">Sınırlandırılmayacak Uygulamalar</h2>
+      <div style="width: 38px;"></div>
+    </div>
+
+    <div class="page-scroll-content">
+      <div class="whitelist-page-banner">
+        <p>İşaretlenen uygulamalar hiçbir kurala takılmaz ve asla kapatılmaz. <strong>İşaretli uygulamalar listenin en başında yer alır.</strong></p>
+        <div class="whitelist-toolbar" style="margin-top: 10px;">
+          <button type="button" class="mini-btn-action" onclick="applyDefaultEssentialWhitelist()">✨ Temel Önerileri Seç</button>
+          <button type="button" class="mini-btn-action subtle" onclick="clearWhitelistSelection()">Temizle</button>
+        </div>
+      </div>
+
+      <div class="search-wrapper" style="margin: 12px 0;">
+        <input type="text" id="whitelistSearchInput" class="search-input" placeholder="Uygulama ara..." oninput="renderWhitelistPage()">
+      </div>
+
+      <!-- İşaretliler en başta, işaretlenmeyenler sonra -->
+      <div id="whitelistPageAppsList" class="whitelist-apps-container"></div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- TAM EKRAN SAYFA: UYGULAMA HAKKINDA          -->
+  <!-- ========================================== -->
+  <div id="aboutView" class="full-screen-page">
+    <div class="page-top-bar">
+      <button class="btn-page-back" onclick="closeAboutPage()" title="Ayarlara Dön">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <h2 class="page-title">Uygulama Hakkında</h2>
+      <div style="width: 38px;"></div>
+    </div>
+
+    <div class="page-scroll-content">
+      <!-- SİSTEM NASIL ÇALIŞIR BİLGİLENDİRMESİ -->
+      <div class="about-info-card">
+        <div class="about-card-header">
+          <span class="about-icon">⚡</span>
+          <h3>Sistem Nasıl Çalışır?</h3>
+        </div>
+        <p>
+          Sınırlayıcı, telefon kullanımınızı sağlıklı tutmak için tasarlanmıştır. Belirlediğiniz süre veya mola dolduğunda kısıtlanan uygulama otomatik olarak kapatılıp sizi ana ekrana yönlendirir. Arka planda güvenli ve pil dostu bir şekilde çalışır.
+        </p>
+      </div>
+
+      <div class="section-title" style="margin-top: 20px;">
+        <span>⚙️ İzin Rehberi</span>
+      </div>
+
+      <!-- REHBER 1: ERİŞİLEBİLİRLİK -->
+      <div class="guide-box">
+        <div class="guide-header">
+          <span class="guide-step-badge">1</span>
+          <strong>Erişilebilirlik Servisi İzni</strong>
+        </div>
+        <p class="guide-desc">
+          Süre dolduğunda uygulamanın kapatılıp ana ekrana yönlendirilebilmesi için zorunludur.
+        </p>
+        <div class="guide-steps-code">
+          <strong>Ayarlar</strong> ➔ <strong>Erişilebilirlik</strong> ➔ <strong>Yüklü Uygulamalar</strong> ➔ <strong>Sınırlayıcı</strong> ➔ <strong>"Açık"</strong> yapın.
+        </div>
+        <button class="btn-guide-action" onclick="openAccessibilitySettings()">Erişilebilirlik Ayarlarını Aç</button>
+      </div>
+
+      <!-- REHBER 2: PİL KULLANIMI KISITLAMA YOK -->
+      <div class="guide-box">
+        <div class="guide-header">
+          <span class="guide-step-badge">2</span>
+          <strong>Pil Kullanımı: "Kısıtlama Yok" (Sınırsız)</strong>
+        </div>
+        <p class="guide-desc">
+          Android'in arka planda zamanlayıcıları ve hatırlatıcıları durdurmaması için gereklidir.
+        </p>
+        <div class="guide-steps-code">
+          <strong>Ayarlar</strong> ➔ <strong>Uygulamalar</strong> ➔ <strong>Sınırlayıcı</strong> ➔ <strong>Pil / Pil Kullanımı</strong> ➔ <strong>"Kısıtlama Yok" (Sınırsız)</strong> seçin.
+        </div>
+        <button class="btn-guide-action" onclick="openBatterySettings()">Pil Kısıtlama Ayarlarını Aç</button>
+      </div>
+
+      <!-- REHBER 3: OTOMATİK BAŞLATMA -->
+      <div class="guide-box">
+        <div class="guide-header">
+          <span class="guide-step-badge">3</span>
+          <strong>Otomatik Başlatma & Arka Plan İzni</strong>
+        </div>
+        <p class="guide-desc">
+          Telefon yeniden başladığında servisin durmaması ve hatırlatıcıların aksamaması için gereklidir.
+        </p>
+        <div class="guide-steps-code">
+          <strong>Ayarlar</strong> ➔ <strong>Uygulamalar</strong> ➔ <strong>Sınırlayıcı</strong> ➔ <strong>Otomatik Başlatma</strong> ➔ <strong>"İzin Ver"</strong> yapın.
+        </div>
+        <button class="btn-guide-action" onclick="openAppDetailSettings()">Uygulama Bilgisi & İzinleri Aç</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: PROFİL & DIŞ HATIRLATICI İZNİ       -->
+  <!-- ========================================== -->
+  <div id="profileModal" class="modal-overlay" onclick="handleProfileOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.3rem;">👤</span>
+          <h3>Profil Ayarları</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeProfileModal()">✕</button>
+      </div>
+
+      <!-- KULLANICI ADI -->
+      <div class="settings-card" style="margin-top: 4px;">
+        <div class="settings-card-header">
+          <div class="settings-icon-circle">👤</div>
+          <div style="flex: 1;">
+            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 700;">Kullanıcı Adım</h4>
+            <p style="margin: 2px 0 0; font-size: 0.74rem; color: var(--text-muted);">
+              Diğer telefonların size hatırlatıcı gönderebilmesi için benzersiz adınız
+            </p>
+          </div>
+          <span id="currentUsernameBadge" class="badge-username">Tanımsız</span>
+        </div>
+        <div style="margin-top: 12px; display: flex; gap: 8px;">
+          <div style="flex: 1; position: relative;">
+            <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-weight: 700;">@</span>
+            <input type="text" id="inputUsername" class="search-input" style="padding-left: 28px;" placeholder="kullanici_adi (en az 3 harf)">
+          </div>
+          <button class="btn-primary" style="padding: 0 16px; white-space: nowrap;" onclick="saveUsernameClick()">Kaydet</button>
+        </div>
+        <div id="usernameFeedback" style="font-size: 0.76rem; margin-top: 6px; display: none;"></div>
+      </div>
+
+      <!-- BAŞKALARINDAN HATIRLATICI KABULÜ -->
+      <div class="settings-card" style="margin-top: 12px;">
+        <div class="settings-card-header" style="align-items: center;">
+          <div class="settings-icon-circle" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">🔒</div>
+          <div style="flex: 1;">
+            <h4 style="margin: 0; font-size: 0.92rem; font-weight: 700;">Dışarıdan Hatırlatıcı Kabulü</h4>
+            <p style="margin: 2px 0 0; font-size: 0.74rem; color: var(--text-muted);">
+              Başkaları tarafından size hatırlatıcı gönderilmesine izin verin
+            </p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="allowIncomingToggle" onchange="handleAllowIncomingToggle(this.checked)">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div id="allowIncomingNotice" class="allow-incoming-notice" style="margin-top: 8px;">
+          ⚠️ <strong>İzin Kapalı:</strong> Kimse size hatırlatıcı isteği gönderemez.
+        </div>
+      </div>
+
+      <div class="modal-actions" style="margin-top: 16px;">
+        <button type="button" class="btn-primary" onclick="closeProfileModal()">Tamam</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: ÖZEL SİLME ONAYI (file:// UYARISIZ) -->
+  <!-- ========================================== -->
+  <div id="customConfirmModal" class="modal-overlay" style="z-index: 100;">
+    <div class="custom-confirm-card">
+      <div class="confirm-icon">⚠️</div>
+      <h3 id="customConfirmMessage" class="confirm-msg">Bu hatırlatıcı silinecek</h3>
+      <div class="confirm-actions">
+        <button type="button" id="customConfirmCancelBtn" class="btn-secondary" onclick="closeCustomConfirm(false)">İptal</button>
+        <button type="button" id="customConfirmOkBtn" class="btn-danger" onclick="closeCustomConfirm(true)">Sil</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: UZAKTAN HATIRLATICI GÖNDERME        -->
+  <!-- ========================================== -->
+  <div id="remoteSendModal" class="modal-overlay" onclick="handleRemoteModalOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div>
+          <h3 id="remoteSendModalTitle">Hatırlatıcı İsteği Gönder</h3>
+          <p id="remoteSendTargetSubtitle" style="font-size: 0.75rem; color: var(--accent-primary); margin-top: 2px;">Hedef: @kullanici</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeRemoteSendModal()">✕</button>
+      </div>
+
+      <input type="hidden" id="remoteTargetType" value="user">
+      <input type="hidden" id="remoteTargetIdentifier" value="">
+
+      <div class="config-group">
+        <label>Hatırlatıcı Başlığı:</label>
+        <input type="text" id="remoteInputTitle" class="search-input" placeholder="Örn: Kitap Oku, Su İç, İlaç">
+      </div>
+
+      <div class="config-group">
+        <label>Hatırlatma Mesajı:</label>
+        <textarea id="remoteInputMessage" class="text-input-field" rows="2" placeholder="Örn: Akşam 20:00'de 30 sayfa kitap okumayı unutma!"></textarea>
+      </div>
+
+      <div class="config-group">
+        <label>Hatırlatma Saati & Sıklığı:</label>
+        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+          <input type="time" id="remoteInputTime" class="time-input-field" value="20:00">
+          <select id="remoteInputType" class="select-field" style="flex: 1;">
+            <option value="daily">🌅 Her Gün</option>
+            <option value="weekly">🗓️ Hafta İçi (Pzt-Cum)</option>
+            <option value="periodic">⏱️ Her 60 Dakikada Bir</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="config-group" style="margin-top: 8px;">
+        <div class="feature-toggle-card">
+          <div style="flex: 1;">
+            <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-main);">📊 "Yaptım / Yapmadım" Takibi</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Karşı tarafın durumunu canlı yüzde ve grafik ile takip edin</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="remoteEnableTracking" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" onclick="closeRemoteSendModal()">İptal</button>
+        <button type="button" class="btn-primary" onclick="submitRemoteSend()">🚀 İsteği Gönder</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: GRUP OLUŞTURMA                      -->
+  <!-- ========================================== -->
+  <div id="createGroupModal" class="modal-overlay" onclick="handleGroupModalOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div>
+          <h3>Yeni Hatırlatıcı Grubu</h3>
+          <p style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">Grup ismi ve üyeleri belirleyin</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeCreateGroupModal()">✕</button>
+      </div>
+
+      <div class="config-group">
+        <label>Grup İsmi:</label>
+        <input type="text" id="groupNameInput" class="search-input" placeholder="Örn: Çalışma Grubu, Aile, Ekip">
+      </div>
+
+      <div class="config-group">
+        <label>Grup Üyeleri (Kullanıcı Adları):</label>
+        <p style="font-size: 0.72rem; color: var(--text-sub); margin-bottom: 6px;">Kullanıcı adlarını virgülle ayırarak yazın (örn: ahmet, mehmet):</p>
+        <textarea id="groupMembersInput" class="text-input-field" rows="3" placeholder="ahmet, mehmet, ayse"></textarea>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" onclick="closeCreateGroupModal()">İptal</button>
+        <button type="button" class="btn-primary" onclick="submitCreateGroup()">Grubu Oluştur</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: ZAMANLANMIŞ KİLİT MODU (5 SN BASILI TUTUNCA) -->
+  <!-- ========================================== -->
+  <div id="scheduledLockModal" class="modal-overlay" onclick="handleScheduledLockOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div>
+          <h3>⏱️ Zamanlanmış Kilit (Odak & Gece)</h3>
+          <p style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">Belirlenen saat aralığında tüm uygulamaları kilitler</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeScheduledLockModal()">✕</button>
+      </div>
+
+      <div class="config-group" style="margin-top: 6px;">
+        <div class="feature-toggle-card">
+          <div style="flex: 1;">
+            <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-main);">🔒 Zamanlanmış Kilit Modu</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">
+              Açıldığında başlangıç ve bitiş saatleri arasında otomatik kilitlenir.
+            </div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="scheduledLockEnabledToggle" onchange="onScheduledLockToggleChange()">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div id="scheduledLockTimeSection" class="config-group">
+        <label>Kilit Başlangıç ve Bitiş Saatleri:</label>
+        <div style="display: flex; gap: 12px; align-items: center; margin-top: 6px;">
+          <div style="flex: 1;">
+            <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">Başlangıç:</div>
+            <input type="time" id="scheduledLockStartTime" class="time-input-field" value="23:00">
+          </div>
+          <div style="font-size: 1.1rem; color: var(--text-sub); margin-top: 16px;">➔</div>
+          <div style="flex: 1;">
+            <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">Bitiş:</div>
+            <input type="time" id="scheduledLockEndTime" class="time-input-field" value="07:00">
+          </div>
+        </div>
+
+        <div style="margin-top: 12px;">
+          <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 6px;">Hızlı Saat Seçenekleri:</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <button type="button" class="time-chip" onclick="setScheduledLockPreset('23:00', '07:00')">🌙 Gece (23:00 - 07:00)</button>
+            <button type="button" class="time-chip" onclick="setScheduledLockPreset('09:00', '18:00')">💼 Çalışma (09:00 - 18:00)</button>
+            <button type="button" class="time-chip" onclick="setScheduledLockPreset('20:00', '23:00')">📚 Akşam (20:00 - 23:00)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-box" style="margin-top: 14px; background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 10px 12px; border-radius: 8px;">
+        <div style="font-size: 0.75rem; color: #fca5a5; line-height: 1.45;">
+          ℹ️ <strong>Kural:</strong> Belirlenen saatler arasında Pomodoro'da izin verdiğiniz ve istisna (Asla Sınırlanmayacak) olarak belirlediğiniz uygulamalar serbest kalır, diğer tüm uygulamalara giriş yasaklanır.
+        </div>
+      </div>
+
+      <div class="modal-actions" style="margin-top: 18px;">
+        <button type="button" class="btn-secondary" onclick="closeScheduledLockModal()">İptal</button>
+        <button type="button" class="btn-primary" onclick="saveScheduledLockSettings()">💾 Kaydet ve Uygula</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="language_game.js"></script>
+  <script src="app.js"></script>
+
+  <!-- Gizli Kod / Menü Yönetim Modalı -->
+  <div id="secretCodeModal" class="modal-overlay" style="display: none; z-index: 120;">
+    <div class="custom-confirm-card secret-code-card">
+      <div class="confirm-icon" style="font-size: 2.2rem; margin-bottom: 6px;">🔐</div>
+      <h3 class="confirm-msg" style="margin-bottom: 6px; font-size: 1.05rem;">Güvenlik Kodu</h3>
+      <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 14px;">Lütfen 4 haneli şifreyi giriniz</p>
+      <input type="password" id="secretCodeInput" maxlength="6" inputmode="numeric" placeholder="••••" 
+             style="width: 140px; text-align: center; font-size: 1.5rem; letter-spacing: 6px; padding: 10px; margin: 0 auto 18px auto; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); background: rgba(15, 23, 42, 0.8); color: #fff; outline: none; display: block;" />
+      <div class="confirm-actions">
+        <button type="button" class="btn-secondary" onclick="closeSecretCodeModal()">İptal</button>
+        <button type="button" class="btn-primary" onclick="submitSecretCode()">Onayla</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 1. Grup İsim Belirleme ve Grubu Boz Modalı -->
+  <div id="groupNameModal" class="modal-overlay" style="display: none; z-index: 135;">
+    <div class="custom-confirm-card" style="max-width: 340px; padding: 22px 20px;">
+      <div class="confirm-icon" style="font-size: 2.2rem; margin-bottom: 6px;">📁</div>
+      <h3 class="confirm-msg" style="margin-bottom: 6px; font-size: 1.1rem;">Hatırlatıcı Grubu Oluştur</h3>
+      <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 14px;">
+        Seçilen iki hatırlatıcı birleştiriliyor. Grup için bir isim belirleyin:
+      </p>
+      <input type="text" id="groupNameInputModal" placeholder="Örn: Sabah Rutini, Dersler..." maxlength="30"
+             style="width: 100%; box-sizing: border-box; font-size: 1rem; font-weight: 600; padding: 12px 14px; margin-bottom: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); background: rgba(15, 23, 42, 0.85); color: #fff; outline: none;" />
+      <div class="confirm-actions" style="display: flex; gap: 10px; justify-content: center;">
+        <button type="button" class="btn-secondary" onclick="cancelGroupCreation()" style="flex: 1; padding: 10px; border-radius: 10px; color: #f87171; border-color: rgba(239,68,68,0.4);">
+          ✕ Grubu Boz
+        </button>
+        <button type="button" class="btn-primary" onclick="confirmGroupCreation()" style="flex: 1; padding: 10px; border-radius: 10px;">
+          ✓ Grubu Kaydet
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Grup Detay Modalı (Grup İçindeki Hatırlatıcılar) -->
+  <div id="groupDetailModal" class="modal-overlay" style="display: none; z-index: 125;">
+    <div class="modal-sheet" style="max-height: 85vh; display: flex; flex-direction: column;">
+      <div class="modal-drag-handle"></div>
+      <div class="modal-header" style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.4rem;">📁</span>
+          <h3 id="groupDetailTitle" style="font-size: 1.15rem; font-weight: 700; color: #fff; margin: 0;">Grup Adı</h3>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button type="button" class="btn-secondary" onclick="dissolveCurrentGroup()" style="font-size: 0.78rem; padding: 6px 12px; border-radius: 8px; color: #f87171; border-color: rgba(239,68,68,0.35);">
+            🗑️ Grubu Boz
+          </button>
+          <button type="button" class="btn-close-modal" onclick="closeGroupDetailModal()" style="font-size: 1.2rem; background: transparent; border: none; color: #94a3b8; cursor: pointer; padding: 4px 8px;">✕</button>
+        </div>
+      </div>
+      <div id="groupDetailList" style="flex: 1; overflow-y: auto; padding: 14px 2px; display: flex; flex-direction: column; gap: 12px;">
+      </div>
+    </div>
+  </div>
+
+  <!-- 3D Hafıza Oyunu İzolasyonlu İframe Modalı -->
+  <div id="hafizaGameContainerModal" style="display: none; position: fixed; inset: 0; z-index: 99999; background: #0d0418; width: 100vw; height: 100vh; flex-direction: column;">
+    <!-- Üst Bar: Her Zaman Görünür & Tıklanabilir Geri Tuşu -->
+    <header style="width: 100%; height: 52px; background: #160a2b; border-bottom: 1px solid rgba(255, 255, 255, 0.15); display: flex; align-items: center; justify-content: space-between; padding: 0 12px; box-sizing: border-box; z-index: 100000; flex-shrink: 0;">
+      <button type="button" id="btnHafizaModalHeaderBack" onclick="closeHafizaGameModal()" style="background: rgba(255, 255, 255, 0.12); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 8px; padding: 6px 14px; font-weight: 700; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+        🏠 Ana Ekrana Dön
+      </button>
+      <div style="font-weight: 800; font-size: 1rem; color: #fff;">🧠 3D Hafıza Oyunu</div>
+      <div style="width: 40px;"></div>
+    </header>
+    <!-- Oyun İframe -->
+    <iframe id="hafizaGameIframe" src="" style="width: 100%; height: calc(100% - 52px); border: none; display: block; flex: 1;" allow="autoplay"></iframe>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- DİL ÖĞRENME & KELİME EŞLEŞTİRME OYUNU MODALI -->
+  <!-- ========================================== -->
+  <div id="languageGameModal" class="lang-game-modal-overlay" style="display: none;">
+    <!-- Üst Bar -->
+    <header class="lang-top-bar">
+      <div class="lang-top-left">
+        <button type="button" class="lang-back-btn" onclick="closeLanguageGameModal()" title="Uygulama Ana Sayfasına Dön" id="btnLangHome">🏠</button>
+        <button type="button" class="lang-back-btn" id="btnLangMenu" onclick="languageGame.showMainMenu()" title="Oyun Menüsüne Dön" style="display: none; margin-left: 6px;">⬅️</button>
+        <div class="lang-header-info">
+          <span class="lang-pill-badge" id="langPillBadge" style="display: none;"></span>
+          <h2 class="lang-header-title" id="langModalTitle" style="font-size: 1.15rem; font-weight: 800; color: #fff;">Arapça</h2>
+        </div>
+      </div>
+      <div class="lang-header-actions">
+        <button type="button" class="btn-lang-toggle-table" id="btnLangToggleTable" onclick="toggleLanguageTable()" title="Tabloyu Aç/Kapat" style="display: none;">
+          <span>📚 Tablo</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 0. BÖLÜM: OYUN ANA MENÜSÜ -->
+    <main id="langMainMenuSection" class="lang-menu-area" style="display: flex;">
+      <div class="menu-hero-banner" style="margin-bottom: 14px;">
+        <span class="hero-badge">ARAPÇA SARF VE EMSİLE EĞİTİMİ</span>
+        <h2 style="font-size: 1.3rem; margin-bottom: 4px;">Ne Çalışmak İstersiniz?</h2>
+        <p style="font-size: 0.82rem; color: #94a3b8;">24 temel sîgayı veya her sîganın zamirlere göre çekimlerini çalışabilirsiniz.</p>
       </div>
 
       <div class="menu-cards-grid">
         <!-- 1. Menü: 24 Çekim -->
-        <div class="menu-choice-card" onclick="startEmsile24Game()">
-          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">24 Çekim</h3>
+        <div class="menu-choice-card" onclick="languageGame.startEmsileGame()">
+          <div class="choice-texts">
+            <h3 class="choice-clean-title">24 Çekim</h3>
+          </div>
           <button type="button" class="btn-start-choice">
             <span>Oyuna Başla</span>
           </button>
         </div>
 
         <!-- 2. Menü: Zamirlere Göre Çekim -->
-        <div class="menu-choice-card" onclick="openSigaSelectionMenu()">
-          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">Zamirlere Göre Çekim</h3>
+        <div class="menu-choice-card" onclick="languageGame.openSigaSelectionMenu()">
+          <div class="choice-texts">
+            <h3 class="choice-clean-title">Zamirlere Göre Çekim</h3>
+          </div>
           <button type="button" class="btn-start-choice">
             <span>Oyuna Başla</span>
           </button>
         </div>
 
         <!-- 3. Menü: Kelime -->
-        <div class="menu-choice-card" onclick="startVocabGame()">
-          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">Kelime</h3>
+        <div class="menu-choice-card" onclick="languageGame.startVocabGame()">
+          <div class="choice-texts">
+            <h3 class="choice-clean-title">Kelime</h3>
+          </div>
           <button type="button" class="btn-start-choice" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);">
             <span>Oyuna Başla</span>
           </button>
         </div>
       </div>
+    </main>
 
-      <!-- Güvenli Çıkış Butonu / Kartı -->
-      <div class="menu-exit-banner">
-        <button type="button" class="btn-menu-exit" onclick="openSafeExitModal()">
-          🚪 Uygulamadan Güvenle Çık
-        </button>
-        <p class="safe-exit-sub">Tüm kelimeleriniz ve çalışmalarınız otomatik olarak kaydedilir.</p>
-      </div>
-    </section>
-
-    <!-- 2. SÎGA SEÇİM MENÜSÜ (24 SÎGA KARTLARI) -->
-    <section id="sigaSelectionView">
-      <div class="siga-selection-banner">
+    <!-- SÎGA SEÇİM MENÜSÜ (24 SÎGA LİSTESİ) -->
+    <main id="langSigaSelectionSection" class="lang-siga-select-area" style="display: none;">
+      <div class="siga-selection-banner" style="margin-bottom: 12px;">
         <div class="siga-banner-texts">
-          <h2>👤 Çekim Yapılacak Sîgayı Seçin</h2>
-          <p>14 şahıs zamiri çekimini çalışmak istediğiniz sîgaya dokunun:</p>
+          <h2 style="font-size: 1rem; color: #fff;">👤 Çekim Yapılacak Sîgayı Seçin</h2>
+          <p style="font-size: 0.78rem; color: #94a3b8;">14 şahıs çekimini çalışmak istediğiniz sîgaya dokunun:</p>
         </div>
-        <button type="button" class="btn-nav" onclick="showScreen('mainMenuView')">
+        <button type="button" class="btn-nav" onclick="languageGame.showMainMenu()">
           ⬅️ Menüye Dön
         </button>
       </div>
 
-      <div class="siga-grid-list" id="sigaGridList">
+      <div class="siga-grid-list" id="langSigaGridList">
         <!-- JS ile 24 sîga butonu doldurulur -->
       </div>
-    </section>
+    </main>
 
-    <!-- 3. TEST / QUIZ ALANI -->
-    <section id="quizSection">
-      <div class="quiz-tracker-bar" style="justify-content: center; margin-bottom: 14px;">
-        <div class="tracker-pill" style="margin: 0 auto;">
-          <span id="quizTrackerText">Soru 1 / 24</span>
+    <!-- 1. BÖLÜM: 5 SEÇENEKLİ SORU / TEST ALANI -->
+    <main id="langQuizSection" class="lang-quiz-area" style="display: none;">
+      <div class="lang-quiz-card">
+        <div class="lang-quiz-card-header" style="justify-content: center; margin-bottom: 16px;">
+          <div class="lang-counter-chip" style="margin: 0 auto;">
+            <span id="langCounterLabel">SORU</span>
+            <strong id="langCurrentIndex">1 / 14</strong>
+          </div>
+          <span id="langSoundBtn" style="display: none;"></span>
         </div>
-        <span id="soundToggleBtn" style="display: none;"></span>
-      </div>
 
-      <!-- Soru Kartı -->
-      <div class="target-word-card" style="margin-bottom: 14px;">
-        <span class="word-badge-tag" id="targetBadgeTag" style="display: none;"></span>
-        <div id="targetWordContainer">
-          <h2 class="target-word-title arabic-font" id="targetWordText">نَصَرَ</h2>
-        </div>
-        <p class="target-word-instruction" id="targetWordInstruction" style="display: none;"></p>
-      </div>
-
-      <!-- 5 Seçenek Butonu -->
-      <div class="options-grid" id="optionsGrid">
-        <!-- JS ile dinamik butonlar üretilir -->
-      </div>
-
-      <!-- Yanlış Yapıldığında Çıkan Devam Et Barı (Kelime Modu İçin) -->
-      <div class="quiz-feedback-bar" id="quizFeedbackBar" style="display: none;">
-        <div class="feedback-info">
-          <span class="feedback-icon">❌</span>
-          <span class="feedback-text">Yanlış cevap! Doğru seçenek yeşille gösterildi.</span>
-        </div>
-        <button type="button" class="btn-feedback-continue" id="btnFeedbackContinue" onclick="advanceToNextQuestion()">
-          <span>Devam Et ▶️</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- 4. 3D FLASHCARD TABLO ALANI -->
-    <section id="tableSection">
-      <div class="table-banner">
-        <div class="table-banner-left">
-          <span class="table-banner-icon" id="tableBannerIcon">📖</span>
-          <div class="table-banner-info">
-            <h3 id="tableBannerTitle">Tablo</h3>
-            <p id="tableBannerDesc">Anlamını ve detaylarını görmek için kartların üzerine dokunabilirsiniz.</p>
+        <div class="lang-target-word-container" style="margin-bottom: 12px;">
+          <span class="lang-word-caption" id="langTargetCaption" style="display: none;"></span>
+          <div class="lang-target-word-glow" id="langTargetWordContainer">
+            <h1 class="lang-target-word-text arabic-font" id="langTargetWord">نَصَرْتُ</h1>
           </div>
         </div>
-        <button type="button" class="btn-continue" onclick="continueQuiz()">
+
+        <!-- 5 Seçenek Butonu -->
+        <div class="lang-options-grid" id="langOptionsGrid">
+          <!-- JS ile dinamik doldurulur -->
+        </div>
+
+        <!-- Kelime Modu Yanlış Cevap Bildirimi ve Devam Et Butonu -->
+        <div class="lang-feedback-bar" id="langQuizFeedbackBar" style="display: none; margin-top: 14px; background: rgba(30, 41, 59, 0.95); border: 1px solid rgba(239, 68, 68, 0.45); border-radius: 12px; padding: 12px 16px; display: none; align-items: center; justify-content: space-between; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2rem;">❌</span>
+            <span style="font-size: 0.84rem; font-weight: 700; color: #fca5a5;">Yanlış cevap! Doğru seçenek yeşille gösterildi.</span>
+          </div>
+          <button type="button" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 8px 18px; border-radius: 8px; font-weight: 800; cursor: pointer; white-space: nowrap;" onclick="advanceLanguageGameQuestion()">
+            Devam Et ▶️
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- 2. BÖLÜM: 3D ÇEVRİLEBİLİR TABLO -->
+    <main id="langTableSection" class="lang-table-area" style="display: none;">
+      <div class="lang-table-banner">
+        <div class="lang-table-banner-left">
+          <span style="font-size: 1.8rem;" id="langTableIcon">📚</span>
+          <div>
+            <h3 id="langTableBannerTitle">Tablo</h3>
+            <p id="langTableBannerDesc">Anlamını görmek istediğiniz kelimenin üzerine dokunun, kart ters dönecektir.</p>
+          </div>
+        </div>
+        <button type="button" class="btn-continue-quiz" onclick="continueLanguageQuiz()">
           <span>🎮 Oyuna Devam Et ▶️</span>
         </button>
       </div>
 
-      <!-- Kart Satırları -->
-      <div id="emsileRowsWrapper">
-        <!-- JS ile 5 satırlı veya Zamir/Kelime tablosu basılır -->
+      <!-- Kart Grid -->
+      <div class="emsile-table-wrapper" id="langCardsGrid">
+        <!-- 3D Flip Card JS ile basılır -->
       </div>
 
-      <button type="button" class="btn-continue bottom-full" onclick="continueQuiz()">
-        <span>🎮 Oyuna Devam Et ▶️</span>
-      </button>
-    </section>
-
-    <!-- 5. GÜVENLİ ÇIKIŞ / OTURUM KAPATILDI EKRANI -->
-    <section id="exitScreenView">
-      <div class="exit-screen-card">
-        <div class="exit-screen-badge">✅</div>
-        <h2 class="exit-screen-title">Oturumunuz Güvenle Kapatıldı</h2>
-        <p class="exit-screen-desc">
-          Arapça Emsile ve Çekim uygulamasındaki tüm çalışma verileriniz, eklediğiniz kelimeler ve ayarlarınız başarıyla kaydedildi.
-        </p>
-        <div class="exit-screen-actions">
-          <button type="button" class="btn-restart-app" onclick="restartApplication()">
-            <span>🔄 Yeniden Başlat / Giriş Yap</span>
-          </button>
-        </div>
+      <div class="lang-table-footer-btn-wrap">
+        <button type="button" class="btn-continue-quiz large" onclick="continueLanguageQuiz()">
+          <span>🎮 Oyuna Devam Et ▶️</span>
+        </button>
       </div>
-    </section>
+    </main>
   </div>
 
 
-  <!-- GÜVENLİ ÇIKIŞ ONAY MODALI -->
-  <div class="modal-overlay" id="safeExitModal">
-    <div class="modal-card exit-modal-card">
-      <div class="modal-header">
-        <h3>🚪 Güvenli Çıkış</h3>
-        <button type="button" class="modal-close-btn" onclick="closeSafeExitModal()">✕</button>
-      </div>
-      <div class="modal-body exit-modal-body">
-        <div class="exit-modal-icon">👋</div>
-        <h4>Uygulamadan çıkmak istiyor musunuz?</h4>
-        <p>Çalışmalarınız, eklediğiniz kelimeler ve tüm ayarlarınız güvenle kaydedildi.</p>
-      </div>
-      <div class="modal-footer exit-modal-footer">
-        <button type="button" class="btn-nav" onclick="closeSafeExitModal()">↩️ Devam Et</button>
-        <button type="button" class="btn-danger-exit" onclick="confirmSafeExit()">🚪 Evet, Çıkış Yap</button>
-      </div>
-    </div>
-  </div>
 
-  <!-- KELİMELERİ VE ANLAMLARI DÜZENLE MODALI -->
-  <div class="modal-overlay" id="editWordsModal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 id="editModalTitle">✏️ Kelimeleri Düzenle</h3>
-        <button type="button" class="modal-close-btn" onclick="closeEditWordsModal()">✕</button>
-      </div>
-      <div class="modal-body" id="editWordsListContainer">
-        <!-- JS ile input alanları basılır -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn-modal cancel" onclick="closeEditWordsModal()">İptal</button>
-        <button type="button" class="btn-modal save" onclick="saveEditedWords()">Kaydet ve Uygula</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Bildirim -->
-  <div class="toast-message" id="toastMessage">Bildirim mesajı</div>
-
-  <!-- JAVASCRIPT OYUN MOTORU -->
-  <script>
-    // =========================================================================
-    // 1. TEMEL VERİLER
-    // =========================================================================
-
-    // A) 24 EMSİLE KELİMELERİ (Anlam + Türkçe Çeviri + Ek Bilgisi)
-    const DEFAULT_EMSILE_24_WORDS = [
-      { id: 1, word: "نَصَرَ", meaning: "Fiil-i mâzî", translation: "Yardım etti", extraHint: "-dı, -di" },
-      { id: 2, word: "يَنْصُرُ", meaning: "Fiil-i müzâri'", translation: "Yardım ediyor / eder", extraHint: "-yor, -ar, -acak" },
-      { id: 3, word: "نَصْرًا", meaning: "Mastar", translation: "Yardım etmek", extraHint: "-mak, -mek" },
-      { id: 4, word: "نَاصِرٌ", meaning: "İsm-i fâil", translation: "Yardım eden", extraHint: "-an, -en, -ıcı" },
-      { id: 5, word: "مَنْصُورٌ", meaning: "İsm-i mef'ûl", translation: "Yardım edilmiş", extraHint: "-ılan, -ilmiş" },
-      { id: 6, word: "لَمْ يَنْصُرْ", meaning: "Cahd-ı mutlak", translation: "Yardım etmedi", extraHint: "-madı, -medi" },
-      { id: 7, word: "لَمَّا يَنْصُرْ", meaning: "Cahd-ı müstağrak", translation: "Henüz yardım etmedi", extraHint: "henüz -madı" },
-      { id: 8, word: "مَا يَنْصُرُ", meaning: "Nefy-i hâl", translation: "Şimdi yardım etmiyor", extraHint: "-mıyor, -miyor" },
-      { id: 9, word: "لَا يَنْصُرُ", meaning: "Nefy-i istikbâl", translation: "Gelecekte yardım etmez", extraHint: "-mayacak, -maz, -mıyor" },
-      { id: 10, word: "لَنْ يَنْصَرَ", meaning: "Te'kîd-i nefy-i istikbâl", translation: "Asla yardım etmeyecek", extraHint: "asla -mayacak" },
-      { id: 11, word: "لِيَنْصُرْ", meaning: "Emr-i gâib", translation: "Yardım etsin", extraHint: "-sın, -sin" },
-      { id: 12, word: "لَا يَنْصُرْ", meaning: "Nehy-i gâib", translation: "Yardım etmesin", extraHint: "-masın, -mesin" },
-      { id: 13, word: "أُنْصُرْ", meaning: "Emr-i hâzır", translation: "Yardım et", extraHint: "- (sen yap)" },
-      { id: 14, word: "لَا تَنْصُرْ", meaning: "Nehy-i hâzır", translation: "Yardım etme", extraHint: "-ma, -me" },
-      { id: 15, word: "مَنْصَرٌ", meaning: "İsm-i zaman, ism-i mekân, masdar-ı mîmî", translation: "Yardım edecek zaman / mekân", extraHint: "Zaman / Mekân / Mastar" },
-      { id: 16, word: "مِنْصَرٌ", meaning: "İsm-i âlet", translation: "Yardım edecek alet", extraHint: "Alet ismi" },
-      { id: 17, word: "نَصْرَةً", meaning: "Masdar-ı binâ-i merre", translation: "Bir kere yardım etmek", extraHint: "Bir kere yapma" },
-      { id: 18, word: "نِصْرَةً", meaning: "Masdar-ı binâ-i nev'", translation: "Bir çeşit yardım etmek", extraHint: "Bir tarz yapma" },
-      { id: 19, word: "نُصَيْرٌ", meaning: "İsm-i tasgîr", translation: "Azıcık yardım etmek", extraHint: "Küçültme (-cık)" },
-      { id: 20, word: "نَصْرِيٌّ", meaning: "İsm-i mensûb", translation: "Yardım etmeye mensup", extraHint: "Aitlik (-li, -sel)" },
-      { id: 21, word: "نَصَّارٌ", meaning: "Mübalağalı ism-i fâil", translation: "Çok yardım edici", extraHint: "Çok yapan" },
-      { id: 22, word: "أَنْصَرُ", meaning: "İsm-i tafdîl", translation: "Daha çok yardım edici", extraHint: "En / Daha çok" },
-      { id: 23, word: "مَا أَنْصَرَهُ", meaning: "Fiil-i taaccüb-i evvel", translation: "Ne acayip yardım etti!", extraHint: "Ne acayip ...!" },
-      { id: 24, word: "أَنْصِرْ بِهِ", meaning: "Fiil-i taaccüb-i sânî", translation: "Ne güzel yardım etti!", extraHint: "Ne güzel / hoş ...!" }
-    ];
-
-    let EMSILE_24_WORDS = JSON.parse(JSON.stringify(DEFAULT_EMSILE_24_WORDS));
-
-    // B) 14 ŞAHIS ZAMİRİ
-    const PRONOUN_MEANINGS = [
-      "O (erkek)", "O ikisi (erkek)", "Onlar (erkek)",
-      "O (kadın)", "O ikisi (kadın)", "Onlar (kadın)",
-      "Sen (erkek)", "Siz ikiniz (erkek)", "Siz (erkek)",
-      "Sen (kadın)", "Siz ikiniz (kadın)", "Siz (kadın)",
-      "Ben", "Biz"
-    ];
-
-    // C) 24 SÎGANIN HER BİRİ İÇİN 14 ŞAHIS ÇEKİMİ
-    const SIGA_CONJUGATIONS = {
-      1: ["نَصَرَ", "نَصَرَا", "نَصَرُوا", "نَصَرَتْ", "نَصَرَتَا", "نَصَرْنَ", "نَصَرْتَ", "نَصَرْتُمَا", "نَصَرْتُمْ", "نَصَرْتِ", "نَصَرْتُمَا", "نَصَرْتُنَّ", "نَصَرْتُ", "نَصَرْنَا"],
-      2: ["يَنْصُرُ", "يَنْصُرَانِ", "يَنْصُرُونَ", "تَنْصُرُ", "تَنْصُرَانِ", "يَنْصُرْنَ", "تَنْصُرُ", "تَنْصُرَانِ", "تَنْصُرُونَ", "تَنْصُرِينَ", "تَنْصُرَانِ", "تَنْصُرْنَ", "أَنْصُرُ", "نَنْصُرُ"],
-      3: ["نَصْرًا", "نَصْرَيْنِ", "نَصَرَاتٍ", "نَصْرًا", "نَصْرَيْنِ", "نَصَرَاتٍ", "نَصْرًا", "نَصْرَيْنِ", "نَصَرَاتٍ", "نَصْرًا", "نَصْرَيْنِ", "نَصَرَاتٍ", "نَصْرًا", "نَصْرًا"],
-      4: ["نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ", "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ", "نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ", "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ", "نَاصِرٌ", "نَاصِرُونَ"],
-      5: ["مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ", "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ", "مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ", "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ", "مَنْصُورٌ", "مَنْصُورُونَ"],
-      6: ["لَمْ يَنْصُرْ", "لَمْ يَنْصُرَا", "لَمْ يَنْصُرُوا", "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ يَنْصُرْنَ", "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرُوا", "لَمْ تَنْصُرِي", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرْنَ", "لَمْ أَنْصُرْ", "لَمْ نَنْصُرْ"],
-      7: ["لَمَّا يَنْصُرْ", "لَمَّا يَنْصُرَا", "لَمَّا يَنْصُرُوا", "لَمَّا تَنْصُرْ", "لَمَّا تَنْصُرَا", "لَمَّا يَنْصُرْنَ", "لَمَّا تَنْصُرْ", "لَمَّا تَنْصُرَا", "لَمَّا تَنْصُرُوا", "لَمَّا تَنْصُرِي", "لَمَّا تَنْصُرَا", "لَمَّا تَنْصُرْنَ", "لَمَّا أَنْصُرْ", "لَمَّا نَنْصُرْ"],
-      8: ["مَا يَنْصُرُ", "مَا يَنْصُرَانِ", "مَا يَنْصُرُونَ", "مَا تَنْصُرُ", "مَا تَنْصُرَانِ", "مَا يَنْصُرْنَ", "مَا تَنْصُرُ", "مَا تَنْصُرَانِ", "مَا تَنْصُرُونَ", "مَا تَنْصُرِينَ", "مَا تَنْصُرَانِ", "مَا تَنْصُرْنَ", "مَا أَنْصُرُ", "مَا نَنْصُرُ"],
-      9: ["لَا يَنْصُرُ", "لَا يَنْصُرَانِ", "لَا يَنْصُرُونَ", "لَا تَنْصُرُ", "لَا تَنْصُرَانِ", "لَا يَنْصُرْنَ", "لَا تَنْصُرُ", "لَا تَنْصُرَانِ", "لَا تَنْصُرُونَ", "لَا تَنْصُرِينَ", "لَا تَنْصُرَانِ", "لَا تَنْصُرْنَ", "لَا أَنْصُرُ", "لَا نَنْصُرُ"],
-      10: ["لَنْ يَنْصَرَ", "لَنْ يَنْصَرَا", "لَنْ يَنْصَرُوا", "لَنْ تَنْصَرَ", "لَنْ تَنْصَرَا", "لَنْ يَنْصَرْنَ", "لَنْ تَنْصَرَ", "لَنْ تَنْصَرَا", "لَنْ تَنْصَرُوا", "لَنْ تَنْصَرِي", "لَنْ تَنْصَرَا", "لَنْ تَنْصَرْنَ", "لَنْ أَنْصَرَ", "لَنْ نَنْصَرَ"],
-      11: ["لِيَنْصُرْ", "لِيَنْصُرَا", "لِيَنْصُرُوا", "لِتَنْصُرْ", "لِتَنْصُرَا", "لِيَنْصُرْنَ", "لِيَنْصُرْ", "لِيَنْصُرَا", "لِيَنْصُرُوا", "لِتَنْصُرِي", "لِتَنْصُرَا", "لِيَنْصُرْنَ", "لِأَنْصُرْ", "لِنَنْصُرْ"],
-      12: ["لَا يَنْصُرْ", "لَا يَنْصُرَا", "لَا يَنْصُرُوا", "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا يَنْصُرْنَ", "لَا يَنْصُرْ", "لَا يَنْصُرَا", "لَا يَنْصُرُوا", "لَا تَنْصُرِي", "لَا تَنْصُرَا", "لَا يَنْصُرْنَ", "لَا أَنْصُرْ", "لَا نَنْصُرْ"],
-      13: ["لِيَنْصُرْ", "لِيَنْصُرَا", "لِيَنْصُرُوا", "لِتَنْصُرْ", "لِتَنْصُرَا", "لِيَنْصُرْنَ", "أُنْصُرْ", "أُنْصُرَا", "أُنْصُرُوا", "أُنْصُرِي", "أُنْصُرَا", "أُنْصُرْنَ", "لِأَنْصُرْ", "لِنَنْصُرْ"],
-      14: ["لَا يَنْصُرْ", "لَا يَنْصُرَا", "لَا يَنْصُرُوا", "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا يَنْصُرْنَ", "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا تَنْصُرُوا", "لَا تَنْصُرِي", "لَا تَنْصُرَا", "لَا تَنْصُرْنَ", "لَا أَنْصُرْ", "لَا نَنْصُرْ"],
-      15: ["مَنْصَرٌ", "مَنْصَرَانِ", "مَنَاصِرُ", "مَنْصَرَةٌ", "مَنْصَرَتَانِ", "مَنَاصِرُ", "مَنْصَرٌ", "مَنْصَرَانِ", "مَنَاصِرُ", "مَنْصَرَةٌ", "مَنْصَرَتَانِ", "مَنَاصِرُ", "مَنْصَرٌ", "مَنَاصِرُ"],
-      16: ["مِنْصَرٌ", "مِنْصَرَانِ", "مَنَاصِرُ", "مِنْصَرَةٌ", "مِنْصَرَتَانِ", "مَنَاصِرُ", "مِنْصَرٌ", "مِنْصَرَانِ", "مَنَاصِرُ", "مِنْصَرَةٌ", "مِنْصَرَتَانِ", "مَنَاصِرُ", "مِنْصَرٌ", "مَنَاصِرُ"],
-      17: ["نَصْرَةً", "نَصْرَتَيْنِ", "نَصَرَاتٍ", "نَصْرَةً", "نَصْرَتَيْنِ", "نَصَرَاتٍ", "نَصْرَةً", "نَصْرَتَيْنِ", "نَصَرَاتٍ", "نَصْرَةً", "نَصْرَتَيْنِ", "نَصَرَاتٍ", "نَصْرَةً", "نَصْرَةً"],
-      18: ["نِصْرَةً", "نِصْرَتَيْنِ", "نِصَرَاتٍ", "نِصْرَةً", "نِصْرَتَيْنِ", "نِصَرَاتٍ", "نِصْرَةً", "نِصْرَتَيْنِ", "نِصَرَاتٍ", "نِصْرَةً", "نِصْرَتَيْنِ", "نِصَرَاتٍ", "نِصْرَةً", "نِصْرَةً"],
-      19: ["نُصَيْرٌ", "نُصَيْرَانِ", "نُصَيْرُونَ", "نُصَيْرَةٌ", "نُصَيْرَتَانِ", "نُصَيْرَاتٌ", "نُصَيْرٌ", "نُصَيْرَانِ", "نُصَيْرُونَ", "نُصَيْرَةٌ", "نُصَيْرَتَانِ", "نُصَيْرَاتٌ", "نُصَيْرٌ", "نُصَيْرُونَ"],
-      20: ["نَصْرِيٌّ", "نَصْرِيَّانِ", "نَصْرِيُّونَ", "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ", "نَصْرِيٌّ", "نَصْرِيَّانِ", "نَصْرِيُّونَ", "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ", "نَصْرِيٌّ", "نَصْرِيُّونَ"],
-      21: ["نَصَّارٌ", "نَصَّارَانِ", "نَصَّارُونَ", "نَصَّارَةٌ", "نَصَّارَتَانِ", "نَصَّارَاتٌ", "نَصَّارٌ", "نَصَّارَانِ", "نَصَّارُونَ", "نَصَّارَةٌ", "نَصَّارَتَانِ", "نَصَّارَاتٌ", "نَصَّارٌ", "نَصَّارُونَ"],
-      22: ["أَنْصَرُ", "أَنْصَرَانِ", "أَنْصَرُونَ", "نُصْرَى", "نُصْرَيَانِ", "نُصْرَيَاتٌ", "أَنْصَرُ", "أَنْصَرَانِ", "أَنْصَرُونَ", "نُصْرَى", "نُصْرَيَانِ", "نُصْرَيَاتٌ", "أَنْصَرُ", "أَنْصَرُونَ"],
-      23: [
-        "مَا أَنْصَرَهُ", "مَا أَنْصَرَهُمَا", "مَا أَنْصَرَهُمْ",
-        "مَا أَنْصَرَهَا", "مَا أَنْصَرَهُمَا", "مَا أَنْصَرَهُنَّ",
-        "مَا أَنْصَرَكَ", "مَا أَنْصَرَكُمَا", "مَا أَنْصَرَكُمْ",
-        "مَا أَنْصَرِكِ", "مَا أَنْصَرَكُمَا", "مَا أَنْصَرَكُنَّ",
-        "مَا أَنْصَرَنِي", "مَا أَنْصَرَنَا"
-      ],
-      24: ["أَنْصِرْ بِهِ", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِمْ", "أَنْصِرْ بِهَا", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِنَّ", "أَنْصِرْ بِكَ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُمْ", "أَنْصِرْ بِكِ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُنَّ", "أَنْصِرْ بِي", "أَنْصِرْ بِنَا"]
-    };
-
-    // D) YENİ KELİME LİSTESİ: TEKİL / İKİLİ / ÇOĞUL (KULLANICI İSTEĞİ)
-    const DEFAULT_VOCABULARY_WORDS = [
-  { id: 1, singular: "رَبٌّ", dual: "رَبَّانِ", plural: "أَرْبَابٌ", meaning: "Rab: Bir şeyi kemâle erinceye kadar derece derece terbiye eden; mutlak mâlik, efendi, rızık veren ve varlığı yöneten (el-Müfredât / Fâtiha 1/2)" },
-  { id: 2, singular: "آيَةٌ", dual: "آيَتَانِ", plural: "آيَاتٌ", meaning: "Âyet: Allah'ın varlık, birlik ve kudretine delalet eden apaçık delil, peygamber mucizesi, ibret ve Kur'an'ın her bir vahiy cümlesi (el-Müfredât / Bakara 2/252)" },
-  { id: 3, singular: "كِتَابٌ", dual: "كِتَابَانِ", plural: "كُتُبٌ", meaning: "Kitap: Yazılı vahiy, Kur'an-ı Kerim, kesin ilahî hüküm, farz kılınan emir ve amel defteri (el-Müfredât / Nisâ 4/103)" },
-  { id: 4, singular: "رَسُولٌ", dual: "رَسُولَانِ", plural: "رُسُلٌ", meaning: "Resûl: Kendisine kitap ve şeriat verilerek insanları hak dine davet ve tebliğle vazifelendirilen ilahî elçi, peygamber (el-Müfredât / Âl-i İmrân 3/144)" },
-  { id: 5, singular: "نَبِيٌّ", dual: "نَبِيَّانِ", plural: "أَنْبِيَاءُ / نَبِيُّونَ", meaning: "Nebî: Allah'tan vahiy ve gayb haberi alan, şanı ve manevî mertebesi yüce olan peygamber (el-Müfredât / Ahzâb 33/40)" },
-  { id: 6, singular: "يَوْمٌ", dual: "يَوْمَانِ", plural: "أَيَّامٌ", meaning: "Yevm: Gün, vakit, zaman; ayetlerde özellikle hesap, diriliş ve ceza günü olan Kıyamet Günü (el-Müfredât / Fâtiha 1/4)" },
-  { id: 7, singular: "سَمَاءٌ", dual: "سَمَاوَانِ", plural: "سَمَاوَاتٌ", meaning: "Semâ: Yeryüzünü kuşatan yüksek gök, semavat; yağmur, rahmet ve vahyin indiği ulvî alem (el-Müfredât / Bakara 2/22)" },
-  { id: 8, singular: "أَرْضٌ", dual: "أَرْضَانِ", plural: "أَرَاضٍ / أَرْضُونَ", meaning: "Arz: İnsan ve canlıların üzerinde yaşadığı yeryüzü, zemin ve nimetlerle donatılmış yer küre (el-Müfredât / Bakara 2/29)" },
-  { id: 9, singular: "نَفْسٌ", dual: "نَفْسَانِ", plural: "أَنْفُسٌ / نُفُوسٌ", meaning: "Nefis: İnsanın bizzat kendisi, zâtı, canı, ruhu; şehevî heveslerin ve manevî tezkiyenin mahalli (el-Müfredât / Şems 91/7-8)" },
-  { id: 10, singular: "قَوْمٌ", dual: "قَوْمَانِ", plural: "أَقْوَامٌ", meaning: "Kavim: Bir gaye ve bağ etrafında kenetlenen insan topluluğu, bir peygambere muhatap olan halk ve millet (el-Müfredât / Yûnus 10/75)" },
-  { id: 11, singular: "عَبْدٌ", dual: "عَبْدَانِ", plural: "عِبَادٌ / عَبِيدٌ", meaning: "Kul: Allah'a mutlak teslimiyet, sevgi ve itaatle boyun eğip ibadet eden insan; köle (el-Müfredât / İsrâ 17/1)" },
-  { id: 12, singular: "قَلْبٌ", dual: "قَلْبَانِ", plural: "قُلُوبٌ", meaning: "Kalp: İmanın, aklın, basiretin, niyetin ve ilahî feyzin mahalli olan manevî merkez, gönül (el-Müfredât / Hac 22/46)" },
-  { id: 13, singular: "عَذَابٌ", dual: "عَذَابَانِ", plural: "أَعْذِبَةٌ", meaning: "Azap: İnsana elem ve ızdırap veren şiddetli ceza; günahkârların ahirette çarptırılacağı elem verici karşılık (el-Müfredât / Bakara 2/7)" },
-  { id: 14, singular: "جَنَّةٌ", dual: "جَنَّتَانِ", plural: "جَنَّاتٌ", meaning: "Cennet: Takva sahibi müminler için ahirette hazırlanan ebedî nimet, huzur, cemalullah ve saadet yurdu; bahçe (el-Müfredât / Tevbe 9/72)" },
-  { id: 15, singular: "نَارٌ", dual: "نَارَانِ", plural: "نِيرَانٌ", meaning: "Nâr: Ateş; ayetlerde inkârcıların ve zalimlerin içine atılacağı yakıcı Cehennem ateşi ve azabı (el-Müfredât / Bakara 2/24)" },
-  { id: 16, singular: "حَقٌّ", dual: "حَقَّانِ", plural: "حُقُوقٌ", meaning: "Hak: Şüphe götürmez mutlak gerçek, adalet, sabit doğru; Allah Teâlâ'nın yüce ismi ve Kur'an'ın bildirdiği hakikat (el-Müfredât / Yûnus 10/32)" },
-  { id: 17, singular: "سَبِيلٌ", dual: "سَبِيلَانِ", plural: "سُبُلٌ", meaning: "Sebîl: Yol, gidişat; ayetlerde özellikle Allah'ın rızasına, cihadına ve hak dinine ulaştıran dosdoğru yol (el-Müfredât / Bakara 2/154)" },
-  { id: 18, singular: "أَمْرٌ", dual: "أَمْرَانِ", plural: "أُمُورٌ / أَوَامِرُ", meaning: "Emir: İlahî buyruk, ferman, hüküm; aynı zamanda iş, durum, kaza ve kader tecellisi (el-Müfredât / Şûrâ 42/53)" },
-  { id: 19, singular: "شَيْءٌ", dual: "شَيْئَانِ", plural: "أَشْيَاءُ", meaning: "Şey: Varlık, yaratılmış olan her bir nesne, mevcut olan ve bilinen her şey (el-Müfredât / Zümer 39/62)" },
-  { id: 20, singular: "مَالٌ", dual: "مَالَانِ", plural: "أَمْوَالٌ", meaning: "Mal: İnsanın sahip olduğu dünya serveti, mülk, meta; imtihan ve infak vesilesi (el-Müfredât / Enfâl 8/28)" },
-  { id: 21, singular: "وَلَدٌ", dual: "وَلَدَانِ", plural: "أَوْلَادٌ / وِلْدَانٌ", meaning: "Veled: Çocuk, evlat; insanın neslini devam ettiren ve dünya hayatının süsü olan zürriyet (el-Müfredât / Kehf 18/46)" },
-  { id: 22, singular: "عِلْمٌ", dual: "عِلْمَانِ", plural: "عُلُومٌ", meaning: "İlim: Bir şeyin hakikatini kesin delille bilmek; vahiy bilgisi, hak ve hikmet marifeti (el-Müfredât / İsrâ 17/85)" },
-  { id: 23, singular: "عَمَلٌ", dual: "عَمَلَانِ", plural: "أَعْمَالٌ", meaning: "Amel: İrade ve niyetle yapılan eylem, iş, fiil; ahirette karşılığı verilecek hayır veya şer ameller (el-Müfredât / Kehf 18/110)" },
-  { id: 24, singular: "أَهْلٌ", dual: "أَهْلَانِ", plural: "أَهْلُونَ / أَهَالٍ", meaning: "Ehil: Aile, ev halkı, soydaşlar; aynı zamanda bir kitaba ve inanca mensup olan zümre (Ehl-i Beyt, Ehl-i Kitap) (el-Müfredât / Ahzâb 33/33)" },
-  { id: 25, singular: "بَيْتٌ", dual: "بَيْتَانِ", plural: "بُيُوتٌ / أَبْيَاتٌ", meaning: "Beyt: Ev, mesken, barınak; ayetlerde özellikle yeryüzünün ilk ve en kutsal mabedi olan Kâbe-i Muazzama (el-Müfredât / Âl-i İmrân 3/96)" },
-  { id: 26, singular: "بَابٌ", dual: "بَابَانِ", plural: "أَبْوَابٌ / بِيبَانٌ", meaning: "Kapı: Giriş ve çıkış yeri; ayetlerde semanın, Cennetin, Cehennemin ve ilahî rahmetin açılan kapıları (el-Müfredât / Zümer 39/73)" },
-  { id: 27, singular: "مَلَكٌ", dual: "مَلَكَانِ", plural: "مَلَائِكَةٌ", meaning: "Melek: Allah Teâlâ'nın nurdan yarattığı, emirlere asla isyan etmeyen, ilahî vazifeleri icra eden ruhanî varlık (el-Müfredât / Tahrîm 66/6)" },
-  { id: 28, singular: "إِنْسَانٌ", dual: "إِنْسَانَانِ", plural: "نَاسٌ / أَنَاسِيُّ", meaning: "İnsan: Akıl, vicdan ve emaneti yüklenen, yaratılışı ahsen-i takvîm üzere olan beşer (el-Müfredât / Tîn 95/4)" },
-  { id: 29, singular: "دِينٌ", dual: "دِينَانِ", plural: "أَدْيَانٌ", meaning: "Din: İtaat, ceza ve mükâfat nizamı, hesap; Allah'ın peygamberleri vasıtasıyla bildirdiği hak şeriat ve inanç yolu (el-Müfredât / Âl-i İmrân 3/19)" },
-  { id: 30, singular: "قَوْلٌ", dual: "قَوْلَانِ", plural: "أَقْوَالٌ / أَقَاوِيلُ", meaning: "Söz: Kelam, lafız, ifade; ayetlerde tevhid kelimesi, hakkı beyan eden söz veya peygamberlere vahyedilen ağır hitap (el-Müfredât / Müzzemmil 73/5)" },
-  { id: 31, singular: "يَدٌ", dual: "يَدَانِ", plural: "أَيْدٍ / أَيَادٍ", meaning: "El: Organ olan el; ayetlerde güç, kudret, nimet, tasarruf ve ilahî inayet (el-Müfredât / Fetih 48/10)" },
-  { id: 32, singular: "عَيْنٌ", dual: "عَيْنَانِ", plural: "أَعْيُنٌ / عُيُونٌ", meaning: "Göz / Pınar: Görme organı; yeryüzünden kaynayan su pınarı; ilahî gözetim ve hıfz (el-Müfredât / Tâhâ 20/39)" },
-  { id: 33, singular: "أُذُنٌ", dual: "أُذُنَانِ", plural: "آذَانٌ", meaning: "Kulak: İşitme organı; ayetlerde vahyi ve hakkı dinleyip ibret alma vasıtası (el-Müfredât / Mâide 5/45)" },
-  { id: 34, singular: "لِسَانٌ", dual: "لِسَانَانِ", plural: "أَلْسِنَةٌ", meaning: "Dil / Lisan: Konuşma organı, lisan, lehçe; güzel bir nam ile anılma (lisân-ı sıdk) ve hakikat tercümanı (el-Müfredât / Şuarâ 26/84)" },
-  { id: 35, singular: "وَجْهٌ", dual: "وَجْهَانِ", plural: "وُجُوهٌ / أَوْجُهٌ", meaning: "Yüz / Vech: Çehre, taraf, istikamet; ayetlerde Allah'ın zâtı ve yüce rızası (el-Müfredât / Kasas 28/88)" },
-  { id: 36, singular: "رِجْلٌ", dual: "رِجْلَانِ", plural: "أَرْجُلٌ", meaning: "Ayak: Yürüme organı; hak yolda sebat etme veya günah mahalline gitme aleti (el-Müfredât / Yâsîn 36/65)" },
-  { id: 37, singular: "صَدْرٌ", dual: "صَدْرَانِ", plural: "صُدُورٌ", meaning: "Göğüs / Sadr: Kalbin mahalli olan sine, bağır; imanın genişliği (inşirah) yahut vesvese ve kinin barındığı yer (el-Müfredât / İnşirâh 94/1)" },
-  { id: 38, singular: "بَصَرٌ", dual: "بَصَرَانِ", plural: "أَبْصَارٌ", meaning: "Basar: Göz nuru, görme hassası; kalbî basiret ve ibret nazarıyla bakış (el-Müfredât / Mülk 67/3-4)" },
-  { id: 39, singular: "سَمْعٌ", dual: "سَمْعَانِ", plural: "أَسْمَاعٌ", meaning: "İşitme / Sem': Kulak vasıtasıyla sesleri ve ilahî hitabı duyup kabul etme yetisi (el-Müfredât / Bakara 2/7)" },
-  { id: 40, singular: "رَأْسٌ", dual: "رَأْسَانِ", plural: "رُؤُوسٌ", meaning: "Baş / Re's: Bedenin tepe noktası, kafa; ayetlerde abdestte mesh edilen uzuv veya bir topluluğun başı (el-Müfredât / Mâide 5/6)" },
-  { id: 41, singular: "شَمْسٌ", dual: "شَمْسَانِ", plural: "شُمُوسٌ", meaning: "Güneş: Âlemi aydınlatıp ısıtan kandil; ilahî kudret ve dakik nizamın apaçık delili (el-Müfredât / Şems 91/1)" },
-  { id: 42, singular: "قَمَرٌ", dual: "قَمَرَانِ", plural: "أَقْمَارٌ", meaning: "Ay / Kamer: Gecenin aydınlığı, menzillere göre hilalden dolunaya dönen takvim ve vakit ölçüsü (el-Müfredât / Yâsîn 36/39)" },
-  { id: 43, singular: "نَجْمٌ", dual: "نَجْمَانِ", plural: "نُجُومٌ / أَنْجُمٌ", meaning: "Yıldız: Semayı süsleyen ışıklı gök cismi; karanlıklarda yol bulma rehberi (el-Müfredât / Necm 53/1)" },
-  { id: 44, singular: "لَيْلٌ", dual: "لَيْلَانِ", plural: "لَيَالٍ", meaning: "Gece: Karanlığın yeryüzünü bürüdüğü dinlenme, tefekkür, ibadet ve sükûn vakti (el-Müfredât / Leyl 92/1)" },
-  { id: 45, singular: "نَهَارٌ", dual: "نَهَارَانِ", plural: "أَنْهُرٌ / نُهُرٌ", meaning: "Gündüz: Güneş ışığıyla aydınlanan, maişet ve çalışma vakti (el-Müfredât / İsrâ 17/12)" },
-  { id: 46, singular: "نُورٌ", dual: "نُورَانِ", plural: "أَنْوَارٌ", meaning: "Nur: Karanlıkları dağıtan aydınlık; imanın, vahyin ve hidayetin kalbi aydınlatan ilahî feyzi (el-Müfredât / Nûr 24/35)" },
-  { id: 47, singular: "ظُلْمَةٌ", dual: "ظُلْمَتَانِ", plural: "ظُلُمَاتٌ", meaning: "Karanlık: Maddî karanlık; ayetlerde özellikle şirk, inkâr ve cehaletin kalbi saran manevî zifiri (el-Müfredât / Bakara 2/17)" },
-  { id: 48, singular: "مَاءٌ", dual: "مَاءَانِ", plural: "مِيَاهٌ / أَمْوَاهٌ", meaning: "Su: Her canlı varlığın hayat bulduğu aziz nimet; gökten inen temizleyici rahmet (el-Müfredât / Enbiyâ 21/30)" },
-  { id: 49, singular: "رِيحٌ", dual: "رِيحَانِ", plural: "رِيَاحٌ / أَرْيَاحٌ", meaning: "Rüzgar: Rahmet bulutlarını sevk eden müjdeci yel; yahut inkârcılara gönderilen helak edici kasırga (el-Müfredât / Rûm 30/46)" },
-  { id: 50, singular: "بَحْرٌ", dual: "بَحْرَانِ", plural: "بِحَارٌ / أَبْحُرٌ", meaning: "Deniz: Uçsuz bucaksız engin su; üzerinde gemilerin akıp gittiği, taze rızık ve inciler barındıran azametli ayet (el-Müfredât / Nahl 16/14)" },
-  { id: 51, singular: "جَبَلٌ", dual: "جَبَلَانِ", plural: "جِبَالٌ", meaning: "Dağ: Yeryüzünü sarsıntıdan koruyan kazıklar hükmünde yüce ve sarp kaya kütlesi (el-Müfredât / Nebe 78/7)" },
-  { id: 52, singular: "نَهْرٌ", dual: "نَهْرَانِ", plural: "أَنْهَارٌ", meaning: "Nehir: Yatağında çağlayarak akan ırmak; Cennette müminlerin köşkleri altından akan kevser, süt, bal ve su nehirleri (el-Müfredât / Bakara 2/25)" },
-  { id: 53, singular: "شَجَرَةٌ", dual: "شَجَرَتَانِ", plural: "أَشْجَارٌ / شَجَرٌ", meaning: "Ağaç: Kökü yerde dalları gökte bitki; ayetlerde imanın kökleşmesini temsil eden mübarek misal (el-Müfredât / İbrâhîm 14/24)" },
-  { id: 54, singular: "ثَمَرَةٌ", dual: "ثَمَرَتَانِ", plural: "ثَمَرَاتٌ / ثَمَرٌ", meaning: "Meyve / Semere: Ağaç ve bitkilerin verdiği ürün; amellerin ahiretteki tatlı hasılatı ve ilahî rızık (el-Müfredât / Bakara 2/126)" },
-  { id: 55, singular: "طَعَامٌ", dual: "طَعَامَانِ", plural: "أَطْعِمَةٌ", meaning: "Yiyecek / Taâm: İnsanın beslendiği gıda ve rızık; yoksulu ve yetimi doyurma vecibesi (el-Müfredât / Mâûn 107/3)" },
-  { id: 56, singular: "مَوْتٌ", dual: "مَوْتَانِ", plural: "أَمْوَاتٌ", meaning: "Ölüm: Ruhun bedenden ayrılmasıyla dünya imtihanının sona ermesi ve ahirete intikal (el-Müfredât / Âl-i İmrân 3/185)" },
-  { id: 57, singular: "حَيَاةٌ", dual: "حَيَاتَانِ", plural: "حَيَوَاتٌ", meaning: "Hayat: Canlılık, dirilik; ayetlerde asıl kalıcı ve hakiki varoluş olan ahiret yurdu (Dârü'l-Hayavân) (el-Müfredât / Ankebût 29/64)" },
-  { id: 58, singular: "دُنْيَا", dual: "دُنْيَيَانِ", plural: "دُنًى", meaning: "Dünya: Ahirete nispetle çok yakın, fani, geçici ve bir imtihan sahnesi olan ilk hayat (el-Müfredât / Hadîd 57/20)" },
-  { id: 59, singular: "آخِرَةٌ", dual: "آخِرَتَانِ", plural: "آخِرَاتٌ", meaning: "Ahiret: Dünyadan sonra gelecek olan ebedî, hakiki ve zevalsiz hesap yurdu (el-Müfredât / Duhâ 93/4)" },
-  { id: 60, singular: "سَاعَةٌ", dual: "سَاعَتَانِ", plural: "سَاعَاتٌ", meaning: "Kıyamet Vakti / Saat: Vakit dilimi; ayetlerde kâinat nizamının bir anda altüst olacağı dehşetli Kıyamet anı (el-Müfredât / Kamer 54/1)" },
-  { id: 61, singular: "أَجْرٌ", dual: "أَجْرَانِ", plural: "أُجُورٌ", meaning: "Ecir / Mükâfat: İman ve salih amellere Allah katında lütfedilen tükenmez hayır ve sevap (el-Müfredât / Fussilet 41/8)" },
-  { id: 62, singular: "فَضْلٌ", dual: "فَضْلَانِ", plural: "فُضُولٌ / أَفْضَالٌ", meaning: "Lütuf / Fazl: Allah'ın kullarına sırf cömertliğiyle bahşettiği bol ihsan, üstünlük ve bereket (el-Müfredât / Bakara 2/105)" },
-  { id: 63, singular: "رَحْمَةٌ", dual: "رَحْمَتَانِ", plural: "رَحَمَاتٌ", meaning: "Rahmet: Allah'ın her şeyi kuşatan sınırsız merhameti, şefkati, bağışlaması ve lütfu (el-Müfredât / A'râf 7/156)" },
-  { id: 64, singular: "نِعْمَةٌ", dual: "نِعْمَتَانِ", plural: "نِعَمٌ / أَنْعُمٌ", meaning: "Nimet: Saymakla bitirilemeyen maddî ve manevî ilahî bağış, sıhhat, hidayet ve ihsan (el-Müfredât / İbrâhîm 14/34)" },
-  { id: 65, singular: "حَسَنَةٌ", dual: "حَسَنَتَانِ", plural: "حَسَنَاتٌ", meaning: "Hasene: Allah rızasına uygun hayır amel, güzellik, dünyada afiyet ve ahirette Cennet sevabı (el-Müfredât / Bakara 2/201)" },
-  { id: 66, singular: "سَيِّئَةٌ", dual: "سَيِّئَتَانِ", plural: "سَيِّئَاتٌ", meaning: "Seyyie: Şeriatın kınadığı günah, çirkin fiil, fenalık ve bunların ahiretteki acı cezası (el-Müfredât / Nisâ 4/79)" },
-  { id: 67, singular: "ذَنْبٌ", dual: "ذَنْبَانِ", plural: "ذُنُوبٌ", meaning: "Günah / Zenb: Kişinin peşini bırakmayan vebal, ilahî sınırlara aykırı düşen suç ve isyan (el-Müfredât / Şûrâ 42/37)" },
-  { id: 68, singular: "خَطِيئَةٌ", dual: "خَطِيئَتَانِ", plural: "خَطَايَا / خَطِيئَاتٌ", meaning: "Hatîe: İnsanı kuşatan büyük günah, kasten veya gafletle işlenen ağır cürüm (el-Müfredât / Bakara 2/81)" },
-  { id: 69, singular: "ظُلْمٌ", dual: "ظُلْمَانِ", plural: "مَظَالِمُ", meaning: "Zulüm: Bir şeyi yerinden saptırıp haddi aşmak, haksızlık; en büyük zulüm ise Allah'a şirk koşmaktır (el-Müfredât / Lokmân 31/13)" },
-  { id: 70, singular: "إِثْمٌ", dual: "إِثْمَانِ", plural: "آثَامٌ", meaning: "İsm: İnsanı hayırdan geri bırakan, vicdanı rahatsız eden ve cezayı gerektiren ağır günah (el-Müfredât / Bakara 2/219)" },
-  { id: 71, singular: "مُؤْمِنٌ", dual: "مُؤْمِنَانِ", plural: "مُؤْمِنُونَ / مُؤْمِنِينَ", meaning: "Mümin: Allah'a, meleklerine, kitaplarına ve ahirete ihlasla iman edip güvene eren samimi kul (el-Müfredât / Enfâl 8/2)" },
-  { id: 72, singular: "كَافِرٌ", dual: "كَافِرَانِ", plural: "كَافِرُونَ / كُفَّارٌ", meaning: "Kâfir: Hakkı, tevhid delillerini ve nimetleri bile bile inkâr edip üzerini örten nankör (el-Müfredât / Bakara 2/6)" },
-  { id: 73, singular: "مُنَافِقٌ", dual: "مُنَافِقَانِ", plural: "مُنَافِقُونَ / مُنَافِقِينَ", meaning: "Münafık: Dıştan inanmış görünüp içinde inkâr ve nifak besleyen, dinde sahtekâr ikiyüzlü kimse (el-Müfredât / Nisâ 4/145)" },
-  { id: 74, singular: "مُشْرِكٌ", dual: "مُشْرِكَانِ", plural: "مُشْرِكُونَ / مُشْرِكِينَ", meaning: "Müşrik: İlahlıkta, yaratmada ve ibadette Allah'a putları veya başka şeyleri ortak koşan (el-Müfredât / Tevbe 9/28)" },
-  { id: 75, singular: "ظَالِمٌ", dual: "ظَالِمَانِ", plural: "ظَالِمُونَ / ظَلَمَةٌ", meaning: "Zalim: İlahi sınırları çiğneyen, hakkı gasbeden ve inkârla kendi nefsine yazık eden kimse (el-Müfredât / Bakara 2/165)" },
-  { id: 76, singular: "فَاسِقٌ", dual: "فَاسِقَانِ", plural: "فَاسِقُونَ / فُسَّاقٌ", meaning: "Fasık: Allah'a itaatten büsbütün çıkıp günahı aşikare işleyen, yoldan sapmış kimse (el-Müfredât / Secde 32/18)" },
-  { id: 77, singular: "صَالِحٌ", dual: "صَالِحَانِ", plural: "صَالِحُونَ / صُلَحَاءُ", meaning: "Salih: İtikadı temiz, ameli Allah'ın rızasına uygun, iyilik ve ıslah üzere yaşayan dürüst kimse (el-Müfredât / Âl-i İmrân 3/114)" },
-  { id: 78, singular: "صَادِقٌ", dual: "صَادِقَانِ", plural: "صَادِقُونَ / صُدَقَاءُ", meaning: "Sadık: Sözünde ve inancında dosdoğru olan, ahdine vefa gösteren dürüst ve sadakatli mümin (el-Müfredât / Ahzâb 33/23)" },
-  { id: 79, singular: "صَابِرٌ", dual: "صَابِرَانِ", plural: "صَابِرُونَ", meaning: "Sabırlı / Sâbir: İbadette sebat eden, günahlara karşı direnen ve musibet anında metanetini koruyan kul (el-Müfredât / Bakara 2/155)" },
-  { id: 80, singular: "شَاكِرٌ", dual: "شَاكِرَانِ", plural: "شَاكِرُونَ / شُكَّارٌ", meaning: "Şükreden / Şâkir: Verilen nimetlerin kadrini bilip Allah'a hamd ile itaat eden kadirşinas kul (el-Müfredât / Nahl 16/121)" },
-  { id: 81, singular: "مُحْسِنٌ", dual: "مُحْسِنَانِ", plural: "مُحْسِنُونَ / مُحْسِنِينَ", meaning: "Muhsin: Allah'ı görür gibi ihlasla ibadet eden, işini mükemmel yapan ve insanlara iyilik saçan (el-Müfredât / Bakara 2/112)" },
-  { id: 82, singular: "شَهِيدٌ", dual: "شَهِيدَانِ", plural: "شُهَدَاءُ", meaning: "Şehit / Şahit: Hakikate tanıklık eden şahit; Allah yolunda canını feda ederek şehadet mertebesine eren mümin (el-Müfredât / Âl-i İmrân 3/140)" },
-  { id: 83, singular: "عَالِمٌ", dual: "عَالِمَانِ", plural: "عُلَمَاءُ", meaning: "Âlim: Hakikati kavrayan, ilmiyle amel eden ve Allah'tan hakkıyla haşyet duyan basiretli zat (el-Müfredât / Fâtır 35/28)" },
-  { id: 84, singular: "عَدُوٌّ", dual: "عَدُوَّانِ", plural: "أَعْدَاءٌ", meaning: "Düşman: İnsanın helakini ve kötülüğünü isteyen açık hasım; ayetlerde özellikle apaçık düşman olan Şeytan (el-Müfredât / Bakara 2/168)" },
-  { id: 85, singular: "وَلِيٌّ", dual: "وَلِيَّانِ", plural: "أَوْلِيَاءُ", meaning: "Veli / Dost: Koruyan, yardım eden, yakın dost; Allah'ın himayesine sığınan ve O'nun sevgisine mazhar olan takva ehli (el-Müfredât / Yûnus 10/62)" },
-  { id: 86, singular: "نَصِيرٌ", dual: "نَصِيرَانِ", plural: "أَنْصَارٌ", meaning: "Nasîr: Zorluk ve düşmanlık karşısında imdada yetişip zafer ve destek bahşeden yardımcı (el-Müfredât / Hac 22/78)" },
-  { id: 87, singular: "سُلْطَانٌ", dual: "سُلْطَانَانِ", plural: "سَلَاطِينُ", meaning: "Sultan: Şüpheleri yok eden sarsılmaz hüccet, kesin delil, kudret ve hükümranlık (el-Müfredât / İsrâ 17/33)" },
-  { id: 88, singular: "بَيِّنَةٌ", dual: "بَيِّنَتَانِ", plural: "بَيِّنَاتٌ", meaning: "Beyyine: Şüpheye yer bırakmayacak kadar net, apaçık ilahî delil, peygamber mucizesi ve vahiy (el-Müfredât / Beyyine 98/1)" },
-  { id: 89, singular: "حِكْمَةٌ", dual: "حِكْمَتَانِ", plural: "حِكَمٌ", meaning: "Hikmet: Eşyanın hakikatini bilip gereğince doğru hareket etmek, her şeyi yerli yerine koymak ve sünnet ilmi (el-Müfredât / Bakara 2/269)" },
-  { id: 90, singular: "كَلِمَةٌ", dual: "كَلِمَتَانِ", plural: "كَلِمَاتٌ / كَلِمٌ", meaning: "Kelime: İlahi irade fermanı, tevhid sözü (lâ ilâhe illallâh) ve Allah'ın kesinleşmiş vaad ve hükmü (el-Müfredât / Sâffât 37/171)" },
-  { id: 91, singular: "حَدِيثٌ", dual: "حَدِيثَانِ", plural: "أَحَادِيثُ", meaning: "Hadis / Söz: Haber, söz, anlatı; ayetlerde Kur'an-ı Kerim (ahsenü'l-hadîs: sözün en güzeli) ve ibretli kıssalar (el-Müfredât / Zümer 39/23)" },
-  { id: 92, singular: "مَسْجِدٌ", dual: "مَسْجِدَانِ", plural: "مَسَاجِدُ", meaning: "Mescit: Allah Teâlâ'ya secde ve ibadet edilen mukaddes mabet, cami (el-Müfredât / Cin 72/18)" },
-  { id: 93, singular: "مَدِينَةٌ", dual: "مَدِينَتَانِ", plural: "مُدُنٌ / مَدَائِنُ", meaning: "Medine / Şehir: Nüfusun toplandığı medenî şehir; hususiyle hicret yurdu olan Medine-i Münevvere (el-Müfredât / Tevbe 9/101)" },
-  { id: 94, singular: "قَرْيَةٌ", dual: "قَرْيَتَانِ", plural: "قُرًى", meaning: "Karye / Belde: İnsanların ikamet ettiği yerleşim birimi, köy, şehir; ayetlerde peygamber gönderilen beldeler (el-Müfredât / İsrâ 17/16)" },
-  { id: 95, singular: "دَارٌ", dual: "دَارَانِ", plural: "دِيَارٌ / دُورٌ", meaning: "Yurt / Dâr: Ev, konut, yurt; ayetlerde selamet yurdu olan Cennet (Dârü's-Selâm) ve ebedî ahiret konağı (el-Müfredât / Yûnus 10/25)" },
-  { id: 96, singular: "أُمٌّ", dual: "أُمَّانِ", plural: "أُمَّهَاتٌ", meaning: "Anne / Ümm: Varlığın aslı, kaynağı ve validesi; ayetlerde ana kitap (Levh-i Mahfuz) ve hürmete en layık valide (el-Müfredât / Lokmân 31/14)" },
-  { id: 97, singular: "أَبٌ", dual: "أَبَوَانِ", plural: "آبَاءٌ", meaning: "Baba / Eb: İnsanın dünyaya gelişine vesile olan peder, ata, dedeler ve peygamber atalar (el-Müfredât / Yûsuf 12/38)" },
-  { id: 98, singular: "أَخٌ", dual: "أَخَوَانِ", plural: "إِخْوَةٌ / إِخْوَانٌ", meaning: "Kardeş / Ah: Öz kardeş; ayetlerde aynı zamanda kalpleri birbirine kaynaştırılmış din kardeşi (el-Müfredât / Hucurât 49/10)" },
-  { id: 99, singular: "أُخْتٌ", dual: "أُخْتَانِ", plural: "أَخَوَاتٌ", meaning: "Kız Kardeş: Nesep bağıyla bağlı kız kardeş; şefkat ve sıla-i rahim muhatabı (el-Müfredât / Nisâ 4/12)" },
-  { id: 100, singular: "زَوْجٌ", dual: "زَوْجَانِ", plural: "أَزْوَاجٌ", meaning: "Eş / Zevc: Birbirini tamamlayan eş, hanım veya koca; kâinatta çift olarak yaratılan her bir varlık (el-Müfredât / Rûm 30/21)" }
-];
-
-    let VOCABULARY_WORDS = JSON.parse(JSON.stringify(DEFAULT_VOCABULARY_WORDS));
-
-    // =========================================================================
-    // 2. SES SİSTEMİ
-    // =========================================================================
-    let audioCtx = null;
-    let isSoundMuted = false;
-
-    function initAudio() {
-      if (!audioCtx) {
-        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-        if (AudioContextClass) audioCtx = new AudioContextClass();
-      }
-      if (audioCtx && audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-    }
-
-    function playSound(type) {
-      if (isSoundMuted) return;
-      try {
-        initAudio();
-        if (!audioCtx) return;
-        const now = audioCtx.currentTime;
-
-        if (type === 'correct') {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(523.25, now);
-          osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.12);
-          gain.gain.setValueAtTime(0.2, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
-          osc.start(now);
-          osc.stop(now + 0.28);
-        } else if (type === 'wrong') {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(220, now);
-          osc.frequency.exponentialRampToValueAtTime(146.83, now + 0.22);
-          gain.gain.setValueAtTime(0.25, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
-          osc.start(now);
-          osc.stop(now + 0.32);
-        } else if (type === 'flip') {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(320, now);
-          osc.frequency.exponentialRampToValueAtTime(580, now + 0.08);
-          gain.gain.setValueAtTime(0.08, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
-          osc.start(now);
-          osc.stop(now + 0.08);
-        }
-      } catch(e) {}
-    }
-
-    function toggleSound() {
-      isSoundMuted = !isSoundMuted;
-      const btn = document.getElementById("soundToggleBtn");
-      if (btn) btn.textContent = isSoundMuted ? "🔇" : "🔊";
-    }
-
-    // =========================================================================
-    // 3. EKRAN VE NAVİGASYON YÖNETİMİ
-    // =========================================================================
-    let currentActiveScreen = 'mainMenuView';
-
-    function showScreen(screenId) {
-      currentActiveScreen = screenId;
-      const screens = ['mainMenuView', 'sigaSelectionView', 'quizSection', 'tableSection', 'exitScreenView'];
-      screens.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = (id === screenId ? 'flex' : 'none');
-      });
-
-      const btnMenu = document.getElementById("btnBackToMenu");
-      const btnExit = document.getElementById("btnSafeExitHeader");
-      const btnTable = document.getElementById("btnToggleTableDirect");
-      const headerTitle = document.getElementById("headerMainTitle");
-      const headerSub = document.getElementById("headerSubTitle");
-
-      if (screenId === 'mainMenuView') {
-        if (btnMenu) btnMenu.style.display = "none";
-        if (btnExit) btnExit.style.display = "inline-flex";
-        if (btnTable) btnTable.style.display = "none";
-        if (headerTitle) headerTitle.textContent = "Arapça Emsile ve Çekim Merkezi";
-        if (headerSub) headerSub.textContent = "24 Sîga & Zamir Çekimleri & Kelime";
-      } else if (screenId === 'sigaSelectionView') {
-        if (btnMenu) btnMenu.style.display = "inline-flex";
-        if (btnExit) btnExit.style.display = "inline-flex";
-        if (btnTable) btnTable.style.display = "none";
-        if (headerTitle) headerTitle.textContent = "Zamir Çekimi Seçimi";
-        if (headerSub) headerSub.textContent = "24 Sîgadan birini seçiniz";
-      } else if (screenId === 'quizSection') {
-        if (btnMenu) btnMenu.style.display = "inline-flex";
-        if (btnExit) btnExit.style.display = "inline-flex";
-        if (btnTable) btnTable.style.display = "inline-flex";
-        if (headerTitle) {
-          if (currentGameMode === 'emsile24') {
-            headerTitle.textContent = "24 Sîga Oyunu";
-          } else if (currentGameMode === 'vocab') {
-            headerTitle.textContent = "Kelime Oyunu (Tekil / İkili / Çoğul)";
-          } else {
-            const foundSiga = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || EMSILE_24_WORDS[0];
-            headerTitle.textContent = `${foundSiga.meaning} Çekimi`;
-          }
-        }
-        if (headerSub) headerSub.textContent = "Çift yönlü soru-cevap testi";
-      } else if (screenId === 'tableSection') {
-        if (btnMenu) btnMenu.style.display = "inline-flex";
-        if (btnExit) btnExit.style.display = "inline-flex";
-        if (btnTable) btnTable.style.display = "inline-flex";
-      } else if (screenId === 'exitScreenView') {
-        if (btnMenu) btnMenu.style.display = "none";
-        if (btnExit) btnExit.style.display = "none";
-        if (btnTable) btnTable.style.display = "none";
-        if (headerTitle) headerTitle.textContent = "Oturum Kapatıldı";
-        if (headerSub) headerSub.textContent = "Tüm çalışmalarınız güvenle kaydedildi";
-      }
-    }
-
-    // =========================================================================
-    // GÜVENLİ ÇIKIŞ (SAFE EXIT) VE VERİ KORUMA YÖNETİMİ
-    // =========================================================================
-    function openSafeExitModal() {
-      const modal = document.getElementById("safeExitModal");
-      if (modal) modal.style.display = "flex";
-    }
-
-    function closeSafeExitModal() {
-      const modal = document.getElementById("safeExitModal");
-      if (modal) modal.style.display = "none";
-    }
-
-    function confirmSafeExit() {
-      closeSafeExitModal();
-      saveStateToLocalStorage();
-
-      // 1. Android Köprüsü (Uygulama İçi)
-      if (window.AndroidBridge && typeof window.AndroidBridge.closeLanguageGame === 'function') {
-        try {
-          window.AndroidBridge.closeLanguageGame();
-          return;
-        } catch(e) {
-          console.warn("AndroidBridge closeLanguageGame error:", e);
-        }
-      }
-
-      // 2. Tarayıcı pencere kapama denemesi
-      try {
-        window.close();
-      } catch(e) {}
-
-      // 3. Tarayıcı izin vermezse güvenli çıkış ekranı
-      showScreen('exitScreenView');
-      showToast("✅ Oturum başarıyla kaydedildi ve kapatıldı!");
-    }
-
-    function restartApplication() {
-      showScreen('mainMenuView');
-      showToast("👋 Hoş geldiniz! İyi çalışmalar.");
-    }
-
-    function handleGoBackToApp() {
-      openSafeExitModal();
-    }
-
-    // =========================================================================
-    // 4. OYUN DURUMU VE MODLARI
-    // =========================================================================
-    let currentGameMode = 'emsile24'; // 'emsile24' | 'sigaPronouns' | 'vocab'
-    let selectedSigaId = 1;
-    let currentQuizWords = [];
-    let shuffledIndices = [];
-    let currentOrderIndex = 0;
-    let currentWord = null;
-    let isAnswering = false;
-    let lastMissedWordId = null;
-    let currentCorrectAnswerKey = "";
-
-    // 1. Mod: 24 Sîga Oyunu Başlat
-    function startEmsile24Game() {
-      currentGameMode = 'emsile24';
-      currentQuizWords = EMSILE_24_WORDS.slice();
-      initShuffledIndices();
-      showScreen("quizSection");
-      renderQuestion();
-    }
-
-    // 2. Mod: Zamir Çekimi Seçim Menüsü Aç
-    function openSigaSelectionMenu() {
-      renderSigaGridList();
-      showScreen("sigaSelectionView");
-    }
-
-    function renderSigaGridList() {
-      const container = document.getElementById("sigaGridList");
-      if (!container) return;
-      container.innerHTML = "";
-
-      EMSILE_24_WORDS.forEach(siga => {
-        const card = document.createElement("div");
-        card.className = "siga-item-card";
-        card.innerHTML = `
-          <span class="siga-badge-num">${siga.id}</span>
-          <div class="siga-item-arabic">${siga.word}</div>
-          <div class="siga-item-title">${escapeHtml(siga.meaning)}</div>
-          <div class="siga-item-trans">${escapeHtml(siga.translation)}</div>
-          ${siga.extraHint ? `<div class="siga-item-hint">${escapeHtml(siga.extraHint)}</div>` : ''}
-        `;
-        card.addEventListener("click", () => startSigaPronounGame(siga.id));
-        container.appendChild(card);
-      });
-    }
-
-    function startSigaPronounGame(sigaId) {
-      currentGameMode = 'sigaPronouns';
-      selectedSigaId = sigaId;
-
-      const forms = SIGA_CONJUGATIONS[sigaId] || SIGA_CONJUGATIONS[1];
-      const list = [];
-      for (let i = 0; i < 14; i++) {
-        list.push({
-          id: i + 1,
-          word: forms[i] || forms[0],
-          meaning: PRONOUN_MEANINGS[i],
-          translation: PRONOUN_MEANINGS[i],
-          extraHint: ""
-        });
-      }
-
-      currentQuizWords = list;
-      initShuffledIndices();
-      showScreen("quizSection");
-      renderQuestion();
-    }
-
-    // 3. Mod: KELİME MENÜSÜ OYUNU BAŞLAT (KULLANICI İSTEĞİ)
-    function startVocabGame() {
-      currentGameMode = 'vocab';
-      currentQuizWords = VOCABULARY_WORDS.slice();
-      initShuffledIndices();
-      showScreen("quizSection");
-      renderQuestion();
-    }
-
-    function initShuffledIndices() {
-      shuffledIndices = [];
-      for (let i = 0; i < currentQuizWords.length; i++) shuffledIndices.push(i);
-      for (let i = shuffledIndices.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffledIndices[i], shuffledIndices[j]] = [shuffledIndices[j], shuffledIndices[i]];
-      }
-      currentOrderIndex = 0;
-    }
-
-    // =========================================================================
-    // 5. TEST SORUSU OLUŞTURMA (TÜM MODLARDA ÇİFT YÖNLÜ)
-    // Kural:
-    // - Kelime Modunda: Soru ve Şıklarda soldan sağa Tekil / İkili / Çoğul
-    // - 24 Sîga Modunda: Arapça varsa şıklarda ya Anlam ya Çeviri (sadece birisi)
-    // =========================================================================
-    function renderQuestion() {
-      if (shuffledIndices.length === 0) initShuffledIndices();
-      isAnswering = false;
-
-      const feedbackBar = document.getElementById("quizFeedbackBar");
-      if (feedbackBar) feedbackBar.style.display = "none";
-
-      const targetIdx = shuffledIndices[currentOrderIndex];
-      currentWord = currentQuizWords[targetIdx];
-
-      const targetWordContainer = document.getElementById("targetWordContainer");
-      const trackerEl = document.getElementById("quizTrackerText");
-      const instructionEl = document.getElementById("targetWordInstruction");
-      const badgeTag = document.getElementById("targetBadgeTag");
-
-      if (trackerEl) trackerEl.textContent = `Soru ${currentOrderIndex + 1} / ${currentQuizWords.length}`;
-
-      let questionConfig = null;
-
-      if (currentGameMode === 'vocab') {
-        // KELİME MODU: ÇİFT YÖNLÜ
-        // 1) Soru: Arapça Tekil / İkili / Çoğul ➔ Şıklar: Türkçe Anlam
-        // 2) Soru: Türkçe Anlam ➔ Şıklar: Arapça Tekil / İkili / Çoğul (Soldan Sağa)
-        const qTypes = ['VOCAB_ARABIC_TO_MEANING', 'VOCAB_MEANING_TO_ARABIC'];
-        const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
-
-        if (chosenType === 'VOCAB_ARABIC_TO_MEANING') {
-          questionConfig = {
-            mode: 'vocab_ar_to_tr',
-            badge: "KELİME ➔ TÜRKÇE ANLAMI",
-            instruction: "Bu kelimelerin (Sağdan Sola: Tekil / İkili / Çoğul) Türkçe anlamı nedir?",
-            correctKey: currentWord.meaning,
-            choices: generateVocabChoices(currentWord, 'meaning')
-          };
-          targetWordContainer.innerHTML = `
-            <div class="vocab-triplet-display" dir="ltr">
-              <div class="triplet-col">
-                <span class="triplet-sub-label">ÇOĞUL (CEMİ)</span>
-                <span class="triplet-arabic-text">${currentWord.plural}</span>
-              </div>
-              <span class="triplet-sep-symbol">/</span>
-              <div class="triplet-col">
-                <span class="triplet-sub-label">İKİLİ (TESNİYE)</span>
-                <span class="triplet-arabic-text">${currentWord.dual}</span>
-              </div>
-              <span class="triplet-sep-symbol">/</span>
-              <div class="triplet-col">
-                <span class="triplet-sub-label">TEKİL</span>
-                <span class="triplet-arabic-text">${currentWord.singular}</span>
-              </div>
-            </div>
-          `;
-        } else {
-          // VOCAB_MEANING_TO_ARABIC
-          questionConfig = {
-            mode: 'vocab_tr_to_ar',
-            badge: "TÜRKÇE ANLAM ➔ TEKİL / İKİLİ / ÇOĞUL",
-            instruction: "Bu anlamın Tekil / İkili / Çoğul Arapça karşılığı hangisidir?",
-            correctKey: currentWord.id,
-            choices: generateVocabChoices(currentWord, 'arabic')
-          };
-          targetWordContainer.innerHTML = `
-            <h2 class="target-word-title latin-font">${escapeHtml(currentWord.meaning)}</h2>
-          `;
-        }
-
-      } else if (currentGameMode === 'emsile24') {
-        // 24 SÎGA MODU: 4 Çeşit Soru
-        const qTypes = [
-          'ARABIC_TO_MEANING',
-          'ARABIC_TO_TRANSLATION',
-          'MEANING_TO_ARABIC',
-          'TRANSLATION_TO_ARABIC'
-        ];
-        const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
-
-        if (chosenType === 'ARABIC_TO_MEANING') {
-          questionConfig = {
-            mode: 'text_simple',
-            badge: "ARAPÇA ➔ SÎGA BAŞLIĞI",
-            instruction: "Bu kelimenin sîga terimi (başlığı) nedir?",
-            correctKey: currentWord.meaning,
-            promptText: currentWord.word,
-            isPromptArabic: true,
-            isChoiceArabic: false,
-            choices: generateSimpleChoices(currentWord.meaning, EMSILE_24_WORDS.map(w => w.meaning))
-          };
-        } else if (chosenType === 'ARABIC_TO_TRANSLATION') {
-          questionConfig = {
-            mode: 'text_simple',
-            badge: "ARAPÇA ➔ TÜRKÇE ÇEVİRİ",
-            instruction: "Bu kelimenin Türkçe fiil manası (çevirisi) nedir?",
-            correctKey: currentWord.translation,
-            promptText: currentWord.word,
-            isPromptArabic: true,
-            isChoiceArabic: false,
-            choices: generateSimpleChoices(currentWord.translation, EMSILE_24_WORDS.map(w => w.translation))
-          };
-        } else if (chosenType === 'MEANING_TO_ARABIC') {
-          questionConfig = {
-            mode: 'text_simple',
-            badge: "SÎGA BAŞLIĞI ➔ ARAPÇA",
-            instruction: "Bu sîga teriminin Arapça çekimi hangisidir?",
-            correctKey: currentWord.word,
-            promptText: currentWord.meaning,
-            isPromptArabic: false,
-            isChoiceArabic: true,
-            choices: generateSimpleChoices(currentWord.word, EMSILE_24_WORDS.map(w => w.word))
-          };
-        } else {
-          // TRANSLATION_TO_ARABIC
-          questionConfig = {
-            mode: 'text_simple',
-            badge: "TÜRKÇE ÇEVİRİ ➔ ARAPÇA",
-            instruction: "Bu manaya gelen Arapça çekim hangisidir?",
-            correctKey: currentWord.word,
-            promptText: currentWord.translation,
-            isPromptArabic: false,
-            isChoiceArabic: true,
-            choices: generateSimpleChoices(currentWord.word, EMSILE_24_WORDS.map(w => w.word))
-          };
-        }
-
-        targetWordContainer.innerHTML = `
-          <h2 class="target-word-title ${questionConfig.isPromptArabic ? 'arabic-font' : 'latin-font'}">${escapeHtml(questionConfig.promptText)}</h2>
-        `;
-
-      } else {
-        // ZAMİR MODU (Emsile-i Muttaride)
-        const sigaObj = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || EMSILE_24_WORDS[0];
-        const qTypes = ['ARABIC_TO_PRONOUN', 'PRONOUN_TO_ARABIC'];
-        const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
-
-        if (chosenType === 'ARABIC_TO_PRONOUN') {
-          questionConfig = {
-            mode: 'text_simple',
-            badge: `${sigaObj.meaning.toUpperCase()} ➔ ZAMİR`,
-            instruction: "Bu çekim hangi şahsa (zamire) aittir?",
-            correctKey: currentWord.meaning,
-            promptText: currentWord.word,
-            isPromptArabic: true,
-            isChoiceArabic: false,
-            choices: generateSimpleChoices(currentWord.meaning, PRONOUN_MEANINGS.slice())
-          };
-        } else {
-          questionConfig = {
-            mode: 'text_simple',
-            badge: `ZAMİR ➔ ${sigaObj.meaning.toUpperCase()}`,
-            instruction: "Bu şahıs zamirine ait Arapça çekim hangisidir?",
-            correctKey: currentWord.word,
-            promptText: currentWord.meaning,
-            isPromptArabic: false,
-            isChoiceArabic: true,
-            choices: generateSimpleChoices(currentWord.word, currentQuizWords.map(w => w.word))
-          };
-        }
-
-        targetWordContainer.innerHTML = `
-          <h2 class="target-word-title ${questionConfig.isPromptArabic ? 'arabic-font' : 'latin-font'}">${escapeHtml(questionConfig.promptText)}</h2>
-        `;
-      }
-
-      currentCorrectAnswerKey = questionConfig.correctKey;
-      if (badgeTag) badgeTag.textContent = questionConfig.badge;
-      if (instructionEl) instructionEl.textContent = questionConfig.instruction;
-
-      // Şıkları Bas
-      renderOptionsGrid(questionConfig);
-    }
-
-    // Basit Şık Üretici
-    function generateSimpleChoices(correctAnswer, pool) {
-      const distractors = pool.filter(opt => opt !== correctAnswer);
-      for (let i = distractors.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [distractors[i], distractors[j]] = [distractors[j], distractors[i]];
-      }
-      const chosen = [correctAnswer, ...distractors.slice(0, 4)];
-      for (let i = chosen.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [chosen[i], chosen[j]] = [chosen[j], chosen[i]];
-      }
-      return chosen;
-    }
-
-    // Kelime Modu Şık Üretici
-    function generateVocabChoices(targetWord, type) {
-      const otherWords = VOCABULARY_WORDS.filter(w => w.id !== targetWord.id);
-      for (let i = otherWords.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [otherWords[i], otherWords[j]] = [otherWords[j], otherWords[i]];
-      }
-      const list = [targetWord, ...otherWords.slice(0, 4)];
-      for (let i = list.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [list[i], list[j]] = [list[j], list[i]];
-      }
-      return list;
-    }
-
-    function renderOptionsGrid(cfg) {
-      const grid = document.getElementById("optionsGrid");
-      if (!grid) return;
-      grid.innerHTML = "";
-      const letters = ["A", "B", "C", "D", "E"];
-
-      if (cfg.mode === 'vocab_tr_to_ar') {
-        // Şıklar: Soldan Sağa Tekil / İkili / Çoğul
-        cfg.choices.forEach((choiceWord, idx) => {
-          const btn = document.createElement("button");
-          btn.className = "option-btn";
-          btn.setAttribute("type", "button");
-          btn.setAttribute("data-key", choiceWord.id);
-
-          btn.innerHTML = `
-            <span class="option-letter">${letters[idx]}</span>
-            <div class="option-content-box">
-              <span class="option-text arabic-triplet" dir="ltr">
-                <span class="triplet-part">${escapeHtml(choiceWord.plural)}</span>
-                <span class="triplet-divider">/</span>
-                <span class="triplet-part">${escapeHtml(choiceWord.dual)}</span>
-                <span class="triplet-divider">/</span>
-                <span class="triplet-part">${escapeHtml(choiceWord.singular)}</span>
-              </span>
-            </div>
-          `;
-          btn.addEventListener("click", () => handleAnswer(choiceWord.id, btn));
-          grid.appendChild(btn);
-        });
-
-      } else if (cfg.mode === 'vocab_ar_to_tr') {
-        // Şıklar: Türkçe Anlamlar
-        cfg.choices.forEach((choiceWord, idx) => {
-          const btn = document.createElement("button");
-          btn.className = "option-btn";
-          btn.setAttribute("type", "button");
-          btn.setAttribute("data-key", choiceWord.meaning);
-
-          btn.innerHTML = `
-            <span class="option-letter">${letters[idx]}</span>
-            <div class="option-content-box">
-              <span class="option-text">${escapeHtml(choiceWord.meaning)}</span>
-            </div>
-          `;
-          btn.addEventListener("click", () => handleAnswer(choiceWord.meaning, btn));
-          grid.appendChild(btn);
-        });
-
-      } else {
-        // Standart Sîga veya Zamir Şıkları
-        cfg.choices.forEach((choiceText, idx) => {
-          const btn = document.createElement("button");
-          btn.className = "option-btn";
-          btn.setAttribute("type", "button");
-          btn.setAttribute("data-key", choiceText);
-
-          const arabicCls = cfg.isChoiceArabic ? "arabic-font" : "";
-
-          btn.innerHTML = `
-            <span class="option-letter">${letters[idx]}</span>
-            <div class="option-content-box">
-              <span class="option-text ${arabicCls}">${escapeHtml(choiceText)}</span>
-            </div>
-          `;
-          btn.addEventListener("click", () => handleAnswer(choiceText, btn));
-          grid.appendChild(btn);
-        });
-      }
-    }
-
-    function handleAnswer(selectedKey, clickedBtn) {
-      if (isAnswering) return;
-      isAnswering = true;
-
-      const isCorrect = (String(selectedKey) === String(currentCorrectAnswerKey));
-
-      if (isCorrect) {
-        clickedBtn.classList.add("correct-choice");
-        playSound('correct');
-        if (navigator.vibrate) navigator.vibrate(35);
-
-        setTimeout(() => {
-          currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
-          renderQuestion();
-        }, 380);
-      } else {
-        clickedBtn.classList.add("wrong-choice");
-        playSound('wrong');
-        if (navigator.vibrate) navigator.vibrate([60, 40, 60]);
-
-        // Doğru şıkkı yeşille göster
-        const grid = document.getElementById("optionsGrid");
-        if (grid) {
-          grid.querySelectorAll(".option-btn").forEach(btn => {
-            if (String(btn.getAttribute("data-key")) === String(currentCorrectAnswerKey)) {
-              btn.classList.add("correct-choice");
-            }
-          });
-        }
-
-        lastMissedWordId = currentWord.id;
-
-        if (currentGameMode === 'vocab') {
-          // KULLANICI İSTEĞİ:
-          // Kelime bölümünde yanlış yapılırsa tablo görünümüne gitme!
-          // Sorunun altında "Devam Et" seçeneği olsun, ona tıklanıldığında diğer soruya geçilsin.
-          const feedbackBar = document.getElementById("quizFeedbackBar");
-          if (feedbackBar) {
-            feedbackBar.style.display = "flex";
-            feedbackBar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
-        } else {
-          // 24 Sîga ve Zamir modlarında tablo görünümüne git
-          setTimeout(() => {
-            showTableSection(lastMissedWordId);
-          }, 650);
-        }
-      }
-    }
-
-    function advanceToNextQuestion() {
-      const feedbackBar = document.getElementById("quizFeedbackBar");
-      if (feedbackBar) feedbackBar.style.display = "none";
-      isAnswering = false;
-      currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
-      renderQuestion();
-    }
-
-    // =========================================================================
-    // 6. 3D FLASHCARD TABLOLARI
-    // =========================================================================
-    function showTableSection(highlightId = null) {
-      showScreen("tableSection");
-      renderActiveTable(highlightId);
-    }
-
-    function continueQuiz() {
-      showScreen("quizSection");
-      currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
-      renderQuestion();
-    }
-
-    function toggleTableDirectly() {
-      const tableSec = document.getElementById("tableSection");
-      if (tableSec && tableSec.style.display !== "none") {
-        continueQuiz();
-      } else {
-        showTableSection(null);
-      }
-    }
-
-    function renderActiveTable(highlightId = null) {
-      const wrapper = document.getElementById("emsileRowsWrapper");
-      const bannerTitle = document.getElementById("tableBannerTitle");
-      const bannerDesc = document.getElementById("tableBannerDesc");
-      const bannerIcon = document.getElementById("tableBannerIcon");
-      if (!wrapper) return;
-      wrapper.innerHTML = "";
-
-      if (currentGameMode === 'vocab') {
-        // KELİME TABLOSU: 3D FLASHCARDLAR
-        if (bannerIcon) bannerIcon.textContent = "📝";
-        if (bannerTitle) bannerTitle.textContent = "Kur'an'da En Çok Geçen 100 İsim (Tekil / İkili / Çoğul)";
-        if (bannerDesc) bannerDesc.textContent = "Kartın ön yüzünde sağdan sola Tekil / İkili / Çoğul formlar, arkasında Türkçe anlamı yer alır.";
-
-        // 100 Kelime İçin Hızlı Canlı Arama Çubuğu
-        const searchBox = document.createElement("div");
-        searchBox.className = "table-search-box";
-        searchBox.innerHTML = `
-          <input type="text" class="table-search-input" id="vocabTableSearchInput" placeholder="🔍 100 Kur'an kelimesinde ara (Arapça veya Türkçe)..." />
-        `;
-        wrapper.appendChild(searchBox);
-
-        const gridDiv = document.createElement("div");
-        gridDiv.className = "vocab-grid-wrapper";
-        gridDiv.id = "vocabCardsGrid";
-
-        currentQuizWords.forEach(item => {
-          const isMissed = (highlightId && item.id === highlightId);
-          const card = document.createElement("div");
-          card.className = `flip-card ${isMissed ? 'missed-highlight' : ''}`;
-          card.setAttribute("data-id", item.id);
-
-          card.innerHTML = `
-            <div class="flip-card-inner">
-              <!-- Ön Yüz: Sağdan Sola Tekil / İkili / Çoğul (Tekil en sağda, Çoğul en solda) -->
-              <div class="flip-card-front" style="padding: 10px 8px;">
-                <span class="card-id-tag">${item.id}</span>
-                <div class="vocab-card-triplet" dir="ltr">
-                  <div class="vct-col">
-                    <span class="vct-lbl">Çoğul</span>
-                    <span class="vct-arabic">${item.plural}</span>
-                  </div>
-                  <span class="vct-sep">/</span>
-                  <div class="vct-col">
-                    <span class="vct-lbl">İkili</span>
-                    <span class="vct-arabic">${item.dual}</span>
-                  </div>
-                  <span class="vct-sep">/</span>
-                  <div class="vct-col">
-                    <span class="vct-lbl">Tekil</span>
-                    <span class="vct-arabic">${item.singular}</span>
-                  </div>
-                </div>
-                <div class="card-flip-hint">🔄 Anlamı Gör</div>
-              </div>
-              <!-- Arka Yüz: Türkçe Anlamı -->
-              <div class="flip-card-back">
-                <div class="card-meaning-text">${escapeHtml(item.meaning)}</div>
-                <div class="card-trans-text" style="color: #c7d2fe;">Sağdan Sola: Tekil / İkili / Çoğul</div>
-                <span class="card-meaning-tag">ANLAMI ✓</span>
-              </div>
-            </div>
-          `;
-
-          card.addEventListener("click", () => {
-            card.classList.toggle("flipped");
-            playSound('flip');
-            if (navigator.vibrate) navigator.vibrate(25);
-          });
-
-          gridDiv.appendChild(card);
-        });
-
-        wrapper.appendChild(gridDiv);
-
-        const searchInput = searchBox.querySelector("#vocabTableSearchInput");
-        if (searchInput) {
-          searchInput.addEventListener("input", (e) => {
-            const q = (e.target.value || "").trim().toLowerCase();
-            const cards = gridDiv.querySelectorAll(".flip-card");
-            cards.forEach(c => {
-              const txt = c.textContent.toLowerCase();
-              c.style.display = (!q || txt.includes(q)) ? "" : "none";
-            });
-          });
-        }
-
-      } else if (currentGameMode === 'emsile24') {
-        // 24 SÎGA TABLOSU (5, 5, 4, 5, 5)
-        if (bannerIcon) bannerIcon.textContent = "📖";
-        if (bannerTitle) bannerTitle.textContent = "24 Sîga Tablosu (Sağdan Sola)";
-        if (bannerDesc) bannerDesc.textContent = "Kartın arkasında sîga başlığı, altında ise Türkçe fiil manası yer alır.";
-
-        const rowDefinitions = [
-          { rowNum: 1, count: 5, slice: [0, 5], className: "cols-5" },
-          { rowNum: 2, count: 5, slice: [5, 10], className: "cols-5" },
-          { rowNum: 3, count: 4, slice: [10, 14], className: "cols-4" },
-          { rowNum: 4, count: 5, slice: [14, 19], className: "cols-5" },
-          { rowNum: 5, count: 5, slice: [19, 24], className: "cols-5" }
-        ];
-
-        const tableWrapper = document.createElement("div");
-        tableWrapper.className = "emsile-table-wrapper";
-
-        rowDefinitions.forEach(def => {
-          const rowItems = currentQuizWords.slice(def.slice[0], def.slice[1]);
-          const rowDiv = document.createElement("div");
-          rowDiv.className = `emsile-row ${def.className}`;
-          rowDiv.setAttribute("data-row", def.rowNum);
-
-          rowItems.forEach(item => {
-            rowDiv.appendChild(createCardElement(item, highlightId));
-          });
-
-          tableWrapper.appendChild(rowDiv);
-        });
-
-        wrapper.appendChild(tableWrapper);
-
-      } else {
-        // 14 ŞAHIS ZAMİR TABLOSU (3, 3, 3, 3, 2)
-        const sigaObj = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || EMSILE_24_WORDS[0];
-        if (bannerIcon) bannerIcon.textContent = "👤";
-        if (bannerTitle) bannerTitle.textContent = `${sigaObj.meaning} - 14 Zamir Tablosu (Sağdan Sola)`;
-        if (bannerDesc) bannerDesc.textContent = "Son satırda 'Ben' tekil sağda, 'Biz' sol ve ortayı kaplar.";
-
-        const tableWrapper = document.createElement("div");
-        tableWrapper.className = "emsile-table-wrapper";
-
-        const zamirRows = [
-          { rowNum: 1, slice: [0, 3] },
-          { rowNum: 2, slice: [3, 6] },
-          { rowNum: 3, slice: [6, 9] },
-          { rowNum: 4, slice: [9, 12] }
-        ];
-
-        zamirRows.forEach(def => {
-          const rowItems = currentQuizWords.slice(def.slice[0], def.slice[1]);
-          const rowDiv = document.createElement("div");
-          rowDiv.className = "emsile-row cols-3";
-          rowDiv.setAttribute("data-row", def.rowNum);
-
-          rowItems.forEach(item => {
-            rowDiv.appendChild(createCardElement(item, highlightId));
-          });
-
-          tableWrapper.appendChild(rowDiv);
-        });
-
-        const row5Div = document.createElement("div");
-        row5Div.className = "emsile-row zamir-row-5";
-        row5Div.setAttribute("data-row", 5);
-
-        const itemBen = currentQuizWords[12];
-        const itemBiz = currentQuizWords[13];
-
-        const cardBen = createCardElement(itemBen, highlightId);
-        const cardBiz = createCardElement(itemBiz, highlightId, true);
-
-        row5Div.appendChild(cardBen);
-        row5Div.appendChild(cardBiz);
-        tableWrapper.appendChild(row5Div);
-
-        wrapper.appendChild(tableWrapper);
-      }
-
-      if (highlightId) {
-        setTimeout(() => {
-          const el = wrapper.querySelector(`.flip-card[data-id="${highlightId}"]`);
-          if (el && typeof el.scrollIntoView === 'function') {
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        }, 150);
-      }
-    }
-
-    function createCardElement(item, highlightId = null, isSpan2 = false) {
-      const isMissed = (highlightId && item.id === highlightId);
-      const card = document.createElement("div");
-      card.className = `flip-card ${isSpan2 ? "card-span-2" : ""} ${isMissed ? "missed-highlight" : ""}`;
-      card.setAttribute("data-id", item.id);
-
-      const transHtml = item.translation ? `<div class="card-trans-text">(${escapeHtml(item.translation)})</div>` : '';
-      const extraHtml = item.extraHint ? `<div class="card-extra-hint">${escapeHtml(item.extraHint)}</div>` : '';
-
-      card.innerHTML = `
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <span class="card-id-tag">${item.id}</span>
-            <div class="card-word-text">${item.word}</div>
-            <div class="card-flip-hint">🔄 Anlamı ve Çevirisi</div>
-          </div>
-          <div class="flip-card-back">
-            <div class="card-meaning-text">${escapeHtml(item.meaning)}</div>
-            ${transHtml}
-            ${extraHtml}
-            <span class="card-meaning-tag">ANLAMI ✓</span>
-          </div>
-        </div>
-      `;
-
-      card.addEventListener("click", () => {
-        card.classList.toggle("flipped");
-        playSound('flip');
-        if (navigator.vibrate) navigator.vibrate(25);
-      });
-
-      return card;
-    }
-
-    // =========================================================================
-    // 7. KELİMELERİ DÜZENLE VE YENİ KELİME EKLE MODALI
-    // =========================================================================
-    function openEditWordsModal() {
-      const container = document.getElementById("editWordsListContainer");
-      const titleEl = document.getElementById("editModalTitle");
-      if (!container) return;
-      container.innerHTML = "";
-
-      if (currentGameMode === 'vocab') {
-        if (titleEl) titleEl.textContent = "✏️ Kelimeleri Düzenle (Tekil / İkili / Çoğul)";
-
-        VOCABULARY_WORDS.forEach((item, idx) => {
-          renderVocabEditRow(container, item, idx);
-        });
-
-        // "+ Yeni Kelime Ekle" butonu
-        const addBtn = document.createElement("button");
-        addBtn.type = "button";
-        addBtn.className = "btn-add-word-row";
-        addBtn.innerHTML = "➕ Yeni Kelime Ekle";
-        addBtn.addEventListener("click", () => {
-          const newIdx = container.querySelectorAll(".word-edit-row").length;
-          const newWord = { id: newIdx + 1, singular: "", dual: "", plural: "", meaning: "" };
-          renderVocabEditRow(container, newWord, newIdx);
-          container.scrollTop = container.scrollHeight;
-        });
-        container.appendChild(addBtn);
-
-      } else {
-        if (titleEl) {
-          titleEl.textContent = (currentGameMode === 'emsile24')
-            ? "✏️ 24 Emsile Kelimeleri, Terimleri ve Çevirilerini Düzenle"
-            : "✏️ 14 Zamir Çekimini Düzenle";
-        }
-
-        currentQuizWords.forEach((item, idx) => {
-          const row = document.createElement("div");
-          row.className = "word-edit-row";
-          row.innerHTML = `
-            <span class="word-edit-num">${idx + 1}.</span>
-            <input type="text" class="word-edit-input arabic-input" id="editWord_${idx}" value="${escapeHtml(item.word)}" placeholder="Arapça" />
-            <input type="text" class="word-edit-input" id="editMeaning_${idx}" value="${escapeHtml(item.meaning)}" placeholder="Sîga Başlığı" />
-            <input type="text" class="word-edit-input" id="editTrans_${idx}" value="${escapeHtml(item.translation || '')}" placeholder="Çeviri (örn: Yardım etti)" />
-            <input type="text" class="word-edit-input" id="editExtra_${idx}" value="${escapeHtml(item.extraHint || '')}" placeholder="Ek/Artı (örn: -dı, -di)" style="max-width: 100px;" />
-          `;
-          container.appendChild(row);
-        });
-      }
-
-      document.getElementById("editWordsModal").style.display = "flex";
-    }
-
-    function renderVocabEditRow(container, item, idx) {
-      const row = document.createElement("div");
-      row.className = "word-edit-row vocab-edit-row";
-      row.innerHTML = `
-        <span class="word-edit-num">${idx + 1}.</span>
-        <input type="text" class="word-edit-input arabic-input" data-field="singular" value="${escapeHtml(item.singular)}" placeholder="Tekil (Müfred)" />
-        <input type="text" class="word-edit-input arabic-input" data-field="dual" value="${escapeHtml(item.dual)}" placeholder="İkili (Tesniye)" />
-        <input type="text" class="word-edit-input arabic-input" data-field="plural" value="${escapeHtml(item.plural)}" placeholder="Çoğul (Cemi)" />
-        <input type="text" class="word-edit-input" data-field="meaning" value="${escapeHtml(item.meaning)}" placeholder="Türkçe Anlamı" />
-        <button type="button" class="btn-del-word" onclick="this.parentElement.remove()" title="Sil">✕</button>
-      `;
-      // Butondan önce ekle (eğer addBtn varsa)
-      const addBtn = container.querySelector(".btn-add-word-row");
-      if (addBtn) {
-        container.insertBefore(row, addBtn);
-      } else {
-        container.appendChild(row);
-      }
-    }
-
-    function closeEditWordsModal() {
-      document.getElementById("editWordsModal").style.display = "none";
-    }
-
-    function saveEditedWords() {
-      const container = document.getElementById("editWordsListContainer");
-
-      if (currentGameMode === 'vocab') {
-        const rows = container.querySelectorAll(".vocab-edit-row");
-        const updatedVocab = [];
-        rows.forEach((row, idx) => {
-          const s = (row.querySelector('[data-field="singular"]').value || "").trim();
-          const d = (row.querySelector('[data-field="dual"]').value || "").trim();
-          const p = (row.querySelector('[data-field="plural"]').value || "").trim();
-          const m = (row.querySelector('[data-field="meaning"]').value || "").trim();
-          if (s || m) {
-            updatedVocab.push({
-              id: idx + 1,
-              singular: s || "---",
-              dual: d || "---",
-              plural: p || "---",
-              meaning: m || "---"
-            });
-          }
-        });
-
-        if (updatedVocab.length > 0) {
-          VOCABULARY_WORDS = updatedVocab;
-          currentQuizWords = VOCABULARY_WORDS.slice();
-        }
-      } else {
-        const updated = [];
-        for (let i = 0; i < currentQuizWords.length; i++) {
-          const wInput = document.getElementById(`editWord_${i}`);
-          const mInput = document.getElementById(`editMeaning_${i}`);
-          const tInput = document.getElementById(`editTrans_${i}`);
-          const eInput = document.getElementById(`editExtra_${i}`);
-
-          const wVal = (wInput ? wInput.value : "").trim() || currentQuizWords[i].word;
-          const mVal = (mInput ? mInput.value : "").trim() || currentQuizWords[i].meaning;
-          const tVal = (tInput ? tInput.value : "").trim() || (currentQuizWords[i].translation || mVal);
-          const eVal = (eInput ? eInput.value : "").trim();
-
-          updated.push({
-            id: i + 1,
-            word: wVal,
-            meaning: mVal,
-            translation: tVal,
-            extraHint: eVal
-          });
-        }
-
-        currentQuizWords = updated;
-        if (currentGameMode === 'emsile24') {
-          EMSILE_24_WORDS = JSON.parse(JSON.stringify(updated));
-        }
-      }
-
-      closeEditWordsModal();
-      saveStateToLocalStorage();
-      initShuffledIndices();
-      renderQuestion();
-      showToast("✅ Kelimeler başarıyla kaydedildi!");
-    }
-
-    // =========================================================================
-    // 8. YARDIMCI FONKSİYONLAR
-    // =========================================================================
-    function escapeHtml(str) {
-      if (!str) return "";
-      return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    let toastTimer = null;
-    function showToast(msg) {
-      const el = document.getElementById("toastMessage");
-      if (!el) return;
-      el.textContent = msg;
-      el.classList.add("show");
-      if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        el.classList.remove("show");
-      }, 2400);
-    }
-
-
-    // =========================================================================
-    // VERİ KALICILIĞI VE SAVUNMACI KODLAMA (ZERO-ERROR)
-    // =========================================================================
-    function saveStateToLocalStorage() {
-      try {
-        localStorage.setItem("emsile_vocab_words_sunnah_100_v2", JSON.stringify(VOCABULARY_WORDS));
-        localStorage.setItem("emsile_sound_muted", isSoundMuted ? "1" : "0");
-      } catch(e) {
-        console.warn("LocalStorage save error:", e);
-      }
-    }
-
-    function loadStateFromLocalStorage() {
-      try {
-        const saved = localStorage.getItem("emsile_vocab_words_sunnah_100_v2");
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            VOCABULARY_WORDS = parsed;
-          }
-        }
-        const savedMuted = localStorage.getItem("emsile_sound_muted");
-        if (savedMuted !== null) {
-          isSoundMuted = (savedMuted === "1");
-          const btn = document.getElementById("soundToggleBtn");
-          if (btn) btn.textContent = isSoundMuted ? "🔇" : "🔊";
-        }
-      } catch(e) {
-        console.warn("LocalStorage load error:", e);
-      }
-    }
-
-    // Global Hata Koruma Kalkanı (Uygulamanın asla çökmemesini garanti eder)
-    window.addEventListener("error", (e) => {
-      console.warn("🛡️ Safe Handler yakaladı:", e.message);
-    });
-
-    window.addEventListener("unhandledrejection", (e) => {
-      console.warn("🛡️ Safe Promise Handler:", e.reason);
-    });
-
-    // Klavye ESC tuşu ile modalları kapatma, Enter/Boşluk ile Devam Et
-    window.addEventListener("keydown", (e) => {
-      const feedbackBar = document.getElementById("quizFeedbackBar");
-      if ((e.key === "Enter" || e.key === " ") && feedbackBar && feedbackBar.style.display === "flex") {
-        e.preventDefault();
-        advanceToNextQuestion();
-        return;
-      }
-      if (e.key === "Escape") {
-        const exitModal = document.getElementById("safeExitModal");
-        if (exitModal && exitModal.style.display === "flex") {
-          closeSafeExitModal();
-          return;
-        }
-        const editModal = document.getElementById("editWordsModal");
-        if (editModal && editModal.style.display === "flex") {
-          closeEditWordsModal();
-          return;
-        }
-        if (currentActiveScreen !== 'mainMenuView' && currentActiveScreen !== 'exitScreenView') {
-          showScreen('mainMenuView');
-        }
-      }
-    });
-
-    // Tarayıcı / Android Donanım Geri Tuşu Desteği
-    window.addEventListener("popstate", () => {
-      const exitModal = document.getElementById("safeExitModal");
-      if (exitModal && exitModal.style.display === "flex") {
-        closeSafeExitModal();
-        return;
-      }
-      const editModal = document.getElementById("editWordsModal");
-      if (editModal && editModal.style.display === "flex") {
-        closeEditWordsModal();
-        return;
-      }
-      if (currentActiveScreen === 'tableSection') {
-        showScreen('quizSection');
-      } else if (currentActiveScreen === 'quizSection' || currentActiveScreen === 'sigaSelectionView') {
-        showScreen('mainMenuView');
-      } else if (currentActiveScreen === 'mainMenuView') {
-        openSafeExitModal();
-      }
-    });
-
-    // Başlangıç: Oyun Ana Menüsü ile başlar
-    window.addEventListener("DOMContentLoaded", () => {
-      loadStateFromLocalStorage();
-      showScreen("mainMenuView");
-    });
-  </script>
 </body>
 </html>

@@ -528,14 +528,22 @@ window.closeHafizaOyunu = function() {
         }
     } catch(e) {}
 
-    // 2. AndroidBridge Native Köprüsü (Android WebView içi iframelerde kesin çalışır)
+    // 2. AndroidBridge Native Köprüsü (Doğrudan, parent ve top pencerelerinde kontrol et)
     try {
         if (window.AndroidBridge && typeof window.AndroidBridge.closeHafizaGame === 'function') {
             window.AndroidBridge.closeHafizaGame();
         }
-    } catch(e) {
-        console.warn("AndroidBridge close error:", e);
-    }
+    } catch(e) {}
+    try {
+        if (window.parent && window.parent.AndroidBridge && typeof window.parent.AndroidBridge.closeHafizaGame === 'function') {
+            window.parent.AndroidBridge.closeHafizaGame();
+        }
+    } catch(e) {}
+    try {
+        if (window.top && window.top.AndroidBridge && typeof window.top.AndroidBridge.closeHafizaGame === 'function') {
+            window.top.AndroidBridge.closeHafizaGame();
+        }
+    } catch(e) {}
 
     // 3. Doğrudan parent ve top fonksiyon çağrısı
     try {
@@ -575,7 +583,22 @@ window.closeHafizaOyunu = function() {
         } catch(e) {}
     }
 
-    // 7. Oyun durumunu nazikçe sıfırla (eğer pencere açık kalırsa kartların donup bozulmasını önle)
+    // 7. Standalone Web / Doğrudan Açılma Durumunda (hafiza.html veya iframe dışı)
+    // Eğer bir modal içinde değilse ana sayfaya yönlendir!
+    try {
+        if (window.parent === window || !window.parent || typeof window.parent.closeHafizaGameModal !== 'function') {
+            const loc = window.location.pathname;
+            if (loc.endsWith('hafiza.html') || loc.includes('/hafiza_oyunu/') || loc.includes('/hafiza/')) {
+                if (window.history.length > 1) {
+                    window.history.back();
+                } else {
+                    window.location.href = (loc.includes('/hafiza_oyunu/') || loc.includes('/hafiza/')) ? '../index.html' : 'index.html';
+                }
+            }
+        }
+    } catch(e) {}
+
+    // 8. Oyun durumunu nazikçe sıfırla
     if (window.game) {
         if (window.game.timerTimeout) {
             clearTimeout(window.game.timerTimeout);
