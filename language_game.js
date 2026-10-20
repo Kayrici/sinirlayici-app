@@ -1228,22 +1228,7 @@ class LanguageGameEngine {
     const captionEl = document.getElementById("langTargetCaption");
 
     if (trackerEl) {
-      if (this.currentGameMode === 'vocab' && this.currentWord) {
-        const st = this.vocabStats ? this.vocabStats[this.currentWord.id] : null;
-        const streak = (st && typeof st.streak === 'number') ? st.streak : 0;
-        const weightPercent = Math.round(this.getWordWeight(this.currentWord.id) * 100);
-        let badgeText = "";
-        if (streak === 0) {
-          badgeText = "🌱 Yeni / Tekrar (%100)";
-        } else if (streak <= 5) {
-          badgeText = `🔥 ${streak}/5 Doğru (%100)`;
-        } else {
-          badgeText = `⭐ Seri ${streak} (Gelme: %${weightPercent})`;
-        }
-        trackerEl.innerHTML = `<span style="font-size:0.8rem; color:#818cf8; font-weight:800;">${badgeText}</span>`;
-      } else {
-        trackerEl.textContent = `${this.currentOrderIndex + 1} / ${this.currentQuizWords.length}`;
-      }
+      trackerEl.textContent = `${this.currentOrderIndex + 1} / ${this.currentQuizWords.length}`;
     }
 
     let questionConfig = null;
