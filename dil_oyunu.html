@@ -1580,6 +1580,7 @@
 
     <div class="header-title-box">
       <h1 id="headerMainTitle" style="font-size: 1.3rem; font-weight: 800; color: #fff; margin: 0;">Arapça</h1>
+      <p id="headerSubTitle" style="font-size: 0.74rem; color: var(--text-muted); margin: 0;"></p>
     </div>
 
     <div class="header-actions">
@@ -1650,6 +1651,76 @@
 
       <div class="siga-grid-list" id="sigaGridList">
         <!-- JS ile 24 sîga butonu doldurulur -->
+      </div>
+    </section>
+
+    <!-- 2.5 KELİME KATEGORİ SEÇİM MENÜSÜ -->
+    <section id="vocabCategorySection" style="display: none; flex-direction: column; gap: 14px;">
+      <div class="siga-selection-banner">
+        <div class="siga-banner-texts">
+          <h2>📖 Arapça Kelime Grupları (750 Kelime)</h2>
+          <p>Çalışmak istediğiniz kategoriyi seçerek teste başlayabilirsiniz:</p>
+        </div>
+        <button type="button" class="btn-nav" onclick="showScreen('mainMenuView')">
+          ⬅️ Menüye Dön
+        </button>
+      </div>
+
+      <div class="menu-cards-grid">
+        <!-- 1. Kur'an Kelimeleri (150) -->
+        <div class="menu-choice-card" onclick="startVocabCategory('kuran')">
+          <div class="choice-texts">
+            <h3 style="font-size: 1.12rem; font-weight: 800; color: #fff; margin-bottom: 4px;">📖 Kur'an Kelimeleri</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">150 Kelime</p>
+          </div>
+          <button type="button" class="btn-start-choice">
+            <span>Oyuna Başla</span>
+          </button>
+        </div>
+
+        <!-- 2. Hadis Kelimeleri (150) -->
+        <div class="menu-choice-card" onclick="startVocabCategory('hadis')">
+          <div class="choice-texts">
+            <h3 style="font-size: 1.12rem; font-weight: 800; color: #fff; margin-bottom: 4px;">📜 Hadis Kelimeleri</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">150 Kelime</p>
+          </div>
+          <button type="button" class="btn-start-choice">
+            <span>Oyuna Başla</span>
+          </button>
+        </div>
+
+        <!-- 3. İslami Kitaplar (150) -->
+        <div class="menu-choice-card" onclick="startVocabCategory('kitap')">
+          <div class="choice-texts">
+            <h3 style="font-size: 1.12rem; font-weight: 800; color: #fff; margin-bottom: 4px;">📚 İslami Kitaplar</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">150 Kelime</p>
+          </div>
+          <button type="button" class="btn-start-choice">
+            <span>Oyuna Başla</span>
+          </button>
+        </div>
+
+        <!-- 4. Genel Kelimeler (300) -->
+        <div class="menu-choice-card" onclick="startVocabCategory('genel')">
+          <div class="choice-texts">
+            <h3 style="font-size: 1.12rem; font-weight: 800; color: #fff; margin-bottom: 4px;">🌟 Genel Kelimeler</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">300 Kelime</p>
+          </div>
+          <button type="button" class="btn-start-choice">
+            <span>Oyuna Başla</span>
+          </button>
+        </div>
+
+        <!-- 5. Tümü Karışık (750) -->
+        <div class="menu-choice-card" onclick="startVocabCategory('all')" style="border-color: rgba(16, 185, 129, 0.45); background: rgba(16, 185, 129, 0.08);">
+          <div class="choice-texts">
+            <h3 style="font-size: 1.12rem; font-weight: 800; color: #34d399; margin-bottom: 4px;">🔄 Tümü (Karışık)</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">750 Kelime</p>
+          </div>
+          <button type="button" class="btn-start-choice" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);">
+            <span>Oyuna Başla</span>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -2486,7 +2557,7 @@ try { if (typeof navigator !== 'undefined') { navigator.vibrate = function() { r
   { id: 631, category: "genel", singular: "قَصِيدَةٌ", dual: "قَصِيدَتَانِ", plural: "قَصَائِدُ", meaning: "Kaside: Uzun manzum şiir" },
   { id: 632, category: "genel", singular: "بَيْتُ شِعْرٍ", dual: "بَيْتَا شِعْرٍ", plural: "أَبْيَاتُ شِعْرٍ", meaning: "Şiir beyti: İki mısradan oluşan dize" },
   { id: 633, category: "genel", singular: "غَزَلٌ", dual: "غَزَلَانِ", plural: "أَغْزَالٌ", meaning: "Gazel: Aşk ve güzelliği terennüm eden şiir" },
-  { id: 634, category: "genel", singular: "مَجَلَّةٌ", dual: "مَجَلَّتَانِ", plural: "مَجَلَّاتٌ", meaning: "Dergi: Periyodik neşriyat risalesi" },
+  { id: 634, category: "genel", singular: "مَجَلَّةٌ", dual: "مَجَلَّتَانِ", plural: "مَجَلَّاتٌ", meaning: "Dergi: Süreli yayın, mevkute, bülten" },
   { id: 635, category: "genel", singular: "جَرِيدَةٌ", dual: "جَرِيدَتَانِ", plural: "جَرَائِدُ", meaning: "Gazete: Günlük haber neşriyatı" },
   { id: 636, category: "genel", singular: "إِعْلَانٌ", dual: "إِعْلَانَانِ", plural: "إِعْلَانَاتٌ", meaning: "Duyuru: Halka yapılan ilan ve bildiri" },
   { id: 637, category: "genel", singular: "مَكْتُوبٌ", dual: "مَكْتُوبَانِ", plural: "مَكَاتِيبُ", meaning: "Mektup: Yazılan haberleşme kâğıdı" },
@@ -2708,7 +2779,7 @@ async function syncWordsFromCloud() {
 
     function showScreen(screenId) {
       currentActiveScreen = screenId;
-      const screens = ['mainMenuView', 'sigaSelectionView', 'quizSection', 'tableSection', 'exitScreenView'];
+      const screens = ['mainMenuView', 'sigaSelectionView', 'vocabCategorySection', 'quizSection', 'tableSection', 'exitScreenView'];
       screens.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = (id === screenId ? 'flex' : 'none');
@@ -2732,15 +2803,25 @@ async function syncWordsFromCloud() {
         if (btnTable) btnTable.style.display = "none";
         if (headerTitle) headerTitle.textContent = "Zamir Çekimi Seçimi";
         if (headerSub) headerSub.textContent = "24 Sîgadan birini seçiniz";
+      } else if (screenId === 'vocabCategorySection') {
+        if (btnMenu) btnMenu.style.display = "inline-flex";
+        if (btnExit) btnExit.style.display = "inline-flex";
+        if (btnTable) btnTable.style.display = "none";
+        if (headerTitle) headerTitle.textContent = "Kelime Kategorileri";
+        if (headerSub) headerSub.textContent = "Çalışmak istediğiniz kategoriyi seçiniz";
       } else if (screenId === 'quizSection') {
         if (btnMenu) btnMenu.style.display = "inline-flex";
         if (btnExit) btnExit.style.display = "inline-flex";
-        if (btnTable) btnTable.style.display = (this.currentGameMode === "vocab" ? "none" : "inline-flex");
+        if (btnTable) btnTable.style.display = (currentGameMode === "vocab" ? "none" : "inline-flex");
         if (headerTitle) {
           if (currentGameMode === 'emsile24') {
             headerTitle.textContent = "24 Sîga Oyunu";
           } else if (currentGameMode === 'vocab') {
-            headerTitle.textContent = "Kelime Oyunu (Tekil / İkili / Çoğul)";
+            if (currentVocabCategory === 'kuran') headerTitle.textContent = "Kur'an Kelimeleri (150)";
+            else if (currentVocabCategory === 'hadis') headerTitle.textContent = "Hadis Kelimeleri (150)";
+            else if (currentVocabCategory === 'kitap') headerTitle.textContent = "İslami Kitaplar (150)";
+            else if (currentVocabCategory === 'genel') headerTitle.textContent = "Genel Kelimeler (300)";
+            else headerTitle.textContent = "Kelime Oyunu (750)";
           } else {
             const foundSiga = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || EMSILE_24_WORDS[0];
             headerTitle.textContent = `${foundSiga.meaning} Çekimi`;
@@ -2750,7 +2831,7 @@ async function syncWordsFromCloud() {
       } else if (screenId === 'tableSection') {
         if (btnMenu) btnMenu.style.display = "inline-flex";
         if (btnExit) btnExit.style.display = "inline-flex";
-        if (btnTable) btnTable.style.display = (this.currentGameMode === "vocab" ? "none" : "inline-flex");
+        if (btnTable) btnTable.style.display = (currentGameMode === "vocab" ? "none" : "inline-flex");
       } else if (screenId === 'exitScreenView') {
         if (btnMenu) btnMenu.style.display = "none";
         if (btnExit) btnExit.style.display = "none";
@@ -2876,61 +2957,39 @@ async function syncWordsFromCloud() {
       renderQuestion();
     }
 
-    // 3. Mod: KELİME MENÜSÜ OYUNU BAŞLAT (KULLANICI İSTEĞİ)
-    function // KELİME KATEGORİ MENÜSÜ AÇMA (Kur'an, Hadis, İslami Eserler, Genel)
-  openVocabCategoryMenu() {
-    this.currentGameMode = 'vocab';
-    this.showScreen("langVocabCategorySection");
-    const btnMenu = document.getElementById("btnLangMenu");
-    const btnTable = document.getElementById("btnLangToggleTable");
-    const title = document.getElementById("langModalTitle");
-    const badge = document.getElementById("langPillBadge");
+    let currentVocabCategory = 'all';
 
-    if (btnMenu) btnMenu.style.display = "inline-flex";
-    if (btnTable) btnTable.style.display = "none"; // KULLANICI İSTEĞİ: Tabloyu gör seçeneği olmasın!
-    if (title) title.textContent = "Kelime Kategorileri";
-    if (badge) badge.style.display = "none";
-  }
-
-  // Belirli bir kategori ile kelime testini başlatma
-  startVocabCategory(category = 'all') {
-    this.currentGameMode = 'vocab';
-    this.currentVocabCategory = category;
-
-    let list = VOCABULARY_WORDS;
-    if (category && category !== 'all') {
-      list = VOCABULARY_WORDS.filter(w => w.category === category);
-    }
-    if (!list || list.length === 0) list = VOCABULARY_WORDS;
-
-    this.currentQuizWords = list.slice();
-    this.initShuffledIndices();
-    this.showScreen("langQuizSection");
-
-    // KULLANICI İSTEĞİ: Tablo butonunu kesinlikle gizle
-    const btnTable = document.getElementById("btnLangToggleTable");
-    if (btnTable) btnTable.style.display = "none";
-
-    const title = document.getElementById("langModalTitle");
-    if (title) {
-      if (category === 'kuran') title.textContent = "Kur'an Kelimeleri (150)";
-      else if (category === 'hadis') title.textContent = "Hadis Kelimeleri (150)";
-      else if (category === 'kitap') title.textContent = "İslami Kitaplar (150)";
-      else if (category === 'genel') title.textContent = "Genel Kelimeler (300)";
-      else title.textContent = "Kelime (750)";
-    }
-
-    this.renderQuestion();
-  }
-
-  startVocabGame() {
-    this.openVocabCategoryMenu();
-  }
-  _old_startVocabGame() {
+    // 3. Mod: KELİME KATEGORİ MENÜSÜ AÇMA (Kur'an, Hadis, İslami Eserler, Genel)
+    function openVocabCategoryMenu() {
       currentGameMode = 'vocab';
-      currentQuizWords = VOCABULARY_WORDS.slice();
+      showScreen("vocabCategorySection");
+      const btnTable = document.getElementById("btnToggleTableDirect");
+      if (btnTable) btnTable.style.display = "none"; // KULLANICI İSTEĞİ: Tabloyu gör seçeneği olmasın!
+    }
+
+    function startVocabGame() {
+      openVocabCategoryMenu();
+    }
+
+    // Belirli bir kategori ile kelime testini başlatma
+    function startVocabCategory(category = 'all') {
+      currentGameMode = 'vocab';
+      currentVocabCategory = category;
+
+      let list = VOCABULARY_WORDS;
+      if (category && category !== 'all') {
+        list = VOCABULARY_WORDS.filter(w => w.category === category);
+      }
+      if (!list || list.length === 0) list = VOCABULARY_WORDS;
+
+      currentQuizWords = list.slice();
       initShuffledIndices();
       showScreen("quizSection");
+
+      // KULLANICI İSTEĞİ: Tablo butonunu kesinlikle gizle
+      const btnTable = document.getElementById("btnToggleTableDirect");
+      if (btnTable) btnTable.style.display = "none";
+
       renderQuestion();
     }
 
@@ -2944,101 +3003,108 @@ async function syncWordsFromCloud() {
       currentOrderIndex = 0;
     }
 
+    // ==========================================
+    // ADAPTİF TEKRAR & İSTATİSTİK SİSTEMİ (LEITNER / SPACED REPETITION)
+    // Tamamen arka planda çalışır, ekranda yüzde/istatistik görünmez
+    // ==========================================
+    let vocabStats = {};
+
+    function loadVocabStats() {
+      try {
+        const saved = localStorage.getItem('vocab_adaptive_stats_v2');
+        vocabStats = saved ? JSON.parse(saved) : {};
+      } catch (_) {
+        vocabStats = {};
+      }
+    }
+
+    function saveVocabStats() {
+      try {
+        localStorage.setItem('vocab_adaptive_stats_v2', JSON.stringify(vocabStats));
+      } catch (_) {}
+    }
+
+    function getWordWeight(wordId) {
+      if (!vocabStats || Object.keys(vocabStats).length === 0) loadVocabStats();
+      const st = vocabStats[wordId];
+      const streak = (st && typeof st.streak === 'number') ? st.streak : 0;
+      // KULLANICI KURALI:
+      // İlk 5 doğru cevapta bir değişiklik yok (1.0).
+      // Sonraki her doğru cevapta gelme olasılığı %30 azalsın (0.70 katı),
+      // sonraki doğru cevapta kalan olasılık tekrar %30 azalsın.
+      if (streak <= 5) {
+        return 1.0;
+      }
+      const reduced = Math.pow(0.70, streak - 5);
+      return Math.max(0.02, reduced); // Minimum %2 taban ağırlık
+    }
+
+    function recordVocabAnswer(wordId, isCorrect) {
+      if (!vocabStats || Object.keys(vocabStats).length === 0) loadVocabStats();
+      if (!vocabStats[wordId]) {
+        vocabStats[wordId] = { streak: 0, totalCorrect: 0, totalWrong: 0 };
+      }
+      const entry = vocabStats[wordId];
+      if (isCorrect) {
+        entry.streak = (entry.streak || 0) + 1;
+        entry.totalCorrect = (entry.totalCorrect || 0) + 1;
+      } else {
+        // KULLANICI KURALI:
+        // Herhangi bir noktada yanlış cevap verilirse olasılık değişimlerinin
+        // tamamı sıfırlansın ve normalde olduğu gibi (%100) olsun!
+        entry.streak = 0;
+        entry.totalWrong = (entry.totalWrong || 0) + 1;
+      }
+      saveVocabStats();
+    }
+
+    function pickNextVocabIndex() {
+      if (!currentQuizWords || currentQuizWords.length === 0) return 0;
+      if (currentQuizWords.length === 1) return 0;
+
+      const weights = currentQuizWords.map(w => getWordWeight(w.id));
+      let totalWeight = 0;
+      for (let i = 0; i < weights.length; i++) {
+        if (currentWord && currentQuizWords[i].id === currentWord.id && currentQuizWords.length > 2) {
+          weights[i] *= 0.05; // Peş peşe aynı kelimenin gelmesini engelle
+        }
+        totalWeight += weights[i];
+      }
+
+      if (totalWeight <= 0) {
+        return Math.floor(Math.random() * currentQuizWords.length);
+      }
+
+      const rand = Math.random() * totalWeight;
+      let cumulative = 0;
+      for (let i = 0; i < weights.length; i++) {
+        cumulative += weights[i];
+        if (rand <= cumulative) {
+          return i;
+        }
+      }
+      return currentQuizWords.length - 1;
+    }
+
     // =========================================================================
     // 5. TEST SORUSU OLUŞTURMA (TÜM MODLARDA ÇİFT YÖNLÜ)
-    // Kural:
-    // - Kelime Modunda: Soru ve Şıklarda soldan sağa Tekil / İkili / Çoğul
-    // - 24 Sîga Modunda: Arapça varsa şıklarda ya Anlam ya Çeviri (sadece birisi)
     // =========================================================================
-    function // ==========================================
-  // ADAPTİF TEKRAR & İSTATİSTİK SİSTEMİ (LEITNER / SPACED REPETITION)
-  // ==========================================
-  loadVocabStats() {
-    try {
-      const saved = localStorage.getItem('vocab_adaptive_stats_v2');
-      this.vocabStats = saved ? JSON.parse(saved) : {};
-    } catch (_) {
-      this.vocabStats = {};
-    }
-  }
-
-  saveVocabStats() {
-    try {
-      localStorage.setItem('vocab_adaptive_stats_v2', JSON.stringify(this.vocabStats));
-    } catch (_) {}
-  }
-
-  getWordWeight(wordId) {
-    if (!this.vocabStats) this.loadVocabStats();
-    const st = this.vocabStats[wordId];
-    const streak = (st && typeof st.streak === 'number') ? st.streak : 0;
-    // KULLANICI KURALI:
-    // İlk 5 doğru cevapta bir değişiklik yok (1.0).
-    // Sonraki her doğru cevapta gelme olasılığı %30 azalsın (0.70 katı),
-    // sonraki doğru cevapta kalan olasılık tekrar %30 azalsın.
-    if (streak <= 5) {
-      return 1.0;
-    }
-    const reduced = Math.pow(0.70, streak - 5);
-    return Math.max(0.02, reduced); // Minimum %2 taban ağırlık
-  }
-
-  recordVocabAnswer(wordId, isCorrect) {
-    if (!this.vocabStats) this.loadVocabStats();
-    if (!this.vocabStats[wordId]) {
-      this.vocabStats[wordId] = { streak: 0, totalCorrect: 0, totalWrong: 0 };
-    }
-    const entry = this.vocabStats[wordId];
-    if (isCorrect) {
-      entry.streak = (entry.streak || 0) + 1;
-      entry.totalCorrect = (entry.totalCorrect || 0) + 1;
-    } else {
-      // KULLANICI KURALI:
-      // Herhangi bir noktada yanlış cevap verilirse olasılık değişimlerinin
-      // tamamı sıfırlansın ve normalde olduğu gibi (%100) olsun!
-      entry.streak = 0;
-      entry.totalWrong = (entry.totalWrong || 0) + 1;
-    }
-    this.saveVocabStats();
-  }
-
-  pickNextVocabIndex() {
-    if (!this.currentQuizWords || this.currentQuizWords.length === 0) return 0;
-    if (this.currentQuizWords.length === 1) return 0;
-
-    const weights = this.currentQuizWords.map(w => this.getWordWeight(w.id));
-    let totalWeight = 0;
-    for (let i = 0; i < weights.length; i++) {
-      if (this.currentWord && this.currentQuizWords[i].id === this.currentWord.id && this.currentQuizWords.length > 2) {
-        weights[i] *= 0.05; // Peş peşe aynı kelimenin gelmesini engelle
-      }
-      totalWeight += weights[i];
-    }
-
-    if (totalWeight <= 0) {
-      return Math.floor(Math.random() * this.currentQuizWords.length);
-    }
-
-    const rand = Math.random() * totalWeight;
-    let cumulative = 0;
-    for (let i = 0; i < weights.length; i++) {
-      cumulative += weights[i];
-      if (rand <= cumulative) {
-        return i;
-      }
-    }
-    return this.currentQuizWords.length - 1;
-  }
-
-  renderQuestion() {
-      if (shuffledIndices.length === 0) initShuffledIndices();
+    function renderQuestion() {
       isAnswering = false;
 
       const feedbackBar = document.getElementById("quizFeedbackBar");
       if (feedbackBar) feedbackBar.style.display = "none";
 
-      const targetIdx = shuffledIndices[currentOrderIndex];
-      currentWord = currentQuizWords[targetIdx];
+      let targetIdx = 0;
+      if (currentGameMode === 'vocab') {
+        targetIdx = pickNextVocabIndex();
+        currentOrderIndex = targetIdx;
+        currentWord = currentQuizWords[targetIdx];
+      } else {
+        if (shuffledIndices.length === 0) initShuffledIndices();
+        targetIdx = shuffledIndices[currentOrderIndex];
+        currentWord = currentQuizWords[targetIdx];
+      }
 
       const targetWordContainer = document.getElementById("targetWordContainer");
       const trackerEl = document.getElementById("quizTrackerText");
@@ -3307,15 +3373,25 @@ async function syncWordsFromCloud() {
       const isCorrect = (String(selectedKey) === String(currentCorrectAnswerKey));
 
       if (isCorrect) {
+        if (currentGameMode === 'vocab' && currentWord) {
+          recordVocabAnswer(currentWord.id, true);
+        }
         clickedBtn.classList.add("correct-choice");
         playSound('correct');
         /* vibration disabled */
 
         setTimeout(() => {
-          currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
-          renderQuestion();
+          if (currentGameMode === 'vocab') {
+            renderQuestion();
+          } else {
+            currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
+            renderQuestion();
+          }
         }, 380);
       } else {
+        if (currentGameMode === 'vocab' && currentWord) {
+          recordVocabAnswer(currentWord.id, false);
+        }
         clickedBtn.classList.add("wrong-choice");
         playSound('wrong');
         /* vibration disabled */
@@ -3354,15 +3430,19 @@ async function syncWordsFromCloud() {
       const feedbackBar = document.getElementById("quizFeedbackBar");
       if (feedbackBar) feedbackBar.style.display = "none";
       isAnswering = false;
-      currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
-      renderQuestion();
+      if (currentGameMode === 'vocab') {
+        renderQuestion();
+      } else {
+        currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
+        renderQuestion();
+      }
     }
 
     // =========================================================================
     // 6. 3D FLASHCARD TABLOLARI
     // =========================================================================
     function showTableSection(highlightId = null) {
-    if (this.currentGameMode === "vocab") return; // Kelime modunda tablo yok
+      if (currentGameMode === "vocab") return; // Kelime modunda tablo yok
       showScreen("tableSection");
       renderActiveTable(highlightId);
     }
@@ -3374,7 +3454,7 @@ async function syncWordsFromCloud() {
     }
 
     function toggleTableDirectly() {
-    if (this.currentGameMode === "vocab") return; // Kelime modunda tablo yok
+      if (currentGameMode === "vocab") return; // Kelime modunda tablo yok
       const tableSec = document.getElementById("tableSection");
       if (tableSec && tableSec.style.display !== "none") {
         continueQuiz();
