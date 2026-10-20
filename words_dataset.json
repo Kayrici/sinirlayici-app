@@ -1,0 +1,2452 @@
+[
+  {
+    "id": 1,
+    "singular": "رَبٌّ",
+    "dual": "رَبَّانِ",
+    "plural": "أَرْبَابٌ",
+    "meaning": "Rab: Terbiye eden, mutlak mâlik ve rızık veren"
+  },
+  {
+    "id": 2,
+    "singular": "آيَةٌ",
+    "dual": "آيَتَانِ",
+    "plural": "آيَاتٌ",
+    "meaning": "Âyet: İlahî delil, mucize ve Kur'an cümlesi"
+  },
+  {
+    "id": 3,
+    "singular": "كِتَابٌ",
+    "dual": "كِتَابَانِ",
+    "plural": "كُتُبٌ",
+    "meaning": "Kitap: Yazılı vahiy, Kur'an ve amel defteri"
+  },
+  {
+    "id": 4,
+    "singular": "رَسُولٌ",
+    "dual": "رَسُولَانِ",
+    "plural": "رُسُلٌ",
+    "meaning": "Resûl: Kitap ve şeriat getiren ilahî elçi"
+  },
+  {
+    "id": 5,
+    "singular": "نَبِيٌّ",
+    "dual": "نَبِيَّانِ",
+    "plural": "أَنْبِيَاءُ / نَبِيُّونَ",
+    "meaning": "Nebî: Vahiy ve gayb haberi alan peygamber"
+  },
+  {
+    "id": 6,
+    "singular": "يَوْمٌ",
+    "dual": "يَوْمَانِ",
+    "plural": "أَيَّامٌ",
+    "meaning": "Yevm: Gün, vakit, kıyamet zamanı"
+  },
+  {
+    "id": 7,
+    "singular": "سَمَاءٌ",
+    "dual": "سَمَاوَانِ",
+    "plural": "سَمَاوَاتٌ",
+    "meaning": "Semâ: Yüksek gök, semavat"
+  },
+  {
+    "id": 8,
+    "singular": "أَرْضٌ",
+    "dual": "أَرْضَانِ",
+    "plural": "أَرَاضٍ / أَرْضُونَ",
+    "meaning": "Arz: Yeryüzü, zemin, dünya"
+  },
+  {
+    "id": 9,
+    "singular": "نَفْسٌ",
+    "dual": "نَفْسَانِ",
+    "plural": "أَنْفُسٌ / نُفُوسٌ",
+    "meaning": "Nefis: İnsanın kendi zâtı, canı, hevesi"
+  },
+  {
+    "id": 10,
+    "singular": "قَوْمٌ",
+    "dual": "قَوْمَانِ",
+    "plural": "أَقْوَامٌ",
+    "meaning": "Kavim: İnsan topluluğu, halk, millet"
+  },
+  {
+    "id": 11,
+    "singular": "عَبْدٌ",
+    "dual": "عَبْدَانِ",
+    "plural": "عِبَادٌ / عَبِيدٌ",
+    "meaning": "Kul: Allah'a boyun eğip ibadet eden insan"
+  },
+  {
+    "id": 12,
+    "singular": "قَلْبٌ",
+    "dual": "قَلْبَانِ",
+    "plural": "قُلُوبٌ",
+    "meaning": "Kalp: Gönül, manevî idrak ve iman merkezi"
+  },
+  {
+    "id": 13,
+    "singular": "عَذَابٌ",
+    "dual": "عَذَابَانِ",
+    "plural": "أَعْذِبَةٌ",
+    "meaning": "Azap: Şiddetli elem ve ahiret cezası"
+  },
+  {
+    "id": 14,
+    "singular": "جَنَّةٌ",
+    "dual": "جَنَّتَانِ",
+    "plural": "جَنَّاتٌ",
+    "meaning": "Cennet: Ebedî saadet, huzur ve mükâfat yurdu"
+  },
+  {
+    "id": 15,
+    "singular": "نَارٌ",
+    "dual": "نَارَانِ",
+    "plural": "نِيرَانٌ",
+    "meaning": "Nâr: Yakıcı ateş, cehennem"
+  },
+  {
+    "id": 16,
+    "singular": "حَقٌّ",
+    "dual": "حَقَّانِ",
+    "plural": "حُقُوقٌ",
+    "meaning": "Hak: Mutlak gerçek, adalet, sabit doğru"
+  },
+  {
+    "id": 17,
+    "singular": "سَبِيلٌ",
+    "dual": "سَبِيلَانِ",
+    "plural": "سُبُلٌ",
+    "meaning": "Sebîl: Yol, rızaya ulaştıran hak yol"
+  },
+  {
+    "id": 18,
+    "singular": "أَمْرٌ",
+    "dual": "أَمْرَانِ",
+    "plural": "أُمُورٌ / أَوَامِرُ",
+    "meaning": "Emir: İlahî buyruk, ferman, hüküm ve iş"
+  },
+  {
+    "id": 19,
+    "singular": "شَيْءٌ",
+    "dual": "شَيْئَانِ",
+    "plural": "أَشْيَاءُ",
+    "meaning": "Şey: Yaratılmış olan her varlık, nesne"
+  },
+  {
+    "id": 20,
+    "singular": "مَالٌ",
+    "dual": "مَالَانِ",
+    "plural": "أَمْوَالٌ",
+    "meaning": "Mal: Dünya serveti, mülk, meta"
+  },
+  {
+    "id": 21,
+    "singular": "وَلَدٌ",
+    "dual": "وَلَدَانِ",
+    "plural": "أَوْلَادٌ / وِلْدَانٌ",
+    "meaning": "Veled: Çocuk, evlat, nesil"
+  },
+  {
+    "id": 22,
+    "singular": "عِلْمٌ",
+    "dual": "عِلْمَانِ",
+    "plural": "عُلُومٌ",
+    "meaning": "İlim: Kesin bilgi, marifet, hakikat ilmi"
+  },
+  {
+    "id": 23,
+    "singular": "عَمَلٌ",
+    "dual": "عَمَلَانِ",
+    "plural": "أَعْمَالٌ",
+    "meaning": "Amel: Niyetle yapılan iş, fiil, eylem"
+  },
+  {
+    "id": 24,
+    "singular": "أَهْلٌ",
+    "dual": "أَهْلَانِ",
+    "plural": "أَهْلُونَ / أَهَالٍ",
+    "meaning": "Ehil: Aile, ev halkı, mensup topluluk"
+  },
+  {
+    "id": 25,
+    "singular": "بَيْتٌ",
+    "dual": "بَيْتَانِ",
+    "plural": "بُيُوتٌ / أَبْيَاتٌ",
+    "meaning": "Beyt: Ev, mesken; Kâbe-i Muazzama"
+  },
+  {
+    "id": 26,
+    "singular": "بَابٌ",
+    "dual": "بَابَانِ",
+    "plural": "أَبْوَابٌ / بِيبَانٌ",
+    "meaning": "Kapı: Giriş yeri, sema ve cennet kapıları"
+  },
+  {
+    "id": 27,
+    "singular": "مَلَكٌ",
+    "dual": "مَلَكَانِ",
+    "plural": "مَلَائِكَةٌ",
+    "meaning": "Melek: Nurdan yaratılmış itaatkâr varlık"
+  },
+  {
+    "id": 28,
+    "singular": "إِنْسَانٌ",
+    "dual": "إِنْسَانَانِ",
+    "plural": "نَاسٌ / أَنَاسِيُّ",
+    "meaning": "İnsan: Akıl ve irade sahibi beşer"
+  },
+  {
+    "id": 29,
+    "singular": "دِينٌ",
+    "dual": "دِينَانِ",
+    "plural": "أَدْيَانٌ",
+    "meaning": "Din: İtaat, hesap ve ilahî şeriat nizamı"
+  },
+  {
+    "id": 30,
+    "singular": "قَوْلٌ",
+    "dual": "قَوْلَانِ",
+    "plural": "أَقْوَالٌ / أَقَاوِيلُ",
+    "meaning": "Söz: Kelam, lafız, hakikat ifadesi"
+  },
+  {
+    "id": 31,
+    "singular": "يَدٌ",
+    "dual": "يَدَانِ",
+    "plural": "أَيْدٍ / أَيَادٍ",
+    "meaning": "El: Organ olan el; güç ve nimet"
+  },
+  {
+    "id": 32,
+    "singular": "عَيْنٌ",
+    "dual": "عَيْنَانِ",
+    "plural": "أَعْيُنٌ / عُيُونٌ",
+    "meaning": "Göz / Pınar: Görme organı; su pınarı"
+  },
+  {
+    "id": 33,
+    "singular": "أُذُنٌ",
+    "dual": "أُذُنَانِ",
+    "plural": "آذَانٌ",
+    "meaning": "Kulak: İşitme ve ibret alma organı"
+  },
+  {
+    "id": 34,
+    "singular": "لِسَانٌ",
+    "dual": "لِسَانَانِ",
+    "plural": "أَلْسِنَةٌ",
+    "meaning": "Dil / Lisan: Konuşma organı, lisan, lehçe"
+  },
+  {
+    "id": 35,
+    "singular": "وَجْهٌ",
+    "dual": "وَجْهَانِ",
+    "plural": "وُجُوهٌ / أَوْجُهٌ",
+    "meaning": "Yüz / Vech: Çehre, taraf; ilahî rıza"
+  },
+  {
+    "id": 36,
+    "singular": "رِجْلٌ",
+    "dual": "رِجْلَانِ",
+    "plural": "أَرْجُلٌ",
+    "meaning": "Ayak: Yürüme ve sebat organı"
+  },
+  {
+    "id": 37,
+    "singular": "صَدْرٌ",
+    "dual": "صَدْرَانِ",
+    "plural": "صُدُورٌ",
+    "meaning": "Göğüs / Sadr: Kalbin mahalli olan sine, bağır"
+  },
+  {
+    "id": 38,
+    "singular": "بَصَرٌ",
+    "dual": "بَصَرَانِ",
+    "plural": "أَبْصَارٌ",
+    "meaning": "Basar: Göz nuru, görme ve idrak kabiliyeti"
+  },
+  {
+    "id": 39,
+    "singular": "سَمْعٌ",
+    "dual": "سَمْعَانِ",
+    "plural": "أَسْمَاعٌ",
+    "meaning": "Sem': İşitme ve hak çağrıyı duyma yetisi"
+  },
+  {
+    "id": 40,
+    "singular": "رَأْسٌ",
+    "dual": "رَأْسَانِ",
+    "plural": "رُؤُوسٌ",
+    "meaning": "Baş / Re's: Baş, tepe noktası, topluluk lideri"
+  },
+  {
+    "id": 41,
+    "singular": "شَمْسٌ",
+    "dual": "شَمْسَانِ",
+    "plural": "شُمُوسٌ",
+    "meaning": "Güneş: Âlemi aydınlatan ve ısıtan kandil"
+  },
+  {
+    "id": 42,
+    "singular": "قَمَرٌ",
+    "dual": "قَمَرَانِ",
+    "plural": "أَقْمَارٌ",
+    "meaning": "Ay / Kamer: Gecenin aydınlığı, zaman ölçüsü"
+  },
+  {
+    "id": 43,
+    "singular": "نَجْمٌ",
+    "dual": "نَجْمَانِ",
+    "plural": "نُجُومٌ / أَنْجُمٌ",
+    "meaning": "Yıldız: Gökyüzünü süsleyen ışıklı cisim"
+  },
+  {
+    "id": 44,
+    "singular": "لَيْلٌ",
+    "dual": "لَيْلَانِ",
+    "plural": "لَيَالٍ",
+    "meaning": "Gece: Karanlığın bürüdüğü sükûn vakti"
+  },
+  {
+    "id": 45,
+    "singular": "نَهَارٌ",
+    "dual": "نَهَارَانِ",
+    "plural": "أَنْهُرٌ / نُهُرٌ",
+    "meaning": "Gündüz: Işıkla aydınlanan çalışma vakti"
+  },
+  {
+    "id": 46,
+    "singular": "نُورٌ",
+    "dual": "نُورَانِ",
+    "plural": "أَنْوَارٌ",
+    "meaning": "Nur: Karanlıkları dağıtan ilahî aydınlık"
+  },
+  {
+    "id": 47,
+    "singular": "ظُلْمَةٌ",
+    "dual": "ظُلْمَتَانِ",
+    "plural": "ظُلُمَاتٌ",
+    "meaning": "Karanlık: Maddî karanlık, şirk ve cehalet"
+  },
+  {
+    "id": 48,
+    "singular": "مَاءٌ",
+    "dual": "مَاءَانِ",
+    "plural": "مِيَاهٌ / أَمْوَاهٌ",
+    "meaning": "Su: Canlılara hayat veren temizleyici nimet"
+  },
+  {
+    "id": 49,
+    "singular": "رِيحٌ",
+    "dual": "رِيحَانِ",
+    "plural": "رِيَاحٌ / أَرْيَاحٌ",
+    "meaning": "Rüzgar: Bulutları sevk eden yel, esinti"
+  },
+  {
+    "id": 50,
+    "singular": "بَحْرٌ",
+    "dual": "بَحْرَانِ",
+    "plural": "بِحَارٌ / أَبْحُرٌ",
+    "meaning": "Deniz: Uçsuz bucaksız engin su kütlesi"
+  },
+  {
+    "id": 51,
+    "singular": "جَبَلٌ",
+    "dual": "جَبَلَانِ",
+    "plural": "جِبَالٌ",
+    "meaning": "Dağ: Yeryüzünü sarsıntıdan koruyan sabit kütle"
+  },
+  {
+    "id": 52,
+    "singular": "نَهْرٌ",
+    "dual": "نَهْرَانِ",
+    "plural": "أَنْهَارٌ",
+    "meaning": "Nehir: Yatağında akan tatlı su ırmağı"
+  },
+  {
+    "id": 53,
+    "singular": "شَجَرَةٌ",
+    "dual": "شَجَرَتَانِ",
+    "plural": "أَشْجَارٌ / شَجَرٌ",
+    "meaning": "Ağaç: Kökü yerde dalları gökte bitki"
+  },
+  {
+    "id": 54,
+    "singular": "ثَمَرَةٌ",
+    "dual": "ثَمَرَتَانِ",
+    "plural": "ثَمَرَاتٌ / ثَمَرٌ",
+    "meaning": "Meyve / Semere: Bitki ürünü; amel hasılatı"
+  },
+  {
+    "id": 55,
+    "singular": "طَعَامٌ",
+    "dual": "طَعَامَانِ",
+    "plural": "أَطْعِمَةٌ",
+    "meaning": "Yiyecek / Taâm: İnsanın beslendiği gıda ve rızık"
+  },
+  {
+    "id": 56,
+    "singular": "مَوْتٌ",
+    "dual": "مَوْتَانِ",
+    "plural": "أَمْوَاتٌ",
+    "meaning": "Ölüm: Ruhun bedenden ayrılıp ahirete göçmesi"
+  },
+  {
+    "id": 57,
+    "singular": "حَيَاةٌ",
+    "dual": "حَيَاتَانِ",
+    "plural": "حَيَوَاتٌ",
+    "meaning": "Hayat: Canlılık, dirilik, hakiki varoluş"
+  },
+  {
+    "id": 58,
+    "singular": "دُنْيَا",
+    "dual": "دُنْيَيَانِ",
+    "plural": "دُنًى",
+    "meaning": "Dünya: Fani, geçici ilk hayat sahnesi"
+  },
+  {
+    "id": 59,
+    "singular": "آخِرَةٌ",
+    "dual": "آخِرَتَانِ",
+    "plural": "آخِرَاتٌ",
+    "meaning": "Ahiret: Dünyadan sonraki ebedî hesap yurdu"
+  },
+  {
+    "id": 60,
+    "singular": "سَاعَةٌ",
+    "dual": "سَاعَتَانِ",
+    "plural": "سَاعَاتٌ",
+    "meaning": "Kıyamet Vakti / Saat: Kâinatın altüst olacağı dehşetli an"
+  },
+  {
+    "id": 61,
+    "singular": "أَجْرٌ",
+    "dual": "أَجْرَانِ",
+    "plural": "أُجُورٌ",
+    "meaning": "Ecir / Mükâfat: Salih amellere verilen sevap"
+  },
+  {
+    "id": 62,
+    "singular": "فَضْلٌ",
+    "dual": "فَضْلَانِ",
+    "plural": "فُضُولٌ / أَفْضَالٌ",
+    "meaning": "Lütuf / Fazl: İlahî bol ihsan, üstünlük ve bereket"
+  },
+  {
+    "id": 63,
+    "singular": "رَحْمَةٌ",
+    "dual": "رَحْمَتَانِ",
+    "plural": "رَحَمَاتٌ",
+    "meaning": "Rahmet: Her şeyi kuşatan ilahî merhamet"
+  },
+  {
+    "id": 64,
+    "singular": "نِعْمَةٌ",
+    "dual": "نِعْمَتَانِ",
+    "plural": "نِعَمٌ / أَنْعُمٌ",
+    "meaning": "Nimet: Maddî ve manevî ilahî bağış, sıhhat"
+  },
+  {
+    "id": 65,
+    "singular": "حَسَنَةٌ",
+    "dual": "حَسَنَتَانِ",
+    "plural": "حَسَنَاتٌ",
+    "meaning": "Hasene: Rızaya uygun güzel amel, iyilik"
+  },
+  {
+    "id": 66,
+    "singular": "سَيِّئَةٌ",
+    "dual": "سَيِّئَتَانِ",
+    "plural": "سَيِّئَاتٌ",
+    "meaning": "Seyyie: Günah, çirkin fiil, fenalık"
+  },
+  {
+    "id": 67,
+    "singular": "ذَنْبٌ",
+    "dual": "ذَنْبَانِ",
+    "plural": "ذُنُوبٌ",
+    "meaning": "Günah / Zenb: Kişiyi sorumlu kılan vebal ve isyan"
+  },
+  {
+    "id": 68,
+    "singular": "خَطِيئَةٌ",
+    "dual": "خَطِيئَتَانِ",
+    "plural": "خَطَايَا / خَطِيئَاتٌ",
+    "meaning": "Hatîe: Kasten veya gafletle işlenen ağır günah"
+  },
+  {
+    "id": 69,
+    "singular": "ظُلْمٌ",
+    "dual": "ظُلْمَانِ",
+    "plural": "مَظَالِمُ",
+    "meaning": "Zulüm: Haddi aşmak, haksızlık, şirk"
+  },
+  {
+    "id": 70,
+    "singular": "إِثْمٌ",
+    "dual": "إِثْمَانِ",
+    "plural": "آثَامٌ",
+    "meaning": "İsm: İnsanı hayırdan alıkoyan ağır günah"
+  },
+  {
+    "id": 71,
+    "singular": "مُؤْمِنٌ",
+    "dual": "مُؤْمِنَانِ",
+    "plural": "مُؤْمِنُونَ / مُؤْمِنِينَ",
+    "meaning": "Mümin: Allah'a ihlasla inanıp güvene eren kul"
+  },
+  {
+    "id": 72,
+    "singular": "كَافِرٌ",
+    "dual": "كَافِرَانِ",
+    "plural": "كَافِرُونَ / كُفَّارٌ",
+    "meaning": "Kâfir: Hakkı ve nimetleri bile bile inkâr eden"
+  },
+  {
+    "id": 73,
+    "singular": "مُنَافِقٌ",
+    "dual": "مُنَافِقَانِ",
+    "plural": "مُنَافِقُونَ / مُنَافِقِينَ",
+    "meaning": "Münafık: İçi inkârcı, dışı inanmış ikiyüzlü"
+  },
+  {
+    "id": 74,
+    "singular": "مُشْرِكٌ",
+    "dual": "مُشْرِكَانِ",
+    "plural": "مُشْرِكُونَ / مُشْرِكِينَ",
+    "meaning": "Müşrik: Allah'a ortak koşan kimse"
+  },
+  {
+    "id": 75,
+    "singular": "ظَالِمٌ",
+    "dual": "ظَالِمَانِ",
+    "plural": "ظَالِمُونَ / ظَلَمَةٌ",
+    "meaning": "Zalim: Sınırları çiğneyen, hakkı gasbeden"
+  },
+  {
+    "id": 76,
+    "singular": "فَاسِقٌ",
+    "dual": "فَاسِقَانِ",
+    "plural": "فَاسِقُونَ / فُسَّاقٌ",
+    "meaning": "Fasık: İtaatten çıkıp günaha dalan kimse"
+  },
+  {
+    "id": 77,
+    "singular": "صَالِحٌ",
+    "dual": "صَالِحَانِ",
+    "plural": "صَالِحُونَ / صُلَحَاءُ",
+    "meaning": "Salih: Ameli dine uygun, temiz ve dürüst kul"
+  },
+  {
+    "id": 78,
+    "singular": "صَادِقٌ",
+    "dual": "صَادِقَانِ",
+    "plural": "صَادِقُونَ / صُدَقَاءُ",
+    "meaning": "Sadık: Sözünde ve inancında dosdoğru olan"
+  },
+  {
+    "id": 79,
+    "singular": "صَابِرٌ",
+    "dual": "صَابِرَانِ",
+    "plural": "صَابِرُونَ",
+    "meaning": "Sabırlı / Sâbir: Güçlüklere ve günaha direnen kul"
+  },
+  {
+    "id": 80,
+    "singular": "شَاكِرٌ",
+    "dual": "شَاكِرَانِ",
+    "plural": "شَاكِرُونَ / شُكَّارٌ",
+    "meaning": "Şükreden / Şâkir: Nimetin kadrini bilip hamdeden"
+  },
+  {
+    "id": 81,
+    "singular": "مُحْسِنٌ",
+    "dual": "مُحْسِنَانِ",
+    "plural": "مُحْسِنُونَ / مُحْسِنِينَ",
+    "meaning": "Muhsin: Allah'ı görür gibi ihlasla iyilik eden"
+  },
+  {
+    "id": 82,
+    "singular": "شَهِيدٌ",
+    "dual": "شَهِيدَانِ",
+    "plural": "شُهَدَاءُ",
+    "meaning": "Şehit / Şahit: Hakikate tanıklık eden; canını feda eden"
+  },
+  {
+    "id": 83,
+    "singular": "عَالِمٌ",
+    "dual": "عَالِمَانِ",
+    "plural": "عُلَمَاءُ",
+    "meaning": "Âlim: İlmiyle amel eden, derin kavrayışlı zat"
+  },
+  {
+    "id": 84,
+    "singular": "عَدُوٌّ",
+    "dual": "عَدُوَّانِ",
+    "plural": "أَعْدَاءٌ",
+    "meaning": "Düşman: İnsanın kötülüğünü isteyen hasım; Şeytan"
+  },
+  {
+    "id": 85,
+    "singular": "وَلِيٌّ",
+    "dual": "وَلِيَّانِ",
+    "plural": "أَوْلِيَاءُ",
+    "meaning": "Veli / Dost: Koruyan, yardım eden, takvalı dost"
+  },
+  {
+    "id": 86,
+    "singular": "نَصِيرٌ",
+    "dual": "نَصِيرَانِ",
+    "plural": "أَنْصَارٌ",
+    "meaning": "Nasîr: Zorlukta yardıma koşan destekçi"
+  },
+  {
+    "id": 87,
+    "singular": "سُلْطَانٌ",
+    "dual": "سُلْطَانَانِ",
+    "plural": "سَلَاطِينُ",
+    "meaning": "Sultan: Kesin delil, karşı konulmaz güç"
+  },
+  {
+    "id": 88,
+    "singular": "بَيِّنَةٌ",
+    "dual": "بَيِّنَتَانِ",
+    "plural": "بَيِّنَاتٌ",
+    "meaning": "Beyyine: Şüphe bırakmayan apaçık delil, mucize"
+  },
+  {
+    "id": 89,
+    "singular": "حِكْمَةٌ",
+    "dual": "حِكْمَتَانِ",
+    "plural": "حِكَمٌ",
+    "meaning": "Hikmet: Eşyanın hakikatini bilip yerli yerince davranmak"
+  },
+  {
+    "id": 90,
+    "singular": "كَلِمَةٌ",
+    "dual": "كَلِمَتَانِ",
+    "plural": "كَلِمَاتٌ / كَلِمٌ",
+    "meaning": "Kelime: İlahî irade fermanı, tevhid sözü"
+  },
+  {
+    "id": 91,
+    "singular": "حَدِيثٌ",
+    "dual": "حَدِيثَانِ",
+    "plural": "أَحَادِيثُ",
+    "meaning": "Hadis / Söz: Haber, söz, anlatı, Kur'an kıssası"
+  },
+  {
+    "id": 92,
+    "singular": "مَسْجِدٌ",
+    "dual": "مَسْجِدَانِ",
+    "plural": "مَسَاجِدُ",
+    "meaning": "Mescit: Allah'a secde ve ibadet edilen mabet"
+  },
+  {
+    "id": 93,
+    "singular": "مَدِينَةٌ",
+    "dual": "مَدِينَتَانِ",
+    "plural": "مُدُنٌ / مَدَائِنُ",
+    "meaning": "Medine / Şehir: Nüfusun toplandığı yerleşim yeri"
+  },
+  {
+    "id": 94,
+    "singular": "قَرْيَةٌ",
+    "dual": "قَرْيَتَانِ",
+    "plural": "قُرًى",
+    "meaning": "Karye / Belde: Kasaba, köy, yerleşim merkezi"
+  },
+  {
+    "id": 95,
+    "singular": "دَارٌ",
+    "dual": "دَارَانِ",
+    "plural": "دِيَارٌ / دُورٌ",
+    "meaning": "Yurt / Dâr: Ev, konut, ebedî ahiret konağı"
+  },
+  {
+    "id": 96,
+    "singular": "أُمٌّ",
+    "dual": "أُمَّانِ",
+    "plural": "أُمَّهَاتٌ",
+    "meaning": "Anne / Ümm: Asıl, kaynak, hürmete layık valide"
+  },
+  {
+    "id": 97,
+    "singular": "أَبٌ",
+    "dual": "أَبَوَانِ",
+    "plural": "آبَاءٌ",
+    "meaning": "Baba / Eb: Nesle vesile olan ata, peder"
+  },
+  {
+    "id": 98,
+    "singular": "أَخٌ",
+    "dual": "أَخَوَانِ",
+    "plural": "إِخْوَةٌ / إِخْوَانٌ",
+    "meaning": "Kardeş / Ah: Öz kardeş ve din kardeşi"
+  },
+  {
+    "id": 99,
+    "singular": "أُخْتٌ",
+    "dual": "أُخْتَانِ",
+    "plural": "أَخَوَاتٌ",
+    "meaning": "Kız Kardeş: Nesep bağıyla bağlı kız kardeş"
+  },
+  {
+    "id": 100,
+    "singular": "زَوْجٌ",
+    "dual": "زَوْجَانِ",
+    "plural": "أَزْوَاجٌ",
+    "meaning": "Eş / Zevc: Birbirini tamamlayan eş, hanım veya koca"
+  },
+  {
+    "id": 101,
+    "singular": "بُرْهَانٌ",
+    "dual": "بُرْهَانَانِ",
+    "plural": "بَرَاهِينُ",
+    "meaning": "Burhân: Kesin delil, sarsılmaz hüccet"
+  },
+  {
+    "id": 102,
+    "singular": "حُجَّةٌ",
+    "dual": "حُجَّتَانِ",
+    "plural": "حُجَجٌ",
+    "meaning": "Hüccet: İkna edici kesin kanıt, senet"
+  },
+  {
+    "id": 103,
+    "singular": "مَوْجُودٌ",
+    "dual": "مَوْجُودَانِ",
+    "plural": "مَوْجُودَاتٌ",
+    "meaning": "Mevcûd: Varlık sahasında bulunan, varlık"
+  },
+  {
+    "id": 104,
+    "singular": "مَخْلُوقٌ",
+    "dual": "مَخْلُوقَانِ",
+    "plural": "مَخْلُوقَاتٌ",
+    "meaning": "Mahlûk: Allah'ın yarattığı varlık"
+  },
+  {
+    "id": 105,
+    "singular": "مَصْنُوعٌ",
+    "dual": "مَصْنُوعَانِ",
+    "plural": "مَصْنُوعَاتٌ",
+    "meaning": "Masnû': Sanatla ve hikmetle yaratılmış eser"
+  },
+  {
+    "id": 106,
+    "singular": "أَثَرٌ",
+    "dual": "أَثَرَانِ",
+    "plural": "آثَارٌ",
+    "meaning": "Eser: Sanatın ve kudretin izi, nişanesi"
+  },
+  {
+    "id": 107,
+    "singular": "سِرٌّ",
+    "dual": "سِرَّانِ",
+    "plural": "أَسْرَارٌ",
+    "meaning": "Sır: Gizli hakikat, derin mana ve incelik"
+  },
+  {
+    "id": 108,
+    "singular": "حَقِيقَةٌ",
+    "dual": "حَقِيقَتَانِ",
+    "plural": "حَقَائِقُ",
+    "meaning": "Hakikat: Bir şeyin aslı, değişmez gerçeği"
+  },
+  {
+    "id": 109,
+    "singular": "لَطِيفَةٌ",
+    "dual": "لَطِيفَتَانِ",
+    "plural": "لَطَائِفُ",
+    "meaning": "Latîfe: İnsandaki ince manevî his ve duygu"
+  },
+  {
+    "id": 110,
+    "singular": "مِنَّةٌ",
+    "dual": "مِنَّتَانِ",
+    "plural": "مِنَنٌ",
+    "meaning": "Minnet: Karşılıksız ilahî iyilik ve ihsan"
+  },
+  {
+    "id": 111,
+    "singular": "نُكْتَةٌ",
+    "dual": "نُكْتَتَانِ",
+    "plural": "نُكَتٌ",
+    "meaning": "Nükte: İnce, derin ve hikmetli mana"
+  },
+  {
+    "id": 112,
+    "singular": "إِشَارَةٌ",
+    "dual": "إِشَارَتَانِ",
+    "plural": "إِشَارَاتٌ",
+    "meaning": "İşaret: Gizli veya remizli delalet, gösterme"
+  },
+  {
+    "id": 113,
+    "singular": "لَمْعَةٌ",
+    "dual": "لَمْعَتَانِ",
+    "plural": "لَمَعَاتٌ",
+    "meaning": "Lem'a: Parlayan ışık parıltısı"
+  },
+  {
+    "id": 114,
+    "singular": "شُعَاعٌ",
+    "dual": "شُعَاعَانِ",
+    "plural": "أَشِعَّةٌ",
+    "meaning": "Şuâ': Işık huzmesi, ışın, güneş ziyası"
+  },
+  {
+    "id": 115,
+    "singular": "قَطْرَةٌ",
+    "dual": "قَطْرَتَانِ",
+    "plural": "قَطَرَاتٌ",
+    "meaning": "Katre: Tek bir su damlası"
+  },
+  {
+    "id": 116,
+    "singular": "زَهْرَةٌ",
+    "dual": "زَهْرَتَانِ",
+    "plural": "أَزْهَارٌ",
+    "meaning": "Zehre: Çiçek, parlak güzellik"
+  },
+  {
+    "id": 117,
+    "singular": "نَافِذَةٌ",
+    "dual": "نَافِذَتَانِ",
+    "plural": "نَوَافِذُ",
+    "meaning": "Nâfize: Dışarıya açılan pencere, menfez"
+  },
+  {
+    "id": 118,
+    "singular": "مِرْآةٌ",
+    "dual": "مِرْآتَانِ",
+    "plural": "مَرَايَا",
+    "meaning": "Mir'ât: Ayna, tecelli yansıma mahalli"
+  },
+  {
+    "id": 119,
+    "singular": "مِيزَانٌ",
+    "dual": "مِيزَانَانِ",
+    "plural": "مَوَازِينُ",
+    "meaning": "Mîzân: Ölçü, tartı, hassas denge terazisi"
+  },
+  {
+    "id": 120,
+    "singular": "مِقْيَاسٌ",
+    "dual": "مِقْيَاسَانِ",
+    "plural": "مَقَايِيسُ",
+    "meaning": "Mikyas: Kıyas ölçüsü, ölçüm kıstası"
+  },
+  {
+    "id": 121,
+    "singular": "مَبْدَأٌ",
+    "dual": "مَبْدَآنِ",
+    "plural": "مَبَادِئُ",
+    "meaning": "Mebde': Başlangıç, asıl kaynak, ilk esas"
+  },
+  {
+    "id": 122,
+    "singular": "مُنْتَهَى",
+    "dual": "مُنْتَهَيَانِ",
+    "plural": "مُنْتَهَيَاتٌ",
+    "meaning": "Müntehâ: Varış noktası, son merhale, nihayet"
+  },
+  {
+    "id": 123,
+    "singular": "مَظْهَرٌ",
+    "dual": "مَظْهَرَانِ",
+    "plural": "مَظَاهِرُ",
+    "meaning": "Mazhar: Tecelli yeri, görünme mahalli"
+  },
+  {
+    "id": 124,
+    "singular": "مَوْرِدٌ",
+    "dual": "مَوْرِدَانِ",
+    "plural": "مَوَارِدُ",
+    "meaning": "Mevrid: Ulaşma yeri, feyiz kaynağı, mecra"
+  },
+  {
+    "id": 125,
+    "singular": "مَصْدَرٌ",
+    "dual": "مَصْدَرَانِ",
+    "plural": "مَصَادِرُ",
+    "meaning": "Masdar: Çıkış yeri, köken, menşe"
+  },
+  {
+    "id": 126,
+    "singular": "مَنْبَعٌ",
+    "dual": "مَنْبَعَانِ",
+    "plural": "مَنَابِعُ",
+    "meaning": "Menba': Yerden kaynayan pınar, su gözü"
+  },
+  {
+    "id": 127,
+    "singular": "عُنْوَانٌ",
+    "dual": "عُنْوَانَانِ",
+    "plural": "عَنَاوِينُ",
+    "meaning": "Unvan: Alamet, nişan, hüviyet başlığı"
+  },
+  {
+    "id": 128,
+    "singular": "طَرِيقٌ",
+    "dual": "طَرِيقَانِ",
+    "plural": "طُرُقٌ",
+    "meaning": "Tarîk: Hakikat yolu, manevi seyr yolu"
+  },
+  {
+    "id": 129,
+    "singular": "مَسْلَكٌ",
+    "dual": "مَسْلَكَانِ",
+    "plural": "مَسَالِكُ",
+    "meaning": "Meslek: Benimsenen yöntem, gidilen yol"
+  },
+  {
+    "id": 130,
+    "singular": "مَشْرَبٌ",
+    "dual": "مَشْرَبَانِ",
+    "plural": "مَشَارِبُ",
+    "meaning": "Meşreb: Su içme yeri; manevi mizaç ve neşve"
+  },
+  {
+    "id": 131,
+    "singular": "رَابِطَةٌ",
+    "dual": "رَابِطَتَانِ",
+    "plural": "رَوَابِطُ",
+    "meaning": "Râbıta: Kalbî bağ, irtibat, alaka"
+  },
+  {
+    "id": 132,
+    "singular": "وَسِيلَةٌ",
+    "dual": "وَسِيلَتَانِ",
+    "plural": "وَسَائِلُ",
+    "meaning": "Vesîle: Gayeye ulaştıran vasıta, sebep"
+  },
+  {
+    "id": 133,
+    "singular": "غَايَةٌ",
+    "dual": "غَايَتَانِ",
+    "plural": "غَايَاتٌ",
+    "meaning": "Gâye: Ulaşılmak istenen nihai hedef, maksat"
+  },
+  {
+    "id": 134,
+    "singular": "مَقْصَدٌ",
+    "dual": "مَقْصَدَانِ",
+    "plural": "مَقَاصِدُ",
+    "meaning": "Maksad: Hedeflenen gaye, niyet edilen murat"
+  },
+  {
+    "id": 135,
+    "singular": "نَتِيجَةٌ",
+    "dual": "نَتِيجَتَانِ",
+    "plural": "نَتَائِجُ",
+    "meaning": "Netîce: Sonuç, elde edilen hasılat, semere"
+  },
+  {
+    "id": 136,
+    "singular": "فَائِدَةٌ",
+    "dual": "فَائِدَتَانِ",
+    "plural": "فَوَائِدُ",
+    "meaning": "Fâide: Sağlanan yarar, elde edilen hayır"
+  },
+  {
+    "id": 137,
+    "singular": "حَاجَةٌ",
+    "dual": "حَاجَتَانِ",
+    "plural": "حَاجَاتٌ",
+    "meaning": "Hâcet: İhtiyaç duyulan şey, lüzum"
+  },
+  {
+    "id": 138,
+    "singular": "عَاجِزٌ",
+    "dual": "عَاجِزَانِ",
+    "plural": "عَاجِزُونَ",
+    "meaning": "Âciz: Kendi gücü yetmeyen, kudretsiz kul"
+  },
+  {
+    "id": 139,
+    "singular": "فَقِيرٌ",
+    "dual": "فَقِيرَانِ",
+    "plural": "فُقَرَاءُ",
+    "meaning": "Fakîr: İlahî rahmete muhtaç olan kul"
+  },
+  {
+    "id": 140,
+    "singular": "نِظَامٌ",
+    "dual": "نِظَامَانِ",
+    "plural": "أَنْظِمَةٌ",
+    "meaning": "Nizâm: Düzen, intizam, kâinattaki ahenk"
+  },
+  {
+    "id": 141,
+    "singular": "قَانُونٌ",
+    "dual": "قَانُونَانِ",
+    "plural": "قَوَانِينُ",
+    "meaning": "Kānûn: İlahî adetullah kuralı, nizam ilkesi"
+  },
+  {
+    "id": 142,
+    "singular": "دُسْتُورٌ",
+    "dual": "دُسْتُورَانِ",
+    "plural": "دَسَاتِيرُ",
+    "meaning": "Düstûr: Temel kural, hareket prensibi"
+  },
+  {
+    "id": 143,
+    "singular": "حِجَابٌ",
+    "dual": "حِجَابَانِ",
+    "plural": "حُجُبٌ",
+    "meaning": "Hicâb: Maddî ve manevî perde, engel, örtü"
+  },
+  {
+    "id": 144,
+    "singular": "سَبَبٌ",
+    "dual": "سَبَبَانِ",
+    "plural": "أَسْبَابٌ",
+    "meaning": "Sebeb: Neticeye perde olan vasıta, vesile"
+  },
+  {
+    "id": 145,
+    "singular": "عِلَّةٌ",
+    "dual": "عِلَّتَانِ",
+    "plural": "عِلَلٌ",
+    "meaning": "İllet: Asıl gerekçe, hakiki sebep ve hikmet"
+  },
+  {
+    "id": 146,
+    "singular": "زَوَالٌ",
+    "dual": "زَوَالَانِ",
+    "plural": "أَزْوِلَةٌ",
+    "meaning": "Zevâl: Güneşin batışı, yok oluş, sona erme"
+  },
+  {
+    "id": 147,
+    "singular": "بَقَاءٌ",
+    "dual": "بَقَاءَانِ",
+    "plural": "بَقَاءَاتٌ",
+    "meaning": "Bekā: Ebedilik, kalıcılık, ölümsüz devam"
+  },
+  {
+    "id": 148,
+    "singular": "تَجَلٍّ",
+    "dual": "تَجَلِّيَانِ",
+    "plural": "تَجَلِّيَاتٌ",
+    "meaning": "Tecellî: İlahî isim ve sıfatların görünmesi"
+  },
+  {
+    "id": 149,
+    "singular": "مِثَالٌ",
+    "dual": "مِثَالَانِ",
+    "plural": "أَمْثِلَةٌ",
+    "meaning": "Misâl: Benzer, örnek, temsilî numune"
+  },
+  {
+    "id": 150,
+    "singular": "دَلِيلٌ",
+    "dual": "دَلِيلَانِ",
+    "plural": "أَدِلَّةٌ",
+    "meaning": "Delîl: Hakikate ulaştıran kanıt, rehber"
+  },
+  {
+    "id": 151,
+    "singular": "رَحْمَةٌ",
+    "dual": "رَحْمَتَانِ",
+    "plural": "رَحَمَاتٌ",
+    "meaning": "Merhamet, acıma, ilahî lütuf ve ihsan"
+  },
+  {
+    "id": 152,
+    "singular": "حِكْمَةٌ",
+    "dual": "حِكْمَتَانِ",
+    "plural": "حِكَمٌ",
+    "meaning": "Eşyanın hakikati, gaye ve fayda"
+  },
+  {
+    "id": 153,
+    "singular": "قُدْرَةٌ",
+    "dual": "قُدْرَتَانِ",
+    "plural": "قُدُرَاتٌ",
+    "meaning": "İlahî güç, yaratma ve tasarruf kuvveti"
+  },
+  {
+    "id": 154,
+    "singular": "إِرَادَةٌ",
+    "dual": "إِرَادَتَانِ",
+    "plural": "إِرَادَاتٌ",
+    "meaning": "Dileme, tercih ve tahsis sıfatı"
+  },
+  {
+    "id": 155,
+    "singular": "عِزَّةٌ",
+    "dual": "عِزَّتَانِ",
+    "plural": "أَعِزَّةٌ",
+    "meaning": "Üstünlük, galebe ve izzet-i ilahiye"
+  },
+  {
+    "id": 156,
+    "singular": "عَظَمَةٌ",
+    "dual": "عَظَمَتَانِ",
+    "plural": "عَظَمَاتٌ",
+    "meaning": "Büyüklük, ululuk ve kibriya"
+  },
+  {
+    "id": 157,
+    "singular": "كَرَمٌ",
+    "dual": "كَرَمَانِ",
+    "plural": "كُرُومٌ",
+    "meaning": "Cömertlik, karşılıksız lütuf ve bağış"
+  },
+  {
+    "id": 158,
+    "singular": "عَدْلٌ",
+    "dual": "عَدْلَانِ",
+    "plural": "أَعْدَالٌ",
+    "meaning": "Adalet, her şeyi yerli yerine koyma"
+  },
+  {
+    "id": 159,
+    "singular": "جَلَالٌ",
+    "dual": "جَلَالَانِ",
+    "plural": "أَجِلَّةٌ",
+    "meaning": "Büyüklük, azamet ve haşmet tecellisi"
+  },
+  {
+    "id": 160,
+    "singular": "جَمَالٌ",
+    "dual": "جَمَالَانِ",
+    "plural": "جَمَالَاتٌ",
+    "meaning": "Güzellik, letafet ve cemal-i ilahi"
+  },
+  {
+    "id": 161,
+    "singular": "كَمَالٌ",
+    "dual": "كَمَالَانِ",
+    "plural": "كَمَالَاتٌ",
+    "meaning": "Kusursuzluk, olgunluk ve mutlak tamlık"
+  },
+  {
+    "id": 162,
+    "singular": "سُلْطَانٌ",
+    "dual": "سُلْطَانَانِ",
+    "plural": "سَلَاطِينُ",
+    "meaning": "Hükümranlık, ilahî kudret ve hüccet"
+  },
+  {
+    "id": 163,
+    "singular": "مُلْكٌ",
+    "dual": "مُلْكَانِ",
+    "plural": "أَمْلَاكٌ",
+    "meaning": "Sahip olunan mülk, alem-i şehadet"
+  },
+  {
+    "id": 164,
+    "singular": "مَلَكُوتٌ",
+    "dual": "مَلَكُوتَانِ",
+    "plural": "مَلَكُوتَاتٌ",
+    "meaning": "Eşyanın iç yüzü, melekler âlemi"
+  },
+  {
+    "id": 165,
+    "singular": "رُوحٌ",
+    "dual": "رُوحَانِ",
+    "plural": "أَرْوَاحٌ",
+    "meaning": "Hayat veren cevher, latif ilahî kanun"
+  },
+  {
+    "id": 166,
+    "singular": "جَسَدٌ",
+    "dual": "جَسَدَانِ",
+    "plural": "أَجْسَادٌ",
+    "meaning": "Maddî beden, et ve kemikten kalıp"
+  },
+  {
+    "id": 167,
+    "singular": "عَقْلٌ",
+    "dual": "عَقْلَانِ",
+    "plural": "عُقُولٌ",
+    "meaning": "Düşünme, anlama ve idrak aleti"
+  },
+  {
+    "id": 168,
+    "singular": "فِكْرٌ",
+    "dual": "فِكْرَانِ",
+    "plural": "أَفْكَارٌ",
+    "meaning": "Düşünce, tefekkür ve zihin faaliyeti"
+  },
+  {
+    "id": 169,
+    "singular": "وَهْمٌ",
+    "dual": "وَهْمَانِ",
+    "plural": "أَوْهَامٌ",
+    "meaning": "Asılsız kuruntu, temelsiz vehim"
+  },
+  {
+    "id": 170,
+    "singular": "شَكٌّ",
+    "dual": "شَكَّانِ",
+    "plural": "شُكُوكٌ",
+    "meaning": "Tereddüt, kararsızlık ve belirsizlik"
+  },
+  {
+    "id": 171,
+    "singular": "يَقِينٌ",
+    "dual": "يَقِينَانِ",
+    "plural": "يَقِينَاتٌ",
+    "meaning": "Şüpheden uzak kesin, sarsılmaz bilgi"
+  },
+  {
+    "id": 172,
+    "singular": "نِيَّةٌ",
+    "dual": "نِيَّتَانِ",
+    "plural": "نِيَّاتٌ",
+    "meaning": "Kalbin kastı, amel yönelişi ve niyet"
+  },
+  {
+    "id": 173,
+    "singular": "إِخْلَاصٌ",
+    "dual": "إِخْلَاصَانِ",
+    "plural": "إِخْلَاصَاتٌ",
+    "meaning": "Ameli yalnız Allah rızası için yapma"
+  },
+  {
+    "id": 174,
+    "singular": "صِدْقٌ",
+    "dual": "صِدْقَانِ",
+    "plural": "أَصْدَاقٌ",
+    "meaning": "Doğruluk, gerçeğe uygunluk ve vefa"
+  },
+  {
+    "id": 175,
+    "singular": "كَذِبٌ",
+    "dual": "كَذِبَانِ",
+    "plural": "أَكَاذِيبُ",
+    "meaning": "Yalan, hakikate aykırı beyan"
+  },
+  {
+    "id": 176,
+    "singular": "حَسَنَةٌ",
+    "dual": "حَسَنَتَانِ",
+    "plural": "حَسَنَاتٌ",
+    "meaning": "İyilik, güzel amel ve sevap"
+  },
+  {
+    "id": 177,
+    "singular": "سَيِّئَةٌ",
+    "dual": "سَيِّئَتَانِ",
+    "plural": "سَيِّئَاتٌ",
+    "meaning": "Kötülük, günah ve isyan ameli"
+  },
+  {
+    "id": 178,
+    "singular": "ثَوَابٌ",
+    "dual": "ثَوَابَانِ",
+    "plural": "أَثْوِبَةٌ",
+    "meaning": "Hayırlı amele verilen ilahî karşılık"
+  },
+  {
+    "id": 179,
+    "singular": "عِقَابٌ",
+    "dual": "عِقَابَانِ",
+    "plural": "أَعْقِبَةٌ",
+    "meaning": "İsyan ve günaha verilen ceza"
+  },
+  {
+    "id": 180,
+    "singular": "فِطْرَةٌ",
+    "dual": "فِطْرَتَانِ",
+    "plural": "فِطَرٌ",
+    "meaning": "Yaratılış mayası, ilk saf hilkat"
+  },
+  {
+    "id": 181,
+    "singular": "خِلْقَةٌ",
+    "dual": "خِلْقَتَانِ",
+    "plural": "خِلَقٌ",
+    "meaning": "Yaratılış şekli, bünye ve suret"
+  },
+  {
+    "id": 182,
+    "singular": "صُورَةٌ",
+    "dual": "صُورَتَانِ",
+    "plural": "صُوَرٌ",
+    "meaning": "Görünüş, biçim, suret ve şekil"
+  },
+  {
+    "id": 183,
+    "singular": "مَادَّةٌ",
+    "dual": "مَادَّتَانِ",
+    "plural": "مَوَادُّ",
+    "meaning": "Maddî cevher, cisim ve unsur"
+  },
+  {
+    "id": 184,
+    "singular": "زَمَانٌ",
+    "dual": "زَمَانَانِ",
+    "plural": "أَزْمِنَةٌ",
+    "meaning": "Vakit, çağ, hareket ve anlar zinciri"
+  },
+  {
+    "id": 185,
+    "singular": "مَكَانٌ",
+    "dual": "مَكَانَانِ",
+    "plural": "أَمْكِنَةٌ",
+    "meaning": "Yer, mevki, cismin kapladığı alan"
+  },
+  {
+    "id": 186,
+    "singular": "حَيَاةٌ",
+    "dual": "حَيَاتَانِ",
+    "plural": "حَيَوَاتٌ",
+    "meaning": "Dirilik, can, varlığın neşesi"
+  },
+  {
+    "id": 187,
+    "singular": "مَوْتٌ",
+    "dual": "مَوْتَانِ",
+    "plural": "أَمْوَاتٌ",
+    "meaning": "Ölüm, vazifeden terhis ve tebdil-i mekan"
+  },
+  {
+    "id": 188,
+    "singular": "حَشْرٌ",
+    "dual": "حَشْرَانِ",
+    "plural": "حُشُورٌ",
+    "meaning": "Mahşerde toplanma, diriltilip bir araya gelme"
+  },
+  {
+    "id": 189,
+    "singular": "نَشْرٌ",
+    "dual": "نَشْرَانِ",
+    "plural": "نُشُورٌ",
+    "meaning": "Dağılma, kabirlerden çıkıp yayılma"
+  },
+  {
+    "id": 190,
+    "singular": "مِيزَانٌ",
+    "dual": "مِيزَانَانِ",
+    "plural": "مَوَازِينُ",
+    "meaning": "Ölçü aleti, adalet ve amel terazisi"
+  },
+  {
+    "id": 191,
+    "singular": "صِرَاطٌ",
+    "dual": "صِرَاطَانِ",
+    "plural": "صُرُطٌ",
+    "meaning": "Doğru yol; cehennem üzerindeki köprü"
+  },
+  {
+    "id": 192,
+    "singular": "شَفَاعَةٌ",
+    "dual": "شَفَاعَتَانِ",
+    "plural": "شَفَاعَاتٌ",
+    "meaning": "Bağışlanma dileme, ilahî aracı olma"
+  },
+  {
+    "id": 193,
+    "singular": "مَغْفِرَةٌ",
+    "dual": "مَغْفِرَتَانِ",
+    "plural": "مَغَافِرُ",
+    "meaning": "Günahları örtme, affetme ve bağışlama"
+  },
+  {
+    "id": 194,
+    "singular": "تَوْبَةٌ",
+    "dual": "تَوْبَتَانِ",
+    "plural": "تَوْبَاتٌ",
+    "meaning": "Günahtan dönme, pişmanlıkla Allah'a yönelme"
+  },
+  {
+    "id": 195,
+    "singular": "ذَنْبٌ",
+    "dual": "ذَنْبَانِ",
+    "plural": "ذُنُوبٌ",
+    "meaning": "Günah, ilahî emre aykırı kusur"
+  },
+  {
+    "id": 196,
+    "singular": "خَطِيئَةٌ",
+    "dual": "خَطِيئَتَانِ",
+    "plural": "خَطَايَا",
+    "meaning": "Kasıtlı veya kasıtsız hata, günah"
+  },
+  {
+    "id": 197,
+    "singular": "طَاعَةٌ",
+    "dual": "طَاعَتَانِ",
+    "plural": "طَاعَاتٌ",
+    "meaning": "İtaat etme, boyun eğme ve kulluk"
+  },
+  {
+    "id": 198,
+    "singular": "عِصْيَانٌ",
+    "dual": "عِصْيَانَانِ",
+    "plural": "أَعْصِيَةٌ",
+    "meaning": "İsyan, başkaldırma ve emre itaatsizlik"
+  },
+  {
+    "id": 199,
+    "singular": "فِسْقٌ",
+    "dual": "فِسْقَانِ",
+    "plural": "فُسُوقٌ",
+    "meaning": "Doğru yoldan çıkma, günaha dalma"
+  },
+  {
+    "id": 200,
+    "singular": "كُفْرٌ",
+    "dual": "كُفْرَانِ",
+    "plural": "كُفُورٌ",
+    "meaning": "Hakkı örtme, inkâr ve nankörlük"
+  },
+  {
+    "id": 201,
+    "singular": "نِفَاقٌ",
+    "dual": "نِفَاقَانِ",
+    "plural": "أَنْفِقَةٌ",
+    "meaning": "İkiyüzlülük, inanmadığı halde inanmış görünme"
+  },
+  {
+    "id": 202,
+    "singular": "شِرْكٌ",
+    "dual": "شِرْكَانِ",
+    "plural": "أَشْرَاكٌ",
+    "meaning": "Allah'a ortak koşma, zatında veya sıfatında şirk"
+  },
+  {
+    "id": 203,
+    "singular": "تَوْحِيدٌ",
+    "dual": "تَوْحِيدَانِ",
+    "plural": "تَوْحِيدَاتٌ",
+    "meaning": "Allah'ın birliğini tasdik ve ilan etme"
+  },
+  {
+    "id": 204,
+    "singular": "تَنْزِيهٌ",
+    "dual": "تَنْزِيهَانِ",
+    "plural": "تَنْزِيهَاتٌ",
+    "meaning": "Allah'ı her türlü noksanlıktan yüce tutma"
+  },
+  {
+    "id": 205,
+    "singular": "تَقْدِيسٌ",
+    "dual": "تَقْدِيسَانِ",
+    "plural": "تَقْدِيسَاتٌ",
+    "meaning": "Mukaddes bilme, paklığını ilan etme"
+  },
+  {
+    "id": 206,
+    "singular": "تَسْبِيحٌ",
+    "dual": "تَسْبِيحَانِ",
+    "plural": "تَسْبِيحَاتٌ",
+    "meaning": "Sübhanallah diyerek tenzih etme"
+  },
+  {
+    "id": 207,
+    "singular": "تَمْحِيدٌ",
+    "dual": "تَمْحِيدَانِ",
+    "plural": "تَمْحِيدَاتٌ",
+    "meaning": "Hamd ve sena ederek övme"
+  },
+  {
+    "id": 208,
+    "singular": "تَكْبِيرٌ",
+    "dual": "تَكْبِيرَانِ",
+    "plural": "تَكْبِيرَاتٌ",
+    "meaning": "Allahu ekber diyerek ululama"
+  },
+  {
+    "id": 209,
+    "singular": "تَهْلِيلٌ",
+    "dual": "تَهْلِيلَانِ",
+    "plural": "تَهْلِيلَاتٌ",
+    "meaning": "Lâ ilahe illallah diyerek tevhid getirme"
+  },
+  {
+    "id": 210,
+    "singular": "دُعَاءٌ",
+    "dual": "دُعَاءَانِ",
+    "plural": "أَدْعِيَةٌ",
+    "meaning": "Yalvarma, ilahî dergâha hacet arzı"
+  },
+  {
+    "id": 211,
+    "singular": "صَلَاةٌ",
+    "dual": "صَلَاتَانِ",
+    "plural": "صَلَوَاتٌ",
+    "meaning": "Namaz, ilahî huzurda ibadet ve dua"
+  },
+  {
+    "id": 212,
+    "singular": "صَوْمٌ",
+    "dual": "صَوْمَانِ",
+    "plural": "أَصْوَامٌ",
+    "meaning": "Oruç, nefsi haram ve şehevattan men etme"
+  },
+  {
+    "id": 213,
+    "singular": "زَكَاةٌ",
+    "dual": "زَكَاتَانِ",
+    "plural": "زَكَوَاتٌ",
+    "meaning": "Malın arınması için verilen farz pay"
+  },
+  {
+    "id": 214,
+    "singular": "حَجٌّ",
+    "dual": "حَجَّانِ",
+    "plural": "حُجُوجٌ",
+    "meaning": "Kâbe-i Muazzama'yı farz niyetiyle ziyaret"
+  },
+  {
+    "id": 215,
+    "singular": "جِهَادٌ",
+    "dual": "جِهَادَانِ",
+    "plural": "جِهَادَاتٌ",
+    "meaning": "Hak yolunda gayret, nefis ve batılla mücadele"
+  },
+  {
+    "id": 216,
+    "singular": "تَقْوَى",
+    "dual": "تَقْوَيَانِ",
+    "plural": "تَقْوَاتٌ",
+    "meaning": "Günahtan sakınma, ilahî azaptan korunma"
+  },
+  {
+    "id": 217,
+    "singular": "وَرَعٌ",
+    "dual": "وَرَعَانِ",
+    "plural": "أَوْرَاعٌ",
+    "meaning": "Şüpheli şeylerden titizlikle kaçınma"
+  },
+  {
+    "id": 218,
+    "singular": "زُهْدٌ",
+    "dual": "زُهْدَانِ",
+    "plural": "أَزْهَادٌ",
+    "meaning": "Dünyaya kalben bağlanmama, aza kanaat"
+  },
+  {
+    "id": 219,
+    "singular": "صَبْرٌ",
+    "dual": "صَبْرَانِ",
+    "plural": "أَصْبَارٌ",
+    "meaning": "Zorluklara ve musibetlere tahammül etme"
+  },
+  {
+    "id": 220,
+    "singular": "شُكْرٌ",
+    "dual": "شُكْرَانِ",
+    "plural": "شُكُورٌ",
+    "meaning": "Nimeti vereni tanıyıp minnettarlık gösterme"
+  },
+  {
+    "id": 221,
+    "singular": "رِضَا",
+    "dual": "رِضَيَانِ",
+    "plural": "رِضَاءَاتٌ",
+    "meaning": "İlahî kaza ve kadere gönülden boyun eğme"
+  },
+  {
+    "id": 222,
+    "singular": "تَوَكُّلٌ",
+    "dual": "تَوَكُّلَانِ",
+    "plural": "تَوَكُّلَاتٌ",
+    "meaning": "Sebeplere teşebbüs edip neticeyi Allah'a bırakma"
+  },
+  {
+    "id": 223,
+    "singular": "خَوْفٌ",
+    "dual": "خَوْفَانِ",
+    "plural": "مَخَاوِفُ",
+    "meaning": "İlahî celal ve gazaptan korkma"
+  },
+  {
+    "id": 224,
+    "singular": "رَجَاءٌ",
+    "dual": "رَجَاءَانِ",
+    "plural": "أَرْجِيَةٌ",
+    "meaning": "İlahî rahmet ve mağfireti ümit etme"
+  },
+  {
+    "id": 225,
+    "singular": "حُبٌّ",
+    "dual": "حُبَّانِ",
+    "plural": "أَحْبَابٌ",
+    "meaning": "Sevgi, muhabbet ve gönülden meyil"
+  },
+  {
+    "id": 226,
+    "singular": "بُغْضٌ",
+    "dual": "بُغْضَانِ",
+    "plural": "أَبْغَاضٌ",
+    "meaning": "Kin, nefret, batıla karşı buğz"
+  },
+  {
+    "id": 227,
+    "singular": "شَفَقَةٌ",
+    "dual": "شَفَقَتَانِ",
+    "plural": "شَفَقَاتٌ",
+    "meaning": "Karşılıksız acıma, esirgeme ve merhamet"
+  },
+  {
+    "id": 228,
+    "singular": "عَفْوٌ",
+    "dual": "عَفْوَانِ",
+    "plural": "أَعْفِيَةٌ",
+    "meaning": "Cezadan vazgeçme, kusuru bağışlama"
+  },
+  {
+    "id": 229,
+    "singular": "صَفْحٌ",
+    "dual": "صَفْحَانِ",
+    "plural": "صُفُوحٌ",
+    "meaning": "Kusuru görmezden gelip yüz çevirme"
+  },
+  {
+    "id": 230,
+    "singular": "حِلْمٌ",
+    "dual": "حِلْمَانِ",
+    "plural": "أَحْلَامٌ",
+    "meaning": "Öfkeyi yenme, yumuşak huyluluk ve teenni"
+  },
+  {
+    "id": 231,
+    "singular": "جُودٌ",
+    "dual": "جُودَانِ",
+    "plural": "أَجْوَادٌ",
+    "meaning": "İstenmeden bolca verme, cömertlik"
+  },
+  {
+    "id": 232,
+    "singular": "بَذْلٌ",
+    "dual": "بَذْلَانِ",
+    "plural": "بُذُولٌ",
+    "meaning": "Fedakarlıkla harcama, esirgemeden verme"
+  },
+  {
+    "id": 233,
+    "singular": "إِحْسَانٌ",
+    "dual": "إِحْسَانَانِ",
+    "plural": "إِحْسَانَاتٌ",
+    "meaning": "Görevini en güzel yapma, lütufta bulunma"
+  },
+  {
+    "id": 234,
+    "singular": "عَهْدٌ",
+    "dual": "عَهْدَانِ",
+    "plural": "عُهُودٌ",
+    "meaning": "Verilen söz, ahit ve taahhüt"
+  },
+  {
+    "id": 235,
+    "singular": "مِيثَاقٌ",
+    "dual": "مِيثَاقَانِ",
+    "plural": "مَوَاثِيقُ",
+    "meaning": "Sağlam sözleşme, yeminli muahede"
+  },
+  {
+    "id": 236,
+    "singular": "أَمَانَةٌ",
+    "dual": "أَمَانَتَانِ",
+    "plural": "أَمَانَاتٌ",
+    "meaning": "Korunmak üzere tevdi edilen emanet"
+  },
+  {
+    "id": 237,
+    "singular": "خِيَانَةٌ",
+    "dual": "خِيَانَتَانِ",
+    "plural": "خِيَانَاتٌ",
+    "meaning": "Emanete hıyanet etme, ahdi bozma"
+  },
+  {
+    "id": 238,
+    "singular": "غَدْرٌ",
+    "dual": "غَدْرَانِ",
+    "plural": "غُدُورٌ",
+    "meaning": "Sözünden dönme, kalleşlik ve vefasızlık"
+  },
+  {
+    "id": 239,
+    "singular": "حَسَدٌ",
+    "dual": "حَسَدَانِ",
+    "plural": "أَحْسَادٌ",
+    "meaning": "Başkasındaki nimetin yok olmasını isteme"
+  },
+  {
+    "id": 240,
+    "singular": "كِبْرٌ",
+    "dual": "كِبْرَانِ",
+    "plural": "أَكْبَارٌ",
+    "meaning": "Kendini büyük görüp başkalarını hakir görme"
+  },
+  {
+    "id": 241,
+    "singular": "عُجْبٌ",
+    "dual": "عُجْبَانِ",
+    "plural": "أَعْجَابٌ",
+    "meaning": "Kendi amelini ve nefsini beğenme"
+  },
+  {
+    "id": 242,
+    "singular": "رِيَاءٌ",
+    "dual": "رِيَاءَانِ",
+    "plural": "أَرْيَاءٌ",
+    "meaning": "Gösteriş yapma, amelde samimiyetsizlik"
+  },
+  {
+    "id": 243,
+    "singular": "سُمْعَةٌ",
+    "dual": "سُمْعَتَانِ",
+    "plural": "سُمْعَاتٌ",
+    "meaning": "Şöhret ve duyulma arzusu"
+  },
+  {
+    "id": 244,
+    "singular": "غَفْلَةٌ",
+    "dual": "غَفْلَتَانِ",
+    "plural": "غَفَلَاتٌ",
+    "meaning": "Hakikatten habersiz olma, aymazlık"
+  },
+  {
+    "id": 245,
+    "singular": "نِسْيَانٌ",
+    "dual": "نِسْيَانَانِ",
+    "plural": "نِسْيَانَاتٌ",
+    "meaning": "Unutma, hatırdan çıkarma"
+  },
+  {
+    "id": 246,
+    "singular": "ذِكْرٌ",
+    "dual": "ذِكْرَانِ",
+    "plural": "أَذْكَارٌ",
+    "meaning": "Hatırlama, anma ve dille tesbih etme"
+  },
+  {
+    "id": 247,
+    "singular": "فَهْمٌ",
+    "dual": "فَهْمَانِ",
+    "plural": "أَفْهَامٌ",
+    "meaning": "Derin kavrayış, idrak ve anlama"
+  },
+  {
+    "id": 248,
+    "singular": "حِفْظٌ",
+    "dual": "حِفْظَانِ",
+    "plural": "أَحْفَاظٌ",
+    "meaning": "Koruma, muhafaza etme ve belleme"
+  },
+  {
+    "id": 249,
+    "singular": "نَظَرٌ",
+    "dual": "نَظَرَانِ",
+    "plural": "أَنْظَارٌ",
+    "meaning": "Bakış, ibretle müşahede ve tefekkür"
+  },
+  {
+    "id": 250,
+    "singular": "شُهُودٌ",
+    "dual": "شُهُودَانِ",
+    "plural": "أَشْهَادٌ",
+    "meaning": "Gözle görme, hazır bulunma ve şahitlik"
+  },
+  {
+    "id": 251,
+    "singular": "بَصِيرَةٌ",
+    "dual": "بَصِيرَتَانِ",
+    "plural": "بَصَائِرُ",
+    "meaning": "Kalp gözü, hakikati gören manevî basar"
+  },
+  {
+    "id": 252,
+    "singular": "فِرَاسَةٌ",
+    "dual": "فِرَاسَتَانِ",
+    "plural": "فِرَاسَاتٌ",
+    "meaning": "Keskin sezgi, alametlerden mana çıkarma"
+  },
+  {
+    "id": 253,
+    "singular": "إِلْهَامٌ",
+    "dual": "إِلْهَامَانِ",
+    "plural": "إِلْهَامَاتٌ",
+    "meaning": "Kalbe doğrudan doğan ilahî mana ve feyiz"
+  },
+  {
+    "id": 254,
+    "singular": "وَحْيٌ",
+    "dual": "وَحْيَانِ",
+    "plural": "وُحِيٌّ",
+    "meaning": "Peygamberlere gelen ilahî bildirim"
+  },
+  {
+    "id": 255,
+    "singular": "كَرَامَةٌ",
+    "dual": "كَرَامَتَانِ",
+    "plural": "كَرَامَاتٌ",
+    "meaning": "Velilere ikram edilen harika hadise"
+  },
+  {
+    "id": 256,
+    "singular": "مُعْجِزَةٌ",
+    "dual": "مُعْجِزَتَانِ",
+    "plural": "مُعْجِزَاتٌ",
+    "meaning": "Peygamberlerin peygamberlik ispatı mucizesi"
+  },
+  {
+    "id": 257,
+    "singular": "فَيْضٌ",
+    "dual": "فَيْضَانِ",
+    "plural": "فُيُوضٌ",
+    "meaning": "Taşan bereket, ilahî ikram ve lütuf"
+  },
+  {
+    "id": 258,
+    "singular": "بَرَكَةٌ",
+    "dual": "بَرَكَتَانِ",
+    "plural": "بَرَكَاتٌ",
+    "meaning": "İlahî hayrın artması ve devamlılığı"
+  },
+  {
+    "id": 259,
+    "singular": "نِعْمَةٌ",
+    "dual": "نِعْمَتَانِ",
+    "plural": "نِعَمٌ",
+    "meaning": "Faydalanılan her türlü iyilik ve bağış"
+  },
+  {
+    "id": 260,
+    "singular": "مِحْنَةٌ",
+    "dual": "مِحْنَتَانِ",
+    "plural": "مِحَنٌ",
+    "meaning": "Sıkıntı, meşakkat ve imtihan vesilesi"
+  },
+  {
+    "id": 261,
+    "singular": "بَلَاءٌ",
+    "dual": "بَلَاءَانِ",
+    "plural": "بَلَايَا",
+    "meaning": "İmtihan, keder ve musibet"
+  },
+  {
+    "id": 262,
+    "singular": "فِتْنَةٌ",
+    "dual": "فِتْنَتَانِ",
+    "plural": "فِتَنٌ",
+    "meaning": "İmtihan, kargaşa ve ayartıcı imtihan"
+  },
+  {
+    "id": 263,
+    "singular": "نَصْرٌ",
+    "dual": "نَصْرَانِ",
+    "plural": "أَنْصَارٌ",
+    "meaning": "Yardım, zafere ulaştırma ve galibiyet"
+  },
+  {
+    "id": 264,
+    "singular": "فَتْحٌ",
+    "dual": "فَتْحَانِ",
+    "plural": "فُتُوحٌ",
+    "meaning": "Kapalı şeylerin açılması, zafer ve inkişaf"
+  },
+  {
+    "id": 265,
+    "singular": "ظَفَرٌ",
+    "dual": "ظَفَرَانِ",
+    "plural": "أَظْفَارٌ",
+    "meaning": "Düşmana üstün gelme, nihai başarı"
+  },
+  {
+    "id": 266,
+    "singular": "هَزِيمَةٌ",
+    "dual": "هَزِيمَتَانِ",
+    "plural": "هَزَائِمُ",
+    "meaning": "Yenilgi, hezimet ve bozulma"
+  },
+  {
+    "id": 267,
+    "singular": "عِزٌّ",
+    "dual": "عِزَّانِ",
+    "plural": "أَعْزَازٌ",
+    "meaning": "Şeref, şan, kudret ve itibar"
+  },
+  {
+    "id": 268,
+    "singular": "ذُلٌّ",
+    "dual": "ذُلَّانِ",
+    "plural": "أَذِلَّةٌ",
+    "meaning": "Aşağılık, zillet ve hakirlik"
+  },
+  {
+    "id": 269,
+    "singular": "هِدَايَةٌ",
+    "dual": "هِدَايَتَانِ",
+    "plural": "هِدَايَاتٌ",
+    "meaning": "Doğru yola ulaştırma, hak rehberlik"
+  },
+  {
+    "id": 270,
+    "singular": "ضَلَالَةٌ",
+    "dual": "ضَلَالَتَانِ",
+    "plural": "ضَلَالَاتٌ",
+    "meaning": "Haktan sapma, şaşkınlık ve batıl yol"
+  },
+  {
+    "id": 271,
+    "singular": "نَجَاةٌ",
+    "dual": "نَجَاتَانِ",
+    "plural": "نَجَوَاتٌ",
+    "meaning": "Kurtuluş, tehlikeden ve helaktan esenlik"
+  },
+  {
+    "id": 272,
+    "singular": "هَلَاكٌ",
+    "dual": "هَلَاكَانِ",
+    "plural": "أَهْلَاكٌ",
+    "meaning": "Mahvoluş, helak olma ve batma"
+  },
+  {
+    "id": 273,
+    "singular": "خَسَارٌ",
+    "dual": "خَسَارَانِ",
+    "plural": "خَسَائِرُ",
+    "meaning": "Hüsran, zarar ve ahiret iflası"
+  },
+  {
+    "id": 274,
+    "singular": "فَوْزٌ",
+    "dual": "فَوْزَانِ",
+    "plural": "أَفْوَازٌ",
+    "meaning": "Büyük kurtuluş, murada erme ve zafer"
+  },
+  {
+    "id": 275,
+    "singular": "سَعَادَةٌ",
+    "dual": "سَعَادَتَانِ",
+    "plural": "سَعَادَاتٌ",
+    "meaning": "Mutluluk, iki cihan huzuru ve sevinç"
+  },
+  {
+    "id": 276,
+    "singular": "شَقَاوَةٌ",
+    "dual": "شَقَاوَتَانِ",
+    "plural": "شَقَاوَاتٌ",
+    "meaning": "Bedbahtlık, mutsuzluk ve ahiret azabı"
+  },
+  {
+    "id": 277,
+    "singular": "حُزْنٌ",
+    "dual": "حُزْنَانِ",
+    "plural": "أَحْزَانٌ",
+    "meaning": "Keder, tasa, elem ve gönül hüznü"
+  },
+  {
+    "id": 278,
+    "singular": "فَرَحٌ",
+    "dual": "فَرَحَانِ",
+    "plural": "أَفْرَاحٌ",
+    "meaning": "Neşe, ferahlık ve iç aydınlığı"
+  },
+  {
+    "id": 279,
+    "singular": "سُرُورٌ",
+    "dual": "سُرُورَانِ",
+    "plural": "أَسِرَّةٌ",
+    "meaning": "Gönül sevinci, huzur ve hoşnutluk"
+  },
+  {
+    "id": 280,
+    "singular": "خَوْضٌ",
+    "dual": "خَوْضَانِ",
+    "plural": "أَخْوَاضٌ",
+    "meaning": "Boş ve bâtıl söze dalma"
+  },
+  {
+    "id": 281,
+    "singular": "لَغْوٌ",
+    "dual": "لَغْوَانِ",
+    "plural": "أَلْغَاءٌ",
+    "meaning": "Faydasız, boş ve gereksiz lafız"
+  },
+  {
+    "id": 282,
+    "singular": "لَهْوٌ",
+    "dual": "لَهْوَانِ",
+    "plural": "أَلْهَاءٌ",
+    "meaning": "Gaflete sevk eden boş oyalanma"
+  },
+  {
+    "id": 283,
+    "singular": "لَعِبٌ",
+    "dual": "لَعِبَانِ",
+    "plural": "أَلْعَابٌ",
+    "meaning": "Ciddiyetsiz oyun, dünya eğlencesi"
+  },
+  {
+    "id": 284,
+    "singular": "زِينَةٌ",
+    "dual": "زِينَتَانِ",
+    "plural": "زِينَاتٌ",
+    "meaning": "Süs, ziynet ve dış görünüş güzelliği"
+  },
+  {
+    "id": 285,
+    "singular": "بَهْجَةٌ",
+    "dual": "بَهْجَتَانِ",
+    "plural": "بَهَجَاتٌ",
+    "meaning": "Parlak güzellik, sevinç veren manzara"
+  },
+  {
+    "id": 286,
+    "singular": "رَوْنَقٌ",
+    "dual": "رَوْنَقَانِ",
+    "plural": "رَوَانِقُ",
+    "meaning": "Parlaklık, tazelik ve letafet cilası"
+  },
+  {
+    "id": 287,
+    "singular": "طَرَاوَةٌ",
+    "dual": "طَرَاوَتَانِ",
+    "plural": "طَرَاوَاتٌ",
+    "meaning": "Tazelik, dirilik ve nemlilik"
+  },
+  {
+    "id": 288,
+    "singular": "يُبْسٌ",
+    "dual": "يُبْسَانِ",
+    "plural": "أَيْبَاسٌ",
+    "meaning": "Kuruluk, kuruma ve can damarının kesilmesi"
+  },
+  {
+    "id": 289,
+    "singular": "ذُبُولٌ",
+    "dual": "ذُبُولَانِ",
+    "plural": "أَذْبَالٌ",
+    "meaning": "Solma, canlılığını ve neşesini kaybetme"
+  },
+  {
+    "id": 290,
+    "singular": "نُمُوٌّ",
+    "dual": "نُمُوَّانِ",
+    "plural": "أَنْمِيَةٌ",
+    "meaning": "Büyüme, gelişme ve boy atma"
+  },
+  {
+    "id": 291,
+    "singular": "بُلُوغٌ",
+    "dual": "بُلُوغَانِ",
+    "plural": "أَبْلَاغٌ",
+    "meaning": "Kemale ve olgunluğa erişme"
+  },
+  {
+    "id": 292,
+    "singular": "كُهُولَةٌ",
+    "dual": "كُهُولَتَانِ",
+    "plural": "كُهُولَاتٌ",
+    "meaning": "Orta yaş olgunluğu, tecrübe dönemi"
+  },
+  {
+    "id": 293,
+    "singular": "هَرَمٌ",
+    "dual": "هَرَمَانِ",
+    "plural": "أَهْرَامٌ",
+    "meaning": "İhtiyarlık, zayıflık ve takatsizlik"
+  },
+  {
+    "id": 294,
+    "singular": "عَفَنٌ",
+    "dual": "عَفَنَانِ",
+    "plural": "أَعْفَانٌ",
+    "meaning": "Çürüme, bozulma ve kokuşma"
+  },
+  {
+    "id": 295,
+    "singular": "نَتَنٌ",
+    "dual": "نَتَنَانِ",
+    "plural": "أَنْتَانٌ",
+    "meaning": "Pis koku, tefessüh ve bozulmuş hal"
+  },
+  {
+    "id": 296,
+    "singular": "طَهَارَةٌ",
+    "dual": "طَهَارَتَانِ",
+    "plural": "طَهَارَاتٌ",
+    "meaning": "Maddî ve manevî temizlik, arılık"
+  },
+  {
+    "id": 297,
+    "singular": "نَزَاهَةٌ",
+    "dual": "نَزَاهَتَانِ",
+    "plural": "نَزَاهَاتٌ",
+    "meaning": "Kusurdan, haramdan ve lekeden uzaklık"
+  },
+  {
+    "id": 298,
+    "singular": "عِفَّةٌ",
+    "dual": "عِفَّتَانِ",
+    "plural": "عِفَّاتٌ",
+    "meaning": "Nefsin şehevî arzularına hakim olma"
+  },
+  {
+    "id": 299,
+    "singular": "حَيَاءٌ",
+    "dual": "حَيَاءَانِ",
+    "plural": "أَحْيِيَةٌ",
+    "meaning": "Utanma duygusu, edep ve perde"
+  },
+  {
+    "id": 300,
+    "singular": "وَقَارٌ",
+    "dual": "وَقَارَانِ",
+    "plural": "أَوْقِرَةٌ",
+    "meaning": "Ağırbaşlılık, heybet ve ciddiyet"
+  },
+  {
+    "id": 301,
+    "singular": "سَكِينَةٌ",
+    "dual": "سَكِينَتَانِ",
+    "plural": "سَكِينَاتٌ",
+    "meaning": "Kalbe inen huzur, sükûn ve itminan"
+  },
+  {
+    "id": 302,
+    "singular": "طُمَأْنِينَةٌ",
+    "dual": "طُمَأْنِينَتَانِ",
+    "plural": "طُمَأْنِينَاتٌ",
+    "meaning": "Kalbin sarsılmaz huzuru ve emniyeti"
+  },
+  {
+    "id": 303,
+    "singular": "أَمْنٌ",
+    "dual": "أَمْنَانِ",
+    "plural": "آمَانٌ",
+    "meaning": "Korkudan emin olma, selamet"
+  },
+  {
+    "id": 304,
+    "singular": "أَمَانٌ",
+    "dual": "أَمَانَانِ",
+    "plural": "أَمَانَاتٌ",
+    "meaning": "Güvence verme, dokunulmazlık ve himaye"
+  },
+  {
+    "id": 305,
+    "singular": "عَهْدَةٌ",
+    "dual": "عَهْدَتَانِ",
+    "plural": "عُهَدٌ",
+    "meaning": "Sorumluluk, mesuliyet ve kefalet"
+  },
+  {
+    "id": 306,
+    "singular": "ضَمَانٌ",
+    "dual": "ضَمَانَانِ",
+    "plural": "ضَمَانَاتٌ",
+    "meaning": "Güvence, tekeffül ve kefillik"
+  },
+  {
+    "id": 307,
+    "singular": "كَفَالَةٌ",
+    "dual": "كَفَالَتَانِ",
+    "plural": "كَفَالَاتٌ",
+    "meaning": "Başkasının borcuna veya nefsine kefil olma"
+  },
+  {
+    "id": 308,
+    "singular": "رَهْنٌ",
+    "dual": "رَهْنَانِ",
+    "plural": "رُهُونٌ",
+    "meaning": "Karşılık olarak tutulan rehin, teminat"
+  },
+  {
+    "id": 309,
+    "singular": "حَقِيبَةٌ",
+    "dual": "حَقِيبَتَانِ",
+    "plural": "حَقَائِبُ",
+    "meaning": "Yük, torba, amellerin konduğu bohça"
+  },
+  {
+    "id": 310,
+    "singular": "زَادٌ",
+    "dual": "زَادَانِ",
+    "plural": "أَزْوَادٌ",
+    "meaning": "Ahiret yolculuğu için gerekli azık"
+  },
+  {
+    "id": 311,
+    "singular": "مَرْكَبٌ",
+    "dual": "مَرْكَبَانِ",
+    "plural": "مَرَاكِبُ",
+    "meaning": "Binilen vasıta, binek ve gemi"
+  },
+  {
+    "id": 312,
+    "singular": "مَطِيَّةٌ",
+    "dual": "مَطِيَّتَانِ",
+    "plural": "مَطَايَا",
+    "meaning": "Üzerine binilen binek hayvanı veya ceset"
+  },
+  {
+    "id": 313,
+    "singular": "سَفِينَةٌ",
+    "dual": "سَفِينَتَانِ",
+    "plural": "سُفُنٌ",
+    "meaning": "Denizde yüzen gemi; dünya gemisi"
+  },
+  {
+    "id": 314,
+    "singular": "مَوْجٌ",
+    "dual": "مَوْجَانِ",
+    "plural": "أَمْوَاجٌ",
+    "meaning": "Dalga, kabaran deniz suyu ve musibet"
+  },
+  {
+    "id": 315,
+    "singular": "لُجَّةٌ",
+    "dual": "لُجَّتَانِ",
+    "plural": "لُجَجٌ",
+    "meaning": "Engin ve derin su kütlesi, deniz girdabı"
+  },
+  {
+    "id": 316,
+    "singular": "غَرَقٌ",
+    "dual": "غَرَقَانِ",
+    "plural": "أَغْرَاقٌ",
+    "meaning": "Suya batma, boğulma ve gaflete dalma"
+  },
+  {
+    "id": 317,
+    "singular": "سَاحِلٌ",
+    "dual": "سَاحِلَانِ",
+    "plural": "سَوَاحِلُ",
+    "meaning": "Kıyı, deniz kenarı ve selamet sahili"
+  },
+  {
+    "id": 318,
+    "singular": "مِينَاءٌ",
+    "dual": "مِينَاءَانِ",
+    "plural": "مَوَانِئُ",
+    "meaning": "Liman, gemilerin sığındığı güvenli koy"
+  },
+  {
+    "id": 319,
+    "singular": "مَلْجَأٌ",
+    "dual": "مَلْجَأَانِ",
+    "plural": "مَلَاجِئُ",
+    "meaning": "Sığınılacak sığınak, iltica yeri"
+  },
+  {
+    "id": 320,
+    "singular": "مَهْرَبٌ",
+    "dual": "مَهْرَبَانِ",
+    "plural": "مَهَارِبُ",
+    "meaning": "Kaçılacak yer, sığınma menfezi"
+  },
+  {
+    "id": 321,
+    "singular": "مَفَرٌّ",
+    "dual": "مَفَرَّانِ",
+    "plural": "مَفَارُّ",
+    "meaning": "Kaçış mahalli, kaçacak delik"
+  },
+  {
+    "id": 322,
+    "singular": "حِصْنٌ",
+    "dual": "حِصْنَانِ",
+    "plural": "حُصُونٌ",
+    "meaning": "Sağlam kale, sarp sığınak ve himaye"
+  },
+  {
+    "id": 323,
+    "singular": "سُورٌ",
+    "dual": "سُورَانِ",
+    "plural": "أَسْوَارٌ",
+    "meaning": "Şehri veya kaleyi çevreleyen sur"
+  },
+  {
+    "id": 324,
+    "singular": "بُرْجٌ",
+    "dual": "بُرْجَانِ",
+    "plural": "أَبْرَاجٌ",
+    "meaning": "Yüksek kule, gök burcu ve müstahkem mevki"
+  },
+  {
+    "id": 325,
+    "singular": "قَصْرٌ",
+    "dual": "قَصْرَانِ",
+    "plural": "قُصُورٌ",
+    "meaning": "Görkemli köşk, saray ve cennet kasrı"
+  },
+  {
+    "id": 326,
+    "singular": "كُوخٌ",
+    "dual": "كُوخَانِ",
+    "plural": "أَكْوَاخٌ",
+    "meaning": "Basit kulübe, derme çatma barınak"
+  },
+  {
+    "id": 327,
+    "singular": "سَقْفٌ",
+    "dual": "سَقْفَانِ",
+    "plural": "سُقُوفٌ",
+    "meaning": "Evin tavanı, semanın kubbesi"
+  },
+  {
+    "id": 328,
+    "singular": "جِدَارٌ",
+    "dual": "جِدَارَانِ",
+    "plural": "جُدْرَانٌ",
+    "meaning": "Duvar, engel olan set ve mania"
+  },
+  {
+    "id": 329,
+    "singular": "أَسَاسٌ",
+    "dual": "أَسَاسَانِ",
+    "plural": "أُسُسٌ",
+    "meaning": "Binanın temeli, kök kural ve dayanak"
+  },
+  {
+    "id": 330,
+    "singular": "رُكْنٌ",
+    "dual": "رُكْنَانِ",
+    "plural": "أَرْكَانٌ",
+    "meaning": "Temel direk, ana unsur ve köşe sütunu"
+  },
+  {
+    "id": 331,
+    "singular": "عِمَادٌ",
+    "dual": "عِمَادَانِ",
+    "plural": "عُمُدٌ",
+    "meaning": "Destek direği, sütun ve bina dayanağı"
+  },
+  {
+    "id": 332,
+    "singular": "سِرَاجٌ",
+    "dual": "سِرَاجَانِ",
+    "plural": "سُرُجٌ",
+    "meaning": "Aydınlatıcı kandil, güneş ve meşale"
+  },
+  {
+    "id": 333,
+    "singular": "مِصْبَاحٌ",
+    "dual": "مِصْبَاحَانِ",
+    "plural": "مَصَابِيحُ",
+    "meaning": "Lamba, kandil ve aydınlatma aracı"
+  },
+  {
+    "id": 334,
+    "singular": "شُعْلَةٌ",
+    "dual": "شُعْلَتَانِ",
+    "plural": "شُعَلٌ",
+    "meaning": "Alev parçası, parlayan ateş dili"
+  },
+  {
+    "id": 335,
+    "singular": "قَبَسٌ",
+    "dual": "قَبَسَانِ",
+    "plural": "أَقْبَاسٌ",
+    "meaning": "Ateşten alınan kor parçası, meşale"
+  },
+  {
+    "id": 336,
+    "singular": "جَذْوَةٌ",
+    "dual": "جَذْوَتَانِ",
+    "plural": "جُذًى",
+    "meaning": "Yanan odun kömürü, köz parçası"
+  },
+  {
+    "id": 337,
+    "singular": "شَرَارَةٌ",
+    "dual": "شَرَارَتَانِ",
+    "plural": "شَرَارٌ",
+    "meaning": "Ateşten sıçrayan kıvılcım"
+  },
+  {
+    "id": 338,
+    "singular": "دُخَانٌ",
+    "dual": "دُخَانَانِ",
+    "plural": "أَدْخِنَةٌ",
+    "meaning": "Ateşten çıkan duman, gaz bulutu"
+  },
+  {
+    "id": 339,
+    "singular": "رَمَادٌ",
+    "dual": "رَمَادَانِ",
+    "plural": "أَرْمِدَةٌ",
+    "meaning": "Yanıp kül olan madde, kül"
+  },
+  {
+    "id": 340,
+    "singular": "طِينٌ",
+    "dual": "طِينََانِ",
+    "plural": "أَطْيَانٌ",
+    "meaning": "Çamur, insanın yaratıldığı ıslak toprak"
+  },
+  {
+    "id": 341,
+    "singular": "تُرَابٌ",
+    "dual": "تُرَابَانِ",
+    "plural": "أَتْرِبَةٌ",
+    "meaning": "Kuru toprak, zemin tozu"
+  },
+  {
+    "id": 342,
+    "singular": "صَلْصَالٌ",
+    "dual": "صَلْصَالَانِ",
+    "plural": "صَلَاصِلُ",
+    "meaning": "Kuru ve tınlayan pişmiş çamur"
+  },
+  {
+    "id": 343,
+    "singular": "حَمَأٌ",
+    "dual": "حَمَأَانِ",
+    "plural": "أَحْمَاءٌ",
+    "meaning": "Kokuşmuş kara balçık, değişken çamur"
+  },
+  {
+    "id": 344,
+    "singular": "صَخْرٌ",
+    "dual": "صَخْرَانِ",
+    "plural": "صُخُورٌ",
+    "meaning": "Sert kaya parçası, sarp taş kütlesi"
+  },
+  {
+    "id": 345,
+    "singular": "حَجَرٌ",
+    "dual": "حَجَرَانِ",
+    "plural": "حِجَارَةٌ",
+    "meaning": "Taş, sert cisim"
+  },
+  {
+    "id": 346,
+    "singular": "حَدِيدٌ",
+    "dual": "حَدِيدَانِ",
+    "plural": "حَدَائِدُ",
+    "meaning": "Demir madeni, sert ve menfaatli cevher"
+  },
+  {
+    "id": 347,
+    "singular": "نُحَاسٌ",
+    "dual": "نُحَاسَانِ",
+    "plural": "أَنْحِسَةٌ",
+    "meaning": "Bakır madeni, erimiş maden"
+  },
+  {
+    "id": 348,
+    "singular": "فِضَّةٌ",
+    "dual": "فِضَّتَانِ",
+    "plural": "فِضَّاتٌ",
+    "meaning": "Gümüş madeni, parlak beyaz cevher"
+  },
+  {
+    "id": 349,
+    "singular": "ذَهَبٌ",
+    "dual": "ذَهَبَانِ",
+    "plural": "أَذْهَابٌ",
+    "meaning": "Altın madeni, kıymetli sarı mücevher"
+  },
+  {
+    "id": 350,
+    "singular": "لُؤْلُؤٌ",
+    "dual": "لُؤْلُؤَانِ",
+    "plural": "لَآلِئُ",
+    "meaning": "İnci tanesi, denizin dibinden çıkan cevher"
+  }
+]
