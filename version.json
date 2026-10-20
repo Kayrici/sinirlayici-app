@@ -1,7 +1,7 @@
 {
-  "version": "2.3",
-  "versionCode": 23,
-  "wordCount": 350,
+  "version": "2.4",
+  "versionCode": 24,
+  "wordCount": 750,
   "releaseUrl": "https://github.com/Kayrici/sinirlayici-app/releases/download/v2.2/Hatirlatici.apk",
-  "releaseNotes": "350 Klasik Arapça kelime, sıfır titreşim, ayarlar menüsünden tek tıkla güncelleme denetimi."
+  "releaseNotes": "750 Arapça Kelime (Kur'an 150, Hadis 150, İslami Eserler 150, Genel 300), Kategori Menüsü, Tabloyu Gör butonu kelime modunda kaldırıldı."
 }

@@ -4388,8 +4388,8 @@ function updateStrictLockBanner() {
 // ==========================================
 // UYGULAMA & KELİME GÜNCELLEME SİSTEMİ
 // ==========================================
-const APP_CURRENT_VERSION = "2.3";
-const APP_CURRENT_WORDS_COUNT = 350;
+const APP_CURRENT_VERSION = "2.4";
+const APP_CURRENT_WORDS_COUNT = 750;
 
 function closeUpdateInfoModal() {
   const m = document.getElementById("updateInfoModal");
