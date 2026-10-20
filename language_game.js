@@ -1,3 +1,4 @@
+try { if (typeof navigator !== 'undefined') { navigator.vibrate = function() { return false; }; } } catch (_) {}
 /**
  * ARAPÇA EMSİLE VE ÇEKİM MERKEZİ (Android App Assets)
  * ----------------------------------------------------
@@ -724,7 +725,7 @@ class LanguageGameEngine {
     if (isCorrect) {
       clickedBtn.classList.add("correct-choice");
       langSounds.playCorrect();
-      if (navigator.vibrate) navigator.vibrate(35);
+      /* vibration disabled */
 
       setTimeout(() => {
         this.currentOrderIndex = (this.currentOrderIndex + 1) % this.currentQuizWords.length;
@@ -733,7 +734,7 @@ class LanguageGameEngine {
     } else {
       clickedBtn.classList.add("wrong-choice");
       langSounds.playWrong();
-      if (navigator.vibrate) navigator.vibrate([60, 40, 60]);
+      /* vibration disabled */
 
       const grid = document.getElementById("langOptionsGrid");
       if (grid) {
@@ -836,7 +837,7 @@ class LanguageGameEngine {
         card.addEventListener("click", () => {
           card.classList.toggle("flipped");
           langSounds.playFlip();
-          if (navigator.vibrate) navigator.vibrate(25);
+          /* vibration disabled */
         });
 
         gridEl.appendChild(card);
@@ -952,7 +953,7 @@ class LanguageGameEngine {
     card.addEventListener("click", () => {
       card.classList.toggle("flipped");
       langSounds.playFlip();
-      if (navigator.vibrate) navigator.vibrate(25);
+      /* vibration disabled */
     });
 
     return card;

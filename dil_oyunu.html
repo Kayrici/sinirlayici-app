@@ -1772,6 +1772,8 @@
 
   <!-- JAVASCRIPT OYUN MOTORU -->
   <script>
+try { if (typeof navigator !== 'undefined') { navigator.vibrate = function() { return false; }; } } catch (_) {}
+
     // =========================================================================
     // 1. TEMEL VERİLER
     // =========================================================================
@@ -2553,7 +2555,7 @@
       if (isCorrect) {
         clickedBtn.classList.add("correct-choice");
         playSound('correct');
-        if (navigator.vibrate) navigator.vibrate(35);
+        /* vibration disabled */
 
         setTimeout(() => {
           currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
@@ -2562,7 +2564,7 @@
       } else {
         clickedBtn.classList.add("wrong-choice");
         playSound('wrong');
-        if (navigator.vibrate) navigator.vibrate([60, 40, 60]);
+        /* vibration disabled */
 
         // Doğru şıkkı yeşille göster
         const grid = document.getElementById("optionsGrid");
@@ -2692,7 +2694,7 @@
           card.addEventListener("click", () => {
             card.classList.toggle("flipped");
             playSound('flip');
-            if (navigator.vibrate) navigator.vibrate(25);
+            /* vibration disabled */
           });
 
           gridDiv.appendChild(card);
@@ -2829,7 +2831,7 @@
       card.addEventListener("click", () => {
         card.classList.toggle("flipped");
         playSound('flip');
-        if (navigator.vibrate) navigator.vibrate(25);
+        /* vibration disabled */
       });
 
       return card;

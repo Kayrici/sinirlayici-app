@@ -1,3 +1,4 @@
+try { if (typeof navigator !== 'undefined') { navigator.vibrate = function() { return false; }; } } catch (_) {}
 /**
  * 3D HAFIZA OYUNU (Memory Matrix 3D) - Oyun Mantığı
  * Neon Mor & Macenta Teması
@@ -378,9 +379,7 @@ class MemoryGame {
             return;
         }
 
-        if (navigator.vibrate) {
-            navigator.vibrate(30);
-        }
+        /* vibration disabled */
 
         if (this.targetIndices.has(index)) {
             this.foundIndices.add(index);
@@ -397,9 +396,7 @@ class MemoryGame {
             soundManager.playWrong();
             cardEl.classList.add('wrong');
 
-            if (navigator.vibrate) {
-                navigator.vibrate([60, 40, 60]);
-            }
+            /* vibration disabled */
 
             this.lives--;
             this.streak = 0;

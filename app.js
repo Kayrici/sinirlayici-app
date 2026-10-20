@@ -1,3 +1,4 @@
+try { if (typeof navigator !== 'undefined') { navigator.vibrate = function() { return false; }; } } catch (_) {}
 // Sınırlayıcı - Ana Uygulama Mantığı (Süre Sınırı, Pomodoro ve Hatırlatıcılar)
 
 let installedApps = [];
@@ -3003,7 +3004,7 @@ function setupHoldToOpenScheduledLock() {
         scheduledHoldTriggered = true;
         btn.classList.remove("is-holding");
         try {
-          if (navigator.vibrate) navigator.vibrate([120, 60, 120]);
+          /* vibration disabled */
         } catch (err) {}
         openScheduledLockModal();
       }, 4000);
@@ -3228,7 +3229,7 @@ function setupBrandClockSecretHold() {
     timer = setTimeout(() => {
       brandIcon.classList.remove("is-holding-secret");
       try {
-        if (navigator.vibrate) navigator.vibrate([90]);
+        /* vibration disabled */
       } catch (err) {}
       openSecretCodeModal();
     }, 2000); // 2 saniye
@@ -3356,7 +3357,7 @@ function triggerHeadsUpNotification(reminder) {
   banner.style.display = "flex";
 
   try {
-    if (navigator.vibrate) navigator.vibrate([150, 80, 150]);
+    /* vibration disabled */
   } catch (e) {}
 
   // Web Notification desteği varsa sistem bildirimi de yolla
@@ -3836,7 +3837,7 @@ function setupRemindersDragAndDrop() {
     renderRemindersList();
 
     try {
-      if (navigator.vibrate) navigator.vibrate([35, 30, 35]);
+      /* vibration disabled */
     } catch (e) {}
     showToast("Sıralama güncellendi! ↕️");
   }
@@ -3866,7 +3867,7 @@ function setupRemindersDragAndDrop() {
         document.body.classList.add("drag-scrolling-locked");
 
         try {
-          if (navigator.vibrate) navigator.vibrate([50]);
+          /* vibration disabled */
         } catch (err) {}
 
         const titleText = card.querySelector(".reminder-msg-text, .group-card-name");
