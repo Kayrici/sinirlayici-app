@@ -462,9 +462,7 @@ async function syncWordsFromCloud() {
     }
   } catch (_) {}
 }
-if (typeof window !== 'undefined') {
-  setTimeout(syncWordsFromCloud, 1000);
-}
+// Offline-first: Auto network fetch disabled on game launch
 
 // 2. SES SİSTEMİ
 class LangSoundManager {

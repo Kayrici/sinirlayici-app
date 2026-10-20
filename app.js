@@ -4381,3 +4381,119 @@ function updateStrictLockBanner() {
     if (banner) banner.style.display = "none";
   }
 }
+
+
+// ==========================================
+// UYGULAMA & KELİME GÜNCELLEME SİSTEMİ
+// ==========================================
+const APP_CURRENT_VERSION = "2.3";
+const APP_CURRENT_WORDS_COUNT = 350;
+
+function closeUpdateInfoModal() {
+  const m = document.getElementById("updateInfoModal");
+  if (m) m.style.display = "none";
+}
+
+function handleUpdateModalOverlayClick(e) {
+  if (e.target && e.target.id === "updateInfoModal") {
+    closeUpdateInfoModal();
+  }
+}
+
+function showUpdateModal(icon, title, bodyHtml, actionsHtml) {
+  const m = document.getElementById("updateInfoModal");
+  const iconEl = document.getElementById("updateModalIcon");
+  const titleEl = document.getElementById("updateModalTitle");
+  const bodyEl = document.getElementById("updateModalBody");
+  const actionsEl = document.getElementById("updateModalActions");
+
+  if (iconEl) iconEl.textContent = icon;
+  if (titleEl) titleEl.textContent = title;
+  if (bodyEl) bodyEl.innerHTML = bodyHtml;
+  if (actionsEl) {
+    actionsEl.innerHTML = actionsHtml || '<button type="button" class="btn-primary" onclick="closeUpdateInfoModal()" style="flex: 1; padding: 10px; border-radius: 10px;">Tamam</button>';
+  }
+  if (m) m.style.display = "flex";
+}
+
+async function checkAppUpdateManual() {
+  const btn = document.getElementById("btnCheckAppUpdate");
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "Denetleniyor... ⏳";
+  }
+
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
+
+    const res = await fetch('https://kayrici.github.io/sinirlayici-app/version.json?t=' + Date.now(), {
+      signal: controller.signal,
+      cache: 'no-cache'
+    });
+    clearTimeout(timeoutId);
+
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const remoteData = await res.json();
+
+    // Yeni kelime kontrolü
+    let wordsUpdated = false;
+    let totalWords = APP_CURRENT_WORDS_COUNT;
+    try {
+      const vocabRes = await fetch('https://kayrici.github.io/sinirlayici-app/words_dataset.json?t=' + Date.now(), {
+        cache: 'no-cache'
+      });
+      if (vocabRes.ok) {
+        const newWords = await vocabRes.json();
+        if (Array.isArray(newWords) && newWords.length > APP_CURRENT_WORDS_COUNT) {
+          localStorage.setItem('synced_vocab_words_v2', JSON.stringify(newWords));
+          if (typeof VOCABULARY_WORDS !== 'undefined') {
+            VOCABULARY_WORDS = newWords;
+          }
+          wordsUpdated = true;
+          totalWords = newWords.length;
+        }
+      }
+    } catch (_) {}
+
+    const isNewAppVersion = remoteData.version && remoteData.version !== APP_CURRENT_VERSION;
+
+    if (isNewAppVersion) {
+      showUpdateModal(
+        "🚀",
+        "Yeni Sürüm Mevcut! (v" + remoteData.version + ")",
+        (remoteData.releaseNotes || "Yeni özellikler yayınlandı.") + "<br><br>Yeni sürümü şimdi indirip güncellemek ister misiniz?",
+        '<button type="button" class="btn-secondary" onclick="closeUpdateInfoModal()" style="flex: 1; padding: 10px; border-radius: 10px;">Vazgeç</button>' +
+        '<button type="button" class="btn-primary" onclick="window.open('' + remoteData.releaseUrl + '', '_system'); closeUpdateInfoModal();" style="flex: 1; padding: 10px; border-radius: 10px;">İndir ve Güncelle</button>'
+      );
+    } else if (wordsUpdated) {
+      showUpdateModal(
+        "🎉",
+        "Kelimeler Güncellendi!",
+        "En yeni kelimeler başarıyla indirildi ve uygulamanıza entegre edildi.<br><br>Toplam kelime sayısı: <strong style='color:#10b981;'>" + totalWords + "</strong> oldu.",
+        '<button type="button" class="btn-primary" onclick="closeUpdateInfoModal()" style="flex: 1; padding: 10px; border-radius: 10px;">Harika!</button>'
+      );
+      const descEl = document.getElementById("updateCardStatusDesc");
+      if (descEl) descEl.textContent = totalWords + " Kelime Yüklü • Çevrimdışı Hazır";
+    } else {
+      showUpdateModal(
+        "✨",
+        "En Güncel Sürümdesiniz",
+        "Uygulamanız (v" + APP_CURRENT_VERSION + ") ve " + APP_CURRENT_WORDS_COUNT + " kelimelik Arapça dağarcığınız tamamen günceldir.<br><br><span style='color:#10b981; font-weight:600;'>Yeni bir güncelleme bulunmuyor.</span>",
+        '<button type="button" class="btn-primary" onclick="closeUpdateInfoModal()" style="flex: 1; padding: 10px; border-radius: 10px;">Tamam</button>'
+      );
+    }
+  } catch (err) {
+    showUpdateModal(
+      "📡",
+      "İnternet Bağlantısı Yok",
+      "Güncellemeleri denetlemek için internet bağlantısı kurulamadı.<br><br>Uygulamanız ve 350 kelimelik oyununuz <strong>internetsiz (çevrimdışı)</strong> olarak sorunsuz çalışmaya devam etmektedir.",
+      '<button type="button" class="btn-primary" onclick="closeUpdateInfoModal()" style="flex: 1; padding: 10px; border-radius: 10px;">Tamam</button>'
+    );
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = "🔄 Güncelle";
+    }
+  }
+}
