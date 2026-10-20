@@ -4384,6 +4384,8 @@ function updateStrictLockBanner() {
 
 
 // ==========================================
+
+// ==========================================
 // UYGULAMA & KELİME GÜNCELLEME SİSTEMİ
 // ==========================================
 const APP_CURRENT_VERSION = "2.3";
@@ -4398,6 +4400,13 @@ function handleUpdateModalOverlayClick(e) {
   if (e.target && e.target.id === "updateInfoModal") {
     closeUpdateInfoModal();
   }
+}
+
+function triggerAppDownload() {
+  closeUpdateInfoModal();
+  try {
+    window.location.href = "https://github.com/Kayrici/sinirlayici-app/releases/download/v2.2/Hatirlatici.apk";
+  } catch (_) {}
 }
 
 function showUpdateModal(icon, title, bodyHtml, actionsHtml) {
@@ -4464,7 +4473,7 @@ async function checkAppUpdateManual() {
         "Yeni Sürüm Mevcut! (v" + remoteData.version + ")",
         (remoteData.releaseNotes || "Yeni özellikler yayınlandı.") + "<br><br>Yeni sürümü şimdi indirip güncellemek ister misiniz?",
         '<button type="button" class="btn-secondary" onclick="closeUpdateInfoModal()" style="flex: 1; padding: 10px; border-radius: 10px;">Vazgeç</button>' +
-        '<button type="button" class="btn-primary" onclick="window.open('' + remoteData.releaseUrl + '', '_system'); closeUpdateInfoModal();" style="flex: 1; padding: 10px; border-radius: 10px;">İndir ve Güncelle</button>'
+        '<button type="button" class="btn-primary" onclick="triggerAppDownload()" style="flex: 1; padding: 10px; border-radius: 10px;">İndir ve Güncelle</button>'
       );
     } else if (wordsUpdated) {
       showUpdateModal(
