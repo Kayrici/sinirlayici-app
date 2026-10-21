@@ -957,7 +957,8 @@ const langSounds = new LangSoundManager();
 // 3. OYUN MOTORU
 class LanguageGameEngine {
   constructor() {
-    this.currentGameMode = 'emsile24'; // 'emsile24' | 'sigaPronouns' | 'vocab' | 'pronouns'
+    this.currentGameMode = 'emsile24';
+    this.currentVocabLevel = 1; // 'emsile24' | 'sigaPronouns' | 'vocab' | 'pronouns'
     this.selectedSigaId = 1;
     this.currentQuizWords = [];
     this.shuffledIndices = [];
@@ -1025,6 +1026,10 @@ class LanguageGameEngine {
             parsed.muttarideUnlocked = [1];
           }
           if (!parsed.muttarideStreaks) parsed.muttarideStreaks = {};
+          if (!parsed.vocabUnlockedLevels || !Array.isArray(parsed.vocabUnlockedLevels) || parsed.vocabUnlockedLevels.length === 0) {
+            parsed.vocabUnlockedLevels = [1];
+          }
+          if (!parsed.vocabStreaks) parsed.vocabStreaks = {};
           return parsed;
         }
       }
@@ -1033,7 +1038,9 @@ class LanguageGameEngine {
       unlockedMenus: ['emsile24'],
       streaks: { emsile24: 0, pronouns: 0 },
       muttarideUnlocked: [1],
-      muttarideStreaks: {}
+      muttarideStreaks: {},
+      vocabUnlockedLevels: [1],
+      vocabStreaks: {}
     };
   }
 
@@ -1089,6 +1096,9 @@ class LanguageGameEngine {
     } else if (this.currentGameMode === 'sigaPronouns') {
       target = 15;
       current = (prog.muttarideStreaks && prog.muttarideStreaks[this.selectedSigaId]) || 0;
+    } else if (this.currentGameMode === 'vocab') {
+      target = 50;
+      current = (prog.vocabStreaks && prog.vocabStreaks[this.currentVocabLevel]) || 0;
     } else {
       square.style.display = "none";
       return;
@@ -1212,6 +1222,46 @@ class LanguageGameEngine {
       } else {
         // YANLIŞ CEVAP: O anki sîganın üst üste serisi sıfırlanır!
         prog.muttarideStreaks[this.selectedSigaId] = 0;
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+      }
+      return;
+    }
+
+    // 4. KELİMELER MODU: O seviyede 50 Doğru -> Sonraki Seviye Açılır (5 Seviye Kademeli)
+    if (this.currentGameMode === 'vocab') {
+      const target = 50;
+      if (!prog.vocabStreaks) prog.vocabStreaks = {};
+      if (!prog.vocabUnlockedLevels) prog.vocabUnlockedLevels = [1];
+      const curStreak = prog.vocabStreaks[this.currentVocabLevel] || 0;
+
+      if (isCorrect) {
+        const newStreak = curStreak + 1;
+        prog.vocabStreaks[this.currentVocabLevel] = newStreak;
+        const nextLevel = this.currentVocabLevel + 1;
+        let justUnlockedNext = false;
+
+        if (newStreak >= target && nextLevel <= 5) {
+          if (!prog.vocabUnlockedLevels.includes(nextLevel)) {
+            prog.vocabUnlockedLevels.push(nextLevel);
+            justUnlockedNext = true;
+          }
+        }
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+
+        if (justUnlockedNext) {
+          setTimeout(() => {
+            this.showUnlockSuccessModal(
+              `${nextLevel}. Seviye Açıldı!`,
+              `Tebrikler! ${this.currentVocabLevel}. Seviyede üst üste 50 doğru yaptınız. ${nextLevel}. Seviye (${nextLevel * 150} kelime) açıldı!`,
+              'nextVocabLevel_' + nextLevel
+            );
+          }, 450);
+        }
+      } else {
+        // YANLIŞ CEVAP: O anki seviyenin üst üste serisi sıfırlanır!
+        prog.vocabStreaks[this.currentVocabLevel] = 0;
         this.saveUserProgress(prog);
         this.updateStreakSquareUI();
       }
@@ -1406,6 +1456,7 @@ class LanguageGameEngine {
   // 1. Mod: 24 Sîga Oyunu
   startEmsileGame() {
     this.currentGameMode = 'emsile24';
+    this.currentVocabLevel = 1;
     this.currentQuizWords = EMSILE_24_WORDS.slice();
     this.initShuffledIndices();
     this.currentOrderIndex = 0;
@@ -1441,7 +1492,7 @@ class LanguageGameEngine {
           <span class="lang-siga-num-badge">${siga.id}</span>
           ${!isUnlocked ? '<span style="font-size: 0.72rem; background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 2px 7px; border-radius: 6px; font-weight: 700;">🔒 Kilitli</span>' : '<span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 7px; border-radius: 6px; font-weight: 700;">✓ Açık</span>'}
         </div>
-        <div class="lang-siga-arabic-word arabic-font">${siga.word}</div>
+        <div class="lang-siga-arabic-word arabic-font" style="font-size: 1.75rem; font-weight: 800; color: #fff; margin: 4px 0;">${siga.word}</div>
         <div class="lang-siga-meaning-title">${escapeHtml(siga.meaning)}</div>
         <div class="lang-siga-trans-text">${escapeHtml(siga.translation)}</div>
         ${siga.extraHint ? `<div class="lang-siga-hint-badge">${escapeHtml(siga.extraHint)}</div>` : ""}
@@ -1479,9 +1530,10 @@ class LanguageGameEngine {
     this.renderQuestion();
   }
 
-  // 3. Mod: Kelime Oyunu (Tekil / İkili / Çoğul)
+  // 3. Mod: Kelimeler Seviye Menüsü (1. Seviye'den 5. Seviye'ye 50 Doğru İle Kademeli)
   openVocabCategoryMenu() {
     this.currentGameMode = 'vocab';
+    this.renderVocabLevelsGrid();
     this.showScreen("langVocabCategorySection");
     const btnMenu = document.getElementById("btnLangMenu");
     const btnTable = document.getElementById("btnLangToggleTable");
@@ -1490,21 +1542,65 @@ class LanguageGameEngine {
 
     if (btnMenu) btnMenu.style.display = "inline-flex";
     if (btnTable) btnTable.style.display = "none";
-    if (title) title.textContent = "Kelime Kategorileri";
+    if (title) title.textContent = "Kelimeler";
     if (badge) badge.style.display = "none";
   }
 
-  startVocabCategory(category = 'all') {
+  renderVocabLevelsGrid() {
+    const grid = document.getElementById("langVocabLevelsGrid");
+    if (!grid) return;
+    grid.innerHTML = "";
+
+    const prog = this.getUserProgress();
+    const unlockedLevels = (prog.vocabUnlockedLevels && Array.isArray(prog.vocabUnlockedLevels)) ? prog.vocabUnlockedLevels : [1];
+
+    const levelsConfig = [
+      { level: 1, title: "1. Seviye", wordCount: 150, desc: "Türkçede en çok kullanılan ilk 150 kelime" },
+      { level: 2, title: "2. Seviye", wordCount: 300, desc: "Önceki 150 kelimeye +150 yeni kelime (Toplam 300)" },
+      { level: 3, title: "3. Seviye", wordCount: 450, desc: "Önceki 300 kelimeye +150 yeni kelime (Toplam 450)" },
+      { level: 4, title: "4. Seviye", wordCount: 600, desc: "Önceki 450 kelimeye +150 yeni kelime (Toplam 600)" },
+      { level: 5, title: "5. Seviye", wordCount: 750, desc: "750 kelimenin tamamı (+150 yeni kelime)" }
+    ];
+
+    levelsConfig.forEach(cfg => {
+      const isUnlocked = unlockedLevels.includes(cfg.level);
+      const card = document.createElement("div");
+      card.className = "menu-choice-card";
+      if (!isUnlocked) {
+        card.style.opacity = "0.52";
+        card.style.cursor = "not-allowed";
+        card.style.filter = "grayscale(35%)";
+      }
+
+      card.innerHTML = `
+        <div class="choice-texts">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <h3 class="choice-clean-title" style="margin: 0; font-size: 1.1rem; color: #fff;">${cfg.title}</h3>
+            ${!isUnlocked ? '<span style="font-size: 0.72rem; background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 2px 7px; border-radius: 6px; font-weight: 700;">🔒 Kilitli</span>' : '<span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 7px; border-radius: 6px; font-weight: 700;">✓ Açık</span>'}
+          </div>
+          <p style="font-size: 0.78rem; color: #94a3b8; margin: 0 0 10px 0;">${cfg.desc}</p>
+        </div>
+        <button type="button" class="btn-start-choice" style="${cfg.level === 5 ? 'background: linear-gradient(135deg, #10b981, #059669);' : ''}">
+          <span>${isUnlocked ? 'Oyuna Başla' : '🔒 Kilitli'}</span>
+        </button>
+      `;
+
+      if (isUnlocked) {
+        card.addEventListener("click", () => this.startVocabLevel(cfg.level));
+      } else {
+        card.addEventListener("click", () => {
+          alert(`🔒 ${cfg.level}. Seviyenin açılması için bir önceki seviyede üst üste 50 doğru yapmalısınız.`);
+        });
+      }
+      grid.appendChild(card);
+    });
+  }
+
+  startVocabLevel(level = 1) {
     this.currentGameMode = 'vocab';
-    this.currentVocabCategory = category;
-
-    let list = VOCABULARY_WORDS;
-    if (category && category !== 'all') {
-      list = VOCABULARY_WORDS.filter(w => w.category === category);
-    }
-    if (!list || list.length === 0) list = VOCABULARY_WORDS;
-
-    this.currentQuizWords = list.slice();
+    this.currentVocabLevel = level;
+    const count = level * 150;
+    this.currentQuizWords = VOCABULARY_WORDS.slice(0, count);
     this.initShuffledIndices();
     this.showScreen("langQuizSection");
 
@@ -1512,15 +1608,13 @@ class LanguageGameEngine {
     if (btnTable) btnTable.style.display = "none";
 
     const title = document.getElementById("langModalTitle");
-    if (title) {
-      if (category === 'kuran') title.textContent = "Kur'an Kelimeleri (150)";
-      else if (category === 'hadis') title.textContent = "Hadis Kelimeleri (150)";
-      else if (category === 'kitap') title.textContent = "İslami Kitaplar (150)";
-      else if (category === 'genel') title.textContent = "Genel Kelimeler (300)";
-      else title.textContent = "Kelime (750)";
-    }
+    if (title) title.textContent = `${level}. Seviye (${count} Kelime)`;
 
     this.renderQuestion();
+  }
+
+  startVocabCategory(cat = 'all') {
+    this.startVocabLevel(1);
   }
 
   startVocabGame() {

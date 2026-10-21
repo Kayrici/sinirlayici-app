@@ -1261,66 +1261,13 @@
     <!-- KELİME KATEGORİ SEÇİM MENÜSÜ -->
     <main id="langVocabCategorySection" class="lang-menu-area" style="display: none; flex-direction: column;">
       <div class="menu-hero-banner" style="margin-bottom: 14px;">
-        <span class="hero-badge">ARAPÇA KELİME DAĞARCIĞI (750 KELİME)</span>
-        <h2 style="font-size: 1.25rem; margin-bottom: 4px;">Kelime Grubu Seçin</h2>
-        <p style="font-size: 0.82rem; color: #94a3b8;">Çalışmak istediğiniz kategoriyi seçerek 5 seçenekli teste başlayabilirsiniz.</p>
+        <span class="hero-badge">ARAPÇA KELİMELER (750 KELİME)</span>
+        <h2 style="font-size: 1.25rem; margin-bottom: 4px;">Seviye Seçin</h2>
+        <p style="font-size: 0.82rem; color: #94a3b8;">Her seviyede üst üste 50 doğru yaparak sonraki seviyenin kilidini açın:</p>
       </div>
 
-      <div class="menu-cards-grid">
-        <!-- 1. Kur'an Kelimeleri (150) -->
-        <div class="menu-choice-card" onclick="languageGame.startVocabCategory('kuran')">
-          <div class="choice-texts">
-            <h3 class="choice-clean-title">📖 Kur'an Kelimeleri</h3>
-            <p style="font-size: 0.78rem; color: #94a3b8; margin: 4px 0 0 0;">150 Kelime</p>
-          </div>
-          <button type="button" class="btn-start-choice">
-            <span>Oyuna Başla</span>
-          </button>
-        </div>
-
-        <!-- 2. Hadis Kelimeleri (150) -->
-        <div class="menu-choice-card" onclick="languageGame.startVocabCategory('hadis')">
-          <div class="choice-texts">
-            <h3 class="choice-clean-title">📜 Hadis Kelimeleri</h3>
-            <p style="font-size: 0.78rem; color: #94a3b8; margin: 4px 0 0 0;">150 Kelime</p>
-          </div>
-          <button type="button" class="btn-start-choice">
-            <span>Oyuna Başla</span>
-          </button>
-        </div>
-
-        <!-- 3. İslami Kitaplar (150) -->
-        <div class="menu-choice-card" onclick="languageGame.startVocabCategory('kitap')">
-          <div class="choice-texts">
-            <h3 class="choice-clean-title">📚 İslami Kitaplar</h3>
-            <p style="font-size: 0.78rem; color: #94a3b8; margin: 4px 0 0 0;">150 Kelime</p>
-          </div>
-          <button type="button" class="btn-start-choice">
-            <span>Oyuna Başla</span>
-          </button>
-        </div>
-
-        <!-- 4. Genel Kelimeler (300) -->
-        <div class="menu-choice-card" onclick="languageGame.startVocabCategory('genel')">
-          <div class="choice-texts">
-            <h3 class="choice-clean-title">🌟 Genel Kelimeler</h3>
-            <p style="font-size: 0.78rem; color: #94a3b8; margin: 4px 0 0 0;">300 Kelime</p>
-          </div>
-          <button type="button" class="btn-start-choice">
-            <span>Oyuna Başla</span>
-          </button>
-        </div>
-
-        <!-- 5. Tümü Karışık (750) -->
-        <div class="menu-choice-card" onclick="languageGame.startVocabCategory('all')" style="border: 1px solid rgba(16, 185, 129, 0.45); background: rgba(16, 185, 129, 0.08);">
-          <div class="choice-texts">
-            <h3 class="choice-clean-title" style="color: #34d399;">🔄 Tümü (Karışık)</h3>
-            <p style="font-size: 0.78rem; color: #94a3b8; margin: 4px 0 0 0;">750 Kelime</p>
-          </div>
-          <button type="button" class="btn-start-choice" style="background: linear-gradient(135deg, #10b981, #059669);">
-            <span>Oyuna Başla</span>
-          </button>
-        </div>
+      <div class="menu-cards-grid" id="langVocabLevelsGrid">
+        <!-- JS ile 5 seviye kartı basılır -->
       </div>
     </main>
 
