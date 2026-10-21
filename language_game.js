@@ -1,16 +1,10 @@
+// ARAPÇA EMSİLE, ÇEKİMLER, ZAMİRLER VE KELİME DAĞARCIĞI OYUN MOTORU
+// Vibrate devre dışı bırakılmıştır
 try { if (typeof navigator !== 'undefined') { navigator.vibrate = function() { return false; }; } } catch (_) {}
-/**
- * ARAPÇA EMSİLE VE ÇEKİM MERKEZİ (Android App Assets)
- * ----------------------------------------------------
- * - 24 Sîga Oyunu (Emsile-i Muhtelife)
- * - Zamirlere Göre Çekimler (24 Sîganın her biri için 14 Zamir Çekimi)
- * - Kelime Bilgisi Oyunu (Tekil / İkili / Çoğul)
- * - Asla okunuş yazılmaz!
- * - Çift Yönlü Test: Çekim ➔ Anlam/Çeviri veya Anlam/Çeviri ➔ Çekim
- * - Kelime Modunda Soru ve Şıklarda soldan sağa: Tekil / İkili / Çoğul
- */
 
-// 1. 24 SÎGA LİSTESİ (Sîga Terimi + Türkçe Fiil Çevirisi + Ek Bilgisi)
+// 1. TEMEL VERİ SETLERİ
+
+// A) 24 EMSİLE KELİMELERİ
 const DEFAULT_EMSILE_24_WORDS = [
   { id: 1, word: "نَصَرَ", meaning: "Fiil-i mâzî", translation: "Yardım etti", extraHint: "-dı, -di" },
   { id: 2, word: "يَنْصُرُ", meaning: "Fiil-i müzâri'", translation: "Yardım ediyor / eder", extraHint: "-yor, -ar, -acak" },
@@ -40,7 +34,25 @@ const DEFAULT_EMSILE_24_WORDS = [
 
 let EMSILE_24_WORDS = JSON.parse(JSON.stringify(DEFAULT_EMSILE_24_WORDS));
 
-// 14 ŞAHIS ZAMİRİ
+// B) 14 AYRIK ŞAHIS ZAMİRİ (KULLANICI TALEBİ)
+const INDEPENDENT_PRONOUNS_14 = [
+  { id: 1, word: "هُوَ", meaning: "O (erkek)", group: "Gâib (3. Şahıs Eril)" },
+  { id: 2, word: "هُمَا", meaning: "O ikisi (erkek)", group: "Gâib (3. Şahıs Eril)" },
+  { id: 3, word: "هُمْ", meaning: "Onlar (erkek)", group: "Gâib (3. Şahıs Eril)" },
+  { id: 4, word: "هِيَ", meaning: "O (kadın)", group: "Gâibe (3. Şahıs Dişil)" },
+  { id: 5, word: "هُمَا", meaning: "O ikisi (kadın)", group: "Gâibe (3. Şahıs Dişil)" },
+  { id: 6, word: "هُنَّ", meaning: "Onlar (kadın)", group: "Gâibe (3. Şahıs Dişil)" },
+  { id: 7, word: "أَنْتَ", meaning: "Sen (erkek)", group: "Muhâtab (2. Şahıs Eril)" },
+  { id: 8, word: "أَنْتُمَا", meaning: "Siz ikiniz (erkek)", group: "Muhâtab (2. Şahıs Eril)" },
+  { id: 9, word: "أَنْتُمْ", meaning: "Siz (erkek)", group: "Muhâtab (2. Şahıs Eril)" },
+  { id: 10, word: "أَنْتِ", meaning: "Sen (kadın)", group: "Muhâtaba (2. Şahıs Dişil)" },
+  { id: 11, word: "أَنْتُمَا", meaning: "Siz ikiniz (kadın)", group: "Muhâtaba (2. Şahıs Dişil)" },
+  { id: 12, word: "أَنْتُنَّ", meaning: "Siz (kadın)", group: "Muhâtaba (2. Şahıs Dişil)" },
+  { id: 13, word: "أَنَا", meaning: "Ben", group: "Mütekellim (1. Şahıs)" },
+  { id: 14, word: "نَحْنُ", meaning: "Biz", group: "Mütekellim (1. Şahıs)" }
+];
+
+// 14 ŞAHIS ZAMİRİ ANLAMLARI (Çekim Modu İçin)
 const PRONOUN_MEANINGS = [
   "O (erkek)", "O ikisi (erkek)", "Onlar (erkek)",
   "O (kadın)", "O ikisi (kadın)", "Onlar (kadın)",
@@ -49,7 +61,7 @@ const PRONOUN_MEANINGS = [
   "Ben", "Biz"
 ];
 
-// 24 SÎGA İÇİN 14 ŞAHIS ÇEKİMİ
+// C) 24 SÎGA İÇİN 14 ŞAHIS ÇEKİMİ
 const SIGA_CONJUGATIONS = {
   1: ["نَصَرَ", "نَصَرَا", "نَصَرُوا", "نَصَرَتْ", "نَصَرَتَا", "نَصَرْنَ", "نَصَرْتَ", "نَصَرْتُمَا", "نَصَرْتُمْ", "نَصَرْتِ", "نَصَرْتُمَا", "نَصَرْتُنَّ", "نَصَرْتُ", "نَصَرْنَا"],
   2: ["يَنْصُرُ", "يَنْصُرَانِ", "يَنْصُرُونَ", "تَنْصُرُ", "تَنْصُرَانِ", "يَنْصُرْنَ", "تَنْصُرُ", "تَنْصُرَانِ", "تَنْصُرُونَ", "تَنْصُرِينَ", "تَنْصُرَانِ", "تَنْصُرْنَ", "أَنْصُرُ", "نَنْصُرُ"],
@@ -83,7 +95,7 @@ const SIGA_CONJUGATIONS = {
   24: ["أَنْصِرْ بِهِ", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِمْ", "أَنْصِرْ بِهَا", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِنَّ", "أَنْصِرْ بِكَ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُمْ", "أَنْصِرْ بِكِ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُنَّ", "أَنْصِرْ بِي", "أَنْصِرْ بِنَا"]
 };
 
-// YENİ KELİME LİSTESİ (TEKİL / İKİLİ / ÇOĞUL) - KULLANICI İSTEĞİ
+// D) 750 ARAPÇA KELİME (OKUNUŞSUZ, ÖZ TÜRKÇE MANALAR)
 const DEFAULT_VOCABULARY_WORDS = [
   { id: 1, category: "kuran", singular: "رَبٌّ", dual: "رَبَّانِ", plural: "أَرْبَابٌ", meaning: "Terbiye eden, mutlak mâlik ve rızık veren" },
   { id: 2, category: "kuran", singular: "آيَةٌ", dual: "آيَتَانِ", plural: "آيَاتٌ", meaning: "İlahî delil, mucize ve Kur'an cümlesi" },
@@ -839,7 +851,6 @@ const DEFAULT_VOCABULARY_WORDS = [
 
 let VOCABULARY_WORDS = JSON.parse(JSON.stringify(DEFAULT_VOCABULARY_WORDS));
 
-// CANLI BULUT SENKRONİZASYONU: Uygulamayı yeniden indirmeden kelimeleri anında güncelleme
 try {
   const cachedVocab = localStorage.getItem('synced_vocab_words_v2');
   if (cachedVocab) {
@@ -862,7 +873,6 @@ async function syncWordsFromCloud() {
     }
   } catch (_) {}
 }
-// Offline-first: Auto network fetch disabled on game launch
 
 // 2. SES SİSTEMİ
 class LangSoundManager {
@@ -947,7 +957,7 @@ const langSounds = new LangSoundManager();
 // 3. OYUN MOTORU
 class LanguageGameEngine {
   constructor() {
-    this.currentGameMode = 'emsile24'; // 'emsile24' | 'sigaPronouns' | 'vocab'
+    this.currentGameMode = 'emsile24'; // 'emsile24' | 'sigaPronouns' | 'vocab' | 'pronouns'
     this.selectedSigaId = 1;
     this.currentQuizWords = [];
     this.shuffledIndices = [];
@@ -956,6 +966,7 @@ class LanguageGameEngine {
     this.isAnswering = false;
     this.lastMissedWordId = null;
     this.currentCorrectAnswerKey = "";
+    this.vocabStats = {};
   }
 
   start() {
@@ -988,12 +999,17 @@ class LanguageGameEngine {
 
     if (screenId === "langQuizSection" || screenId === "langTableSection") {
       if (btnMenu) btnMenu.style.display = "inline-flex";
-      if (btnTable) btnTable.style.display = (this.currentGameMode === "vocab" ? "none" : "inline-flex");
+      // Kelime ve Zamirler modunda tablo butonu gizli
+      const hideTable = (this.currentGameMode === "vocab" || this.currentGameMode === "pronouns");
+      if (btnTable) btnTable.style.display = hideTable ? "none" : "inline-flex";
+
       if (title) {
         if (this.currentGameMode === 'emsile24') {
           title.textContent = "24 Çekim";
         } else if (this.currentGameMode === 'vocab') {
           title.textContent = "Kelime";
+        } else if (this.currentGameMode === 'pronouns') {
+          title.textContent = "Zamirler";
         } else {
           const s = EMSILE_24_WORDS.find(w => w.id === this.selectedSigaId) || EMSILE_24_WORDS[0];
           title.textContent = `${s.meaning} Çekimi`;
@@ -1028,13 +1044,13 @@ class LanguageGameEngine {
 
     EMSILE_24_WORDS.forEach(siga => {
       const card = document.createElement("div");
-      card.className = "siga-item-card";
+      card.className = "lang-siga-card";
       card.innerHTML = `
-        <span class="siga-badge-num">${siga.id}</span>
-        <div class="siga-item-arabic">${siga.word}</div>
-        <div class="siga-item-title">${escapeHtml(siga.meaning)}</div>
-        <div class="siga-item-trans">${escapeHtml(siga.translation)}</div>
-        ${siga.extraHint ? `<div class="siga-item-hint">${escapeHtml(siga.extraHint)}</div>` : ""}
+        <span class="lang-siga-num-badge">${siga.id}</span>
+        <div class="lang-siga-arabic-word arabic-font">${siga.word}</div>
+        <div class="lang-siga-meaning-title">${escapeHtml(siga.meaning)}</div>
+        <div class="lang-siga-trans-text">${escapeHtml(siga.translation)}</div>
+        ${siga.extraHint ? `<div class="lang-siga-hint-badge">${escapeHtml(siga.extraHint)}</div>` : ""}
       `;
       card.addEventListener("click", () => this.startSigaPronounGame(siga.id));
       grid.appendChild(card);
@@ -1063,8 +1079,7 @@ class LanguageGameEngine {
     this.renderQuestion();
   }
 
-  // 3. Mod: Kelime Oyunu (Tekil / İkili / Çoğul) - KULLANICI İSTEĞİ
-  // KELİME KATEGORİ MENÜSÜ AÇMA (Kur'an, Hadis, İslami Eserler, Genel)
+  // 3. Mod: Kelime Oyunu (Tekil / İkili / Çoğul)
   openVocabCategoryMenu() {
     this.currentGameMode = 'vocab';
     this.showScreen("langVocabCategorySection");
@@ -1074,58 +1089,11 @@ class LanguageGameEngine {
     const badge = document.getElementById("langPillBadge");
 
     if (btnMenu) btnMenu.style.display = "inline-flex";
-    if (btnTable) btnTable.style.display = "none"; // KULLANICI İSTEĞİ: Tabloyu gör seçeneği olmasın!
-    if (title) title.textContent = "Kelime Kategorileri";
-    if (badge) badge.style.display = "none";
-  }
-
-  // Belirli bir kategori ile kelime testini başlatma
-  startVocabCategory(category = 'all') {
-    this.currentGameMode = 'vocab';
-    this.currentVocabCategory = category;
-
-    let list = VOCABULARY_WORDS;
-    if (category && category !== 'all') {
-      list = VOCABULARY_WORDS.filter(w => w.category === category);
-    }
-    if (!list || list.length === 0) list = VOCABULARY_WORDS;
-
-    this.currentQuizWords = list.slice();
-    this.initShuffledIndices();
-    this.showScreen("langQuizSection");
-
-    // KULLANICI İSTEĞİ: Tablo butonunu kesinlikle gizle
-    const btnTable = document.getElementById("btnLangToggleTable");
     if (btnTable) btnTable.style.display = "none";
-
-    const title = document.getElementById("langModalTitle");
-    if (title) {
-      if (category === 'kuran') title.textContent = "Kur'an Kelimeleri (150)";
-      else if (category === 'hadis') title.textContent = "Hadis Kelimeleri (150)";
-      else if (category === 'kitap') title.textContent = "İslami Kitaplar (150)";
-      else if (category === 'genel') title.textContent = "Genel Kelimeler (300)";
-      else title.textContent = "Kelime (750)";
-    }
-
-    this.renderQuestion();
-  }
-
-  // KELİME KATEGORİ MENÜSÜ AÇMA (Kur'an, Hadis, İslami Eserler, Genel)
-  openVocabCategoryMenu() {
-    this.currentGameMode = 'vocab';
-    this.showScreen("langVocabCategorySection");
-    const btnMenu = document.getElementById("btnLangMenu");
-    const btnTable = document.getElementById("btnLangToggleTable");
-    const title = document.getElementById("langModalTitle");
-    const badge = document.getElementById("langPillBadge");
-
-    if (btnMenu) btnMenu.style.display = "inline-flex";
-    if (btnTable) btnTable.style.display = "none"; // KULLANICI İSTEĞİ: Tabloyu gör seçeneği olmasın!
     if (title) title.textContent = "Kelime Kategorileri";
     if (badge) badge.style.display = "none";
   }
 
-  // Belirli bir kategori ile kelime testini başlatma
   startVocabCategory(category = 'all') {
     this.currentGameMode = 'vocab';
     this.currentVocabCategory = category;
@@ -1140,7 +1108,6 @@ class LanguageGameEngine {
     this.initShuffledIndices();
     this.showScreen("langQuizSection");
 
-    // KULLANICI İSTEĞİ: Tablo butonunu kesinlikle gizle
     const btnTable = document.getElementById("btnLangToggleTable");
     if (btnTable) btnTable.style.display = "none";
 
@@ -1160,8 +1127,489 @@ class LanguageGameEngine {
     this.openVocabCategoryMenu();
   }
 
+  // 4. Mod: ZAMİRLER OYUNU (KULLANICI İSTEĞİ: 14 AYRIK ŞAHIS ZAMİRİ)
+  startPronounsGame() {
+    this.currentGameMode = 'pronouns';
+    this.currentQuizWords = INDEPENDENT_PRONOUNS_14.slice();
+    this.initShuffledIndices();
+    this.showScreen("langQuizSection");
+
+    const btnTable = document.getElementById("btnLangToggleTable");
+    if (btnTable) btnTable.style.display = "none";
+
+    const title = document.getElementById("langModalTitle");
+    if (title) title.textContent = "Zamirler";
+
+    this.renderQuestion();
+  }
+
+  initShuffledIndices() {
+    this.shuffledIndices = [];
+    for (let i = 0; i < this.currentQuizWords.length; i++) this.shuffledIndices.push(i);
+    for (let i = this.shuffledIndices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.shuffledIndices[i], this.shuffledIndices[j]] = [this.shuffledIndices[j], this.shuffledIndices[i]];
+    }
+    this.currentOrderIndex = 0;
+  }
+
+  // ADAPTİF TEKRAR & İSTATİSTİK SİSTEMİ (LEITNER)
+  loadVocabStats() {
+    try {
+      const saved = localStorage.getItem('vocab_adaptive_stats_v2');
+      this.vocabStats = saved ? JSON.parse(saved) : {};
+    } catch (_) {
+      this.vocabStats = {};
+    }
+  }
+
+  saveVocabStats() {
+    try {
+      localStorage.setItem('vocab_adaptive_stats_v2', JSON.stringify(this.vocabStats));
+    } catch (_) {}
+  }
+
+  getWordWeight(wordId) {
+    if (!this.vocabStats) this.loadVocabStats();
+    const st = this.vocabStats[wordId];
+    const streak = (st && typeof st.streak === 'number') ? st.streak : 0;
+    if (streak <= 5) return 1.0;
+    const reduced = Math.pow(0.70, streak - 5);
+    return Math.max(0.02, reduced);
+  }
+
+  recordVocabAnswer(wordId, isCorrect) {
+    if (!this.vocabStats) this.loadVocabStats();
+    if (!this.vocabStats[wordId]) {
+      this.vocabStats[wordId] = { streak: 0, totalCorrect: 0, totalWrong: 0 };
+    }
+    const entry = this.vocabStats[wordId];
+    if (isCorrect) {
+      entry.streak = (entry.streak || 0) + 1;
+      entry.totalCorrect = (entry.totalCorrect || 0) + 1;
+    } else {
+      entry.streak = 0;
+      entry.totalWrong = (entry.totalWrong || 0) + 1;
+    }
+    this.saveVocabStats();
+  }
+
+  pickNextVocabIndex() {
+    if (!this.currentQuizWords || this.currentQuizWords.length === 0) return 0;
+    if (this.currentQuizWords.length === 1) return 0;
+
+    const weights = this.currentQuizWords.map(w => this.getWordWeight(w.id));
+    let totalWeight = 0;
+    for (let i = 0; i < weights.length; i++) {
+      if (this.currentWord && this.currentQuizWords[i].id === this.currentWord.id && this.currentQuizWords.length > 2) {
+        weights[i] *= 0.05;
+      }
+      totalWeight += weights[i];
+    }
+
+    if (totalWeight <= 0) {
+      return Math.floor(Math.random() * this.currentQuizWords.length);
+    }
+
+    const rand = Math.random() * totalWeight;
+    let cumulative = 0;
+    for (let i = 0; i < weights.length; i++) {
+      cumulative += weights[i];
+      if (rand <= cumulative) return i;
+    }
+    return this.currentQuizWords.length - 1;
+  }
+
+  renderQuestion() {
+    this.isAnswering = false;
+
+    const feedbackBar = document.getElementById("langQuizFeedbackBar");
+    if (feedbackBar) feedbackBar.style.display = "none";
+
+    let targetIdx;
+    if (this.currentGameMode === 'vocab') {
+      targetIdx = this.pickNextVocabIndex();
+      this.currentOrderIndex = targetIdx;
+    } else {
+      if (this.shuffledIndices.length === 0) this.initShuffledIndices();
+      targetIdx = this.shuffledIndices[this.currentOrderIndex];
+    }
+    this.currentWord = this.currentQuizWords[targetIdx];
+
+    const targetWordEl = document.getElementById("langTargetWord");
+    const targetContainer = document.getElementById("langTargetWordContainer") || (targetWordEl ? targetWordEl.parentElement : null);
+    const trackerEl = document.getElementById("langCurrentIndex");
+    const captionEl = document.getElementById("langTargetCaption");
+
+    if (trackerEl) {
+      trackerEl.textContent = `${this.currentOrderIndex + 1} / ${this.currentQuizWords.length}`;
+    }
+
+    let questionConfig = null;
+
+    if (this.currentGameMode === 'vocab') {
+      // KELİME MODU: Çift Yönlü
+      const qTypes = ['VOCAB_ARABIC_TO_MEANING', 'VOCAB_MEANING_TO_ARABIC'];
+      const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
+
+      if (chosenType === 'VOCAB_ARABIC_TO_MEANING') {
+        questionConfig = {
+          mode: 'vocab_ar_to_tr',
+          instruction: "Bu kelimelerin (Tekil / İkili / Çoğul) Türkçe anlamı nedir?",
+          correctKey: this.currentWord.meaning,
+          choices: this.generateVocabChoices(this.currentWord, 'meaning')
+        };
+        if (targetContainer) {
+          targetContainer.innerHTML = `
+            <div class="vocab-triplet-display" dir="ltr" style="display:flex; justify-content:center; align-items:center; gap:8px; margin:6px 0;">
+              <div class="triplet-col" style="display:flex; flex-direction:column; align-items:center; background:rgba(30,41,59,0.7); padding:6px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.1);">
+                <span style="font-size:0.65rem; color:#818cf8; font-weight:700;">ÇOĞUL</span>
+                <span class="arabic-font" style="font-size:1.5rem; color:#fff; direction:rtl;">${this.currentWord.plural}</span>
+              </div>
+              <span style="font-size:1.4rem; color:#94a3b8; font-weight:700;">/</span>
+              <div class="triplet-col" style="display:flex; flex-direction:column; align-items:center; background:rgba(30,41,59,0.7); padding:6px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.1);">
+                <span style="font-size:0.65rem; color:#818cf8; font-weight:700;">İKİLİ</span>
+                <span class="arabic-font" style="font-size:1.5rem; color:#fff; direction:rtl;">${this.currentWord.dual}</span>
+              </div>
+              <span style="font-size:1.4rem; color:#94a3b8; font-weight:700;">/</span>
+              <div class="triplet-col" style="display:flex; flex-direction:column; align-items:center; background:rgba(30,41,59,0.7); padding:6px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.1);">
+                <span style="font-size:0.65rem; color:#818cf8; font-weight:700;">TEKİL</span>
+                <span class="arabic-font" style="font-size:1.5rem; color:#fff; direction:rtl;">${this.currentWord.singular}</span>
+              </div>
+            </div>
+          `;
+        }
+      } else {
+        questionConfig = {
+          mode: 'vocab_tr_to_ar',
+          instruction: "Bu anlamın Tekil / İkili / Çoğul Arapça karşılığı hangisidir?",
+          correctKey: this.currentWord.id,
+          choices: this.generateVocabChoices(this.currentWord, 'arabic')
+        };
+        if (targetContainer) {
+          targetContainer.innerHTML = `
+            <h1 class="lang-target-word-text latin-font" id="langTargetWord">${escapeHtml(this.currentWord.meaning)}</h1>
+          `;
+        }
+      }
+
+    } else if (this.currentGameMode === 'pronouns') {
+      // 4. Mod: ZAMİRLER MODU (Çift Yönlü: Arapça ➔ Anlam veya Anlam ➔ Arapça)
+      const qTypes = ['PRONOUN_AR_TO_TR', 'PRONOUN_TR_TO_AR'];
+      const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
+
+      if (chosenType === 'PRONOUN_AR_TO_TR') {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu zamirin anlamı hangisidir?",
+          correctKey: this.currentWord.meaning,
+          promptText: this.currentWord.word,
+          isPromptArabic: true,
+          isChoiceArabic: false,
+          choices: this.generatePronounChoices(this.currentWord, 'meaning')
+        };
+      } else {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu anlama gelen Arapça zamir hangisidir?",
+          correctKey: this.currentWord.word,
+          promptText: this.currentWord.meaning,
+          isPromptArabic: false,
+          isChoiceArabic: true,
+          choices: this.generatePronounChoices(this.currentWord, 'word')
+        };
+      }
+
+      if (targetContainer) {
+        targetContainer.innerHTML = `
+          <h1 class="lang-target-word-text ${questionConfig.isPromptArabic ? 'arabic-font' : 'latin-font'}" id="langTargetWord">${escapeHtml(questionConfig.promptText)}</h1>
+        `;
+      }
+
+    } else if (this.currentGameMode === 'emsile24') {
+      const qTypes = ['ARABIC_TO_MEANING', 'ARABIC_TO_TRANSLATION', 'MEANING_TO_ARABIC', 'TRANSLATION_TO_ARABIC'];
+      const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
+
+      if (chosenType === 'ARABIC_TO_MEANING') {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu kelimenin sîga terimi (başlığı) nedir?",
+          correctKey: this.currentWord.meaning,
+          promptText: this.currentWord.word,
+          isPromptArabic: true,
+          isChoiceArabic: false,
+          choices: this.generateSimpleChoices(this.currentWord.meaning, EMSILE_24_WORDS.map(w => w.meaning))
+        };
+      } else if (chosenType === 'ARABIC_TO_TRANSLATION') {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu kelimenin Türkçe fiil manası (çevirisi) nedir?",
+          correctKey: this.currentWord.translation,
+          promptText: this.currentWord.word,
+          isPromptArabic: true,
+          isChoiceArabic: false,
+          choices: this.generateSimpleChoices(this.currentWord.translation, EMSILE_24_WORDS.map(w => w.translation))
+        };
+      } else if (chosenType === 'MEANING_TO_ARABIC') {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu sîga teriminin Arapça çekimi hangisidir?",
+          correctKey: this.currentWord.word,
+          promptText: this.currentWord.meaning,
+          isPromptArabic: false,
+          isChoiceArabic: true,
+          choices: this.generateSimpleChoices(this.currentWord.word, EMSILE_24_WORDS.map(w => w.word))
+        };
+      } else {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu manaya gelen Arapça çekim hangisidir?",
+          correctKey: this.currentWord.word,
+          promptText: this.currentWord.translation,
+          isPromptArabic: false,
+          isChoiceArabic: true,
+          choices: this.generateSimpleChoices(this.currentWord.word, EMSILE_24_WORDS.map(w => w.word))
+        };
+      }
+
+      if (targetContainer) {
+        targetContainer.innerHTML = `
+          <h1 class="lang-target-word-text ${questionConfig.isPromptArabic ? 'arabic-font' : 'latin-font'}" id="langTargetWord">${escapeHtml(questionConfig.promptText)}</h1>
+        `;
+      }
+
+    } else {
+      // Siga Pronouns (Zamirlere Göre Çekim)
+      const qTypes = ['ARABIC_TO_PRONOUN', 'PRONOUN_TO_ARABIC'];
+      const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
+
+      if (chosenType === 'ARABIC_TO_PRONOUN') {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu çekim hangi şahsa (zamire) aittir?",
+          correctKey: this.currentWord.meaning,
+          promptText: this.currentWord.word,
+          isPromptArabic: true,
+          isChoiceArabic: false,
+          choices: this.generateSimpleChoices(this.currentWord.meaning, PRONOUN_MEANINGS.slice())
+        };
+      } else {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu şahıs zamirine ait Arapça çekim hangisidir?",
+          correctKey: this.currentWord.word,
+          promptText: this.currentWord.meaning,
+          isPromptArabic: false,
+          isChoiceArabic: true,
+          choices: this.generateSimpleChoices(this.currentWord.word, this.currentQuizWords.map(w => w.word))
+        };
+      }
+
+      if (targetContainer) {
+        targetContainer.innerHTML = `
+          <h1 class="lang-target-word-text ${questionConfig.isPromptArabic ? 'arabic-font' : 'latin-font'}" id="langTargetWord">${escapeHtml(questionConfig.promptText)}</h1>
+        `;
+      }
+    }
+
+    this.currentCorrectAnswerKey = questionConfig.correctKey;
+    if (captionEl) captionEl.textContent = questionConfig.instruction;
+
+    this.renderOptionsGrid(questionConfig);
+  }
+
+  generateSimpleChoices(correctAnswer, pool) {
+    const distractors = pool.filter(opt => opt !== correctAnswer);
+    for (let i = distractors.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [distractors[i], distractors[j]] = [distractors[j], distractors[i]];
+    }
+    const chosen = [correctAnswer, ...distractors.slice(0, 4)];
+    for (let i = chosen.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [chosen[i], chosen[j]] = [chosen[j], chosen[i]];
+    }
+    return chosen;
+  }
+
+  generateVocabChoices(targetWord, type) {
+    const others = VOCABULARY_WORDS.filter(w => w.id !== targetWord.id);
+    for (let i = others.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [others[i], others[j]] = [others[j], others[i]];
+    }
+    const chosen = [targetWord, ...others.slice(0, 4)];
+    for (let i = chosen.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [chosen[i], chosen[j]] = [chosen[j], chosen[i]];
+    }
+    return chosen;
+  }
+
+  generatePronounChoices(targetItem, type) {
+    // type: 'meaning' veya 'word'
+    const correctVal = targetItem[type];
+    const uniquePool = [];
+    const seen = new Set();
+    seen.add(correctVal);
+
+    // Aynı kelimeye ait diğer varyantı eleyerek kafa karışıklığını önle (örn: هُمَا için diğer هُمَا)
+    for (const item of INDEPENDENT_PRONOUNS_14) {
+      const val = item[type];
+      if (!seen.has(val) && item.word !== targetItem.word) {
+        seen.add(val);
+        uniquePool.push(val);
+      }
+    }
+
+    for (let i = uniquePool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [uniquePool[i], uniquePool[j]] = [uniquePool[j], uniquePool[i]];
+    }
+
+    const chosen = [correctVal, ...uniquePool.slice(0, 4)];
+    for (let i = chosen.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [chosen[i], chosen[j]] = [chosen[j], chosen[i]];
+    }
+    return chosen;
+  }
+
+  renderOptionsGrid(cfg) {
+    const grid = document.getElementById("langOptionsGrid");
+    if (!grid) return;
+    grid.innerHTML = "";
+    const letters = ["A", "B", "C", "D", "E"];
+
+    if (cfg.mode === 'vocab_tr_to_ar') {
+      cfg.choices.forEach((choiceWord, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "lang-option-btn";
+        btn.setAttribute("type", "button");
+        btn.setAttribute("data-key", choiceWord.id);
+
+        btn.innerHTML = `
+          <span class="lang-opt-letter">${letters[idx]}</span>
+          <div class="lang-opt-content" dir="ltr" style="display:inline-flex; align-items:center; gap:8px;">
+            <span class="arabic-font" style="font-size:1.35rem; direction:rtl;">${escapeHtml(choiceWord.plural)}</span>
+            <span style="color:#818cf8; font-weight:700;">/</span>
+            <span class="arabic-font" style="font-size:1.35rem; direction:rtl;">${escapeHtml(choiceWord.dual)}</span>
+            <span style="color:#818cf8; font-weight:700;">/</span>
+            <span class="arabic-font" style="font-size:1.35rem; direction:rtl;">${escapeHtml(choiceWord.singular)}</span>
+          </div>
+        `;
+        btn.addEventListener("click", () => this.handleAnswer(choiceWord.id, btn));
+        grid.appendChild(btn);
+      });
+
+    } else if (cfg.mode === 'vocab_ar_to_tr') {
+      cfg.choices.forEach((choiceWord, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "lang-option-btn";
+        btn.setAttribute("type", "button");
+        btn.setAttribute("data-key", choiceWord.meaning);
+
+        btn.innerHTML = `
+          <span class="lang-opt-letter">${letters[idx]}</span>
+          <div class="lang-opt-content">
+            <span class="lang-opt-text">${escapeHtml(choiceWord.meaning)}</span>
+          </div>
+        `;
+        btn.addEventListener("click", () => this.handleAnswer(choiceWord.meaning, btn));
+        grid.appendChild(btn);
+      });
+
+    } else {
+      cfg.choices.forEach((choiceText, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "lang-option-btn";
+        btn.setAttribute("type", "button");
+        btn.setAttribute("data-key", choiceText);
+
+        const arabicCls = cfg.isChoiceArabic ? "arabic-font" : "";
+
+        btn.innerHTML = `
+          <span class="lang-opt-letter">${letters[idx]}</span>
+          <div class="lang-opt-content">
+            <span class="lang-opt-text ${arabicCls}">${escapeHtml(choiceText)}</span>
+          </div>
+        `;
+        btn.addEventListener("click", () => this.handleAnswer(choiceText, btn));
+        grid.appendChild(btn);
+      });
+    }
+  }
+
+  handleAnswer(selectedKey, clickedBtn) {
+    if (this.isAnswering) return;
+    this.isAnswering = true;
+
+    const isCorrect = (String(selectedKey) === String(this.currentCorrectAnswerKey));
+
+    if (isCorrect) {
+      clickedBtn.classList.add("correct-choice");
+      langSounds.playCorrect();
+
+      if (this.currentGameMode === 'vocab' && this.currentWord) {
+        this.recordVocabAnswer(this.currentWord.id, true);
+      }
+
+      setTimeout(() => {
+        if (this.currentGameMode === 'vocab') {
+          this.renderQuestion();
+        } else {
+          this.currentOrderIndex = (this.currentOrderIndex + 1) % this.currentQuizWords.length;
+          this.renderQuestion();
+        }
+      }, 380);
+    } else {
+      clickedBtn.classList.add("wrong-choice");
+      langSounds.playWrong();
+
+      const grid = document.getElementById("langOptionsGrid");
+      if (grid) {
+        grid.querySelectorAll(".lang-option-btn").forEach(btn => {
+          if (String(btn.getAttribute("data-key")) === String(this.currentCorrectAnswerKey)) {
+            btn.classList.add("correct-choice");
+          }
+        });
+      }
+
+      this.lastMissedWordId = this.currentWord.id;
+
+      if (this.currentGameMode === 'vocab' && this.currentWord) {
+        this.recordVocabAnswer(this.currentWord.id, false);
+      }
+
+      if (this.currentGameMode === 'vocab' || this.currentGameMode === 'pronouns') {
+        // Kelime veya Zamirler bölümünde yanlış yapılınca tabloya gitme, Devam Et göster
+        const feedbackBar = document.getElementById("langQuizFeedbackBar");
+        if (feedbackBar) {
+          feedbackBar.style.display = "flex";
+          feedbackBar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      } else {
+        setTimeout(() => {
+          this.showTableSection(this.lastMissedWordId);
+        }, 650);
+      }
+    }
+  }
+
+  showTableSection(highlightId = null) {
+    if (this.currentGameMode === "vocab" || this.currentGameMode === "pronouns") return;
+    this.showScreen("langTableSection");
+    this.renderCardsGrid(highlightId);
+  }
+
+  continueQuiz() {
+    this.showScreen("langQuizSection");
+    this.currentOrderIndex = (this.currentOrderIndex + 1) % this.currentQuizWords.length;
+    this.renderQuestion();
+  }
+
   toggleTableDirectly() {
-    if (this.currentGameMode === "vocab") return; // Kelime modunda tablo yok
+    if (this.currentGameMode === "vocab" || this.currentGameMode === "pronouns") return;
     const tableSec = document.getElementById("langTableSection");
     if (tableSec && tableSec.style.display !== "none") {
       this.continueQuiz();
@@ -1178,59 +1626,7 @@ class LanguageGameEngine {
     if (!gridEl) return;
     gridEl.innerHTML = "";
 
-    if (this.currentGameMode === 'vocab') {
-      if (bannerIcon) bannerIcon.textContent = "📝";
-      if (bannerTitle) bannerTitle.textContent = "Kelime Kartları (Tekil / İkili / Çoğul)";
-      if (bannerDesc) bannerDesc.textContent = "Kartın önünde soldan sağa Tekil / İkili / Çoğul formlar yer alır.";
-
-      gridEl.className = "vocab-grid-wrapper";
-
-      this.currentQuizWords.forEach(item => {
-        const isMissed = (highlightId && item.id === highlightId);
-        const card = document.createElement("div");
-        card.className = `lang-flip-card ${isMissed ? "missed-highlight" : ""}`;
-        card.setAttribute("data-id", item.id);
-
-        card.innerHTML = `
-          <div class="lang-flip-card-inner">
-            <div class="lang-flip-card-front" style="padding: 10px 6px;">
-              <span class="lang-card-num-badge">${item.id}</span>
-              <div class="vocab-card-triplet" dir="ltr" style="display:flex; justify-content:center; align-items:center; gap:6px; width:100%;">
-                <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
-                  <span style="font-size:0.55rem; color:#a5b4fc; font-weight:700;">Tekil</span>
-                  <span class="arabic-font" style="font-size:1.15rem; color:#fff; direction:rtl;">${item.singular}</span>
-                </div>
-                <span style="color:#64748b; font-weight:700; font-size:0.9rem;">/</span>
-                <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
-                  <span style="font-size:0.55rem; color:#a5b4fc; font-weight:700;">İkili</span>
-                  <span class="arabic-font" style="font-size:1.15rem; color:#fff; direction:rtl;">${item.dual}</span>
-                </div>
-                <span style="color:#64748b; font-weight:700; font-size:0.9rem;">/</span>
-                <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
-                  <span style="font-size:0.55rem; color:#a5b4fc; font-weight:700;">Çoğul</span>
-                  <span class="arabic-font" style="font-size:1.15rem; color:#fff; direction:rtl;">${item.plural}</span>
-                </div>
-              </div>
-              <div class="lang-card-tap-hint">🔄 Anlamı Gör</div>
-            </div>
-            <div class="lang-flip-card-back">
-              <div class="lang-card-answer-title" style="font-size:1.05rem;">${escapeHtml(item.meaning)}</div>
-              <div class="card-trans-text" style="color:#c7d2fe;">Tekil / İkili / Çoğul</div>
-              <div class="lang-card-check-icon">✓</div>
-            </div>
-          </div>
-        `;
-
-        card.addEventListener("click", () => {
-          card.classList.toggle("flipped");
-          langSounds.playFlip();
-          /* vibration disabled */
-        });
-
-        gridEl.appendChild(card);
-      });
-
-    } else if (this.currentGameMode === 'emsile24') {
+    if (this.currentGameMode === 'emsile24') {
       if (bannerIcon) bannerIcon.textContent = "📖";
       if (bannerTitle) bannerTitle.textContent = "24 Sîga Tablosu (Sağdan Sola)";
       if (bannerDesc) bannerDesc.textContent = "Kartın arkasında sîga başlığı ve Türkçe fiil manası yer alır.";
@@ -1321,13 +1717,11 @@ class LanguageGameEngine {
 
     card.innerHTML = `
       <div class="lang-flip-card-inner">
-        <!-- ÖN YÜZ: Arapça Kelime (Sağdan Sola) -->
         <div class="lang-flip-card-front">
           <span class="lang-card-num-badge">${item.id}</span>
           <div class="lang-card-word-title arabic-font">${item.word}</div>
           <div class="lang-card-tap-hint">🔄 Anlamı ve Çevirisi</div>
         </div>
-        <!-- ARKA YÜZ: Anlamı ve Türkçe Çevirisi -->
         <div class="lang-flip-card-back">
           <div class="lang-card-answer-title">${escapeHtml(item.meaning)}</div>
           ${transHtml}
@@ -1340,7 +1734,6 @@ class LanguageGameEngine {
     card.addEventListener("click", () => {
       card.classList.toggle("flipped");
       langSounds.playFlip();
-      /* vibration disabled */
     });
 
     return card;

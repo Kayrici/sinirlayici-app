@@ -1626,6 +1626,14 @@
             <span>Oyuna Başla</span>
           </button>
         </div>
+
+        <!-- 4. Menü: Zamirler -->
+        <div class="menu-choice-card" onclick="startPronounsGame()">
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">Zamirler</h3>
+          <button type="button" class="btn-start-choice" style="background: linear-gradient(135deg, #8b5cf6, #ec4899); box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);">
+            <span>Oyuna Başla</span>
+          </button>
+        </div>
       </div>
 
       <!-- Güvenli Çıkış Butonu / Kartı -->
@@ -1880,6 +1888,24 @@ try { if (typeof navigator !== 'undefined') { navigator.vibrate = function() { r
     let EMSILE_24_WORDS = JSON.parse(JSON.stringify(DEFAULT_EMSILE_24_WORDS));
 
     // B) 14 ŞAHIS ZAMİRİ
+        // B-2) 14 AYRIK ŞAHIS ZAMİRİ (KULLANICI TALEBİ)
+    const INDEPENDENT_PRONOUNS_14 = [
+      { id: 1, word: "هُوَ", meaning: "O (erkek)", group: "Gâib (3. Şahıs Eril)" },
+      { id: 2, word: "هُمَا", meaning: "O ikisi (erkek)", group: "Gâib (3. Şahıs Eril)" },
+      { id: 3, word: "هُمْ", meaning: "Onlar (erkek)", group: "Gâib (3. Şahıs Eril)" },
+      { id: 4, word: "هِيَ", meaning: "O (kadın)", group: "Gâibe (3. Şahıs Dişil)" },
+      { id: 5, word: "هُمَا", meaning: "O ikisi (kadın)", group: "Gâibe (3. Şahıs Dişil)" },
+      { id: 6, word: "هُنَّ", meaning: "Onlar (kadın)", group: "Gâibe (3. Şahıs Dişil)" },
+      { id: 7, word: "أَنْتَ", meaning: "Sen (erkek)", group: "Muhâtab (2. Şahıs Eril)" },
+      { id: 8, word: "أَنْتُمَا", meaning: "Siz ikiniz (erkek)", group: "Muhâtab (2. Şahıs Eril)" },
+      { id: 9, word: "أَنْتُمْ", meaning: "Siz (erkek)", group: "Muhâtab (2. Şahıs Eril)" },
+      { id: 10, word: "أَنْتِ", meaning: "Sen (kadın)", group: "Muhâtaba (2. Şahıs Dişil)" },
+      { id: 11, word: "أَنْتُمَا", meaning: "Siz ikiniz (kadın)", group: "Muhâtaba (2. Şahıs Dişil)" },
+      { id: 12, word: "أَنْتُنَّ", meaning: "Siz (kadın)", group: "Muhâtaba (2. Şahıs Dişil)" },
+      { id: 13, word: "أَنَا", meaning: "Ben", group: "Mütekellim (1. Şahıs)" },
+      { id: 14, word: "نَحْنُ", meaning: "Biz", group: "Mütekellim (1. Şahıs)" }
+    ];
+
     const PRONOUN_MEANINGS = [
       "O (erkek)", "O ikisi (erkek)", "Onlar (erkek)",
       "O (kadın)", "O ikisi (kadın)", "Onlar (kadın)",
@@ -2812,11 +2838,13 @@ async function syncWordsFromCloud() {
       } else if (screenId === 'quizSection') {
         if (btnMenu) btnMenu.style.display = "inline-flex";
         if (btnExit) btnExit.style.display = "inline-flex";
-        if (btnTable) btnTable.style.display = (currentGameMode === "vocab" ? "none" : "inline-flex");
+        if (btnTable) btnTable.style.display = ((currentGameMode === "vocab" || currentGameMode === "pronouns") ? "none" : "inline-flex");
         if (headerTitle) {
           if (currentGameMode === 'emsile24') {
             headerTitle.textContent = "24 Sîga Oyunu";
-          } else if (currentGameMode === 'vocab') {
+          } else if (currentGameMode === 'pronouns') {
+            headerTitle.textContent = "Zamirler";
+          } else if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
             if (currentVocabCategory === 'kuran') headerTitle.textContent = "Kur'an Kelimeleri (150)";
             else if (currentVocabCategory === 'hadis') headerTitle.textContent = "Hadis Kelimeleri (150)";
             else if (currentVocabCategory === 'kitap') headerTitle.textContent = "İslami Kitaplar (150)";
@@ -2831,7 +2859,7 @@ async function syncWordsFromCloud() {
       } else if (screenId === 'tableSection') {
         if (btnMenu) btnMenu.style.display = "inline-flex";
         if (btnExit) btnExit.style.display = "inline-flex";
-        if (btnTable) btnTable.style.display = (currentGameMode === "vocab" ? "none" : "inline-flex");
+        if (btnTable) btnTable.style.display = ((currentGameMode === "vocab" || currentGameMode === "pronouns") ? "none" : "inline-flex");
       } else if (screenId === 'exitScreenView') {
         if (btnMenu) btnMenu.style.display = "none";
         if (btnExit) btnExit.style.display = "none";
@@ -2967,6 +2995,46 @@ async function syncWordsFromCloud() {
       if (btnTable) btnTable.style.display = "none"; // KULLANICI İSTEĞİ: Tabloyu gör seçeneği olmasın!
     }
 
+        // 4. Mod: ZAMİRLER OYUNU (14 AYRIK ŞAHIS ZAMİRİ)
+    function startPronounsGame() {
+      currentGameMode = 'pronouns';
+      currentQuizWords = INDEPENDENT_PRONOUNS_14.slice();
+      initShuffledIndices();
+      showScreen("quizSection");
+
+      const btnTable = document.getElementById("btnToggleTableDirect");
+      if (btnTable) btnTable.style.display = "none";
+
+      renderQuestion();
+    }
+
+    function generatePronounChoices(targetItem, type) {
+      const correctVal = targetItem[type];
+      const uniquePool = [];
+      const seen = new Set();
+      seen.add(correctVal);
+
+      for (const item of INDEPENDENT_PRONOUNS_14) {
+        const val = item[type];
+        if (!seen.has(val) && item.word !== targetItem.word) {
+          seen.add(val);
+          uniquePool.push(val);
+        }
+      }
+
+      for (let i = uniquePool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [uniquePool[i], uniquePool[j]] = [uniquePool[j], uniquePool[i]];
+      }
+
+      const chosen = [correctVal, ...uniquePool.slice(0, 4)];
+      for (let i = chosen.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [chosen[i], chosen[j]] = [chosen[j], chosen[i]];
+      }
+      return chosen;
+    }
+
     function startVocabGame() {
       openVocabCategoryMenu();
     }
@@ -3096,7 +3164,7 @@ async function syncWordsFromCloud() {
       if (feedbackBar) feedbackBar.style.display = "none";
 
       let targetIdx = 0;
-      if (currentGameMode === 'vocab') {
+      if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
         targetIdx = pickNextVocabIndex();
         currentOrderIndex = targetIdx;
         currentWord = currentQuizWords[targetIdx];
@@ -3115,7 +3183,7 @@ async function syncWordsFromCloud() {
 
       let questionConfig = null;
 
-      if (currentGameMode === 'vocab') {
+      if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
         // KELİME MODU: ÇİFT YÖNLÜ
         // 1) Soru: Arapça Tekil / İkili / Çoğul ➔ Şıklar: Türkçe Anlam
         // 2) Soru: Türkçe Anlam ➔ Şıklar: Arapça Tekil / İkili / Çoğul (Soldan Sağa)
@@ -3381,7 +3449,7 @@ async function syncWordsFromCloud() {
         /* vibration disabled */
 
         setTimeout(() => {
-          if (currentGameMode === 'vocab') {
+          if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
             renderQuestion();
           } else {
             currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
@@ -3408,7 +3476,7 @@ async function syncWordsFromCloud() {
 
         lastMissedWordId = currentWord.id;
 
-        if (currentGameMode === 'vocab') {
+        if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
           // KULLANICI İSTEĞİ:
           // Kelime bölümünde yanlış yapılırsa tablo görünümüne gitme!
           // Sorunun altında "Devam Et" seçeneği olsun, ona tıklanıldığında diğer soruya geçilsin.
@@ -3430,7 +3498,7 @@ async function syncWordsFromCloud() {
       const feedbackBar = document.getElementById("quizFeedbackBar");
       if (feedbackBar) feedbackBar.style.display = "none";
       isAnswering = false;
-      if (currentGameMode === 'vocab') {
+      if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
         renderQuestion();
       } else {
         currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
@@ -3442,7 +3510,7 @@ async function syncWordsFromCloud() {
     // 6. 3D FLASHCARD TABLOLARI
     // =========================================================================
     function showTableSection(highlightId = null) {
-      if (currentGameMode === "vocab") return; // Kelime modunda tablo yok
+      if (currentGameMode === "vocab" || currentGameMode === "pronouns") return;
       showScreen("tableSection");
       renderActiveTable(highlightId);
     }
@@ -3454,7 +3522,7 @@ async function syncWordsFromCloud() {
     }
 
     function toggleTableDirectly() {
-      if (currentGameMode === "vocab") return; // Kelime modunda tablo yok
+      if (currentGameMode === "vocab" || currentGameMode === "pronouns") return;
       const tableSec = document.getElementById("tableSection");
       if (tableSec && tableSec.style.display !== "none") {
         continueQuiz();
@@ -3471,7 +3539,7 @@ async function syncWordsFromCloud() {
       if (!wrapper) return;
       wrapper.innerHTML = "";
 
-      if (currentGameMode === 'vocab') {
+      if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
         // KELİME TABLOSU: 3D FLASHCARDLAR
         if (bannerIcon) bannerIcon.textContent = "📝";
         if (bannerTitle) bannerTitle.textContent = "Kur'an'da En Çok Geçen 100 İsim (Tekil / İkili / Çoğul)";
@@ -3682,7 +3750,7 @@ async function syncWordsFromCloud() {
       if (!container) return;
       container.innerHTML = "";
 
-      if (currentGameMode === 'vocab') {
+      if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
         if (titleEl) titleEl.textContent = "✏️ Kelimeleri Düzenle (Tekil / İkili / Çoğul)";
 
         VOCABULARY_WORDS.forEach((item, idx) => {
@@ -3753,7 +3821,7 @@ async function syncWordsFromCloud() {
     function saveEditedWords() {
       const container = document.getElementById("editWordsListContainer");
 
-      if (currentGameMode === 'vocab') {
+      if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
         const rows = container.querySelectorAll(".vocab-edit-row");
         const updatedVocab = [];
         rows.forEach((row, idx) => {
