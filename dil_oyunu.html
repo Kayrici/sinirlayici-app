@@ -1560,8 +1560,158 @@
         justify-content: center;
         width: 100%;
       }
+    /* SAĞ ÜST KÖŞEDEKİ UFAK DOĞRU ORANI KARESİ (3/30 gibi) */
+    .quiz-streak-square {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      min-width: 50px;
+      height: 36px;
+      padding: 0 8px;
+      background: rgba(30, 41, 59, 0.88);
+      border: 1.5px solid rgba(99, 102, 241, 0.45);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+      z-index: 5;
+    }
+    .quiz-streak-square span {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: #818cf8;
+      letter-spacing: 0.5px;
+    }
+    .quiz-streak-square.streak-completed {
+      border-color: #10b981;
+      background: rgba(6, 78, 59, 0.85);
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
+    }
+    .quiz-streak-square.streak-completed span {
+      color: #34d399;
     }
 
+    /* KULLANICI PROFİLİ BUTONU VE HERO ALANI */
+    .btn-profile-action {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #c7d2fe;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+    }
+    .btn-profile-action:hover {
+      background: rgba(99, 102, 241, 0.3);
+      border-color: rgba(99, 102, 241, 0.7);
+      color: #ffffff;
+    }
+    .profile-hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.2s ease;
+    }
+    .profile-hero-pill:hover {
+      border-color: #818cf8;
+      color: #fff;
+      background: rgba(30, 41, 59, 0.85);
+      transform: translateY(-1px);
+    }
+    .profile-hero-pill strong {
+      color: #818cf8;
+    }
+
+    /* KULLANICI SEÇİM MODALI */
+    .user-list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 16px 0;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+    .user-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .user-list-item:hover {
+      border-color: #818cf8;
+      background: rgba(49, 46, 129, 0.35);
+    }
+    .user-list-item.active {
+      border-color: #10b981;
+      background: rgba(6, 78, 59, 0.35);
+    }
+    .user-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .user-item-name {
+      font-weight: 700;
+      color: #f8fafc;
+      font-size: 0.95rem;
+    }
+    .user-active-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.2);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .add-user-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .add-user-input {
+      flex: 1;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+    .add-user-btn {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    @keyframes bounceUnlock {
+      0% { transform: scale(0.9); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1.0); }
+    }
   </style>
 </head>
 <body>
@@ -1584,6 +1734,9 @@
     </div>
 
     <div class="header-actions">
+      <button type="button" class="btn-header-action btn-profile-action" onclick="openUserProfileModal()" id="btnUserProfileHeader" title="Kullanıcı Değiştir">
+        👤 <span id="activeUserNameHeader">Kullanıcı 1</span>
+      </button>
       <button type="button" class="btn-header-action" id="btnToggleTableDirect" onclick="toggleTableDirectly()" style="display: none;">
         📖 Tabloyu Gör
       </button>
@@ -1600,37 +1753,40 @@
         <span class="hero-badge">🎯 ARAPÇA ÇALIŞMA MERKEZİ</span>
         <h2>Ne Çalışmak İstiyorsunuz?</h2>
         <p>Aşağıdan istediğiniz oyun modunu seçin. Çekimler, sîga başlıkları, fiil manaları veya Tekil / İkili / Çoğul kelime eşleştirmesi yapabilirsiniz.</p>
+        <div class="profile-hero-pill" onclick="openUserProfileModal()" title="Kullanıcı Değiştir">
+          <span>👤 Aktif Kullanıcı: <strong id="activeUserNameBanner">Kullanıcı 1</strong> ⚙️ Değiştir</span>
+        </div>
       </div>
 
       <div class="menu-cards-grid">
-        <!-- 1. Menü: 24 Çekim -->
-        <div class="menu-choice-card" onclick="startEmsile24Game()">
-          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">24 Çekim</h3>
+        <!-- 1. Menü: Emsile-i Muhtelife (Başlangıçta Açık Olan Tek Menü) -->
+        <div class="menu-choice-card" id="menuCardEmsile24" onclick="startEmsile24Game()">
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">Emsile-i Muhtelife</h3>
           <button type="button" class="btn-start-choice">
             <span>Oyuna Başla</span>
           </button>
         </div>
 
-        <!-- 2. Menü: Zamirlere Göre Çekim -->
-        <div class="menu-choice-card" onclick="openSigaSelectionMenu()">
+        <!-- 2. Menü: Zamirler (Emsile-i Muhtelife'de 30 doğru yapılınca açılır) -->
+        <div class="menu-choice-card" id="menuCardPronouns" onclick="startPronounsGame()" style="display: none;">
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">Zamirler</h3>
+          <button type="button" class="btn-start-choice" style="background: linear-gradient(135deg, #8b5cf6, #ec4899); box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);">
+            <span>Oyuna Başla</span>
+          </button>
+        </div>
+
+        <!-- 3. Menü: Zamirlere Göre Çekim (Zamirler'de 15 doğru yapılınca açılır) -->
+        <div class="menu-choice-card" id="menuCardSigaPronouns" onclick="openSigaSelectionMenu()" style="display: none;">
           <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">Zamirlere Göre Çekim</h3>
           <button type="button" class="btn-start-choice">
             <span>Oyuna Başla</span>
           </button>
         </div>
 
-        <!-- 3. Menü: Kelime -->
-        <div class="menu-choice-card" onclick="startVocabGame()">
+        <!-- 4. Menü: Kelime -->
+        <div class="menu-choice-card" id="menuCardVocab" onclick="startVocabGame()" style="display: none;">
           <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">Kelime</h3>
           <button type="button" class="btn-start-choice" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);">
-            <span>Oyuna Başla</span>
-          </button>
-        </div>
-
-        <!-- 4. Menü: Zamirler -->
-        <div class="menu-choice-card" onclick="startPronounsGame()">
-          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">Zamirler</h3>
-          <button type="button" class="btn-start-choice" style="background: linear-gradient(135deg, #8b5cf6, #ec4899); box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);">
             <span>Oyuna Başla</span>
           </button>
         </div>
@@ -1734,9 +1890,13 @@
 
     <!-- 3. TEST / QUIZ ALANI -->
     <section id="quizSection">
-      <div class="quiz-tracker-bar" style="justify-content: center; margin-bottom: 14px;">
+      <div class="quiz-tracker-bar" style="position: relative; display: flex; justify-content: center; align-items: center; margin-bottom: 14px;">
         <div class="tracker-pill" style="margin: 0 auto;">
           <span id="quizTrackerText">Soru 1 / 24</span>
+        </div>
+        <!-- Sağ üst köşedeki ufak kare (3/30 gibi oran) -->
+        <div id="quizStreakSquare" class="quiz-streak-square" title="Üst üste doğru sayısı">
+          <span id="quizStreakRatio">0/30</span>
         </div>
         <span id="soundToggleBtn" style="display: none;"></span>
       </div>
@@ -1842,6 +2002,43 @@
       <div class="modal-footer">
         <button type="button" class="btn-modal cancel" onclick="closeEditWordsModal()">İptal</button>
         <button type="button" class="btn-modal save" onclick="saveEditedWords()">Kaydet ve Uygula</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- KİLİT AÇILDI TEBRİK MODALI -->
+  <div class="modal-overlay" id="unlockSuccessModal" style="display: none; align-items: center; justify-content: center; z-index: 10000;">
+    <div class="modal-card" style="max-width: 380px; text-align: center; border: 2px solid #10b981; box-shadow: 0 10px 40px rgba(16, 185, 129, 0.35);">
+      <div style="font-size: 3rem; margin: 10px 0; animation: bounceUnlock 1s infinite alternate;">🎉</div>
+      <h3 style="font-size: 1.25rem; font-weight: 800; color: #34d399; margin: 0 0 8px 0;" id="unlockSuccessTitle">Yeni Menü Açıldı!</h3>
+      <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.5; margin: 0 0 20px 0;" id="unlockSuccessDesc">Tebrikler! Üst üste doğru serisini tamamlayarak yeni menünün kilidini açtınız.</p>
+      <div style="display: flex; gap: 10px; justify-content: center;">
+        <button type="button" class="btn-start-choice" style="background: linear-gradient(135deg, #10b981, #059669); padding: 10px 18px; border-radius: 8px;" onclick="goToUnlockedMenu()">
+          <span>Yeni Menüye Git</span>
+        </button>
+        <button type="button" class="btn-start-choice" style="background: rgba(51, 65, 85, 0.8); border: 1px solid rgba(255,255,255,0.15); padding: 10px 18px; border-radius: 8px;" onclick="closeUnlockModal()">
+          <span>Burada Devam Et</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- KULLANICI PROFİLİ MODALI -->
+  <div class="modal-overlay" id="userProfileModal" style="display: none; align-items: center; justify-content: center; z-index: 10000;">
+    <div class="modal-card" style="max-width: 420px; width: 90%;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0;">👤 Kullanıcı Profilleri</h3>
+        <button type="button" class="modal-close-btn" onclick="closeUserProfileModal()">✕</button>
+      </div>
+      <div class="modal-body" style="padding: 14px 18px;">
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 12px 0;">Her kullanıcının kilit açma ilerlemesi ve doğru serileri ayrı kaydedilir.</p>
+        <div class="user-list-container" id="userProfilesListContainer">
+          <!-- JS ile doldurulur -->
+        </div>
+        <div class="add-user-row">
+          <input type="text" class="add-user-input" id="newUserNameInput" placeholder="Yeni kullanıcı adı..." maxlength="20" onkeydown="if(event.key==='Enter') addNewUser()" />
+          <button type="button" class="add-user-btn" onclick="addNewUser()">➕ Ekle</button>
+        </div>
       </div>
     </div>
   </div>
@@ -2799,6 +2996,329 @@ async function syncWordsFromCloud() {
     }
 
     // =========================================================================
+    // 2.5 KULLANICI PROFİLİ VE AŞAMALI KİLİT AÇMA (PROGRESSION) SİSTEMİ
+    // =========================================================================
+    const USER_STORAGE_KEYS = {
+      USERS_LIST: 'emsile_users_list_v3',
+      ACTIVE_USER_ID: 'emsile_active_user_id_v3',
+      PROGRESS_PREFIX: 'emsile_user_prog_v3_'
+    };
+
+    function getUsersList() {
+      try {
+        const raw = localStorage.getItem(USER_STORAGE_KEYS.USERS_LIST);
+        if (raw) {
+          const list = JSON.parse(raw);
+          if (Array.isArray(list) && list.length > 0) return list;
+        }
+      } catch (_) {}
+      const defaultList = [{ id: 'user_1', name: 'Kullanıcı 1' }];
+      saveUsersList(defaultList);
+      return defaultList;
+    }
+
+    function saveUsersList(list) {
+      try {
+        localStorage.setItem(USER_STORAGE_KEYS.USERS_LIST, JSON.stringify(list));
+      } catch (_) {}
+    }
+
+    function getActiveUserId() {
+      try {
+        const id = localStorage.getItem(USER_STORAGE_KEYS.ACTIVE_USER_ID);
+        if (id) return id;
+      } catch (_) {}
+      const list = getUsersList();
+      const id = list[0].id;
+      setActiveUserId(id);
+      return id;
+    }
+
+    function setActiveUserId(id) {
+      try {
+        localStorage.setItem(USER_STORAGE_KEYS.ACTIVE_USER_ID, id);
+      } catch (_) {}
+    }
+
+    function getActiveUser() {
+      const list = getUsersList();
+      const activeId = getActiveUserId();
+      return list.find(u => u.id === activeId) || list[0];
+    }
+
+    function getUserProgress(userId = null) {
+      const uid = userId || getActiveUserId();
+      try {
+        const raw = localStorage.getItem(USER_STORAGE_KEYS.PROGRESS_PREFIX + uid);
+        if (raw) {
+          const prog = JSON.parse(raw);
+          if (prog && Array.isArray(prog.unlockedMenus)) {
+            if (!prog.streaks) prog.streaks = {};
+            return prog;
+          }
+        }
+      } catch (_) {}
+      // KULLANICI KURALI: Başlangıçta yalnızca emsile-i muhtelife menüsü açık, diğer tüm menüler kapalı!
+      const defaultProg = {
+        unlockedMenus: ['emsile24'],
+        streaks: {
+          emsile24: 0,
+          pronouns: 0,
+          sigaPronouns: 0
+        }
+      };
+      saveUserProgress(defaultProg, uid);
+      return defaultProg;
+    }
+
+    function saveUserProgress(prog, userId = null) {
+      const uid = userId || getActiveUserId();
+      try {
+        localStorage.setItem(USER_STORAGE_KEYS.PROGRESS_PREFIX + uid, JSON.stringify(prog));
+      } catch (_) {}
+    }
+
+    function updateMenuVisibility() {
+      const prog = getUserProgress();
+      const activeUser = getActiveUser();
+
+      // İsim alanlarını güncelle
+      const nameHeader = document.getElementById("activeUserNameHeader");
+      if (nameHeader) nameHeader.textContent = activeUser.name;
+      const nameBanner = document.getElementById("activeUserNameBanner");
+      if (nameBanner) nameBanner.textContent = activeUser.name;
+
+      // 1. Menü: Emsile-i Muhtelife (Her zaman açık)
+      const cardEmsile = document.getElementById("menuCardEmsile24");
+      if (cardEmsile) cardEmsile.style.display = "flex";
+
+      // 2. Menü: Zamirler (Emsile-i Muhtelife'de 30 doğru yapılınca açılır)
+      const cardPronouns = document.getElementById("menuCardPronouns");
+      if (cardPronouns) {
+        cardPronouns.style.display = prog.unlockedMenus.includes('pronouns') ? "flex" : "none";
+      }
+
+      // 3. Menü: Zamirlere Göre Çekim (Zamirler'de 15 doğru yapılınca açılır)
+      const cardSigaPronouns = document.getElementById("menuCardSigaPronouns");
+      if (cardSigaPronouns) {
+        cardSigaPronouns.style.display = prog.unlockedMenus.includes('sigaPronouns') ? "flex" : "none";
+      }
+
+      // 4. Menü: Kelime
+      const cardVocab = document.getElementById("menuCardVocab");
+      if (cardVocab) {
+        cardVocab.style.display = prog.unlockedMenus.includes('vocab') ? "flex" : "none";
+      }
+    }
+
+    // SAĞ ÜST KÖŞEDEKİ UFAK KAREDE 3/30 VEYA 7/15 GİBİ ORANI GÖSTER
+    function updateStreakSquareUI() {
+      const square = document.getElementById("quizStreakSquare");
+      const ratioEl = document.getElementById("quizStreakRatio");
+      if (!square || !ratioEl) return;
+
+      const prog = getUserProgress();
+      let target = 0;
+      let current = 0;
+
+      if (currentGameMode === 'emsile24') {
+        target = 30;
+        current = (prog.streaks && prog.streaks.emsile24) || 0;
+      } else if (currentGameMode === 'pronouns') {
+        target = 15;
+        current = (prog.streaks && prog.streaks.pronouns) || 0;
+      } else if (currentGameMode === 'sigaPronouns') {
+        target = 15;
+        current = (prog.streaks && prog.streaks.sigaPronouns) || 0;
+      } else {
+        square.style.display = "none";
+        return;
+      }
+
+      square.style.display = "flex";
+      ratioEl.textContent = `${current}/${target}`;
+
+      if (current >= target) {
+        square.classList.add("streak-completed");
+      } else {
+        square.classList.remove("streak-completed");
+      }
+    }
+
+    let lastUnlockedMenuKey = null;
+
+    function processAnswerStreak(isCorrect) {
+      const prog = getUserProgress();
+      if (!prog.streaks) prog.streaks = {};
+
+      let target = 0;
+      let unlockKey = null;
+      let unlockTitle = "";
+      let unlockDesc = "";
+
+      if (currentGameMode === 'emsile24') {
+        target = 30;
+        unlockKey = 'pronouns';
+        unlockTitle = "Zamirler Menüsü Açıldı!";
+        unlockDesc = "Tebrikler! Emsile-i Muhtelife'de üst üste 30 doğru yaptınız. İkinci seçenek olarak Zamirler menüsü açıldı!";
+      } else if (currentGameMode === 'pronouns') {
+        target = 15;
+        unlockKey = 'sigaPronouns';
+        unlockTitle = "Yeni Menü Açıldı!";
+        unlockDesc = "Tebrikler! Zamirler menüsünde üst üste 15 doğru yaptınız. Zamirlere Göre Çekim menüsünün kilidi açıldı!";
+      } else if (currentGameMode === 'sigaPronouns') {
+        target = 15;
+        unlockKey = 'vocab';
+        unlockTitle = "Kelime Menüsü Açıldı!";
+        unlockDesc = "Tebrikler! Üst üste 15 doğru yaptınız. Kelime menüsünün kilidi açıldı!";
+      }
+
+      if (target > 0) {
+        if (isCorrect) {
+          const newStreak = (prog.streaks[currentGameMode] || 0) + 1;
+          prog.streaks[currentGameMode] = newStreak;
+
+          let justUnlocked = false;
+          if (newStreak >= target && unlockKey && !prog.unlockedMenus.includes(unlockKey)) {
+            prog.unlockedMenus.push(unlockKey);
+            justUnlocked = true;
+          }
+          saveUserProgress(prog);
+          updateStreakSquareUI();
+
+          if (justUnlocked) {
+            setTimeout(() => {
+              showUnlockSuccessModal(unlockTitle, unlockDesc, unlockKey);
+            }, 450);
+          }
+        } else {
+          // YANLIŞ CEVAP: Üst üste doğru serisi sıfırlanır!
+          prog.streaks[currentGameMode] = 0;
+          saveUserProgress(prog);
+          updateStreakSquareUI();
+        }
+      }
+    }
+
+    function showUnlockSuccessModal(title, desc, unlockKey) {
+      lastUnlockedMenuKey = unlockKey;
+      const modal = document.getElementById("unlockSuccessModal");
+      const titleEl = document.getElementById("unlockSuccessTitle");
+      const descEl = document.getElementById("unlockSuccessDesc");
+      if (titleEl) titleEl.textContent = title;
+      if (descEl) descEl.textContent = desc;
+      if (modal) modal.style.display = "flex";
+      updateMenuVisibility();
+      playSound('correct');
+    }
+
+    function closeUnlockModal() {
+      const modal = document.getElementById("unlockSuccessModal");
+      if (modal) modal.style.display = "none";
+    }
+
+    function goToUnlockedMenu() {
+      closeUnlockModal();
+      updateMenuVisibility();
+      if (lastUnlockedMenuKey === 'pronouns') {
+        startPronounsGame();
+      } else if (lastUnlockedMenuKey === 'sigaPronouns') {
+        openSigaSelectionMenu();
+      } else if (lastUnlockedMenuKey === 'vocab') {
+        startVocabGame();
+      } else {
+        showScreen('mainMenuView');
+      }
+    }
+
+    // KULLANICI PROFİLİ MODAL FONKSİYONLARI
+    function openUserProfileModal() {
+      renderUserProfileModal();
+      const modal = document.getElementById("userProfileModal");
+      if (modal) modal.style.display = "flex";
+    }
+
+    function closeUserProfileModal() {
+      const modal = document.getElementById("userProfileModal");
+      if (modal) modal.style.display = "none";
+    }
+
+    function renderUserProfileModal() {
+      const container = document.getElementById("userProfilesListContainer");
+      if (!container) return;
+      container.innerHTML = "";
+
+      const users = getUsersList();
+      const activeId = getActiveUserId();
+
+      users.forEach(user => {
+        const item = document.createElement("div");
+        const isActive = (user.id === activeId);
+        item.className = `user-list-item ${isActive ? 'active' : ''}`;
+        
+        const prog = getUserProgress(user.id);
+        const unlockedCount = prog.unlockedMenus ? prog.unlockedMenus.length : 1;
+
+        item.innerHTML = `
+          <div class="user-item-left">
+            <span style="font-size: 1.3rem;">👤</span>
+            <div>
+              <div class="user-item-name">${escapeHtml(user.name)}</div>
+              <div style="font-size: 0.72rem; color: #94a3b8;">Açık Menü: ${unlockedCount}/4</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            ${isActive ? '<span class="user-active-badge">Aktif</span>' : `<button type="button" class="btn-start-choice" style="padding: 4px 10px; font-size: 0.75rem;" onclick="switchUser('${user.id}')">Seç</button>`}
+          </div>
+        `;
+        if (!isActive) {
+          item.addEventListener("click", (e) => {
+            if (e.target.tagName !== 'BUTTON') switchUser(user.id);
+          });
+        }
+        container.appendChild(item);
+      });
+    }
+
+    function switchUser(userId) {
+      setActiveUserId(userId);
+      closeUserProfileModal();
+      updateMenuVisibility();
+      if (currentActiveScreen === 'quizSection') {
+        updateStreakSquareUI();
+      }
+      showToast(`Aktif kullanıcı: ${getActiveUser().name}`);
+    }
+
+    function addNewUser() {
+      const input = document.getElementById("newUserNameInput");
+      if (!input) return;
+      const name = input.value.trim();
+      if (!name) return;
+
+      const users = getUsersList();
+      const newId = 'user_' + Date.now();
+      users.push({ id: newId, name: name });
+      saveUsersList(users);
+
+      // Yeni kullanıcı başlangıçta yalnızca emsile24 açık olarak başlar!
+      const defaultProg = {
+        unlockedMenus: ['emsile24'],
+        streaks: { emsile24: 0, pronouns: 0, sigaPronouns: 0 }
+      };
+      saveUserProgress(defaultProg, newId);
+
+      setActiveUserId(newId);
+      input.value = "";
+      closeUserProfileModal();
+      updateMenuVisibility();
+      if (currentActiveScreen === 'quizSection') {
+        updateStreakSquareUI();
+      }
+      showToast(`Yeni kullanıcı oluşturuldu: ${name}`);
+    }
+
+    // =========================================================================
     // 3. EKRAN VE NAVİGASYON YÖNETİMİ
     // =========================================================================
     let currentActiveScreen = 'mainMenuView';
@@ -2823,6 +3343,7 @@ async function syncWordsFromCloud() {
         if (btnTable) btnTable.style.display = "none";
         if (headerTitle) headerTitle.textContent = "Arapça Emsile ve Çekim Merkezi";
         if (headerSub) headerSub.textContent = "24 Sîga & Zamir Çekimleri & Kelime";
+        updateMenuVisibility();
       } else if (screenId === 'sigaSelectionView') {
         if (btnMenu) btnMenu.style.display = "inline-flex";
         if (btnExit) btnExit.style.display = "inline-flex";
@@ -2839,6 +3360,7 @@ async function syncWordsFromCloud() {
         if (btnMenu) btnMenu.style.display = "inline-flex";
         if (btnExit) btnExit.style.display = "inline-flex";
         if (btnTable) btnTable.style.display = ((currentGameMode === "vocab" || currentGameMode === "pronouns") ? "none" : "inline-flex");
+        updateStreakSquareUI();
         if (headerTitle) {
           if (currentGameMode === 'emsile24') {
             headerTitle.textContent = "24 Sîga Oyunu";
@@ -2933,6 +3455,7 @@ async function syncWordsFromCloud() {
       currentGameMode = 'emsile24';
       currentQuizWords = EMSILE_24_WORDS.slice();
       initShuffledIndices();
+      currentOrderIndex = 0;
       showScreen("quizSection");
       renderQuestion();
     }
@@ -3160,6 +3683,8 @@ async function syncWordsFromCloud() {
     // =========================================================================
     function renderQuestion() {
       isAnswering = false;
+
+      updateStreakSquareUI();
 
       const feedbackBar = document.getElementById("quizFeedbackBar");
       if (feedbackBar) feedbackBar.style.display = "none";
@@ -3478,6 +4003,7 @@ async function syncWordsFromCloud() {
       const isCorrect = (String(selectedKey) === String(currentCorrectAnswerKey));
 
       if (isCorrect) {
+        processAnswerStreak(true);
         if (currentGameMode === 'vocab' && currentWord) {
           recordVocabAnswer(currentWord.id, true);
         }
@@ -3495,6 +4021,7 @@ async function syncWordsFromCloud() {
           }
         }, 380);
       } else {
+        processAnswerStreak(false);
         if (currentGameMode === 'vocab' && currentWord) {
           recordVocabAnswer(currentWord.id, false);
         }
@@ -3994,6 +4521,16 @@ async function syncWordsFromCloud() {
         return;
       }
       if (e.key === "Escape") {
+        const unlockModal = document.getElementById("unlockSuccessModal");
+        if (unlockModal && unlockModal.style.display === "flex") {
+          closeUnlockModal();
+          return;
+        }
+        const profileModal = document.getElementById("userProfileModal");
+        if (profileModal && profileModal.style.display === "flex") {
+          closeUserProfileModal();
+          return;
+        }
         const exitModal = document.getElementById("safeExitModal");
         if (exitModal && exitModal.style.display === "flex") {
           closeSafeExitModal();
@@ -4012,6 +4549,16 @@ async function syncWordsFromCloud() {
 
     // Tarayıcı / Android Donanım Geri Tuşu Desteği
     window.addEventListener("popstate", () => {
+      const unlockModal = document.getElementById("unlockSuccessModal");
+      if (unlockModal && unlockModal.style.display === "flex") {
+        closeUnlockModal();
+        return;
+      }
+      const profileModal = document.getElementById("userProfileModal");
+      if (profileModal && profileModal.style.display === "flex") {
+        closeUserProfileModal();
+        return;
+      }
       const exitModal = document.getElementById("safeExitModal");
       if (exitModal && exitModal.style.display === "flex") {
         closeSafeExitModal();
@@ -4034,6 +4581,7 @@ async function syncWordsFromCloud() {
     // Başlangıç: Oyun Ana Menüsü ile başlar
     window.addEventListener("DOMContentLoaded", () => {
       loadStateFromLocalStorage();
+      updateMenuVisibility();
       showScreen("mainMenuView");
     });
   </script>

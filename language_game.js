@@ -969,6 +969,305 @@ class LanguageGameEngine {
     this.vocabStats = {};
   }
 
+  // ==========================================
+  // KULLANICI PROFİLİ VE İLERLEME YÖNETİMİ
+  // ==========================================
+  getUsersList() {
+    try {
+      const saved = localStorage.getItem("app_users_list_v2");
+      if (saved) {
+        const list = JSON.parse(saved);
+        if (Array.isArray(list) && list.length > 0) return list;
+      }
+    } catch (_) {}
+    return [{ id: 'user_default', name: 'Kullanıcı 1' }];
+  }
+
+  saveUsersList(users) {
+    try {
+      localStorage.setItem("app_users_list_v2", JSON.stringify(users));
+    } catch (_) {}
+  }
+
+  getActiveUserId() {
+    try {
+      const id = localStorage.getItem("active_user_id");
+      if (id) return id;
+    } catch (_) {}
+    return 'user_default';
+  }
+
+  setActiveUserId(id) {
+    try {
+      localStorage.setItem("active_user_id", id);
+    } catch (_) {}
+  }
+
+  getActiveUser() {
+    const list = this.getUsersList();
+    const id = this.getActiveUserId();
+    return list.find(u => u.id === id) || list[0] || { id: 'user_default', name: 'Kullanıcı 1' };
+  }
+
+  getUserProgress(userId = null) {
+    const uId = userId || this.getActiveUserId();
+    const key = `user_prog_${uId}`;
+    try {
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && Array.isArray(parsed.unlockedMenus)) {
+          if (!parsed.unlockedMenus.includes('emsile24')) {
+            parsed.unlockedMenus.unshift('emsile24');
+          }
+          if (!parsed.streaks) parsed.streaks = {};
+          return parsed;
+        }
+      }
+    } catch (_) {}
+    return {
+      unlockedMenus: ['emsile24'],
+      streaks: { emsile24: 0, pronouns: 0, sigaPronouns: 0 }
+    };
+  }
+
+  saveUserProgress(prog, userId = null) {
+    const uId = userId || this.getActiveUserId();
+    const key = `user_prog_${uId}`;
+    try {
+      localStorage.setItem(key, JSON.stringify(prog));
+    } catch (_) {}
+  }
+
+  updateMenuVisibility() {
+    const prog = this.getUserProgress();
+    const activeUser = this.getActiveUser();
+
+    const bannerUserEl = document.getElementById("langActiveUserNameBanner");
+    const headerUserEl = document.getElementById("langActiveUserNameHeader");
+    if (bannerUserEl) bannerUserEl.textContent = activeUser.name;
+    if (headerUserEl) headerUserEl.textContent = activeUser.name;
+
+    const cardEmsile24 = document.getElementById("langMenuCardEmsile24");
+    const cardPronouns = document.getElementById("langMenuCardPronouns");
+    const cardSigaPronouns = document.getElementById("langMenuCardSigaPronouns");
+    const cardVocab = document.getElementById("langMenuCardVocab");
+
+    if (cardEmsile24) cardEmsile24.style.display = "flex";
+
+    const isPronounsOpen = prog.unlockedMenus && prog.unlockedMenus.includes('pronouns');
+    if (cardPronouns) cardPronouns.style.display = isPronounsOpen ? "flex" : "none";
+
+    const isSigaPronounsOpen = prog.unlockedMenus && prog.unlockedMenus.includes('sigaPronouns');
+    if (cardSigaPronouns) cardSigaPronouns.style.display = isSigaPronounsOpen ? "flex" : "none";
+
+    const isVocabOpen = prog.unlockedMenus && prog.unlockedMenus.includes('vocab');
+    if (cardVocab) cardVocab.style.display = isVocabOpen ? "flex" : "none";
+  }
+
+  updateStreakSquareUI() {
+    const square = document.getElementById("langStreakSquare");
+    const ratioEl = document.getElementById("langStreakRatio");
+    if (!square || !ratioEl) return;
+
+    const prog = this.getUserProgress();
+    let target = 0;
+    let current = 0;
+
+    if (this.currentGameMode === 'emsile24') {
+      target = 30;
+      current = (prog.streaks && prog.streaks.emsile24) || 0;
+    } else if (this.currentGameMode === 'pronouns') {
+      target = 15;
+      current = (prog.streaks && prog.streaks.pronouns) || 0;
+    } else if (this.currentGameMode === 'sigaPronouns') {
+      target = 15;
+      current = (prog.streaks && prog.streaks.sigaPronouns) || 0;
+    } else {
+      square.style.display = "none";
+      return;
+    }
+
+    square.style.display = "flex";
+    ratioEl.textContent = `${current}/${target}`;
+
+    if (current >= target) {
+      square.classList.add("streak-completed");
+    } else {
+      square.classList.remove("streak-completed");
+    }
+  }
+
+  processAnswerStreak(isCorrect) {
+    const prog = this.getUserProgress();
+    if (!prog.streaks) prog.streaks = {};
+
+    let target = 0;
+    let unlockKey = null;
+    let unlockTitle = "";
+    let unlockDesc = "";
+
+    if (this.currentGameMode === 'emsile24') {
+      target = 30;
+      unlockKey = 'pronouns';
+      unlockTitle = "Zamirler Menüsü Açıldı!";
+      unlockDesc = "Tebrikler! Emsile-i Muhtelife'de üst üste 30 doğru yaptınız. İkinci seçenek olarak Zamirler menüsü açıldı!";
+    } else if (this.currentGameMode === 'pronouns') {
+      target = 15;
+      unlockKey = 'sigaPronouns';
+      unlockTitle = "Yeni Menü Açıldı!";
+      unlockDesc = "Tebrikler! Zamirler menüsünde üst üste 15 doğru yaptınız. Zamirlere Göre Çekim menüsünün kilidi açıldı!";
+    } else if (this.currentGameMode === 'sigaPronouns') {
+      target = 15;
+      unlockKey = 'vocab';
+      unlockTitle = "Kelime Menüsü Açıldı!";
+      unlockDesc = "Tebrikler! Üst üste 15 doğru yaptınız. Kelime menüsünün kilidi açıldı!";
+    }
+
+    if (target > 0) {
+      if (isCorrect) {
+        const newStreak = (prog.streaks[this.currentGameMode] || 0) + 1;
+        prog.streaks[this.currentGameMode] = newStreak;
+
+        let justUnlocked = false;
+        if (newStreak >= target && unlockKey && !prog.unlockedMenus.includes(unlockKey)) {
+          prog.unlockedMenus.push(unlockKey);
+          justUnlocked = true;
+        }
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+
+        if (justUnlocked) {
+          setTimeout(() => {
+            this.showUnlockSuccessModal(unlockTitle, unlockDesc, unlockKey);
+          }, 450);
+        }
+      } else {
+        // YANLIŞ CEVAP: Üst üste doğru serisi sıfırlanır!
+        prog.streaks[this.currentGameMode] = 0;
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+      }
+    }
+  }
+
+  showUnlockSuccessModal(title, desc, unlockKey) {
+    this.lastUnlockedMenuKey = unlockKey;
+    const modal = document.getElementById("langUnlockSuccessModal");
+    const titleEl = document.getElementById("langUnlockSuccessTitle");
+    const descEl = document.getElementById("langUnlockSuccessDesc");
+    if (titleEl) titleEl.textContent = title;
+    if (descEl) descEl.textContent = desc;
+    if (modal) modal.style.display = "flex";
+    this.updateMenuVisibility();
+    langSounds.playCorrect();
+  }
+
+  closeUnlockModal() {
+    const modal = document.getElementById("langUnlockSuccessModal");
+    if (modal) modal.style.display = "none";
+  }
+
+  goToUnlockedMenu() {
+    this.closeUnlockModal();
+    this.updateMenuVisibility();
+    if (this.lastUnlockedMenuKey === 'pronouns') {
+      this.startPronounsGame();
+    } else if (this.lastUnlockedMenuKey === 'sigaPronouns') {
+      this.openSigaSelectionMenu();
+    } else if (this.lastUnlockedMenuKey === 'vocab') {
+      this.startVocabGame();
+    } else {
+      this.showMainMenu();
+    }
+  }
+
+  // KULLANICI PROFİLİ MODAL FONKSİYONLARI
+  openUserProfileModal() {
+    this.renderUserProfileModal();
+    const modal = document.getElementById("langUserProfileModal");
+    if (modal) modal.style.display = "flex";
+  }
+
+  closeUserProfileModal() {
+    const modal = document.getElementById("langUserProfileModal");
+    if (modal) modal.style.display = "none";
+  }
+
+  renderUserProfileModal() {
+    const container = document.getElementById("langUserProfilesListContainer");
+    if (!container) return;
+    container.innerHTML = "";
+
+    const users = this.getUsersList();
+    const activeId = this.getActiveUserId();
+
+    users.forEach(user => {
+      const item = document.createElement("div");
+      const isActive = (user.id === activeId);
+      item.className = `user-list-item ${isActive ? 'active' : ''}`;
+      
+      const prog = this.getUserProgress(user.id);
+      const unlockedCount = prog.unlockedMenus ? prog.unlockedMenus.length : 1;
+
+      item.style.cssText = "display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; margin-bottom: 6px;";
+      if (isActive) {
+        item.style.borderColor = "#6366f1";
+        item.style.background = "rgba(99, 102, 241, 0.15)";
+      }
+
+      item.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.3rem;">👤</span>
+          <div>
+            <div style="font-weight: 700; color: #fff; font-size: 0.88rem;">${escapeHtml(user.name)}</div>
+            <div style="font-size: 0.72rem; color: #94a3b8;">Açık Menü: ${unlockedCount}/4</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          ${isActive ? '<span style="font-size: 0.75rem; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 3px 8px; border-radius: 6px; font-weight: 700;">Aktif</span>' : `<button type="button" class="btn-start-choice" style="padding: 4px 10px; font-size: 0.75rem;" onclick="languageGame.switchUser('${user.id}')">Seç</button>`}
+        </div>
+      `;
+      if (!isActive) {
+        item.addEventListener("click", (e) => {
+          if (e.target.tagName !== 'BUTTON') this.switchUser(user.id);
+        });
+      }
+      container.appendChild(item);
+    });
+  }
+
+  switchUser(userId) {
+    this.setActiveUserId(userId);
+    this.closeUserProfileModal();
+    this.updateMenuVisibility();
+    this.updateStreakSquareUI();
+  }
+
+  addNewUser() {
+    const input = document.getElementById("langNewUserNameInput");
+    if (!input) return;
+    const name = input.value.trim();
+    if (!name) return;
+
+    const users = this.getUsersList();
+    const newId = 'user_' + Date.now();
+    users.push({ id: newId, name: name });
+    this.saveUsersList(users);
+
+    const defaultProg = {
+      unlockedMenus: ['emsile24'],
+      streaks: { emsile24: 0, pronouns: 0, sigaPronouns: 0 }
+    };
+    this.saveUserProgress(defaultProg, newId);
+
+    this.setActiveUserId(newId);
+    input.value = "";
+    this.closeUserProfileModal();
+    this.updateMenuVisibility();
+    this.updateStreakSquareUI();
+  }
+
   start() {
     this.showMainMenu();
   }
@@ -984,6 +1283,7 @@ class LanguageGameEngine {
     if (btnTable) btnTable.style.display = "none";
     if (title) title.textContent = "Arapça";
     if (badge) badge.style.display = "none";
+    this.updateMenuVisibility();
   }
 
   showScreen(screenId) {
@@ -992,6 +1292,12 @@ class LanguageGameEngine {
       const el = document.getElementById(id);
       if (el) el.style.display = (id === screenId ? "flex" : "none");
     });
+
+    if (screenId === "langMainMenuSection") {
+      this.updateMenuVisibility();
+    } else if (screenId === "langQuizSection") {
+      this.updateStreakSquareUI();
+    }
 
     const btnMenu = document.getElementById("btnLangMenu");
     const btnTable = document.getElementById("btnLangToggleTable");
@@ -1005,7 +1311,7 @@ class LanguageGameEngine {
 
       if (title) {
         if (this.currentGameMode === 'emsile24') {
-          title.textContent = "24 Çekim";
+          title.textContent = "Emsile-i Muhtelife";
         } else if (this.currentGameMode === 'vocab') {
           title.textContent = "Kelime";
         } else if (this.currentGameMode === 'pronouns') {
@@ -1027,6 +1333,7 @@ class LanguageGameEngine {
     this.currentGameMode = 'emsile24';
     this.currentQuizWords = EMSILE_24_WORDS.slice();
     this.initShuffledIndices();
+    this.currentOrderIndex = 0;
     this.showScreen("langQuizSection");
     this.renderQuestion();
   }
@@ -1223,6 +1530,7 @@ class LanguageGameEngine {
 
   renderQuestion() {
     this.isAnswering = false;
+    this.updateStreakSquareUI();
 
     const feedbackBar = document.getElementById("langQuizFeedbackBar");
     if (feedbackBar) feedbackBar.style.display = "none";
@@ -1548,6 +1856,7 @@ class LanguageGameEngine {
     const isCorrect = (String(selectedKey) === String(this.currentCorrectAnswerKey));
 
     if (isCorrect) {
+      this.processAnswerStreak(true);
       clickedBtn.classList.add("correct-choice");
       langSounds.playCorrect();
 
@@ -1565,6 +1874,7 @@ class LanguageGameEngine {
         }
       }, 380);
     } else {
+      this.processAnswerStreak(false);
       clickedBtn.classList.add("wrong-choice");
       langSounds.playWrong();
 

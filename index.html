@@ -1193,7 +1193,10 @@
           <h2 class="lang-header-title" id="langModalTitle" style="font-size: 1.15rem; font-weight: 800; color: #fff;">Arapça</h2>
         </div>
       </div>
-      <div class="lang-header-actions">
+      <div class="lang-header-actions" style="display: flex; align-items: center; gap: 6px;">
+        <button type="button" class="btn-lang-toggle-table" id="btnLangUserProfileHeader" onclick="languageGame.openUserProfileModal()" title="Kullanıcı Değiştir" style="background: rgba(99, 102, 241, 0.2); border-color: rgba(99, 102, 241, 0.4); color: #c7d2fe;">
+          👤 <span id="langActiveUserNameHeader">Kullanıcı 1</span>
+        </button>
         <button type="button" class="btn-lang-toggle-table" id="btnLangToggleTable" onclick="toggleLanguageTable()" title="Tabloyu Aç/Kapat" style="display: none;">
           <span>📚 Tablo</span>
         </button>
@@ -1206,21 +1209,34 @@
         <span class="hero-badge">ARAPÇA SARF VE EMSİLE EĞİTİMİ</span>
         <h2 style="font-size: 1.3rem; margin-bottom: 4px;">Ne Çalışmak İstersiniz?</h2>
         <p style="font-size: 0.82rem; color: #94a3b8;">24 temel sîgayı veya her sîganın zamirlere göre çekimlerini çalışabilirsiniz.</p>
+        <div class="profile-hero-pill" onclick="languageGame.openUserProfileModal()" title="Kullanıcı Değiştir" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 20px; padding: 6px 14px; font-size: 0.82rem; color: #cbd5e1; cursor: pointer; margin-top: 10px;">
+          <span>👤 Aktif Kullanıcı: <strong id="langActiveUserNameBanner" style="color: #818cf8;">Kullanıcı 1</strong> ⚙️ Değiştir</span>
+        </div>
       </div>
 
       <div class="menu-cards-grid">
-        <!-- 1. Menü: 24 Çekim -->
-        <div class="menu-choice-card" onclick="languageGame.startEmsileGame()">
+        <!-- 1. Menü: Emsile-i Muhtelife (Başlangıçta Açık Olan Tek Menü) -->
+        <div class="menu-choice-card" id="langMenuCardEmsile24" onclick="languageGame.startEmsileGame()">
           <div class="choice-texts">
-            <h3 class="choice-clean-title">24 Çekim</h3>
+            <h3 class="choice-clean-title">Emsile-i Muhtelife</h3>
           </div>
           <button type="button" class="btn-start-choice">
             <span>Oyuna Başla</span>
           </button>
         </div>
 
-        <!-- 2. Menü: Zamirlere Göre Çekim -->
-        <div class="menu-choice-card" onclick="languageGame.openSigaSelectionMenu()">
+        <!-- 2. Menü: Zamirler (Emsile-i Muhtelife'de 30 doğru yapılınca açılır) -->
+        <div class="menu-choice-card" id="langMenuCardPronouns" onclick="languageGame.startPronounsGame()" style="display: none;">
+          <div class="choice-texts">
+            <h3 class="choice-clean-title">Zamirler</h3>
+          </div>
+          <button type="button" class="btn-start-choice" style="background: linear-gradient(135deg, #8b5cf6, #ec4899); box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);">
+            <span>Oyuna Başla</span>
+          </button>
+        </div>
+
+        <!-- 3. Menü: Zamirlere Göre Çekim (Zamirler'de 15 doğru yapılınca açılır) -->
+        <div class="menu-choice-card" id="langMenuCardSigaPronouns" onclick="languageGame.openSigaSelectionMenu()" style="display: none;">
           <div class="choice-texts">
             <h3 class="choice-clean-title">Zamirlere Göre Çekim</h3>
           </div>
@@ -1229,22 +1245,12 @@
           </button>
         </div>
 
-        <!-- 3. Menü: Kelime -->
-        <div class="menu-choice-card" onclick="languageGame.openVocabCategoryMenu()">
+        <!-- 4. Menü: Kelime -->
+        <div class="menu-choice-card" id="langMenuCardVocab" onclick="languageGame.openVocabCategoryMenu()" style="display: none;">
           <div class="choice-texts">
             <h3 class="choice-clean-title">Kelime</h3>
           </div>
           <button type="button" class="btn-start-choice" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);">
-            <span>Oyuna Başla</span>
-          </button>
-        </div>
-
-        <!-- 4. Menü: Zamirler -->
-        <div class="menu-choice-card" onclick="languageGame.startPronounsGame()">
-          <div class="choice-texts">
-            <h3 class="choice-clean-title">Zamirler</h3>
-          </div>
-          <button type="button" class="btn-start-choice" style="background: linear-gradient(135deg, #8b5cf6, #ec4899); box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);">
             <span>Oyuna Başla</span>
           </button>
         </div>
@@ -1338,10 +1344,14 @@
     <!-- 1. BÖLÜM: 5 SEÇENEKLİ SORU / TEST ALANI -->
     <main id="langQuizSection" class="lang-quiz-area" style="display: none;">
       <div class="lang-quiz-card">
-        <div class="lang-quiz-card-header" style="justify-content: center; margin-bottom: 16px;">
+        <div class="lang-quiz-card-header" style="position: relative; justify-content: center; margin-bottom: 16px;">
           <div class="lang-counter-chip" style="margin: 0 auto;">
             <span id="langCounterLabel">SORU</span>
             <strong id="langCurrentIndex">1 / 14</strong>
+          </div>
+          <!-- Sağ üst köşedeki ufak kare (3/30 gibi oran) -->
+          <div id="langStreakSquare" class="lang-streak-square" title="Üst üste doğru sayısı">
+            <span id="langStreakRatio">0/30</span>
           </div>
           <span id="langSoundBtn" style="display: none;"></span>
         </div>
@@ -1400,6 +1410,44 @@
   </div>
 
 
+
+
+    <!-- KULLANICI PROFİLİ DEĞİŞTİRME MODALI -->
+    <div id="langUserProfileModal" class="modal-overlay" style="display: none; z-index: 150;">
+      <div class="modal-card" style="max-width: 440px; border-radius: 18px; background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.15); padding: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 12px; margin-bottom: 14px;">
+          <h3 style="margin: 0; font-size: 1.1rem; color: #fff;">👤 Kullanıcı Profili Seçin</h3>
+          <button type="button" class="modal-close-btn" onclick="languageGame.closeUserProfileModal()" style="background: none; border: none; color: #94a3b8; font-size: 1.4rem; cursor: pointer;">✕</button>
+        </div>
+        <p style="font-size: 0.8rem; color: #94a3b8; margin: 0 0 12px 0;">Her kullanıcının doğru serisi ve açık menüleri ayrı olarak saklanır.</p>
+        
+        <div class="user-list-container" id="langUserProfilesListContainer" style="display: flex; flex-direction: column; gap: 8px; margin: 12px 0; max-height: 200px; overflow-y: auto;">
+          <!-- JS ile doldurulur -->
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+          <input type="text" id="langNewUserNameInput" placeholder="Yeni Kullanıcı Adı..." maxlength="20" style="flex: 1; background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 8px 12px; color: #fff; font-size: 0.85rem; outline: none;">
+          <button type="button" onclick="languageGame.addNewUser()" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; border: none; border-radius: 8px; padding: 8px 14px; font-weight: 700; cursor: pointer;">+ Ekle</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- KİLİT AÇILDI TEBRİK MODALI -->
+    <div id="langUnlockSuccessModal" class="modal-overlay" style="display: none; z-index: 160;">
+      <div class="modal-card" style="max-width: 400px; border-radius: 20px; background: linear-gradient(145deg, #0f172a, #1e1b4b); border: 1.5px solid rgba(99, 102, 241, 0.6); box-shadow: 0 0 35px rgba(99, 102, 241, 0.4); text-align: center; padding: 26px 20px;">
+        <div style="font-size: 3.5rem; margin-bottom: 10px; animation: bounceUnlock 0.8s ease;">🎉🔓</div>
+        <h3 id="langUnlockSuccessTitle" style="font-size: 1.35rem; color: #ffffff; font-weight: 800; margin-bottom: 8px;">Yeni Menü Açıldı!</h3>
+        <p id="langUnlockSuccessDesc" style="font-size: 0.88rem; color: #c7d2fe; line-height: 1.5; margin-bottom: 22px;">Tebrikler! Belirlenen doğru serisini tamamladınız ve yeni bölümün kilidi açıldı!</p>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+          <button type="button" onclick="languageGame.goToUnlockedMenu()" style="background: linear-gradient(135deg, #10b981, #059669); color: #ffffff; border: none; padding: 12px 22px; border-radius: 12px; font-weight: 800; font-size: 0.95rem; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">
+            🚀 Yeni Bölüme Geç
+          </button>
+          <button type="button" onclick="languageGame.closeUnlockModal()" style="background: rgba(255, 255, 255, 0.1); color: #cbd5e1; border: 1px solid rgba(255, 255, 255, 0.2); padding: 12px 18px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; cursor: pointer;">
+            Kapat
+          </button>
+        </div>
+      </div>
+    </div>
 
 
   <!-- Sürüm Bilgilendirme Modalı -->
