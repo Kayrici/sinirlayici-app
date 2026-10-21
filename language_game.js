@@ -1021,13 +1021,19 @@ class LanguageGameEngine {
             parsed.unlockedMenus.unshift('emsile24');
           }
           if (!parsed.streaks) parsed.streaks = {};
+          if (!parsed.muttarideUnlocked || !Array.isArray(parsed.muttarideUnlocked) || parsed.muttarideUnlocked.length === 0) {
+            parsed.muttarideUnlocked = [1];
+          }
+          if (!parsed.muttarideStreaks) parsed.muttarideStreaks = {};
           return parsed;
         }
       }
     } catch (_) {}
     return {
       unlockedMenus: ['emsile24'],
-      streaks: { emsile24: 0, pronouns: 0, sigaPronouns: 0 }
+      streaks: { emsile24: 0, pronouns: 0 },
+      muttarideUnlocked: [1],
+      muttarideStreaks: {}
     };
   }
 
@@ -1082,7 +1088,7 @@ class LanguageGameEngine {
       current = (prog.streaks && prog.streaks.pronouns) || 0;
     } else if (this.currentGameMode === 'sigaPronouns') {
       target = 15;
-      current = (prog.streaks && prog.streaks.sigaPronouns) || 0;
+      current = (prog.muttarideStreaks && prog.muttarideStreaks[this.selectedSigaId]) || 0;
     } else {
       square.style.display = "none";
       return;
@@ -1101,37 +1107,18 @@ class LanguageGameEngine {
   processAnswerStreak(isCorrect) {
     const prog = this.getUserProgress();
     if (!prog.streaks) prog.streaks = {};
+    if (!prog.muttarideStreaks) prog.muttarideStreaks = {};
+    if (!prog.muttarideUnlocked) prog.muttarideUnlocked = [1];
 
-    let target = 0;
-    let unlockKey = null;
-    let unlockTitle = "";
-    let unlockDesc = "";
-
+    // 1. EMSİLE-İ MUHTELİFE MODU: 30 Doğru -> Zamirler Menüsü Açılır
     if (this.currentGameMode === 'emsile24') {
-      target = 30;
-      unlockKey = 'pronouns';
-      unlockTitle = "Zamirler Menüsü Açıldı!";
-      unlockDesc = "Tebrikler! Emsile-i Muhtelife'de üst üste 30 doğru yaptınız. İkinci seçenek olarak Zamirler menüsü açıldı!";
-    } else if (this.currentGameMode === 'pronouns') {
-      target = 15;
-      unlockKey = 'sigaPronouns';
-      unlockTitle = "Yeni Menü Açıldı!";
-      unlockDesc = "Tebrikler! Zamirler menüsünde üst üste 15 doğru yaptınız. Zamirlere Göre Çekim menüsünün kilidi açıldı!";
-    } else if (this.currentGameMode === 'sigaPronouns') {
-      target = 15;
-      unlockKey = 'vocab';
-      unlockTitle = "Kelime Menüsü Açıldı!";
-      unlockDesc = "Tebrikler! Üst üste 15 doğru yaptınız. Kelime menüsünün kilidi açıldı!";
-    }
-
-    if (target > 0) {
+      const target = 30;
       if (isCorrect) {
-        const newStreak = (prog.streaks[this.currentGameMode] || 0) + 1;
-        prog.streaks[this.currentGameMode] = newStreak;
-
+        const newStreak = (prog.streaks['emsile24'] || 0) + 1;
+        prog.streaks['emsile24'] = newStreak;
         let justUnlocked = false;
-        if (newStreak >= target && unlockKey && !prog.unlockedMenus.includes(unlockKey)) {
-          prog.unlockedMenus.push(unlockKey);
+        if (newStreak >= target && !prog.unlockedMenus.includes('pronouns')) {
+          prog.unlockedMenus.push('pronouns');
           justUnlocked = true;
         }
         this.saveUserProgress(prog);
@@ -1139,15 +1126,96 @@ class LanguageGameEngine {
 
         if (justUnlocked) {
           setTimeout(() => {
-            this.showUnlockSuccessModal(unlockTitle, unlockDesc, unlockKey);
+            this.showUnlockSuccessModal(
+              "Zamirler Menüsü Açıldı!",
+              "Tebrikler! Emsile-i Muhtelife'de üst üste 30 doğru yaptınız. İkinci seçenek olarak Zamirler menüsü açıldı!",
+              'pronouns'
+            );
           }, 450);
         }
       } else {
-        // YANLIŞ CEVAP: Üst üste doğru serisi sıfırlanır!
-        prog.streaks[this.currentGameMode] = 0;
+        prog.streaks['emsile24'] = 0;
         this.saveUserProgress(prog);
         this.updateStreakSquareUI();
       }
+      return;
+    }
+
+    // 2. ZAMİRLER MODU: 15 Doğru -> HEM Emsile-i Muttaride HEM Kelimeler AYNI ANDA AÇILIR!
+    if (this.currentGameMode === 'pronouns') {
+      const target = 15;
+      if (isCorrect) {
+        const newStreak = (prog.streaks['pronouns'] || 0) + 1;
+        prog.streaks['pronouns'] = newStreak;
+        let justUnlocked = false;
+        if (newStreak >= target) {
+          if (!prog.unlockedMenus.includes('sigaPronouns')) {
+            prog.unlockedMenus.push('sigaPronouns');
+            justUnlocked = true;
+          }
+          if (!prog.unlockedMenus.includes('vocab')) {
+            prog.unlockedMenus.push('vocab');
+            justUnlocked = true;
+          }
+        }
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+
+        if (justUnlocked) {
+          setTimeout(() => {
+            this.showUnlockSuccessModal(
+              "Emsile-i Muttaride ve Kelimeler Açıldı!",
+              "Tebrikler! Zamirler bölümünde üst üste 15 doğru yaptınız. Ana ekranda Emsile-i Muttaride ve Kelimeler menüleri açıldı!",
+              'sigaPronouns'
+            );
+          }, 450);
+        }
+      } else {
+        prog.streaks['pronouns'] = 0;
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+      }
+      return;
+    }
+
+    // 3. EMSİLE-İ MUTTARİDE MODU: O sîgada 15 Doğru -> Sonraki Sîga Açılır (24 Çekim Kademeli)
+    if (this.currentGameMode === 'sigaPronouns') {
+      const target = 15;
+      const curStreak = prog.muttarideStreaks[this.selectedSigaId] || 0;
+
+      if (isCorrect) {
+        const newStreak = curStreak + 1;
+        prog.muttarideStreaks[this.selectedSigaId] = newStreak;
+        const nextSigaId = this.selectedSigaId + 1;
+        let justUnlockedNext = false;
+
+        if (newStreak >= target && nextSigaId <= 24) {
+          if (!prog.muttarideUnlocked.includes(nextSigaId)) {
+            prog.muttarideUnlocked.push(nextSigaId);
+            justUnlockedNext = true;
+          }
+        }
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+
+        if (justUnlockedNext) {
+          const curSigaObj = EMSILE_24_WORDS.find(w => w.id === this.selectedSigaId) || { meaning: `${this.selectedSigaId}. Çekim` };
+          const nextSigaObj = EMSILE_24_WORDS.find(w => w.id === nextSigaId) || { meaning: `${nextSigaId}. Çekim` };
+          setTimeout(() => {
+            this.showUnlockSuccessModal(
+              `${nextSigaObj.meaning} Açıldı!`,
+              `Tebrikler! ${curSigaObj.meaning} kalıbında üst üste 15 doğru yaptınız. ${nextSigaId}. çekim olan ${nextSigaObj.meaning} açıldı!`,
+              'nextSiga_' + nextSigaId
+            );
+          }, 450);
+        }
+      } else {
+        // YANLIŞ CEVAP: O anki sîganın üst üste serisi sıfırlanır!
+        prog.muttarideStreaks[this.selectedSigaId] = 0;
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+      }
+      return;
     }
   }
 
@@ -1171,6 +1239,13 @@ class LanguageGameEngine {
   goToUnlockedMenu() {
     this.closeUnlockModal();
     this.updateMenuVisibility();
+    if (this.lastUnlockedMenuKey && this.lastUnlockedMenuKey.startsWith('nextSiga_')) {
+      const nextId = parseInt(this.lastUnlockedMenuKey.replace('nextSiga_', ''), 10);
+      if (nextId && nextId <= 24) {
+        this.startSigaPronounGame(nextId);
+        return;
+      }
+    }
     if (this.lastUnlockedMenuKey === 'pronouns') {
       this.startPronounsGame();
     } else if (this.lastUnlockedMenuKey === 'sigaPronouns') {
@@ -1313,7 +1388,7 @@ class LanguageGameEngine {
         if (this.currentGameMode === 'emsile24') {
           title.textContent = "Emsile-i Muhtelife";
         } else if (this.currentGameMode === 'vocab') {
-          title.textContent = "Kelime";
+          title.textContent = "Kelimeler";
         } else if (this.currentGameMode === 'pronouns') {
           title.textContent = "Zamirler";
         } else {
@@ -1324,7 +1399,7 @@ class LanguageGameEngine {
     } else if (screenId === "langSigaSelectionSection") {
       if (btnMenu) btnMenu.style.display = "inline-flex";
       if (btnTable) btnTable.style.display = "none";
-      if (title) title.textContent = "Zamir Çekimi Seçimi";
+      if (title) title.textContent = "Emsile-i Muttaride (24 Çekim)";
     }
   }
 
@@ -1349,17 +1424,35 @@ class LanguageGameEngine {
     if (!grid) return;
     grid.innerHTML = "";
 
+    const prog = this.getUserProgress();
+    const unlockedSigaList = (prog.muttarideUnlocked && Array.isArray(prog.muttarideUnlocked)) ? prog.muttarideUnlocked : [1];
+
     EMSILE_24_WORDS.forEach(siga => {
+      const isUnlocked = unlockedSigaList.includes(siga.id);
       const card = document.createElement("div");
-      card.className = "lang-siga-card";
+      card.className = `lang-siga-card ${isUnlocked ? 'unlocked' : 'locked'}`;
+      if (!isUnlocked) {
+        card.style.opacity = "0.52";
+        card.style.cursor = "not-allowed";
+        card.style.filter = "grayscale(35%)";
+      }
       card.innerHTML = `
-        <span class="lang-siga-num-badge">${siga.id}</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <span class="lang-siga-num-badge">${siga.id}</span>
+          ${!isUnlocked ? '<span style="font-size: 0.72rem; background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 2px 7px; border-radius: 6px; font-weight: 700;">🔒 Kilitli</span>' : '<span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 7px; border-radius: 6px; font-weight: 700;">✓ Açık</span>'}
+        </div>
         <div class="lang-siga-arabic-word arabic-font">${siga.word}</div>
         <div class="lang-siga-meaning-title">${escapeHtml(siga.meaning)}</div>
         <div class="lang-siga-trans-text">${escapeHtml(siga.translation)}</div>
         ${siga.extraHint ? `<div class="lang-siga-hint-badge">${escapeHtml(siga.extraHint)}</div>` : ""}
       `;
-      card.addEventListener("click", () => this.startSigaPronounGame(siga.id));
+      if (isUnlocked) {
+        card.addEventListener("click", () => this.startSigaPronounGame(siga.id));
+      } else {
+        card.addEventListener("click", () => {
+          alert(`🔒 Bu çekimin açılması için önceki çekimde üst üste 15 doğru yapmalısınız.`);
+        });
+      }
       grid.appendChild(card);
     });
   }

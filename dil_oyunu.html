@@ -1777,7 +1777,7 @@
 
         <!-- 3. Menü: Zamirlere Göre Çekim (Zamirler'de 15 doğru yapılınca açılır) -->
         <div class="menu-choice-card" id="menuCardSigaPronouns" onclick="openSigaSelectionMenu()" style="display: none;">
-          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">Zamirlere Göre Çekim</h3>
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">Emsile-i Muttaride</h3>
           <button type="button" class="btn-start-choice">
             <span>Oyuna Başla</span>
           </button>
@@ -1785,7 +1785,7 @@
 
         <!-- 4. Menü: Kelime -->
         <div class="menu-choice-card" id="menuCardVocab" onclick="startVocabGame()" style="display: none;">
-          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">Kelime</h3>
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0 0 14px 0;">Kelimeler</h3>
           <button type="button" class="btn-start-choice" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);">
             <span>Oyuna Başla</span>
           </button>
@@ -1805,8 +1805,8 @@
     <section id="sigaSelectionView">
       <div class="siga-selection-banner">
         <div class="siga-banner-texts">
-          <h2>👤 Çekim Yapılacak Sîgayı Seçin</h2>
-          <p>14 şahıs zamiri çekimini çalışmak istediğiniz sîgaya dokunun:</p>
+          <h2>👤 Emsile-i Muttaride (24 Çekim)</h2>
+          <p>14 şahıs çekimlerini sırayla tamamlayarak bir sonraki kalıbın kilidini açın:</p>
         </div>
         <button type="button" class="btn-nav" onclick="showScreen('mainMenuView')">
           ⬅️ Menüye Dön
@@ -3129,7 +3129,7 @@ async function syncWordsFromCloud() {
         current = (prog.streaks && prog.streaks.pronouns) || 0;
       } else if (currentGameMode === 'sigaPronouns') {
         target = 15;
-        current = (prog.streaks && prog.streaks.sigaPronouns) || 0;
+        current = (prog.muttarideStreaks && prog.muttarideStreaks[selectedSigaId]) || 0;
       } else {
         square.style.display = "none";
         return;
@@ -3150,37 +3150,18 @@ async function syncWordsFromCloud() {
     function processAnswerStreak(isCorrect) {
       const prog = getUserProgress();
       if (!prog.streaks) prog.streaks = {};
+      if (!prog.muttarideStreaks) prog.muttarideStreaks = {};
+      if (!prog.muttarideUnlocked) prog.muttarideUnlocked = [1];
 
-      let target = 0;
-      let unlockKey = null;
-      let unlockTitle = "";
-      let unlockDesc = "";
-
+      // 1. EMSİLE-İ MUHTELİFE MODU: 30 Doğru -> Zamirler Menüsü Açılır
       if (currentGameMode === 'emsile24') {
-        target = 30;
-        unlockKey = 'pronouns';
-        unlockTitle = "Zamirler Menüsü Açıldı!";
-        unlockDesc = "Tebrikler! Emsile-i Muhtelife'de üst üste 30 doğru yaptınız. İkinci seçenek olarak Zamirler menüsü açıldı!";
-      } else if (currentGameMode === 'pronouns') {
-        target = 15;
-        unlockKey = 'sigaPronouns';
-        unlockTitle = "Yeni Menü Açıldı!";
-        unlockDesc = "Tebrikler! Zamirler menüsünde üst üste 15 doğru yaptınız. Zamirlere Göre Çekim menüsünün kilidi açıldı!";
-      } else if (currentGameMode === 'sigaPronouns') {
-        target = 15;
-        unlockKey = 'vocab';
-        unlockTitle = "Kelime Menüsü Açıldı!";
-        unlockDesc = "Tebrikler! Üst üste 15 doğru yaptınız. Kelime menüsünün kilidi açıldı!";
-      }
-
-      if (target > 0) {
+        const target = 30;
         if (isCorrect) {
-          const newStreak = (prog.streaks[currentGameMode] || 0) + 1;
-          prog.streaks[currentGameMode] = newStreak;
-
+          const newStreak = (prog.streaks['emsile24'] || 0) + 1;
+          prog.streaks['emsile24'] = newStreak;
           let justUnlocked = false;
-          if (newStreak >= target && unlockKey && !prog.unlockedMenus.includes(unlockKey)) {
-            prog.unlockedMenus.push(unlockKey);
+          if (newStreak >= target && !prog.unlockedMenus.includes('pronouns')) {
+            prog.unlockedMenus.push('pronouns');
             justUnlocked = true;
           }
           saveUserProgress(prog);
@@ -3188,15 +3169,96 @@ async function syncWordsFromCloud() {
 
           if (justUnlocked) {
             setTimeout(() => {
-              showUnlockSuccessModal(unlockTitle, unlockDesc, unlockKey);
+              showUnlockSuccessModal(
+                "Zamirler Menüsü Açıldı!",
+                "Tebrikler! Emsile-i Muhtelife'de üst üste 30 doğru yaptınız. İkinci seçenek olarak Zamirler menüsü açıldı!",
+                'pronouns'
+              );
             }, 450);
           }
         } else {
-          // YANLIŞ CEVAP: Üst üste doğru serisi sıfırlanır!
-          prog.streaks[currentGameMode] = 0;
+          prog.streaks['emsile24'] = 0;
           saveUserProgress(prog);
           updateStreakSquareUI();
         }
+        return;
+      }
+
+      // 2. ZAMİRLER MODU: 15 Doğru -> HEM Emsile-i Muttaride HEM Kelimeler AYNI ANDA AÇILIR!
+      if (currentGameMode === 'pronouns') {
+        const target = 15;
+        if (isCorrect) {
+          const newStreak = (prog.streaks['pronouns'] || 0) + 1;
+          prog.streaks['pronouns'] = newStreak;
+          let justUnlocked = false;
+          if (newStreak >= target) {
+            if (!prog.unlockedMenus.includes('sigaPronouns')) {
+              prog.unlockedMenus.push('sigaPronouns');
+              justUnlocked = true;
+            }
+            if (!prog.unlockedMenus.includes('vocab')) {
+              prog.unlockedMenus.push('vocab');
+              justUnlocked = true;
+            }
+          }
+          saveUserProgress(prog);
+          updateStreakSquareUI();
+
+          if (justUnlocked) {
+            setTimeout(() => {
+              showUnlockSuccessModal(
+                "Emsile-i Muttaride ve Kelimeler Açıldı!",
+                "Tebrikler! Zamirler bölümünde üst üste 15 doğru yaptınız. Ana ekranda Emsile-i Muttaride ve Kelimeler menüleri açıldı!",
+                'sigaPronouns'
+              );
+            }, 450);
+          }
+        } else {
+          prog.streaks['pronouns'] = 0;
+          saveUserProgress(prog);
+          updateStreakSquareUI();
+        }
+        return;
+      }
+
+      // 3. EMSİLE-İ MUTTARİDE MODU: O sîgada 15 Doğru -> Sonraki Sîga Açılır (24 Çekim Kademeli)
+      if (currentGameMode === 'sigaPronouns') {
+        const target = 15;
+        const curStreak = prog.muttarideStreaks[selectedSigaId] || 0;
+
+        if (isCorrect) {
+          const newStreak = curStreak + 1;
+          prog.muttarideStreaks[selectedSigaId] = newStreak;
+          const nextSigaId = selectedSigaId + 1;
+          let justUnlockedNext = false;
+
+          if (newStreak >= target && nextSigaId <= 24) {
+            if (!prog.muttarideUnlocked.includes(nextSigaId)) {
+              prog.muttarideUnlocked.push(nextSigaId);
+              justUnlockedNext = true;
+            }
+          }
+          saveUserProgress(prog);
+          updateStreakSquareUI();
+
+          if (justUnlockedNext) {
+            const curSigaObj = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || { meaning: `${selectedSigaId}. Çekim` };
+            const nextSigaObj = EMSILE_24_WORDS.find(w => w.id === nextSigaId) || { meaning: `${nextSigaId}. Çekim` };
+            setTimeout(() => {
+              showUnlockSuccessModal(
+                `${nextSigaObj.meaning} Açıldı!`,
+                `Tebrikler! ${curSigaObj.meaning} kalıbında üst üste 15 doğru yaptınız. ${nextSigaId}. çekim olan ${nextSigaObj.meaning} açıldı!`,
+                'nextSiga_' + nextSigaId
+              );
+            }, 450);
+          }
+        } else {
+          // YANLIŞ CEVAP: O anki sîganın üst üste serisi sıfırlanır!
+          prog.muttarideStreaks[selectedSigaId] = 0;
+          saveUserProgress(prog);
+          updateStreakSquareUI();
+        }
+        return;
       }
     }
 
@@ -3220,6 +3282,13 @@ async function syncWordsFromCloud() {
     function goToUnlockedMenu() {
       closeUnlockModal();
       updateMenuVisibility();
+      if (lastUnlockedMenuKey && lastUnlockedMenuKey.startsWith('nextSiga_')) {
+        const nextId = parseInt(lastUnlockedMenuKey.replace('nextSiga_', ''), 10);
+        if (nextId && nextId <= 24) {
+          startSigaPronounGame(nextId);
+          return;
+        }
+      }
       if (lastUnlockedMenuKey === 'pronouns') {
         startPronounsGame();
       } else if (lastUnlockedMenuKey === 'sigaPronouns') {
@@ -3471,17 +3540,35 @@ async function syncWordsFromCloud() {
       if (!container) return;
       container.innerHTML = "";
 
+      const prog = getUserProgress();
+      const unlockedSigaList = (prog.muttarideUnlocked && Array.isArray(prog.muttarideUnlocked)) ? prog.muttarideUnlocked : [1];
+
       EMSILE_24_WORDS.forEach(siga => {
+        const isUnlocked = unlockedSigaList.includes(siga.id);
         const card = document.createElement("div");
-        card.className = "siga-item-card";
+        card.className = `siga-item-card ${isUnlocked ? 'unlocked' : 'locked'}`;
+        if (!isUnlocked) {
+          card.style.opacity = "0.52";
+          card.style.cursor = "not-allowed";
+          card.style.filter = "grayscale(35%)";
+        }
         card.innerHTML = `
-          <span class="siga-badge-num">${siga.id}</span>
+          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <span class="siga-badge-num">${siga.id}</span>
+            ${!isUnlocked ? '<span style="font-size: 0.72rem; background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 2px 7px; border-radius: 6px; font-weight: 700;">🔒 Kilitli</span>' : '<span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 7px; border-radius: 6px; font-weight: 700;">✓ Açık</span>'}
+          </div>
           <div class="siga-item-arabic">${siga.word}</div>
           <div class="siga-item-title">${escapeHtml(siga.meaning)}</div>
           <div class="siga-item-trans">${escapeHtml(siga.translation)}</div>
           ${siga.extraHint ? `<div class="siga-item-hint">${escapeHtml(siga.extraHint)}</div>` : ''}
         `;
-        card.addEventListener("click", () => startSigaPronounGame(siga.id));
+        if (isUnlocked) {
+          card.addEventListener("click", () => startSigaPronounGame(siga.id));
+        } else {
+          card.addEventListener("click", () => {
+            showToast(`🔒 Bu çekimin açılması için önceki çekimde üst üste 15 doğru yapmalısınız.`);
+          });
+        }
         container.appendChild(card);
       });
     }
