@@ -66,7 +66,7 @@ const SIGA_CONJUGATIONS = {
   1: ["نَصَرَ", "نَصَرَا", "نَصَرُوا", "نَصَرَتْ", "نَصَرَتَا", "نَصَرْنَ", "نَصَرْتَ", "نَصَرْتُمَا", "نَصَرْتُمْ", "نَصَرْتِ", "نَصَرْتُمَا", "نَصَرْتُنَّ", "نَصَرْتُ", "نَصَرْنَا"],
   2: ["يَنْصُرُ", "يَنْصُرَانِ", "يَنْصُرُونَ", "تَنْصُرُ", "تَنْصُرَانِ", "يَنْصُرْنَ", "تَنْصُرُ", "تَنْصُرَانِ", "تَنْصُرُونَ", "تَنْصُرِينَ", "تَنْصُرَانِ", "تَنْصُرْنَ", "أَنْصُرُ", "نَنْصُرُ"],
   3: ["نَصْرًا", "نَصْرَانِ", "نَصَرَاتٌ"],
-  4: ["نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ", "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ", "نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ", "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ", "نَاصِرٌ", "نَاصِرُونَ"],
+  4: ["نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ", "نُصَّارٌ (Kırık Cemi)", "نُصَّرُ (Kırık Cemi)", "نَصَرَةٌ (Kırık Cemi)", "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ", "نَوَاصِرُ (Kırık Cemi)"],
   5: ["مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ", "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ", "مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ", "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ", "مَنْصُورٌ", "مَنْصُورُونَ"],
   6: ["لَمْ يَنْصُرْ", "لَمْ يَنْصُرَا", "لَمْ يَنْصُرُوا", "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ يَنْصُرْنَ", "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرُوا", "لَمْ تَنْصُرِي", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرْنَ", "لَمْ أَنْصُرْ", "لَمْ نَنْصُرْ"],
   7: ["لَمَّا يَنْصُرْ", "لَمَّا يَنْصُرَا", "لَمَّا يَنْصُرُوا", "لَمَّا تَنْصُرْ", "لَمَّا تَنْصُرَا", "لَمَّا يَنْصُرْنَ", "لَمَّا تَنْصُرْ", "لَمَّا تَنْصُرَا", "لَمَّا تَنْصُرُوا", "لَمَّا تَنْصُرِي", "لَمَّا تَنْصُرَا", "لَمَّا تَنْصُرْنَ", "لَمَّا أَنْصُرْ", "لَمَّا نَنْصُرْ"],
@@ -367,6 +367,88 @@ const SIGA_CONJUGATION_DETAILS = {
       person: "Masdar-ı gayr-i mîmî - Cemî",
       pronoun: "Cemî (Çoğul)",
       fullDetail: "Masdar-ı gayr-i mîmî cem', mânâsı: Çok yardım etmek"
+    }
+  ],
+  4: [
+    {
+      id: 1,
+      word: "نَاصِرٌ",
+      meaning: "Yardım edici bir er",
+      person: "İsm-i fâil - Müfred Müzekker",
+      pronoun: "Müfred Müzekker",
+      fullDetail: "İsm-i fâil müfred müzekker, mânâsı: Yardım edici bir er"
+    },
+    {
+      id: 2,
+      word: "نَاصِرَانِ",
+      meaning: "Yardım edici iki erler",
+      person: "İsm-i fâil - Tesniye Müzekker",
+      pronoun: "Tesniye Müzekker",
+      fullDetail: "İsm-i fâil tesniye müzekker, mânâsı: Yardım edici iki erler"
+    },
+    {
+      id: 3,
+      word: "نَاصِرُونَ",
+      meaning: "Yardım edici cem' erler (Musahhah)",
+      person: "İsm-i fâil - Cem' Müzekker Musahhah",
+      pronoun: "Cem' Müzekker Musahhah",
+      fullDetail: "İsm-i fâil cem' müzekker musahhah, mânâsı: Yardım edici cem' erler"
+    },
+    {
+      id: 4,
+      word: "نُصَّارٌ (Kırık Cemi)",
+      meaning: "Yardım edici cem' erler (Kırık Cemi)",
+      person: "İsm-i fâil - Cem' Müzekker Mükesser (Kırık Cemi)",
+      pronoun: "Cem' Müzekker (Kırık Cemi)",
+      fullDetail: "İsm-i fâil cem' müzekker mükesser, mânâsı: Yardım edici cem' erler (Kırık Cemi)"
+    },
+    {
+      id: 5,
+      word: "نُصَّرُ (Kırık Cemi)",
+      meaning: "Yardım edici cem' erler (Kırık Cemi)",
+      person: "İsm-i fâil - Cem' Müzekker Mükesser (Kırık Cemi)",
+      pronoun: "Cem' Müzekker (Kırık Cemi)",
+      fullDetail: "İsm-i fâil cem' müzekker mükesser, mânâsı: Yardım edici cem' erler (Kırık Cemi)"
+    },
+    {
+      id: 6,
+      word: "نَصَرَةٌ (Kırık Cemi)",
+      meaning: "Yardım edici cem' erler (Kırık Cemi)",
+      person: "İsm-i fâil - Cem' Müzekker Mükesser (Kırık Cemi)",
+      pronoun: "Cem' Müzekker (Kırık Cemi)",
+      fullDetail: "İsm-i fâil cem' müzekker mükesser, mânâsı: Yardım edici cem' erler (Kırık Cemi)"
+    },
+    {
+      id: 7,
+      word: "نَاصِرَةٌ",
+      meaning: "Yardım edici bir avrat",
+      person: "İsm-i fâil - Müfred Müennes",
+      pronoun: "Müfred Müennes",
+      fullDetail: "İsm-i fâil müfred müennes, mânâsı: Yardım edici bir avrat (kadın)"
+    },
+    {
+      id: 8,
+      word: "نَاصِرَتَانِ",
+      meaning: "Yardım edici iki avratlar",
+      person: "İsm-i fâil - Tesniye Müennes",
+      pronoun: "Tesniye Müennes",
+      fullDetail: "İsm-i fâil tesniye müennes, mânâsı: Yardım edici iki avratlar (kadınlar)"
+    },
+    {
+      id: 9,
+      word: "نَاصِرَاتٌ",
+      meaning: "Yardım edici cem' avratlar (Musahhah)",
+      person: "İsm-i fâil - Cem' Müennes Musahhah",
+      pronoun: "Cem' Müennes Musahhah",
+      fullDetail: "İsm-i fâil cem' müennes musahhah, mânâsı: Yardım edici cem' avratlar (kadınlar)"
+    },
+    {
+      id: 10,
+      word: "نَوَاصِرُ (Kırık Cemi)",
+      meaning: "Yardım edici cem' avratlar (Kırık Cemi)",
+      person: "İsm-i fâil - Cem' Müennes Mükesser (Kırık Cemi)",
+      pronoun: "Cem' Müennes (Kırık Cemi)",
+      fullDetail: "İsm-i fâil cem' müennes mükesser, mânâsı: Yardım edici cem' avratlar (Kırık Cemi)"
     }
   ]
 };
@@ -1358,7 +1440,8 @@ class LanguageGameEngine {
     const targets = {
       1: 15,
       2: 15,
-      3: 4
+      3: 4,
+      4: 15
     };
     return targets[sigaId] || 15;
   }
@@ -2222,7 +2305,7 @@ class LanguageGameEngine {
           .filter(m => m === correct || !siblingMeanings.includes(m));
         questionConfig = {
           mode: 'text_simple',
-          instruction: "Bu fiil çekiminin Türkçe anlamı nedir?",
+          instruction: "Bu çekimin Türkçe anlamı nedir?",
           correctKey: correct,
           promptText: curWord.word,
           isPromptArabic: true,
@@ -2231,7 +2314,12 @@ class LanguageGameEngine {
         };
       } else if (chosenType === 'MEANING_TO_AR') {
         const correct = curWord.word;
-        const pool = this.currentQuizWords.map(w => w.word);
+        const siblingWordsWithSameMeaning = this.currentQuizWords
+          .filter(w => w.meaning === curWord.meaning && w.word !== curWord.word)
+          .map(w => w.word);
+        const pool = this.currentQuizWords
+          .map(w => w.word)
+          .filter(w => !siblingWordsWithSameMeaning.includes(w));
         questionConfig = {
           mode: 'text_simple',
           instruction: "Bu Türkçe anlama gelen Arapça çekim hangisidir?",
@@ -2260,8 +2348,13 @@ class LanguageGameEngine {
         };
       } else {
         const correct = curWord.word;
-        const pool = this.currentQuizWords.map(w => w.word);
         const personText = curWord.person || curWord.meaning;
+        const siblingWordsWithSamePerson = this.currentQuizWords
+          .filter(w => (w.person || w.meaning) === personText && w.word !== curWord.word)
+          .map(w => w.word);
+        const pool = this.currentQuizWords
+          .map(w => w.word)
+          .filter(w => !siblingWordsWithSamePerson.includes(w));
         questionConfig = {
           mode: 'text_simple',
           instruction: "Bu şahıs ve sîgaya ait Arapça çekim hangisidir?",
@@ -2563,6 +2656,35 @@ class LanguageGameEngine {
       });
 
       gridEl.appendChild(rowDiv);
+    } else if (this.currentQuizWords.length === 10) {
+      const s = EMSILE_24_WORDS.find(w => w.id === this.selectedSigaId) || { meaning: "İsm-i Fâil", word: "نَاصِرٌ" };
+      if (bannerIcon) bannerIcon.textContent = "👤";
+      if (bannerTitle) bannerTitle.textContent = `${s.meaning} (${s.word}) Tablosu (Sağdan Sola)`;
+      if (bannerDesc) bannerDesc.textContent = "Müfred, Tesniye ve Cemî (Musahhah & Kırık Cemi) çekimleri";
+
+      gridEl.className = "emsile-table-wrapper";
+
+      const rowsDef = [
+        { rowNum: 1, slice: [0, 4] },
+        { rowNum: 2, slice: [4, 8] },
+        { rowNum: 3, slice: [8, 10] }
+      ];
+
+      rowsDef.forEach(def => {
+        const rowItems = this.currentQuizWords.slice(def.slice[0], def.slice[1]);
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "emsile-row";
+        rowDiv.style.gridTemplateColumns = "repeat(4, 1fr)";
+        rowDiv.style.width = "100%";
+        rowDiv.style.margin = "0";
+        rowDiv.setAttribute("data-row", def.rowNum);
+
+        rowItems.forEach(item => {
+          rowDiv.appendChild(this.createCard(item, highlightId));
+        });
+
+        gridEl.appendChild(rowDiv);
+      });
     } else {
       const s = EMSILE_24_WORDS.find(w => w.id === this.selectedSigaId) || EMSILE_24_WORDS[0];
       if (bannerIcon) bannerIcon.textContent = "👤";
