@@ -2291,6 +2291,120 @@ try { if (typeof navigator !== 'undefined') { navigator.vibrate = function() { r
           pronoun: "نَحْنُ",
           fullDetail: "Yardım ettik biz geçmiş zamanda"
         }
+      ],
+      2: [
+        {
+          id: 1,
+          word: "يَنْصُرُ",
+          meaning: "O (erkek) yardım ediyor",
+          person: "Müzekker Gâib - Müfred",
+          pronoun: "هُوَ",
+          fullDetail: "Yardım eder bir gâib er şimdiki veya gelecek zamanda"
+        },
+        {
+          id: 2,
+          word: "يَنْصُرَانِ",
+          meaning: "O iki erkek yardım ediyor",
+          person: "Müzekker Gâib - Tesniye",
+          pronoun: "هُمَا",
+          fullDetail: "Yardım ederler iki gâib erler şimdiki veya gelecek zamanda"
+        },
+        {
+          id: 3,
+          word: "يَنْصُرُونَ",
+          meaning: "Onlar (erkek) yardım ediyor",
+          person: "Müzekker Gâib - Cemî",
+          pronoun: "هُمْ",
+          fullDetail: "Yardım ederler cemî gâib erler şimdiki veya gelecek zamanda"
+        },
+        {
+          id: 4,
+          word: "تَنْصُرُ",
+          meaning: "O (kadın) yardım ediyor",
+          person: "Müennes Gâibe - Müfred",
+          pronoun: "هِيَ",
+          fullDetail: "Yardım eder bir gâibe avrat şimdiki veya gelecek zamanda"
+        },
+        {
+          id: 5,
+          word: "تَنْصُرَانِ",
+          meaning: "O iki kadın yardım ediyor",
+          person: "Müennes Gâibe - Tesniye",
+          pronoun: "هُمَا",
+          fullDetail: "Yardım ederler iki gâibe avratlar şimdiki veya gelecek zamanda"
+        },
+        {
+          id: 6,
+          word: "يَنْصُرْنَ",
+          meaning: "Onlar (kadın) yardım ediyor",
+          person: "Müennes Gâibe - Cemî",
+          pronoun: "هُنَّ",
+          fullDetail: "Yardım ederler cemî gâibe avratlar şimdiki veya gelecek zamanda"
+        },
+        {
+          id: 7,
+          word: "تَنْصُرُ",
+          meaning: "Sen (erkek) yardım ediyorsun",
+          person: "Müzekker Muhatab - Müfred",
+          pronoun: "أَنْتَ",
+          fullDetail: "Yardım edersin sen bir hâzır er şimdiki veya gelecek zamanda"
+        },
+        {
+          id: 8,
+          word: "تَنْصُرَانِ",
+          meaning: "Siz iki erkek yardım ediyorsunuz",
+          person: "Müzekker Muhatab - Tesniye",
+          pronoun: "أَنْتُمَا",
+          fullDetail: "Yardım edersiniz siz iki hâzır erler şimdiki veya gelecek zamanda"
+        },
+        {
+          id: 9,
+          word: "تَنْصُرُونَ",
+          meaning: "Siz (erkek) yardım ediyorsunuz",
+          person: "Müzekker Muhatab - Cemî",
+          pronoun: "أَنْتُمْ",
+          fullDetail: "Yardım edersiniz siz cemî hâzır erler şimdiki veya gelecek zamanda"
+        },
+        {
+          id: 10,
+          word: "تَنْصُرِينَ",
+          meaning: "Sen (kadın) yardım ediyorsun",
+          person: "Müennes Muhataba - Müfred",
+          pronoun: "أَنْتِ",
+          fullDetail: "Yardım edersin sen bir hâzıra avrat şimdiki veya gelecek zamanda"
+        },
+        {
+          id: 11,
+          word: "تَنْصُرَانِ",
+          meaning: "Siz iki kadın yardım ediyorsunuz",
+          person: "Müennes Muhataba - Tesniye",
+          pronoun: "أَنْتُمَا",
+          fullDetail: "Yardım edersiniz siz iki hâzıra avratlar şimdiki veya gelecek zamanda"
+        },
+        {
+          id: 12,
+          word: "تَنْصُرْنَ",
+          meaning: "Siz (kadın) yardım ediyorsunuz",
+          person: "Müennes Muhataba - Cemî",
+          pronoun: "أَنْتُنَّ",
+          fullDetail: "Yardım edersiniz siz cemî hâzıra avratlar şimdiki veya gelecek zamanda"
+        },
+        {
+          id: 13,
+          word: "أَنْصُرُ",
+          meaning: "Ben yardım ediyorum",
+          person: "Mütekellim - Müfred (Vahde)",
+          pronoun: "أَنَا",
+          fullDetail: "Yardım ederim ben şimdiki veya gelecek zamanda"
+        },
+        {
+          id: 14,
+          word: "نَنْصُرُ",
+          meaning: "Biz yardım ediyoruz",
+          person: "Mütekellim - Tesniye / Cemî (Maa'l-gayr)",
+          pronoun: "نَحْنُ",
+          fullDetail: "Yardım ederiz biz şimdiki veya gelecek zamanda"
+        }
       ]
     };
 
@@ -4251,12 +4365,12 @@ async function syncWordsFromCloud() {
 
         if (chosenType === 'AR_TO_MEANING') {
           const correct = curWord.meaning;
-          const pool = currentQuizWords.map(w => w.meaning).filter(m => {
-            if (curWord.word === "نَصَرْتُمَا") {
-              return m === correct || !m.includes("Siz ikiniz");
-            }
-            return true;
-          });
+          const siblingMeanings = currentQuizWords
+            .filter(w => w.word === curWord.word)
+            .map(w => w.meaning);
+          const pool = currentQuizWords
+            .map(w => w.meaning)
+            .filter(m => m === correct || !siblingMeanings.includes(m));
           questionConfig = {
             mode: 'text_simple',
             badge: `${sigaObj.word} ➔ ANLAMI`,
@@ -4282,12 +4396,12 @@ async function syncWordsFromCloud() {
           };
         } else if (chosenType === 'AR_TO_PERSON') {
           const correct = curWord.person || curWord.meaning;
-          const pool = currentQuizWords.map(w => w.person || w.meaning).filter(p => {
-            if (curWord.word === "نَصَرْتُمَا") {
-              return p === correct || !p.includes("Muhatab");
-            }
-            return true;
-          });
+          const siblingPersons = currentQuizWords
+            .filter(w => w.word === curWord.word)
+            .map(w => w.person || w.meaning);
+          const pool = currentQuizWords
+            .map(w => w.person || w.meaning)
+            .filter(p => p === correct || !siblingPersons.includes(p));
           questionConfig = {
             mode: 'text_simple',
             badge: `${sigaObj.word} ➔ ŞAHIS / SÎGA`,
