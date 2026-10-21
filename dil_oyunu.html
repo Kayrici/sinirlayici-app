@@ -3408,6 +3408,7 @@ async function syncWordsFromCloud() {
     function switchUser(userId) {
       setActiveUserId(userId);
       closeUserProfileModal();
+      loadVocabStats();
       updateMenuVisibility();
       if (currentActiveScreen === 'quizSection') {
         updateStreakSquareUI();
@@ -3839,14 +3840,16 @@ async function syncWordsFromCloud() {
     }
 
     // ==========================================
-    // ADAPTİF TEKRAR & İSTATİSTİK SİSTEMİ (LEITNER / SPACED REPETITION)
-    // Tamamen arka planda çalışır, ekranda yüzde/istatistik görünmez
+    // ADAPTİF TEKRAR & İSTATİSTİK SİSTEMİ (LEITNER / DİNAMİK SIKLIK KURALI)
+    // Tamamen arka planda çalışır, ekranda yüzde/istatistik görünmez.
+    // Her kullanıcının kelime istatistikleri kendi profili altında ayrı saklanır.
     // ==========================================
     let vocabStats = {};
 
     function loadVocabStats() {
       try {
-        const saved = localStorage.getItem('vocab_adaptive_stats_v2');
+        const uId = getActiveUserId();
+        const saved = localStorage.getItem('vocab_adaptive_stats_' + uId);
         vocabStats = saved ? JSON.parse(saved) : {};
       } catch (_) {
         vocabStats = {};
@@ -3855,7 +3858,8 @@ async function syncWordsFromCloud() {
 
     function saveVocabStats() {
       try {
-        localStorage.setItem('vocab_adaptive_stats_v2', JSON.stringify(vocabStats));
+        const uId = getActiveUserId();
+        localStorage.setItem('vocab_adaptive_stats_' + uId, JSON.stringify(vocabStats));
       } catch (_) {}
     }
 
@@ -3864,18 +3868,19 @@ async function syncWordsFromCloud() {
       const st = vocabStats[wordId];
       const streak = (st && typeof st.streak === 'number') ? st.streak : 0;
       // KULLANICI KURALI:
-      // İlk 5 doğru cevapta bir değişiklik yok (1.0).
-      // Sonraki her doğru cevapta gelme olasılığı %30 azalsın (0.70 katı),
-      // sonraki doğru cevapta kalan olasılık tekrar %30 azalsın.
-      if (streak <= 5) {
-        return 1.0;
+      // Kullanıcı bir kelimeye sürekli doğru cevap veriyorsa, o kelimenin o seviyede de,
+      // sonraki seviyelerde de, önceki seviyelerde de karşısına çıkma olasılığı düşürülür.
+      // Kullanıcı yanlış cevap verene kadar bu düşük olasılık korunur.
+      if (streak <= 0) {
+        return 1.0; // İlk hali: %100 normal olasılık
       }
-      const reduced = Math.pow(0.70, streak - 5);
-      return Math.max(0.02, reduced); // Minimum %2 taban ağırlık
+      // Her doğru cevapta olasılık kademeli olarak düşürülür (0.72 çarpanı)
+      const reduced = Math.pow(0.72, streak);
+      return Math.max(0.02, reduced); // Minimum %2 taban ağırlık korunur
     }
 
     function recordVocabAnswer(wordId, isCorrect) {
-      if (!vocabStats || Object.keys(vocabStats).length === 0) loadVocabStats();
+      loadVocabStats();
       if (!vocabStats[wordId]) {
         vocabStats[wordId] = { streak: 0, totalCorrect: 0, totalWrong: 0 };
       }
@@ -3885,8 +3890,7 @@ async function syncWordsFromCloud() {
         entry.totalCorrect = (entry.totalCorrect || 0) + 1;
       } else {
         // KULLANICI KURALI:
-        // Herhangi bir noktada yanlış cevap verilirse olasılık değişimlerinin
-        // tamamı sıfırlansın ve normalde olduğu gibi (%100) olsun!
+        // Yanlış cevap verildiğinde ise kelimenin tekrar sorulma olasılığı ilk haline getirilir!
         entry.streak = 0;
         entry.totalWrong = (entry.totalWrong || 0) + 1;
       }

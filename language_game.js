@@ -1365,6 +1365,7 @@ class LanguageGameEngine {
   switchUser(userId) {
     this.setActiveUserId(userId);
     this.closeUserProfileModal();
+    this.loadVocabStats();
     this.updateMenuVisibility();
     this.updateStreakSquareUI();
   }
@@ -1671,10 +1672,12 @@ class LanguageGameEngine {
     this.currentOrderIndex = 0;
   }
 
-  // ADAPTİF TEKRAR & İSTATİSTİK SİSTEMİ (LEITNER)
+  // ADAPTİF TEKRAR & İSTATİSTİK SİSTEMİ (LEITNER / DİNAMİK SIKLIK KURALI)
+  // Her kullanıcının kelime istatistikleri kendi profili altında ayrı saklanır.
   loadVocabStats() {
     try {
-      const saved = localStorage.getItem('vocab_adaptive_stats_v2');
+      const uId = this.getActiveUserId();
+      const saved = localStorage.getItem('vocab_adaptive_stats_' + uId);
       this.vocabStats = saved ? JSON.parse(saved) : {};
     } catch (_) {
       this.vocabStats = {};
@@ -1683,7 +1686,8 @@ class LanguageGameEngine {
 
   saveVocabStats() {
     try {
-      localStorage.setItem('vocab_adaptive_stats_v2', JSON.stringify(this.vocabStats));
+      const uId = this.getActiveUserId();
+      localStorage.setItem('vocab_adaptive_stats_' + uId, JSON.stringify(this.vocabStats));
     } catch (_) {}
   }
 
@@ -1691,13 +1695,20 @@ class LanguageGameEngine {
     if (!this.vocabStats) this.loadVocabStats();
     const st = this.vocabStats[wordId];
     const streak = (st && typeof st.streak === 'number') ? st.streak : 0;
-    if (streak <= 5) return 1.0;
-    const reduced = Math.pow(0.70, streak - 5);
-    return Math.max(0.02, reduced);
+    // KULLANICI KURALI:
+    // Kullanıcı bir kelimeye sürekli doğru cevap veriyorsa, o kelimenin o seviyede de,
+    // sonraki seviyelerde de, önceki seviyelerde de karşısına çıkma olasılığı düşürülür.
+    // Kullanıcı yanlış cevap verene kadar bu düşük olasılık korunur.
+    if (streak <= 0) {
+      return 1.0; // İlk hali: %100 normal olasılık
+    }
+    // Her doğru cevapta olasılık kademeli olarak düşürülür (0.72 çarpanı)
+    const reduced = Math.pow(0.72, streak);
+    return Math.max(0.02, reduced); // Minimum %2 taban ağırlık
   }
 
   recordVocabAnswer(wordId, isCorrect) {
-    if (!this.vocabStats) this.loadVocabStats();
+    this.loadVocabStats();
     if (!this.vocabStats[wordId]) {
       this.vocabStats[wordId] = { streak: 0, totalCorrect: 0, totalWrong: 0 };
     }
@@ -1706,6 +1717,8 @@ class LanguageGameEngine {
       entry.streak = (entry.streak || 0) + 1;
       entry.totalCorrect = (entry.totalCorrect || 0) + 1;
     } else {
+      // KULLANICI KURALI:
+      // Yanlış cevap verildiğinde ise kelimenin tekrar sorulma olasılığı ilk haline getirilir!
       entry.streak = 0;
       entry.totalWrong = (entry.totalWrong || 0) + 1;
     }
