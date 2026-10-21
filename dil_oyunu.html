@@ -2,6 +2,9 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Arapça Emsile ve Çekim Merkezi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1597,43 +1600,18 @@
       color: #34d399;
     }
 
-    /* KULLANICI PROFİLİ BUTONU VE HERO ALANI */
-    .btn-profile-action {
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      color: #c7d2fe;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 700;
-    }
-    .btn-profile-action:hover {
-      background: rgba(99, 102, 241, 0.3);
-      border-color: rgba(99, 102, 241, 0.7);
-      color: #ffffff;
-    }
-    .profile-hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 0.82rem;
-      color: #cbd5e1;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: all 0.2s ease;
-    }
-    .profile-hero-pill:hover {
-      border-color: #818cf8;
-      color: #fff;
-      background: rgba(30, 41, 59, 0.85);
-      transform: translateY(-1px);
-    }
-    .profile-hero-pill strong {
-      color: #818cf8;
+    /* KULLANICI PROFİLİ VE DÜZENLE BUTONLARI KESİNLİKLE GİZLİ */
+    .btn-profile-action,
+    .profile-hero-pill,
+    #btnUserProfileHeader,
+    #activeUserNameHeader,
+    #activeUserNameBanner,
+    #userProfileModal,
+    #editWordsModal {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
 
     /* KULLANICI SEÇİM MODALI */
