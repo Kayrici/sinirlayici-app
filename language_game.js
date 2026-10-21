@@ -1331,46 +1331,9 @@ class LanguageGameEngine {
   // ==========================================
   // KULLANICI PROFİLİ VE İLERLEME YÖNETİMİ
   // ==========================================
-  getUsersList() {
-    try {
-      const saved = localStorage.getItem("app_users_list_v2");
-      if (saved) {
-        const list = JSON.parse(saved);
-        if (Array.isArray(list) && list.length > 0) return list;
-      }
-    } catch (_) {}
-    return [{ id: 'user_default', name: 'Kullanıcı 1' }];
-  }
-
-  saveUsersList(users) {
-    try {
-      localStorage.setItem("app_users_list_v2", JSON.stringify(users));
-    } catch (_) {}
-  }
-
-  getActiveUserId() {
-    try {
-      const id = localStorage.getItem("active_user_id");
-      if (id) return id;
-    } catch (_) {}
-    return 'user_default';
-  }
-
-  setActiveUserId(id) {
-    try {
-      localStorage.setItem("active_user_id", id);
-    } catch (_) {}
-  }
-
-  getActiveUser() {
-    const list = this.getUsersList();
-    const id = this.getActiveUserId();
-    return list.find(u => u.id === id) || list[0] || { id: 'user_default', name: 'Kullanıcı 1' };
-  }
 
   getUserProgress(userId = null) {
-    const uId = userId || this.getActiveUserId();
-    const key = `user_prog_${uId}`;
+    const key = `app_progress`;
     try {
       const saved = localStorage.getItem(key);
       if (saved) {
@@ -1403,8 +1366,7 @@ class LanguageGameEngine {
   }
 
   saveUserProgress(prog, userId = null) {
-    const uId = userId || this.getActiveUserId();
-    const key = `user_prog_${uId}`;
+    const key = `app_progress`;
     try {
       localStorage.setItem(key, JSON.stringify(prog));
     } catch (_) {}
@@ -1414,10 +1376,7 @@ class LanguageGameEngine {
     const prog = this.getUserProgress();
     const activeUser = this.getActiveUser();
 
-    const bannerUserEl = document.getElementById("langActiveUserNameBanner");
-    const headerUserEl = document.getElementById("langActiveUserNameHeader");
-    if (bannerUserEl) bannerUserEl.textContent = activeUser.name;
-    if (headerUserEl) headerUserEl.textContent = activeUser.name;
+    // User name display removed for anonymous mode
 
     const cardEmsile24 = document.getElementById("langMenuCardEmsile24");
     const cardPronouns = document.getElementById("langMenuCardPronouns");
@@ -1686,92 +1645,9 @@ class LanguageGameEngine {
     }
   }
 
-  // KULLANICI PROFİLİ MODAL FONKSİYONLARI
-  openUserProfileModal() {
-    this.renderUserProfileModal();
-    const modal = document.getElementById("langUserProfileModal");
-    if (modal) modal.style.display = "flex";
-  }
-
-  closeUserProfileModal() {
-    const modal = document.getElementById("langUserProfileModal");
-    if (modal) modal.style.display = "none";
-  }
-
-  renderUserProfileModal() {
-    const container = document.getElementById("langUserProfilesListContainer");
-    if (!container) return;
-    container.innerHTML = "";
-
-    const users = this.getUsersList();
-    const activeId = this.getActiveUserId();
-
-    users.forEach(user => {
-      const item = document.createElement("div");
-      const isActive = (user.id === activeId);
-      item.className = `user-list-item ${isActive ? 'active' : ''}`;
-      
-      const prog = this.getUserProgress(user.id);
-      const unlockedCount = prog.unlockedMenus ? prog.unlockedMenus.length : 1;
-
-      item.style.cssText = "display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; margin-bottom: 6px;";
-      if (isActive) {
-        item.style.borderColor = "#6366f1";
-        item.style.background = "rgba(99, 102, 241, 0.15)";
-      }
-
-      item.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 1.3rem;">👤</span>
-          <div>
-            <div style="font-weight: 700; color: #fff; font-size: 0.88rem;">${escapeHtml(user.name)}</div>
-            <div style="font-size: 0.72rem; color: #94a3b8;">Açık Menü: ${unlockedCount}/4</div>
-          </div>
-        </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-          ${isActive ? '<span style="font-size: 0.75rem; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 3px 8px; border-radius: 6px; font-weight: 700;">Aktif</span>' : `<button type="button" class="btn-start-choice" style="padding: 4px 10px; font-size: 0.75rem;" onclick="languageGame.switchUser('${user.id}')">Seç</button>`}
-        </div>
-      `;
-      if (!isActive) {
-        item.addEventListener("click", (e) => {
-          if (e.target.tagName !== 'BUTTON') this.switchUser(user.id);
-        });
-      }
-      container.appendChild(item);
-    });
-  }
-
-  switchUser(userId) {
-    this.setActiveUserId(userId);
-    this.closeUserProfileModal();
-    this.loadVocabStats();
-    this.updateMenuVisibility();
-    this.updateStreakSquareUI();
-  }
-
-  addNewUser() {
-    const input = document.getElementById("langNewUserNameInput");
-    if (!input) return;
-    const name = input.value.trim();
-    if (!name) return;
-
-    const users = this.getUsersList();
-    const newId = 'user_' + Date.now();
-    users.push({ id: newId, name: name });
-    this.saveUsersList(users);
-
-    const defaultProg = {
-      unlockedMenus: ['emsile24'],
-      streaks: { emsile24: 0, pronouns: 0, sigaPronouns: 0 }
-    };
-    this.saveUserProgress(defaultProg, newId);
-
-    this.setActiveUserId(newId);
-    input.value = "";
-    this.closeUserProfileModal();
-    this.updateMenuVisibility();
-    this.updateStreakSquareUI();
-  }
+  // KULLANICI PROFİLİ KALDIRILDI (ANONİM ÇALIŞIR)
+  openUserProfileModal() {}
+  closeUserProfileModal() {}
 
   start() {
     this.showMainMenu();

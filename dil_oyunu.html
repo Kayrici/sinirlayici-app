@@ -1819,14 +1819,8 @@
     </div>
 
     <div class="header-actions">
-      <button type="button" class="btn-header-action btn-profile-action" onclick="openUserProfileModal()" id="btnUserProfileHeader" title="Kullanıcı Değiştir">
-        👤 <span id="activeUserNameHeader">Kullanıcı 1</span>
-      </button>
       <button type="button" class="btn-header-action" id="btnToggleTableDirect" onclick="toggleTableDirectly()" style="display: none;">
         📖 Tabloyu Gör
-      </button>
-      <button type="button" class="btn-header-action" onclick="openEditWordsModal()">
-        ✏️ Düzenle
       </button>
     </div>
   </header>
@@ -1838,9 +1832,6 @@
         <span class="hero-badge">🎯 ARAPÇA ÇALIŞMA MERKEZİ</span>
         <h2>Ne Çalışmak İstiyorsunuz?</h2>
         <p>Aşağıdan istediğiniz oyun modunu seçin. Çekimler, sîga başlıkları, fiil manaları veya Tekil / İkili / Çoğul kelime eşleştirmesi yapabilirsiniz.</p>
-        <div class="profile-hero-pill" onclick="openUserProfileModal()" title="Kullanıcı Değiştir">
-          <span>👤 Aktif Kullanıcı: <strong id="activeUserNameBanner">Kullanıcı 1</strong> ⚙️ Değiştir</span>
-        </div>
       </div>
 
       <div class="menu-cards-grid">
@@ -2021,23 +2012,6 @@
     </div>
   </div>
 
-  <!-- KELİMELERİ VE ANLAMLARI DÜZENLE MODALI -->
-  <div class="modal-overlay" id="editWordsModal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 id="editModalTitle">✏️ Kelimeleri Düzenle</h3>
-        <button type="button" class="modal-close-btn" onclick="closeEditWordsModal()">✕</button>
-      </div>
-      <div class="modal-body" id="editWordsListContainer">
-        <!-- JS ile input alanları basılır -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn-modal cancel" onclick="closeEditWordsModal()">İptal</button>
-        <button type="button" class="btn-modal save" onclick="saveEditedWords()">Kaydet ve Uygula</button>
-      </div>
-    </div>
-  </div>
-
   <!-- KİLİT AÇILDI TEBRİK MODALI -->
   <div class="modal-overlay" id="unlockSuccessModal" style="display: none; align-items: center; justify-content: center; z-index: 10000;">
     <div class="modal-card" style="max-width: 380px; text-align: center; border: 2px solid #10b981; box-shadow: 0 10px 40px rgba(16, 185, 129, 0.35);">
@@ -2051,26 +2025,6 @@
         <button type="button" class="btn-start-choice" style="background: rgba(51, 65, 85, 0.8); border: 1px solid rgba(255,255,255,0.15); padding: 10px 18px; border-radius: 8px;" onclick="closeUnlockModal()">
           <span>Burada Devam Et</span>
         </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- KULLANICI PROFİLİ MODALI -->
-  <div class="modal-overlay" id="userProfileModal" style="display: none; align-items: center; justify-content: center; z-index: 10000;">
-    <div class="modal-card" style="max-width: 420px; width: 90%;">
-      <div class="modal-header">
-        <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0;">👤 Kullanıcı Profilleri</h3>
-        <button type="button" class="modal-close-btn" onclick="closeUserProfileModal()">✕</button>
-      </div>
-      <div class="modal-body" style="padding: 14px 18px;">
-        <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 12px 0;">Her kullanıcının kilit açma ilerlemesi ve doğru serileri ayrı kaydedilir.</p>
-        <div class="user-list-container" id="userProfilesListContainer">
-          <!-- JS ile doldurulur -->
-        </div>
-        <div class="add-user-row">
-          <input type="text" class="add-user-input" id="newUserNameInput" placeholder="Yeni kullanıcı adı..." maxlength="20" onkeydown="if(event.key==='Enter') addNewUser()" />
-          <button type="button" class="add-user-btn" onclick="addNewUser()">➕ Ekle</button>
-        </div>
       </div>
     </div>
   </div>
@@ -3388,58 +3342,14 @@ async function syncWordsFromCloud() {
     // =========================================================================
     // 2.5 KULLANICI PROFİLİ VE AŞAMALI KİLİT AÇMA (PROGRESSION) SİSTEMİ
     // =========================================================================
-    const USER_STORAGE_KEYS = {
-      USERS_LIST: 'emsile_users_list_v3',
-      ACTIVE_USER_ID: 'emsile_active_user_id_v3',
-      PROGRESS_PREFIX: 'emsile_user_prog_v3_'
-    };
+    // =========================================================================
+    // 2.5 AŞAMALI KİLİT AÇMA (PROGRESSION) SİSTEMİ (ANONİM / YEREL DEPOLAMA)
+    // =========================================================================
+    const APP_PROGRESS_KEY = 'app_progress';
 
-    function getUsersList() {
+    function getUserProgress() {
       try {
-        const raw = localStorage.getItem(USER_STORAGE_KEYS.USERS_LIST);
-        if (raw) {
-          const list = JSON.parse(raw);
-          if (Array.isArray(list) && list.length > 0) return list;
-        }
-      } catch (_) {}
-      const defaultList = [{ id: 'user_1', name: 'Kullanıcı 1' }];
-      saveUsersList(defaultList);
-      return defaultList;
-    }
-
-    function saveUsersList(list) {
-      try {
-        localStorage.setItem(USER_STORAGE_KEYS.USERS_LIST, JSON.stringify(list));
-      } catch (_) {}
-    }
-
-    function getActiveUserId() {
-      try {
-        const id = localStorage.getItem(USER_STORAGE_KEYS.ACTIVE_USER_ID);
-        if (id) return id;
-      } catch (_) {}
-      const list = getUsersList();
-      const id = list[0].id;
-      setActiveUserId(id);
-      return id;
-    }
-
-    function setActiveUserId(id) {
-      try {
-        localStorage.setItem(USER_STORAGE_KEYS.ACTIVE_USER_ID, id);
-      } catch (_) {}
-    }
-
-    function getActiveUser() {
-      const list = getUsersList();
-      const activeId = getActiveUserId();
-      return list.find(u => u.id === activeId) || list[0];
-    }
-
-    function getUserProgress(userId = null) {
-      const uid = userId || getActiveUserId();
-      try {
-        const raw = localStorage.getItem(USER_STORAGE_KEYS.PROGRESS_PREFIX + uid);
+        const raw = localStorage.getItem(APP_PROGRESS_KEY) || localStorage.getItem('emsile_progress_v1') || localStorage.getItem('emsile_user_prog_v3_user_1');
         if (raw) {
           const prog = JSON.parse(raw);
           if (prog && Array.isArray(prog.unlockedMenus)) {
@@ -3448,7 +3358,6 @@ async function syncWordsFromCloud() {
           }
         }
       } catch (_) {}
-      // KULLANICI KURALI: Başlangıçta yalnızca emsile-i muhtelife menüsü açık, diğer tüm menüler kapalı!
       const defaultProg = {
         unlockedMenus: ['emsile24'],
         streaks: {
@@ -3457,26 +3366,18 @@ async function syncWordsFromCloud() {
           sigaPronouns: 0
         }
       };
-      saveUserProgress(defaultProg, uid);
+      saveUserProgress(defaultProg);
       return defaultProg;
     }
 
-    function saveUserProgress(prog, userId = null) {
-      const uid = userId || getActiveUserId();
+    function saveUserProgress(prog) {
       try {
-        localStorage.setItem(USER_STORAGE_KEYS.PROGRESS_PREFIX + uid, JSON.stringify(prog));
+        localStorage.setItem(APP_PROGRESS_KEY, JSON.stringify(prog));
       } catch (_) {}
     }
 
     function updateMenuVisibility() {
       const prog = getUserProgress();
-      const activeUser = getActiveUser();
-
-      // İsim alanlarını güncelle
-      const nameHeader = document.getElementById("activeUserNameHeader");
-      if (nameHeader) nameHeader.textContent = activeUser.name;
-      const nameBanner = document.getElementById("activeUserNameBanner");
-      if (nameBanner) nameBanner.textContent = activeUser.name;
 
       // 1. Menü: Emsile-i Muhtelife (Her zaman açık)
       const cardEmsile = document.getElementById("menuCardEmsile24");
@@ -3754,93 +3655,9 @@ async function syncWordsFromCloud() {
       }
     }
 
-    // KULLANICI PROFİLİ MODAL FONKSİYONLARI
-    function openUserProfileModal() {
-      renderUserProfileModal();
-      const modal = document.getElementById("userProfileModal");
-      if (modal) modal.style.display = "flex";
-    }
-
-    function closeUserProfileModal() {
-      const modal = document.getElementById("userProfileModal");
-      if (modal) modal.style.display = "none";
-    }
-
-    function renderUserProfileModal() {
-      const container = document.getElementById("userProfilesListContainer");
-      if (!container) return;
-      container.innerHTML = "";
-
-      const users = getUsersList();
-      const activeId = getActiveUserId();
-
-      users.forEach(user => {
-        const item = document.createElement("div");
-        const isActive = (user.id === activeId);
-        item.className = `user-list-item ${isActive ? 'active' : ''}`;
-        
-        const prog = getUserProgress(user.id);
-        const unlockedCount = prog.unlockedMenus ? prog.unlockedMenus.length : 1;
-
-        item.innerHTML = `
-          <div class="user-item-left">
-            <span style="font-size: 1.3rem;">👤</span>
-            <div>
-              <div class="user-item-name">${escapeHtml(user.name)}</div>
-              <div style="font-size: 0.72rem; color: #94a3b8;">Açık Menü: ${unlockedCount}/4</div>
-            </div>
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px;">
-            ${isActive ? '<span class="user-active-badge">Aktif</span>' : `<button type="button" class="btn-start-choice" style="padding: 4px 10px; font-size: 0.75rem;" onclick="switchUser('${user.id}')">Seç</button>`}
-          </div>
-        `;
-        if (!isActive) {
-          item.addEventListener("click", (e) => {
-            if (e.target.tagName !== 'BUTTON') switchUser(user.id);
-          });
-        }
-        container.appendChild(item);
-      });
-    }
-
-    function switchUser(userId) {
-      setActiveUserId(userId);
-      closeUserProfileModal();
-      loadVocabStats();
-      updateMenuVisibility();
-      if (currentActiveScreen === 'quizSection') {
-        updateStreakSquareUI();
-      }
-      showToast(`Aktif kullanıcı: ${getActiveUser().name}`);
-    }
-
-    function addNewUser() {
-      const input = document.getElementById("newUserNameInput");
-      if (!input) return;
-      const name = input.value.trim();
-      if (!name) return;
-
-      const users = getUsersList();
-      const newId = 'user_' + Date.now();
-      users.push({ id: newId, name: name });
-      saveUsersList(users);
-
-      // Yeni kullanıcı başlangıçta yalnızca emsile24 açık olarak başlar!
-      const defaultProg = {
-        unlockedMenus: ['emsile24'],
-        streaks: { emsile24: 0, pronouns: 0, sigaPronouns: 0 }
-      };
-      saveUserProgress(defaultProg, newId);
-
-      setActiveUserId(newId);
-      input.value = "";
-      closeUserProfileModal();
-      updateMenuVisibility();
-      if (currentActiveScreen === 'quizSection') {
-        updateStreakSquareUI();
-      }
-      showToast(`Yeni kullanıcı oluşturuldu: ${name}`);
-    }
+    // KULLANICI PROFİLİ KALDIRILDI (ANONİM ÇALIŞIR)
+    function openUserProfileModal() {}
+    function closeUserProfileModal() {}
 
     // =========================================================================
     // 3. EKRAN VE NAVİGASYON YÖNETİMİ
@@ -5182,143 +4999,9 @@ async function syncWordsFromCloud() {
       return card;
     }
 
-    // =========================================================================
-    // 7. KELİMELERİ DÜZENLE VE YENİ KELİME EKLE MODALI
-    // =========================================================================
-    function openEditWordsModal() {
-      const container = document.getElementById("editWordsListContainer");
-      const titleEl = document.getElementById("editModalTitle");
-      if (!container) return;
-      container.innerHTML = "";
-
-      if (currentGameMode === 'vocab') {
-        if (titleEl) titleEl.textContent = "✏️ Kelimeleri Düzenle (Tekil / İkili / Çoğul)";
-
-        VOCABULARY_WORDS.forEach((item, idx) => {
-          renderVocabEditRow(container, item, idx);
-        });
-
-        // "+ Yeni Kelime Ekle" butonu
-        const addBtn = document.createElement("button");
-        addBtn.type = "button";
-        addBtn.className = "btn-add-word-row";
-        addBtn.innerHTML = "➕ Yeni Kelime Ekle";
-        addBtn.addEventListener("click", () => {
-          const newIdx = container.querySelectorAll(".word-edit-row").length;
-          const newWord = { id: newIdx + 1, singular: "", dual: "", plural: "", meaning: "" };
-          renderVocabEditRow(container, newWord, newIdx);
-          container.scrollTop = container.scrollHeight;
-        });
-        container.appendChild(addBtn);
-
-      } else {
-        if (titleEl) {
-          titleEl.textContent = (currentGameMode === 'emsile24')
-            ? "✏️ 24 Emsile Kelimeleri, Terimleri ve Çevirilerini Düzenle"
-            : "✏️ 14 Zamir Çekimini Düzenle";
-        }
-
-        currentQuizWords.forEach((item, idx) => {
-          const row = document.createElement("div");
-          row.className = "word-edit-row";
-          row.innerHTML = `
-            <span class="word-edit-num">${idx + 1}.</span>
-            <input type="text" class="word-edit-input arabic-input" id="editWord_${idx}" value="${escapeHtml(item.word)}" placeholder="Arapça" />
-            <input type="text" class="word-edit-input" id="editMeaning_${idx}" value="${escapeHtml(item.meaning)}" placeholder="Sîga Başlığı" />
-            <input type="text" class="word-edit-input" id="editTrans_${idx}" value="${escapeHtml(item.translation || '')}" placeholder="Çeviri (örn: Yardım etti)" />
-            <input type="text" class="word-edit-input" id="editExtra_${idx}" value="${escapeHtml(item.extraHint || '')}" placeholder="Ek/Artı (örn: -dı, -di)" style="max-width: 100px;" />
-          `;
-          container.appendChild(row);
-        });
-      }
-
-      document.getElementById("editWordsModal").style.display = "flex";
-    }
-
-    function renderVocabEditRow(container, item, idx) {
-      const row = document.createElement("div");
-      row.className = "word-edit-row vocab-edit-row";
-      row.innerHTML = `
-        <span class="word-edit-num">${idx + 1}.</span>
-        <input type="text" class="word-edit-input arabic-input" data-field="singular" value="${escapeHtml(item.singular)}" placeholder="Tekil (Müfred)" />
-        <input type="text" class="word-edit-input arabic-input" data-field="dual" value="${escapeHtml(item.dual)}" placeholder="İkili (Tesniye)" />
-        <input type="text" class="word-edit-input arabic-input" data-field="plural" value="${escapeHtml(item.plural)}" placeholder="Çoğul (Cemi)" />
-        <input type="text" class="word-edit-input" data-field="meaning" value="${escapeHtml(item.meaning)}" placeholder="Türkçe Anlamı" />
-        <button type="button" class="btn-del-word" onclick="this.parentElement.remove()" title="Sil">✕</button>
-      `;
-      // Butondan önce ekle (eğer addBtn varsa)
-      const addBtn = container.querySelector(".btn-add-word-row");
-      if (addBtn) {
-        container.insertBefore(row, addBtn);
-      } else {
-        container.appendChild(row);
-      }
-    }
-
-    function closeEditWordsModal() {
-      document.getElementById("editWordsModal").style.display = "none";
-    }
-
-    function saveEditedWords() {
-      const container = document.getElementById("editWordsListContainer");
-
-      if (currentGameMode === 'vocab') {
-        const rows = container.querySelectorAll(".vocab-edit-row");
-        const updatedVocab = [];
-        rows.forEach((row, idx) => {
-          const s = (row.querySelector('[data-field="singular"]').value || "").trim();
-          const d = (row.querySelector('[data-field="dual"]').value || "").trim();
-          const p = (row.querySelector('[data-field="plural"]').value || "").trim();
-          const m = (row.querySelector('[data-field="meaning"]').value || "").trim();
-          if (s || m) {
-            updatedVocab.push({
-              id: idx + 1,
-              singular: s || "---",
-              dual: d || "---",
-              plural: p || "---",
-              meaning: m || "---"
-            });
-          }
-        });
-
-        if (updatedVocab.length > 0) {
-          VOCABULARY_WORDS = updatedVocab;
-          currentQuizWords = VOCABULARY_WORDS.slice();
-        }
-      } else {
-        const updated = [];
-        for (let i = 0; i < currentQuizWords.length; i++) {
-          const wInput = document.getElementById(`editWord_${i}`);
-          const mInput = document.getElementById(`editMeaning_${i}`);
-          const tInput = document.getElementById(`editTrans_${i}`);
-          const eInput = document.getElementById(`editExtra_${i}`);
-
-          const wVal = (wInput ? wInput.value : "").trim() || currentQuizWords[i].word;
-          const mVal = (mInput ? mInput.value : "").trim() || currentQuizWords[i].meaning;
-          const tVal = (tInput ? tInput.value : "").trim() || (currentQuizWords[i].translation || mVal);
-          const eVal = (eInput ? eInput.value : "").trim();
-
-          updated.push({
-            id: i + 1,
-            word: wVal,
-            meaning: mVal,
-            translation: tVal,
-            extraHint: eVal
-          });
-        }
-
-        currentQuizWords = updated;
-        if (currentGameMode === 'emsile24') {
-          EMSILE_24_WORDS = JSON.parse(JSON.stringify(updated));
-        }
-      }
-
-      closeEditWordsModal();
-      saveStateToLocalStorage();
-      initShuffledIndices();
-      renderQuestion();
-      showToast("✅ Kelimeler başarıyla kaydedildi!");
-    }
+    // DÜZENLEME SEÇENEĞİ KALDIRILDI
+    function openEditWordsModal() {}
+    function closeEditWordsModal() {}
 
     // =========================================================================
     // 8. YARDIMCI FONKSİYONLAR

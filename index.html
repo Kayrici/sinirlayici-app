@@ -1194,9 +1194,7 @@
         </div>
       </div>
       <div class="lang-header-actions" style="display: flex; align-items: center; gap: 6px;">
-        <button type="button" class="btn-lang-toggle-table" id="btnLangUserProfileHeader" onclick="languageGame.openUserProfileModal()" title="Kullanıcı Değiştir" style="background: rgba(99, 102, 241, 0.2); border-color: rgba(99, 102, 241, 0.4); color: #c7d2fe;">
-          👤 <span id="langActiveUserNameHeader">Kullanıcı 1</span>
-        </button>
+
         <button type="button" class="btn-lang-toggle-table" id="btnLangToggleTable" onclick="toggleLanguageTable()" title="Tabloyu Aç/Kapat" style="display: none;">
           <span>📚 Tablo</span>
         </button>
@@ -1209,9 +1207,7 @@
         <span class="hero-badge">ARAPÇA SARF VE EMSİLE EĞİTİMİ</span>
         <h2 style="font-size: 1.3rem; margin-bottom: 4px;">Ne Çalışmak İstersiniz?</h2>
         <p style="font-size: 0.82rem; color: #94a3b8;">24 temel sîgayı veya her sîganın zamirlere göre çekimlerini çalışabilirsiniz.</p>
-        <div class="profile-hero-pill" onclick="languageGame.openUserProfileModal()" title="Kullanıcı Değiştir" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 20px; padding: 6px 14px; font-size: 0.82rem; color: #cbd5e1; cursor: pointer; margin-top: 10px;">
-          <span>👤 Aktif Kullanıcı: <strong id="langActiveUserNameBanner" style="color: #818cf8;">Kullanıcı 1</strong> ⚙️ Değiştir</span>
-        </div>
+
       </div>
 
       <div class="menu-cards-grid">
@@ -1359,25 +1355,7 @@
 
 
 
-    <!-- KULLANICI PROFİLİ DEĞİŞTİRME MODALI -->
-    <div id="langUserProfileModal" class="modal-overlay" style="display: none; z-index: 150;">
-      <div class="modal-card" style="max-width: 440px; border-radius: 18px; background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.15); padding: 18px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 12px; margin-bottom: 14px;">
-          <h3 style="margin: 0; font-size: 1.1rem; color: #fff;">👤 Kullanıcı Profili Seçin</h3>
-          <button type="button" class="modal-close-btn" onclick="languageGame.closeUserProfileModal()" style="background: none; border: none; color: #94a3b8; font-size: 1.4rem; cursor: pointer;">✕</button>
-        </div>
-        <p style="font-size: 0.8rem; color: #94a3b8; margin: 0 0 12px 0;">Her kullanıcının doğru serisi ve açık menüleri ayrı olarak saklanır.</p>
-        
-        <div class="user-list-container" id="langUserProfilesListContainer" style="display: flex; flex-direction: column; gap: 8px; margin: 12px 0; max-height: 200px; overflow-y: auto;">
-          <!-- JS ile doldurulur -->
-        </div>
 
-        <div style="display: flex; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
-          <input type="text" id="langNewUserNameInput" placeholder="Yeni Kullanıcı Adı..." maxlength="20" style="flex: 1; background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 8px 12px; color: #fff; font-size: 0.85rem; outline: none;">
-          <button type="button" onclick="languageGame.addNewUser()" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; border: none; border-radius: 8px; padding: 8px 14px; font-weight: 700; cursor: pointer;">+ Ekle</button>
-        </div>
-      </div>
-    </div>
 
     <!-- KİLİT AÇILDI TEBRİK MODALI -->
     <div id="langUnlockSuccessModal" class="modal-overlay" style="display: none; z-index: 160;">
