@@ -1712,7 +1712,73 @@
       50% { transform: scale(1.1); }
       100% { transform: scale(1.0); }
     }
-  </style>
+  
+
+/* KELİMELER MENÜSÜ: YUKARIDAN AŞAĞIYA DOĞRU DİZİLİŞ */
+#vocabLevelsGrid, #langVocabLevelsGrid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  width: 100% !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+}
+
+/* EMSİLE-İ MUTTARİDE 5 SATIRLI DİZİLİŞ (5, 5, 4, 5, 5) */
+.siga-grid-list, #langSigaGridList {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.siga-5col-row {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  direction: rtl !important; /* SAĞDAN SOLA DİZİLİŞ */
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.siga-item-card, .lang-siga-card {
+  background: rgba(26, 34, 53, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
+  padding: 8px 6px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 2px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  min-height: 74px !important;
+  box-sizing: border-box !important;
+}
+
+.siga-item-card:hover:not(.locked), .lang-siga-card:hover:not(.locked) {
+  background: rgba(35, 46, 70, 0.95) !important;
+  border-color: rgba(99, 102, 241, 0.6) !important;
+  transform: translateY(-2px) !important;
+}
+
+@media (max-width: 520px) {
+  .siga-5col-row {
+    gap: 5px !important;
+  }
+  .siga-item-card, .lang-siga-card {
+    padding: 6px 3px !important;
+    min-height: 68px !important;
+  }
+  .siga-item-arabic, .lang-siga-arabic-word {
+    font-size: 1.15rem !important;
+  }
+  .siga-item-title, .lang-siga-meaning-title {
+    font-size: 0.65rem !important;
+  }
+}
+
+</style>
 </head>
 <body>
   <div class="ambient-glow"></div>
@@ -3525,7 +3591,7 @@ async function syncWordsFromCloud() {
       showScreen("sigaSelectionView");
     }
 
-    function renderSigaGridList() {
+        function renderSigaGridList() {
       const container = document.getElementById("sigaGridList");
       if (!container) return;
       container.innerHTML = "";
@@ -3533,33 +3599,61 @@ async function syncWordsFromCloud() {
       const prog = getUserProgress();
       const unlockedSigaList = (prog.muttarideUnlocked && Array.isArray(prog.muttarideUnlocked)) ? prog.muttarideUnlocked : [1];
 
-      EMSILE_24_WORDS.forEach(siga => {
-        const isUnlocked = unlockedSigaList.includes(siga.id);
-        const card = document.createElement("div");
-        card.className = `siga-item-card ${isUnlocked ? 'unlocked' : 'locked'}`;
-        if (!isUnlocked) {
-          card.style.opacity = "0.52";
-          card.style.cursor = "not-allowed";
-          card.style.filter = "grayscale(35%)";
+      // KULLANICI DÜZENİ: 5 satır (5, 5, 4, 5, 5 çekim)
+      // Satır 1: 5 çekim (nasara, yensuru, nasran, nasir, mensur)
+      // Satır 2: 5 çekim (lem yensur, lemma yensur, ma yensuru, la yensuru, len yensura)
+      // Satır 3: 4 çekim (liyensur, la yensur, unsur, la tensur)
+      // Satır 4: 5 çekim (mensar, minsar, nasraten, nisraten, nuseyrun)
+      // Satır 5: 5 çekim (nasriyyun, nassar, ensaru, ma ansarahu, ansir bihi)
+      const rowDefinitions = [
+        { rowNum: 1, slice: [0, 5], count: 5 },
+        { rowNum: 2, slice: [5, 10], count: 5 },
+        { rowNum: 3, slice: [10, 14], count: 4 },
+        { rowNum: 4, slice: [14, 19], count: 5 },
+        { rowNum: 5, slice: [19, 24], count: 5 }
+      ];
+
+      rowDefinitions.forEach(def => {
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "siga-5col-row";
+
+        const rowItems = EMSILE_24_WORDS.slice(def.slice[0], def.slice[1]);
+        rowItems.forEach(siga => {
+          const isUnlocked = unlockedSigaList.includes(siga.id);
+          const card = document.createElement("div");
+          card.className = `siga-item-card ${isUnlocked ? 'unlocked' : 'locked'}`;
+          if (!isUnlocked) {
+            card.style.opacity = "0.52";
+            card.style.cursor = "not-allowed";
+            card.style.filter = "grayscale(35%)";
+          }
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="siga-badge-num">${siga.id}</span>
+              ${!isUnlocked ? '<span style="font-size: 0.68rem; background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 1px 5px; border-radius: 5px; font-weight: 700;">🔒</span>' : '<span style="font-size: 0.68rem; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 1px 5px; border-radius: 5px; font-weight: 700;">✓</span>'}
+            </div>
+            <div class="siga-item-arabic" style="font-size: 1.35rem; font-weight: 800; color: #fff; margin: 2px 0;">${siga.word}</div>
+            <div class="siga-item-title" style="font-size: 0.72rem; color: #818cf8; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;" title="${escapeHtml(siga.meaning)}">${escapeHtml(siga.meaning)}</div>
+          `;
+          if (isUnlocked) {
+            card.addEventListener("click", () => startSigaPronounGame(siga.id));
+          } else {
+            card.addEventListener("click", () => {
+              showToast(`🔒 Bu çekimin açılması için önceki çekimde üst üste 15 doğru yapmalısınız.`);
+            });
+          }
+          rowDiv.appendChild(card);
+        });
+
+        // 3. satırda 4 çekim olduğu için 5. sütunu boş placeholder ile doldur
+        if (def.count === 4) {
+          const placeholder = document.createElement("div");
+          placeholder.style.visibility = "hidden";
+          placeholder.className = "siga-item-card";
+          rowDiv.appendChild(placeholder);
         }
-        card.innerHTML = `
-          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-            <span class="siga-badge-num">${siga.id}</span>
-            ${!isUnlocked ? '<span style="font-size: 0.72rem; background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 2px 7px; border-radius: 6px; font-weight: 700;">🔒 Kilitli</span>' : '<span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 7px; border-radius: 6px; font-weight: 700;">✓ Açık</span>'}
-          </div>
-          <div class="siga-item-arabic" style="font-size: 1.75rem; font-weight: 800; color: #fff; margin: 4px 0;">${siga.word}</div>
-          <div class="siga-item-title" style="font-size: 0.85rem; color: #818cf8; font-weight: 700;">${escapeHtml(siga.meaning)}</div>
-          <div class="siga-item-trans">${escapeHtml(siga.translation)}</div>
-          ${siga.extraHint ? `<div class="siga-item-hint">${escapeHtml(siga.extraHint)}</div>` : ''}
-        `;
-        if (isUnlocked) {
-          card.addEventListener("click", () => startSigaPronounGame(siga.id));
-        } else {
-          card.addEventListener("click", () => {
-            showToast(`🔒 Bu çekimin açılması için önceki çekimde üst üste 15 doğru yapmalısınız.`);
-          });
-        }
-        container.appendChild(card);
+
+        container.appendChild(rowDiv);
       });
     }
 

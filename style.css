@@ -4399,3 +4399,68 @@ body.drag-scrolling-locked {
 .lang-streak-square.streak-completed span {
   color: #34d399;
 }
+
+
+/* KELİMELER MENÜSÜ: YUKARIDAN AŞAĞIYA DOĞRU DİZİLİŞ */
+#vocabLevelsGrid, #langVocabLevelsGrid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  width: 100% !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+}
+
+/* EMSİLE-İ MUTTARİDE 5 SATIRLI DİZİLİŞ (5, 5, 4, 5, 5) */
+.siga-grid-list, #langSigaGridList {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.siga-5col-row {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  direction: rtl !important; /* SAĞDAN SOLA DİZİLİŞ */
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.siga-item-card, .lang-siga-card {
+  background: rgba(26, 34, 53, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
+  padding: 8px 6px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 2px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  min-height: 74px !important;
+  box-sizing: border-box !important;
+}
+
+.siga-item-card:hover:not(.locked), .lang-siga-card:hover:not(.locked) {
+  background: rgba(35, 46, 70, 0.95) !important;
+  border-color: rgba(99, 102, 241, 0.6) !important;
+  transform: translateY(-2px) !important;
+}
+
+@media (max-width: 520px) {
+  .siga-5col-row {
+    gap: 5px !important;
+  }
+  .siga-item-card, .lang-siga-card {
+    padding: 6px 3px !important;
+    min-height: 68px !important;
+  }
+  .siga-item-arabic, .lang-siga-arabic-word {
+    font-size: 1.15rem !important;
+  }
+  .siga-item-title, .lang-siga-meaning-title {
+    font-size: 0.65rem !important;
+  }
+}

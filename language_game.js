@@ -1470,7 +1470,7 @@ class LanguageGameEngine {
     this.showScreen("langSigaSelectionSection");
   }
 
-  renderSigaGrid() {
+    renderSigaGrid() {
     const grid = document.getElementById("langSigaGridList");
     if (!grid) return;
     grid.innerHTML = "";
@@ -1478,33 +1478,56 @@ class LanguageGameEngine {
     const prog = this.getUserProgress();
     const unlockedSigaList = (prog.muttarideUnlocked && Array.isArray(prog.muttarideUnlocked)) ? prog.muttarideUnlocked : [1];
 
-    EMSILE_24_WORDS.forEach(siga => {
-      const isUnlocked = unlockedSigaList.includes(siga.id);
-      const card = document.createElement("div");
-      card.className = `lang-siga-card ${isUnlocked ? 'unlocked' : 'locked'}`;
-      if (!isUnlocked) {
-        card.style.opacity = "0.52";
-        card.style.cursor = "not-allowed";
-        card.style.filter = "grayscale(35%)";
+    // KULLANICI DÜZENİ: 5 satır (5, 5, 4, 5, 5 çekim)
+    const rowDefinitions = [
+      { rowNum: 1, slice: [0, 5], count: 5 },
+      { rowNum: 2, slice: [5, 10], count: 5 },
+      { rowNum: 3, slice: [10, 14], count: 4 },
+      { rowNum: 4, slice: [14, 19], count: 5 },
+      { rowNum: 5, slice: [19, 24], count: 5 }
+    ];
+
+    rowDefinitions.forEach(def => {
+      const rowDiv = document.createElement("div");
+      rowDiv.className = "siga-5col-row";
+
+      const rowItems = EMSILE_24_WORDS.slice(def.slice[0], def.slice[1]);
+      rowItems.forEach(siga => {
+        const isUnlocked = unlockedSigaList.includes(siga.id);
+        const card = document.createElement("div");
+        card.className = `lang-siga-card ${isUnlocked ? 'unlocked' : 'locked'}`;
+        if (!isUnlocked) {
+          card.style.opacity = "0.52";
+          card.style.cursor = "not-allowed";
+          card.style.filter = "grayscale(35%)";
+        }
+        card.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <span class="lang-siga-num-badge">${siga.id}</span>
+            ${!isUnlocked ? '<span style="font-size: 0.68rem; background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 1px 5px; border-radius: 5px; font-weight: 700;">🔒</span>' : '<span style="font-size: 0.68rem; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 1px 5px; border-radius: 5px; font-weight: 700;">✓</span>'}
+          </div>
+          <div class="lang-siga-arabic-word arabic-font" style="font-size: 1.35rem; font-weight: 800; color: #fff; margin: 2px 0;">${siga.word}</div>
+          <div class="lang-siga-meaning-title" style="font-size: 0.72rem; color: #818cf8; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;" title="${escapeHtml(siga.meaning)}">${escapeHtml(siga.meaning)}</div>
+        `;
+        if (isUnlocked) {
+          card.addEventListener("click", () => this.startSigaPronounGame(siga.id));
+        } else {
+          card.addEventListener("click", () => {
+            alert(`🔒 Bu çekimin açılması için önceki çekimde üst üste 15 doğru yapmalısınız.`);
+          });
+        }
+        rowDiv.appendChild(card);
+      });
+
+      // 3. satırda 4 çekim olduğu için 5. sütunu boş placeholder ile doldur
+      if (def.count === 4) {
+        const placeholder = document.createElement("div");
+        placeholder.style.visibility = "hidden";
+        placeholder.className = "lang-siga-card";
+        rowDiv.appendChild(placeholder);
       }
-      card.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-          <span class="lang-siga-num-badge">${siga.id}</span>
-          ${!isUnlocked ? '<span style="font-size: 0.72rem; background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 2px 7px; border-radius: 6px; font-weight: 700;">🔒 Kilitli</span>' : '<span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 7px; border-radius: 6px; font-weight: 700;">✓ Açık</span>'}
-        </div>
-        <div class="lang-siga-arabic-word arabic-font" style="font-size: 1.75rem; font-weight: 800; color: #fff; margin: 4px 0;">${siga.word}</div>
-        <div class="lang-siga-meaning-title">${escapeHtml(siga.meaning)}</div>
-        <div class="lang-siga-trans-text">${escapeHtml(siga.translation)}</div>
-        ${siga.extraHint ? `<div class="lang-siga-hint-badge">${escapeHtml(siga.extraHint)}</div>` : ""}
-      `;
-      if (isUnlocked) {
-        card.addEventListener("click", () => this.startSigaPronounGame(siga.id));
-      } else {
-        card.addEventListener("click", () => {
-          alert(`🔒 Bu çekimin açılması için önceki çekimde üst üste 15 doğru yapmalısınız.`);
-        });
-      }
-      grid.appendChild(card);
+
+      grid.appendChild(rowDiv);
     });
   }
 
