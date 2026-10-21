@@ -1732,7 +1732,26 @@
   width: 100% !important;
 }
 
-.siga-5col-row {
+    /* Karışık (Deneme Sınavı) Banner Kartı */
+    .siga-mixed-banner-card {
+      width: 100% !important;
+      box-sizing: border-box !important;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(49, 46, 129, 0.55)) !important;
+      border: 1px solid rgba(129, 140, 248, 0.5) !important;
+      border-radius: 14px !important;
+      padding: 12px 16px !important;
+      margin-bottom: 12px !important;
+      cursor: pointer !important;
+      transition: all 0.25s ease !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+    }
+    .siga-mixed-banner-card:hover {
+      background: linear-gradient(135deg, rgba(35, 48, 72, 0.98), rgba(67, 56, 202, 0.65)) !important;
+      border-color: rgba(165, 180, 252, 0.8) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3) !important;
+    }
+    .siga-5col-row {
   display: grid !important;
   grid-template-columns: repeat(5, 1fr) !important;
   direction: rtl !important; /* SAĞDAN SOLA DİZİLİŞ */
@@ -3502,6 +3521,10 @@ async function syncWordsFromCloud() {
       let target = 0;
       let current = 0;
 
+      if (currentGameMode === 'muttarideMixed') {
+        square.style.display = "none";
+        return;
+      }
       if (currentGameMode === 'emsile24') {
         target = 30;
         current = (prog.streaks && prog.streaks.emsile24) || 0;
@@ -3532,6 +3555,9 @@ async function syncWordsFromCloud() {
     let lastUnlockedMenuKey = null;
 
     function processAnswerStreak(isCorrect) {
+      if (currentGameMode === 'muttarideMixed') {
+        return;
+      }
       const prog = getUserProgress();
       if (!prog.streaks) prog.streaks = {};
       if (!prog.muttarideStreaks) prog.muttarideStreaks = {};
@@ -3628,10 +3654,14 @@ async function syncWordsFromCloud() {
           if (justUnlockedNext) {
             const curSigaObj = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || { word: "نَصَرَ", meaning: `${selectedSigaId}. Çekim` };
             const nextSigaObj = EMSILE_24_WORDS.find(w => w.id === nextSigaId) || { word: "يَنْصُرُ", meaning: `${nextSigaId}. Çekim` };
+            let unlockMsg = `Tebrikler! ${curSigaObj.word} (${curSigaObj.meaning}) çekiminde üst üste ${target} doğru yaptınız. ${nextSigaId}. çekim olan ${nextSigaObj.word} (${nextSigaObj.meaning}) açıldı!`;
+            if (nextSigaId === 5) {
+              unlockMsg += " Ayrıca 4. seviyeyi geçtiğiniz için menünün en üstünde 'Karışık (Deneme Sınavı)' modu açıldı!";
+            }
             setTimeout(() => {
               showUnlockSuccessModal(
                 `${nextSigaObj.word} (${nextSigaObj.meaning}) Açıldı!`,
-                `Tebrikler! ${curSigaObj.word} (${curSigaObj.meaning}) çekiminde üst üste ${target} doğru yaptınız. ${nextSigaId}. çekim olan ${nextSigaObj.word} (${nextSigaObj.meaning}) açıldı!`,
+                unlockMsg,
                 'nextSiga_' + nextSigaId
               );
             }, 450);
@@ -3853,13 +3883,15 @@ async function syncWordsFromCloud() {
       } else if (screenId === 'quizSection') {
         if (btnMenu) btnMenu.style.display = "inline-flex";
         if (btnExit) btnExit.style.display = "inline-flex";
-        if (btnTable) btnTable.style.display = ((currentGameMode === "vocab" || currentGameMode === "pronouns") ? "none" : "inline-flex");
+        if (btnTable) btnTable.style.display = ((currentGameMode === "vocab" || currentGameMode === "pronouns" || currentGameMode === "muttarideMixed") ? "none" : "inline-flex");
         updateStreakSquareUI();
         if (headerTitle) {
           if (currentGameMode === 'emsile24') {
             headerTitle.textContent = "24 Sîga Oyunu";
           } else if (currentGameMode === 'pronouns') {
             headerTitle.textContent = "Zamirler";
+          } else if (currentGameMode === 'muttarideMixed') {
+            headerTitle.textContent = "Karışık (Deneme Sınavı)";
           } else if (currentGameMode === 'vocab') {
             if (currentVocabCategory === 'kuran') headerTitle.textContent = "Kur'an Kelimeleri (150)";
             else if (currentVocabCategory === 'hadis') headerTitle.textContent = "Hadis Kelimeleri (150)";
@@ -3967,6 +3999,35 @@ async function syncWordsFromCloud() {
 
       const prog = getUserProgress();
       const unlockedSigaList = (prog.muttarideUnlocked && Array.isArray(prog.muttarideUnlocked)) ? prog.muttarideUnlocked : [1];
+      const maxUnlocked = Math.max(...unlockedSigaList);
+
+      // KULLANICI İSTEĞİ: Kişi eğer seviye 4'ü geçerse (5'i açarsa) tüm alt menülerin üstünde
+      // "Karışık" isminde bir menü olacak. Şu ana kadar açılan tüm seviyeler sorulacak.
+      if (maxUnlocked >= 5) {
+        const mixedCard = document.createElement("div");
+        mixedCard.id = "btnMuttarideMixed";
+        mixedCard.className = "siga-mixed-banner-card";
+        mixedCard.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="font-size: 1.6rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.35), rgba(168, 85, 247, 0.35)); border-radius: 12px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(168, 85, 247, 0.4); flex-shrink: 0;">🔀</div>
+              <div style="text-align: left;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 1.15rem; font-weight: 800; color: #fff;">Karışık</span>
+                  <span style="font-size: 0.68rem; background: linear-gradient(135deg, #6366f1, #a855f7); color: #fff; padding: 2px 8px; border-radius: 10px; font-weight: 700; letter-spacing: 0.4px;">DENEME SINAVI</span>
+                </div>
+                <p style="margin: 2px 0 0 0; font-size: 0.78rem; color: #94a3b8;">Şu ana kadar açılan tüm çekimlerden karma sorular (Sayaçsız Serbest Sınav)</p>
+              </div>
+            </div>
+            <div class="siga-mixed-btn" style="background: rgba(99, 102, 241, 0.2); border: 1px solid rgba(99, 102, 241, 0.6); color: #a5b4fc; font-weight: 700; font-size: 0.85rem; padding: 8px 16px; border-radius: 10px; display: flex; align-items: center; gap: 6px; flex-shrink: 0;">
+              <span>Sınava Başla</span>
+              <span>➔</span>
+            </div>
+          </div>
+        `;
+        mixedCard.addEventListener("click", () => startMuttarideMixedGame());
+        container.appendChild(mixedCard);
+      }
 
       // KULLANICI DÜZENİ: 5 satır (5, 5, 4, 5, 5 çekim)
       // Satır 1: 5 çekim (nasara, yensuru, nasran, nasir, mensur)
@@ -4025,6 +4086,63 @@ async function syncWordsFromCloud() {
 
         container.appendChild(rowDiv);
       });
+    }
+
+    function startMuttarideMixedGame() {
+      currentGameMode = 'muttarideMixed';
+      selectedSigaId = null;
+
+      const prog = getUserProgress();
+      const unlockedList = (prog.muttarideUnlocked && Array.isArray(prog.muttarideUnlocked)) ? prog.muttarideUnlocked : [1];
+
+      let mixedWords = [];
+      let nextId = 1;
+
+      unlockedList.forEach(sigaId => {
+        let items = [];
+        if (SIGA_CONJUGATION_DETAILS && SIGA_CONJUGATION_DETAILS[sigaId]) {
+          items = JSON.parse(JSON.stringify(SIGA_CONJUGATION_DETAILS[sigaId]));
+        } else {
+          const forms = (typeof SIGA_CONJUGATIONS !== 'undefined' && SIGA_CONJUGATIONS[sigaId]) ? SIGA_CONJUGATIONS[sigaId] : [];
+          for (let i = 0; i < forms.length; i++) {
+            items.push({
+              id: i + 1,
+              word: forms[i] || forms[0],
+              meaning: (typeof PRONOUN_MEANINGS !== 'undefined' && PRONOUN_MEANINGS[i]) ? PRONOUN_MEANINGS[i] : "",
+              translation: (typeof PRONOUN_MEANINGS !== 'undefined' && PRONOUN_MEANINGS[i]) ? PRONOUN_MEANINGS[i] : "",
+              person: (typeof PRONOUN_PERSON_NAMES !== 'undefined' && PRONOUN_PERSON_NAMES[i]) ? PRONOUN_PERSON_NAMES[i] : "",
+              pronoun: (typeof INDEPENDENT_PRONOUNS_14 !== 'undefined' && INDEPENDENT_PRONOUNS_14[i]) ? INDEPENDENT_PRONOUNS_14[i].word : "",
+              fullDetail: ""
+            });
+          }
+        }
+
+        items.forEach(item => {
+          const clone = Object.assign({}, item);
+          clone.origId = item.id;
+          clone.sigaId = sigaId;
+          clone.id = nextId++;
+          mixedWords.push(clone);
+        });
+      });
+
+      if (mixedWords.length === 0) {
+        mixedWords = JSON.parse(JSON.stringify(SIGA_CONJUGATION_DETAILS[1] || []));
+      }
+
+      currentQuizWords = mixedWords;
+      initShuffledIndices();
+      currentOrderIndex = 0;
+
+      showScreen('quizSection');
+
+      const square = document.getElementById("quizStreakSquare");
+      if (square) square.style.display = "none";
+
+      const headerTitle = document.getElementById("headerMainTitle");
+      if (headerTitle) headerTitle.textContent = "Karışık (Deneme Sınavı)";
+
+      renderQuestion();
     }
 
     function startSigaPronounGame(sigaId) {
@@ -4741,9 +4859,9 @@ async function syncWordsFromCloud() {
 
         lastMissedWordId = currentWord.id;
 
-        if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
+        if (currentGameMode === 'vocab' || currentGameMode === 'pronouns' || currentGameMode === 'muttarideMixed') {
           // KULLANICI İSTEĞİ:
-          // Kelime ve Zamirler bölümünde yanlış yapılırsa tablo görünümüne gitme!
+          // Kelime, Zamirler ve Karışık bölümünde yanlış yapılırsa tablo görünümüne gitme!
           // Sorunun altında "Devam Et" seçeneği olsun, ona tıklanıldığında diğer soruya geçilsin.
           const feedbackBar = document.getElementById("quizFeedbackBar");
           if (feedbackBar) {

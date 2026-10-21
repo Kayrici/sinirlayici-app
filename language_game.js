@@ -1455,6 +1455,10 @@ class LanguageGameEngine {
     let target = 0;
     let current = 0;
 
+    if (this.currentGameMode === 'muttarideMixed') {
+      square.style.display = "none";
+      return;
+    }
     if (this.currentGameMode === 'emsile24') {
       target = 30;
       current = (prog.streaks && prog.streaks.emsile24) || 0;
@@ -1483,6 +1487,9 @@ class LanguageGameEngine {
   }
 
   processAnswerStreak(isCorrect) {
+    if (this.currentGameMode === 'muttarideMixed') {
+      return;
+    }
     const prog = this.getUserProgress();
     if (!prog.streaks) prog.streaks = {};
     if (!prog.muttarideStreaks) prog.muttarideStreaks = {};
@@ -1579,10 +1586,14 @@ class LanguageGameEngine {
         if (justUnlockedNext) {
           const curSigaObj = EMSILE_24_WORDS.find(w => w.id === this.selectedSigaId) || { word: "نَصَرَ", meaning: `${this.selectedSigaId}. Çekim` };
           const nextSigaObj = EMSILE_24_WORDS.find(w => w.id === nextSigaId) || { word: "يَنْصُرُ", meaning: `${nextSigaId}. Çekim` };
+          let unlockMsg = `Tebrikler! ${curSigaObj.word} (${curSigaObj.meaning}) çekiminde üst üste ${target} doğru yaptınız. ${nextSigaId}. çekim olan ${nextSigaObj.word} (${nextSigaObj.meaning}) açıldı!`;
+          if (nextSigaId === 5) {
+            unlockMsg += " Ayrıca 4. seviyeyi geçtiğiniz için menünün en üstünde 'Karışık (Deneme Sınavı)' modu açıldı!";
+          }
           setTimeout(() => {
             this.showUnlockSuccessModal(
               `${nextSigaObj.word} (${nextSigaObj.meaning}) Açıldı!`,
-              `Tebrikler! ${curSigaObj.word} (${curSigaObj.meaning}) çekiminde üst üste ${target} doğru yaptınız. ${nextSigaId}. çekim olan ${nextSigaObj.word} (${nextSigaObj.meaning}) açıldı!`,
+              unlockMsg,
               'nextSiga_' + nextSigaId
             );
           }, 450);
@@ -1767,6 +1778,17 @@ class LanguageGameEngine {
   }
 
   showMainMenu() {
+    const quizSec = document.getElementById("langQuizSection");
+    const tableSec = document.getElementById("langTableSection");
+    const isQuizOrTable = (quizSec && quizSec.style.display !== "none") || (tableSec && tableSec.style.display !== "none");
+    if (isQuizOrTable && (this.currentGameMode === 'sigaPronouns' || this.currentGameMode === 'muttarideMixed')) {
+      this.openSigaSelectionMenu();
+      return;
+    }
+    if (isQuizOrTable && this.currentGameMode === 'vocab') {
+      this.openVocabCategoryMenu();
+      return;
+    }
     this.showScreen("langMainMenuSection");
     const btnMenu = document.getElementById("btnLangMenu");
     const btnTable = document.getElementById("btnLangToggleTable");
@@ -1799,8 +1821,8 @@ class LanguageGameEngine {
 
     if (screenId === "langQuizSection" || screenId === "langTableSection") {
       if (btnMenu) btnMenu.style.display = "inline-flex";
-      // Kelime ve Zamirler modunda tablo butonu gizli
-      const hideTable = (this.currentGameMode === "vocab" || this.currentGameMode === "pronouns");
+      // Kelime, Zamirler ve Karışık modunda tablo butonu gizli
+      const hideTable = (this.currentGameMode === "vocab" || this.currentGameMode === "pronouns" || this.currentGameMode === "muttarideMixed");
       if (btnTable) btnTable.style.display = hideTable ? "none" : "inline-flex";
 
       if (title) {
@@ -1810,6 +1832,8 @@ class LanguageGameEngine {
           title.textContent = "Kelimeler";
         } else if (this.currentGameMode === 'pronouns') {
           title.textContent = "Zamirler";
+        } else if (this.currentGameMode === 'muttarideMixed') {
+          title.textContent = "Karışık (Deneme Sınavı)";
         } else {
           const s = EMSILE_24_WORDS.find(w => w.id === this.selectedSigaId) || EMSILE_24_WORDS[0];
           title.textContent = `${s.meaning} Çekimi`;
@@ -1846,6 +1870,35 @@ class LanguageGameEngine {
 
     const prog = this.getUserProgress();
     const unlockedSigaList = (prog.muttarideUnlocked && Array.isArray(prog.muttarideUnlocked)) ? prog.muttarideUnlocked : [1];
+    const maxUnlocked = Math.max(...unlockedSigaList);
+
+    // KULLANICI İSTEĞİ: Kişi eğer seviye 4'ü geçerse (5'i açarsa) tüm alt menülerin üstünde
+    // "Karışık" isminde bir menü olacak. Şu ana kadar açılan tüm seviyeler sorulacak.
+    if (maxUnlocked >= 5) {
+      const mixedCard = document.createElement("div");
+      mixedCard.id = "btnMuttarideMixed";
+      mixedCard.className = "siga-mixed-banner-card";
+      mixedCard.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="font-size: 1.6rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.35), rgba(168, 85, 247, 0.35)); border-radius: 12px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(168, 85, 247, 0.4); flex-shrink: 0;">🔀</div>
+            <div style="text-align: left;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.15rem; font-weight: 800; color: #fff;">Karışık</span>
+                <span style="font-size: 0.68rem; background: linear-gradient(135deg, #6366f1, #a855f7); color: #fff; padding: 2px 8px; border-radius: 10px; font-weight: 700; letter-spacing: 0.4px;">DENEME SINAVI</span>
+              </div>
+              <p style="margin: 2px 0 0 0; font-size: 0.78rem; color: #94a3b8;">Şu ana kadar açılan tüm çekimlerden karma sorular (Sayaçsız Serbest Sınav)</p>
+            </div>
+          </div>
+          <div class="siga-mixed-btn" style="background: rgba(99, 102, 241, 0.2); border: 1px solid rgba(99, 102, 241, 0.6); color: #a5b4fc; font-weight: 700; font-size: 0.85rem; padding: 8px 16px; border-radius: 10px; display: flex; align-items: center; gap: 6px; flex-shrink: 0;">
+            <span>Sınava Başla</span>
+            <span>➔</span>
+          </div>
+        </div>
+      `;
+      mixedCard.addEventListener("click", () => this.startMuttarideMixedGame());
+      grid.appendChild(mixedCard);
+    }
 
     // KULLANICI DÜZENİ: 5 satır (5, 5, 4, 5, 5 çekim)
     const rowDefinitions = [
@@ -1899,6 +1952,63 @@ class LanguageGameEngine {
 
       grid.appendChild(rowDiv);
     });
+  }
+
+  startMuttarideMixedGame() {
+    this.currentGameMode = 'muttarideMixed';
+    this.selectedSigaId = null;
+
+    const prog = this.getUserProgress();
+    const unlockedList = (prog.muttarideUnlocked && Array.isArray(prog.muttarideUnlocked)) ? prog.muttarideUnlocked : [1];
+
+    let mixedWords = [];
+    let nextId = 1;
+
+    unlockedList.forEach(sigaId => {
+      let items = [];
+      if (SIGA_CONJUGATION_DETAILS && SIGA_CONJUGATION_DETAILS[sigaId]) {
+        items = JSON.parse(JSON.stringify(SIGA_CONJUGATION_DETAILS[sigaId]));
+      } else {
+        const forms = (typeof SIGA_CONJUGATIONS !== 'undefined' && SIGA_CONJUGATIONS[sigaId]) ? SIGA_CONJUGATIONS[sigaId] : [];
+        for (let i = 0; i < forms.length; i++) {
+          items.push({
+            id: i + 1,
+            word: forms[i] || forms[0],
+            meaning: (typeof PRONOUN_MEANINGS !== 'undefined' && PRONOUN_MEANINGS[i]) ? PRONOUN_MEANINGS[i] : "",
+            translation: (typeof PRONOUN_MEANINGS !== 'undefined' && PRONOUN_MEANINGS[i]) ? PRONOUN_MEANINGS[i] : "",
+            person: (typeof PRONOUN_PERSON_NAMES !== 'undefined' && PRONOUN_PERSON_NAMES[i]) ? PRONOUN_PERSON_NAMES[i] : "",
+            pronoun: (typeof INDEPENDENT_PRONOUNS_14 !== 'undefined' && INDEPENDENT_PRONOUNS_14[i]) ? INDEPENDENT_PRONOUNS_14[i].word : "",
+            fullDetail: ""
+          });
+        }
+      }
+
+      items.forEach(item => {
+        const clone = Object.assign({}, item);
+        clone.origId = item.id;
+        clone.sigaId = sigaId;
+        clone.id = nextId++;
+        mixedWords.push(clone);
+      });
+    });
+
+    if (mixedWords.length === 0) {
+      mixedWords = JSON.parse(JSON.stringify(SIGA_CONJUGATION_DETAILS[1] || []));
+    }
+
+    this.currentQuizWords = mixedWords;
+    this.initShuffledIndices();
+    this.currentOrderIndex = 0;
+
+    this.showScreen("langQuizSection");
+
+    const square = document.getElementById("langStreakSquare");
+    if (square) square.style.display = "none";
+
+    const title = document.getElementById("langModalTitle");
+    if (title) title.textContent = "Karışık (Deneme Sınavı)";
+
+    this.renderQuestion();
   }
 
   startSigaPronounGame(sigaId) {
@@ -2567,8 +2677,8 @@ class LanguageGameEngine {
         this.recordVocabAnswer(this.currentWord.id, false);
       }
 
-      if (this.currentGameMode === 'vocab' || this.currentGameMode === 'pronouns') {
-        // Kelime veya Zamirler bölümünde yanlış yapılınca tabloya gitme, Devam Et göster
+      if (this.currentGameMode === 'vocab' || this.currentGameMode === 'pronouns' || this.currentGameMode === 'muttarideMixed') {
+        // Kelime, Zamirler veya Karışık bölümünde yanlış yapılınca tabloya gitme, Devam Et göster
         const feedbackBar = document.getElementById("langQuizFeedbackBar");
         if (feedbackBar) {
           feedbackBar.style.display = "flex";
