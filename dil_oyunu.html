@@ -2158,6 +2158,142 @@ try { if (typeof navigator !== 'undefined') { navigator.vibrate = function() { r
       24: ["أَنْصِرْ بِهِ", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِمْ", "أَنْصِرْ بِهَا", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِنَّ", "أَنْصِرْ بِكَ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُمْ", "أَنْصِرْ بِكِ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُنَّ", "أَنْصِرْ بِي", "أَنْصِرْ بِنَا"]
     };
 
+    // 14 ŞAHIS / SÎGA ADLARI (TABLO KONUMLARI)
+    const PRONOUN_PERSON_NAMES = [
+      "Müzekker Gâib - Müfred (O erkek)",
+      "Müzekker Gâib - Tesniye (O iki erkek)",
+      "Müzekker Gâib - Cemî (Onlar erkek)",
+      "Müennes Gâibe - Müfred (O kadın)",
+      "Müennes Gâibe - Tesniye (O iki kadın)",
+      "Müennes Gâibe - Cemî (Onlar kadın)",
+      "Müzekker Muhatab - Müfred (Sen erkek)",
+      "Müzekker Muhatab - Tesniye (Siz iki erkek)",
+      "Müzekker Muhatab - Cemî (Siz erkekler)",
+      "Müennes Muhataba - Müfred (Sen kadın)",
+      "Müennes Muhataba - Tesniye (Siz iki kadın)",
+      "Müennes Muhataba - Cemî (Siz kadınlar)",
+      "Mütekellim - Müfred / Vahde (Ben)",
+      "Mütekellim - Tesniye / Cemî / Maa'l-gayr (Biz)"
+    ];
+
+    // HER SÎGANIN AYRINTILI 14 ÇEKİMİ VE ANLAMLARI
+    const SIGA_CONJUGATION_DETAILS = {
+      1: [
+        {
+          id: 1,
+          word: "نَصَرَ",
+          meaning: "O (erkek) yardım etti",
+          person: "Müzekker Gâib - Müfred",
+          pronoun: "هُوَ",
+          fullDetail: "Yardım etti bir gâib er geçmiş zamanda"
+        },
+        {
+          id: 2,
+          word: "نَصَرَا",
+          meaning: "O iki erkek yardım etti",
+          person: "Müzekker Gâib - Tesniye",
+          pronoun: "هُمَا",
+          fullDetail: "Yardım ettiler iki gâib erler geçmiş zamanda"
+        },
+        {
+          id: 3,
+          word: "نَصَرُوا",
+          meaning: "Onlar (erkek) yardım etti",
+          person: "Müzekker Gâib - Cemî",
+          pronoun: "هُمْ",
+          fullDetail: "Yardım ettiler cemî gâib erler geçmiş zamanda"
+        },
+        {
+          id: 4,
+          word: "نَصَرَتْ",
+          meaning: "O (kadın) yardım etti",
+          person: "Müennes Gâibe - Müfred",
+          pronoun: "هِيَ",
+          fullDetail: "Yardım etti bir gâibe avrat geçmiş zamanda"
+        },
+        {
+          id: 5,
+          word: "نَصَرَتَا",
+          meaning: "O iki kadın yardım etti",
+          person: "Müennes Gâibe - Tesniye",
+          pronoun: "هُمَا",
+          fullDetail: "Yardım ettiler iki gâibe avratlar geçmiş zamanda"
+        },
+        {
+          id: 6,
+          word: "نَصَرْنَ",
+          meaning: "Onlar (kadın) yardım etti",
+          person: "Müennes Gâibe - Cemî",
+          pronoun: "هُنَّ",
+          fullDetail: "Yardım ettiler cemî gâibe avratlar geçmiş zamanda"
+        },
+        {
+          id: 7,
+          word: "نَصَرْتَ",
+          meaning: "Sen (erkek) yardım ettin",
+          person: "Müzekker Muhatab - Müfred",
+          pronoun: "أَنْتَ",
+          fullDetail: "Yardım ettin sen bir hâzır er geçmiş zamanda"
+        },
+        {
+          id: 8,
+          word: "نَصَرْتُمَا",
+          meaning: "Siz iki erkek yardım ettiniz",
+          person: "Müzekker Muhatab - Tesniye",
+          pronoun: "أَنْتُمَا",
+          fullDetail: "Yardım ettiniz siz iki hâzır erler geçmiş zamanda"
+        },
+        {
+          id: 9,
+          word: "نَصَرْتُمْ",
+          meaning: "Siz (erkek) yardım ettiniz",
+          person: "Müzekker Muhatab - Cemî",
+          pronoun: "أَنْتُمْ",
+          fullDetail: "Yardım ettiniz siz cemî hâzır erler geçmiş zamanda"
+        },
+        {
+          id: 10,
+          word: "نَصَرْتِ",
+          meaning: "Sen (kadın) yardım ettin",
+          person: "Müennes Muhataba - Müfred",
+          pronoun: "أَنْتِ",
+          fullDetail: "Yardım ettin sen bir hâzıra avrat geçmiş zamanda"
+        },
+        {
+          id: 11,
+          word: "نَصَرْتُمَا",
+          meaning: "Siz iki kadın yardım ettiniz",
+          person: "Müennes Muhataba - Tesniye",
+          pronoun: "أَنْتُمَا",
+          fullDetail: "Yardım ettiniz siz iki hâzıra avratlar geçmiş zamanda"
+        },
+        {
+          id: 12,
+          word: "نَصَرْتُنَّ",
+          meaning: "Siz (kadın) yardım ettiniz",
+          person: "Müennes Muhataba - Cemî",
+          pronoun: "أَنْتُنَّ",
+          fullDetail: "Yardım ettiniz siz cemî hâzıra avratlar geçmiş zamanda"
+        },
+        {
+          id: 13,
+          word: "نَصَرْتُ",
+          meaning: "Ben yardım ettim",
+          person: "Mütekellim - Müfred (Vahde)",
+          pronoun: "أَنَا",
+          fullDetail: "Yardım ettim ben geçmiş zamanda"
+        },
+        {
+          id: 14,
+          word: "نَصَرْنَا",
+          meaning: "Biz yardım ettik",
+          person: "Mütekellim - Tesniye / Cemî (Maa'l-gayr)",
+          pronoun: "نَحْنُ",
+          fullDetail: "Yardım ettik biz geçmiş zamanda"
+        }
+      ]
+    };
+
     // D) YENİ KELİME LİSTESİ: TEKİL / İKİLİ / ÇOĞUL (KULLANICI İSTEĞİ)
     const DEFAULT_VOCABULARY_WORDS = [
   { id: 1, category: "kuran", singular: "رَبٌّ", dual: "رَبَّانِ", plural: "أَرْبَابٌ", meaning: "Terbiye eden, mutlak mâlik ve rızık veren" },
@@ -3258,12 +3394,12 @@ async function syncWordsFromCloud() {
           updateStreakSquareUI();
 
           if (justUnlockedNext) {
-            const curSigaObj = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || { meaning: `${selectedSigaId}. Çekim` };
-            const nextSigaObj = EMSILE_24_WORDS.find(w => w.id === nextSigaId) || { meaning: `${nextSigaId}. Çekim` };
+            const curSigaObj = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || { word: "نَصَرَ", meaning: `${selectedSigaId}. Çekim` };
+            const nextSigaObj = EMSILE_24_WORDS.find(w => w.id === nextSigaId) || { word: "يَنْصُرُ", meaning: `${nextSigaId}. Çekim` };
             setTimeout(() => {
               showUnlockSuccessModal(
-                `${nextSigaObj.meaning} Açıldı!`,
-                `Tebrikler! ${curSigaObj.meaning} kalıbında üst üste 15 doğru yaptınız. ${nextSigaId}. çekim olan ${nextSigaObj.meaning} açıldı!`,
+                `${nextSigaObj.word} (${nextSigaObj.meaning}) Açıldı!`,
+                `Tebrikler! ${curSigaObj.word} (${curSigaObj.meaning}) çekiminde üst üste 15 doğru yaptınız. ${nextSigaId}. çekim olan ${nextSigaObj.word} (${nextSigaObj.meaning}) açıldı!`,
                 'nextSiga_' + nextSigaId
               );
             }, 450);
@@ -3662,19 +3798,25 @@ async function syncWordsFromCloud() {
       currentGameMode = 'sigaPronouns';
       selectedSigaId = sigaId;
 
-      const forms = SIGA_CONJUGATIONS[sigaId] || SIGA_CONJUGATIONS[1];
-      const list = [];
-      for (let i = 0; i < 14; i++) {
-        list.push({
-          id: i + 1,
-          word: forms[i] || forms[0],
-          meaning: PRONOUN_MEANINGS[i],
-          translation: PRONOUN_MEANINGS[i],
-          extraHint: ""
-        });
+      if (SIGA_CONJUGATION_DETAILS[sigaId]) {
+        currentQuizWords = JSON.parse(JSON.stringify(SIGA_CONJUGATION_DETAILS[sigaId]));
+      } else {
+        const forms = SIGA_CONJUGATIONS[sigaId] || SIGA_CONJUGATIONS[1];
+        const list = [];
+        for (let i = 0; i < 14; i++) {
+          list.push({
+            id: i + 1,
+            word: forms[i] || forms[0],
+            meaning: PRONOUN_MEANINGS[i],
+            translation: PRONOUN_MEANINGS[i],
+            person: PRONOUN_PERSON_NAMES[i] || PRONOUN_MEANINGS[i],
+            pronoun: INDEPENDENT_PRONOUNS_14[i] ? INDEPENDENT_PRONOUNS_14[i].word : "",
+            fullDetail: ""
+          });
+        }
+        currentQuizWords = list;
       }
 
-      currentQuizWords = list;
       initShuffledIndices();
       showScreen("quizSection");
       renderQuestion();
@@ -4102,31 +4244,73 @@ async function syncWordsFromCloud() {
 
       } else {
         // ZAMİR MODU (Emsile-i Muttaride)
+        const curWord = currentWord;
         const sigaObj = EMSILE_24_WORDS.find(w => w.id === selectedSigaId) || EMSILE_24_WORDS[0];
-        const qTypes = ['ARABIC_TO_PRONOUN', 'PRONOUN_TO_ARABIC'];
+        const qTypes = ['AR_TO_MEANING', 'MEANING_TO_AR', 'AR_TO_PERSON', 'PERSON_TO_AR'];
         const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
 
-        if (chosenType === 'ARABIC_TO_PRONOUN') {
+        if (chosenType === 'AR_TO_MEANING') {
+          const correct = curWord.meaning;
+          const pool = currentQuizWords.map(w => w.meaning).filter(m => {
+            if (curWord.word === "نَصَرْتُمَا") {
+              return m === correct || !m.includes("Siz ikiniz");
+            }
+            return true;
+          });
           questionConfig = {
             mode: 'text_simple',
-            badge: `${sigaObj.meaning.toUpperCase()} ➔ ZAMİR`,
-            instruction: "Bu çekim hangi şahsa (zamire) aittir?",
-            correctKey: currentWord.meaning,
-            promptText: currentWord.word,
+            badge: `${sigaObj.word} ➔ ANLAMI`,
+            instruction: "Bu fiil çekiminin Türkçe anlamı nedir?",
+            correctKey: correct,
+            promptText: curWord.word,
             isPromptArabic: true,
             isChoiceArabic: false,
-            choices: generateSimpleChoices(currentWord.meaning, PRONOUN_MEANINGS.slice())
+            choices: generateDistinctChoices(correct, pool)
           };
-        } else {
+        } else if (chosenType === 'MEANING_TO_AR') {
+          const correct = curWord.word;
+          const pool = currentQuizWords.map(w => w.word);
           questionConfig = {
             mode: 'text_simple',
-            badge: `ZAMİR ➔ ${sigaObj.meaning.toUpperCase()}`,
-            instruction: "Bu şahıs zamirine ait Arapça çekim hangisidir?",
-            correctKey: currentWord.word,
-            promptText: currentWord.meaning,
+            badge: `ANLAM ➔ ${sigaObj.word}`,
+            instruction: "Bu Türkçe anlama gelen Arapça çekim hangisidir?",
+            correctKey: correct,
+            promptText: curWord.meaning,
             isPromptArabic: false,
             isChoiceArabic: true,
-            choices: generateSimpleChoices(currentWord.word, currentQuizWords.map(w => w.word))
+            choices: generateDistinctChoices(correct, pool)
+          };
+        } else if (chosenType === 'AR_TO_PERSON') {
+          const correct = curWord.person || curWord.meaning;
+          const pool = currentQuizWords.map(w => w.person || w.meaning).filter(p => {
+            if (curWord.word === "نَصَرْتُمَا") {
+              return p === correct || !p.includes("Muhatab");
+            }
+            return true;
+          });
+          questionConfig = {
+            mode: 'text_simple',
+            badge: `${sigaObj.word} ➔ ŞAHIS / SÎGA`,
+            instruction: "Bu çekim hangi şahsa ve sigaya aittir?",
+            correctKey: correct,
+            promptText: curWord.word,
+            isPromptArabic: true,
+            isChoiceArabic: false,
+            choices: generateDistinctChoices(correct, pool)
+          };
+        } else {
+          const correct = curWord.word;
+          const pool = currentQuizWords.map(w => w.word);
+          const personText = curWord.person || curWord.meaning;
+          questionConfig = {
+            mode: 'text_simple',
+            badge: `ŞAHIS ➔ ${sigaObj.word}`,
+            instruction: "Bu şahıs ve sîgaya ait Arapça çekim hangisidir?",
+            correctKey: correct,
+            promptText: personText,
+            isPromptArabic: false,
+            isChoiceArabic: true,
+            choices: generateDistinctChoices(correct, pool)
           };
         }
 
@@ -4141,6 +4325,20 @@ async function syncWordsFromCloud() {
 
       // Şıkları Bas
       renderOptionsGrid(questionConfig);
+    }
+
+    function generateDistinctChoices(correctAnswer, pool) {
+      const uniquePool = Array.from(new Set(pool.filter(opt => opt && opt !== correctAnswer)));
+      for (let i = uniquePool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [uniquePool[i], uniquePool[j]] = [uniquePool[j], uniquePool[i]];
+      }
+      const chosen = [correctAnswer, ...uniquePool.slice(0, 4)];
+      for (let i = chosen.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [chosen[i], chosen[j]] = [chosen[j], chosen[i]];
+      }
+      return chosen;
     }
 
     // Basit Şık Üretici
@@ -4526,8 +4724,8 @@ async function syncWordsFromCloud() {
       card.className = `flip-card ${isSpan2 ? "card-span-2" : ""} ${isMissed ? "missed-highlight" : ""}`;
       card.setAttribute("data-id", item.id);
 
-      const transHtml = item.translation ? `<div class="card-trans-text">(${escapeHtml(item.translation)})</div>` : '';
-      const extraHtml = item.extraHint ? `<div class="card-extra-hint">${escapeHtml(item.extraHint)}</div>` : '';
+      const transHtml = item.person ? `<div class="card-trans-text" style="color: #818cf8; font-weight: 700; font-size: 0.76rem; margin-top: 3px;">${escapeHtml(item.person)}</div>` : (item.translation ? `<div class="card-trans-text">(${escapeHtml(item.translation)})</div>` : '');
+      const extraHtml = item.fullDetail ? `<div class="card-extra-hint" style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px;">${escapeHtml(item.fullDetail)}</div>` : (item.extraHint ? `<div class="card-extra-hint">${escapeHtml(item.extraHint)}</div>` : '');
 
       card.innerHTML = `
         <div class="flip-card-inner">
