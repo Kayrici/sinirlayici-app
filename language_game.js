@@ -65,7 +65,7 @@ const PRONOUN_MEANINGS = [
 const SIGA_CONJUGATIONS = {
   1: ["نَصَرَ", "نَصَرَا", "نَصَرُوا", "نَصَرَتْ", "نَصَرَتَا", "نَصَرْنَ", "نَصَرْتَ", "نَصَرْتُمَا", "نَصَرْتُمْ", "نَصَرْتِ", "نَصَرْتُمَا", "نَصَرْتُنَّ", "نَصَرْتُ", "نَصَرْنَا"],
   2: ["يَنْصُرُ", "يَنْصُرَانِ", "يَنْصُرُونَ", "تَنْصُرُ", "تَنْصُرَانِ", "يَنْصُرْنَ", "تَنْصُرُ", "تَنْصُرَانِ", "تَنْصُرُونَ", "تَنْصُرِينَ", "تَنْصُرَانِ", "تَنْصُرْنَ", "أَنْصُرُ", "نَنْصُرُ"],
-  3: ["نَصْرًا", "نَصْرَيْنِ", "نَصَرَاتٍ", "نَصْرًا", "نَصْرَيْنِ", "نَصَرَاتٍ", "نَصْرًا", "نَصْرَيْنِ", "نَصَرَاتٍ", "نَصْرًا", "نَصْرَيْنِ", "نَصَرَاتٍ", "نَصْرًا", "نَصْرًا"],
+  3: ["نَصْرًا", "نَصْرَانِ", "نَصَرَاتٌ"],
   4: ["نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ", "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ", "نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ", "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ", "نَاصِرٌ", "نَاصِرُونَ"],
   5: ["مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ", "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ", "مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ", "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ", "مَنْصُورٌ", "مَنْصُورُونَ"],
   6: ["لَمْ يَنْصُرْ", "لَمْ يَنْصُرَا", "لَمْ يَنْصُرُوا", "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ يَنْصُرْنَ", "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرُوا", "لَمْ تَنْصُرِي", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرْنَ", "لَمْ أَنْصُرْ", "لَمْ نَنْصُرْ"],
@@ -341,6 +341,32 @@ const SIGA_CONJUGATION_DETAILS = {
       person: "Mütekellim - Tesniye / Cemî (Maa'l-gayr)",
       pronoun: "نَحْنُ",
       fullDetail: "Yardım ederiz biz şimdiki veya gelecek zamanda"
+    }
+  ],
+  3: [
+    {
+      id: 1,
+      word: "نَصْرًا",
+      meaning: "Bir yardım etmek",
+      person: "Masdar-ı gayr-i mîmî - Müfred",
+      pronoun: "Müfred (Tekil)",
+      fullDetail: "Masdar-ı gayr-i mîmî müfred, mânâsı: Bir yardım etmek"
+    },
+    {
+      id: 2,
+      word: "نَصْرَانِ",
+      meaning: "İki yardım etmek",
+      person: "Masdar-ı gayr-i mîmî - Tesniye",
+      pronoun: "Tesniye (İkili)",
+      fullDetail: "Masdar-ı gayr-i mîmî tesniye, mânâsı: İki yardım etmek"
+    },
+    {
+      id: 3,
+      word: "نَصَرَاتٌ",
+      meaning: "Çok yardım etmek",
+      person: "Masdar-ı gayr-i mîmî - Cemî",
+      pronoun: "Cemî (Çoğul)",
+      fullDetail: "Masdar-ı gayr-i mîmî cem', mânâsı: Çok yardım etmek"
     }
   ]
 };
@@ -1328,6 +1354,15 @@ class LanguageGameEngine {
     if (cardVocab) cardVocab.style.display = isVocabOpen ? "flex" : "none";
   }
 
+  getTargetStreakForSiga(sigaId) {
+    const targets = {
+      1: 15,
+      2: 15,
+      3: 4
+    };
+    return targets[sigaId] || 15;
+  }
+
   updateStreakSquareUI() {
     const square = document.getElementById("langStreakSquare");
     const ratioEl = document.getElementById("langStreakRatio");
@@ -1344,7 +1379,7 @@ class LanguageGameEngine {
       target = 15;
       current = (prog.streaks && prog.streaks.pronouns) || 0;
     } else if (this.currentGameMode === 'sigaPronouns') {
-      target = 15;
+      target = this.getTargetStreakForSiga(this.selectedSigaId);
       current = (prog.muttarideStreaks && prog.muttarideStreaks[this.selectedSigaId]) || 0;
     } else if (this.currentGameMode === 'vocab') {
       target = 50;
@@ -1438,9 +1473,9 @@ class LanguageGameEngine {
       return;
     }
 
-    // 3. EMSİLE-İ MUTTARİDE MODU: O sîgada 15 Doğru -> Sonraki Sîga Açılır (24 Çekim Kademeli)
+    // 3. EMSİLE-İ MUTTARİDE MODU: O sîgada hedef doğru -> Sonraki Sîga Açılır (24 Çekim Kademeli)
     if (this.currentGameMode === 'sigaPronouns') {
-      const target = 15;
+      const target = this.getTargetStreakForSiga(this.selectedSigaId);
       const curStreak = prog.muttarideStreaks[this.selectedSigaId] || 0;
 
       if (isCorrect) {
@@ -1464,7 +1499,7 @@ class LanguageGameEngine {
           setTimeout(() => {
             this.showUnlockSuccessModal(
               `${nextSigaObj.word} (${nextSigaObj.meaning}) Açıldı!`,
-              `Tebrikler! ${curSigaObj.word} (${curSigaObj.meaning}) çekiminde üst üste 15 doğru yaptınız. ${nextSigaId}. çekim olan ${nextSigaObj.word} (${nextSigaObj.meaning}) açıldı!`,
+              `Tebrikler! ${curSigaObj.word} (${curSigaObj.meaning}) çekiminde üst üste ${target} doğru yaptınız. ${nextSigaId}. çekim olan ${nextSigaObj.word} (${nextSigaObj.meaning}) açıldı!`,
               'nextSiga_' + nextSigaId
             );
           }, 450);
@@ -1764,7 +1799,8 @@ class LanguageGameEngine {
           card.addEventListener("click", () => this.startSigaPronounGame(siga.id));
         } else {
           card.addEventListener("click", () => {
-            alert(`🔒 Bu çekimin açılması için önceki çekimde üst üste 15 doğru yapmalısınız.`);
+            const reqStreak = this.getTargetStreakForSiga(siga.id - 1);
+            alert(`🔒 Bu çekimin açılması için önceki çekimde üst üste ${reqStreak} doğru yapmalısınız.`);
           });
         }
         rowDiv.appendChild(card);
@@ -2172,6 +2208,10 @@ class LanguageGameEngine {
       const qTypes = ['AR_TO_MEANING', 'MEANING_TO_AR', 'AR_TO_PERSON', 'PERSON_TO_AR'];
       const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
 
+      const extraAr = ["نَصْرَةً", "نِصْرَةً", "مَنْصَرٌ", "نُصَيْرٌ", "نَاصِرٌ", "مَنْصُورٌ"];
+      const extraMeaning = ["Bir kere yardım etmek", "Bir türlü yardım etmek", "Yardım edecek zaman/mekân", "Küçük yardım etmek", "Yardım eden bir er", "Yardım olunmuş bir er"];
+      const extraPerson = ["Masdar-ı bina-i merre", "Masdar-ı bina-i nev'i", "İsm-i mekân / zaman", "İsm-i tasgîr", "İsm-i fâil - Müzekker", "İsm-i mef'ûl - Müzekker"];
+
       if (chosenType === 'AR_TO_MEANING') {
         const correct = curWord.meaning;
         const siblingMeanings = this.currentQuizWords
@@ -2187,7 +2227,7 @@ class LanguageGameEngine {
           promptText: curWord.word,
           isPromptArabic: true,
           isChoiceArabic: false,
-          choices: this.generateDistinctChoices(correct, pool)
+          choices: this.generateDistinctChoices(correct, pool, extraMeaning)
         };
       } else if (chosenType === 'MEANING_TO_AR') {
         const correct = curWord.word;
@@ -2199,7 +2239,7 @@ class LanguageGameEngine {
           promptText: curWord.meaning,
           isPromptArabic: false,
           isChoiceArabic: true,
-          choices: this.generateDistinctChoices(correct, pool)
+          choices: this.generateDistinctChoices(correct, pool, extraAr)
         };
       } else if (chosenType === 'AR_TO_PERSON') {
         const correct = curWord.person || curWord.meaning;
@@ -2216,7 +2256,7 @@ class LanguageGameEngine {
           promptText: curWord.word,
           isPromptArabic: true,
           isChoiceArabic: false,
-          choices: this.generateDistinctChoices(correct, pool)
+          choices: this.generateDistinctChoices(correct, pool, extraPerson)
         };
       } else {
         const correct = curWord.word;
@@ -2229,7 +2269,7 @@ class LanguageGameEngine {
           promptText: personText,
           isPromptArabic: false,
           isChoiceArabic: true,
-          choices: this.generateDistinctChoices(correct, pool)
+          choices: this.generateDistinctChoices(correct, pool, extraAr)
         };
       }
 
@@ -2246,8 +2286,16 @@ class LanguageGameEngine {
     this.renderOptionsGrid(questionConfig);
   }
 
-  generateDistinctChoices(correctAnswer, pool) {
+  generateDistinctChoices(correctAnswer, pool, extraFallbacks = []) {
     const uniquePool = Array.from(new Set(pool.filter(opt => opt && opt !== correctAnswer)));
+    if (uniquePool.length < 4 && Array.isArray(extraFallbacks)) {
+      for (const fb of extraFallbacks) {
+        if (fb && fb !== correctAnswer && !uniquePool.includes(fb)) {
+          uniquePool.push(fb);
+          if (uniquePool.length >= 4) break;
+        }
+      }
+    }
     for (let i = uniquePool.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [uniquePool[i], uniquePool[j]] = [uniquePool[j], uniquePool[i]];
@@ -2498,6 +2546,23 @@ class LanguageGameEngine {
 
         gridEl.appendChild(rowDiv);
       });
+    } else if (this.currentQuizWords.length === 3) {
+      const s = EMSILE_24_WORDS.find(w => w.id === this.selectedSigaId) || { meaning: "Masdar-ı Gayr-i Mîmî", word: "نَصْرًا" };
+      if (bannerIcon) bannerIcon.textContent = "📜";
+      if (bannerTitle) bannerTitle.textContent = `${s.meaning} (${s.word}) Tablosu`;
+      if (bannerDesc) bannerDesc.textContent = "Müfred, Tesniye ve Cemî çekimleri (Sağdan Sola)";
+
+      gridEl.className = "emsile-table-wrapper";
+
+      const rowDiv = document.createElement("div");
+      rowDiv.className = "emsile-row cols-3";
+      rowDiv.setAttribute("data-row", 1);
+
+      this.currentQuizWords.forEach(item => {
+        rowDiv.appendChild(this.createCard(item, highlightId));
+      });
+
+      gridEl.appendChild(rowDiv);
     } else {
       const s = EMSILE_24_WORDS.find(w => w.id === this.selectedSigaId) || EMSILE_24_WORDS[0];
       if (bannerIcon) bannerIcon.textContent = "👤";
@@ -2526,19 +2591,21 @@ class LanguageGameEngine {
         gridEl.appendChild(rowDiv);
       });
 
-      const row5Div = document.createElement("div");
-      row5Div.className = "emsile-row zamir-row-5";
-      row5Div.setAttribute("data-row", 5);
+      if (this.currentQuizWords.length >= 14) {
+        const row5Div = document.createElement("div");
+        row5Div.className = "emsile-row zamir-row-5";
+        row5Div.setAttribute("data-row", 5);
 
-      const itemBen = this.currentQuizWords[12];
-      const itemBiz = this.currentQuizWords[13];
+        const itemBen = this.currentQuizWords[12];
+        const itemBiz = this.currentQuizWords[13];
 
-      const cardBen = this.createCard(itemBen, highlightId);
-      const cardBiz = this.createCard(itemBiz, highlightId, true);
+        const cardBen = this.createCard(itemBen, highlightId);
+        const cardBiz = this.createCard(itemBiz, highlightId, true);
 
-      row5Div.appendChild(cardBen);
-      row5Div.appendChild(cardBiz);
-      gridEl.appendChild(row5Div);
+        row5Div.appendChild(cardBen);
+        row5Div.appendChild(cardBiz);
+        gridEl.appendChild(row5Div);
+      }
     }
 
     if (highlightId) {
