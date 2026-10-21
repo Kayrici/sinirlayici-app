@@ -1132,6 +1132,7 @@ class LanguageGameEngine {
     this.currentGameMode = 'pronouns';
     this.currentQuizWords = INDEPENDENT_PRONOUNS_14.slice();
     this.initShuffledIndices();
+    this.currentOrderIndex = 0;
     this.showScreen("langQuizSection");
 
     const btnTable = document.getElementById("btnLangToggleTable");
@@ -1559,6 +1560,7 @@ class LanguageGameEngine {
           this.renderQuestion();
         } else {
           this.currentOrderIndex = (this.currentOrderIndex + 1) % this.currentQuizWords.length;
+          if (this.currentOrderIndex === 0) this.initShuffledIndices();
           this.renderQuestion();
         }
       }, 380);
@@ -1780,6 +1782,7 @@ function advanceLanguageGameQuestion() {
       window.languageGame.renderQuestion();
     } else {
       window.languageGame.currentOrderIndex = (window.languageGame.currentOrderIndex + 1) % window.languageGame.currentQuizWords.length;
+      if (window.languageGame.currentOrderIndex === 0) window.languageGame.initShuffledIndices();
       window.languageGame.renderQuestion();
     }
   }

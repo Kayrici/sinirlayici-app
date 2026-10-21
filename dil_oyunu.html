@@ -2844,7 +2844,7 @@ async function syncWordsFromCloud() {
             headerTitle.textContent = "24 Sîga Oyunu";
           } else if (currentGameMode === 'pronouns') {
             headerTitle.textContent = "Zamirler";
-          } else if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
+          } else if (currentGameMode === 'vocab') {
             if (currentVocabCategory === 'kuran') headerTitle.textContent = "Kur'an Kelimeleri (150)";
             else if (currentVocabCategory === 'hadis') headerTitle.textContent = "Hadis Kelimeleri (150)";
             else if (currentVocabCategory === 'kitap') headerTitle.textContent = "İslami Kitaplar (150)";
@@ -2995,11 +2995,12 @@ async function syncWordsFromCloud() {
       if (btnTable) btnTable.style.display = "none"; // KULLANICI İSTEĞİ: Tabloyu gör seçeneği olmasın!
     }
 
-        // 4. Mod: ZAMİRLER OYUNU (14 AYRIK ŞAHIS ZAMİRİ)
+    // 4. Mod: ZAMİRLER OYUNU (14 AYRIK ŞAHIS ZAMİRİ)
     function startPronounsGame() {
       currentGameMode = 'pronouns';
       currentQuizWords = INDEPENDENT_PRONOUNS_14.slice();
       initShuffledIndices();
+      currentOrderIndex = 0;
       showScreen("quizSection");
 
       const btnTable = document.getElementById("btnToggleTableDirect");
@@ -3164,7 +3165,7 @@ async function syncWordsFromCloud() {
       if (feedbackBar) feedbackBar.style.display = "none";
 
       let targetIdx = 0;
-      if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
+      if (currentGameMode === 'vocab') {
         targetIdx = pickNextVocabIndex();
         currentOrderIndex = targetIdx;
         currentWord = currentQuizWords[targetIdx];
@@ -3183,7 +3184,7 @@ async function syncWordsFromCloud() {
 
       let questionConfig = null;
 
-      if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
+      if (currentGameMode === 'vocab') {
         // KELİME MODU: ÇİFT YÖNLÜ
         // 1) Soru: Arapça Tekil / İkili / Çoğul ➔ Şıklar: Türkçe Anlam
         // 2) Soru: Türkçe Anlam ➔ Şıklar: Arapça Tekil / İkili / Çoğul (Soldan Sağa)
@@ -3229,6 +3230,42 @@ async function syncWordsFromCloud() {
             <h2 class="target-word-title latin-font">${escapeHtml(currentWord.meaning)}</h2>
           `;
         }
+
+      } else if (currentGameMode === 'pronouns') {
+        // 4. Mod: ZAMİRLER MODU (14 AYRIK ŞAHIS ZAMİRİ)
+        // Kullanıcı İsteği: Sadece 14 kelime ve 14 cevap olacak.
+        // Kelimeleri zamirlere göre çekmeyi sormayacağız.
+        // Sorulacak şey fotodaki zamirlerin ne anlama geldiği (ör: o (erkek), sen (kadın), biz gibi).
+        const qTypes = ['PRONOUN_AR_TO_TR', 'PRONOUN_TR_TO_AR'];
+        const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
+
+        if (chosenType === 'PRONOUN_AR_TO_TR') {
+          questionConfig = {
+            mode: 'text_simple',
+            badge: `ZAMİR ➔ ANLAMI • ${currentWord.group}`,
+            instruction: "Bu zamirin anlamı nedir?",
+            correctKey: currentWord.meaning,
+            promptText: currentWord.word,
+            isPromptArabic: true,
+            isChoiceArabic: false,
+            choices: generatePronounChoices(currentWord, 'meaning')
+          };
+        } else {
+          questionConfig = {
+            mode: 'text_simple',
+            badge: `ANLAM ➔ ARAPÇA ZAMİR • ${currentWord.group}`,
+            instruction: "Bu anlama gelen Arapça zamir hangisidir?",
+            correctKey: currentWord.word,
+            promptText: currentWord.meaning,
+            isPromptArabic: false,
+            isChoiceArabic: true,
+            choices: generatePronounChoices(currentWord, 'word')
+          };
+        }
+
+        targetWordContainer.innerHTML = `
+          <h2 class="target-word-title ${questionConfig.isPromptArabic ? 'arabic-font' : 'latin-font'}">${escapeHtml(questionConfig.promptText)}</h2>
+        `;
 
       } else if (currentGameMode === 'emsile24') {
         // 24 SÎGA MODU: 4 Çeşit Soru
@@ -3449,10 +3486,11 @@ async function syncWordsFromCloud() {
         /* vibration disabled */
 
         setTimeout(() => {
-          if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
+          if (currentGameMode === 'vocab') {
             renderQuestion();
           } else {
             currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
+            if (currentOrderIndex === 0) initShuffledIndices();
             renderQuestion();
           }
         }, 380);
@@ -3478,7 +3516,7 @@ async function syncWordsFromCloud() {
 
         if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
           // KULLANICI İSTEĞİ:
-          // Kelime bölümünde yanlış yapılırsa tablo görünümüne gitme!
+          // Kelime ve Zamirler bölümünde yanlış yapılırsa tablo görünümüne gitme!
           // Sorunun altında "Devam Et" seçeneği olsun, ona tıklanıldığında diğer soruya geçilsin.
           const feedbackBar = document.getElementById("quizFeedbackBar");
           if (feedbackBar) {
@@ -3498,10 +3536,11 @@ async function syncWordsFromCloud() {
       const feedbackBar = document.getElementById("quizFeedbackBar");
       if (feedbackBar) feedbackBar.style.display = "none";
       isAnswering = false;
-      if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
+      if (currentGameMode === 'vocab') {
         renderQuestion();
       } else {
         currentOrderIndex = (currentOrderIndex + 1) % currentQuizWords.length;
+        if (currentOrderIndex === 0) initShuffledIndices();
         renderQuestion();
       }
     }
@@ -3539,7 +3578,7 @@ async function syncWordsFromCloud() {
       if (!wrapper) return;
       wrapper.innerHTML = "";
 
-      if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
+      if (currentGameMode === 'vocab') {
         // KELİME TABLOSU: 3D FLASHCARDLAR
         if (bannerIcon) bannerIcon.textContent = "📝";
         if (bannerTitle) bannerTitle.textContent = "Kur'an'da En Çok Geçen 100 İsim (Tekil / İkili / Çoğul)";
@@ -3750,7 +3789,7 @@ async function syncWordsFromCloud() {
       if (!container) return;
       container.innerHTML = "";
 
-      if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
+      if (currentGameMode === 'vocab') {
         if (titleEl) titleEl.textContent = "✏️ Kelimeleri Düzenle (Tekil / İkili / Çoğul)";
 
         VOCABULARY_WORDS.forEach((item, idx) => {
@@ -3821,7 +3860,7 @@ async function syncWordsFromCloud() {
     function saveEditedWords() {
       const container = document.getElementById("editWordsListContainer");
 
-      if (currentGameMode === 'vocab' || currentGameMode === 'pronouns') {
+      if (currentGameMode === 'vocab') {
         const rows = container.querySelectorAll(".vocab-edit-row");
         const updatedVocab = [];
         rows.forEach((row, idx) => {
