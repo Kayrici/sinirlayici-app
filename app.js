@@ -3314,6 +3314,14 @@ function submitSecretCode() {
     }
     showToast("🧠 3D Hafıza Oyunu Açıldı! 22.000 puanı geçerseniz 10 dk serbest izin kazanırsınız!");
     return;
+  } else if (val === "4444") {
+    // 4444 KODU: Arapça İnteraktif Hikaye Modu Aç
+    closeSecretCodeModal();
+    if (typeof openHikayeModal === 'function') {
+      openHikayeModal();
+    }
+    showToast("📜 Arapça Hikaye ve Kelime Çözümleme Açıldı!");
+    return;
   } else if (val === "2488") {
     // Pomodoro Modunu Gizle / Göster
     isPomodoroHidden = !isPomodoroHidden;
@@ -4149,6 +4157,36 @@ function closeHafizaGameModal() {
 }
 window.closeHafizaGameModal = closeHafizaGameModal;
 window.openHafizaGameModal = openHafizaGameModal;
+
+// ==========================================
+// ARAPÇA HİKAYE VE KELİME ÇÖZÜMLEME MODALI (KOD: 4444)
+// ==========================================
+function openHikayeModal() {
+  const container = document.getElementById("hikayeContainerModal");
+  const iframe = document.getElementById("hikayeIframe");
+  if (container && iframe) {
+    iframe.src = "hikaye.html";
+    container.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function closeHikayeModal() {
+  const container = document.getElementById("hikayeContainerModal");
+  const iframe = document.getElementById("hikayeIframe");
+  if (container) {
+    container.style.display = "none";
+  }
+  if (iframe) {
+    try {
+      iframe.src = "about:blank";
+    } catch (e) {}
+  }
+  document.body.style.overflow = "";
+  showToast("🏠 Ana ekrana dönüldü.");
+}
+window.closeHikayeModal = closeHikayeModal;
+window.openHikayeModal = openHikayeModal;
 
 // ==========================================
 // HAFIZA OYUNU 80K+ SKOR BANNERI (15 DAKİKA)
