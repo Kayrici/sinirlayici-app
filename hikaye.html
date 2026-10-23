@@ -13,18 +13,15 @@
 
   <style>
     :root {
-      --bg-main: #090d16;
-      --bg-card: rgba(26, 34, 53, 0.78);
-      --bg-card-hover: rgba(35, 46, 70, 0.95);
-      --border-color: rgba(255, 255, 255, 0.12);
+      --bg-main: #0a0e17;
+      --bg-book: #131b2e;
+      --border-color: rgba(255, 255, 255, 0.1);
       --accent-primary: #6366f1;
-      --accent-glow: rgba(99, 102, 241, 0.35);
-      --accent-success: #10b981;
       --accent-gold: #f59e0b;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --font-arabic: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
-      --arabic-font-size: 2.15rem;
+      --arabic-font-size: 2.2rem;
     }
 
     * {
@@ -49,7 +46,7 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(9, 13, 22, 0.94);
+      background: rgba(10, 14, 23, 0.94);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-color);
@@ -109,13 +106,14 @@
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--border-color);
       color: #fff;
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
+      font-size: 0.9rem;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -123,24 +121,6 @@
     .btn-font-size:hover {
       background: rgba(99, 102, 241, 0.3);
       border-color: #6366f1;
-    }
-
-    .btn-toggle-tr {
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      color: #c7d2fe;
-      padding: 7px 12px;
-      border-radius: 9px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-
-    .btn-toggle-tr:hover {
-      background: rgba(99, 102, 241, 0.3);
-      color: #fff;
     }
 
     /* Ana Alan */
@@ -157,7 +137,7 @@
 
     /* Sayfa Seçici Menüsü */
     .page-nav-wrapper {
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(19, 27, 46, 0.8);
       border: 1px solid var(--border-color);
       border-radius: 16px;
       padding: 10px 14px;
@@ -195,9 +175,9 @@
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: #cbd5e1;
-      padding: 6px 12px;
+      padding: 6px 13px;
       border-radius: 9px;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
@@ -220,107 +200,83 @@
       box-shadow: 0 0 12px rgba(99, 102, 241, 0.45);
     }
 
-    /* Sayfa Başlık Bandı */
-    .page-section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.95));
+    /* KİTAP SAYFASI FORMATI (NORMAL KİTAP GİBİ AKICI METİN) */
+    .book-page-sheet {
+      background: var(--bg-book);
       border: 1px solid var(--border-color);
-      border-left: 4px solid var(--accent-primary);
-      border-radius: 14px;
-      padding: 12px 18px;
-      margin-top: 6px;
-      margin-bottom: 10px;
-    }
-
-    .page-section-title-ar {
-      font-family: var(--font-arabic);
-      font-size: 1.45rem;
-      font-weight: 700;
-      color: #fbbf24;
-      direction: rtl;
-    }
-
-    .page-section-meta {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: #94a3b8;
-    }
-
-    /* Hikaye Paragraf Kartları */
-    .story-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 18px;
-      padding: 22px 20px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      padding: 32px 30px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      transition: all 0.2s ease;
-      margin-bottom: 14px;
+      gap: 24px;
+      margin-bottom: 20px;
     }
 
-    .story-card:hover {
-      border-color: rgba(99, 102, 241, 0.35);
+    /* Kitap Bölüm Başlığı */
+    .book-page-title-box {
+      text-align: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
     }
 
-    .arabic-text-box {
+    .book-page-title-box::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background: var(--accent-gold);
+      border-radius: 2px;
+    }
+
+    .book-page-title-ar {
+      font-family: var(--font-arabic);
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: #fbbf24;
       direction: rtl;
-      text-align: right;
+      letter-spacing: 0.5px;
+    }
+
+    /* Akıcı Kitap Paragrafı */
+    .book-paragraph {
+      direction: rtl;
+      text-align: justify;
+      text-justify: inter-word;
       font-family: var(--font-arabic);
       font-size: var(--arabic-font-size);
-      line-height: 2.3;
+      line-height: 2.5;
       color: #ffffff;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.35px;
       user-select: text;
+      word-spacing: 2px;
     }
 
-    /* Kelime Tıklama Butonları */
+    /* Tıklanabilir Kelimeler */
     .ar-word {
-      display: inline-block;
+      display: inline;
       cursor: pointer;
-      padding: 2px 6px;
-      margin: 0 2px;
-      border-radius: 7px;
-      transition: all 0.18s ease;
+      padding: 2px 4px;
+      margin: 0 1px;
+      border-radius: 6px;
+      transition: all 0.16s ease;
       position: relative;
     }
 
     .ar-word:hover {
-      background: rgba(99, 102, 241, 0.32);
+      background: rgba(99, 102, 241, 0.3);
       color: #c7d2fe;
-      transform: translateY(-1px);
     }
 
     .ar-word.selected {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.5), rgba(168, 85, 247, 0.45));
-      color: #fff;
-      box-shadow: 0 0 12px rgba(99, 102, 241, 0.55);
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.55), rgba(168, 85, 247, 0.5));
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
       border-bottom: 2px solid #a5b4fc;
-    }
-
-    /* Cümle Çeviri Alanı */
-    .sentence-tr-box {
-      border-top: 1px dashed rgba(255, 255, 255, 0.12);
-      padding-top: 12px;
-      font-size: 0.92rem;
-      line-height: 1.55;
-      color: #cbd5e1;
-      font-style: italic;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .sentence-tr-box .tr-label {
-      font-size: 0.7rem;
-      font-weight: 800;
-      color: #818cf8;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-style: normal;
     }
 
     /* Alt Sayfa Geçiş Butonları */
@@ -329,15 +285,14 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      margin-top: 10px;
-      padding: 14px 4px;
+      padding: 10px 4px;
     }
 
     .btn-page-step {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--border-color);
       color: #fff;
-      padding: 10px 20px;
+      padding: 11px 22px;
       border-radius: 12px;
       font-size: 0.88rem;
       font-weight: 700;
@@ -359,26 +314,26 @@
       cursor: not-allowed;
     }
 
-    /* ALT SABİT KELİME ÇÖZÜMLEME DOCK'U */
+    /* ALT SABİT KELİME ÇÖZÜMLEME DOCK'U (SADECE KELİME VE TAMLAMA MANASI) */
     .word-dock {
       position: fixed;
       bottom: 18px;
       left: 50%;
       transform: translateX(-50%) translateY(140%);
       width: calc(100% - 32px);
-      max-width: 800px;
-      background: rgba(15, 23, 42, 0.97);
+      max-width: 760px;
+      background: rgba(15, 23, 42, 0.98);
       border: 1.5px solid rgba(99, 102, 241, 0.55);
-      border-radius: 20px;
-      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 30px rgba(99, 102, 241, 0.3);
+      border-radius: 18px;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), 0 0 25px rgba(99, 102, 241, 0.3);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       z-index: 100;
-      padding: 18px 22px;
-      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 16px 20px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .word-dock.active {
@@ -391,13 +346,13 @@
       justify-content: space-between;
       gap: 12px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 10px;
+      padding-bottom: 8px;
     }
 
     .dock-left-box {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
@@ -416,15 +371,15 @@
       background: rgba(245, 158, 11, 0.15);
       border: 1px solid rgba(245, 158, 11, 0.4);
       color: #fbbf24;
-      padding: 5px 14px;
+      padding: 4px 12px;
       border-radius: 20px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 700;
     }
 
     .dock-root-badge .root-ar {
       font-family: var(--font-arabic);
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: 800;
     }
 
@@ -432,9 +387,9 @@
       background: rgba(99, 102, 241, 0.15);
       border: 1px solid rgba(99, 102, 241, 0.35);
       color: #a5b4fc;
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-size: 0.74rem;
+      padding: 3px 9px;
+      border-radius: 7px;
+      font-size: 0.75rem;
       font-weight: 700;
     }
 
@@ -442,10 +397,10 @@
       background: transparent;
       border: none;
       color: #94a3b8;
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       cursor: pointer;
       padding: 4px 8px;
-      border-radius: 8px;
+      border-radius: 6px;
       line-height: 1;
       transition: all 0.2s;
     }
@@ -458,14 +413,13 @@
     .dock-body {
       display: flex;
       flex-direction: column;
-      gap: 8px;
     }
 
     .dock-phrase-tr {
-      font-size: 1.15rem;
+      font-size: 1.22rem;
       color: #f8fafc;
       font-weight: 600;
-      line-height: 1.5;
+      line-height: 1.45;
     }
 
     /* Kullanıcının istediği altı çizili tamlama vurgusu */
@@ -477,41 +431,28 @@
       font-weight: 800;
     }
 
-    .dock-meta {
-      font-size: 0.8rem;
-      color: #94a3b8;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      line-height: 1.4;
-    }
-
-    .dock-meta em {
-      font-family: var(--font-arabic);
-      font-style: normal;
-      color: #e2e8f0;
-      direction: rtl;
-    }
-
     /* Mobil Uyumluluk */
     @media (max-width: 600px) {
       :root {
-        --arabic-font-size: 1.8rem;
+        --arabic-font-size: 1.85rem;
       }
-      .story-card {
-        padding: 16px 14px;
+      .book-page-sheet {
+        padding: 22px 18px;
+      }
+      .book-paragraph {
+        line-height: 2.3;
+        text-align: right;
       }
       .dock-word-ar {
-        font-size: 1.7rem;
+        font-size: 1.75rem;
       }
       .word-dock {
         bottom: 10px;
-        padding: 14px 16px;
+        padding: 13px 16px;
         width: calc(100% - 20px);
       }
       .dock-phrase-tr {
-        font-size: 1rem;
+        font-size: 1.05rem;
       }
     }
   </style>
@@ -533,9 +474,6 @@
     <div class="header-actions">
       <button type="button" class="btn-font-size" onclick="adjustFontSize(-0.15)" title="Yazıyı Küçült">A-</button>
       <button type="button" class="btn-font-size" onclick="adjustFontSize(0.15)" title="Yazıyı Büyüt">A+</button>
-      <button type="button" class="btn-toggle-tr" id="btnToggleTr" onclick="toggleAllTranslations()">
-        📖 Çeviriyi Gizle
-      </button>
     </div>
   </header>
 
@@ -553,9 +491,9 @@
       </div>
     </div>
 
-    <!-- HİKAYE CÜMLELERİ ALANI -->
+    <!-- HİKAYE KİTAP SAYFALARI ALANI -->
     <div id="storyContentArea">
-      <!-- Cümle kartları burada render edilir -->
+      <!-- Normal kitap gibi akan paragraflar burada render edilir -->
     </div>
 
     <!-- ALT SAYFA GEÇİŞİ -->
@@ -570,7 +508,7 @@
 
   </div>
 
-  <!-- ALT KELİME ÇÖZÜMLEME DOCK'U -->
+  <!-- ALT KELİME ÇÖZÜMLEME DOCK'U (SADECE KELİME / TAMLAMA MANASI) -->
   <div class="word-dock" id="wordDock">
     <div class="dock-header">
       <div class="dock-left-box">
@@ -588,22 +526,18 @@
       <div class="dock-phrase-tr" id="dockPhraseTr">
         <u>Büyük</u> Kaya Şehri'nde
       </div>
-      <div class="dock-meta" id="dockMeta">
-        <span id="dockFullSentence">📍 Cümle: "فِي مَدِينَةِ الصَّخْرِ الكَبِيرَةِ."</span>
-      </div>
     </div>
   </div>
 
-  <!-- HİKAYE VERİ SETİ (10 SAYFA, KÖKLER, ANLAMLAR) -->
+  <!-- HİKAYE VERİ SETİ (10 SAYFA, PARAGRAFLAR, KÖKLER, TAMLAMALAR) -->
   <script src="hikaye_data.js"></script>
 
   <script>
     let activePageNumber = 1; // 1 to 10, or 'all'
-    let currentFontSizeRem = 2.15;
-    let areTranslationsVisible = true;
+    let currentFontSizeRem = 2.2;
     let selectedWordId = null;
 
-    // Sayfa navigasyon butonlarını oluştur
+    // Sayfa butonlarını üret
     function renderPageChips() {
       const container = document.getElementById("pageChipsContainer");
       if (!container || typeof STORY_PAGES === "undefined") return;
@@ -627,7 +561,6 @@
       container.appendChild(allBtn);
     }
 
-    // Sayfa değiştirme fonksiyonu
     function switchPage(target) {
       activePageNumber = target;
       renderPageChips();
@@ -665,7 +598,7 @@
       }
     }
 
-    // Hikaye İçeriğini Render Et
+    // Normal kitap sayfa formatında render et
     function renderStory() {
       const area = document.getElementById("storyContentArea");
       if (!area || typeof STORY_PAGES === "undefined") return;
@@ -676,56 +609,43 @@
         : STORY_PAGES.filter(p => p.pageNum === activePageNumber);
 
       pagesToRender.forEach((page) => {
-        // Sayfa Başlığı Bandı
-        const pageHeader = document.createElement("div");
-        pageHeader.className = "page-section-header";
-        pageHeader.innerHTML = `
-          <div class="page-section-title-ar">${page.title}</div>
-          <div class="page-section-meta">Bölüm ${page.pageNum}</div>
+        const sheet = document.createElement("div");
+        sheet.className = "book-page-sheet";
+        sheet.id = `bookPage_${page.pageNum}`;
+
+        // Kitap Bölüm Başlığı
+        const titleBox = document.createElement("div");
+        titleBox.className = "book-page-title-box";
+        titleBox.innerHTML = `
+          <div class="book-page-title-ar">${page.title}</div>
         `;
-        area.appendChild(pageHeader);
+        sheet.appendChild(titleBox);
 
-        // Sayfadaki Cümleler
-        page.sentences.forEach((sentence) => {
-          const card = document.createElement("div");
-          card.className = "story-card";
-          card.id = `sentenceCard_${sentence.id}`;
+        // Akıcı Paragraflar
+        page.paragraphs.forEach((paragraph) => {
+          const pEl = document.createElement("p");
+          pEl.className = "book-paragraph";
 
-          // Arapça Metin Alanı
-          const arBox = document.createElement("div");
-          arBox.className = "arabic-text-box";
-
-          sentence.words.forEach((w) => {
+          paragraph.words.forEach((w) => {
             const wSpan = document.createElement("span");
             wSpan.className = "ar-word";
             wSpan.id = `word_${w.id}`;
             wSpan.textContent = w.ar;
             wSpan.title = "Kök ve tamlama manası için tıklayın";
-            wSpan.addEventListener("click", () => selectWord(sentence, w));
-            arBox.appendChild(wSpan);
-            arBox.appendChild(document.createTextNode(" "));
+            wSpan.addEventListener("click", () => selectWord(w));
+            pEl.appendChild(wSpan);
+            pEl.appendChild(document.createTextNode(" "));
           });
 
-          card.appendChild(arBox);
-
-          // Türkçe Çeviri Alanı
-          const trBox = document.createElement("div");
-          trBox.className = "sentence-tr-box";
-          trBox.id = `sentenceTr_${sentence.id}`;
-          trBox.style.display = areTranslationsVisible ? "flex" : "none";
-          trBox.innerHTML = `
-            <span class="tr-label">TÜRKÇE ANLAMI:</span>
-            <span>${sentence.fullTurkish}</span>
-          `;
-
-          card.appendChild(trBox);
-          area.appendChild(card);
+          sheet.appendChild(pEl);
         });
+
+        area.appendChild(sheet);
       });
     }
 
-    // Kelime Seçme ve Alt Paneli Açma
-    function selectWord(sentence, word) {
+    // Kelime Seçme ve Alt Paneli Açma (Sadece kelime ve tamlama manası)
+    function selectWord(word) {
       selectedWordId = word.id;
 
       // Önceki seçili kelimelerden vurguyu kaldır
@@ -741,14 +661,14 @@
       const rootAr = document.getElementById("dockRootAr");
       const phraseTr = document.getElementById("dockPhraseTr");
       const typeBadge = document.getElementById("dockTypeBadge");
-      const fullSentence = document.getElementById("dockFullSentence");
 
       if (wordAr) wordAr.textContent = word.ar;
       if (rootAr) rootAr.textContent = word.root ? word.root : "—";
       if (typeBadge) typeBadge.textContent = word.type || "Kelime";
-      if (phraseTr) phraseTr.innerHTML = word.phraseTr || word.meaning;
-      if (fullSentence) {
-        fullSentence.innerHTML = `📍 Cümle: <em>"${sentence.fullArabic}"</em> — ${sentence.fullTurkish}`;
+      
+      // SADECE ait olduğu tamlama veya kendi kelime manası (altı çizili)
+      if (phraseTr) {
+        phraseTr.innerHTML = word.phraseTr || `<u>${word.meaning}</u>`;
       }
 
       if (dock) {
@@ -763,19 +683,8 @@
       selectedWordId = null;
     }
 
-    function toggleAllTranslations() {
-      areTranslationsVisible = !areTranslationsVisible;
-      const btn = document.getElementById("btnToggleTr");
-      if (btn) {
-        btn.textContent = areTranslationsVisible ? "📖 Çeviriyi Gizle" : "📖 Çeviriyi Göster";
-      }
-      document.querySelectorAll(".sentence-tr-box").forEach(el => {
-        el.style.display = areTranslationsVisible ? "flex" : "none";
-      });
-    }
-
     function adjustFontSize(delta) {
-      currentFontSizeRem = Math.max(1.4, Math.min(3.2, currentFontSizeRem + delta));
+      currentFontSizeRem = Math.max(1.4, Math.min(3.4, currentFontSizeRem + delta));
       document.documentElement.style.setProperty('--arabic-font-size', `${currentFontSizeRem}rem`);
     }
 
@@ -793,11 +702,11 @@
       renderStory();
       updatePageFooterNav();
 
-      // İlk kelimeyi kullanıcıya örnek olarak seçili göster
-      if (typeof STORY_PAGES !== "undefined" && STORY_PAGES[0] && STORY_PAGES[0].sentences[0]) {
-        const firstSent = STORY_PAGES[0].sentences[0];
-        if (firstSent.words[0]) {
-          selectWord(firstSent, firstSent.words[0]);
+      // İlk kelimeyi örnek olarak seç
+      if (typeof STORY_PAGES !== "undefined" && STORY_PAGES[0] && STORY_PAGES[0].paragraphs[0]) {
+        const firstPara = STORY_PAGES[0].paragraphs[0];
+        if (firstPara.words[0]) {
+          selectWord(firstPara.words[0]);
         }
       }
     });
