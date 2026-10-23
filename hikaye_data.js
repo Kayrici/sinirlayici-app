@@ -1,6 +1,6 @@
 /**
- * Rami ve Zeyd Arapça Hikayesi - Kitap Formatı & Tamlama/Kelime Çözümleme
- * Cümlenin tamamı değil, sadece ilgili kelime veya ait olduğu tamlama grubu gösterilir.
+ * Rami, Zeyd ve Tarık Arapça Hikayesi - 20 Sayfa Tam Seri
+ * Kitap formatı & Tamlama/Kelime Çözümleme (Kök ve Tamlama Manası)
  */
 const STORY_PAGES = [
   {
@@ -418,7 +418,7 @@ const STORY_PAGES = [
           {
             "id": "p1_pr2_w12",
             "ar": "الغَابَةِ.",
-            "root": "غيب",
+            "root": "غَابَ",
             "meaning": "Orman",
             "phraseTr": "<u>ormanda</u>",
             "type": "isim"
@@ -3800,10 +3800,10 @@ const STORY_PAGES = [
           {
             "id": "p3_pr4_w19",
             "ar": "يُضَيِّعُ",
-            "root": "ضيع",
-            "meaning": "Boşa harcar",
-            "phraseTr": "<u>Boşa harcar</u>",
-            "type": "muzari fiil"
+            "root": "ضَاعَ",
+            "meaning": "Kaybettirir, karıştırır",
+            "phraseTr": "<u>Kaybettirir, karıştırır</u>",
+            "type": "fiil"
           },
           {
             "id": "p3_pr4_w20",
@@ -3968,9 +3968,9 @@ const STORY_PAGES = [
           {
             "id": "p3_pr4_w40",
             "ar": "بِسَعَادَةٍ.",
-            "root": "سعد",
-            "meaning": "mutlulukla",
-            "phraseTr": "<u>mutlulukla</u>",
+            "root": "سَعَدَ",
+            "meaning": "Mutlulukla",
+            "phraseTr": "<u>Mutlulukla</u>",
             "type": "zarf"
           },
           {
@@ -6348,9 +6348,9 @@ const STORY_PAGES = [
           {
             "id": "p5_pr4_w19",
             "ar": "بِطَاقَةِ",
-            "root": "طوق",
-            "meaning": "... ile Enerji",
-            "phraseTr": "<u>... ile Enerji</u>",
+            "root": "بَطَقَ",
+            "meaning": "Bir kart",
+            "phraseTr": "<u>Bir kart</u>",
             "type": "isim"
           },
           {
@@ -7313,7 +7313,7 @@ const STORY_PAGES = [
           {
             "id": "p6_pr3_w20",
             "ar": "صَاحِبَ",
-            "root": "صحب",
+            "root": "صَحِبَ",
             "meaning": "Sahibi",
             "phraseTr": "sakal <u>sahibi</u>",
             "type": "isim"
@@ -12297,10 +12297,10 @@ const STORY_PAGES = [
           {
             "id": "p9_pr5_w63",
             "ar": "وَجَدْتُ",
-            "root": "وجد",
+            "root": "وَجَدَ",
             "meaning": "Buldum",
             "phraseTr": "<u>Buldum</u>",
-            "type": "mazi fiil"
+            "type": "fiil"
           },
           {
             "id": "p9_pr5_w64",
@@ -13969,6 +13969,10188 @@ const STORY_PAGES = [
             "meaning": "birlikte, beraber",
             "phraseTr": "<u>birlikte, beraber</u>",
             "type": "zarf"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pageNum": 11,
+    "title": "الصَّفْحَةُ الحَادِيَةَ عَشْرَةَ (11)",
+    "paragraphs": [
+      {
+        "pId": "p11_pr1",
+        "words": [
+          {
+            "id": "p11_pr1_w1",
+            "ar": "وَقَفَ",
+            "root": "وقف",
+            "meaning": "Durdu",
+            "phraseTr": "<u>Durdu</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p11_pr1_w2",
+            "ar": "المُتَسَابِقُونَ",
+            "root": "سبق",
+            "meaning": "Yarışmacılar",
+            "phraseTr": "<u>Yarışmacılar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p11_pr1_w3",
+            "ar": "أَمَامَ",
+            "root": "أمم",
+            "meaning": "önünde, önüne",
+            "phraseTr": "<u>önünde, önüne</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p11_pr1_w4",
+            "ar": "غَابَةٍ",
+            "root": "غَابَ",
+            "meaning": "Orman",
+            "phraseTr": "<u>Orman</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr1_w5",
+            "ar": "ضَخْمَةٍ",
+            "root": "ضَخُمَ",
+            "meaning": "Kocaman, devasa",
+            "phraseTr": "<u>Kocaman, devasa</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p11_pr1_w6",
+            "ar": "جِدّاً.",
+            "root": "جدد",
+            "meaning": "çok",
+            "phraseTr": "<u>çok</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p11_pr1_w7",
+            "ar": "كَانَ",
+            "root": "كون",
+            "meaning": "İdi, oldu",
+            "phraseTr": "<u>İdi, oldu</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p11_pr1_w8",
+            "ar": "الضَّبَابُ",
+            "root": "ضَبَّ",
+            "meaning": "Sis",
+            "phraseTr": "beyaz <u>sis</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr1_w9",
+            "ar": "الأَبْيَضُ",
+            "root": "بيض",
+            "meaning": "Beyaz",
+            "phraseTr": "<u>beyaz</u> sis",
+            "type": "sıfat"
+          },
+          {
+            "id": "p11_pr1_w10",
+            "ar": "يُغَطِّي",
+            "root": "غَطَّى",
+            "meaning": "Kaplıyor, örtüyor",
+            "phraseTr": "<u>Kaplıyor, örtüyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p11_pr1_w11",
+            "ar": "كُلَّ",
+            "root": "كلل",
+            "meaning": "her",
+            "phraseTr": "<u>her</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p11_pr1_w12",
+            "ar": "الأَشْجَارِ،",
+            "root": "شجر",
+            "meaning": "Ağaçlar",
+            "phraseTr": "<u>Ağaçlar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p11_pr1_w13",
+            "ar": "وَلاَ",
+            "root": "لاَ",
+            "meaning": "Ve değil, -mez, -maz",
+            "phraseTr": "<u>Ve değil, -mez, -maz</u>",
+            "type": "nefy edatı"
+          },
+          {
+            "id": "p11_pr1_w14",
+            "ar": "يُمْكِنُ",
+            "root": "يمك",
+            "meaning": "يُمْكِنُ",
+            "phraseTr": "<u>يُمْكِنُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p11_pr1_w15",
+            "ar": "رُؤْيَةُ",
+            "root": "رَأَى",
+            "meaning": "Görüş, görmek",
+            "phraseTr": "<u>Görüş, görmek</u>",
+            "type": "mastar"
+          },
+          {
+            "id": "p11_pr1_w16",
+            "ar": "شَيْءٍ",
+            "root": "شَيءَ",
+            "meaning": "Şey, hiçbir şey",
+            "phraseTr": "<u>Şey, hiçbir şey</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr1_w17",
+            "ar": "بَعْدَ",
+            "root": "بَعْد",
+            "meaning": "Sonra",
+            "phraseTr": "<u>Sonra</u>",
+            "type": "zaman zarfı"
+          },
+          {
+            "id": "p11_pr1_w18",
+            "ar": "عَشْرِ",
+            "root": "عشر",
+            "meaning": "on",
+            "phraseTr": "<u>on</u> adım",
+            "type": "sayı"
+          },
+          {
+            "id": "p11_pr1_w19",
+            "ar": "خُطُوَاتٍ.",
+            "root": "خَطَا",
+            "meaning": "Adımlar",
+            "phraseTr": "on <u>adım</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p11_pr1_w20",
+            "ar": "نَظَرَ",
+            "root": "نظر",
+            "meaning": "Baktı",
+            "phraseTr": "<u>Baktı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p11_pr1_w21",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p11_pr1_w22",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p11_pr1_w23",
+            "ar": "عَدَدِ",
+            "root": "عَدَّ",
+            "meaning": "Sayı, adet",
+            "phraseTr": "<u>Sayı, adet</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr1_w24",
+            "ar": "النَّاسِ،",
+            "root": "نوس",
+            "meaning": "İnsanlar",
+            "phraseTr": "<u>İnsanlar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p11_pr1_w25",
+            "ar": "فَوَجَدَ",
+            "root": "وَجَدَ",
+            "meaning": "Bunun üzerine buldu",
+            "phraseTr": "<u>Bunun üzerine buldu</u>",
+            "type": "bağlaç + fiil"
+          },
+          {
+            "id": "p11_pr1_w26",
+            "ar": "أَنَّ",
+            "root": "أَنَّ",
+            "meaning": "-dığı, ki, olduğunu",
+            "phraseTr": "<u>-dığı, ki, olduğunu</u>",
+            "type": "tekit harfi"
+          },
+          {
+            "id": "p11_pr1_w27",
+            "ar": "ثَمَانِينَ",
+            "root": "ثما",
+            "meaning": "ثَمَانِينَ",
+            "phraseTr": "<u>ثَمَانِينَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p11_pr1_w28",
+            "ar": "(80)",
+            "root": "",
+            "meaning": "(80)",
+            "phraseTr": "(80)",
+            "type": "sayı/noktalama"
+          },
+          {
+            "id": "p11_pr1_w29",
+            "ar": "شَخْصاً",
+            "root": "شخص",
+            "meaning": "Kişi",
+            "phraseTr": "<u>Kişi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr1_w30",
+            "ar": "فَقَطْ",
+            "root": "فقط",
+            "meaning": "yalnızca, sadece",
+            "phraseTr": "<u>yalnızca, sadece</u>",
+            "type": "edat"
+          },
+          {
+            "id": "p11_pr1_w31",
+            "ar": "نَجَحُوا",
+            "root": "نَجَحَ",
+            "meaning": "Başardılar",
+            "phraseTr": "<u>Başardılar</u>",
+            "type": "fiil (çoğul)"
+          },
+          {
+            "id": "p11_pr1_w32",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p11_pr1_w33",
+            "ar": "الخُرُوجِ",
+            "root": "خَرَجَ",
+            "meaning": "Çıkmak, çıkış",
+            "phraseTr": "<u>Çıkmak, çıkış</u>",
+            "type": "mastar"
+          },
+          {
+            "id": "p11_pr1_w34",
+            "ar": "مِنَ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p11_pr1_w35",
+            "ar": "النَّفَقِ.",
+            "root": "نفق",
+            "meaning": "Tünel",
+            "phraseTr": "<u>Tünel</u>",
+            "type": "isim"
+          }
+        ]
+      },
+      {
+        "pId": "p11_pr2",
+        "words": [
+          {
+            "id": "p11_pr2_w1",
+            "ar": "وَقَفَ",
+            "root": "وقف",
+            "meaning": "Durdu",
+            "phraseTr": "<u>Durdu</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p11_pr2_w2",
+            "ar": "الحَكَمُ",
+            "root": "حكم",
+            "meaning": "Hakem",
+            "phraseTr": "<u>Hakem</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr2_w3",
+            "ar": "سَاجِد",
+            "root": "سَجَدَ",
+            "meaning": "Sacid (sınav hakemi)",
+            "phraseTr": "<u>Sacid</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p11_pr2_w4",
+            "ar": "عَلَى",
+            "root": "عَلَى",
+            "meaning": "üzerinde, -e",
+            "phraseTr": "<u>üzerinde, -e</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p11_pr2_w5",
+            "ar": "صَخْرَةٍ",
+            "root": "صَخَرَ",
+            "meaning": "Kaya",
+            "phraseTr": "yüksek bir <u>kaya</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr2_w6",
+            "ar": "عَالِيَةٍ،",
+            "root": "عال",
+            "meaning": "عَالِيَةٍ",
+            "phraseTr": "<u>yüksek</u> bir kaya",
+            "type": "kelime"
+          },
+          {
+            "id": "p11_pr2_w7",
+            "ar": "وَقَالَ",
+            "root": "قول",
+            "meaning": "Ve Dedi",
+            "phraseTr": "<u>Ve Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p11_pr2_w8",
+            "ar": "بِصَوْتٍ",
+            "root": "صوت",
+            "meaning": "... ile Ses",
+            "phraseTr": "yüksek <u>sesle</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr2_w9",
+            "ar": "عَالٍ:",
+            "root": "علو",
+            "meaning": "Yüksek",
+            "phraseTr": "<u>yüksek</u> sesle",
+            "type": "sıfat"
+          },
+          {
+            "id": "p11_pr2_w10",
+            "ar": "«مَرْحَباً",
+            "root": "رَحِبَ",
+            "meaning": "Merhaba!",
+            "phraseTr": "<u>Merhaba!</u>",
+            "type": "ünlem"
+          },
+          {
+            "id": "p11_pr2_w11",
+            "ar": "بِكُمْ",
+            "root": "كم",
+            "meaning": "... ile kaç, ne kadar",
+            "phraseTr": "<u>... ile kaç, ne kadar</u>",
+            "type": "soru edatı"
+          },
+          {
+            "id": "p11_pr2_w12",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p11_pr2_w13",
+            "ar": "غَابَةِ",
+            "root": "غَابَ",
+            "meaning": "Orman",
+            "phraseTr": "Sis <u>Ormanı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr2_w14",
+            "ar": "الضَّبَابِ.",
+            "root": "ضَبَّ",
+            "meaning": "Sis",
+            "phraseTr": "<u>Sis</u> Ormanı",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr2_w15",
+            "ar": "هَذِهِ",
+            "root": "ذه",
+            "meaning": "Bu (dişil)",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p11_pr2_w16",
+            "ar": "الغَابَةُ",
+            "root": "غَابَ",
+            "meaning": "Orman",
+            "phraseTr": "<u>Orman</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr2_w17",
+            "ar": "مَلِيئَةٌ",
+            "root": "ملأ",
+            "meaning": "Dolu",
+            "phraseTr": "<u>Dolu</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p11_pr2_w18",
+            "ar": "بِالحِيَلِ",
+            "root": "حَالَ",
+            "meaning": "... ile Tuzaklar, hileler",
+            "phraseTr": "<u>... ile Tuzaklar, hileler</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p11_pr2_w19",
+            "ar": "وَالوُحُوشِ",
+            "root": "وَحَشَ",
+            "meaning": "Ve Canavarlar",
+            "phraseTr": "<u>Ve Canavarlar</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p11_pr2_w20",
+            "ar": "الغَرِيبَةِ.",
+            "root": "غَرُبَ",
+            "meaning": "Tuhaf",
+            "phraseTr": "<u>Tuhaf</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p11_pr2_w21",
+            "ar": "هَذَا",
+            "root": "ذا",
+            "meaning": "Bu",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p11_pr2_w22",
+            "ar": "هُوَ",
+            "root": "هُوَ",
+            "meaning": "O",
+            "phraseTr": "<u>O</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p11_pr2_w23",
+            "ar": "الاخْتِبَارُ",
+            "root": "خبر",
+            "meaning": "Sınav",
+            "phraseTr": "ikinci <u>sınav</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr2_w24",
+            "ar": "الثَّانِي:",
+            "root": "ثني",
+            "meaning": "ikinci",
+            "phraseTr": "<u>ikinci</u> sınav",
+            "type": "sıra sayısı"
+          },
+          {
+            "id": "p11_pr2_w25",
+            "ar": "يَجِبُ",
+            "root": "وَجَبَ",
+            "meaning": "Gerekir, mecburdur",
+            "phraseTr": "<u>Gerekir, mecburdur</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p11_pr2_w26",
+            "ar": "أَنْ",
+            "root": "أَنْ",
+            "meaning": "-mek, -mak",
+            "phraseTr": "<u>-mek, -mak</u>",
+            "type": "masdariyye harfi"
+          },
+          {
+            "id": "p11_pr2_w27",
+            "ar": "تَمْشُوا",
+            "root": "مَشَى",
+            "meaning": "Yürüyün, yürüyesiniz",
+            "phraseTr": "<u>Yürüyün, yürüyesiniz</u>",
+            "type": "fiil (çoğul)"
+          },
+          {
+            "id": "p11_pr2_w28",
+            "ar": "خَلْفِي",
+            "root": "خلف",
+            "meaning": "arkamdan, arkamda",
+            "phraseTr": "<u>arkamdan, arkamda</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p11_pr2_w29",
+            "ar": "حَتَّى",
+            "root": "حَتَّى",
+            "meaning": "Kadar, ta ki",
+            "phraseTr": "<u>Kadar, ta ki</u>",
+            "type": "edat"
+          },
+          {
+            "id": "p11_pr2_w30",
+            "ar": "نَصِلَ",
+            "root": "وَصَلَ",
+            "meaning": "Ulaşalım, varalım",
+            "phraseTr": "<u>Ulaşalım, varalım</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p11_pr2_w31",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p11_pr2_w32",
+            "ar": "القَلْعَةِ",
+            "root": "قَلَعَ",
+            "meaning": "Kale",
+            "phraseTr": "<u>Kale</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr2_w33",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p11_pr2_w34",
+            "ar": "نِهَايَةِ",
+            "root": "نهي",
+            "meaning": "Son",
+            "phraseTr": "ormanın <u>sonu</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr2_w35",
+            "ar": "الغَابَةِ.",
+            "root": "غَابَ",
+            "meaning": "Orman",
+            "phraseTr": "<u>ormanın</u> sonu",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr2_w36",
+            "ar": "مَنْ",
+            "root": "من",
+            "meaning": "kim, her kim",
+            "phraseTr": "<u>kim, her kim</u>",
+            "type": "şart / soru"
+          },
+          {
+            "id": "p11_pr2_w37",
+            "ar": "يَضِيعُ",
+            "root": "ضَاعَ",
+            "meaning": "Kaybolur",
+            "phraseTr": "<u>Kaybolur</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p11_pr2_w38",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p11_pr2_w39",
+            "ar": "الضَّبَابِ،",
+            "root": "ضَبَّ",
+            "meaning": "Sis",
+            "phraseTr": "<u>Sis</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr2_w40",
+            "ar": "لَنْ",
+            "root": "لَنْ",
+            "meaning": "asla -meyecek",
+            "phraseTr": "<u>asla -meyecek</u>",
+            "type": "nefy edatı"
+          },
+          {
+            "id": "p11_pr2_w41",
+            "ar": "يَرْجِعَ",
+            "root": "رجع",
+            "meaning": "Geri döner",
+            "phraseTr": "<u>Geri döner</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p11_pr2_w42",
+            "ar": "أَبَداً!»",
+            "root": "أَبَد",
+            "meaning": "Asla, katiyen",
+            "phraseTr": "<u>Asla, katiyen</u>",
+            "type": "zarf"
+          }
+        ]
+      },
+      {
+        "pId": "p11_pr3",
+        "words": [
+          {
+            "id": "p11_pr3_w1",
+            "ar": "نَظَرَ",
+            "root": "نظر",
+            "meaning": "Baktı",
+            "phraseTr": "<u>Baktı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p11_pr3_w2",
+            "ar": "زَيْد",
+            "root": "زَيْد",
+            "meaning": "Zeyd (arkadaşı)",
+            "phraseTr": "<u>Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p11_pr3_w3",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p11_pr3_w4",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p11_pr3_w5",
+            "ar": "وَقَالَ",
+            "root": "قول",
+            "meaning": "Ve Dedi",
+            "phraseTr": "<u>Ve Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p11_pr3_w6",
+            "ar": "بِهُدُوءٍ:",
+            "root": "هدأ",
+            "meaning": "sakin bir şekilde",
+            "phraseTr": "<u>sakin bir şekilde</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p11_pr3_w7",
+            "ar": "«يَا",
+            "root": "يَا",
+            "meaning": "Ey!",
+            "phraseTr": "<u>Ey!</u>",
+            "type": "nida edatı"
+          },
+          {
+            "id": "p11_pr3_w8",
+            "ar": "رَامِي،",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p11_pr3_w9",
+            "ar": "هَذِهِ",
+            "root": "ذه",
+            "meaning": "Bu (dişil)",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p11_pr3_w10",
+            "ar": "الغَابَةُ",
+            "root": "غَابَ",
+            "meaning": "Orman",
+            "phraseTr": "<u>Orman</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr3_w11",
+            "ar": "خَطِيرَةٌ.",
+            "root": "خطر",
+            "meaning": "Tehlikeli",
+            "phraseTr": "<u>Tehlikeli</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p11_pr3_w12",
+            "ar": "بَعْضُ",
+            "root": "بعض",
+            "meaning": "Bir kısım, bazıları",
+            "phraseTr": "<u>Bir kısım, bazıları</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr3_w13",
+            "ar": "الوُحُوشِ",
+            "root": "وَحَشَ",
+            "meaning": "Canavarlar, vahşi yaratıklar",
+            "phraseTr": "<u>Canavarlar, vahşi yaratıklar</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p11_pr3_w14",
+            "ar": "هُنَا",
+            "root": "هنا",
+            "meaning": "burada, buraya",
+            "phraseTr": "<u>burada, buraya</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p11_pr3_w15",
+            "ar": "تَسْتَطِيعُ",
+            "root": "طوع",
+            "meaning": "Güç yetirirsin, yapabilirsin",
+            "phraseTr": "<u>Güç yetirirsin, yapabilirsin</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p11_pr3_w16",
+            "ar": "أَنْ",
+            "root": "أَنْ",
+            "meaning": "-mek, -mak",
+            "phraseTr": "<u>-mek, -mak</u>",
+            "type": "masdariyye harfi"
+          },
+          {
+            "id": "p11_pr3_w17",
+            "ar": "تُقَلِّدَ",
+            "root": "قَلَّدَ",
+            "meaning": "Taklit eder",
+            "phraseTr": "<u>Taklit eder</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p11_pr3_w18",
+            "ar": "أَصْوَاتَ",
+            "root": "صَوَّتَ",
+            "meaning": "Sesleri",
+            "phraseTr": "insanların <u>sesleri</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p11_pr3_w19",
+            "ar": "النَّاسِ",
+            "root": "نوس",
+            "meaning": "İnsanlar",
+            "phraseTr": "<u>insanların</u> sesleri",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p11_pr3_w20",
+            "ar": "لِتَصِيدَهُمْ.",
+            "root": "صَادَ",
+            "meaning": "Onları avlamak için",
+            "phraseTr": "<u>Onları avlamak için</u>",
+            "type": "fiil + zamir"
+          },
+          {
+            "id": "p11_pr3_w21",
+            "ar": "لاَ",
+            "root": "لاَ",
+            "meaning": "değil, -mez, -maz",
+            "phraseTr": "<u>değil, -mez, -maz</u>",
+            "type": "nefy edatı"
+          },
+          {
+            "id": "p11_pr3_w22",
+            "ar": "تُصَدِّقْ",
+            "root": "صَدَقَ",
+            "meaning": "İnanma!",
+            "phraseTr": "<u>İnanma!</u>",
+            "type": "fiil (cezm)"
+          },
+          {
+            "id": "p11_pr3_w23",
+            "ar": "كُلَّ",
+            "root": "كلل",
+            "meaning": "her",
+            "phraseTr": "<u>her</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p11_pr3_w24",
+            "ar": "مَا",
+            "root": "ما",
+            "meaning": "ne, şey",
+            "phraseTr": "<u>ne, şey</u>",
+            "type": "soru / nefy"
+          },
+          {
+            "id": "p11_pr3_w25",
+            "ar": "تَسْمَعُ!»",
+            "root": "تسم",
+            "meaning": "تَسْمَعُ",
+            "phraseTr": "<u>تَسْمَعُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p11_pr3_w26",
+            "ar": "قَالَ",
+            "root": "قول",
+            "meaning": "Dedi",
+            "phraseTr": "<u>Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p11_pr3_w27",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p11_pr3_w28",
+            "ar": "بِثِقَةٍ:",
+            "root": "وَثِقَ",
+            "meaning": "Güvenle, kendinden emin",
+            "phraseTr": "<u>Güvenle, kendinden emin</u>",
+            "type": "harf-i cer + isim"
+          },
+          {
+            "id": "p11_pr3_w29",
+            "ar": "«حَسَناً",
+            "root": "حَسُنَ",
+            "meaning": "Pekala, tamam",
+            "phraseTr": "<u>Pekala, tamam</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p11_pr3_w30",
+            "ar": "يَا",
+            "root": "يَا",
+            "meaning": "Ey!",
+            "phraseTr": "<u>Ey!</u>",
+            "type": "nida edatı"
+          },
+          {
+            "id": "p11_pr3_w31",
+            "ar": "زَيْد!",
+            "root": "زَيْد",
+            "meaning": "Zeyd (arkadaşı)",
+            "phraseTr": "<u>Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p11_pr3_w32",
+            "ar": "أَنَا",
+            "root": "أَنَا",
+            "meaning": "Ben",
+            "phraseTr": "<u>Ben</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p11_pr3_w33",
+            "ar": "وَأَنْتَ",
+            "root": "أَنْتَ",
+            "meaning": "Ve Sen",
+            "phraseTr": "<u>Ve Sen</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p11_pr3_w34",
+            "ar": "سَنَبْقَى",
+            "root": "بَقِيَ",
+            "meaning": "Kalacağız",
+            "phraseTr": "<u>Kalacağız</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p11_pr3_w35",
+            "ar": "مَعاً",
+            "root": "معع",
+            "meaning": "birlikte, beraber",
+            "phraseTr": "<u>birlikte, beraber</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p11_pr3_w36",
+            "ar": "وَلَنْ",
+            "root": "لَنْ",
+            "meaning": "Ve asla -meyecek",
+            "phraseTr": "<u>Ve asla -meyecek</u>",
+            "type": "nefy edatı"
+          },
+          {
+            "id": "p11_pr3_w37",
+            "ar": "نَفْتَرِقَ.»",
+            "root": "فَرَقَ",
+            "meaning": "Ayrılmayız",
+            "phraseTr": "<u>Ayrılmayız</u>",
+            "type": "fiil"
+          }
+        ]
+      },
+      {
+        "pId": "p11_pr4",
+        "words": [
+          {
+            "id": "p11_pr4_w1",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p11_pr4_w2",
+            "ar": "تِلْكَ",
+            "root": "ذَا",
+            "meaning": "O, şu (dişil)",
+            "phraseTr": "<u>O</u> an",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p11_pr4_w3",
+            "ar": "اللَّحْظَةِ،",
+            "root": "لحظ",
+            "meaning": "An",
+            "phraseTr": "O <u>anda</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr4_w4",
+            "ar": "رَأَى",
+            "root": "رأي",
+            "meaning": "Gördü",
+            "phraseTr": "<u>Gördü</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p11_pr4_w5",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p11_pr4_w6",
+            "ar": "شَابّاً",
+            "root": "شاب",
+            "meaning": "شَابّاً",
+            "phraseTr": "<u>شَابّاً</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p11_pr4_w7",
+            "ar": "طَوِيلاً",
+            "root": "طول",
+            "meaning": "Uzun",
+            "phraseTr": "<u>Uzun</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p11_pr4_w8",
+            "ar": "يَلْبَسُ",
+            "root": "لبس",
+            "meaning": "Giyer",
+            "phraseTr": "<u>Giyer</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p11_pr4_w9",
+            "ar": "نَظَّارَةً",
+            "root": "نَظَرَ",
+            "meaning": "Gözlük",
+            "phraseTr": "numaralı <u>gözlük</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr4_w10",
+            "ar": "طِبِّيَّةً",
+            "root": "طَبَّ",
+            "meaning": "Tıbbi (numaralı)",
+            "phraseTr": "<u>numaralı</u> gözlük",
+            "type": "sıfat"
+          },
+          {
+            "id": "p11_pr4_w11",
+            "ar": "وَيَحْمِلُ",
+            "root": "حمل",
+            "meaning": "Ve Taşır",
+            "phraseTr": "<u>Ve Taşır</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p11_pr4_w12",
+            "ar": "حَقِيبَةً",
+            "root": "حقب",
+            "meaning": "Bir çanta",
+            "phraseTr": "ahşap <u>çanta</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr4_w13",
+            "ar": "خَشَبِيَّةً",
+            "root": "خَشَبَ",
+            "meaning": "Ahşap",
+            "phraseTr": "<u>ahşap</u> çanta",
+            "type": "sıfat"
+          },
+          {
+            "id": "p11_pr4_w14",
+            "ar": "صَغِيرَةً،",
+            "root": "صغر",
+            "meaning": "Küçük",
+            "phraseTr": "<u>Küçük</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p11_pr4_w15",
+            "ar": "وَعَلَى",
+            "root": "عَلَى",
+            "meaning": "Ve üzerinde, -e",
+            "phraseTr": "<u>Ve üzerinde, -e</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p11_pr4_w16",
+            "ar": "صَدْرِهِ",
+            "root": "صدر",
+            "meaning": "Göğsü",
+            "phraseTr": "<u>Göğsü</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr4_w17",
+            "ar": "الرَّقْمُ",
+            "root": "رقم",
+            "meaning": "Numara",
+            "phraseTr": "<u>Numara</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr4_w18",
+            "ar": "208.",
+            "root": "",
+            "meaning": "208.",
+            "phraseTr": "208.",
+            "type": "sayı/noktalama"
+          },
+          {
+            "id": "p11_pr4_w19",
+            "ar": "كَانَ",
+            "root": "كون",
+            "meaning": "İdi, oldu",
+            "phraseTr": "<u>İdi, oldu</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p11_pr4_w20",
+            "ar": "هَذَا",
+            "root": "ذا",
+            "meaning": "Bu",
+            "phraseTr": "<u>Bu</u> genç",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p11_pr4_w21",
+            "ar": "الشَّابُّ",
+            "root": "شبب",
+            "meaning": "Genç",
+            "phraseTr": "Bu <u>genç</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr4_w22",
+            "ar": "يَقِفُ",
+            "root": "وقف",
+            "meaning": "Durur",
+            "phraseTr": "<u>Durur</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p11_pr4_w23",
+            "ar": "قَرِيباً",
+            "root": "قري",
+            "meaning": "قَرِيباً",
+            "phraseTr": "<u>قَرِيباً</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p11_pr4_w24",
+            "ar": "مِنْهُمَا،",
+            "root": "مِنْ",
+            "meaning": "-den, -dan (ikisinin)",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p11_pr4_w25",
+            "ar": "وَيَبْدُو",
+            "root": "بَدَا",
+            "meaning": "Ve Görünüyor, beliriyor",
+            "phraseTr": "<u>Ve Görünüyor, beliriyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p11_pr4_w26",
+            "ar": "عَلَيْهِ",
+            "root": "عَلَى",
+            "meaning": "Üzerinde / ona",
+            "phraseTr": "<u>Üzerinde</u>",
+            "type": "harf-i cer + zamir"
+          },
+          {
+            "id": "p11_pr4_w27",
+            "ar": "الخَوْفُ",
+            "root": "خوف",
+            "meaning": "Korku",
+            "phraseTr": "<u>Korku</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p11_pr4_w28",
+            "ar": "وَالحَذَرُ.",
+            "root": "حَذِرَ",
+            "meaning": "Ve Tedbirlilik, dikkat",
+            "phraseTr": "<u>Ve Tedbirlilik, dikkat</u>",
+            "type": "isim"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pageNum": 12,
+    "title": "الصَّفْحَةُ الثَّانِيَةَ عَشْرَةَ (12)",
+    "paragraphs": [
+      {
+        "pId": "p12_pr1",
+        "words": [
+          {
+            "id": "p12_pr1_w1",
+            "ar": "وَقَبْلَ",
+            "root": "قَبْل",
+            "meaning": "Ve ... önce",
+            "phraseTr": "<u>Ve ... önce</u>",
+            "type": "bağlaç + zarf"
+          },
+          {
+            "id": "p12_pr1_w2",
+            "ar": "أَنْ",
+            "root": "أَنْ",
+            "meaning": "-mek, -mak",
+            "phraseTr": "<u>-mek, -mak</u>",
+            "type": "masdariyye harfi"
+          },
+          {
+            "id": "p12_pr1_w3",
+            "ar": "يَبْدَأَ",
+            "root": "يبد",
+            "meaning": "يَبْدَأَ",
+            "phraseTr": "<u>يَبْدَأَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr1_w4",
+            "ar": "الجَرْيُ،",
+            "root": "جري",
+            "meaning": "Koşma",
+            "phraseTr": "<u>Koşma</u>",
+            "type": "isim / mastar"
+          },
+          {
+            "id": "p12_pr1_w5",
+            "ar": "صَرَخَ",
+            "root": "صرخ",
+            "meaning": "Bağırdı",
+            "phraseTr": "<u>Bağırdı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p12_pr1_w6",
+            "ar": "رَجُلٌ",
+            "root": "رجل",
+            "meaning": "Adam",
+            "phraseTr": "yaralı bir <u>adam</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr1_w7",
+            "ar": "جَرِيحٌ",
+            "root": "جَرَحَ",
+            "meaning": "Yaralı",
+            "phraseTr": "<u>yaralı</u> bir adam",
+            "type": "sıfat"
+          },
+          {
+            "id": "p12_pr1_w8",
+            "ar": "مِنْ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p12_pr1_w9",
+            "ar": "خَلْفِ",
+            "root": "خلف",
+            "meaning": "خَلْفِ",
+            "phraseTr": "<u>خَلْفِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr1_w10",
+            "ar": "الأَشْجَارِ:",
+            "root": "شجر",
+            "meaning": "Ağaçlar",
+            "phraseTr": "<u>Ağaçlar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p12_pr1_w11",
+            "ar": "«انْتَظِرُوا!",
+            "root": "انت",
+            "meaning": "انْتَظِرُوا",
+            "phraseTr": "<u>انْتَظِرُوا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr1_w12",
+            "ar": "لاَ",
+            "root": "لاَ",
+            "meaning": "değil, -mez, -maz",
+            "phraseTr": "<u>değil, -mez, -maz</u>",
+            "type": "nefy edatı"
+          },
+          {
+            "id": "p12_pr1_w13",
+            "ar": "تَمْشُوا",
+            "root": "مَشَى",
+            "meaning": "Yürüyün, yürüyesiniz",
+            "phraseTr": "<u>Yürüyün, yürüyesiniz</u>",
+            "type": "fiil (çoğul)"
+          },
+          {
+            "id": "p12_pr1_w14",
+            "ar": "خَلْفَ",
+            "root": "خلف",
+            "meaning": "خَلْفَ",
+            "phraseTr": "<u>خَلْفَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr1_w15",
+            "ar": "ذَلِكَ",
+            "root": "ذا",
+            "meaning": "Şu / O",
+            "phraseTr": "<u>Şu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p12_pr1_w16",
+            "ar": "الرَّجُلِ!",
+            "root": "رجل",
+            "meaning": "Adam",
+            "phraseTr": "<u>Adam</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr1_w17",
+            "ar": "هَذَا",
+            "root": "ذا",
+            "meaning": "Bu",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p12_pr1_w18",
+            "ar": "لَيْسَ",
+            "root": "ليس",
+            "meaning": "لَيْسَ",
+            "phraseTr": "<u>لَيْسَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr1_w19",
+            "ar": "الحَكَمَ",
+            "root": "حكم",
+            "meaning": "Hakem",
+            "phraseTr": "<u>Hakem</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr1_w20",
+            "ar": "سَاجِد،",
+            "root": "سَجَدَ",
+            "meaning": "Sacid (sınav hakemi)",
+            "phraseTr": "<u>Sacid</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p12_pr1_w21",
+            "ar": "هَذَا",
+            "root": "ذا",
+            "meaning": "Bu",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p12_pr1_w22",
+            "ar": "وَحْشٌ",
+            "root": "وَحَشَ",
+            "meaning": "Canavar",
+            "phraseTr": "kötü bir <u>canavar</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr1_w23",
+            "ar": "شِرِّيرٌ",
+            "root": "شَرَّ",
+            "meaning": "Kötü, zalim",
+            "phraseTr": "<u>kötü</u> bir canavar",
+            "type": "sıfat"
+          },
+          {
+            "id": "p12_pr1_w24",
+            "ar": "يُرِيدُ",
+            "root": "يري",
+            "meaning": "يُرِيدُ",
+            "phraseTr": "<u>يُرِيدُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr1_w25",
+            "ar": "أَنْ",
+            "root": "أَنْ",
+            "meaning": "-mek, -mak",
+            "phraseTr": "<u>-mek, -mak</u>",
+            "type": "masdariyye harfi"
+          },
+          {
+            "id": "p12_pr1_w26",
+            "ar": "يَأْكُلَكُمْ!»",
+            "root": "أَكَلَ",
+            "meaning": "Sizi yesin",
+            "phraseTr": "<u>Sizi yesin</u>",
+            "type": "fiil + zamir"
+          }
+        ]
+      },
+      {
+        "pId": "p12_pr2",
+        "words": [
+          {
+            "id": "p12_pr2_w1",
+            "ar": "خَرَجَ",
+            "root": "خرج",
+            "meaning": "Çıktı",
+            "phraseTr": "<u>Çıktı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p12_pr2_w2",
+            "ar": "الرَّجُلُ",
+            "root": "رجل",
+            "meaning": "Adam",
+            "phraseTr": "yaralı <u>adam</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr2_w3",
+            "ar": "الجَرِيحُ",
+            "root": "جَرَحَ",
+            "meaning": "Yaralı",
+            "phraseTr": "<u>yaralı</u> adam",
+            "type": "sıfat"
+          },
+          {
+            "id": "p12_pr2_w4",
+            "ar": "وَهُوَ",
+            "root": "هُوَ",
+            "meaning": "Ve O",
+            "phraseTr": "<u>Ve O</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p12_pr2_w5",
+            "ar": "يَحْمِلُ",
+            "root": "حمل",
+            "meaning": "Taşır",
+            "phraseTr": "<u>Taşır</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p12_pr2_w6",
+            "ar": "قِرْداً",
+            "root": "قَرَدَ",
+            "meaning": "Maymun",
+            "phraseTr": "garip bir <u>maymun</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr2_w7",
+            "ar": "غَرِيباً",
+            "root": "غري",
+            "meaning": "غَرِيباً",
+            "phraseTr": "<u>garip</u> bir maymun",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr2_w8",
+            "ar": "لَهُ",
+            "root": "لِ",
+            "meaning": "Ona / onun için",
+            "phraseTr": "<u>Ona</u>",
+            "type": "harf-i cer + zamir"
+          },
+          {
+            "id": "p12_pr2_w9",
+            "ar": "وَجْهُ",
+            "root": "وجه",
+            "meaning": "وَجْهُ",
+            "phraseTr": "insan <u>yüzü</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr2_w10",
+            "ar": "إِنْسَانٍ.",
+            "root": "أنس",
+            "meaning": "İnsan",
+            "phraseTr": "<u>insan</u> yüzü",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr2_w11",
+            "ar": "صَاحَ",
+            "root": "صاح",
+            "meaning": "صَاحَ",
+            "phraseTr": "<u>صَاحَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr2_w12",
+            "ar": "الرَّجُلُ:",
+            "root": "رجل",
+            "meaning": "Adam",
+            "phraseTr": "<u>Adam</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr2_w13",
+            "ar": "«انْظُرُوا!",
+            "root": "نظر",
+            "meaning": "Bakın!",
+            "phraseTr": "<u>Bakın!</u>",
+            "type": "emir fiili"
+          },
+          {
+            "id": "p12_pr2_w14",
+            "ar": "هَذَا",
+            "root": "ذا",
+            "meaning": "Bu",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p12_pr2_w15",
+            "ar": "القِرْدُ",
+            "root": "قَرَدَ",
+            "meaning": "Maymun",
+            "phraseTr": "<u>Maymun</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr2_w16",
+            "ar": "هُوَ",
+            "root": "هُوَ",
+            "meaning": "O",
+            "phraseTr": "<u>O</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p12_pr2_w17",
+            "ar": "أَخُو",
+            "root": "أَخَا",
+            "meaning": "Kardeşi",
+            "phraseTr": "<u>Kardeşi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr2_w18",
+            "ar": "هَذَا",
+            "root": "ذا",
+            "meaning": "Bu",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p12_pr2_w19",
+            "ar": "الوَحْشِ!",
+            "root": "وَحَشَ",
+            "meaning": "Canavar",
+            "phraseTr": "<u>Canavar</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr2_w20",
+            "ar": "الحَكَمُ",
+            "root": "حكم",
+            "meaning": "Hakem",
+            "phraseTr": "gerçek <u>hakem</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr2_w21",
+            "ar": "الحَقِيقِيُّ",
+            "root": "حَقَّ",
+            "meaning": "Gerçek",
+            "phraseTr": "<u>gerçek</u> hakem",
+            "type": "sıfat"
+          },
+          {
+            "id": "p12_pr2_w22",
+            "ar": "مَاتَ",
+            "root": "مَاتَ",
+            "meaning": "Öldü",
+            "phraseTr": "<u>Öldü</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p12_pr2_w23",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p12_pr2_w24",
+            "ar": "البِدَايَةِ!»",
+            "root": "بدو",
+            "meaning": "Başlangıç",
+            "phraseTr": "<u>Başlangıç</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr2_w25",
+            "ar": "خَافَ",
+            "root": "خوف",
+            "meaning": "Korktu",
+            "phraseTr": "<u>Korktu</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p12_pr2_w26",
+            "ar": "كَثِيرٌ",
+            "root": "كَثُرَ",
+            "meaning": "Çok, birçok",
+            "phraseTr": "<u>Çok, birçok</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p12_pr2_w27",
+            "ar": "مِنَ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p12_pr2_w28",
+            "ar": "المُتَسَابِقِينَ،",
+            "root": "سبق",
+            "meaning": "Yarışmacılar",
+            "phraseTr": "<u>Yarışmacılar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p12_pr2_w29",
+            "ar": "وَقَالُوا",
+            "root": "وقا",
+            "meaning": "وَقَالُوا",
+            "phraseTr": "<u>وَقَالُوا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr2_w30",
+            "ar": "بِقَلَقٍ:",
+            "root": "قَلِقَ",
+            "meaning": "Endişeyle",
+            "phraseTr": "<u>Endişeyle</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p12_pr2_w31",
+            "ar": "«مَاذَا؟",
+            "root": "مَاذَا",
+            "meaning": "Ne?",
+            "phraseTr": "<u>Ne?</u>",
+            "type": "soru edatı"
+          },
+          {
+            "id": "p12_pr2_w32",
+            "ar": "هَلْ",
+            "root": "هَلْ",
+            "meaning": "Mı, mi?",
+            "phraseTr": "<u>Mı, mi?</u>",
+            "type": "soru edatı"
+          },
+          {
+            "id": "p12_pr2_w33",
+            "ar": "هَذَا",
+            "root": "ذا",
+            "meaning": "Bu",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p12_pr2_w34",
+            "ar": "الحَكَمُ",
+            "root": "حكم",
+            "meaning": "Hakem",
+            "phraseTr": "<u>Hakem</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr2_w35",
+            "ar": "وَحْشٌ",
+            "root": "وَحَشَ",
+            "meaning": "Canavar",
+            "phraseTr": "<u>Canavar</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr2_w36",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p12_pr2_w37",
+            "ar": "جِسْمِ",
+            "root": "جسم",
+            "meaning": "جِسْمِ",
+            "phraseTr": "<u>جِسْمِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr2_w38",
+            "ar": "إِنْسَانٍ؟»",
+            "root": "أنس",
+            "meaning": "İnsan",
+            "phraseTr": "<u>İnsan</u>",
+            "type": "isim"
+          }
+        ]
+      },
+      {
+        "pId": "p12_pr3",
+        "words": [
+          {
+            "id": "p12_pr3_w1",
+            "ar": "وَفَجْأَةً،",
+            "root": "فجأ",
+            "meaning": "Ve ansızın, birdenbire",
+            "phraseTr": "<u>Ve ansızın, birdenbire</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p12_pr3_w2",
+            "ar": "طَارَتْ",
+            "root": "طار",
+            "meaning": "طَارَتْ",
+            "phraseTr": "<u>طَارَتْ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr3_w3",
+            "ar": "ثَلاَثُ",
+            "root": "ثلث",
+            "meaning": "üç",
+            "phraseTr": "<u>üç</u>",
+            "type": "sayı"
+          },
+          {
+            "id": "p12_pr3_w4",
+            "ar": "بِطَاقَاتٍ",
+            "root": "بَطَقَ",
+            "meaning": "Kartlar, rozetler",
+            "phraseTr": "demir <u>kartlar</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p12_pr3_w5",
+            "ar": "حَدِيدِيَّةٍ",
+            "root": "حَدَدَ",
+            "meaning": "Demir",
+            "phraseTr": "<u>demir</u> kartlar",
+            "type": "sıfat"
+          },
+          {
+            "id": "p12_pr3_w6",
+            "ar": "حَادَّةٍ",
+            "root": "حَدَّ",
+            "meaning": "Keskin",
+            "phraseTr": "<u>keskin</u> kartlar",
+            "type": "sıfat"
+          },
+          {
+            "id": "p12_pr3_w7",
+            "ar": "بِسُرْعَةِ",
+            "root": "سرع",
+            "meaning": "hızlıca, hızla",
+            "phraseTr": "şimşek <u>hızıyla</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p12_pr3_w8",
+            "ar": "البَرْقِ",
+            "root": "بَرَقَ",
+            "meaning": "Şimşek",
+            "phraseTr": "<u>şimşek</u> hızıyla",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr3_w9",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p12_pr3_w10",
+            "ar": "الهَوَاءِ!",
+            "root": "هوو",
+            "meaning": "Hava",
+            "phraseTr": "<u>Hava</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr3_w11",
+            "ar": "كَانَتْ",
+            "root": "كون",
+            "meaning": "İdi (dişil)",
+            "phraseTr": "<u>İdi</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p12_pr3_w12",
+            "ar": "بَطَاقَتَانِ",
+            "root": "بَطَقَ",
+            "meaning": "İki kart",
+            "phraseTr": "<u>İki kart</u>",
+            "type": "isim (tesniye)"
+          },
+          {
+            "id": "p12_pr3_w13",
+            "ar": "تَتَّجِهَانِ",
+            "root": "وَجَهَ",
+            "meaning": "Yöneliyor ikisi",
+            "phraseTr": "<u>Yöneliyor ikisi</u>",
+            "type": "fiil (tesniye)"
+          },
+          {
+            "id": "p12_pr3_w14",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p12_pr3_w15",
+            "ar": "وَجْهِ",
+            "root": "وجه",
+            "meaning": "وَجْهِ",
+            "phraseTr": "<u>وَجْهِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr3_w16",
+            "ar": "الحَكَمِ",
+            "root": "حكم",
+            "meaning": "Hakem",
+            "phraseTr": "<u>Hakem</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr3_w17",
+            "ar": "سَاجِد،",
+            "root": "سَجَدَ",
+            "meaning": "Sacid (sınav hakemi)",
+            "phraseTr": "<u>Sacid</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p12_pr3_w18",
+            "ar": "وَبِطَاقَةٌ",
+            "root": "بَطَقَ",
+            "meaning": "Ve Bir kart",
+            "phraseTr": "<u>Ve Bir kart</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr3_w19",
+            "ar": "وَاحِدَةٌ",
+            "root": "وحد",
+            "meaning": "bir, bir defa",
+            "phraseTr": "<u>bir, bir defa</u>",
+            "type": "sayı"
+          },
+          {
+            "id": "p12_pr3_w20",
+            "ar": "تَتَّجِهُ",
+            "root": "وَجَهَ",
+            "meaning": "Yöneliyor",
+            "phraseTr": "<u>Yöneliyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p12_pr3_w21",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p12_pr3_w22",
+            "ar": "الرَّجُلِ",
+            "root": "رجل",
+            "meaning": "Adam",
+            "phraseTr": "yaralı <u>adam</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr3_w23",
+            "ar": "الجَرِيحِ.",
+            "root": "جَرَحَ",
+            "meaning": "Yaralı",
+            "phraseTr": "<u>yaralı</u> adam",
+            "type": "sıfat"
+          }
+        ]
+      },
+      {
+        "pId": "p12_pr4",
+        "words": [
+          {
+            "id": "p12_pr4_w1",
+            "ar": "مَدَّ",
+            "root": "مدد",
+            "meaning": "Uzattı",
+            "phraseTr": "<u>Uzattı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p12_pr4_w2",
+            "ar": "الحَكَمُ",
+            "root": "حكم",
+            "meaning": "Hakem",
+            "phraseTr": "<u>Hakem</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr4_w3",
+            "ar": "سَاجِد",
+            "root": "سَجَدَ",
+            "meaning": "Sacid (sınav hakemi)",
+            "phraseTr": "<u>Sacid</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p12_pr4_w4",
+            "ar": "إِصْبَعَيْنِ،",
+            "root": "صَبَعَ",
+            "meaning": "İki parmak",
+            "phraseTr": "<u>İki parmak</u>",
+            "type": "isim (tesniye)"
+          },
+          {
+            "id": "p12_pr4_w5",
+            "ar": "وَأَمْسَكَ",
+            "root": "وأم",
+            "meaning": "وَأَمْسَكَ",
+            "phraseTr": "<u>وَأَمْسَكَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr4_w6",
+            "ar": "البِطَاقَتَيْنِ",
+            "root": "بَطَقَ",
+            "meaning": "İki kartı",
+            "phraseTr": "iki demir <u>kartı</u>",
+            "type": "isim (tesniye)"
+          },
+          {
+            "id": "p12_pr4_w7",
+            "ar": "الحَدِيدِيَّتَيْنِ",
+            "root": "حَدَدَ",
+            "meaning": "Demir olan ikisini",
+            "phraseTr": "<u>iki demir</u> kartı",
+            "type": "sıfat (tesniye)"
+          },
+          {
+            "id": "p12_pr4_w8",
+            "ar": "بِسُهُولَةٍ",
+            "root": "سهل",
+            "meaning": "kolaylıkla",
+            "phraseTr": "<u>kolaylıkla</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p12_pr4_w9",
+            "ar": "كَبِيرَةٍ",
+            "root": "كبر",
+            "meaning": "Büyük",
+            "phraseTr": "<u>Büyük</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p12_pr4_w10",
+            "ar": "بِقُوَّةِ",
+            "root": "قوو",
+            "meaning": "... ile Güç",
+            "phraseTr": "Çi <u>gücüyle</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr4_w11",
+            "ar": "التْشِي.",
+            "root": "تْشِي",
+            "meaning": "Çi enerjisi",
+            "phraseTr": "<u>Çi</u> gücüyle",
+            "type": "terim"
+          },
+          {
+            "id": "p12_pr4_w12",
+            "ar": "أَمَّا",
+            "root": "أَمَّا",
+            "meaning": "-e gelince, ise",
+            "phraseTr": "<u>-e gelince, ise</u>",
+            "type": "şart/tafsil edatı"
+          },
+          {
+            "id": "p12_pr4_w13",
+            "ar": "الرَّجُلُ",
+            "root": "رجل",
+            "meaning": "Adam",
+            "phraseTr": "yaralı <u>adam</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr4_w14",
+            "ar": "الجَرِيحُ،",
+            "root": "جَرَحَ",
+            "meaning": "Yaralı",
+            "phraseTr": "<u>yaralı</u> adam",
+            "type": "sıfat"
+          },
+          {
+            "id": "p12_pr4_w15",
+            "ar": "فَخَافَ",
+            "root": "خوف",
+            "meaning": "Derhal Korktu",
+            "phraseTr": "<u>Derhal Korktu</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p12_pr4_w16",
+            "ar": "وَسَقَطَ",
+            "root": "سقط",
+            "meaning": "Ve Düştü",
+            "phraseTr": "<u>Ve Düştü</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p12_pr4_w17",
+            "ar": "عَلَى",
+            "root": "عَلَى",
+            "meaning": "üzerinde, -e",
+            "phraseTr": "<u>üzerinde, -e</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p12_pr4_w18",
+            "ar": "الأَرْضِ،",
+            "root": "أرض",
+            "meaning": "Yer, zemin",
+            "phraseTr": "<u>Yer, zemin</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr4_w19",
+            "ar": "فَمَاتَ",
+            "root": "مَاتَ",
+            "meaning": "Derhal Öldü",
+            "phraseTr": "<u>Derhal Öldü</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p12_pr4_w20",
+            "ar": "فَوْراً؛",
+            "root": "فور",
+            "meaning": "hemen, derhal",
+            "phraseTr": "<u>hemen, derhal</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p12_pr4_w21",
+            "ar": "لأَنَّهُ",
+            "root": "أَنَّ",
+            "meaning": "Çünkü o",
+            "phraseTr": "<u>Çünkü o</u>",
+            "type": "bağlaç + zamir"
+          },
+          {
+            "id": "p12_pr4_w22",
+            "ar": "كَانَ",
+            "root": "كون",
+            "meaning": "İdi, oldu",
+            "phraseTr": "<u>İdi, oldu</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p12_pr4_w23",
+            "ar": "وَحْشاً",
+            "root": "وَحَشَ",
+            "meaning": "Bir canavar",
+            "phraseTr": "hilekar bir <u>canavar</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr4_w24",
+            "ar": "مُخَادِعاً!",
+            "root": "خَدَعَ",
+            "meaning": "Aldatıcı, sahtekar",
+            "phraseTr": "<u>hilekar</u> bir canavar",
+            "type": "ism-i fail"
+          }
+        ]
+      },
+      {
+        "pId": "p12_pr5",
+        "words": [
+          {
+            "id": "p12_pr5_w1",
+            "ar": "نَظَرَ",
+            "root": "نظر",
+            "meaning": "Baktı",
+            "phraseTr": "<u>Baktı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p12_pr5_w2",
+            "ar": "الحَكَمُ",
+            "root": "حكم",
+            "meaning": "Hakem",
+            "phraseTr": "<u>Hakem</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr5_w3",
+            "ar": "سَاجِد",
+            "root": "سَجَدَ",
+            "meaning": "Sacid (sınav hakemi)",
+            "phraseTr": "<u>Sacid</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p12_pr5_w4",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p12_pr5_w5",
+            "ar": "الخَلْفِ،",
+            "root": "خَلَفَ",
+            "meaning": "Arka taraf",
+            "phraseTr": "<u>Arka taraf</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr5_w6",
+            "ar": "فَرَأَى",
+            "root": "رأي",
+            "meaning": "Derhal Gördü",
+            "phraseTr": "<u>Derhal Gördü</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p12_pr5_w7",
+            "ar": "شَابّاً",
+            "root": "شاب",
+            "meaning": "شَابّاً",
+            "phraseTr": "gizemli bir <u>genç</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr5_w8",
+            "ar": "غَامِضاً",
+            "root": "غَمَضَ",
+            "meaning": "Gizemli",
+            "phraseTr": "<u>gizemli</u> bir genç",
+            "type": "sıfat"
+          },
+          {
+            "id": "p12_pr5_w9",
+            "ar": "يَلْبَسُ",
+            "root": "لبس",
+            "meaning": "Giyer",
+            "phraseTr": "<u>Giyer</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p12_pr5_w10",
+            "ar": "مَلاَبِسَ",
+            "root": "لبس",
+            "meaning": "Elbiseler",
+            "phraseTr": "<u>Elbiseler</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p12_pr5_w11",
+            "ar": "بَيْضَاءَ،",
+            "root": "بيض",
+            "meaning": "Beyaz",
+            "phraseTr": "<u>Beyaz</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p12_pr5_w12",
+            "ar": "وَعَلَى",
+            "root": "عَلَى",
+            "meaning": "Ve üzerinde, -e",
+            "phraseTr": "<u>Ve üzerinde, -e</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p12_pr5_w13",
+            "ar": "صَدْرِهِ",
+            "root": "صدر",
+            "meaning": "Göğsü",
+            "phraseTr": "<u>Göğsü</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr5_w14",
+            "ar": "الرَّقْمُ",
+            "root": "رقم",
+            "meaning": "Numara",
+            "phraseTr": "<u>Numara</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr5_w15",
+            "ar": "44.",
+            "root": "",
+            "meaning": "44.",
+            "phraseTr": "44.",
+            "type": "sayı/noktalama"
+          },
+          {
+            "id": "p12_pr5_w16",
+            "ar": "كَانَ",
+            "root": "كون",
+            "meaning": "İdi, oldu",
+            "phraseTr": "<u>İdi, oldu</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p12_pr5_w17",
+            "ar": "هَذَا",
+            "root": "ذا",
+            "meaning": "Bu",
+            "phraseTr": "<u>Bu</u> genç",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p12_pr5_w18",
+            "ar": "الشَّابُّ",
+            "root": "شبب",
+            "meaning": "Genç",
+            "phraseTr": "Bu <u>genç</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr5_w19",
+            "ar": "يَبْتَسِمُ",
+            "root": "يبت",
+            "meaning": "يَبْتَسِمُ",
+            "phraseTr": "<u>يَبْتَسِمُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p12_pr5_w20",
+            "ar": "ابْتِسَامَةً",
+            "root": "بَسَمَ",
+            "meaning": "Gülümseme",
+            "phraseTr": "korkutucu bir <u>gülümseme</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr5_w21",
+            "ar": "مُخِيفَةً",
+            "root": "خَافَ",
+            "meaning": "Korkutucu",
+            "phraseTr": "<u>korkutucu</u> bir gülümseme",
+            "type": "sıfat"
+          },
+          {
+            "id": "p12_pr5_w22",
+            "ar": "وَيَلْعَبُ",
+            "root": "لَعِبَ",
+            "meaning": "Ve Oynuyor",
+            "phraseTr": "<u>Ve Oynuyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p12_pr5_w23",
+            "ar": "بِالبِطَاقَاتِ.",
+            "root": "بَطَقَ",
+            "meaning": "Kartlarla",
+            "phraseTr": "<u>Kartlarla</u>",
+            "type": "harf + isim"
+          },
+          {
+            "id": "p12_pr5_w24",
+            "ar": "قَالَ",
+            "root": "قول",
+            "meaning": "Dedi",
+            "phraseTr": "<u>Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p12_pr5_w25",
+            "ar": "سَاجِد",
+            "root": "سَجَدَ",
+            "meaning": "Sacid (sınav hakemi)",
+            "phraseTr": "<u>Sacid</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p12_pr5_w26",
+            "ar": "بِجِدِّيَّةٍ:",
+            "root": "جَدَّ",
+            "meaning": "Ciddiyetle",
+            "phraseTr": "<u>Ciddiyetle</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p12_pr5_w27",
+            "ar": "«شُكْراً",
+            "root": "شَكَرَ",
+            "meaning": "Teşekkürler",
+            "phraseTr": "<u>Teşekkürler</u>",
+            "type": "mastar/ünlem"
+          },
+          {
+            "id": "p12_pr5_w28",
+            "ar": "لَكَ",
+            "root": "لِ",
+            "meaning": "Sana / senin için",
+            "phraseTr": "<u>Sana</u>",
+            "type": "harf-i cer + zamir"
+          },
+          {
+            "id": "p12_pr5_w29",
+            "ar": "يَا",
+            "root": "يَا",
+            "meaning": "Ey!",
+            "phraseTr": "<u>Ey!</u>",
+            "type": "nida edatı"
+          },
+          {
+            "id": "p12_pr5_w30",
+            "ar": "رَقْمَ",
+            "root": "رقم",
+            "meaning": "Numaralı",
+            "phraseTr": "<u>Numaralı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr5_w31",
+            "ar": "44",
+            "root": "",
+            "meaning": "44",
+            "phraseTr": "44",
+            "type": "sayı/noktalama"
+          },
+          {
+            "id": "p12_pr5_w32",
+            "ar": "عَلَى",
+            "root": "عَلَى",
+            "meaning": "üzerinde, -e",
+            "phraseTr": "<u>üzerinde, -e</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p12_pr5_w33",
+            "ar": "كَشْفِ",
+            "root": "كَشَفَ",
+            "meaning": "Ortaya çıkarma",
+            "phraseTr": "<u>Ortaya çıkarma</u>",
+            "type": "mastar"
+          },
+          {
+            "id": "p12_pr5_w34",
+            "ar": "الوَحْشِ،",
+            "root": "وَحَشَ",
+            "meaning": "Canavar",
+            "phraseTr": "<u>Canavar</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr5_w35",
+            "ar": "وَلَكِنْ",
+            "root": "لَكِنْ",
+            "meaning": "Ve lakin, fakat",
+            "phraseTr": "<u>Ve lakin, fakat</u>",
+            "type": "bağlaç + istidrak"
+          },
+          {
+            "id": "p12_pr5_w36",
+            "ar": "إِذَا",
+            "root": "إِذَا",
+            "meaning": "eğer, -dığı zaman",
+            "phraseTr": "<u>eğer, -dığı zaman</u>",
+            "type": "şart edatı"
+          },
+          {
+            "id": "p12_pr5_w37",
+            "ar": "هَاجَمْتَنِي",
+            "root": "هَجَمَ",
+            "meaning": "Bana saldırdın",
+            "phraseTr": "<u>Bana saldırdın</u>",
+            "type": "fiil + zamir"
+          },
+          {
+            "id": "p12_pr5_w38",
+            "ar": "مَرَّةً",
+            "root": "مَرَّ",
+            "meaning": "Bir kere, defa",
+            "phraseTr": "<u>Bir kere, defa</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr5_w39",
+            "ar": "أُخْرَى،",
+            "root": "أَخِر",
+            "meaning": "Başka, diğer",
+            "phraseTr": "<u>Başka, diğer</u>",
+            "type": "sıfat (dişil)"
+          },
+          {
+            "id": "p12_pr5_w40",
+            "ar": "سَأَطْرُدُكَ",
+            "root": "طَرَدَ",
+            "meaning": "Seni kovarım",
+            "phraseTr": "<u>Seni kovarım</u>",
+            "type": "fiil + zamir"
+          },
+          {
+            "id": "p12_pr5_w41",
+            "ar": "مِنَ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p12_pr5_w42",
+            "ar": "المُسَابَقَةِ",
+            "root": "سَبَقَ",
+            "meaning": "Yarışma",
+            "phraseTr": "<u>Yarışma</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p12_pr5_w43",
+            "ar": "فَوْراً!»",
+            "root": "فور",
+            "meaning": "hemen, derhal",
+            "phraseTr": "<u>hemen, derhal</u>",
+            "type": "zarf"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pageNum": 13,
+    "title": "الصَّفْحَةُ الثَّالِثَةَ عَشْرَةَ (13)",
+    "paragraphs": [
+      {
+        "pId": "p13_pr1",
+        "words": [
+          {
+            "id": "p13_pr1_w1",
+            "ar": "اسْتَدَارَ",
+            "root": "دور",
+            "meaning": "Geriye döndü",
+            "phraseTr": "<u>Geriye döndü</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p13_pr1_w2",
+            "ar": "الحَكَمُ",
+            "root": "حكم",
+            "meaning": "Hakem",
+            "phraseTr": "<u>Hakem</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr1_w3",
+            "ar": "سَاجِد",
+            "root": "سَجَدَ",
+            "meaning": "Sacid (sınav hakemi)",
+            "phraseTr": "<u>Sacid</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p13_pr1_w4",
+            "ar": "وَدَخَلَ",
+            "root": "دخل",
+            "meaning": "Ve Girdi",
+            "phraseTr": "<u>Ve Girdi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p13_pr1_w5",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p13_pr1_w6",
+            "ar": "عُمْقِ",
+            "root": "عَمُقَ",
+            "meaning": "Derinlik",
+            "phraseTr": "sisin <u>derinliği</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr1_w7",
+            "ar": "الضَّبَابِ",
+            "root": "ضَبَّ",
+            "meaning": "Sis",
+            "phraseTr": "<u>sisin</u> derinliği",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr1_w8",
+            "ar": "الكَثِيفِ،",
+            "root": "كَثُفَ",
+            "meaning": "Yoğun, koyu",
+            "phraseTr": "<u>yoğun</u> sis",
+            "type": "sıfat"
+          },
+          {
+            "id": "p13_pr1_w9",
+            "ar": "وَجَرَى",
+            "root": "وجر",
+            "meaning": "وَجَرَى",
+            "phraseTr": "<u>وَجَرَى</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr1_w10",
+            "ar": "خَلْفَهُ",
+            "root": "خلف",
+            "meaning": "خَلْفَهُ",
+            "phraseTr": "<u>خَلْفَهُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr1_w11",
+            "ar": "جَمِيعُ",
+            "root": "جَمَعَ",
+            "meaning": "Bütün, herkes",
+            "phraseTr": "<u>Bütün, herkes</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr1_w12",
+            "ar": "المُتَسَابِقِينَ.",
+            "root": "سبق",
+            "meaning": "Yarışmacılar",
+            "phraseTr": "<u>Yarışmacılar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p13_pr1_w13",
+            "ar": "أَصْبَحَ",
+            "root": "صبح",
+            "meaning": "Haline geldi, oldu",
+            "phraseTr": "<u>Haline geldi, oldu</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p13_pr1_w14",
+            "ar": "الضَّبَابُ",
+            "root": "ضَبَّ",
+            "meaning": "Sis",
+            "phraseTr": "<u>Sis</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr1_w15",
+            "ar": "أَبْيَضَ",
+            "root": "بيض",
+            "meaning": "Beyaz",
+            "phraseTr": "<u>Beyaz</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p13_pr1_w16",
+            "ar": "مِثْلَ",
+            "root": "مِثْل",
+            "meaning": "Gibi",
+            "phraseTr": "<u>gibi</u>",
+            "type": "edat/isim"
+          },
+          {
+            "id": "p13_pr1_w17",
+            "ar": "الحَلِيبِ؛",
+            "root": "حَلَبَ",
+            "meaning": "Süt",
+            "phraseTr": "<u>süt</u> gibi",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr1_w18",
+            "ar": "حَتَّى",
+            "root": "حَتَّى",
+            "meaning": "Kadar, ta ki",
+            "phraseTr": "<u>Kadar, ta ki</u>",
+            "type": "edat"
+          },
+          {
+            "id": "p13_pr1_w19",
+            "ar": "إِنَّ",
+            "root": "إن",
+            "meaning": "إِنَّ",
+            "phraseTr": "<u>إِنَّ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr1_w20",
+            "ar": "الرَّجُلَ",
+            "root": "رجل",
+            "meaning": "Adamı",
+            "phraseTr": "<u>Adamı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr1_w21",
+            "ar": "لاَ",
+            "root": "لاَ",
+            "meaning": "değil, -mez, -maz",
+            "phraseTr": "<u>değil, -mez, -maz</u>",
+            "type": "nefy edatı"
+          },
+          {
+            "id": "p13_pr1_w22",
+            "ar": "يَكَادُ",
+            "root": "يكا",
+            "meaning": "يَكَادُ",
+            "phraseTr": "<u>يَكَادُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr1_w23",
+            "ar": "يَرَى",
+            "root": "يرى",
+            "meaning": "يَرَى",
+            "phraseTr": "<u>يَرَى</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr1_w24",
+            "ar": "يَدَهُ",
+            "root": "يدي",
+            "meaning": "Elini",
+            "phraseTr": "<u>Elini</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr1_w25",
+            "ar": "أَمَامَ",
+            "root": "أمم",
+            "meaning": "önünde, önüne",
+            "phraseTr": "<u>önünde, önüne</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p13_pr1_w26",
+            "ar": "عَيْنَيْهِ!",
+            "root": "عين",
+            "meaning": "İki gözü",
+            "phraseTr": "<u>İki gözü</u>",
+            "type": "tesniye isim"
+          }
+        ]
+      },
+      {
+        "pId": "p13_pr2",
+        "words": [
+          {
+            "id": "p13_pr2_w1",
+            "ar": "كَانَ",
+            "root": "كون",
+            "meaning": "İdi, oldu",
+            "phraseTr": "<u>İdi, oldu</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p13_pr2_w2",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p13_pr2_w3",
+            "ar": "وَزَيْد",
+            "root": "زَيْد",
+            "meaning": "Ve Zeyd (arkadaşı)",
+            "phraseTr": "<u>Ve Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p13_pr2_w4",
+            "ar": "يَجْرِيَانِ",
+            "root": "يجر",
+            "meaning": "يَجْرِيَانِ",
+            "phraseTr": "<u>يَجْرِيَانِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr2_w5",
+            "ar": "جَنْباً",
+            "root": "جنب",
+            "meaning": "جَنْباً",
+            "phraseTr": "<u>yan</u> yana",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr2_w6",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "yan <u>yana</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p13_pr2_w7",
+            "ar": "جَنْبٍ.",
+            "root": "جنب",
+            "meaning": "جَنْبٍ",
+            "phraseTr": "yan <u>yana</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr2_w8",
+            "ar": "اقْتَرَبَ",
+            "root": "قرب",
+            "meaning": "Yaklaştı",
+            "phraseTr": "<u>Yaklaştı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p13_pr2_w9",
+            "ar": "مِنْهُمَا",
+            "root": "مِنْ",
+            "meaning": "-den, -dan (ikisinin)",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p13_pr2_w10",
+            "ar": "الشَّابُّ",
+            "root": "شبب",
+            "meaning": "Genç",
+            "phraseTr": "<u>Genç</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr2_w11",
+            "ar": "صَاحِبُ",
+            "root": "صَحِبَ",
+            "meaning": "Sahibi",
+            "phraseTr": "gözlüklü <u>adam</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr2_w12",
+            "ar": "النَّظَّارَةِ",
+            "root": "نَظَرَ",
+            "meaning": "Gözlük",
+            "phraseTr": "<u>gözlüklü</u> adam",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr2_w13",
+            "ar": "(رَقْمُ",
+            "root": "رقم",
+            "meaning": "Numaralı",
+            "phraseTr": "<u>Numaralı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr2_w14",
+            "ar": "208)",
+            "root": "",
+            "meaning": "208)",
+            "phraseTr": "208)",
+            "type": "sayı/noktalama"
+          },
+          {
+            "id": "p13_pr2_w15",
+            "ar": "وَقَالَ",
+            "root": "قول",
+            "meaning": "Ve Dedi",
+            "phraseTr": "<u>Ve Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p13_pr2_w16",
+            "ar": "وَهُوَ",
+            "root": "هُوَ",
+            "meaning": "Ve O",
+            "phraseTr": "<u>Ve O</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p13_pr2_w17",
+            "ar": "يَلْهَثُ:",
+            "root": "لَهَثَ",
+            "meaning": "Nefes nefese kalıyor",
+            "phraseTr": "<u>Nefes nefese kalıyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p13_pr2_w18",
+            "ar": "«يَا",
+            "root": "يَا",
+            "meaning": "Ey!",
+            "phraseTr": "<u>Ey!</u>",
+            "type": "nida edatı"
+          },
+          {
+            "id": "p13_pr2_w19",
+            "ar": "شَبَابُ،",
+            "root": "شبا",
+            "meaning": "شَبَابُ",
+            "phraseTr": "<u>شَبَابُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr2_w20",
+            "ar": "هَلْ",
+            "root": "هَلْ",
+            "meaning": "Mı, mi?",
+            "phraseTr": "<u>Mı, mi?</u>",
+            "type": "soru edatı"
+          },
+          {
+            "id": "p13_pr2_w21",
+            "ar": "يُمْكِنُنِي",
+            "root": "مَكُنَ",
+            "meaning": "Yapabilir miyim",
+            "phraseTr": "<u>Yapabilir miyim</u>",
+            "type": "fiil + zamir"
+          },
+          {
+            "id": "p13_pr2_w22",
+            "ar": "أَنْ",
+            "root": "أَنْ",
+            "meaning": "-mek, -mak",
+            "phraseTr": "<u>-mek, -mak</u>",
+            "type": "masdariyye harfi"
+          },
+          {
+            "id": "p13_pr2_w23",
+            "ar": "أَجْرِيَ",
+            "root": "أجر",
+            "meaning": "أَجْرِيَ",
+            "phraseTr": "<u>أَجْرِيَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr2_w24",
+            "ar": "مَعَكُمَا؟",
+            "root": "معك",
+            "meaning": "مَعَكُمَا",
+            "phraseTr": "<u>مَعَكُمَا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr2_w25",
+            "ar": "الضَّبَابُ",
+            "root": "ضَبَّ",
+            "meaning": "Sis",
+            "phraseTr": "<u>Sis</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr2_w26",
+            "ar": "هُنَا",
+            "root": "هنا",
+            "meaning": "burada, buraya",
+            "phraseTr": "<u>burada, buraya</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p13_pr2_w27",
+            "ar": "يُضَيِّعُ",
+            "root": "ضَاعَ",
+            "meaning": "Kaybettirir, karıştırır",
+            "phraseTr": "<u>Kaybettirir, karıştırır</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p13_pr2_w28",
+            "ar": "العَقْلَ!»",
+            "root": "عَقَلَ",
+            "meaning": "Akıl",
+            "phraseTr": "<u>Akıl</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr2_w29",
+            "ar": "ابْتَسَمَ",
+            "root": "بسم",
+            "meaning": "Gülümsedi",
+            "phraseTr": "<u>Gülümsedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p13_pr2_w30",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p13_pr2_w31",
+            "ar": "وَقَالَ:",
+            "root": "قول",
+            "meaning": "Ve Dedi",
+            "phraseTr": "<u>Ve Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p13_pr2_w32",
+            "ar": "«أَهْلاً",
+            "root": "أَهْل",
+            "meaning": "Hoş geldin",
+            "phraseTr": "<u>Hoş geldin</u>",
+            "type": "ünlem"
+          },
+          {
+            "id": "p13_pr2_w33",
+            "ar": "بِكَ!",
+            "root": "بِ",
+            "meaning": "Seninle / sana",
+            "phraseTr": "<u>Seninle</u>",
+            "type": "harf-i cer + zamir"
+          },
+          {
+            "id": "p13_pr2_w34",
+            "ar": "مَا",
+            "root": "ما",
+            "meaning": "ne, şey",
+            "phraseTr": "<u>ne, şey</u>",
+            "type": "soru / nefy"
+          },
+          {
+            "id": "p13_pr2_w35",
+            "ar": "اسْمُكَ؟»",
+            "root": "سمو",
+            "meaning": "Adın",
+            "phraseTr": "<u>Adın</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr2_w36",
+            "ar": "قَالَ",
+            "root": "قول",
+            "meaning": "Dedi",
+            "phraseTr": "<u>Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p13_pr2_w37",
+            "ar": "الشَّابُّ:",
+            "root": "شبب",
+            "meaning": "Genç",
+            "phraseTr": "<u>Genç</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr2_w38",
+            "ar": "«اسْمِي",
+            "root": "سمو",
+            "meaning": "Adım",
+            "phraseTr": "<u>Adım</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr2_w39",
+            "ar": "طَارِق.",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p13_pr2_w40",
+            "ar": "أَنَا",
+            "root": "أَنَا",
+            "meaning": "Ben",
+            "phraseTr": "<u>Ben</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p13_pr2_w41",
+            "ar": "أَدْرُسُ",
+            "root": "دَرَسَ",
+            "meaning": "Öğrenim görüyorum",
+            "phraseTr": "<u>Öğrenim görüyorum</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p13_pr2_w42",
+            "ar": "الطِّبَّ",
+            "root": "طَبَّ",
+            "meaning": "Tıp",
+            "phraseTr": "<u>Tıp</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr2_w43",
+            "ar": "لأُصْبِحَ",
+            "root": "صَبَحَ",
+            "meaning": "Olmak için",
+            "phraseTr": "<u>Olmak için</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p13_pr2_w44",
+            "ar": "طَبِيباً.»",
+            "root": "طَبَّ",
+            "meaning": "Doktor",
+            "phraseTr": "<u>Doktor</u>",
+            "type": "isim"
+          }
+        ]
+      },
+      {
+        "pId": "p13_pr3",
+        "words": [
+          {
+            "id": "p13_pr3_w1",
+            "ar": "سَأَلَهُ",
+            "root": "سأل",
+            "meaning": "Sordu (onun)",
+            "phraseTr": "<u>Sordu</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p13_pr3_w2",
+            "ar": "زَيْد",
+            "root": "زَيْد",
+            "meaning": "Zeyd (arkadaşı)",
+            "phraseTr": "<u>Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p13_pr3_w3",
+            "ar": "بِفُضُولٍ:",
+            "root": "فَضَلَ",
+            "meaning": "Merakla",
+            "phraseTr": "<u>Merakla</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p13_pr3_w4",
+            "ar": "«لِمَاذَا",
+            "root": "مَاذَا",
+            "meaning": "... için Ne?",
+            "phraseTr": "<u>... için Ne?</u>",
+            "type": "soru edatı"
+          },
+          {
+            "id": "p13_pr3_w5",
+            "ar": "تَحْمِلُ",
+            "root": "تحم",
+            "meaning": "تَحْمِلُ",
+            "phraseTr": "<u>تَحْمِلُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr3_w6",
+            "ar": "هَذِهِ",
+            "root": "ذه",
+            "meaning": "Bu (dişil)",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p13_pr3_w7",
+            "ar": "الحَقِيبَةَ",
+            "root": "حقب",
+            "meaning": "Çanta",
+            "phraseTr": "ahşap <u>çanta</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr3_w8",
+            "ar": "الخَشَبِيَّةَ",
+            "root": "خَشَبَ",
+            "meaning": "Ahşap",
+            "phraseTr": "<u>ahşap</u> çanta",
+            "type": "sıfat"
+          },
+          {
+            "id": "p13_pr3_w9",
+            "ar": "الثَّقِيلَةَ",
+            "root": "الث",
+            "meaning": "الثَّقِيلَةَ",
+            "phraseTr": "<u>الثَّقِيلَةَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr3_w10",
+            "ar": "وَأَنْتَ",
+            "root": "أَنْتَ",
+            "meaning": "Ve Sen",
+            "phraseTr": "<u>Ve Sen</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p13_pr3_w11",
+            "ar": "تَجْرِي",
+            "root": "جري",
+            "meaning": "Koşarsın",
+            "phraseTr": "<u>Koşarsın</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p13_pr3_w12",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p13_pr3_w13",
+            "ar": "الغَابَةِ؟»",
+            "root": "غَابَ",
+            "meaning": "Orman",
+            "phraseTr": "<u>ormanda</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr3_w14",
+            "ar": "عَدَّلَ",
+            "root": "عَدَلَ",
+            "meaning": "Düzeltti",
+            "phraseTr": "<u>Düzeltti</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p13_pr3_w15",
+            "ar": "طَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p13_pr3_w16",
+            "ar": "نَظَّارَتَهُ",
+            "root": "نَظَرَ",
+            "meaning": "Gözlüğünü",
+            "phraseTr": "<u>Gözlüğünü</u>",
+            "type": "isim + zamir"
+          },
+          {
+            "id": "p13_pr3_w17",
+            "ar": "وَابْتَسَمَ",
+            "root": "بسم",
+            "meaning": "Ve Gülümsedi",
+            "phraseTr": "<u>Ve Gülümsedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p13_pr3_w18",
+            "ar": "بِفَخْرٍ:",
+            "root": "فَخَرَ",
+            "meaning": "Gururla",
+            "phraseTr": "<u>Gururla</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p13_pr3_w19",
+            "ar": "«فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p13_pr3_w20",
+            "ar": "دَاخِلِ",
+            "root": "دخل",
+            "meaning": "iç",
+            "phraseTr": "<u>iç</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr3_w21",
+            "ar": "هَذِهِ",
+            "root": "ذه",
+            "meaning": "Bu (dişil)",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p13_pr3_w22",
+            "ar": "الحَقِيبَةِ",
+            "root": "حقب",
+            "meaning": "Çanta",
+            "phraseTr": "<u>Çanta</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr3_w23",
+            "ar": "تُوجَدُ",
+            "root": "وجد",
+            "meaning": "Bulunur, vardır",
+            "phraseTr": "<u>Bulunur, vardır</u>",
+            "type": "meçhul fiil"
+          },
+          {
+            "id": "p13_pr3_w24",
+            "ar": "أَدْوِيَةٌ",
+            "root": "دَوَى",
+            "meaning": "İlaçlar",
+            "phraseTr": "<u>ilaçlar</u> ve otlar",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p13_pr3_w25",
+            "ar": "وَأَعْشَابٌ",
+            "root": "عَشَبَ",
+            "meaning": "Ve Şifalı otlar",
+            "phraseTr": "ilaçlar ve <u>otlar</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p13_pr3_w26",
+            "ar": "نَادِرَةٌ.",
+            "root": "نَدَرَ",
+            "meaning": "Nadir, az bulunur",
+            "phraseTr": "<u>Nadir, az bulunur</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p13_pr3_w27",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p13_pr3_w28",
+            "ar": "هَذِهِ",
+            "root": "ذه",
+            "meaning": "Bu (dişil)",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p13_pr3_w29",
+            "ar": "الغَابَةِ",
+            "root": "غَابَ",
+            "meaning": "Orman",
+            "phraseTr": "<u>Orman</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr3_w30",
+            "ar": "الخَطِيرَةِ،",
+            "root": "خطر",
+            "meaning": "Tehlikeli",
+            "phraseTr": "<u>Tehlikeli</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p13_pr3_w31",
+            "ar": "الدَّوَاءُ",
+            "root": "دَوَى",
+            "meaning": "İlaç",
+            "phraseTr": "<u>İlaç</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr3_w32",
+            "ar": "أَغْلَى",
+            "root": "غَلَا",
+            "meaning": "Daha değerli, pahalı",
+            "phraseTr": "<u>Daha değerli, pahalı</u>",
+            "type": "ismi tafdil"
+          },
+          {
+            "id": "p13_pr3_w33",
+            "ar": "مِنَ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>...-den</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p13_pr3_w34",
+            "ar": "الذَّهَبِ!»",
+            "root": "ذَهَبَ",
+            "meaning": "Altın",
+            "phraseTr": "<u>altından</u> daha değerli",
+            "type": "isim"
+          }
+        ]
+      },
+      {
+        "pId": "p13_pr4",
+        "words": [
+          {
+            "id": "p13_pr4_w1",
+            "ar": "حَكَى",
+            "root": "حَكَى",
+            "meaning": "Anlattı",
+            "phraseTr": "<u>Anlattı</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p13_pr4_w2",
+            "ar": "لَهُمَا",
+            "root": "لهم",
+            "meaning": "لَهُمَا",
+            "phraseTr": "<u>لَهُمَا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr4_w3",
+            "ar": "طَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p13_pr4_w4",
+            "ar": "عَنْ",
+            "root": "عَنْ",
+            "meaning": "-den, hakkında",
+            "phraseTr": "<u>-den, hakkında</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p13_pr4_w5",
+            "ar": "قَرْيَتِهِ",
+            "root": "قري",
+            "meaning": "قَرْيَتِهِ",
+            "phraseTr": "uzak <u>köyü</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p13_pr4_w6",
+            "ar": "البَعِيدَةِ:",
+            "root": "بعد",
+            "meaning": "Uzak",
+            "phraseTr": "<u>uzak</u> köyü",
+            "type": "sıfat"
+          },
+          {
+            "id": "p13_pr4_w7",
+            "ar": "«فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>...-de</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p13_pr4_w8",
+            "ar": "قَرْيَتِي",
+            "root": "قري",
+            "meaning": "Köyüm",
+            "phraseTr": "<u>köyümde</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr4_w9",
+            "ar": "مَرِضَ",
+            "root": "مَرِضَ",
+            "meaning": "Hastalandı",
+            "phraseTr": "<u>Hastalandı</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p13_pr4_w10",
+            "ar": "كَثِيرٌ",
+            "root": "كَثُرَ",
+            "meaning": "Çok, birçok",
+            "phraseTr": "<u>Çok, birçok</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p13_pr4_w11",
+            "ar": "مِنَ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p13_pr4_w12",
+            "ar": "النَّاسِ",
+            "root": "نوس",
+            "meaning": "İnsanlar",
+            "phraseTr": "<u>İnsanlar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p13_pr4_w13",
+            "ar": "بِمَرَضٍ",
+            "root": "مَرِضَ",
+            "meaning": "Bir hastalıkla",
+            "phraseTr": "<u>Bir hastalıkla</u>",
+            "type": "harf + isim"
+          },
+          {
+            "id": "p13_pr4_w14",
+            "ar": "صَعْبٍ.",
+            "root": "صَعُبَ",
+            "meaning": "Zor, çetin",
+            "phraseTr": "<u>Zor, çetin</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p13_pr4_w15",
+            "ar": "أَنَا",
+            "root": "أَنَا",
+            "meaning": "Ben",
+            "phraseTr": "<u>Ben</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p13_pr4_w16",
+            "ar": "جِئْتُ",
+            "root": "جيأ",
+            "meaning": "Geldim",
+            "phraseTr": "<u>Geldim</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p13_pr4_w17",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p13_pr4_w18",
+            "ar": "هَذِهِ",
+            "root": "ذه",
+            "meaning": "Bu (dişil)",
+            "phraseTr": "<u>Bu</u> yarışma",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p13_pr4_w19",
+            "ar": "المُسَابَقَةِ",
+            "root": "سَبَقَ",
+            "meaning": "Yarışma",
+            "phraseTr": "Bu <u>yarışma</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr4_w20",
+            "ar": "لأَحْصُلَ",
+            "root": "حَصَلَ",
+            "meaning": "Kazanmak için",
+            "phraseTr": "<u>Kazanmak için</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p13_pr4_w21",
+            "ar": "عَلَى",
+            "root": "عَلَى",
+            "meaning": "üzerinde, -e",
+            "phraseTr": "<u>üzerinde, -e</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p13_pr4_w22",
+            "ar": "لَقَبِ",
+            "root": "لقب",
+            "meaning": "Unvan",
+            "phraseTr": "şampiyon <u>unvanı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr4_w23",
+            "ar": "البَطَلِ،",
+            "root": "بطل",
+            "meaning": "Şampiyon",
+            "phraseTr": "<u>şampiyon</u> unvanı",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr4_w24",
+            "ar": "وَأَسْتَطِيعَ",
+            "root": "طوع",
+            "meaning": "Ve Güç yetirebilirim",
+            "phraseTr": "<u>Ve Güç yetirebilirim</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p13_pr4_w25",
+            "ar": "شِرَاءَ",
+            "root": "شَرَى",
+            "meaning": "Satın almak",
+            "phraseTr": "<u>Satın almak</u>",
+            "type": "mastar"
+          },
+          {
+            "id": "p13_pr4_w26",
+            "ar": "الأَدْوِيَةِ",
+            "root": "دَوَى",
+            "meaning": "İlaçlar",
+            "phraseTr": "<u>İlaçlar</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p13_pr4_w27",
+            "ar": "لِكُلِّ",
+            "root": "كلل",
+            "meaning": "... için bütün, her",
+            "phraseTr": "<u>... için bütün, her</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr4_w28",
+            "ar": "الفُقَرَاءِ.»",
+            "root": "فَقَرَ",
+            "meaning": "Fakirler, yoksullar",
+            "phraseTr": "<u>Fakirler, yoksullar</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p13_pr4_w29",
+            "ar": "شَعَرَ",
+            "root": "شعر",
+            "meaning": "Hissetti",
+            "phraseTr": "<u>Hissetti</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p13_pr4_w30",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p13_pr4_w31",
+            "ar": "بِإِعْجَابٍ",
+            "root": "عجب",
+            "meaning": "hayranlıkla",
+            "phraseTr": "<u>hayranlıkla</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p13_pr4_w32",
+            "ar": "كَبِيرٍ",
+            "root": "كبر",
+            "meaning": "Büyük, yaşlı",
+            "phraseTr": "<u>Büyük, yaşlı</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p13_pr4_w33",
+            "ar": "بِشَجَاعَةِ",
+            "root": "شَجُعَ",
+            "meaning": "Cesareti",
+            "phraseTr": "<u>Cesareti</u>",
+            "type": "harf + isim"
+          },
+          {
+            "id": "p13_pr4_w34",
+            "ar": "طَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p13_pr4_w35",
+            "ar": "وَطِيبَةِ",
+            "root": "طَابَ",
+            "meaning": "Ve İyilik, temizlik",
+            "phraseTr": "<u>Ve İyilik, temizlik</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p13_pr4_w36",
+            "ar": "قَلْبِهِ.",
+            "root": "قلب",
+            "meaning": "Kalbi",
+            "phraseTr": "<u>Kalbi</u>",
+            "type": "isim"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pageNum": 14,
+    "title": "الصَّفْحَةُ الرَّابِعَةَ عَشْرَةَ (14)",
+    "paragraphs": [
+      {
+        "pId": "p14_pr1",
+        "words": [
+          {
+            "id": "p14_pr1_w1",
+            "ar": "فَجْأَةً،",
+            "root": "فجأ",
+            "meaning": "ansızın, birdenbire",
+            "phraseTr": "<u>ansızın, birdenbire</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p14_pr1_w2",
+            "ar": "ارْتَفَعَتْ",
+            "root": "رَفَعَ",
+            "meaning": "Yükseldi",
+            "phraseTr": "<u>Yükseldi</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p14_pr1_w3",
+            "ar": "أَصْوَاتُ",
+            "root": "صَوَّتَ",
+            "meaning": "Sesler",
+            "phraseTr": "<u>Sesler</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p14_pr1_w4",
+            "ar": "صُرَاخٍ",
+            "root": "صَرَخَ",
+            "meaning": "Çığlık",
+            "phraseTr": "<u>Çığlık</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr1_w5",
+            "ar": "وَاسْتِغَاثَةٍ",
+            "root": "غَاثَ",
+            "meaning": "Ve Yardım feryadı",
+            "phraseTr": "<u>Ve Yardım feryadı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr1_w6",
+            "ar": "بَيْنَ",
+            "root": "بين",
+            "meaning": "بَيْنَ",
+            "phraseTr": "<u>بَيْنَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p14_pr1_w7",
+            "ar": "الأَشْجَارِ:",
+            "root": "شجر",
+            "meaning": "Ağaçlar",
+            "phraseTr": "<u>Ağaçlar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p14_pr1_w8",
+            "ar": "«أَنْقِذُونِي!",
+            "root": "نَقَذَ",
+            "meaning": "Kurtarın beni!",
+            "phraseTr": "<u>Kurtarın beni!</u>",
+            "type": "emir + zamir"
+          },
+          {
+            "id": "p14_pr1_w9",
+            "ar": "النَّجْدَةَ!",
+            "root": "نَجَدَ",
+            "meaning": "İmdat!",
+            "phraseTr": "<u>İmdat!</u>",
+            "type": "isim/ünlem"
+          },
+          {
+            "id": "p14_pr1_w10",
+            "ar": "أَنَا",
+            "root": "أَنَا",
+            "meaning": "Ben",
+            "phraseTr": "<u>Ben</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p14_pr1_w11",
+            "ar": "هُنَا",
+            "root": "هنا",
+            "meaning": "burada, buraya",
+            "phraseTr": "<u>burada, buraya</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p14_pr1_w12",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p14_pr1_w13",
+            "ar": "الوَرْطَةِ!»",
+            "root": "وَرَطَ",
+            "meaning": "Tuzak, zor durum",
+            "phraseTr": "<u>Tuzak, zor durum</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr1_w14",
+            "ar": "تَوَقَّفَ",
+            "root": "وَقَفَ",
+            "meaning": "Durdu",
+            "phraseTr": "<u>Durdu</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p14_pr1_w15",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p14_pr1_w16",
+            "ar": "فَوْراً",
+            "root": "فور",
+            "meaning": "hemen, derhal",
+            "phraseTr": "<u>hemen, derhal</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p14_pr1_w17",
+            "ar": "وَقَالَ:",
+            "root": "قول",
+            "meaning": "Ve Dedi",
+            "phraseTr": "<u>Ve Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p14_pr1_w18",
+            "ar": "«اسْمَعَا!",
+            "root": "سَمِعَ",
+            "meaning": "İkiniz dinleyin!",
+            "phraseTr": "<u>İkiniz dinleyin!</u>",
+            "type": "emir (tesniye)"
+          },
+          {
+            "id": "p14_pr1_w19",
+            "ar": "يُوجَدُ",
+            "root": "وجد",
+            "meaning": "Bulunur, vardır",
+            "phraseTr": "<u>Bulunur, vardır</u>",
+            "type": "meçhul fiil"
+          },
+          {
+            "id": "p14_pr1_w20",
+            "ar": "شَخْصٌ",
+            "root": "شخص",
+            "meaning": "Kişi",
+            "phraseTr": "<u>Kişi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr1_w21",
+            "ar": "يَطْلُبُ",
+            "root": "طَلَبَ",
+            "meaning": "İstiyor",
+            "phraseTr": "<u>İstiyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p14_pr1_w22",
+            "ar": "المُسَاعَدَةَ!»",
+            "root": "سَعَدَ",
+            "meaning": "Yardım",
+            "phraseTr": "<u>Yardım</u>",
+            "type": "isim"
+          }
+        ]
+      },
+      {
+        "pId": "p14_pr2",
+        "words": [
+          {
+            "id": "p14_pr2_w1",
+            "ar": "أَمْسَكَ",
+            "root": "أمس",
+            "meaning": "أَمْسَكَ",
+            "phraseTr": "<u>أَمْسَكَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p14_pr2_w2",
+            "ar": "زَيْد",
+            "root": "زَيْد",
+            "meaning": "Zeyd (arkadaşı)",
+            "phraseTr": "<u>Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p14_pr2_w3",
+            "ar": "بِذِرَاعِ",
+            "root": "بذر",
+            "meaning": "بِذِرَاعِ",
+            "phraseTr": "<u>بِذِرَاعِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p14_pr2_w4",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p14_pr2_w5",
+            "ar": "بِقُوَّةٍ",
+            "root": "قوو",
+            "meaning": "... ile Güç",
+            "phraseTr": "<u>... ile Güç</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr2_w6",
+            "ar": "وَقَالَ:",
+            "root": "قول",
+            "meaning": "Ve Dedi",
+            "phraseTr": "<u>Ve Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p14_pr2_w7",
+            "ar": "«تَمَهَّلْ",
+            "root": "مَهَلَ",
+            "meaning": "Sakin ol, bekle!",
+            "phraseTr": "<u>Sakin ol, bekle!</u>",
+            "type": "emir fiili"
+          },
+          {
+            "id": "p14_pr2_w8",
+            "ar": "يَا",
+            "root": "يَا",
+            "meaning": "Ey!",
+            "phraseTr": "<u>Ey!</u>",
+            "type": "nida edatı"
+          },
+          {
+            "id": "p14_pr2_w9",
+            "ar": "رَامِي!",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p14_pr2_w10",
+            "ar": "انْظُرْ",
+            "root": "انظ",
+            "meaning": "انْظُرْ",
+            "phraseTr": "<u>انْظُرْ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p14_pr2_w11",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p14_pr2_w12",
+            "ar": "الأَرْضِ",
+            "root": "أرض",
+            "meaning": "Yer, zemin",
+            "phraseTr": "<u>Yer, zemin</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr2_w13",
+            "ar": "جَيِّداً.",
+            "root": "جيد",
+            "meaning": "جَيِّداً",
+            "phraseTr": "<u>جَيِّداً</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p14_pr2_w14",
+            "ar": "لاَ",
+            "root": "لاَ",
+            "meaning": "değil, -mez, -maz",
+            "phraseTr": "<u>değil, -mez, -maz</u>",
+            "type": "nefy edatı"
+          },
+          {
+            "id": "p14_pr2_w15",
+            "ar": "تُوجَدُ",
+            "root": "وجد",
+            "meaning": "Bulunur, vardır",
+            "phraseTr": "<u>Bulunur, vardır</u>",
+            "type": "meçhul fiil"
+          },
+          {
+            "id": "p14_pr2_w16",
+            "ar": "أَيُّ",
+            "root": "أَيّ",
+            "meaning": "Hangi, herhangi bir",
+            "phraseTr": "<u>Hangi, herhangi bir</u>",
+            "type": "soru/işaret ismi"
+          },
+          {
+            "id": "p14_pr2_w17",
+            "ar": "آثَارِ",
+            "root": "أَثَرَ",
+            "meaning": "İzler",
+            "phraseTr": "ayak <u>izleri</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p14_pr2_w18",
+            "ar": "أَقْدَامٍ",
+            "root": "أقد",
+            "meaning": "أَقْدَامٍ",
+            "phraseTr": "<u>ayak</u> izleri",
+            "type": "kelime"
+          },
+          {
+            "id": "p14_pr2_w19",
+            "ar": "بَشَرِيَّةٍ",
+            "root": "بَشَرَ",
+            "meaning": "İnsana ait",
+            "phraseTr": "<u>insan</u> ayakları",
+            "type": "sıfat"
+          },
+          {
+            "id": "p14_pr2_w20",
+            "ar": "هُنَا!",
+            "root": "هنا",
+            "meaning": "burada, buraya",
+            "phraseTr": "<u>burada, buraya</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p14_pr2_w21",
+            "ar": "هَذَا",
+            "root": "ذا",
+            "meaning": "Bu",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p14_pr2_w22",
+            "ar": "صَوْتُ",
+            "root": "صوت",
+            "meaning": "Sesi",
+            "phraseTr": "<u>Sesi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr2_w23",
+            "ar": "طَائِرِ",
+            "root": "طَارَ",
+            "meaning": "Kuş",
+            "phraseTr": "sis <u>kuşu</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr2_w24",
+            "ar": "الضَّبَابِ",
+            "root": "ضَبَّ",
+            "meaning": "Sis",
+            "phraseTr": "<u>sis</u> kuşu",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr2_w25",
+            "ar": "المُخَادِعِ؛",
+            "root": "خَدَعَ",
+            "meaning": "Hilekar",
+            "phraseTr": "<u>Hilekar</u>",
+            "type": "ism-i fail"
+          },
+          {
+            "id": "p14_pr2_w26",
+            "ar": "يُقَلِّدُ",
+            "root": "قَلَّدَ",
+            "meaning": "Taklit ediyor",
+            "phraseTr": "<u>Taklit ediyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p14_pr2_w27",
+            "ar": "بُكَاءَ",
+            "root": "بَكَى",
+            "meaning": "Ağlama",
+            "phraseTr": "çocuk <u>ağlaması</u>",
+            "type": "mastar"
+          },
+          {
+            "id": "p14_pr2_w28",
+            "ar": "الأَطْفَالِ",
+            "root": "طفل",
+            "meaning": "Çocuklar",
+            "phraseTr": "<u>çocuk</u> ağlaması",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p14_pr2_w29",
+            "ar": "لِيَسْحَبَ",
+            "root": "سَحَبَ",
+            "meaning": "Çekmek için",
+            "phraseTr": "<u>Çekmek için</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p14_pr2_w30",
+            "ar": "النَّاسَ",
+            "root": "نوس",
+            "meaning": "İnsanlar",
+            "phraseTr": "<u>İnsanlar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p14_pr2_w31",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p14_pr2_w32",
+            "ar": "حُفْرَةِ",
+            "root": "حَفَرَ",
+            "meaning": "Çukur",
+            "phraseTr": "bitkiler <u>çukuru</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr2_w33",
+            "ar": "النَّبَاتَاتِ",
+            "root": "نَبَتَ",
+            "meaning": "Bitkiler",
+            "phraseTr": "<u>bitkiler</u> çukuru",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p14_pr2_w34",
+            "ar": "الآكِلَةِ!»",
+            "root": "أَكَلَ",
+            "meaning": "Etobur, yiyen",
+            "phraseTr": "<u>etobur</u> bitkiler",
+            "type": "sıfat"
+          }
+        ]
+      },
+      {
+        "pId": "p14_pr3",
+        "words": [
+          {
+            "id": "p14_pr3_w1",
+            "ar": "وَضَعَ",
+            "root": "وضع",
+            "meaning": "Koydu",
+            "phraseTr": "<u>Koydu</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p14_pr3_w2",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p14_pr3_w3",
+            "ar": "طَاقَةَ",
+            "root": "طوق",
+            "meaning": "Enerjisini",
+            "phraseTr": "Çi <u>enerjisi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr3_w4",
+            "ar": "التْشِي",
+            "root": "تْشِي",
+            "meaning": "Çi enerjisi",
+            "phraseTr": "<u>Çi</u> enerjisi",
+            "type": "terim"
+          },
+          {
+            "id": "p14_pr3_w5",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p14_pr3_w6",
+            "ar": "أُذُنَيْهِ",
+            "root": "أَذِنَ",
+            "meaning": "İki kulağı",
+            "phraseTr": "<u>İki kulağı</u>",
+            "type": "isim (tesniye) + zamir"
+          },
+          {
+            "id": "p14_pr3_w7",
+            "ar": "وَعَيْنَيْهِ",
+            "root": "عين",
+            "meaning": "Ve İki gözü",
+            "phraseTr": "<u>Ve İki gözü</u>",
+            "type": "tesniye isim"
+          },
+          {
+            "id": "p14_pr3_w8",
+            "ar": "كَمَا",
+            "root": "ما",
+            "meaning": "... gibi ne, şey",
+            "phraseTr": "<u>... gibi ne, şey</u>",
+            "type": "soru / nefy"
+          },
+          {
+            "id": "p14_pr3_w9",
+            "ar": "عَلَّمَهُ",
+            "root": "علم",
+            "meaning": "Ona öğretti",
+            "phraseTr": "<u>Ona öğretti</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p14_pr3_w10",
+            "ar": "جَدُّهُ.",
+            "root": "جدد",
+            "meaning": "Dedesi",
+            "phraseTr": "<u>Dedesi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr3_w11",
+            "ar": "رَكَّزَ",
+            "root": "رَكَزَ",
+            "meaning": "Odakladı",
+            "phraseTr": "<u>Odakladı</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p14_pr3_w12",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p14_pr3_w13",
+            "ar": "سَمْعَهُ،",
+            "root": "سَمِعَ",
+            "meaning": "İşitmesini",
+            "phraseTr": "<u>İşitmesini</u>",
+            "type": "isim + zamir"
+          },
+          {
+            "id": "p14_pr3_w14",
+            "ar": "فَرَأَى",
+            "root": "رأي",
+            "meaning": "Derhal Gördü",
+            "phraseTr": "<u>Derhal Gördü</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p14_pr3_w15",
+            "ar": "مِنْ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p14_pr3_w16",
+            "ar": "خِلاَلِ",
+            "root": "خلا",
+            "meaning": "خِلاَلِ",
+            "phraseTr": "<u>خِلاَلِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p14_pr3_w17",
+            "ar": "الضَّبَابِ",
+            "root": "ضَبَّ",
+            "meaning": "Sis",
+            "phraseTr": "<u>Sis</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr3_w18",
+            "ar": "طَائِراً",
+            "root": "طَارَ",
+            "meaning": "Bir kuş",
+            "phraseTr": "büyük bir <u>kuş</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr3_w19",
+            "ar": "كَبِيراً",
+            "root": "كبر",
+            "meaning": "Büyük",
+            "phraseTr": "<u>büyük</u> bir kuş",
+            "type": "sıfat"
+          },
+          {
+            "id": "p14_pr3_w20",
+            "ar": "لَهُ",
+            "root": "لِ",
+            "meaning": "Ona / onun için",
+            "phraseTr": "<u>Ona</u>",
+            "type": "harf-i cer + zamir"
+          },
+          {
+            "id": "p14_pr3_w21",
+            "ar": "رِيشٌ",
+            "root": "رَاشَ",
+            "meaning": "Tüy",
+            "phraseTr": "gri <u>tüy</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr3_w22",
+            "ar": "رَمَادِيٌّ",
+            "root": "رَمَدَ",
+            "meaning": "Gri",
+            "phraseTr": "<u>gri</u> tüy",
+            "type": "sıfat"
+          },
+          {
+            "id": "p14_pr3_w23",
+            "ar": "يَجْلِسُ",
+            "root": "جلس",
+            "meaning": "Oturur",
+            "phraseTr": "<u>Oturur</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p14_pr3_w24",
+            "ar": "فَوْقَ",
+            "root": "فوق",
+            "meaning": "üstünde, üzerine",
+            "phraseTr": "<u>üstünde, üzerine</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p14_pr3_w25",
+            "ar": "غُصْنٍ",
+            "root": "غَصَنَ",
+            "meaning": "Ağaç dalı",
+            "phraseTr": "yüksek bir <u>dal</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr3_w26",
+            "ar": "عَالٍ",
+            "root": "علو",
+            "meaning": "Yüksek",
+            "phraseTr": "<u>yüksek</u> bir dal",
+            "type": "sıfat"
+          },
+          {
+            "id": "p14_pr3_w27",
+            "ar": "وَيُحَرِّكُ",
+            "root": "ويح",
+            "meaning": "وَيُحَرِّكُ",
+            "phraseTr": "<u>وَيُحَرِّكُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p14_pr3_w28",
+            "ar": "مِنْقَارَهُ",
+            "root": "نَقَرَ",
+            "meaning": "Gagasını",
+            "phraseTr": "<u>Gagasını</u>",
+            "type": "isim + zamir"
+          },
+          {
+            "id": "p14_pr3_w29",
+            "ar": "بِمَكْرٍ!",
+            "root": "مَكَرَ",
+            "meaning": "Kurnazca",
+            "phraseTr": "<u>Kurnazca</u>",
+            "type": "zarf"
+          }
+        ]
+      },
+      {
+        "pId": "p14_pr4",
+        "words": [
+          {
+            "id": "p14_pr4_w1",
+            "ar": "قَالَ",
+            "root": "قول",
+            "meaning": "Dedi",
+            "phraseTr": "<u>Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p14_pr4_w2",
+            "ar": "طَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p14_pr4_w3",
+            "ar": "وَهُوَ",
+            "root": "هُوَ",
+            "meaning": "Ve O",
+            "phraseTr": "<u>Ve O</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p14_pr4_w4",
+            "ar": "يَمْسَحُ",
+            "root": "مَسَحَ",
+            "meaning": "Siliyor",
+            "phraseTr": "<u>Siliyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p14_pr4_w5",
+            "ar": "عَرَقَهُ:",
+            "root": "عَرِقَ",
+            "meaning": "Terini",
+            "phraseTr": "<u>Terini</u>",
+            "type": "isim + zamir"
+          },
+          {
+            "id": "p14_pr4_w6",
+            "ar": "«يَا",
+            "root": "يَا",
+            "meaning": "Ey!",
+            "phraseTr": "<u>Ey!</u>",
+            "type": "nida edatı"
+          },
+          {
+            "id": "p14_pr4_w7",
+            "ar": "إِلَهِي!",
+            "root": "إله",
+            "meaning": "إِلَهِي",
+            "phraseTr": "<u>إِلَهِي</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p14_pr4_w8",
+            "ar": "لَوْ",
+            "root": "لَوْ",
+            "meaning": "Eğer, şayet",
+            "phraseTr": "<u>Eğer, şayet</u>",
+            "type": "şart edatı"
+          },
+          {
+            "id": "p14_pr4_w9",
+            "ar": "ذَهَبْنَا",
+            "root": "ذَهَبَ",
+            "meaning": "Gitti (bizim)",
+            "phraseTr": "<u>Gitti</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p14_pr4_w10",
+            "ar": "هُنَاكَ",
+            "root": "هناك",
+            "meaning": "orada, oraya",
+            "phraseTr": "<u>orada, oraya</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p14_pr4_w11",
+            "ar": "لَكُنَّا",
+            "root": "لِ",
+            "meaning": "Sana / senin için (bizim)",
+            "phraseTr": "<u>Sana</u>",
+            "type": "harf-i cer + zamir"
+          },
+          {
+            "id": "p14_pr4_w12",
+            "ar": "الآنَ",
+            "root": "أون",
+            "meaning": "şimdi, şu an",
+            "phraseTr": "<u>şimdi, şu an</u>",
+            "type": "zaman zarfı"
+          },
+          {
+            "id": "p14_pr4_w13",
+            "ar": "طَعَاماً",
+            "root": "طَعِمَ",
+            "meaning": "Yiyecek, yem",
+            "phraseTr": "<u>Yiyecek, yem</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr4_w14",
+            "ar": "لِلنَّبَاتَاتِ!",
+            "root": "للن",
+            "meaning": "لِلنَّبَاتَاتِ",
+            "phraseTr": "<u>لِلنَّبَاتَاتِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p14_pr4_w15",
+            "ar": "شُكْراً",
+            "root": "شَكَرَ",
+            "meaning": "Teşekkürler",
+            "phraseTr": "<u>Teşekkürler</u>",
+            "type": "mastar/ünlem"
+          },
+          {
+            "id": "p14_pr4_w16",
+            "ar": "لَكَ",
+            "root": "لِ",
+            "meaning": "Sana / senin için",
+            "phraseTr": "<u>Sana</u>",
+            "type": "harf-i cer + zamir"
+          },
+          {
+            "id": "p14_pr4_w17",
+            "ar": "يَا",
+            "root": "يَا",
+            "meaning": "Ey!",
+            "phraseTr": "<u>Ey!</u>",
+            "type": "nida edatı"
+          },
+          {
+            "id": "p14_pr4_w18",
+            "ar": "زَيْد،",
+            "root": "زَيْد",
+            "meaning": "Zeyd (arkadaşı)",
+            "phraseTr": "<u>Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p14_pr4_w19",
+            "ar": "أَنْتَ",
+            "root": "أَنْتَ",
+            "meaning": "Sen",
+            "phraseTr": "<u>Sen</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p14_pr4_w20",
+            "ar": "ذَكِيٌّ",
+            "root": "ذَكَا",
+            "meaning": "Zeki",
+            "phraseTr": "<u>Zeki</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p14_pr4_w21",
+            "ar": "جِدّاً!»",
+            "root": "جدد",
+            "meaning": "çok",
+            "phraseTr": "<u>çok</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p14_pr4_w22",
+            "ar": "قَالَ",
+            "root": "قول",
+            "meaning": "Dedi",
+            "phraseTr": "<u>Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p14_pr4_w23",
+            "ar": "زَيْد",
+            "root": "زَيْد",
+            "meaning": "Zeyd (arkadaşı)",
+            "phraseTr": "<u>Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p14_pr4_w24",
+            "ar": "بِحَذَرٍ:",
+            "root": "حَذِرَ",
+            "meaning": "Dikkatle, tedbirlice",
+            "phraseTr": "<u>Dikkatle, tedbirlice</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p14_pr4_w25",
+            "ar": "«هَيَّا",
+            "root": "هَيَّا",
+            "meaning": "Haydi!",
+            "phraseTr": "<u>Haydi!</u>",
+            "type": "fiil-ünlem"
+          },
+          {
+            "id": "p14_pr4_w26",
+            "ar": "نُسْرِعْ،",
+            "root": "سَرُعَ",
+            "meaning": "Acele edelim",
+            "phraseTr": "<u>Acele edelim</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p14_pr4_w27",
+            "ar": "الحَكَمُ",
+            "root": "حكم",
+            "meaning": "Hakem",
+            "phraseTr": "<u>Hakem</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p14_pr4_w28",
+            "ar": "سَاجِد",
+            "root": "سَجَدَ",
+            "meaning": "Sacid (sınav hakemi)",
+            "phraseTr": "<u>Sacid</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p14_pr4_w29",
+            "ar": "يَبْتَعِدُ",
+            "root": "بَعُدَ",
+            "meaning": "Uzaklaşıyor",
+            "phraseTr": "<u>Uzaklaşıyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p14_pr4_w30",
+            "ar": "عَنَّا!»",
+            "root": "عَنْ",
+            "meaning": "Bizden",
+            "phraseTr": "<u>Bizden</u>",
+            "type": "harf + zamir"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pageNum": 15,
+    "title": "الصَّفْحَةُ الخَامِسَةَ عَشْرَةَ (15)",
+    "paragraphs": [
+      {
+        "pId": "p15_pr1",
+        "words": [
+          {
+            "id": "p15_pr1_w1",
+            "ar": "وَبَيْنَمَا",
+            "root": "بَيْنَ",
+            "meaning": "Ve İken, o esnada",
+            "phraseTr": "<u>Ve İken, o esnada</u>",
+            "type": "zaman zarfı"
+          },
+          {
+            "id": "p15_pr1_w2",
+            "ar": "كَانَ",
+            "root": "كون",
+            "meaning": "İdi, oldu",
+            "phraseTr": "<u>İdi, oldu</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p15_pr1_w3",
+            "ar": "الأَصْدِقَاءُ",
+            "root": "صَدَقَ",
+            "meaning": "Arkadaşlar, dostlar",
+            "phraseTr": "<u>Arkadaşlar, dostlar</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p15_pr1_w4",
+            "ar": "الثَّلاَثَةُ",
+            "root": "ثَلَثَ",
+            "meaning": "Üçü",
+            "phraseTr": "<u>Üçü</u>",
+            "type": "sayı"
+          },
+          {
+            "id": "p15_pr1_w5",
+            "ar": "يَجْرُونَ،",
+            "root": "جري",
+            "meaning": "Koşarlar",
+            "phraseTr": "<u>Koşarlar</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p15_pr1_w6",
+            "ar": "سَمِعُوا",
+            "root": "سمع",
+            "meaning": "سَمِعُوا",
+            "phraseTr": "<u>سَمِعُوا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p15_pr1_w7",
+            "ar": "صَوْتَ",
+            "root": "صوت",
+            "meaning": "Sesi",
+            "phraseTr": "<u>Sesi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr1_w8",
+            "ar": "ضَرْبٍ",
+            "root": "ضَرَبَ",
+            "meaning": "Darbe, çarpışma",
+            "phraseTr": "<u>Darbe, çarpışma</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr1_w9",
+            "ar": "قَوِيٍّ",
+            "root": "قوو",
+            "meaning": "Güçlü",
+            "phraseTr": "<u>Güçlü</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr1_w10",
+            "ar": "خَلْفَهُمْ",
+            "root": "خلف",
+            "meaning": "خَلْفَهُمْ",
+            "phraseTr": "<u>خَلْفَهُمْ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p15_pr1_w11",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p15_pr1_w12",
+            "ar": "الضَّبَابِ.",
+            "root": "ضَبَّ",
+            "meaning": "Sis",
+            "phraseTr": "<u>Sis</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr1_w13",
+            "ar": "نَظَرَ",
+            "root": "نظر",
+            "meaning": "Baktı",
+            "phraseTr": "<u>Baktı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p15_pr1_w14",
+            "ar": "طَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p15_pr1_w15",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p15_pr1_w16",
+            "ar": "الوَرَاءِ،",
+            "root": "الو",
+            "meaning": "الوَرَاءِ",
+            "phraseTr": "<u>الوَرَاءِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p15_pr1_w17",
+            "ar": "فَارْتَجَفَتْ",
+            "root": "رَجَفَ",
+            "meaning": "Titredi",
+            "phraseTr": "<u>Titredi</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p15_pr1_w18",
+            "ar": "رُكْبَتَاهُ",
+            "root": "رَكَبَ",
+            "meaning": "İki dizi",
+            "phraseTr": "<u>İki dizi</u>",
+            "type": "isim (tesniye) + zamir"
+          },
+          {
+            "id": "p15_pr1_w19",
+            "ar": "وَتَوَقَّفَ",
+            "root": "وَقَفَ",
+            "meaning": "Ve Durdu",
+            "phraseTr": "<u>Ve Durdu</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p15_pr1_w20",
+            "ar": "عَنِ",
+            "root": "عَنْ",
+            "meaning": "-den, hakkında",
+            "phraseTr": "<u>-den, hakkında</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p15_pr1_w21",
+            "ar": "الحَرَكَةِ:",
+            "root": "حرك",
+            "meaning": "Hareket",
+            "phraseTr": "<u>Hareket</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr1_w22",
+            "ar": "«أُوه",
+            "root": "أُوه",
+            "meaning": "Oh.. (iç çekme)",
+            "phraseTr": "<u>Oh..</u>",
+            "type": "ünlem"
+          },
+          {
+            "id": "p15_pr1_w23",
+            "ar": "لاَ..",
+            "root": "لاَ",
+            "meaning": "değil, -mez, -maz",
+            "phraseTr": "<u>değil, -mez, -maz</u>",
+            "type": "nefy edatı"
+          },
+          {
+            "id": "p15_pr1_w24",
+            "ar": "انْظُرُوا",
+            "root": "نظر",
+            "meaning": "Bakın!",
+            "phraseTr": "<u>Bakın!</u>",
+            "type": "emir fiili"
+          },
+          {
+            "id": "p15_pr1_w25",
+            "ar": "مَنْ",
+            "root": "من",
+            "meaning": "kim, her kim",
+            "phraseTr": "<u>kim, her kim</u>",
+            "type": "şart / soru"
+          },
+          {
+            "id": "p15_pr1_w26",
+            "ar": "هُنَاكَ!»",
+            "root": "هناك",
+            "meaning": "orada, oraya",
+            "phraseTr": "<u>orada, oraya</u>",
+            "type": "mekan zarfı"
+          }
+        ]
+      },
+      {
+        "pId": "p15_pr2",
+        "words": [
+          {
+            "id": "p15_pr2_w1",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p15_pr2_w2",
+            "ar": "مَسَاحَةٍ",
+            "root": "مَسَحَ",
+            "meaning": "Açıklık, alan",
+            "phraseTr": "<u>Açıklık, alan</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr2_w3",
+            "ar": "صَغِيرَةٍ",
+            "root": "صغر",
+            "meaning": "Küçük",
+            "phraseTr": "<u>Küçük</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr2_w4",
+            "ar": "خَالِيَةٍ",
+            "root": "خَلَا",
+            "meaning": "Boş, arınmış",
+            "phraseTr": "<u>Boş, arınmış</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr2_w5",
+            "ar": "مِنَ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p15_pr2_w6",
+            "ar": "الشَّجَرِ،",
+            "root": "شَجَرَ",
+            "meaning": "Ağaçlar",
+            "phraseTr": "<u>Ağaçlar</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr2_w7",
+            "ar": "كَانَ",
+            "root": "كون",
+            "meaning": "İdi, oldu",
+            "phraseTr": "<u>İdi, oldu</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p15_pr2_w8",
+            "ar": "يَقِفُ",
+            "root": "وقف",
+            "meaning": "Durur",
+            "phraseTr": "<u>Durur</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p15_pr2_w9",
+            "ar": "الشَّابُّ",
+            "root": "شبب",
+            "meaning": "Genç",
+            "phraseTr": "<u>Genç</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr2_w10",
+            "ar": "ذُو",
+            "root": "ذُو",
+            "meaning": "Sahibi olan",
+            "phraseTr": "<u>Sahibi olan</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr2_w11",
+            "ar": "المَلاَبِسِ",
+            "root": "لبس",
+            "meaning": "Elbiseler",
+            "phraseTr": "<u>Elbiseler</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p15_pr2_w12",
+            "ar": "البَيْضَاءِ",
+            "root": "بيض",
+            "meaning": "Beyaz",
+            "phraseTr": "<u>Beyaz</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr2_w13",
+            "ar": "(رَقْمُ",
+            "root": "رقم",
+            "meaning": "Numaralı",
+            "phraseTr": "<u>Numaralı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr2_w14",
+            "ar": "44)،",
+            "root": "",
+            "meaning": "44)،",
+            "phraseTr": "44)،",
+            "type": "sayı/noktalama"
+          },
+          {
+            "id": "p15_pr2_w15",
+            "ar": "وَاسْمُهُ",
+            "root": "واس",
+            "meaning": "وَاسْمُهُ",
+            "phraseTr": "<u>وَاسْمُهُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p15_pr2_w16",
+            "ar": "قَيْس.",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p15_pr2_w17",
+            "ar": "كَانَ",
+            "root": "كون",
+            "meaning": "İdi, oldu",
+            "phraseTr": "<u>İdi, oldu</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p15_pr2_w18",
+            "ar": "حَوْلَهُ",
+            "root": "حول",
+            "meaning": "etrafına, çevresine",
+            "phraseTr": "<u>etrafına, çevresine</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p15_pr2_w19",
+            "ar": "عَشَرَةُ",
+            "root": "عشر",
+            "meaning": "on",
+            "phraseTr": "<u>on</u>",
+            "type": "sayı"
+          },
+          {
+            "id": "p15_pr2_w20",
+            "ar": "مُتَسَابِقِينَ",
+            "root": "متس",
+            "meaning": "مُتَسَابِقِينَ",
+            "phraseTr": "<u>مُتَسَابِقِينَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p15_pr2_w21",
+            "ar": "قَدْ",
+            "root": "قد",
+            "meaning": "gerçekten, andolsun",
+            "phraseTr": "<u>gerçekten, andolsun</u>",
+            "type": "tahkik edatı"
+          },
+          {
+            "id": "p15_pr2_w22",
+            "ar": "سَقَطُوا",
+            "root": "سقط",
+            "meaning": "سَقَطُوا",
+            "phraseTr": "<u>سَقَطُوا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p15_pr2_w23",
+            "ar": "جَمِيعاً",
+            "root": "جمي",
+            "meaning": "جَمِيعاً",
+            "phraseTr": "<u>جَمِيعاً</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p15_pr2_w24",
+            "ar": "عَلَى",
+            "root": "عَلَى",
+            "meaning": "üzerinde, -e",
+            "phraseTr": "<u>üzerinde, -e</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p15_pr2_w25",
+            "ar": "الأَرْضِ",
+            "root": "أرض",
+            "meaning": "Yer, zemin",
+            "phraseTr": "<u>Yer, zemin</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr2_w26",
+            "ar": "بِلَا",
+            "root": "لَا",
+            "meaning": "Olmaksızın, -sız",
+            "phraseTr": "<u>Olmaksızın, -sız</u>",
+            "type": "edat"
+          },
+          {
+            "id": "p15_pr2_w27",
+            "ar": "حَرَاكٍ!",
+            "root": "حَرَكَ",
+            "meaning": "Kıpırtı, hareket",
+            "phraseTr": "<u>Kıpırtı, hareket</u>",
+            "type": "isim"
+          }
+        ]
+      },
+      {
+        "pId": "p15_pr3",
+        "words": [
+          {
+            "id": "p15_pr3_w1",
+            "ar": "كَانَ",
+            "root": "كون",
+            "meaning": "İdi, oldu",
+            "phraseTr": "<u>İdi, oldu</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p15_pr3_w2",
+            "ar": "قَيْس",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p15_pr3_w3",
+            "ar": "يَبْتَسِمُ",
+            "root": "يبت",
+            "meaning": "يَبْتَسِمُ",
+            "phraseTr": "<u>يَبْتَسِمُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p15_pr3_w4",
+            "ar": "ابْتِسَامَةً",
+            "root": "بَسَمَ",
+            "meaning": "Gülümseme",
+            "phraseTr": "soğuk bir <u>gülümseme</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr3_w5",
+            "ar": "بَارِدَةً،",
+            "root": "برد",
+            "meaning": "Soğuk",
+            "phraseTr": "<u>soğuk</u> bir gülümseme",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr3_w6",
+            "ar": "وَيُخْرِجُ",
+            "root": "خرج",
+            "meaning": "Ve Çıkarır",
+            "phraseTr": "<u>Ve Çıkarır</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p15_pr3_w7",
+            "ar": "مِنْ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p15_pr3_w8",
+            "ar": "أَصَابِعِهِ",
+            "root": "صَبَعَ",
+            "meaning": "Parmakları",
+            "phraseTr": "<u>Parmakları</u>",
+            "type": "isim + zamir"
+          },
+          {
+            "id": "p15_pr3_w9",
+            "ar": "خُيُوطاً",
+            "root": "خَاطَ",
+            "meaning": "İpler, teller",
+            "phraseTr": "parlak <u>teller</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p15_pr3_w10",
+            "ar": "لَمَّاعَةً",
+            "root": "لَمَعَ",
+            "meaning": "Parlak",
+            "phraseTr": "<u>parlak</u> teller",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr3_w11",
+            "ar": "مَصْنُوعَةً",
+            "root": "مصن",
+            "meaning": "مَصْنُوعَةً",
+            "phraseTr": "<u>مَصْنُوعَةً</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p15_pr3_w12",
+            "ar": "مِنْ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p15_pr3_w13",
+            "ar": "طَاقَةِ",
+            "root": "طوق",
+            "meaning": "Enerji",
+            "phraseTr": "Çi <u>enerjisi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr3_w14",
+            "ar": "التْشِي",
+            "root": "تْشِي",
+            "meaning": "Çi enerjisi",
+            "phraseTr": "<u>Çi</u> enerjisi",
+            "type": "terim"
+          },
+          {
+            "id": "p15_pr3_w15",
+            "ar": "الخَالِصَةِ.",
+            "root": "خَلَصَ",
+            "meaning": "Saf, arı",
+            "phraseTr": "<u>saf</u> Çi",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr3_w16",
+            "ar": "كَانَتْ",
+            "root": "كون",
+            "meaning": "İdi (dişil)",
+            "phraseTr": "<u>İdi</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p15_pr3_w17",
+            "ar": "هَذِهِ",
+            "root": "ذه",
+            "meaning": "Bu (dişil)",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p15_pr3_w18",
+            "ar": "الخُيُوطُ",
+            "root": "الخ",
+            "meaning": "الخُيُوطُ",
+            "phraseTr": "<u>الخُيُوطُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p15_pr3_w19",
+            "ar": "قَوِيَّةً",
+            "root": "قوو",
+            "meaning": "Güçlü",
+            "phraseTr": "<u>Güçlü</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr3_w20",
+            "ar": "كَالفُولاَذِ",
+            "root": "فَلَذَ",
+            "meaning": "Çelik gibi",
+            "phraseTr": "<u>Çelik gibi</u>",
+            "type": "harf + isim"
+          },
+          {
+            "id": "p15_pr3_w21",
+            "ar": "وَحَادَّةً",
+            "root": "حَدَّ",
+            "meaning": "Ve Keskin",
+            "phraseTr": "<u>Ve Keskin</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr3_w22",
+            "ar": "كَالسَّيْفِ!",
+            "root": "سَافَ",
+            "meaning": "Kılıç gibi",
+            "phraseTr": "<u>Kılıç gibi</u>",
+            "type": "harf + isim"
+          }
+        ]
+      },
+      {
+        "pId": "p15_pr4",
+        "words": [
+          {
+            "id": "p15_pr4_w1",
+            "ar": "قَالَ",
+            "root": "قول",
+            "meaning": "Dedi",
+            "phraseTr": "<u>Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p15_pr4_w2",
+            "ar": "طَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p15_pr4_w3",
+            "ar": "بِصَوْتٍ",
+            "root": "صوت",
+            "meaning": "... ile Ses",
+            "phraseTr": "<u>... ile Ses</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr4_w4",
+            "ar": "خَافِتٍ",
+            "root": "خَفَتَ",
+            "meaning": "Kısık, alçak",
+            "phraseTr": "<u>Kısık, alçak</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr4_w5",
+            "ar": "جِدّاً:",
+            "root": "جدد",
+            "meaning": "çok",
+            "phraseTr": "<u>çok</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p15_pr4_w6",
+            "ar": "«هَذَا",
+            "root": "ذا",
+            "meaning": "Bu",
+            "phraseTr": "<u>Bu</u> adam",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p15_pr4_w7",
+            "ar": "الرَّجُلُ",
+            "root": "رجل",
+            "meaning": "Adam",
+            "phraseTr": "Bu <u>adam</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p15_pr4_w8",
+            "ar": "خَبِيثٌ",
+            "root": "خَبُثَ",
+            "meaning": "Sinsi, kötü niyetli",
+            "phraseTr": "<u>Sinsi, kötü niyetli</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr4_w9",
+            "ar": "وَمُخِيفٌ.",
+            "root": "خَافَ",
+            "meaning": "Ve Korkutucu",
+            "phraseTr": "<u>Ve Korkutucu</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr4_w10",
+            "ar": "هُوَ",
+            "root": "هُوَ",
+            "meaning": "O",
+            "phraseTr": "<u>O</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p15_pr4_w11",
+            "ar": "لاَ",
+            "root": "لاَ",
+            "meaning": "değil, -mez, -maz",
+            "phraseTr": "<u>değil, -mez, -maz</u>",
+            "type": "nefy edatı"
+          },
+          {
+            "id": "p15_pr4_w12",
+            "ar": "يَهْتَمُّ",
+            "root": "هَمَّ",
+            "meaning": "Önem veriyor",
+            "phraseTr": "<u>Önem veriyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p15_pr4_w13",
+            "ar": "بِالفَوْزِ؛",
+            "root": "بال",
+            "meaning": "بِالفَوْزِ",
+            "phraseTr": "<u>بِالفَوْزِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p15_pr4_w14",
+            "ar": "هُوَ",
+            "root": "هُوَ",
+            "meaning": "O",
+            "phraseTr": "<u>O</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p15_pr4_w15",
+            "ar": "يَسْتَمْتِعُ",
+            "root": "مَتَعَ",
+            "meaning": "Zevk alıyor",
+            "phraseTr": "<u>Zevk alıyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p15_pr4_w16",
+            "ar": "فَقَطْ",
+            "root": "فقط",
+            "meaning": "yalnızca, sadece",
+            "phraseTr": "<u>yalnızca, sadece</u>",
+            "type": "edat"
+          },
+          {
+            "id": "p15_pr4_w17",
+            "ar": "بِمُحَارَبَةِ",
+            "root": "حَرَبَ",
+            "meaning": "Savaşmaktan",
+            "phraseTr": "<u>Savaşmaktan</u>",
+            "type": "harf + mastar"
+          },
+          {
+            "id": "p15_pr4_w18",
+            "ar": "الأَقْوِيَاءِ!»",
+            "root": "قوو",
+            "meaning": "Güçlüler",
+            "phraseTr": "<u>Güçlüler</u>",
+            "type": "cemi sıfat"
+          },
+          {
+            "id": "p15_pr4_w19",
+            "ar": "الْتَفَتَ",
+            "root": "لَفَتَ",
+            "meaning": "Döndü, arkasına baktı",
+            "phraseTr": "<u>Döndü, arkasına baktı</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p15_pr4_w20",
+            "ar": "قَيْس",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p15_pr4_w21",
+            "ar": "بِبُطْءٍ،",
+            "root": "بطأ",
+            "meaning": "yavaşça",
+            "phraseTr": "<u>yavaşça</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p15_pr4_w22",
+            "ar": "وَنَظَرَتْ",
+            "root": "ونظ",
+            "meaning": "وَنَظَرَتْ",
+            "phraseTr": "<u>وَنَظَرَتْ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p15_pr4_w23",
+            "ar": "عَيْنَاهُ",
+            "root": "عين",
+            "meaning": "İki gözü",
+            "phraseTr": "sarı <u>gözleri</u>",
+            "type": "tesniye isim"
+          },
+          {
+            "id": "p15_pr4_w24",
+            "ar": "الصَّفْرَاوَانِ",
+            "root": "صَفِرَ",
+            "meaning": "İki sarı",
+            "phraseTr": "<u>sarı</u> gözleri",
+            "type": "sıfat (tesniye)"
+          },
+          {
+            "id": "p15_pr4_w25",
+            "ar": "نَحْوَ",
+            "root": "نَحَا",
+            "meaning": "Doğru, yönünde",
+            "phraseTr": "<u>Doğru, yönünde</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p15_pr4_w26",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p15_pr4_w27",
+            "ar": "وَزَيْد",
+            "root": "زَيْد",
+            "meaning": "Ve Zeyd (arkadaşı)",
+            "phraseTr": "<u>Ve Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p15_pr4_w28",
+            "ar": "وَطَارِق:",
+            "root": "طَرَقَ",
+            "meaning": "Ve Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Ve Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p15_pr4_w29",
+            "ar": "«أُوه..",
+            "root": "أُوه",
+            "meaning": "Oh.. (iç çekme)",
+            "phraseTr": "<u>Oh..</u>",
+            "type": "ünlem"
+          },
+          {
+            "id": "p15_pr4_w30",
+            "ar": "عَصَافِيرُ",
+            "root": "عَصَفَ",
+            "meaning": "Kuşlar, serçeler",
+            "phraseTr": "küçük <u>kuşlar</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p15_pr4_w31",
+            "ar": "صَغِيرَةٌ",
+            "root": "صغر",
+            "meaning": "Küçük",
+            "phraseTr": "<u>küçük</u> kuşlar",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr4_w32",
+            "ar": "جَدِيدَةٌ",
+            "root": "جدد",
+            "meaning": "Yeni",
+            "phraseTr": "<u>Yeni</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p15_pr4_w33",
+            "ar": "جَاءَتْ",
+            "root": "جاء",
+            "meaning": "جَاءَتْ",
+            "phraseTr": "<u>جَاءَتْ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p15_pr4_w34",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p15_pr4_w35",
+            "ar": "عُشِّي؟»",
+            "root": "عَشَّ",
+            "meaning": "Yuvam",
+            "phraseTr": "<u>Yuvam</u>",
+            "type": "isim + zamir"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pageNum": 16,
+    "title": "الصَّفْحَةُ السَّادِسَةَ عَشْرَةَ (16)",
+    "paragraphs": [
+      {
+        "pId": "p16_pr1",
+        "words": [
+          {
+            "id": "p16_pr1_w1",
+            "ar": "خَطَا",
+            "root": "خَطَا",
+            "meaning": "Adım attı",
+            "phraseTr": "<u>Adım attı</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p16_pr1_w2",
+            "ar": "قَيْس",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p16_pr1_w3",
+            "ar": "خُطْوَةً",
+            "root": "خَطَا",
+            "meaning": "Bir adım",
+            "phraseTr": "<u>Bir adım</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr1_w4",
+            "ar": "نَحْوَهُمْ.",
+            "root": "نَحَا",
+            "meaning": "Doğru, yönünde (onların)",
+            "phraseTr": "<u>Doğru, yönünde</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p16_pr1_w5",
+            "ar": "كَانَتْ",
+            "root": "كون",
+            "meaning": "İdi (dişil)",
+            "phraseTr": "<u>İdi</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p16_pr1_w6",
+            "ar": "طَاقَةُ",
+            "root": "طوق",
+            "meaning": "Enerjisi",
+            "phraseTr": "Çi <u>enerjisi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr1_w7",
+            "ar": "التْشِي",
+            "root": "تْشِي",
+            "meaning": "Çi enerjisi",
+            "phraseTr": "<u>Çi</u> enerjisi",
+            "type": "terim"
+          },
+          {
+            "id": "p16_pr1_w8",
+            "ar": "تُحِيطُ",
+            "root": "حَاطَ",
+            "meaning": "Kuşatıyor",
+            "phraseTr": "<u>Kuşatıyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p16_pr1_w9",
+            "ar": "بِجِسْمِهِ",
+            "root": "جسم",
+            "meaning": "... ile Bedeninden",
+            "phraseTr": "<u>... ile Bedeninden</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr1_w10",
+            "ar": "مِثْلَ",
+            "root": "مِثْل",
+            "meaning": "Gibi",
+            "phraseTr": "<u>Gibi</u>",
+            "type": "edat/isim"
+          },
+          {
+            "id": "p16_pr1_w11",
+            "ar": "نَارٍ",
+            "root": "نور",
+            "meaning": "Ateş",
+            "phraseTr": "mavi <u>ateş</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr1_w12",
+            "ar": "زَرْقَاءَ",
+            "root": "زَرَقَ",
+            "meaning": "Mavi",
+            "phraseTr": "<u>mavi</u> ateş",
+            "type": "sıfat"
+          },
+          {
+            "id": "p16_pr1_w13",
+            "ar": "بَارِدَةٍ.",
+            "root": "برد",
+            "meaning": "Soğuk",
+            "phraseTr": "<u>soğuk</u> mavi",
+            "type": "sıfat"
+          },
+          {
+            "id": "p16_pr1_w14",
+            "ar": "ارْتَعَدَ",
+            "root": "رَعَدَ",
+            "meaning": "Titredi",
+            "phraseTr": "<u>Titredi</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p16_pr1_w15",
+            "ar": "طَارِق،",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p16_pr1_w16",
+            "ar": "وَلَكِنَّهُ",
+            "root": "لَكِنْ",
+            "meaning": "Fakat o",
+            "phraseTr": "<u>Fakat o</u>",
+            "type": "bağlaç + harf + zamir"
+          },
+          {
+            "id": "p16_pr1_w17",
+            "ar": "لَمْ",
+            "root": "لَمْ",
+            "meaning": "-medi, -madı",
+            "phraseTr": "<u>-medi, -madı</u>",
+            "type": "cezm edatı"
+          },
+          {
+            "id": "p16_pr1_w18",
+            "ar": "يَهْرُبْ!",
+            "root": "هَرَبَ",
+            "meaning": "Kaçmadı",
+            "phraseTr": "<u>Kaçmadı</u>",
+            "type": "fiil (cezm)"
+          },
+          {
+            "id": "p16_pr1_w19",
+            "ar": "فَتَحَ",
+            "root": "فتح",
+            "meaning": "Açtı",
+            "phraseTr": "<u>Açtı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p16_pr1_w20",
+            "ar": "حَقِيبَتَهُ",
+            "root": "حقب",
+            "meaning": "Çantası",
+            "phraseTr": "ahşap <u>çantasını</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr1_w21",
+            "ar": "الخَشَبِيَّةَ،",
+            "root": "خَشَبَ",
+            "meaning": "Ahşap",
+            "phraseTr": "<u>ahşap</u> çantasını",
+            "type": "sıfat"
+          },
+          {
+            "id": "p16_pr1_w22",
+            "ar": "وَأَخْرَجَ",
+            "root": "خرج",
+            "meaning": "Ve Çıkardı",
+            "phraseTr": "<u>Ve Çıkardı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p16_pr1_w23",
+            "ar": "عَصاً",
+            "root": "عصا",
+            "meaning": "عَصاً",
+            "phraseTr": "kısa bir <u>sopa</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p16_pr1_w24",
+            "ar": "قَصِيرَةً،",
+            "root": "قصي",
+            "meaning": "قَصِيرَةً",
+            "phraseTr": "<u>kısa</u> bir sopa",
+            "type": "kelime"
+          },
+          {
+            "id": "p16_pr1_w25",
+            "ar": "وَوَقَفَ",
+            "root": "وقف",
+            "meaning": "Ve Durdu",
+            "phraseTr": "<u>Ve Durdu</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p16_pr1_w26",
+            "ar": "أَمَامَ",
+            "root": "أمم",
+            "meaning": "önünde, önüne",
+            "phraseTr": "<u>önünde</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p16_pr1_w27",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami'nin</u> önünde",
+            "type": "özel isim"
+          },
+          {
+            "id": "p16_pr1_w28",
+            "ar": "وَزَيْد!",
+            "root": "زَيْد",
+            "meaning": "Ve Zeyd (arkadaşı)",
+            "phraseTr": "<u>Ve Zeyd</u>",
+            "type": "özel isim"
+          }
+        ]
+      },
+      {
+        "pId": "p16_pr2",
+        "words": [
+          {
+            "id": "p16_pr2_w1",
+            "ar": "صَرَخَ",
+            "root": "صرخ",
+            "meaning": "Bağırdı",
+            "phraseTr": "<u>Bağırdı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p16_pr2_w2",
+            "ar": "طَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p16_pr2_w3",
+            "ar": "بِشَجَاعَةٍ:",
+            "root": "شَجُعَ",
+            "meaning": "Cesurca",
+            "phraseTr": "<u>Cesurca</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p16_pr2_w4",
+            "ar": "«اهْرُبَا",
+            "root": "هَرَبَ",
+            "meaning": "Kaçın ikiniz!",
+            "phraseTr": "<u>Kaçın ikiniz!</u>",
+            "type": "emir (tesniye)"
+          },
+          {
+            "id": "p16_pr2_w5",
+            "ar": "أَنْتُمَا",
+            "root": "أنت",
+            "meaning": "أَنْتُمَا",
+            "phraseTr": "<u>أَنْتُمَا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p16_pr2_w6",
+            "ar": "يَا",
+            "root": "يَا",
+            "meaning": "Ey!",
+            "phraseTr": "<u>Ey!</u>",
+            "type": "nida edatı"
+          },
+          {
+            "id": "p16_pr2_w7",
+            "ar": "صَغِيرَيَّ!",
+            "root": "صَغُرَ",
+            "meaning": "Benim iki küçüğüm",
+            "phraseTr": "<u>Benim iki küçüğüm</u>",
+            "type": "isim (tesniye) + zamir"
+          },
+          {
+            "id": "p16_pr2_w8",
+            "ar": "أَنْتُمَا",
+            "root": "أنت",
+            "meaning": "أَنْتُمَا",
+            "phraseTr": "<u>أَنْتُمَا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p16_pr2_w9",
+            "ar": "مَا",
+            "root": "ما",
+            "meaning": "ne, şey",
+            "phraseTr": "<u>ne, şey</u>",
+            "type": "soru / nefy"
+          },
+          {
+            "id": "p16_pr2_w10",
+            "ar": "زِلْتُمَا",
+            "root": "زلت",
+            "meaning": "زِلْتُمَا",
+            "phraseTr": "<u>زِلْتُمَا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p16_pr2_w11",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p16_pr2_w12",
+            "ar": "بِدَايَةِ",
+            "root": "بدا",
+            "meaning": "بِدَايَةِ",
+            "phraseTr": "ömrün <u>başlangıcı</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p16_pr2_w13",
+            "ar": "العُمْرِ!",
+            "root": "الع",
+            "meaning": "العُمْرِ",
+            "phraseTr": "<u>ömrün</u> başlangıcı",
+            "type": "kelime"
+          },
+          {
+            "id": "p16_pr2_w14",
+            "ar": "أَنَا",
+            "root": "أَنَا",
+            "meaning": "Ben",
+            "phraseTr": "<u>Ben</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p16_pr2_w15",
+            "ar": "سَأُعَطِّلُ",
+            "root": "عَطَلَ",
+            "meaning": "Oyalayacağım",
+            "phraseTr": "<u>Oyalayacağım</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p16_pr2_w16",
+            "ar": "هَذَا",
+            "root": "ذا",
+            "meaning": "Bu",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p16_pr2_w17",
+            "ar": "الشِّرِّيرَ",
+            "root": "شَرَّ",
+            "meaning": "Kötü kişi",
+            "phraseTr": "<u>Kötü kişi</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p16_pr2_w18",
+            "ar": "لِعِدَّةِ",
+            "root": "عَدَّ",
+            "meaning": "Birkaç",
+            "phraseTr": "<u>Birkaç</u>",
+            "type": "harf + isim"
+          },
+          {
+            "id": "p16_pr2_w19",
+            "ar": "دَقَائِقَ!»",
+            "root": "دقق",
+            "meaning": "Dakikalar",
+            "phraseTr": "<u>Dakikalar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p16_pr2_w20",
+            "ar": "ضَحِكَ",
+            "root": "ضحك",
+            "meaning": "Güldü",
+            "phraseTr": "<u>Güldü</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p16_pr2_w21",
+            "ar": "قَيْس",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p16_pr2_w22",
+            "ar": "بِسُخْرِيَةٍ:",
+            "root": "سَخِرَ",
+            "meaning": "Alayla",
+            "phraseTr": "<u>Alayla</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p16_pr2_w23",
+            "ar": "«الشَّجَاعَةُ",
+            "root": "شَجُعَ",
+            "meaning": "Cesaret",
+            "phraseTr": "<u>Cesaret</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr2_w24",
+            "ar": "بِلَا",
+            "root": "لَا",
+            "meaning": "Olmaksızın, -sız",
+            "phraseTr": "<u>Olmaksızın, -sız</u>",
+            "type": "edat"
+          },
+          {
+            "id": "p16_pr2_w25",
+            "ar": "قُوَّةٍ",
+            "root": "قوو",
+            "meaning": "Güç",
+            "phraseTr": "<u>Güç</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr2_w26",
+            "ar": "هِيَ",
+            "root": "هِيَ",
+            "meaning": "O (dişil)",
+            "phraseTr": "<u>O</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p16_pr2_w27",
+            "ar": "مَوْتٌ",
+            "root": "موت",
+            "meaning": "مَوْتٌ",
+            "phraseTr": "kesin bir <u>ölüm</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p16_pr2_w28",
+            "ar": "مَضْمُونٌ",
+            "root": "ضَمَنَ",
+            "meaning": "Kesin, garantili",
+            "phraseTr": "<u>kesin</u> bir ölüm",
+            "type": "ism-i mef'ul"
+          },
+          {
+            "id": "p16_pr2_w29",
+            "ar": "يَا",
+            "root": "يَا",
+            "meaning": "Ey!",
+            "phraseTr": "<u>Ey!</u>",
+            "type": "nida edatı"
+          },
+          {
+            "id": "p16_pr2_w30",
+            "ar": "صَاحِبَ",
+            "root": "صَحِبَ",
+            "meaning": "Sahibi",
+            "phraseTr": "gözlüklü <u>adam</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr2_w31",
+            "ar": "النَّظَّارَةِ.»",
+            "root": "نَظَرَ",
+            "meaning": "Gözlük",
+            "phraseTr": "<u>gözlüklü</u> adam",
+            "type": "isim"
+          }
+        ]
+      },
+      {
+        "pId": "p16_pr3",
+        "words": [
+          {
+            "id": "p16_pr3_w1",
+            "ar": "تَحَرَّكَ",
+            "root": "تحر",
+            "meaning": "تَحَرَّكَ",
+            "phraseTr": "<u>تَحَرَّكَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p16_pr3_w2",
+            "ar": "قَيْس",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p16_pr3_w3",
+            "ar": "كَالظِّلِّ",
+            "root": "ظَلَّ",
+            "meaning": "Gölge gibi",
+            "phraseTr": "<u>Gölge gibi</u>",
+            "type": "harf + isim"
+          },
+          {
+            "id": "p16_pr3_w4",
+            "ar": "الخَفِيِّ،",
+            "root": "خَفِيَ",
+            "meaning": "Gizli",
+            "phraseTr": "<u>Gizli</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p16_pr3_w5",
+            "ar": "وَفِي",
+            "root": "فِي",
+            "meaning": "Ve -de, -da, içinde",
+            "phraseTr": "<u>Ve -de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p16_pr3_w6",
+            "ar": "لَحْظَةٍ",
+            "root": "لحظ",
+            "meaning": "Bir an",
+            "phraseTr": "bir <u>an</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr3_w7",
+            "ar": "وَاحِدَةٍ",
+            "root": "وحد",
+            "meaning": "bir, bir defa",
+            "phraseTr": "<u>tek</u> bir an önce",
+            "type": "sayı"
+          },
+          {
+            "id": "p16_pr3_w8",
+            "ar": "ضَرَبَ",
+            "root": "ضرب",
+            "meaning": "Vurdu",
+            "phraseTr": "<u>Vurdu</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p16_pr3_w9",
+            "ar": "طَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p16_pr3_w10",
+            "ar": "عَلَى",
+            "root": "عَلَى",
+            "meaning": "üzerinde, -e",
+            "phraseTr": "<u>üzerinde, -e</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p16_pr3_w11",
+            "ar": "رَقَبَتِهِ،",
+            "root": "رَقَبَ",
+            "meaning": "Boynu",
+            "phraseTr": "<u>Boynu</u>",
+            "type": "isim + zamir"
+          },
+          {
+            "id": "p16_pr3_w12",
+            "ar": "فَسَقَطَ",
+            "root": "سقط",
+            "meaning": "Derhal Düştü",
+            "phraseTr": "<u>Derhal Düştü</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p16_pr3_w13",
+            "ar": "طَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p16_pr3_w14",
+            "ar": "عَلَى",
+            "root": "عَلَى",
+            "meaning": "üzerinde, -e",
+            "phraseTr": "<u>üzerinde, -e</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p16_pr3_w15",
+            "ar": "الأَرْضِ",
+            "root": "أرض",
+            "meaning": "Yer, zemin",
+            "phraseTr": "<u>Yer, zemin</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr3_w16",
+            "ar": "وَغَابَ",
+            "root": "غَابَ",
+            "meaning": "Ve Kayboldu",
+            "phraseTr": "<u>Ve Kayboldu</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p16_pr3_w17",
+            "ar": "عَنِ",
+            "root": "عَنْ",
+            "meaning": "-den, hakkında",
+            "phraseTr": "<u>-den, hakkında</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p16_pr3_w18",
+            "ar": "الوَعْيِ!",
+            "root": "وَعَى",
+            "meaning": "Bilinç",
+            "phraseTr": "<u>Bilinç</u>",
+            "type": "isim"
+          }
+        ]
+      },
+      {
+        "pId": "p16_pr4",
+        "words": [
+          {
+            "id": "p16_pr4_w1",
+            "ar": "عِنْدَمَا",
+            "root": "عِنْد",
+            "meaning": "-dığı zaman",
+            "phraseTr": "<u>-dığı zaman</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p16_pr4_w2",
+            "ar": "رَأَى",
+            "root": "رأي",
+            "meaning": "Gördü",
+            "phraseTr": "<u>Gördü</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p16_pr4_w3",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p16_pr4_w4",
+            "ar": "صَدِيقَهُ",
+            "root": "صدق",
+            "meaning": "Arkadaş (onun)",
+            "phraseTr": "<u>Arkadaş</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr4_w5",
+            "ar": "طَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p16_pr4_w6",
+            "ar": "يَسْقُطُ،",
+            "root": "يسق",
+            "meaning": "يَسْقُطُ",
+            "phraseTr": "<u>يَسْقُطُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p16_pr4_w7",
+            "ar": "اشْتَعَلَ",
+            "root": "شَعَلَ",
+            "meaning": "Alevlendi, parladı",
+            "phraseTr": "<u>Alevlendi, parladı</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p16_pr4_w8",
+            "ar": "الغَضَبُ",
+            "root": "غَضِبَ",
+            "meaning": "Öfke",
+            "phraseTr": "<u>Öfke</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr4_w9",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p16_pr4_w10",
+            "ar": "صَدْرِهِ.",
+            "root": "صدر",
+            "meaning": "Göğsü",
+            "phraseTr": "<u>Göğsü</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr4_w11",
+            "ar": "تَذَكَّرَ",
+            "root": "ذكر",
+            "meaning": "Hatırladı",
+            "phraseTr": "<u>Hatırladı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p16_pr4_w12",
+            "ar": "كَلاَمَ",
+            "root": "كلم",
+            "meaning": "Sözü",
+            "phraseTr": "dedesinin <u>sözü</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr4_w13",
+            "ar": "جَدِّهِ:",
+            "root": "جدد",
+            "meaning": "Dedesi",
+            "phraseTr": "<u>dedesinin</u> sözü",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr4_w14",
+            "ar": "«طَاقَةُ",
+            "root": "طوق",
+            "meaning": "Enerjisi",
+            "phraseTr": "Çi <u>enerjisi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr4_w15",
+            "ar": "التْشِي",
+            "root": "تْشِي",
+            "meaning": "Çi enerjisi",
+            "phraseTr": "<u>Çi</u> enerjisi",
+            "type": "terim"
+          },
+          {
+            "id": "p16_pr4_w16",
+            "ar": "تُصْبِحُ",
+            "root": "صَبَحَ",
+            "meaning": "Olur",
+            "phraseTr": "<u>Olur</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p16_pr4_w17",
+            "ar": "أَعْظَمَ",
+            "root": "عَظُمَ",
+            "meaning": "Daha muazzam, büyük",
+            "phraseTr": "<u>Daha muazzam, büyük</u>",
+            "type": "ismi tafdil"
+          },
+          {
+            "id": "p16_pr4_w18",
+            "ar": "عِنْدَمَا",
+            "root": "عِنْد",
+            "meaning": "-dığı zaman",
+            "phraseTr": "<u>-dığı zaman</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p16_pr4_w19",
+            "ar": "تُدَافِعُ",
+            "root": "دَفَعَ",
+            "meaning": "Savunursun",
+            "phraseTr": "<u>Savunursun</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p16_pr4_w20",
+            "ar": "عَنْ",
+            "root": "عَنْ",
+            "meaning": "-den, hakkında",
+            "phraseTr": "<u>-den, hakkında</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p16_pr4_w21",
+            "ar": "صَدِيقٍ",
+            "root": "صدق",
+            "meaning": "Arkadaş",
+            "phraseTr": "sadık bir <u>dost</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr4_w22",
+            "ar": "مُخْلِصٍ.»",
+            "root": "خَلَصَ",
+            "meaning": "Sadık, vefakar",
+            "phraseTr": "<u>sadık</u> bir dost",
+            "type": "sıfat"
+          },
+          {
+            "id": "p16_pr4_w23",
+            "ar": "جَمَعَ",
+            "root": "جمع",
+            "meaning": "Topladı",
+            "phraseTr": "<u>Topladı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p16_pr4_w24",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p16_pr4_w25",
+            "ar": "كُلَّ",
+            "root": "كلل",
+            "meaning": "her",
+            "phraseTr": "<u>her</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p16_pr4_w26",
+            "ar": "طَاقَتِهِ",
+            "root": "طاق",
+            "meaning": "طَاقَتِهِ",
+            "phraseTr": "<u>طَاقَتِهِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p16_pr4_w27",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p16_pr4_w28",
+            "ar": "قَبْضَتِهِ",
+            "root": "قَبَضَ",
+            "meaning": "Yumruğu",
+            "phraseTr": "sağ <u>yumruğu</u>",
+            "type": "isim + zamir"
+          },
+          {
+            "id": "p16_pr4_w29",
+            "ar": "اليُمْنَى،",
+            "root": "يَمَنَ",
+            "meaning": "Sağ",
+            "phraseTr": "<u>sağ</u> yumruğu",
+            "type": "sıfat"
+          },
+          {
+            "id": "p16_pr4_w30",
+            "ar": "فَأَضَاءَتْ",
+            "root": "ضَوَأَ",
+            "meaning": "Aydınlandı, parladı",
+            "phraseTr": "<u>Aydınlandı, parladı</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p16_pr4_w31",
+            "ar": "يَدُهُ",
+            "root": "يدي",
+            "meaning": "Eli",
+            "phraseTr": "<u>Eli</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p16_pr4_w32",
+            "ar": "بِنُورٍ",
+            "root": "نَوَرَ",
+            "meaning": "Bir ışıkla",
+            "phraseTr": "<u>Bir ışıkla</u>",
+            "type": "harf + isim"
+          },
+          {
+            "id": "p16_pr4_w33",
+            "ar": "ذَهَبِيٍّ",
+            "root": "ذَهَبَ",
+            "meaning": "Altın rengi",
+            "phraseTr": "<u>Altın rengi</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p16_pr4_w34",
+            "ar": "قَوِيٍّ،",
+            "root": "قوو",
+            "meaning": "Güçlü",
+            "phraseTr": "<u>Güçlü</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p16_pr4_w35",
+            "ar": "وَانْدَفَعَ",
+            "root": "دَفَعَ",
+            "meaning": "Ve Atıldı, hücum etti",
+            "phraseTr": "<u>Ve Atıldı, hücum etti</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p16_pr4_w36",
+            "ar": "نَحْوَ",
+            "root": "نَحَا",
+            "meaning": "Doğru, yönünde",
+            "phraseTr": "<u>Doğru, yönünde</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p16_pr4_w37",
+            "ar": "قَيْس",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p16_pr4_w38",
+            "ar": "بِصَيْحَةٍ",
+            "root": "صَاحَ",
+            "meaning": "Bir haykırışla",
+            "phraseTr": "<u>Bir haykırışla</u>",
+            "type": "harf + isim"
+          },
+          {
+            "id": "p16_pr4_w39",
+            "ar": "هَادِرَةٍ!",
+            "root": "هَدَرَ",
+            "meaning": "Gürleyen",
+            "phraseTr": "<u>Gürleyen</u>",
+            "type": "sıfat"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pageNum": 17,
+    "title": "الصَّفْحَةُ السَّابِعَةَ عَشْرَةَ (17)",
+    "paragraphs": [
+      {
+        "pId": "p17_pr1",
+        "words": [
+          {
+            "id": "p17_pr1_w1",
+            "ar": "ضَرَبَ",
+            "root": "ضرب",
+            "meaning": "Vurdu",
+            "phraseTr": "<u>Vurdu</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p17_pr1_w2",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p17_pr1_w3",
+            "ar": "قَبْضَتَهُ",
+            "root": "قَبَضَ",
+            "meaning": "Yumruğunu",
+            "phraseTr": "altın rengi <u>yumruğunu</u>",
+            "type": "isim + zamir"
+          },
+          {
+            "id": "p17_pr1_w4",
+            "ar": "الذَّهَبِيَّةَ",
+            "root": "ذَهَبَ",
+            "meaning": "Altın rengi",
+            "phraseTr": "<u>altın rengi</u> yumruğunu",
+            "type": "sıfat"
+          },
+          {
+            "id": "p17_pr1_w5",
+            "ar": "بِأَقْصَى",
+            "root": "قصو",
+            "meaning": "... ile En son, son radde",
+            "phraseTr": "<u>... ile En son, son radde</u>",
+            "type": "ismi tafdil"
+          },
+          {
+            "id": "p17_pr1_w6",
+            "ar": "قُوَّتِهِ!",
+            "root": "قوت",
+            "meaning": "قُوَّتِهِ",
+            "phraseTr": "<u>قُوَّتِهِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr1_w7",
+            "ar": "رَفَعَ",
+            "root": "رفع",
+            "meaning": "Kaldırdı",
+            "phraseTr": "<u>Kaldırdı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p17_pr1_w8",
+            "ar": "قَيْس",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p17_pr1_w9",
+            "ar": "كَفَّهُ",
+            "root": "كَفَّ",
+            "meaning": "Avucunu",
+            "phraseTr": "<u>Avucunu</u>",
+            "type": "isim + zamir"
+          },
+          {
+            "id": "p17_pr1_w10",
+            "ar": "لِيَصُدَّ",
+            "root": "صَدَّ",
+            "meaning": "Durdurmak / engellemek için",
+            "phraseTr": "<u>Durdurmak</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p17_pr1_w11",
+            "ar": "الضَّرْبَةَ،",
+            "root": "ضَرَبَ",
+            "meaning": "Darbeyi",
+            "phraseTr": "<u>Darbeyi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr1_w12",
+            "ar": "وَلَكِنَّ",
+            "root": "لَكِنْ",
+            "meaning": "Ve lakin, fakat",
+            "phraseTr": "<u>Ve lakin, fakat</u>",
+            "type": "bağlaç + istidrak"
+          },
+          {
+            "id": "p17_pr1_w13",
+            "ar": "قُوَّةَ",
+            "root": "قوو",
+            "meaning": "Güç",
+            "phraseTr": "<u>Güç</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr1_w14",
+            "ar": "الِاصْطِدَامِ",
+            "root": "صَدَمَ",
+            "meaning": "Çarpışma",
+            "phraseTr": "<u>Çarpışma</u>",
+            "type": "mastar"
+          },
+          {
+            "id": "p17_pr1_w15",
+            "ar": "كَانَتْ",
+            "root": "كون",
+            "meaning": "İdi (dişil)",
+            "phraseTr": "<u>İdi</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p17_pr1_w16",
+            "ar": "هَائِلَةً:",
+            "root": "هَالَ",
+            "meaning": "Muazzam, korkunç",
+            "phraseTr": "<u>Muazzam, korkunç</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p17_pr1_w17",
+            "ar": "«طَرَرَرَاق!»",
+            "root": "طرر",
+            "meaning": "طَرَرَرَاق",
+            "phraseTr": "<u>طَرَرَرَاق</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr1_w18",
+            "ar": "انْفَجَرَتْ",
+            "root": "انف",
+            "meaning": "انْفَجَرَتْ",
+            "phraseTr": "<u>انْفَجَرَتْ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr1_w19",
+            "ar": "مَوْجَةُ",
+            "root": "مَاجَ",
+            "meaning": "Dalgası",
+            "phraseTr": "hava <u>dalgası</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr1_w20",
+            "ar": "هَوَاءٍ",
+            "root": "هوا",
+            "meaning": "هَوَاءٍ",
+            "phraseTr": "<u>hava</u> dalgası",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr1_w21",
+            "ar": "ضَخْمَةٌ",
+            "root": "ضَخُمَ",
+            "meaning": "Kocaman, devasa",
+            "phraseTr": "<u>Kocaman, devasa</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p17_pr1_w22",
+            "ar": "طَيَّرَتِ",
+            "root": "طَارَ",
+            "meaning": "Uçurdu",
+            "phraseTr": "<u>Uçurdu</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p17_pr1_w23",
+            "ar": "الضَّبَابَ",
+            "root": "ضَبَّ",
+            "meaning": "Sis",
+            "phraseTr": "<u>Sis</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr1_w24",
+            "ar": "وَالأَوْرَاقَ",
+            "root": "وَرَقَ",
+            "meaning": "Ve Yapraklar",
+            "phraseTr": "<u>Ve Yapraklar</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p17_pr1_w25",
+            "ar": "حَوْلَهُمَا!",
+            "root": "حول",
+            "meaning": "حَوْلَهُمَا",
+            "phraseTr": "<u>حَوْلَهُمَا</u>",
+            "type": "kelime"
+          }
+        ]
+      },
+      {
+        "pId": "p17_pr2",
+        "words": [
+          {
+            "id": "p17_pr2_w1",
+            "ar": "تَرَاجَعَ",
+            "root": "رَجَعَ",
+            "meaning": "Geri çekildi",
+            "phraseTr": "<u>Geri çekildi</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p17_pr2_w2",
+            "ar": "قَيْس",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p17_pr2_w3",
+            "ar": "خُطْوَتَيْنِ",
+            "root": "خَطَا",
+            "meaning": "İki adım",
+            "phraseTr": "<u>İki adım</u>",
+            "type": "isim (tesniye)"
+          },
+          {
+            "id": "p17_pr2_w4",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p17_pr2_w5",
+            "ar": "الخَلْفِ،",
+            "root": "خَلَفَ",
+            "meaning": "Arka taraf",
+            "phraseTr": "<u>Arka taraf</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr2_w6",
+            "ar": "وَظَهَرَتْ",
+            "root": "وظه",
+            "meaning": "وَظَهَرَتْ",
+            "phraseTr": "<u>وَظَهَرَتْ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr2_w7",
+            "ar": "عَلَى",
+            "root": "عَلَى",
+            "meaning": "üzerinde, -e",
+            "phraseTr": "<u>üzerine</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p17_pr2_w8",
+            "ar": "وَجْهِهِ",
+            "root": "وجه",
+            "meaning": "Yüzü",
+            "phraseTr": "kendi <u>yüzüstü</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr2_w9",
+            "ar": "عَلاَمَاتُ",
+            "root": "عَلَمَ",
+            "meaning": "Belirtiler, işaretler",
+            "phraseTr": "<u>Belirtiler, işaretler</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p17_pr2_w10",
+            "ar": "الدَّهْشَةِ",
+            "root": "دَهَشَ",
+            "meaning": "Şaşkınlık",
+            "phraseTr": "<u>Şaşkınlık</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr2_w11",
+            "ar": "الكَبِيرَةِ:",
+            "root": "كبر",
+            "meaning": "Büyük",
+            "phraseTr": "<u>Büyük</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p17_pr2_w12",
+            "ar": "«يَا",
+            "root": "يَا",
+            "meaning": "Ey!",
+            "phraseTr": "<u>Ey!</u>",
+            "type": "nida edatı"
+          },
+          {
+            "id": "p17_pr2_w13",
+            "ar": "لِلْعَجَبِ!",
+            "root": "للع",
+            "meaning": "لِلْعَجَبِ",
+            "phraseTr": "<u>لِلْعَجَبِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr2_w14",
+            "ar": "هَذِهِ",
+            "root": "ذه",
+            "meaning": "Bu (dişil)",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p17_pr2_w15",
+            "ar": "طَاقَةُ",
+            "root": "طوق",
+            "meaning": "Enerjisi",
+            "phraseTr": "saf Çi <u>enerjisi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr2_w16",
+            "ar": "تْشِي",
+            "root": "تْشِي",
+            "meaning": "Çi (yaşam enerjisi)",
+            "phraseTr": "<u>Çi</u> enerjisi",
+            "type": "terim"
+          },
+          {
+            "id": "p17_pr2_w17",
+            "ar": "نَقِيَّةٌ",
+            "root": "نَقَا",
+            "meaning": "Saf, berrak",
+            "phraseTr": "<u>saf</u> Çi enerjisi",
+            "type": "sıfat"
+          },
+          {
+            "id": "p17_pr2_w18",
+            "ar": "وَهَائِلَةٌ",
+            "root": "هَالَ",
+            "meaning": "Ve Muazzam, korkunç",
+            "phraseTr": "<u>Ve Muazzam, korkunç</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p17_pr2_w19",
+            "ar": "جِدّاً",
+            "root": "جدد",
+            "meaning": "çok",
+            "phraseTr": "<u>çok</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p17_pr2_w20",
+            "ar": "لِوَلَدٍ",
+            "root": "ولد",
+            "meaning": "... için Erkek çocuk",
+            "phraseTr": "<u>... için Erkek çocuk</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr2_w21",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p17_pr2_w22",
+            "ar": "هَذَا",
+            "root": "ذا",
+            "meaning": "Bu",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p17_pr2_w23",
+            "ar": "السِّنِّ!»",
+            "root": "سِنّ",
+            "meaning": "Yaş",
+            "phraseTr": "<u>Yaş</u>",
+            "type": "isim"
+          }
+        ]
+      },
+      {
+        "pId": "p17_pr3",
+        "words": [
+          {
+            "id": "p17_pr3_w1",
+            "ar": "وَفِي",
+            "root": "فِي",
+            "meaning": "Ve -de, -da, içinde",
+            "phraseTr": "<u>Ve -de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p17_pr3_w2",
+            "ar": "نَفْسِ",
+            "root": "نفس",
+            "meaning": "Aynı",
+            "phraseTr": "<u>aynı</u> an",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr3_w3",
+            "ar": "اللَّحْظَةِ،",
+            "root": "لحظ",
+            "meaning": "An",
+            "phraseTr": "aynı <u>anda</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr3_w4",
+            "ar": "قَفَزَ",
+            "root": "قفز",
+            "meaning": "Atladı",
+            "phraseTr": "<u>Atladı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p17_pr3_w5",
+            "ar": "زَيْد",
+            "root": "زَيْد",
+            "meaning": "Zeyd (arkadaşı)",
+            "phraseTr": "<u>Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p17_pr3_w6",
+            "ar": "مِنْ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p17_pr3_w7",
+            "ar": "خَلْفِ",
+            "root": "خلف",
+            "meaning": "خَلْفِ",
+            "phraseTr": "<u>خَلْفِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr3_w8",
+            "ar": "قَيْس",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p17_pr3_w9",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p17_pr3_w10",
+            "ar": "صَمْتٍ",
+            "root": "صَمَتَ",
+            "meaning": "Sessizlik",
+            "phraseTr": "tam bir <u>sessizlik</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr3_w11",
+            "ar": "مُطْلَقٍ،",
+            "root": "طَلَقَ",
+            "meaning": "Mutlak, tam",
+            "phraseTr": "<u>tam bir</u> sessizlik",
+            "type": "sıfat"
+          },
+          {
+            "id": "p17_pr3_w12",
+            "ar": "وَسَدَّدَ",
+            "root": "سَدَّ",
+            "meaning": "Ve İndirdi, vurdu",
+            "phraseTr": "<u>Ve İndirdi, vurdu</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p17_pr3_w13",
+            "ar": "رَكْلَةً",
+            "root": "رَكَلَ",
+            "meaning": "Tekme",
+            "phraseTr": "hızlı bir <u>tekme</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr3_w14",
+            "ar": "سَرِيعَةً",
+            "root": "سرع",
+            "meaning": "Hızlı",
+            "phraseTr": "<u>hızlı</u> bir tekme",
+            "type": "sıfat"
+          },
+          {
+            "id": "p17_pr3_w15",
+            "ar": "بِرِجْلِهِ",
+            "root": "برج",
+            "meaning": "بِرِجْلِهِ",
+            "phraseTr": "<u>بِرِجْلِهِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr3_w16",
+            "ar": "نَحْوَ",
+            "root": "نَحَا",
+            "meaning": "Doğru, yönünde",
+            "phraseTr": "<u>Doğru, yönünde</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p17_pr3_w17",
+            "ar": "رَأْسِ",
+            "root": "رأس",
+            "meaning": "رَأْسِ",
+            "phraseTr": "<u>رَأْسِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr3_w18",
+            "ar": "قَيْس.",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p17_pr3_w19",
+            "ar": "لَكِنَّ",
+            "root": "لَكِنْ",
+            "meaning": "Fakat, lakin",
+            "phraseTr": "<u>Fakat, lakin</u>",
+            "type": "istidrak harfi"
+          },
+          {
+            "id": "p17_pr3_w20",
+            "ar": "قَيْس",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p17_pr3_w21",
+            "ar": "حَنَى",
+            "root": "حَنَا",
+            "meaning": "Eğdi",
+            "phraseTr": "<u>Eğdi</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p17_pr3_w22",
+            "ar": "رَأْسَهُ",
+            "root": "رأس",
+            "meaning": "Başı",
+            "phraseTr": "<u>Başı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr3_w23",
+            "ar": "بِبَرَاعَةٍ،",
+            "root": "بَرَعَ",
+            "meaning": "Ustalıkla",
+            "phraseTr": "<u>Ustalıkla</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p17_pr3_w24",
+            "ar": "وَقَفَزَ",
+            "root": "قفز",
+            "meaning": "Ve Atladı",
+            "phraseTr": "<u>Ve Atladı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p17_pr3_w25",
+            "ar": "بَعِيداً",
+            "root": "بعي",
+            "meaning": "بَعِيداً",
+            "phraseTr": "<u>بَعِيداً</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr3_w26",
+            "ar": "فَوْقَ",
+            "root": "فوق",
+            "meaning": "üstünde, üzerine",
+            "phraseTr": "<u>üstünde, üzerine</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p17_pr3_w27",
+            "ar": "غُصْنِ",
+            "root": "غَصَنَ",
+            "meaning": "Dal",
+            "phraseTr": "<u>Dal</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr3_w28",
+            "ar": "شَجَرَةٍ.",
+            "root": "شجر",
+            "meaning": "شَجَرَةٍ",
+            "phraseTr": "<u>شَجَرَةٍ</u>",
+            "type": "kelime"
+          }
+        ]
+      },
+      {
+        "pId": "p17_pr4",
+        "words": [
+          {
+            "id": "p17_pr4_w1",
+            "ar": "نَظَرَ",
+            "root": "نظر",
+            "meaning": "Baktı",
+            "phraseTr": "<u>Baktı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p17_pr4_w2",
+            "ar": "قَيْس",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p17_pr4_w3",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p17_pr4_w4",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p17_pr4_w5",
+            "ar": "وَزَيْد،",
+            "root": "زَيْد",
+            "meaning": "Ve Zeyd (arkadaşı)",
+            "phraseTr": "<u>Ve Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p17_pr4_w6",
+            "ar": "وَانْفَجَرَ",
+            "root": "فَجَرَ",
+            "meaning": "Ve Patlak verdi",
+            "phraseTr": "<u>Ve Patlak verdi</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p17_pr4_w7",
+            "ar": "ضَاحِكاً",
+            "root": "ضَحِكَ",
+            "meaning": "Gülerek",
+            "phraseTr": "<u>Gülerek</u>",
+            "type": "hal"
+          },
+          {
+            "id": "p17_pr4_w8",
+            "ar": "بِسَعَادَةٍ",
+            "root": "سَعَدَ",
+            "meaning": "Mutlulukla",
+            "phraseTr": "<u>Mutlulukla</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p17_pr4_w9",
+            "ar": "غَرِيبَةٍ:",
+            "root": "غَرُبَ",
+            "meaning": "Tuhaf",
+            "phraseTr": "<u>Tuhaf</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p17_pr4_w10",
+            "ar": "«رَائِعٌ!",
+            "root": "رائ",
+            "meaning": "رَائِعٌ",
+            "phraseTr": "<u>رَائِعٌ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr4_w11",
+            "ar": "رَائِعٌ",
+            "root": "رائ",
+            "meaning": "رَائِعٌ",
+            "phraseTr": "<u>رَائِعٌ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr4_w12",
+            "ar": "جِدّاً!",
+            "root": "جدد",
+            "meaning": "çok",
+            "phraseTr": "<u>çok</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p17_pr4_w13",
+            "ar": "لَدَيْكُمَا",
+            "root": "لَدَى",
+            "meaning": "Sizde ikinizde var",
+            "phraseTr": "<u>Sizde ikinizde var</u>",
+            "type": "zarf + zamir"
+          },
+          {
+            "id": "p17_pr4_w14",
+            "ar": "مَوْهِبَةٌ",
+            "root": "وَهَبَ",
+            "meaning": "Yetenek",
+            "phraseTr": "büyük bir <u>yetenek</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr4_w15",
+            "ar": "عَظِيمَةٌ.",
+            "root": "عَظُمَ",
+            "meaning": "Büyük, yüce",
+            "phraseTr": "<u>büyük</u> bir yetenek",
+            "type": "sıfat"
+          },
+          {
+            "id": "p17_pr4_w16",
+            "ar": "أَنَا",
+            "root": "أَنَا",
+            "meaning": "Ben",
+            "phraseTr": "<u>Ben</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p17_pr4_w17",
+            "ar": "لَنْ",
+            "root": "لَنْ",
+            "meaning": "asla -meyecek",
+            "phraseTr": "<u>asla -meyecek</u>",
+            "type": "nefy edatı"
+          },
+          {
+            "id": "p17_pr4_w18",
+            "ar": "أَقْطِفَ",
+            "root": "قَطَفَ",
+            "meaning": "Koparayım",
+            "phraseTr": "<u>Koparayım</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p17_pr4_w19",
+            "ar": "الثِّمَارَ",
+            "root": "ثَمَرَ",
+            "meaning": "Meyveler",
+            "phraseTr": "yeşil (ham) <u>meyveler</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p17_pr4_w20",
+            "ar": "الخَضْرَاءَ",
+            "root": "الخ",
+            "meaning": "الخَضْرَاءَ",
+            "phraseTr": "<u>yeşil (ham)</u> meyveler",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr4_w21",
+            "ar": "قَبْلَ",
+            "root": "قَبْل",
+            "meaning": "Önce",
+            "phraseTr": "<u>Önce</u>",
+            "type": "zaman zarfı"
+          },
+          {
+            "id": "p17_pr4_w22",
+            "ar": "أَنْ",
+            "root": "أَنْ",
+            "meaning": "-mek, -mak",
+            "phraseTr": "<u>-mek, -mak</u>",
+            "type": "masdariyye harfi"
+          },
+          {
+            "id": "p17_pr4_w23",
+            "ar": "تَنْضَجَ!",
+            "root": "نَضَجَ",
+            "meaning": "Olgunlaşır",
+            "phraseTr": "<u>Olgunlaşır</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p17_pr4_w24",
+            "ar": "اذْهَبَا",
+            "root": "اذه",
+            "meaning": "اذْهَبَا",
+            "phraseTr": "<u>اذْهَبَا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr4_w25",
+            "ar": "الآنَ،",
+            "root": "أون",
+            "meaning": "şimdi, şu an",
+            "phraseTr": "<u>şimdi, şu an</u>",
+            "type": "zaman zarfı"
+          },
+          {
+            "id": "p17_pr4_w26",
+            "ar": "وَأَتَمَنَّى",
+            "root": "مَنَى",
+            "meaning": "Ve Umarım, dilerim",
+            "phraseTr": "<u>Ve Umarım, dilerim</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p17_pr4_w27",
+            "ar": "أَنْ",
+            "root": "أَنْ",
+            "meaning": "-mek, -mak",
+            "phraseTr": "<u>-mek, -mak</u>",
+            "type": "masdariyye harfi"
+          },
+          {
+            "id": "p17_pr4_w28",
+            "ar": "نَلْتَقِيَ",
+            "root": "لَقِيَ",
+            "meaning": "Karşılaşalım",
+            "phraseTr": "<u>Karşılaşalım</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p17_pr4_w29",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p17_pr4_w30",
+            "ar": "الاخْتِبَارِ",
+            "root": "خبر",
+            "meaning": "Sınav",
+            "phraseTr": "gelecek <u>sınav</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr4_w31",
+            "ar": "القَادِمِ!»",
+            "root": "قَدِمَ",
+            "meaning": "Gelecek",
+            "phraseTr": "<u>gelecek</u> sınav",
+            "type": "sıfat"
+          },
+          {
+            "id": "p17_pr4_w32",
+            "ar": "ثُمَّ",
+            "root": "ثُمَّ",
+            "meaning": "sonra, ardından",
+            "phraseTr": "<u>sonra, ardından</u>",
+            "type": "bağlaç"
+          },
+          {
+            "id": "p17_pr4_w33",
+            "ar": "اخْتَفَى",
+            "root": "خَفِيَ",
+            "meaning": "Gözden kayboldu",
+            "phraseTr": "<u>Gözden kayboldu</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p17_pr4_w34",
+            "ar": "قَيْس",
+            "root": "قَاسَ",
+            "meaning": "Kays (tehlikeli yarışmacı no: 44)",
+            "phraseTr": "<u>Kays</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p17_pr4_w35",
+            "ar": "بَيْنَ",
+            "root": "بين",
+            "meaning": "بَيْنَ",
+            "phraseTr": "<u>بَيْنَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p17_pr4_w36",
+            "ar": "الضَّبَابِ",
+            "root": "ضَبَّ",
+            "meaning": "Sis",
+            "phraseTr": "<u>Sis</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p17_pr4_w37",
+            "ar": "مِثْلَ",
+            "root": "مِثْل",
+            "meaning": "Gibi",
+            "phraseTr": "<u>Gibi</u>",
+            "type": "edat/isim"
+          },
+          {
+            "id": "p17_pr4_w38",
+            "ar": "الشَّبَحِ.",
+            "root": "شَبَحَ",
+            "meaning": "Hayalet",
+            "phraseTr": "<u>Hayalet</u>",
+            "type": "isim"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pageNum": 18,
+    "title": "الصَّفْحَةُ الثَّامِنَةَ عَشْرَةَ (18)",
+    "paragraphs": [
+      {
+        "pId": "p18_pr1",
+        "words": [
+          {
+            "id": "p18_pr1_w1",
+            "ar": "رَكَضَ",
+            "root": "رَكَضَ",
+            "meaning": "Koştu",
+            "phraseTr": "<u>Koştu</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p18_pr1_w2",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p18_pr1_w3",
+            "ar": "وَزَيْد",
+            "root": "زَيْد",
+            "meaning": "Ve Zeyd (arkadaşı)",
+            "phraseTr": "<u>Ve Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p18_pr1_w4",
+            "ar": "نَحْوَ",
+            "root": "نَحَا",
+            "meaning": "Doğru, yönünde",
+            "phraseTr": "<u>Doğru, yönünde</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p18_pr1_w5",
+            "ar": "طَارِق.",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p18_pr1_w6",
+            "ar": "فَتَحَ",
+            "root": "فتح",
+            "meaning": "Açtı",
+            "phraseTr": "<u>Açtı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p18_pr1_w7",
+            "ar": "طَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p18_pr1_w8",
+            "ar": "عَيْنَيْهِ",
+            "root": "عين",
+            "meaning": "İki gözü",
+            "phraseTr": "<u>İki gözü</u>",
+            "type": "tesniye isim"
+          },
+          {
+            "id": "p18_pr1_w9",
+            "ar": "بِبُطْءٍ",
+            "root": "بطأ",
+            "meaning": "yavaşça",
+            "phraseTr": "<u>yavaşça</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p18_pr1_w10",
+            "ar": "وَقَالَ",
+            "root": "قول",
+            "meaning": "Ve Dedi",
+            "phraseTr": "<u>Ve Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p18_pr1_w11",
+            "ar": "بِأَلَمٍ:",
+            "root": "بأل",
+            "meaning": "بِأَلَمٍ",
+            "phraseTr": "<u>بِأَلَمٍ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p18_pr1_w12",
+            "ar": "«أَأَنَا",
+            "root": "أَنَا",
+            "meaning": "Ben mi",
+            "phraseTr": "<u>Ben mi</u>",
+            "type": "istifham + zamir"
+          },
+          {
+            "id": "p18_pr1_w13",
+            "ar": "حَيٌّ؟",
+            "root": "حَيِيَ",
+            "meaning": "Canlı, hayatta",
+            "phraseTr": "<u>Canlı, hayatta</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p18_pr1_w14",
+            "ar": "هَلْ",
+            "root": "هَلْ",
+            "meaning": "Mı, mi?",
+            "phraseTr": "<u>Mı, mi?</u>",
+            "type": "soru edatı"
+          },
+          {
+            "id": "p18_pr1_w15",
+            "ar": "مَاتَ",
+            "root": "مَاتَ",
+            "meaning": "Öldü",
+            "phraseTr": "<u>Öldü</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p18_pr1_w16",
+            "ar": "ذَلِكَ",
+            "root": "ذا",
+            "meaning": "Şu / O",
+            "phraseTr": "<u>Şu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p18_pr1_w17",
+            "ar": "الشَّيْطَانُ؟»",
+            "root": "شَطَنَ",
+            "meaning": "Şeytan",
+            "phraseTr": "<u>Şeytan</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr1_w18",
+            "ar": "سَاعَدَهُ",
+            "root": "سَعَدَ",
+            "meaning": "Ona yardım etti",
+            "phraseTr": "<u>Ona yardım etti</u>",
+            "type": "fiil + zamir"
+          },
+          {
+            "id": "p18_pr1_w19",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p18_pr1_w20",
+            "ar": "عَلَى",
+            "root": "عَلَى",
+            "meaning": "üzerinde, -e",
+            "phraseTr": "<u>üzerinde, -e</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p18_pr1_w21",
+            "ar": "الوُقُوفِ",
+            "root": "وَقَفَ",
+            "meaning": "Ayağa kalkmak",
+            "phraseTr": "<u>Ayağa kalkmak</u>",
+            "type": "mastar"
+          },
+          {
+            "id": "p18_pr1_w22",
+            "ar": "وَابْتَسَمَ:",
+            "root": "بسم",
+            "meaning": "Ve Gülümsedi",
+            "phraseTr": "<u>Ve Gülümsedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p18_pr1_w23",
+            "ar": "«أَنْتَ",
+            "root": "أَنْتَ",
+            "meaning": "Sen",
+            "phraseTr": "<u>Sen</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p18_pr1_w24",
+            "ar": "بِخَيْرٍ",
+            "root": "خَيْر",
+            "meaning": "İyi, esenlikte",
+            "phraseTr": "<u>İyi, esenlikte</u>",
+            "type": "harf-i cer + isim"
+          },
+          {
+            "id": "p18_pr1_w25",
+            "ar": "يَا",
+            "root": "يَا",
+            "meaning": "Ey!",
+            "phraseTr": "<u>Ey!</u>",
+            "type": "nida edatı"
+          },
+          {
+            "id": "p18_pr1_w26",
+            "ar": "طَارِق!",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p18_pr1_w27",
+            "ar": "لَقَدْ",
+            "root": "لقد",
+            "meaning": "şüphesiz ki",
+            "phraseTr": "<u>şüphesiz ki</u>",
+            "type": "tekit edatı"
+          },
+          {
+            "id": "p18_pr1_w28",
+            "ar": "تَرَكَنَا",
+            "root": "ترك",
+            "meaning": "تَرَكَنَا",
+            "phraseTr": "<u>تَرَكَنَا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p18_pr1_w29",
+            "ar": "وَرَحَلَ.»",
+            "root": "رَحَلَ",
+            "meaning": "Ve Gitti, uzaklaştı",
+            "phraseTr": "<u>Ve Gitti, uzaklaştı</u>",
+            "type": "fiil"
+          }
+        ]
+      },
+      {
+        "pId": "p18_pr2",
+        "words": [
+          {
+            "id": "p18_pr2_w1",
+            "ar": "لَكِنَّ",
+            "root": "لَكِنْ",
+            "meaning": "Fakat, lakin",
+            "phraseTr": "<u>Fakat, lakin</u>",
+            "type": "istidrak harfi"
+          },
+          {
+            "id": "p18_pr2_w2",
+            "ar": "طَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p18_pr2_w3",
+            "ar": "نَظَرَ",
+            "root": "نظر",
+            "meaning": "Baktı",
+            "phraseTr": "<u>Baktı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p18_pr2_w4",
+            "ar": "حَوْلَهُ",
+            "root": "حول",
+            "meaning": "etrafına, çevresine",
+            "phraseTr": "<u>etrafına, çevresine</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p18_pr2_w5",
+            "ar": "بِرُعْبٍ:",
+            "root": "رَعَبَ",
+            "meaning": "Dehşetle",
+            "phraseTr": "<u>Dehşetle</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p18_pr2_w6",
+            "ar": "«أُوه",
+            "root": "أُوه",
+            "meaning": "Oh.. (iç çekme)",
+            "phraseTr": "<u>Oh..</u>",
+            "type": "ünlem"
+          },
+          {
+            "id": "p18_pr2_w7",
+            "ar": "لاَ!",
+            "root": "لاَ",
+            "meaning": "değil, -mez, -maz",
+            "phraseTr": "<u>değil, -mez, -maz</u>",
+            "type": "nefy edatı"
+          },
+          {
+            "id": "p18_pr2_w8",
+            "ar": "لَقَدْ",
+            "root": "لقد",
+            "meaning": "şüphesiz ki",
+            "phraseTr": "<u>şüphesiz ki</u>",
+            "type": "tekit edatı"
+          },
+          {
+            "id": "p18_pr2_w9",
+            "ar": "تَأَخَّرْنَا",
+            "root": "أَخَرَ",
+            "meaning": "Geciktik",
+            "phraseTr": "<u>Geciktik</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p18_pr2_w10",
+            "ar": "كَثِيراً!",
+            "root": "كثر",
+            "meaning": "çok, fazlaca",
+            "phraseTr": "<u>çok, fazlaca</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p18_pr2_w11",
+            "ar": "الحَكَمُ",
+            "root": "حكم",
+            "meaning": "Hakem",
+            "phraseTr": "<u>Hakem</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr2_w12",
+            "ar": "سَاجِد",
+            "root": "سَجَدَ",
+            "meaning": "Sacid (sınav hakemi)",
+            "phraseTr": "<u>Sacid</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p18_pr2_w13",
+            "ar": "وَبَاقِي",
+            "root": "بَقِيَ",
+            "meaning": "Ve Kalan",
+            "phraseTr": "<u>Ve Kalan</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr2_w14",
+            "ar": "المُتَسَابِقِينَ",
+            "root": "سبق",
+            "meaning": "Yarışmacılar",
+            "phraseTr": "<u>Yarışmacılar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p18_pr2_w15",
+            "ar": "قَدِ",
+            "root": "قد",
+            "meaning": "gerçekten, andolsun",
+            "phraseTr": "<u>gerçekten, andolsun</u>",
+            "type": "tahkik edatı"
+          },
+          {
+            "id": "p18_pr2_w16",
+            "ar": "ابْتَعَدُوا،",
+            "root": "ابت",
+            "meaning": "ابْتَعَدُوا",
+            "phraseTr": "<u>ابْتَعَدُوا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p18_pr2_w17",
+            "ar": "وَالضَّبَابُ",
+            "root": "ضَبَّ",
+            "meaning": "Ve Sis",
+            "phraseTr": "<u>Ve Sis</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr2_w18",
+            "ar": "مَسَحَ",
+            "root": "مَسَحَ",
+            "meaning": "Sildi, yok etti",
+            "phraseTr": "<u>Sildi, yok etti</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p18_pr2_w19",
+            "ar": "كُلَّ",
+            "root": "كلل",
+            "meaning": "her",
+            "phraseTr": "<u>her</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p18_pr2_w20",
+            "ar": "آثَارِ",
+            "root": "أَثَرَ",
+            "meaning": "İzler",
+            "phraseTr": "<u>İzler</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p18_pr2_w21",
+            "ar": "الأَقْدَامِ!",
+            "root": "الأ",
+            "meaning": "الأَقْدَامِ",
+            "phraseTr": "<u>الأَقْدَامِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p18_pr2_w22",
+            "ar": "لَقَدْ",
+            "root": "لقد",
+            "meaning": "şüphesiz ki",
+            "phraseTr": "<u>şüphesiz ki</u>",
+            "type": "tekit edatı"
+          },
+          {
+            "id": "p18_pr2_w23",
+            "ar": "خَسِرْنَا",
+            "root": "خَسِرَ",
+            "meaning": "Kaybettik",
+            "phraseTr": "<u>Kaybettik</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p18_pr2_w24",
+            "ar": "الاخْتِبَارَ!»",
+            "root": "خبر",
+            "meaning": "Sınav",
+            "phraseTr": "<u>Sınav</u>",
+            "type": "isim"
+          }
+        ]
+      },
+      {
+        "pId": "p18_pr3",
+        "words": [
+          {
+            "id": "p18_pr3_w1",
+            "ar": "أَغْلَقَ",
+            "root": "غلق",
+            "meaning": "Kapattı",
+            "phraseTr": "<u>Kapattı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p18_pr3_w2",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p18_pr3_w3",
+            "ar": "عَيْنَيْهِ",
+            "root": "عين",
+            "meaning": "İki gözü",
+            "phraseTr": "<u>İki gözü</u>",
+            "type": "tesniye isim"
+          },
+          {
+            "id": "p18_pr3_w4",
+            "ar": "وَتَنَفَّسَ",
+            "root": "نفس",
+            "meaning": "Ve Nefes al!",
+            "phraseTr": "<u>Ve Nefes al!</u>",
+            "type": "emir fiili"
+          },
+          {
+            "id": "p18_pr3_w5",
+            "ar": "بِعُمْقٍ.",
+            "root": "عَمُقَ",
+            "meaning": "... ile Derinlik",
+            "phraseTr": "<u>... ile Derinlik</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr3_w6",
+            "ar": "تَذَكَّرَ",
+            "root": "ذكر",
+            "meaning": "Hatırladı",
+            "phraseTr": "<u>Hatırladı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p18_pr3_w7",
+            "ar": "دَرْساً",
+            "root": "دَرَسَ",
+            "meaning": "Bir ders",
+            "phraseTr": "<u>Bir ders</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr3_w8",
+            "ar": "آخَرَ",
+            "root": "أخر",
+            "meaning": "Son",
+            "phraseTr": "<u>Son</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr3_w9",
+            "ar": "مِنْ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p18_pr3_w10",
+            "ar": "جَدِّهِ",
+            "root": "جدد",
+            "meaning": "Dedesi",
+            "phraseTr": "bilge <u>dedesi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr3_w11",
+            "ar": "الحَكِيمِ:",
+            "root": "حَكَمَ",
+            "meaning": "Bilge",
+            "phraseTr": "<u>bilge</u> dedesi",
+            "type": "sıfat"
+          },
+          {
+            "id": "p18_pr3_w12",
+            "ar": "«يَا",
+            "root": "يَا",
+            "meaning": "Ey!",
+            "phraseTr": "<u>Ey!</u>",
+            "type": "nida edatı"
+          },
+          {
+            "id": "p18_pr3_w13",
+            "ar": "رَامِي،",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p18_pr3_w14",
+            "ar": "الإِنْسَانُ",
+            "root": "أنس",
+            "meaning": "İnsan",
+            "phraseTr": "<u>İnsan</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr3_w15",
+            "ar": "الَّذِي",
+            "root": "الذي",
+            "meaning": "-an, -en, olan",
+            "phraseTr": "<u>-an, -en, olan</u>",
+            "type": "ilgi zamiri"
+          },
+          {
+            "id": "p18_pr3_w16",
+            "ar": "يَسْتَخْدِمُ",
+            "root": "يست",
+            "meaning": "يَسْتَخْدِمُ",
+            "phraseTr": "<u>يَسْتَخْدِمُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p18_pr3_w17",
+            "ar": "طَاقَةَ",
+            "root": "طوق",
+            "meaning": "Enerjisini",
+            "phraseTr": "Çi <u>enerjisi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr3_w18",
+            "ar": "التْشِي",
+            "root": "تْشِي",
+            "meaning": "Çi enerjisi",
+            "phraseTr": "<u>Çi</u> enerjisi",
+            "type": "terim"
+          },
+          {
+            "id": "p18_pr3_w19",
+            "ar": "يَتْرُكُ",
+            "root": "تَرَكَ",
+            "meaning": "Bırakır",
+            "phraseTr": "<u>Bırakır</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p18_pr3_w20",
+            "ar": "خَلْفَهُ",
+            "root": "خلف",
+            "meaning": "خَلْفَهُ",
+            "phraseTr": "<u>خَلْفَهُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p18_pr3_w21",
+            "ar": "رَائِحَةً",
+            "root": "رَاحَ",
+            "meaning": "Koku",
+            "phraseTr": "gizli bir <u>koku</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr3_w22",
+            "ar": "خَفِيَّةً",
+            "root": "خَفِيَ",
+            "meaning": "Gizli",
+            "phraseTr": "<u>gizli</u> bir koku",
+            "type": "sıfat"
+          },
+          {
+            "id": "p18_pr3_w23",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p18_pr3_w24",
+            "ar": "الهَوَاءِ",
+            "root": "هوو",
+            "meaning": "Hava",
+            "phraseTr": "<u>Hava</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr3_w25",
+            "ar": "كَأَنَّهَا",
+            "root": "كأن",
+            "meaning": "كَأَنَّهَا",
+            "phraseTr": "<u>كَأَنَّهَا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p18_pr3_w26",
+            "ar": "خَيْطٌ",
+            "root": "خَاطَ",
+            "meaning": "İp, çizgi",
+            "phraseTr": "ılık bir <u>çizgi / iz</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr3_w27",
+            "ar": "دَافِئٌ.»",
+            "root": "دَفَأَ",
+            "meaning": "Ilık",
+            "phraseTr": "<u>ılık</u> bir çizgi / iz",
+            "type": "sıfat"
+          }
+        ]
+      },
+      {
+        "pId": "p18_pr4",
+        "words": [
+          {
+            "id": "p18_pr4_w1",
+            "ar": "أَرْسَلَ",
+            "root": "رسل",
+            "meaning": "Gönderdi",
+            "phraseTr": "<u>Gönderdi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p18_pr4_w2",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p18_pr4_w3",
+            "ar": "طَاقَةَ",
+            "root": "طوق",
+            "meaning": "Enerjisini",
+            "phraseTr": "Çi <u>enerjisi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr4_w4",
+            "ar": "التْشِي",
+            "root": "تْشِي",
+            "meaning": "Çi enerjisi",
+            "phraseTr": "<u>Çi</u> enerjisi",
+            "type": "terim"
+          },
+          {
+            "id": "p18_pr4_w5",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p18_pr4_w6",
+            "ar": "أَنْفِهِ،",
+            "root": "أنف",
+            "meaning": "Burnu",
+            "phraseTr": "<u>Burnu</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr4_w7",
+            "ar": "وَشَمَّ",
+            "root": "شَمَّ",
+            "meaning": "Ve Kokladı",
+            "phraseTr": "<u>Ve Kokladı</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p18_pr4_w8",
+            "ar": "الهَوَاءَ",
+            "root": "هوو",
+            "meaning": "Havayı",
+            "phraseTr": "<u>Havayı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr4_w9",
+            "ar": "بِدِقَّةٍ.",
+            "root": "دَقَّ",
+            "meaning": "Dikkatle",
+            "phraseTr": "<u>Dikkatle</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p18_pr4_w10",
+            "ar": "ابْتَسَمَ",
+            "root": "بسم",
+            "meaning": "Gülümsedi",
+            "phraseTr": "<u>Gülümsedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p18_pr4_w11",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p18_pr4_w12",
+            "ar": "بِفَرَحٍ",
+            "root": "فرح",
+            "meaning": "... ile Sevindi",
+            "phraseTr": "<u>... ile Sevindi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p18_pr4_w13",
+            "ar": "وَفَتَحَ",
+            "root": "فتح",
+            "meaning": "Ve Açtı",
+            "phraseTr": "<u>Ve Açtı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p18_pr4_w14",
+            "ar": "عَيْنَيْهِ:",
+            "root": "عين",
+            "meaning": "İki gözü",
+            "phraseTr": "<u>İki gözü</u>",
+            "type": "tesniye isim"
+          },
+          {
+            "id": "p18_pr4_w15",
+            "ar": "«وَجَدْتُ",
+            "root": "وَجَدَ",
+            "meaning": "Buldum",
+            "phraseTr": "<u>Buldum</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p18_pr4_w16",
+            "ar": "الطَّرِيقَ!",
+            "root": "طرق",
+            "meaning": "Yol",
+            "phraseTr": "<u>Yol</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr4_w17",
+            "ar": "أَنَا",
+            "root": "أَنَا",
+            "meaning": "Ben",
+            "phraseTr": "<u>Ben</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p18_pr4_w18",
+            "ar": "أَشُمُّ",
+            "root": "شَمَّ",
+            "meaning": "Kokluyorum",
+            "phraseTr": "<u>Kokluyorum</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p18_pr4_w19",
+            "ar": "رَائِحَةَ",
+            "root": "رَاحَ",
+            "meaning": "Kokusu",
+            "phraseTr": "<u>Kokusu</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr4_w20",
+            "ar": "حِذَاءِ",
+            "root": "حَذَا",
+            "meaning": "Ayakkabısı",
+            "phraseTr": "<u>Ayakkabısı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr4_w21",
+            "ar": "الحَكَمِ",
+            "root": "حكم",
+            "meaning": "Hakem",
+            "phraseTr": "<u>Hakem</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr4_w22",
+            "ar": "سَاجِد",
+            "root": "سَجَدَ",
+            "meaning": "Sacid (sınav hakemi)",
+            "phraseTr": "<u>Sacid</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p18_pr4_w23",
+            "ar": "وَرَائِحَةَ",
+            "root": "رَاحَ",
+            "meaning": "Ve Koku",
+            "phraseTr": "<u>Ve Koku</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p18_pr4_w24",
+            "ar": "طَاقَتِهِ",
+            "root": "طاق",
+            "meaning": "طَاقَتِهِ",
+            "phraseTr": "<u>طَاقَتِهِ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p18_pr4_w25",
+            "ar": "القَوِيَّةِ!",
+            "root": "قوو",
+            "meaning": "Güçlü",
+            "phraseTr": "<u>Güçlü</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p18_pr4_w26",
+            "ar": "تَعَالَوْا",
+            "root": "علو",
+            "meaning": "Gelin!",
+            "phraseTr": "<u>Gelin!</u>",
+            "type": "emir fiili"
+          },
+          {
+            "id": "p18_pr4_w27",
+            "ar": "خَلْفِي!»",
+            "root": "خلف",
+            "meaning": "arkamdan, arkamda",
+            "phraseTr": "<u>arkamdan, arkamda</u>",
+            "type": "mekan zarfı"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pageNum": 19,
+    "title": "الصَّفْحَةُ التَّاسِعَةَ عَشْرَةَ (19)",
+    "paragraphs": [
+      {
+        "pId": "p19_pr1",
+        "words": [
+          {
+            "id": "p19_pr1_w1",
+            "ar": "انْطَلَقَ",
+            "root": "طَلَقَ",
+            "meaning": "Harekete geçti",
+            "phraseTr": "<u>Harekete geçti</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p19_pr1_w2",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p19_pr1_w3",
+            "ar": "يَتْبَعُ",
+            "root": "تَبِعَ",
+            "meaning": "Takip ediyor",
+            "phraseTr": "<u>Takip ediyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p19_pr1_w4",
+            "ar": "الأَثَرَ",
+            "root": "أَثَرَ",
+            "meaning": "İz",
+            "phraseTr": "gizli <u>iz</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr1_w5",
+            "ar": "السِّرِّيَّ",
+            "root": "سَرَّ",
+            "meaning": "Gizli",
+            "phraseTr": "<u>gizli</u> iz",
+            "type": "sıfat"
+          },
+          {
+            "id": "p19_pr1_w6",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p19_pr1_w7",
+            "ar": "الهَوَاءِ،",
+            "root": "هوو",
+            "meaning": "Hava",
+            "phraseTr": "<u>Hava</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr1_w8",
+            "ar": "وَجَرَى",
+            "root": "وجر",
+            "meaning": "وَجَرَى",
+            "phraseTr": "<u>وَجَرَى</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p19_pr1_w9",
+            "ar": "خَلْفَهُ",
+            "root": "خلف",
+            "meaning": "خَلْفَهُ",
+            "phraseTr": "<u>خَلْفَهُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p19_pr1_w10",
+            "ar": "زَيْد",
+            "root": "زَيْد",
+            "meaning": "Zeyd (arkadaşı)",
+            "phraseTr": "<u>Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p19_pr1_w11",
+            "ar": "وَطَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Ve Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Ve Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p19_pr1_w12",
+            "ar": "بِأَقْصَى",
+            "root": "قصو",
+            "meaning": "... ile En son, son radde",
+            "phraseTr": "<u>son</u> hızla",
+            "type": "ismi tafdil"
+          },
+          {
+            "id": "p19_pr1_w13",
+            "ar": "سُرْعَةٍ.",
+            "root": "سرع",
+            "meaning": "Hız",
+            "phraseTr": "son <u>hızla</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr1_w14",
+            "ar": "وَبَعْدَ",
+            "root": "بَعْد",
+            "meaning": "Ve sonra",
+            "phraseTr": "<u>Ve sonra</u>",
+            "type": "bağlaç + zarf"
+          },
+          {
+            "id": "p19_pr1_w15",
+            "ar": "نِصْفِ",
+            "root": "نَصَفَ",
+            "meaning": "Yarım",
+            "phraseTr": "<u>yarım</u> saat",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr1_w16",
+            "ar": "سَاعَةٍ،",
+            "root": "سوع",
+            "meaning": "Bir saat",
+            "phraseTr": "yarım <u>saat</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr1_w17",
+            "ar": "وَصَلُوا",
+            "root": "وصل",
+            "meaning": "Ulaştılar",
+            "phraseTr": "<u>Ulaştılar</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p19_pr1_w18",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p19_pr1_w19",
+            "ar": "مُسْتَنْقَعٍ",
+            "root": "نَقَعَ",
+            "meaning": "Bataklık",
+            "phraseTr": "geniş bir <u>bataklık</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr1_w20",
+            "ar": "وَاسِعٍ",
+            "root": "واس",
+            "meaning": "وَاسِعٍ",
+            "phraseTr": "<u>geniş</u> bir bataklık",
+            "type": "kelime"
+          },
+          {
+            "id": "p19_pr1_w21",
+            "ar": "مَلِيءٍ",
+            "root": "مَلَأَ",
+            "meaning": "Dolu",
+            "phraseTr": "<u>Dolu</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p19_pr1_w22",
+            "ar": "بِالطِّينِ",
+            "root": "طَانَ",
+            "meaning": "... ile Çamur",
+            "phraseTr": "<u>... ile Çamur</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr1_w23",
+            "ar": "الأَسْوَدِ",
+            "root": "الأ",
+            "meaning": "الأَسْوَدِ",
+            "phraseTr": "yapışkan <u>kara</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p19_pr1_w24",
+            "ar": "اللَّزِجِ.",
+            "root": "لَزِجَ",
+            "meaning": "Yapışkan",
+            "phraseTr": "<u>yapışkan</u> kara",
+            "type": "sıfat"
+          }
+        ]
+      },
+      {
+        "pId": "p19_pr2",
+        "words": [
+          {
+            "id": "p19_pr2_w1",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p19_pr2_w2",
+            "ar": "وَسَطِ",
+            "root": "وَسَط",
+            "meaning": "Ortasında, orta",
+            "phraseTr": "bataklığın <u>ortası</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr2_w3",
+            "ar": "المُسْتَنْقَعِ،",
+            "root": "نَقَعَ",
+            "meaning": "Bataklık",
+            "phraseTr": "<u>bataklığın</u> ortası",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr2_w4",
+            "ar": "كَانَتْ",
+            "root": "كون",
+            "meaning": "İdi (dişil)",
+            "phraseTr": "<u>İdi</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p19_pr2_w5",
+            "ar": "تَنَامُ",
+            "root": "نَامَ",
+            "meaning": "Uyuyor",
+            "phraseTr": "<u>Uyuyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p19_pr2_w6",
+            "ar": "وُحُوشُ",
+            "root": "وَحَشَ",
+            "meaning": "Canavarlar",
+            "phraseTr": "çamur <u>canavarları</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p19_pr2_w7",
+            "ar": "الطِّينِ",
+            "root": "طَانَ",
+            "meaning": "Çamur",
+            "phraseTr": "<u>çamur</u> canavarları",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr2_w8",
+            "ar": "الضَّخْمَةُ.",
+            "root": "ضَخُمَ",
+            "meaning": "Kocaman, devasa",
+            "phraseTr": "<u>Kocaman, devasa</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p19_pr2_w9",
+            "ar": "إِذَا",
+            "root": "إِذَا",
+            "meaning": "eğer, -dığı zaman",
+            "phraseTr": "<u>eğer, -dığı zaman</u>",
+            "type": "şart edatı"
+          },
+          {
+            "id": "p19_pr2_w10",
+            "ar": "سَقَطَ",
+            "root": "سقط",
+            "meaning": "Düştü",
+            "phraseTr": "<u>Düştü</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p19_pr2_w11",
+            "ar": "أَيُّ",
+            "root": "أَيّ",
+            "meaning": "Hangi, herhangi bir",
+            "phraseTr": "<u>Hangi, herhangi bir</u>",
+            "type": "soru/işaret ismi"
+          },
+          {
+            "id": "p19_pr2_w12",
+            "ar": "حَجَرٍ،",
+            "root": "حجر",
+            "meaning": "حَجَرٍ",
+            "phraseTr": "<u>حَجَرٍ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p19_pr2_w13",
+            "ar": "سَتَسْتَيْقِظُ",
+            "root": "يَقَظَ",
+            "meaning": "Uyanacak",
+            "phraseTr": "<u>Uyanacak</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p19_pr2_w14",
+            "ar": "هَذِهِ",
+            "root": "ذه",
+            "meaning": "Bu (dişil)",
+            "phraseTr": "<u>Bu</u>",
+            "type": "işaret ismi"
+          },
+          {
+            "id": "p19_pr2_w15",
+            "ar": "الوُحُوشُ",
+            "root": "وَحَشَ",
+            "meaning": "Canavarlar, vahşi yaratıklar",
+            "phraseTr": "<u>Canavarlar, vahşi yaratıklar</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p19_pr2_w16",
+            "ar": "وَتَبْتَلِعُ",
+            "root": "بَلَعَ",
+            "meaning": "Ve Yutar",
+            "phraseTr": "<u>Ve Yutar</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p19_pr2_w17",
+            "ar": "كُلَّ",
+            "root": "كلل",
+            "meaning": "her",
+            "phraseTr": "<u>her</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p19_pr2_w18",
+            "ar": "مَنْ",
+            "root": "من",
+            "meaning": "kim, her kim",
+            "phraseTr": "<u>kim, her kim</u>",
+            "type": "şart / soru"
+          },
+          {
+            "id": "p19_pr2_w19",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p19_pr2_w20",
+            "ar": "المَكَانِ!",
+            "root": "كون",
+            "meaning": "Mekan, yer",
+            "phraseTr": "<u>Mekan, yer</u>",
+            "type": "isim"
+          }
+        ]
+      },
+      {
+        "pId": "p19_pr3",
+        "words": [
+          {
+            "id": "p19_pr3_w1",
+            "ar": "وَقَفَ",
+            "root": "وقف",
+            "meaning": "Durdu",
+            "phraseTr": "<u>Durdu</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p19_pr3_w2",
+            "ar": "زَيْد",
+            "root": "زَيْد",
+            "meaning": "Zeyd (arkadaşı)",
+            "phraseTr": "<u>Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p19_pr3_w3",
+            "ar": "وَقَالَ:",
+            "root": "قول",
+            "meaning": "Ve Dedi",
+            "phraseTr": "<u>Ve Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p19_pr3_w4",
+            "ar": "«لاَ",
+            "root": "لاَ",
+            "meaning": "değil, -mez, -maz",
+            "phraseTr": "<u>değil, -mez, -maz</u>",
+            "type": "nefy edatı"
+          },
+          {
+            "id": "p19_pr3_w5",
+            "ar": "تَقْلَقَا!",
+            "root": "قَلِقَ",
+            "meaning": "İkiniz endişelenmeyin!",
+            "phraseTr": "<u>İkiniz endişelenmeyin!</u>",
+            "type": "fiil (nehiy tesniye)"
+          },
+          {
+            "id": "p19_pr3_w6",
+            "ar": "سَأُعَلِّمُكُمَا",
+            "root": "عَلِمَ",
+            "meaning": "İkinize öğreteceğim",
+            "phraseTr": "<u>İkinize öğreteceğim</u>",
+            "type": "fiil + zamir"
+          },
+          {
+            "id": "p19_pr3_w7",
+            "ar": "حَرَكَةً",
+            "root": "حَرَكَ",
+            "meaning": "Bir hareket",
+            "phraseTr": "<u>Bir hareket</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr3_w8",
+            "ar": "اسْمُهَا:",
+            "root": "سمو",
+            "meaning": "Adı",
+            "phraseTr": "<u>Adı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr3_w9",
+            "ar": "الخُطْوَةُ",
+            "root": "خَطَا",
+            "meaning": "Adım",
+            "phraseTr": "sessiz <u>adım</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr3_w10",
+            "ar": "الصَّامِتَةُ.",
+            "root": "صَمَتَ",
+            "meaning": "Sessiz",
+            "phraseTr": "<u>sessiz</u> adım",
+            "type": "sıfat"
+          },
+          {
+            "id": "p19_pr3_w11",
+            "ar": "ضَعَا",
+            "root": "ضعا",
+            "meaning": "ضَعَا",
+            "phraseTr": "<u>ضَعَا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p19_pr3_w12",
+            "ar": "طَاقَةَ",
+            "root": "طوق",
+            "meaning": "Enerjisini",
+            "phraseTr": "Çi <u>enerjisi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr3_w13",
+            "ar": "التْشِي",
+            "root": "تْشِي",
+            "meaning": "Çi enerjisi",
+            "phraseTr": "<u>Çi</u> enerjisi",
+            "type": "terim"
+          },
+          {
+            "id": "p19_pr3_w14",
+            "ar": "بِتَسَاوٍ",
+            "root": "سَوِيَ",
+            "meaning": "Eşit bir şekilde",
+            "phraseTr": "<u>Eşit bir şekilde</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p19_pr3_w15",
+            "ar": "تَحْتَ",
+            "root": "تحت",
+            "meaning": "altında, altına",
+            "phraseTr": "<u>altında, altına</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p19_pr3_w16",
+            "ar": "أَقْدَامِكُمَا",
+            "root": "أقد",
+            "meaning": "أَقْدَامِكُمَا",
+            "phraseTr": "<u>أَقْدَامِكُمَا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p19_pr3_w17",
+            "ar": "مِثْلَ",
+            "root": "مِثْل",
+            "meaning": "Gibi",
+            "phraseTr": "<u>Gibi</u>",
+            "type": "edat/isim"
+          },
+          {
+            "id": "p19_pr3_w18",
+            "ar": "لَوْحٍ",
+            "root": "لَاحَ",
+            "meaning": "Levha, tahta",
+            "phraseTr": "hafif bir <u>tahta</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr3_w19",
+            "ar": "خَفِيفٍ",
+            "root": "خفي",
+            "meaning": "خَفِيفٍ",
+            "phraseTr": "<u>hafif</u> bir tahta",
+            "type": "kelime"
+          },
+          {
+            "id": "p19_pr3_w20",
+            "ar": "مِنَ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>...-den</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p19_pr3_w21",
+            "ar": "الخَشَبِ،",
+            "root": "خَشَبَ",
+            "meaning": "Ahşap, tahta",
+            "phraseTr": "<u>ahşaptan</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr3_w22",
+            "ar": "وَامْشِيَا",
+            "root": "مَشَى",
+            "meaning": "Ve Yürüyün ikiniz",
+            "phraseTr": "<u>Ve Yürüyün ikiniz</u>",
+            "type": "emir (tesniye)"
+          },
+          {
+            "id": "p19_pr3_w23",
+            "ar": "فَوْقَ",
+            "root": "فوق",
+            "meaning": "üstünde, üzerine",
+            "phraseTr": "<u>üstünde, üzerine</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p19_pr3_w24",
+            "ar": "الطِّينِ",
+            "root": "طَانَ",
+            "meaning": "Çamur",
+            "phraseTr": "<u>Çamur</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr3_w25",
+            "ar": "بِلَا",
+            "root": "لَا",
+            "meaning": "Olmaksızın, -sız",
+            "phraseTr": "<u>Olmaksızın, -sız</u>",
+            "type": "edat"
+          },
+          {
+            "id": "p19_pr3_w26",
+            "ar": "وَزْنٍ.»",
+            "root": "وَزَنَ",
+            "meaning": "Ağırlık",
+            "phraseTr": "<u>Ağırlık</u>",
+            "type": "isim"
+          }
+        ]
+      },
+      {
+        "pId": "p19_pr4",
+        "words": [
+          {
+            "id": "p19_pr4_w1",
+            "ar": "جَرَّبَ",
+            "root": "جَرَبَ",
+            "meaning": "Denedi",
+            "phraseTr": "<u>Denedi</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p19_pr4_w2",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p19_pr4_w3",
+            "ar": "وَطَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Ve Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Ve Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p19_pr4_w4",
+            "ar": "الحَرَكَةَ",
+            "root": "حَرَكَ",
+            "meaning": "Hareketi",
+            "phraseTr": "<u>Hareketi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr4_w5",
+            "ar": "بِنَجَاحٍ.",
+            "root": "نَجَحَ",
+            "meaning": "Başarıyla",
+            "phraseTr": "<u>Başarıyla</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p19_pr4_w6",
+            "ar": "طَفَا",
+            "root": "طَفَا",
+            "meaning": "Yüzeyde durdu, süzüldü",
+            "phraseTr": "<u>Yüzeyde durdu, süzüldü</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p19_pr4_w7",
+            "ar": "الثَّلاَثَةُ",
+            "root": "ثَلَثَ",
+            "meaning": "Üçü",
+            "phraseTr": "<u>Üçü</u>",
+            "type": "sayı"
+          },
+          {
+            "id": "p19_pr4_w8",
+            "ar": "فَوْقَ",
+            "root": "فوق",
+            "meaning": "üstünde, üzerine",
+            "phraseTr": "<u>üstünde, üzerine</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p19_pr4_w9",
+            "ar": "الطِّينِ",
+            "root": "طَانَ",
+            "meaning": "Çamur",
+            "phraseTr": "kara <u>çamur</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr4_w10",
+            "ar": "الأَسْوَدِ",
+            "root": "الأ",
+            "meaning": "الأَسْوَدِ",
+            "phraseTr": "<u>kara</u> çamur",
+            "type": "kelime"
+          },
+          {
+            "id": "p19_pr4_w11",
+            "ar": "بِخِفَّةٍ",
+            "root": "خَفَّ",
+            "meaning": "Hafiflikle",
+            "phraseTr": "<u>Hafiflikle</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p19_pr4_w12",
+            "ar": "عَجِيبَةٍ،",
+            "root": "عجب",
+            "meaning": "Şaşırtıcı",
+            "phraseTr": "<u>Şaşırtıcı</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p19_pr4_w13",
+            "ar": "وَعَبَرُوا",
+            "root": "عَبَرَ",
+            "meaning": "Ve Geçtiler",
+            "phraseTr": "<u>Ve Geçtiler</u>",
+            "type": "fiil (çoğul)"
+          },
+          {
+            "id": "p19_pr4_w14",
+            "ar": "المُسْتَنْقَعَ",
+            "root": "نَقَعَ",
+            "meaning": "Bataklık",
+            "phraseTr": "tehlikeli <u>bataklık</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr4_w15",
+            "ar": "الخَطِيرَ",
+            "root": "خطر",
+            "meaning": "Tehlikeli",
+            "phraseTr": "<u>tehlikeli</u> bataklık",
+            "type": "sıfat"
+          },
+          {
+            "id": "p19_pr4_w16",
+            "ar": "دُونَ",
+            "root": "دُونَ",
+            "meaning": "Olmadan, -meksizin",
+            "phraseTr": "<u>Olmadan, -meksizin</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p19_pr4_w17",
+            "ar": "أَنْ",
+            "root": "أَنْ",
+            "meaning": "-mek, -mak",
+            "phraseTr": "<u>-mek, -mak</u>",
+            "type": "masdariyye harfi"
+          },
+          {
+            "id": "p19_pr4_w18",
+            "ar": "يَسْتَيْقِظَ",
+            "root": "يَقَظَ",
+            "meaning": "Uyanır",
+            "phraseTr": "<u>Uyanır</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p19_pr4_w19",
+            "ar": "وَحْشٌ",
+            "root": "وَحَشَ",
+            "meaning": "Canavar",
+            "phraseTr": "<u>Canavar</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p19_pr4_w20",
+            "ar": "وَاحِدٌ!",
+            "root": "واح",
+            "meaning": "وَاحِدٌ",
+            "phraseTr": "<u>وَاحِدٌ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p19_pr4_w21",
+            "ar": "قَالَ",
+            "root": "قول",
+            "meaning": "Dedi",
+            "phraseTr": "<u>Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p19_pr4_w22",
+            "ar": "طَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p19_pr4_w23",
+            "ar": "بِانْبِهَارٍ:",
+            "root": "بَهَرَ",
+            "meaning": "Hayranlıkla",
+            "phraseTr": "<u>Hayranlıkla</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p19_pr4_w24",
+            "ar": "«أَنْتُمَا",
+            "root": "أنت",
+            "meaning": "أَنْتُمَا",
+            "phraseTr": "<u>أَنْتُمَا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p19_pr4_w25",
+            "ar": "حَقّاً",
+            "root": "حَقَّ",
+            "meaning": "Gerçekten",
+            "phraseTr": "<u>Gerçekten</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p19_pr4_w26",
+            "ar": "أَبْطَالٌ",
+            "root": "بَطَلَ",
+            "meaning": "Kahramanlar",
+            "phraseTr": "dahi <u>kahramanlar</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p19_pr4_w27",
+            "ar": "عَبَاقِرَةٌ!»",
+            "root": "عَبْقَرَ",
+            "meaning": "Dahiler",
+            "phraseTr": "<u>dahi</u> kahramanlar",
+            "type": "isim (çoğul)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pageNum": 20,
+    "title": "الصَّفْحَةُ العِشْرُونَ (20)",
+    "paragraphs": [
+      {
+        "pId": "p20_pr1",
+        "words": [
+          {
+            "id": "p20_pr1_w1",
+            "ar": "بَدَأَتِ",
+            "root": "بدو",
+            "meaning": "Başladı (dişil)",
+            "phraseTr": "<u>Başladı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr1_w2",
+            "ar": "الأَشْجَارُ",
+            "root": "شجر",
+            "meaning": "Ağaçlar",
+            "phraseTr": "<u>Ağaçlar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p20_pr1_w3",
+            "ar": "تَقِلُّ،",
+            "root": "قَلَّ",
+            "meaning": "Azalıyor",
+            "phraseTr": "<u>Azalıyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p20_pr1_w4",
+            "ar": "وَبَدَأَ",
+            "root": "بدو",
+            "meaning": "Ve Başladı",
+            "phraseTr": "<u>Ve Başladı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr1_w5",
+            "ar": "الضَّبَابُ",
+            "root": "ضَبَّ",
+            "meaning": "Sis",
+            "phraseTr": "beyaz <u>sis</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr1_w6",
+            "ar": "الأَبْيَضُ",
+            "root": "بيض",
+            "meaning": "Beyaz",
+            "phraseTr": "<u>beyaz</u> sis",
+            "type": "sıfat"
+          },
+          {
+            "id": "p20_pr1_w7",
+            "ar": "يَتَبَدَّدُ",
+            "root": "بَدَّ",
+            "meaning": "Dağılıyor",
+            "phraseTr": "<u>Dağılıyor</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p20_pr1_w8",
+            "ar": "أَمَامَهُمْ.",
+            "root": "أمم",
+            "meaning": "önünde, önüne (onların)",
+            "phraseTr": "<u>önünde, önüne</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p20_pr1_w9",
+            "ar": "وَفَجْأَةً،",
+            "root": "فجأ",
+            "meaning": "Ve ansızın, birdenbire",
+            "phraseTr": "<u>Ve ansızın, birdenbire</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p20_pr1_w10",
+            "ar": "خَرَجُوا",
+            "root": "خرج",
+            "meaning": "خَرَجُوا",
+            "phraseTr": "<u>خَرَجُوا</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p20_pr1_w11",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p20_pr1_w12",
+            "ar": "سَهْلٍ",
+            "root": "سَهُلَ",
+            "meaning": "Ova, düzlük",
+            "phraseTr": "yeşil bir <u>ova</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr1_w13",
+            "ar": "أَخْضَرَ",
+            "root": "خضر",
+            "meaning": "Yeşil",
+            "phraseTr": "<u>yeşil</u> bir ova",
+            "type": "sıfat"
+          },
+          {
+            "id": "p20_pr1_w14",
+            "ar": "وَاسِعٍ",
+            "root": "واس",
+            "meaning": "وَاسِعٍ",
+            "phraseTr": "<u>geniş</u> yeşil",
+            "type": "kelime"
+          },
+          {
+            "id": "p20_pr1_w15",
+            "ar": "تَحْتَ",
+            "root": "تحت",
+            "meaning": "altında, altına",
+            "phraseTr": "<u>altında, altına</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p20_pr1_w16",
+            "ar": "السَّمَاءِ",
+            "root": "سمو",
+            "meaning": "Gökyüzü",
+            "phraseTr": "mavi <u>gökyüzü</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr1_w17",
+            "ar": "الزَّرْقَاءِ.",
+            "root": "زَرَقَ",
+            "meaning": "Mavi",
+            "phraseTr": "<u>mavi</u> gökyüzü",
+            "type": "sıfat"
+          },
+          {
+            "id": "p20_pr1_w18",
+            "ar": "وَفِي",
+            "root": "فِي",
+            "meaning": "Ve -de, -da, içinde",
+            "phraseTr": "<u>Ve -de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p20_pr1_w19",
+            "ar": "نِهَايَةِ",
+            "root": "نهي",
+            "meaning": "Son",
+            "phraseTr": "ovanın <u>sonu</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr1_w20",
+            "ar": "السَّهْلِ،",
+            "root": "سَهُلَ",
+            "meaning": "Ova",
+            "phraseTr": "<u>ovanın</u> sonu",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr1_w21",
+            "ar": "كَانَتْ",
+            "root": "كون",
+            "meaning": "İdi (dişil)",
+            "phraseTr": "<u>İdi</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p20_pr1_w22",
+            "ar": "تَقِفُ",
+            "root": "تقف",
+            "meaning": "تَقِفُ",
+            "phraseTr": "<u>تَقِفُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p20_pr1_w23",
+            "ar": "قَلْعَةٌ",
+            "root": "قَلَعَ",
+            "meaning": "Kale",
+            "phraseTr": "taş bir <u>kale</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr1_w24",
+            "ar": "حَجَرِيَّةٌ",
+            "root": "حجر",
+            "meaning": "حَجَرِيَّةٌ",
+            "phraseTr": "<u>taş</u> bir kale",
+            "type": "kelime"
+          },
+          {
+            "id": "p20_pr1_w25",
+            "ar": "عِمْلاَقَةٌ",
+            "root": "عَمْلَقَ",
+            "meaning": "Devasa",
+            "phraseTr": "<u>devasa</u> taş kale",
+            "type": "sıfat"
+          },
+          {
+            "id": "p20_pr1_w26",
+            "ar": "لَهَا",
+            "root": "صَوْت",
+            "meaning": "... için Ha! (kahkaha)",
+            "phraseTr": "<u>... için Ha!</u>",
+            "type": "ünlem"
+          },
+          {
+            "id": "p20_pr1_w27",
+            "ar": "أَبْرَاجٌ",
+            "root": "بَرَجَ",
+            "meaning": "Kuleler",
+            "phraseTr": "yüksek <u>kuleler</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p20_pr1_w28",
+            "ar": "عَالِيَةٌ!",
+            "root": "عال",
+            "meaning": "عَالِيَةٌ",
+            "phraseTr": "<u>yüksek</u> kuleler",
+            "type": "kelime"
+          }
+        ]
+      },
+      {
+        "pId": "p20_pr2",
+        "words": [
+          {
+            "id": "p20_pr2_w1",
+            "ar": "أَمَامَ",
+            "root": "أمم",
+            "meaning": "önünde, önüne",
+            "phraseTr": "<u>önünde, önüne</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p20_pr2_w2",
+            "ar": "بَوَّابَةِ",
+            "root": "بَوَّبَ",
+            "meaning": "Kapısı",
+            "phraseTr": "kale <u>kapısı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr2_w3",
+            "ar": "القَلْعَةِ،",
+            "root": "قَلَعَ",
+            "meaning": "Kale",
+            "phraseTr": "<u>kale</u> kapısı",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr2_w4",
+            "ar": "كَانَ",
+            "root": "كون",
+            "meaning": "İdi, oldu",
+            "phraseTr": "<u>İdi, oldu</u>",
+            "type": "nâkıs fiil"
+          },
+          {
+            "id": "p20_pr2_w5",
+            "ar": "يَقِفُ",
+            "root": "وقف",
+            "meaning": "Durur",
+            "phraseTr": "<u>Durur</u>",
+            "type": "muzari fiil"
+          },
+          {
+            "id": "p20_pr2_w6",
+            "ar": "الحَكَمُ",
+            "root": "حكم",
+            "meaning": "Hakem",
+            "phraseTr": "<u>Hakem</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr2_w7",
+            "ar": "سَاجِد",
+            "root": "سَجَدَ",
+            "meaning": "Sacid (sınav hakemi)",
+            "phraseTr": "<u>Sacid</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p20_pr2_w8",
+            "ar": "مَعَ",
+            "root": "مَعَ",
+            "meaning": "ile, beraber",
+            "phraseTr": "<u>ile, beraber</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p20_pr2_w9",
+            "ar": "المُتَسَابِقِينَ",
+            "root": "سبق",
+            "meaning": "Yarışmacılar",
+            "phraseTr": "<u>Yarışmacılar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p20_pr2_w10",
+            "ar": "الَّذِينَ",
+            "root": "الذين",
+            "meaning": "-anlar, -enler",
+            "phraseTr": "<u>-anlar, -enler</u>",
+            "type": "ilgi zamiri"
+          },
+          {
+            "id": "p20_pr2_w11",
+            "ar": "نَجَوْا.",
+            "root": "نَجَا",
+            "meaning": "Kurtulanlar",
+            "phraseTr": "<u>Kurtulanlar</u>",
+            "type": "fiil (çoğul)"
+          },
+          {
+            "id": "p20_pr2_w12",
+            "ar": "لَمْ",
+            "root": "لَمْ",
+            "meaning": "-medi, -madı",
+            "phraseTr": "<u>-medi, -madı</u>",
+            "type": "cezm edatı"
+          },
+          {
+            "id": "p20_pr2_w13",
+            "ar": "يَبْقَ",
+            "root": "بقي",
+            "meaning": "Kaldı",
+            "phraseTr": "<u>Kaldı</u>",
+            "type": "muzari fiil (meczum)"
+          },
+          {
+            "id": "p20_pr2_w14",
+            "ar": "مِنَ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p20_pr2_w15",
+            "ar": "المُتَسَابِقِينَ",
+            "root": "سبق",
+            "meaning": "Yarışmacılar",
+            "phraseTr": "<u>Yarışmacılar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p20_pr2_w16",
+            "ar": "إِلاَّ",
+            "root": "إِلَّا",
+            "meaning": "Ancak, sadece, -den başka",
+            "phraseTr": "<u>Ancak, sadece, -den başka</u>",
+            "type": "istisna edatı"
+          },
+          {
+            "id": "p20_pr2_w17",
+            "ar": "اثْنَانِ",
+            "root": "ثَنَى",
+            "meaning": "İki",
+            "phraseTr": "<u>İki</u>",
+            "type": "sayı"
+          },
+          {
+            "id": "p20_pr2_w18",
+            "ar": "وَأَرْبَعُونَ",
+            "root": "رَبَعَ",
+            "meaning": "Ve kırk",
+            "phraseTr": "<u>Ve kırk</u>",
+            "type": "sayı"
+          },
+          {
+            "id": "p20_pr2_w19",
+            "ar": "(42)",
+            "root": "",
+            "meaning": "(42)",
+            "phraseTr": "(42)",
+            "type": "sayı/noktalama"
+          },
+          {
+            "id": "p20_pr2_w20",
+            "ar": "شَخْصاً",
+            "root": "شخص",
+            "meaning": "Kişi",
+            "phraseTr": "<u>Kişi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr2_w21",
+            "ar": "فَقَطْ!",
+            "root": "فقط",
+            "meaning": "yalnızca, sadece",
+            "phraseTr": "<u>yalnızca, sadece</u>",
+            "type": "edat"
+          },
+          {
+            "id": "p20_pr2_w22",
+            "ar": "نَظَرَ",
+            "root": "نظر",
+            "meaning": "Baktı",
+            "phraseTr": "<u>Baktı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr2_w23",
+            "ar": "سَاجِد",
+            "root": "سَجَدَ",
+            "meaning": "Sacid (sınav hakemi)",
+            "phraseTr": "<u>Sacid</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p20_pr2_w24",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p20_pr2_w25",
+            "ar": "سَاعَتِهِ",
+            "root": "سَاعَ",
+            "meaning": "Kendi saati",
+            "phraseTr": "<u>Kendi saati</u>",
+            "type": "isim + zamir"
+          },
+          {
+            "id": "p20_pr2_w26",
+            "ar": "وَقَالَ:",
+            "root": "قول",
+            "meaning": "Ve Dedi",
+            "phraseTr": "<u>Ve Dedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr2_w27",
+            "ar": "«انْتَهَى",
+            "root": "نهي",
+            "meaning": "Bitti",
+            "phraseTr": "<u>Bitti</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr2_w28",
+            "ar": "وَقْتُ",
+            "root": "وقت",
+            "meaning": "وَقْتُ",
+            "phraseTr": "<u>وَقْتُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p20_pr2_w29",
+            "ar": "غَابَةِ",
+            "root": "غَابَ",
+            "meaning": "Orman",
+            "phraseTr": "Sis <u>Ormanı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr2_w30",
+            "ar": "الضَّبَابِ.",
+            "root": "ضَبَّ",
+            "meaning": "Sis",
+            "phraseTr": "<u>Sis</u> Ormanı",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr2_w31",
+            "ar": "أَغْلِقُوا",
+            "root": "غَلَقَ",
+            "meaning": "Kapatın!",
+            "phraseTr": "<u>Kapatın!</u>",
+            "type": "emir (çoğul)"
+          },
+          {
+            "id": "p20_pr2_w32",
+            "ar": "البَوَّابَةَ",
+            "root": "بَوَّبَ",
+            "meaning": "Kapıyı",
+            "phraseTr": "demir <u>kapı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr2_w33",
+            "ar": "الحَدِيدِيَّةَ!»",
+            "root": "حَدَدَ",
+            "meaning": "Demir olanı",
+            "phraseTr": "<u>demir</u> kapı",
+            "type": "sıfat"
+          }
+        ]
+      },
+      {
+        "pId": "p20_pr3",
+        "words": [
+          {
+            "id": "p20_pr3_w1",
+            "ar": "بَدَأَتِ",
+            "root": "بدو",
+            "meaning": "Başladı (dişil)",
+            "phraseTr": "<u>Başladı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr3_w2",
+            "ar": "البَوَّابَةُ",
+            "root": "بَوَّبَ",
+            "meaning": "Kapı",
+            "phraseTr": "büyük <u>kapı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr3_w3",
+            "ar": "الضَّخْمَةُ",
+            "root": "ضَخُمَ",
+            "meaning": "Kocaman, devasa",
+            "phraseTr": "<u>büyük</u> kapı",
+            "type": "sıfat"
+          },
+          {
+            "id": "p20_pr3_w4",
+            "ar": "تَنْزِلُ",
+            "root": "تنز",
+            "meaning": "تَنْزِلُ",
+            "phraseTr": "<u>تَنْزِلُ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p20_pr3_w5",
+            "ar": "لِتُغْلَقَ.",
+            "root": "لتغ",
+            "meaning": "لِتُغْلَقَ",
+            "phraseTr": "<u>لِتُغْلَقَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p20_pr3_w6",
+            "ar": "صَرَخَ",
+            "root": "صرخ",
+            "meaning": "Bağırdı",
+            "phraseTr": "<u>Bağırdı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr3_w7",
+            "ar": "رَامِي:",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p20_pr3_w8",
+            "ar": "«أَسْرِعَا!»",
+            "root": "سَرُعَ",
+            "meaning": "İkiniz acele edin!",
+            "phraseTr": "<u>İkiniz acele edin!</u>",
+            "type": "emir (tesniye)"
+          },
+          {
+            "id": "p20_pr3_w9",
+            "ar": "وَوَضَعَ",
+            "root": "وضع",
+            "meaning": "Ve Koydu",
+            "phraseTr": "<u>Ve Koydu</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr3_w10",
+            "ar": "الثَّلاَثَةُ",
+            "root": "ثَلَثَ",
+            "meaning": "Üçü",
+            "phraseTr": "<u>Üçü</u>",
+            "type": "sayı"
+          },
+          {
+            "id": "p20_pr3_w11",
+            "ar": "كُلَّ",
+            "root": "كلل",
+            "meaning": "her",
+            "phraseTr": "<u>her</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p20_pr3_w12",
+            "ar": "طَاقَتِهِمْ",
+            "root": "طاق",
+            "meaning": "طَاقَتِهِمْ",
+            "phraseTr": "<u>طَاقَتِهِمْ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p20_pr3_w13",
+            "ar": "فِي",
+            "root": "فِي",
+            "meaning": "-de, -da, içinde",
+            "phraseTr": "<u>-de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p20_pr3_w14",
+            "ar": "سِيقَانِهِمْ،",
+            "root": "سَاقَ",
+            "meaning": "Bacakları",
+            "phraseTr": "<u>Bacakları</u>",
+            "type": "isim + zamir"
+          },
+          {
+            "id": "p20_pr3_w15",
+            "ar": "وَانْدَفَعُوا",
+            "root": "دَفَعَ",
+            "meaning": "Ve Atıldılar",
+            "phraseTr": "<u>Ve Atıldılar</u>",
+            "type": "fiil (çoğul)"
+          },
+          {
+            "id": "p20_pr3_w16",
+            "ar": "كَالرِّيَاحِ",
+            "root": "رَاحَ",
+            "meaning": "Rüzgarlar gibi",
+            "phraseTr": "<u>Rüzgarlar gibi</u>",
+            "type": "harf + isim"
+          },
+          {
+            "id": "p20_pr3_w17",
+            "ar": "العَاصِفَةِ.",
+            "root": "عَصَفَ",
+            "meaning": "Fırtınalı",
+            "phraseTr": "<u>Fırtınalı</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p20_pr3_w18",
+            "ar": "وَفِي",
+            "root": "فِي",
+            "meaning": "Ve -de, -da, içinde",
+            "phraseTr": "<u>Ve -de, -da, içinde</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p20_pr3_w19",
+            "ar": "الجُزْءِ",
+            "root": "جَزَأَ",
+            "meaning": "Parça",
+            "phraseTr": "son <u>an / salise</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr3_w20",
+            "ar": "الأَخِيرِ",
+            "root": "أَخَرَ",
+            "meaning": "Son",
+            "phraseTr": "<u>son</u> an / salise",
+            "type": "sıfat"
+          },
+          {
+            "id": "p20_pr3_w21",
+            "ar": "مِنَ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p20_pr3_w22",
+            "ar": "الثَّانِيَةِ،",
+            "root": "ثني",
+            "meaning": "ikinci (dişil)",
+            "phraseTr": "<u>ikinci</u>",
+            "type": "sıra sayısı"
+          },
+          {
+            "id": "p20_pr3_w23",
+            "ar": "قَفَزَ",
+            "root": "قفز",
+            "meaning": "Atladı",
+            "phraseTr": "<u>Atladı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr3_w24",
+            "ar": "رَامِي",
+            "root": "رَامِي",
+            "meaning": "Rami (baş kahraman)",
+            "phraseTr": "<u>Rami</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p20_pr3_w25",
+            "ar": "وَزَيْد",
+            "root": "زَيْد",
+            "meaning": "Ve Zeyd (arkadaşı)",
+            "phraseTr": "<u>Ve Zeyd</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p20_pr3_w26",
+            "ar": "وَطَارِق",
+            "root": "طَرَقَ",
+            "meaning": "Ve Tarık (doktor adayı yarışmacı)",
+            "phraseTr": "<u>Ve Tarık</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p20_pr3_w27",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p20_pr3_w28",
+            "ar": "دَاخِلِ",
+            "root": "دخل",
+            "meaning": "iç",
+            "phraseTr": "kalenin <u>içi</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr3_w29",
+            "ar": "القَلْعَةِ",
+            "root": "قَلَعَ",
+            "meaning": "Kale",
+            "phraseTr": "<u>kalenin</u> içi",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr3_w30",
+            "ar": "مَعاً!",
+            "root": "معع",
+            "meaning": "birlikte, beraber",
+            "phraseTr": "<u>birlikte, beraber</u>",
+            "type": "zarf"
+          }
+        ]
+      },
+      {
+        "pId": "p20_pr4",
+        "words": [
+          {
+            "id": "p20_pr4_w1",
+            "ar": "وَقَعَ",
+            "root": "وَقَعَ",
+            "meaning": "Düştü",
+            "phraseTr": "<u>Düştü</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p20_pr4_w2",
+            "ar": "الثَّلاَثَةُ",
+            "root": "ثَلَثَ",
+            "meaning": "Üçü",
+            "phraseTr": "<u>Üçü</u>",
+            "type": "sayı"
+          },
+          {
+            "id": "p20_pr4_w3",
+            "ar": "عَلَى",
+            "root": "عَلَى",
+            "meaning": "üzerinde, -e",
+            "phraseTr": "<u>üzerinde, -e</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p20_pr4_w4",
+            "ar": "الأَرْضِ",
+            "root": "أرض",
+            "meaning": "Yer, zemin",
+            "phraseTr": "çimenlik <u>zemin</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr4_w5",
+            "ar": "العُشْبِيَّةِ",
+            "root": "عَشَبَ",
+            "meaning": "Çimenlik",
+            "phraseTr": "<u>çimenlik</u> zemin",
+            "type": "sıfat"
+          },
+          {
+            "id": "p20_pr4_w6",
+            "ar": "يَلْهَثُونَ",
+            "root": "لَهَثَ",
+            "meaning": "Nefes nefeseler",
+            "phraseTr": "<u>Nefes nefeseler</u>",
+            "type": "fiil (çoğul)"
+          },
+          {
+            "id": "p20_pr4_w7",
+            "ar": "وَيَضْحَكُونَ",
+            "root": "ويض",
+            "meaning": "وَيَضْحَكُونَ",
+            "phraseTr": "<u>وَيَضْحَكُونَ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p20_pr4_w8",
+            "ar": "بِسَعَادَةٍ",
+            "root": "سَعَدَ",
+            "meaning": "Mutlulukla",
+            "phraseTr": "<u>Mutlulukla</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p20_pr4_w9",
+            "ar": "غَامِرَةٍ.",
+            "root": "غَمَرَ",
+            "meaning": "Büyük, coşkulu",
+            "phraseTr": "<u>Büyük, coşkulu</u>",
+            "type": "sıfat"
+          },
+          {
+            "id": "p20_pr4_w10",
+            "ar": "نَظَرَ",
+            "root": "نظر",
+            "meaning": "Baktı",
+            "phraseTr": "<u>Baktı</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr4_w11",
+            "ar": "سَاجِد",
+            "root": "سَجَدَ",
+            "meaning": "Sacid (sınav hakemi)",
+            "phraseTr": "<u>Sacid</u>",
+            "type": "özel isim"
+          },
+          {
+            "id": "p20_pr4_w12",
+            "ar": "إِلَيْهِمْ",
+            "root": "إلي",
+            "meaning": "إِلَيْهِمْ",
+            "phraseTr": "<u>إِلَيْهِمْ</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p20_pr4_w13",
+            "ar": "وَابْتَسَمَ",
+            "root": "بسم",
+            "meaning": "Ve Gülümsedi",
+            "phraseTr": "<u>Ve Gülümsedi</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr4_w14",
+            "ar": "ابْتِسَامَةَ",
+            "root": "بَسَمَ",
+            "meaning": "Gülümseme",
+            "phraseTr": "saygı dolu bir <u>gülümseme</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr4_w15",
+            "ar": "احْتِرَامٍ:",
+            "root": "حَرَمَ",
+            "meaning": "Saygı",
+            "phraseTr": "<u>saygı dolu</u> bir gülümseme",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr4_w16",
+            "ar": "«المُتَسَابِقُونَ",
+            "root": "سبق",
+            "meaning": "Yarışmacılar",
+            "phraseTr": "<u>Yarışmacılar</u>",
+            "type": "cemi isim"
+          },
+          {
+            "id": "p20_pr4_w17",
+            "ar": "رَقْمُ",
+            "root": "رقم",
+            "meaning": "Numaralı",
+            "phraseTr": "<u>Numaralı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr4_w18",
+            "ar": "405،",
+            "root": "",
+            "meaning": "405،",
+            "phraseTr": "405،",
+            "type": "sayı/noktalama"
+          },
+          {
+            "id": "p20_pr4_w19",
+            "ar": "وَ99،",
+            "root": "99",
+            "meaning": "Ve 99",
+            "phraseTr": "<u>Ve 99</u>",
+            "type": "sayı"
+          },
+          {
+            "id": "p20_pr4_w20",
+            "ar": "وَ208..",
+            "root": "و20",
+            "meaning": "وَ208",
+            "phraseTr": "<u>وَ208</u>",
+            "type": "kelime"
+          },
+          {
+            "id": "p20_pr4_w21",
+            "ar": "أَنْتُمْ",
+            "root": "أَنْتُمْ",
+            "meaning": "Siz",
+            "phraseTr": "<u>Siz</u>",
+            "type": "zamir"
+          },
+          {
+            "id": "p20_pr4_w22",
+            "ar": "نَاجِحُونَ!",
+            "root": "نَجَحَ",
+            "meaning": "Başarılısınız, geçtiniz",
+            "phraseTr": "<u>Başarılısınız, geçtiniz</u>",
+            "type": "ism-i fail (çoğul)"
+          },
+          {
+            "id": "p20_pr4_w23",
+            "ar": "لَقَدِ",
+            "root": "لقد",
+            "meaning": "şüphesiz ki",
+            "phraseTr": "<u>şüphesiz ki</u>",
+            "type": "tekit edatı"
+          },
+          {
+            "id": "p20_pr4_w24",
+            "ar": "انْتَهَى",
+            "root": "نهي",
+            "meaning": "Bitti",
+            "phraseTr": "<u>Bitti</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr4_w25",
+            "ar": "الاخْتِبَارُ",
+            "root": "خبر",
+            "meaning": "Sınav",
+            "phraseTr": "ikinci <u>sınav</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr4_w26",
+            "ar": "الثَّانِي",
+            "root": "ثني",
+            "meaning": "ikinci",
+            "phraseTr": "<u>ikinci</u> sınav",
+            "type": "sıra sayısı"
+          },
+          {
+            "id": "p20_pr4_w27",
+            "ar": "بِنَجَاحٍ.»",
+            "root": "نَجَحَ",
+            "meaning": "Başarıyla",
+            "phraseTr": "<u>Başarıyla</u>",
+            "type": "zarf"
+          }
+        ]
+      },
+      {
+        "pId": "p20_pr5",
+        "words": [
+          {
+            "id": "p20_pr5_w1",
+            "ar": "وَقَفَ",
+            "root": "وقف",
+            "meaning": "Durdu",
+            "phraseTr": "<u>Durdu</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr5_w2",
+            "ar": "الأَصْدِقَاءُ",
+            "root": "صَدَقَ",
+            "meaning": "Arkadaşlar, dostlar",
+            "phraseTr": "<u>Arkadaşlar, dostlar</u>",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p20_pr5_w3",
+            "ar": "الثَّلاَثَةُ",
+            "root": "ثَلَثَ",
+            "meaning": "Üçü",
+            "phraseTr": "<u>Üçü</u>",
+            "type": "sayı"
+          },
+          {
+            "id": "p20_pr5_w4",
+            "ar": "مُتَمَاسِكِي",
+            "root": "مَسَكَ",
+            "meaning": "Birbirine kenetlenmiş",
+            "phraseTr": "elleri <u>kenetlenmiş</u>",
+            "type": "ism-i fail (çoğul)"
+          },
+          {
+            "id": "p20_pr5_w5",
+            "ar": "الأَيْدِي،",
+            "root": "يَدَ",
+            "meaning": "Eller",
+            "phraseTr": "<u>elleri</u> kenetlenmiş",
+            "type": "isim (çoğul)"
+          },
+          {
+            "id": "p20_pr5_w6",
+            "ar": "وَنَظَرُوا",
+            "root": "نظر",
+            "meaning": "Ve Baktılar",
+            "phraseTr": "<u>Ve Baktılar</u>",
+            "type": "mazi fiil"
+          },
+          {
+            "id": "p20_pr5_w7",
+            "ar": "إِلَى",
+            "root": "إِلَى",
+            "meaning": "-e, -a, doğru",
+            "phraseTr": "<u>-e, -a, doğru</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p20_pr5_w8",
+            "ar": "بَابِ",
+            "root": "ب Web",
+            "meaning": "Bir kapı",
+            "phraseTr": "kale <u>kapısı</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr5_w9",
+            "ar": "القَلْعَةِ",
+            "root": "قَلَعَ",
+            "meaning": "Kale",
+            "phraseTr": "<u>kale</u> kapısı",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr5_w10",
+            "ar": "الدَّاخِلِيِّ",
+            "root": "دَخَلَ",
+            "meaning": "İç",
+            "phraseTr": "<u>iç</u> kale",
+            "type": "sıfat"
+          },
+          {
+            "id": "p20_pr5_w11",
+            "ar": "المُظْلِمِ",
+            "root": "ظلم",
+            "meaning": "Karanlık",
+            "phraseTr": "<u>karanlık</u> iç kapı",
+            "type": "sıfat"
+          },
+          {
+            "id": "p20_pr5_w12",
+            "ar": "حَيْثُ",
+            "root": "حَيْثُ",
+            "meaning": "Yerde, orada",
+            "phraseTr": "<u>Yerde, orada</u>",
+            "type": "zarf"
+          },
+          {
+            "id": "p20_pr5_w13",
+            "ar": "يَنْتَظِرُهُمُ",
+            "root": "نَظَرَ",
+            "meaning": "Onları bekliyor",
+            "phraseTr": "<u>Onları bekliyor</u>",
+            "type": "fiil + zamir"
+          },
+          {
+            "id": "p20_pr5_w14",
+            "ar": "الاخْتِبَارُ",
+            "root": "خبر",
+            "meaning": "Sınav",
+            "phraseTr": "üçüncü <u>sınav</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr5_w15",
+            "ar": "الثَّالِثُ",
+            "root": "ثَلَثَ",
+            "meaning": "Üçüncü",
+            "phraseTr": "<u>üçüncü</u> sınav",
+            "type": "sıfat"
+          },
+          {
+            "id": "p20_pr5_w16",
+            "ar": "الأَكْثَرُ",
+            "root": "كَثُرَ",
+            "meaning": "En çok",
+            "phraseTr": "en <u>gizemli</u>",
+            "type": "ismi tafdil"
+          },
+          {
+            "id": "p20_pr5_w17",
+            "ar": "غُمُوضاً",
+            "root": "غَمَضَ",
+            "meaning": "Gizemli olan",
+            "phraseTr": "en <u>gizemli</u>",
+            "type": "temyiz"
+          },
+          {
+            "id": "p20_pr5_w18",
+            "ar": "وَتَحَدِّياً.",
+            "root": "حَدَا",
+            "meaning": "Ve Zorlu olan",
+            "phraseTr": "<u>Ve Zorlu olan</u>",
+            "type": "temyiz"
+          },
+          {
+            "id": "p20_pr5_w19",
+            "ar": "هُنَاكَ",
+            "root": "هناك",
+            "meaning": "orada, oraya",
+            "phraseTr": "<u>orada, oraya</u>",
+            "type": "mekan zarfı"
+          },
+          {
+            "id": "p20_pr5_w20",
+            "ar": "سَتَبْدَأُ",
+            "root": "بَدَأَ",
+            "meaning": "Başlayacak",
+            "phraseTr": "<u>Başlayacak</u>",
+            "type": "fiil"
+          },
+          {
+            "id": "p20_pr5_w21",
+            "ar": "مَرْحَلَةٌ",
+            "root": "رَحَلَ",
+            "meaning": "Aşama, safha",
+            "phraseTr": "yeni bir <u>aşama</u>",
+            "type": "isim"
+          },
+          {
+            "id": "p20_pr5_w22",
+            "ar": "جَدِيدَةٌ",
+            "root": "جدد",
+            "meaning": "Yeni",
+            "phraseTr": "<u>yeni</u> bir aşama",
+            "type": "sıfat"
+          },
+          {
+            "id": "p20_pr5_w23",
+            "ar": "مِنْ",
+            "root": "مِنْ",
+            "meaning": "-den, -dan",
+            "phraseTr": "<u>-den, -dan</u>",
+            "type": "harf-i cer"
+          },
+          {
+            "id": "p20_pr5_w24",
+            "ar": "قِتَالِ",
+            "root": "قَتَلَ",
+            "meaning": "Dövüş, savaş",
+            "phraseTr": "Çi <u>dövüşü</u>",
+            "type": "mastar"
+          },
+          {
+            "id": "p20_pr5_w25",
+            "ar": "التْشِي",
+            "root": "تْشِي",
+            "meaning": "Çi enerjisi",
+            "phraseTr": "<u>Çi</u> dövüşü",
+            "type": "terim"
+          },
+          {
+            "id": "p20_pr5_w26",
+            "ar": "المَلْحَمِيِّ!",
+            "root": "لَحَمَ",
+            "meaning": "Destansı",
+            "phraseTr": "<u>destansı</u> Çi dövüşü",
+            "type": "sıfat"
           }
         ]
       }

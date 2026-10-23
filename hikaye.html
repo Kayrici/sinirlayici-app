@@ -484,7 +484,7 @@
     <div class="page-nav-wrapper">
       <div class="page-nav-header">
         <span>📖 SAYFA SEÇİN:</span>
-        <span id="currentPageIndicator">Sayfa 1 / 10</span>
+        <span id="currentPageIndicator">Sayfa 1 / 20</span>
       </div>
       <div class="page-chips" id="pageChipsContainer">
         <!-- JS ile sayfa butonları üretilir -->
@@ -543,6 +543,8 @@
       if (!container || typeof STORY_PAGES === "undefined") return;
       container.innerHTML = "";
 
+      const total = STORY_PAGES.length;
+
       STORY_PAGES.forEach((page) => {
         const btn = document.createElement("button");
         btn.type = "button";
@@ -556,7 +558,7 @@
       const allBtn = document.createElement("button");
       allBtn.type = "button";
       allBtn.className = `chip-btn ${activePageNumber === 'all' ? "active" : ""}`;
-      allBtn.textContent = `📚 Tüm Hikaye (1-10)`;
+      allBtn.textContent = `📚 Tüm Hikaye (1-${total})`;
       allBtn.addEventListener("click", () => switchPage('all'));
       container.appendChild(allBtn);
     }
@@ -570,12 +572,13 @@
     }
 
     function changePage(delta) {
+      const total = STORY_PAGES ? STORY_PAGES.length : 20;
       if (activePageNumber === 'all') {
         switchPage(1);
         return;
       }
       const newPage = activePageNumber + delta;
-      if (newPage >= 1 && newPage <= (STORY_PAGES ? STORY_PAGES.length : 10)) {
+      if (newPage >= 1 && newPage <= total) {
         switchPage(newPage);
       }
     }
@@ -584,7 +587,7 @@
       const indicator = document.getElementById("currentPageIndicator");
       const prevBtn = document.getElementById("btnPrevPage");
       const nextBtn = document.getElementById("btnNextPage");
-      const total = STORY_PAGES ? STORY_PAGES.length : 10;
+      const total = STORY_PAGES ? STORY_PAGES.length : 20;
 
       if (indicator) {
         indicator.textContent = activePageNumber === 'all' ? `Tüm Hikaye (1 - ${total})` : `Sayfa ${activePageNumber} / ${total}`;
