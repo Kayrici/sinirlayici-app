@@ -1,8 +1,8 @@
 /**
- * Rami, Zeyd ve Tarık Arapça Hikayesi - 20 Sayfa Tam Seri
- * Kitap formatı & Tamlama/Kelime Çözümleme (Kök ve Tamlama Manası)
+ * Rami, Zeyd ve Tarik Arapca Hikayesi - 20 Sayfa Tam Seri
+ * Kitap formati & Tamlama/Kelime Cozumleme (Kok ve Tamlama Manasi)
  */
-const STORY_PAGES = [
+var STORY_PAGES = window.STORY_PAGES = [
   {
     "pageNum": 1,
     "title": "الصَّفْحَةُ الأُولَى (1)",

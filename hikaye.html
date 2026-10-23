@@ -529,23 +529,35 @@
     </div>
   </div>
 
-  <!-- HİKAYE VERİ SETİ (10 SAYFA, PARAGRAFLAR, KÖKLER, TAMLAMALAR) -->
-  <script src="hikaye_data.js"></script>
+  <!-- HİKAYE VERİ SETİ (20 SAYFA, PARAGRAFLAR, KÖKLER, TAMLAMALAR) -->
+  <script src="hikaye_data.js?v=20_pages_final_v5"></script>
 
   <script>
-    let activePageNumber = 1; // 1 to 10, or 'all'
+    let activePageNumber = 1; // 1 to 20, or 'all'
     let currentFontSizeRem = 2.2;
     let selectedWordId = null;
+
+    function getStoryPages() {
+      if (typeof STORY_PAGES !== "undefined" && Array.isArray(STORY_PAGES) && STORY_PAGES.length) {
+        return STORY_PAGES;
+      }
+      if (typeof window.STORY_PAGES !== "undefined" && Array.isArray(window.STORY_PAGES) && window.STORY_PAGES.length) {
+        return window.STORY_PAGES;
+      }
+      return [];
+    }
 
     // Sayfa butonlarını üret
     function renderPageChips() {
       const container = document.getElementById("pageChipsContainer");
-      if (!container || typeof STORY_PAGES === "undefined") return;
+      if (!container) return;
+      const pages = getStoryPages();
+      if (!pages.length) return;
       container.innerHTML = "";
 
-      const total = STORY_PAGES.length;
+      const total = pages.length;
 
-      STORY_PAGES.forEach((page) => {
+      pages.forEach((page) => {
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = `chip-btn ${activePageNumber === page.pageNum ? "active" : ""}`;
@@ -572,7 +584,8 @@
     }
 
     function changePage(delta) {
-      const total = STORY_PAGES ? STORY_PAGES.length : 20;
+      const pages = getStoryPages();
+      const total = pages.length || 20;
       if (activePageNumber === 'all') {
         switchPage(1);
         return;
@@ -587,7 +600,8 @@
       const indicator = document.getElementById("currentPageIndicator");
       const prevBtn = document.getElementById("btnPrevPage");
       const nextBtn = document.getElementById("btnNextPage");
-      const total = STORY_PAGES ? STORY_PAGES.length : 20;
+      const pages = getStoryPages();
+      const total = pages.length || 20;
 
       if (indicator) {
         indicator.textContent = activePageNumber === 'all' ? `Tüm Hikaye (1 - ${total})` : `Sayfa ${activePageNumber} / ${total}`;
@@ -604,12 +618,22 @@
     // Normal kitap sayfa formatında render et
     function renderStory() {
       const area = document.getElementById("storyContentArea");
-      if (!area || typeof STORY_PAGES === "undefined") return;
+      if (!area) return;
+      const pages = getStoryPages();
+      if (!pages.length) {
+        area.innerHTML = `
+          <div style="text-align: center; padding: 40px; color: #94a3b8;">
+            <p style="font-size: 1.1rem; margin-bottom: 8px;">⏳ Hikaye yükleniyor...</p>
+            <p style="font-size: 0.85rem;">Lütfen sayfayı yenileyiniz.</p>
+          </div>
+        `;
+        return;
+      }
       area.innerHTML = "";
 
       const pagesToRender = activePageNumber === 'all'
-        ? STORY_PAGES
-        : STORY_PAGES.filter(p => p.pageNum === activePageNumber);
+        ? pages
+        : pages.filter(p => p.pageNum === activePageNumber);
 
       pagesToRender.forEach((page) => {
         const sheet = document.createElement("div");
@@ -624,8 +648,21 @@
         `;
         sheet.appendChild(titleBox);
 
+        // Paragrafları al (paragraflar veya cümleler formatını destekle)
+        let paras = [];
+        if (page.paragraphs && Array.isArray(page.paragraphs)) {
+          paras = page.paragraphs;
+        } else if (page.sentences && Array.isArray(page.sentences)) {
+          const allWords = [];
+          page.sentences.forEach(s => {
+            if (s.words) allWords.push(...s.words);
+          });
+          paras = [{ words: allWords }];
+        }
+
         // Akıcı Paragraflar
-        page.paragraphs.forEach((paragraph) => {
+        paras.forEach((paragraph) => {
+          if (!paragraph.words || !paragraph.words.length) return;
           const pEl = document.createElement("p");
           pEl.className = "book-paragraph";
 
@@ -649,6 +686,7 @@
 
     // Kelime Seçme ve Alt Paneli Açma (Sadece kelime ve tamlama manası)
     function selectWord(word) {
+      if (!word) return;
       selectedWordId = word.id;
 
       // Önceki seçili kelimelerden vurguyu kaldır
@@ -671,7 +709,7 @@
       
       // SADECE ait olduğu tamlama veya kendi kelime manası (altı çizili)
       if (phraseTr) {
-        phraseTr.innerHTML = word.phraseTr || `<u>${word.meaning}</u>`;
+        phraseTr.innerHTML = word.phraseTr || `<u>${word.meaning || word.ar}</u>`;
       }
 
       if (dock) {
@@ -699,20 +737,39 @@
       }
     }
 
-    // Sayfa Yüklendiğinde Başlat
-    window.addEventListener("DOMContentLoaded", () => {
+    // Güvenli başlatma döngüsü
+    let initAttempts = 0;
+    function initStoryApp() {
+      const pages = getStoryPages();
+      if (!pages.length && initAttempts < 20) {
+        initAttempts++;
+        setTimeout(initStoryApp, 50);
+        return;
+      }
+
       renderPageChips();
       renderStory();
       updatePageFooterNav();
 
-      // İlk kelimeyi örnek olarak seç
-      if (typeof STORY_PAGES !== "undefined" && STORY_PAGES[0] && STORY_PAGES[0].paragraphs[0]) {
-        const firstPara = STORY_PAGES[0].paragraphs[0];
-        if (firstPara.words[0]) {
-          selectWord(firstPara.words[0]);
+      // İlk kelimeyi güvenli seç
+      try {
+        if (pages.length && pages[0]) {
+          const p1 = pages[0];
+          let firstWord = null;
+          if (p1.paragraphs && p1.paragraphs[0] && p1.paragraphs[0].words) {
+            firstWord = p1.paragraphs[0].words[0];
+          } else if (p1.sentences && p1.sentences[0] && p1.sentences[0].words) {
+            firstWord = p1.sentences[0].words[0];
+          }
+          if (firstWord) {
+            selectWord(firstWord);
+          }
         }
-      }
-    });
+      } catch (e) {}
+    }
+
+    window.addEventListener("DOMContentLoaded", initStoryApp);
+    window.addEventListener("load", initStoryApp);
   </script>
 </body>
 </html>
