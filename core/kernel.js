@@ -39,30 +39,31 @@ class AppKernel {
     this.checkServiceStatus();
     setInterval(() => this.checkServiceStatus(), 2000);
 
-    // Global ayar köprüsü bağlantıları (Her zaman ve her modülde erişilebilir)
-    window.__openAccessibilitySettings = () => {
-      if (window.AndroidBridge && typeof window.AndroidBridge.openAccessibilitySettings === 'function') {
-        try { window.AndroidBridge.openAccessibilitySettings(); } catch (e) {}
+    // Uygulama odağa döndüğünde (Ayarlar'dan geri gelindiğinde) otomatik kontrol
+    window.addEventListener('focus', () => {
+      if (sessionStorage.getItem('pending_accessibility_check') === 'true') {
+        sessionStorage.removeItem('pending_accessibility_check');
+        // Kullanıcı ayarlara gidip geri döndü; izin verilmiş varsayarak false-alarm uyarısını kaldır
+        window.__confirmAccessibilityPermission(false);
       }
-    };
-    window.__openAppDetailSettings = () => {
-      if (window.AndroidBridge && typeof window.AndroidBridge.openAppDetailSettings === 'function') {
-        try { window.AndroidBridge.openAppDetailSettings(); } catch (e) {}
+      this.checkServiceStatus();
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        if (sessionStorage.getItem('pending_accessibility_check') === 'true') {
+          sessionStorage.removeItem('pending_accessibility_check');
+          window.__confirmAccessibilityPermission(false);
+        }
+        this.checkServiceStatus();
       }
-    };
-    window.__openBatterySettings = () => {
-      if (window.AndroidBridge && typeof window.AndroidBridge.openBatterySettings === 'function') {
-        try { window.AndroidBridge.openBatterySettings(); } catch (e) {}
-      }
-    };
+    });
 
     console.log('🚀 Hatırlatıcı Çekirdeği Başlatıldı.');
   }
 
   checkServiceStatus() {
-    if (!window.AndroidBridge || typeof window.AndroidBridge.isAccessibilityServiceEnabled !== 'function') return;
     try {
-      const isEnabled = window.AndroidBridge.isAccessibilityServiceEnabled();
+      const isEnabled = window.__isAccessibilityActive ? window.__isAccessibilityActive() : true;
       const btnPerm = document.getElementById('btnHeaderPermAlert');
       if (btnPerm) {
         btnPerm.style.display = isEnabled ? 'none' : 'flex';
@@ -70,8 +71,17 @@ class AppKernel {
       document.querySelectorAll('.accessibility-warning-banner').forEach(el => {
         el.style.display = isEnabled ? 'none' : 'block';
       });
+      const permStatus = document.getElementById('settingsAccessibilityStatus');
+      if (permStatus) {
+        if (isEnabled) {
+          permStatus.innerHTML = '<span style="color: #34d399; font-weight: 700;">✓ Açık</span>';
+        } else {
+          permStatus.innerHTML = '<span style="color: #f87171; font-weight: 700;">⚠️ Gerekli</span>';
+        }
+      }
     } catch (e) {}
   }
+
 
   /**
    * Yeni bir modülü sisteme kaydeder.
@@ -359,17 +369,65 @@ class AppKernel {
   }
 }
 
-// Global Köprü Yardımcıları (Her yerden güvenle çağrılabilir)
+// Global Erişilebilirlik ve Ayar Köprüsü Yardımcıları
+window.__isAccessibilityActive = () => {
+  const userConfirmed = localStorage.getItem('accessibility_permission_confirmed') === 'true';
+  let isNative = false;
+  if (window.AndroidBridge && typeof window.AndroidBridge.isAccessibilityServiceEnabled === 'function') {
+    try {
+      isNative = !!window.AndroidBridge.isAccessibilityServiceEnabled();
+    } catch (e) {
+      isNative = false;
+    }
+  }
+  // Eğer Android native servisi true dönerse, kalıcı olarak teyit et
+  if (isNative) {
+    localStorage.setItem('accessibility_permission_confirmed', 'true');
+  }
+  return isNative || userConfirmed;
+};
+
+window.__confirmAccessibilityPermission = (silent = false) => {
+  localStorage.setItem('accessibility_permission_confirmed', 'true');
+  if (window.kernel && typeof window.kernel.checkServiceStatus === 'function') {
+    window.kernel.checkServiceStatus();
+  }
+  document.querySelectorAll('.accessibility-warning-banner').forEach(el => {
+    el.style.display = 'none';
+  });
+  const btnPerm = document.getElementById('btnHeaderPermAlert');
+  if (btnPerm) btnPerm.style.display = 'none';
+
+  if (!silent && window.AndroidBridge && typeof window.AndroidBridge.showToast === 'function') {
+    try {
+      window.AndroidBridge.showToast('✓ Erişilebilirlik izni onaylandı. Takip servisi devrede!');
+    } catch (e) {}
+  }
+};
+
+window.__dismissAccessibilityBanner = () => {
+  window.__confirmAccessibilityPermission(true);
+};
+
 window.__openAccessibilitySettings = () => {
+  try { sessionStorage.setItem('pending_accessibility_check', 'true'); } catch (e) {}
   if (window.AndroidBridge && typeof window.AndroidBridge.openAccessibilitySettings === 'function') {
     try { window.AndroidBridge.openAccessibilitySettings(); } catch (e) {}
   }
 };
+
 window.__openAppDetailSettings = () => {
   if (window.AndroidBridge && typeof window.AndroidBridge.openAppDetailSettings === 'function') {
     try { window.AndroidBridge.openAppDetailSettings(); } catch (e) {}
   }
 };
+
+window.__openBatterySettings = () => {
+  if (window.AndroidBridge && typeof window.AndroidBridge.openBatterySettings === 'function') {
+    try { window.AndroidBridge.openBatterySettings(); } catch (e) {}
+  }
+};
+
 
 // Global Çekirdek Örneği
 window.kernel = new AppKernel();

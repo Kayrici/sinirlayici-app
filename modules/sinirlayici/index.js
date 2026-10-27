@@ -179,28 +179,35 @@
         context.storage.set('last_cycle_start', cycleStart);
       }
 
-      const isAccessEnabled = (window.AndroidBridge && typeof window.AndroidBridge.isAccessibilityServiceEnabled === 'function')
-        ? window.AndroidBridge.isAccessibilityServiceEnabled()
-        : true;
+      const isAccessEnabled = typeof window.__isAccessibilityActive === 'function'
+        ? window.__isAccessibilityActive()
+        : (localStorage.getItem('accessibility_permission_confirmed') === 'true');
 
       container.innerHTML = `
         <div style="padding-top: 0.25rem; padding-bottom: 2.5rem;">
 
-          <!-- Erişilebilirlik Servis Uyarısı (Yalnızca servis kapalıysa şıkça görünür) -->
-          <div class="accessibility-warning-banner" style="display: ${isAccessEnabled ? 'none' : 'block'}; background: linear-gradient(135deg, rgba(239, 68, 68, 0.16), rgba(245, 158, 11, 0.16)); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 16px; padding: 0.9rem 1rem; margin-bottom: 1rem;">
-            <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+          <!-- Erişilebilirlik Servis Uyarısı -->
+          <div class="accessibility-warning-banner" style="display: ${isAccessEnabled ? 'none' : 'block'}; background: linear-gradient(135deg, rgba(239, 68, 68, 0.16), rgba(245, 158, 11, 0.16)); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 16px; padding: 0.9rem 1rem; margin-bottom: 1rem; position: relative;">
+            <button type="button" onclick="window.__dismissAccessibilityBanner()" style="position: absolute; top: 0.6rem; right: 0.6rem; background: rgba(255,255,255,0.12); border: none; color: #fff; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.85rem;" title="Kapat">✕</button>
+            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding-right: 1.5rem;">
               <span style="font-size: 1.4rem; line-height: 1;">🛡️</span>
               <div style="flex: 1;">
-                <div style="font-size: 0.9rem; font-weight: 800; color: #fff;">Sınırlayıcı ve Takip Servisi Kapalı</div>
+                <div style="font-size: 0.9rem; font-weight: 800; color: #fff;">Sınırlayıcı ve Takip Servisi</div>
                 <div style="font-size: 0.75rem; color: #cbd5e1; margin-top: 0.2rem; line-height: 1.35;">
                   Uygulama kullanım sürelerinin sayılabilmesi ve limit dolunca kapatılabilmesi için <b>Erişilebilirlik İznini</b> açmanız gerekir.
                 </div>
+                <div style="font-size: 0.7rem; color: #fcd34d; margin-top: 0.35rem; line-height: 1.3; background: rgba(0,0,0,0.25); padding: 0.4rem 0.6rem; border-radius: 8px;">
+                  💡 <b>İpucu:</b> İzni açtığınız halde uyarı kalkmadıysa <b>"✓ İzni Verdim"</b> butonuna basın. (Android 13+ cihazlarda 'Kısıtlanmış ayarlara izin ver' gerekebilir).
+                </div>
                 <div style="display: flex; gap: 0.5rem; margin-top: 0.6rem; flex-wrap: wrap;">
+                  <button type="button" onclick="window.__confirmAccessibilityPermission(false)" style="background: #10b981; border: none; color: #fff; padding: 0.45rem 0.85rem; border-radius: 10px; font-weight: 800; font-size: 0.78rem; cursor: pointer;">
+                    ✓ İzni Verdim
+                  </button>
                   <button type="button" onclick="window.__openAccessibilitySettings()" style="background: #ef4444; border: none; color: #fff; padding: 0.45rem 0.85rem; border-radius: 10px; font-weight: 800; font-size: 0.78rem; cursor: pointer;">
-                    ⚙️ Erişilebilirlik İznini Aç
+                    ⚙️ Erişilebilirlik Ayarları
                   </button>
                   <button type="button" onclick="window.__openAppDetailSettings()" style="background: rgba(255,255,255,0.08); border: 1px solid var(--border-card); color: #fff; padding: 0.45rem 0.75rem; border-radius: 10px; font-weight: 700; font-size: 0.78rem; cursor: pointer;">
-                    📋 Kullanım & Bildirim İzinleri
+                    📋 Uygulama Bilgisi
                   </button>
                 </div>
               </div>
@@ -283,12 +290,6 @@
         <!-- Kayan Bildirim Konteyneri -->
         <div id="floatingToast" style="display: none; position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%); background: rgba(239, 68, 68, 0.95); color: #fff; padding: 0.8rem 1.4rem; border-radius: 999px; font-size: 0.85rem; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 200; border: 1px solid rgba(255,255,255,0.2);"></div>
       `;
-
-      window.__openAccessibilitySettings = () => {
-        if (window.AndroidBridge && typeof window.AndroidBridge.openAccessibilitySettings === 'function') {
-          try { window.AndroidBridge.openAccessibilitySettings(); } catch (e) {}
-        }
-      };
 
       this.bindEvents(container, context);
       this.renderLimitsList(container, context);
@@ -636,7 +637,6 @@
       if (this.checkInterval) clearInterval(this.checkInterval);
       delete window.__sinirlayiciDelete;
       delete window.__selectAppForLimit;
-      delete window.__openAccessibilitySettings;
     }
   };
 

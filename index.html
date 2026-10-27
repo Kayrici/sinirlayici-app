@@ -69,12 +69,25 @@
             </div>
             <span class="settings-item-arrow">→</span>
           </div>
-          <div class="settings-item" onclick="if(window.AndroidBridge)window.AndroidBridge.openAccessibilitySettings()">
+          <div class="settings-item" onclick="window.__openAccessibilitySettings()">
             <div class="settings-item-left">
               <span class="settings-item-icon">🛡️</span>
               <div>
                 <div class="settings-item-title">Erişilebilirlik İzni</div>
-                <div class="settings-item-subtitle">Süre bitiminde uygulamayı kapatma yetkisi</div>
+                <div class="settings-item-subtitle">Süre bitiminde uygulamayı kapatma ve takip yetkisi</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.3rem;">
+              <span id="settingsAccessibilityStatus" style="font-size: 0.78rem;"></span>
+              <span class="settings-item-arrow">→</span>
+            </div>
+          </div>
+          <div class="settings-item" onclick="window.__openAppDetailSettings()">
+            <div class="settings-item-left">
+              <span class="settings-item-icon">📋</span>
+              <div>
+                <div class="settings-item-title">Uygulama Bilgisi & İzinler</div>
+                <div class="settings-item-subtitle">Android 13+ kısıtlanmış ayarlar ve bildirim izinleri</div>
               </div>
             </div>
             <span class="settings-item-arrow">→</span>
