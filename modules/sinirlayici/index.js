@@ -446,6 +446,9 @@
       container.querySelector('#btnCloseModal').onclick = () => {
         modal.style.display = 'none';
       };
+      modal.onclick = (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+      };
 
       // Sınırı Kaydet
       container.querySelector('#btnConfirmSaveLimit').onclick = () => {
@@ -460,17 +463,26 @@
           return lId === pkgId;
         });
 
+        let initSecs = 0;
+        if (existingIdx !== -1) {
+          initSecs = limits[existingIdx].usedSeconds || 0;
+        } else if (window.AndroidBridge && typeof window.AndroidBridge.getTodayUsageSeconds === 'function') {
+          try {
+            const s = window.AndroidBridge.getTodayUsageSeconds(pkgId);
+            if (s > 0) initSecs = s;
+          } catch (e) {}
+        }
+
         const limitObj = {
           id: pkgId,
           packageName: pkgId,
           name: currentSelectedApp.name || pkgId,
           icon: currentSelectedApp.icon || '',
           maxMinutes: mins,
-          usedSeconds: 0
+          usedSeconds: initSecs
         };
 
         if (existingIdx !== -1) {
-          limitObj.usedSeconds = limits[existingIdx].usedSeconds || 0;
           limits[existingIdx] = limitObj;
         } else {
           limits.push(limitObj);
@@ -545,6 +557,16 @@
 
       // Performans Odaklı Canlı İzleme (getLimits + getTodayUsageSeconds çift yönlü senkronizasyonu)
       this.checkInterval = setInterval(() => {
+        // Canlı 03:00 döngü kontrolü
+        const cycleStart = getCycleStartTimestamp();
+        let storedCycle = context.storage.get('last_cycle_start', 0);
+        if (storedCycle > 0 && cycleStart > storedCycle) {
+          context.storage.set('last_cycle_start', cycleStart);
+          let curr = context.storage.get('limits', []);
+          curr = curr.map(it => ({ ...it, usedSeconds: 0 }));
+          context.storage.set('limits', curr);
+        }
+
         let limits = context.storage.get('limits', []);
         if (limits.length === 0) return;
 

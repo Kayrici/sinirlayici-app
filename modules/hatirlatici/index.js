@@ -526,7 +526,7 @@
         container.querySelector('#selectFormSchedule').value = 'daily';
         container.querySelector('#boxWeeklyDays').style.display = 'none';
         container.querySelector('#boxMonthlyDays').style.display = 'none';
-        container.querySelector('#selectFormEndCondition').value = 'forever';
+        container.querySelector('#selectFormEndCondition').value = 'never';
         container.querySelector('#boxEndConfig').style.display = 'none';
         container.querySelector('#inputFormMaxCount').value = '';
         container.querySelector('#inputFormEndDate').value = '';
@@ -574,7 +574,7 @@
           btn.style.color = isActive ? '#fff' : 'var(--text-secondary)';
         });
 
-        container.querySelector('#selectFormEndCondition').value = item.endCondition || 'forever';
+        container.querySelector('#selectFormEndCondition').value = (item.endCondition === 'forever') ? 'never' : (item.endCondition || 'never');
         const boxEnd = container.querySelector('#boxEndConfig');
         const boxCount = container.querySelector('#boxCountSub');
         const boxDate = container.querySelector('#boxDateSub');
@@ -816,7 +816,7 @@
 
       endSelect.onchange = () => {
         const val = endSelect.value;
-        if (val === 'forever') {
+        if (val === 'never' || val === 'forever') {
           boxEnd.style.display = 'none';
           boxCount.style.display = 'none';
           boxDate.style.display = 'none';

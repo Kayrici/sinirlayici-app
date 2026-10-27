@@ -303,6 +303,7 @@ class AppKernel {
       s.style.display = 'flex';
       this.closeProfile(); // ana ayarlar listesini göster
       this.loadProfile();
+      this.checkServiceStatus();
     }
   }
 
