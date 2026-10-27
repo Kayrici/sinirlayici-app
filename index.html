@@ -2,231 +2,109 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Egitici Oyunlar ve Dil Portali</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Hatırlatıcı</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #090d16;
-      --card-bg: rgba(22, 30, 49, 0.7);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --card-hover: rgba(30, 41, 69, 0.9);
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: radial-gradient(circle at 50% 0%, #1e1e38 0%, var(--bg) 70%);
-      color: var(--text);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2.5rem 1.25rem;
-    }
-    .container {
-      width: 100%;
-      max-width: 860px;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
-    .badge {
-      display: inline-block;
-      padding: 0.35rem 0.9rem;
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: #34d399;
-      font-size: 0.8rem;
-      font-weight: 700;
-      border-radius: 999px;
-      margin-bottom: 1rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.75rem;
-      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    p.subtitle {
-      color: var(--text-muted);
-      font-size: 1rem;
-      max-width: 580px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 2.5rem;
-    }
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 1.25rem;
-      padding: 1.5rem;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      backdrop-filter: blur(12px);
-      position: relative;
-      overflow: hidden;
-    }
-    .card:hover {
-      background: var(--card-hover);
-      border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.5);
-    }
-    .card-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 0.85rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.2rem;
-    }
-    .card-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .card-title .arrow {
-      font-size: 1.1rem;
-      transition: transform 0.2s ease;
-      color: var(--text-muted);
-    }
-    .card:hover .arrow {
-      transform: translateX(4px);
-      color: var(--text);
-    }
-    .card-desc {
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      line-height: 1.5;
-      margin-bottom: 1.25rem;
-      flex-grow: 1;
-    }
-    .card-tags {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .tag {
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 0.2rem 0.55rem;
-      border-radius: 0.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      color: #cbd5e1;
-    }
-    footer {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--card-border);
-      padding-top: 1.5rem;
-      width: 100%;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="core/style.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="badge">Bagimsiz Egitim ve Oyun Paketi</div>
-      <h1>Egitici Oyunlar ve Dil Portali</h1>
-      <p class="subtitle">Hafiza oyunu, interaktif Arapca fiil ve kelime calisma modulu ve hikaye okuyucusu tek merkezde toplanmistir.</p>
+  <div id="app" class="mobile-viewport">
+    <!-- Üst Mobil Bar (Header) -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="app-logo" title="Hatırlatıcı">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="clock-silhouette">
+            <circle cx="12" cy="12" r="9"></circle>
+            <polyline points="12 7 12 12 15 14"></polyline>
+          </svg>
+        </div>
+        <div class="header-titles">
+          <h1 id="appHeaderTitle">Hatırlatıcı</h1>
+        </div>
+      </div>
+      <div class="header-right">
+        <button id="btnHeaderSettings" class="btn-gear" onclick="window.kernel.openSettings()" title="Ayarlar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gear-icon">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
     </header>
 
-    <div class="grid">
-      <a href="dil_oyunu.html" class="card">
-        <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">&#128214;</div>
-        <div class="card-title">
-          Arapca Dil Oyunu
-          <span class="arrow">&rarr;</span>
-        </div>
-        <div class="card-desc">Emsile-i Muhtelife, Muttaride ve Zamirler fiil cekimleri ile 750 kelimelik dinamik frekansli test sistemi.</div>
-        <div class="card-tags">
-          <span class="tag">Emsile</span>
-          <span class="tag">Zamirler</span>
-          <span class="tag">750 Kelime</span>
-        </div>
-      </a>
+    <!-- Üst Menü Sekmeleri (Yukarı Taşındı) -->
+    <nav class="app-top-nav">
+      <div id="navItemsContainer" class="top-nav-wrapper">
+        <!-- Menü isimleri burada yer alır -->
+      </div>
+    </nav>
 
-      <a href="hafiza.html" class="card">
-        <div class="card-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">&#129504;</div>
-        <div class="card-title">
-          Hafiza Oyunu
-          <span class="arrow">&rarr;</span>
-        </div>
-        <div class="card-desc">Zihinsel dikkat, sirali hatirlama ve refleksleri gelistiren seviyeli hafiza bulmacasi.</div>
-        <div class="card-tags">
-          <span class="tag">Odaklanma</span>
-          <span class="tag">Ses Efektleri</span>
-          <span class="tag">Seviyeler</span>
-        </div>
-      </a>
+    <!-- Dinamik Modül Görüntüleme Alanı -->
+    <main id="moduleContainer" class="module-container">
+      <!-- Modüller buraya izole olarak yüklenir -->
+    </main>
 
-      <a href="hikaye.html" class="card">
-        <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">&#128220;</div>
-        <div class="card-title">
-          Arapca Hikaye Okuyucu
-          <span class="arrow">&rarr;</span>
+    <!-- Ayarlar Ekranı (Şimdilik Boş ve Sade) -->
+    <section id="settingsView" class="settings-modal" style="display: none;">
+      <div class="settings-header">
+        <button class="btn-back" onclick="window.kernel.closeSettings()">←</button>
+        <h2>Ayarlar</h2>
+        <div style="width: 32px;"></div>
+      </div>
+      <div class="settings-content">
+        <!-- Ayarlar Listesi -->
+        <div id="settingsMainList">
+          <div class="settings-item" onclick="window.kernel.openProfile()">
+            <div class="settings-item-left">
+              <span class="settings-item-icon">👤</span>
+              <div>
+                <div class="settings-item-title">Profil</div>
+                <div id="profileUsernameDisplay" class="settings-item-subtitle">Kullanıcı adı belirlenmedi</div>
+              </div>
+            </div>
+            <span class="settings-item-arrow">→</span>
+          </div>
+          <div class="settings-item" onclick="if(window.AndroidBridge)window.AndroidBridge.openAccessibilitySettings()">
+            <div class="settings-item-left">
+              <span class="settings-item-icon">🛡️</span>
+              <div>
+                <div class="settings-item-title">Erişilebilirlik İzni</div>
+                <div class="settings-item-subtitle">Süre bitiminde uygulamayı kapatma yetkisi</div>
+              </div>
+            </div>
+            <span class="settings-item-arrow">→</span>
+          </div>
         </div>
-        <div class="card-desc">Akici hikaye metni, kelimeye dokunarak Turkce anlamini ve tahlilini aninda gorme destegi.</div>
-        <div class="card-tags">
-          <span class="tag">Interaktif Sozluk</span>
-          <span class="tag">Metin Takibi</span>
-        </div>
-      </a>
 
-      <a href="hikaye_kelimeler.html" class="card">
-        <div class="card-icon" style="background: rgba(6, 182, 212, 0.15); color: #22d3ee;">&#128269;</div>
-        <div class="card-title">
-          Kelime Analiz Listesi
-          <span class="arrow">&rarr;</span>
+        <!-- Profil Düzenleme Alt Ekranı -->
+        <div id="profileSubView" style="display: none; flex-direction: column; gap: 1rem;">
+          <div class="card-panel" style="margin-bottom: 0;">
+            <label style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.6rem;">
+              Kullanıcı Adı
+            </label>
+            <input type="text" id="usernameInput" placeholder="Kullanıcı adınızı girin..."
+              style="width: 100%; padding: 0.8rem 1rem; border-radius: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-card); color: #fff; font-size: 0.95rem; outline: none; margin-bottom: 1rem;">
+            <div style="display: flex; gap: 0.5rem;">
+              <button onclick="window.kernel.closeProfile()" 
+                style="flex: 1; background: rgba(255,255,255,0.06); border: 1px solid var(--border-card); color: var(--text-secondary); padding: 0.75rem; border-radius: 12px; font-weight: 600; cursor: pointer;">
+                İptal
+              </button>
+              <button onclick="window.kernel.saveUsername()" 
+                style="flex: 1; background: var(--accent-primary); border: none; color: #fff; padding: 0.75rem; border-radius: 12px; font-weight: 700; cursor: pointer;">
+                Kaydet
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="card-desc">Hikayedeki tum kelimelerin kok, cekim ve Turkce karsiliklarinin yer aldigi ayrintili fihrist.</div>
-        <div class="card-tags">
-          <span class="tag">Fihrist</span>
-          <span class="tag">Kelimeler</span>
-        </div>
-      </a>
-
-      <a href="dil_oyunu_admin.html" class="card">
-        <div class="card-icon" style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">&#9881;&#65039;</div>
-        <div class="card-title">
-          Kelime ve Sistem Yoneticisi
-          <span class="arrow">&rarr;</span>
-        </div>
-        <div class="card-desc">Kelime havuzunu, seviyeleri, istatistikleri ve ayarlari dogrudan yonetin.</div>
-        <div class="card-tags">
-          <span class="tag">Admin Paneli</span>
-          <span class="tag">Kelime Havuzu</span>
-        </div>
-      </a>
-    </div>
-
-    <footer>
-      <p>Moduler Egitim Sistemi &bull; Tum bagimsiz bilesenler aktif ve calisir durumdadir.</p>
-    </footer>
+      </div>
+    </section>
   </div>
+
+  <!-- Çekirdek Sistem ve Modüller (Doğrudan Sıralı Yükleme) -->
+  <script src="core/kernel.js"></script>
+  <script src="modules/hatirlatici/index.js"></script>
+  <script src="modules/sinirlayici/index.js"></script>
 </body>
 </html>
