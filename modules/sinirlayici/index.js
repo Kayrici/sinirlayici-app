@@ -333,10 +333,7 @@
                 </div>
               </div>
               <div style="display: flex; align-items: center; gap: 0.4rem;">
-                <button type="button" onclick="window.__sinirlayiciTestClose('${pkgId}')" title="Kapatma uyarısını test et" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); color: #fca5a5; font-size: 0.72rem; font-weight: 700; padding: 0.3rem 0.6rem; border-radius: 8px; cursor: pointer;">
-                  Kapatmayı Test Et
-                </button>
-                <button type="button" onclick="window.__sinirlayiciDelete('${pkgId}')" title="Sınırı Sil" style="background: none; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; padding: 0.4rem;">
+                <button type="button" onclick="window.__sinirlayiciDelete('${pkgId}')" title="Sınırı Sil" style="background: none; border: none; color: var(--text-muted); font-size: 1.15rem; cursor: pointer; padding: 0.4rem;">
                   🗑️
                 </button>
               </div>
@@ -497,20 +494,6 @@
         this.renderLimitsList(container, context);
       };
 
-      // Test Kapatma Aksiyonu
-      window.__sinirlayiciTestClose = (id) => {
-        const limits = context.storage.get('limits', []);
-        const targetId = String(id || '').trim();
-        const app = limits.find(l => {
-          const lId = String(l.id || l.packageName || '').trim();
-          return lId === targetId;
-        });
-        if (!app) return;
-        this.triggerEnforcement(app);
-        if (window.AndroidBridge && typeof window.AndroidBridge.showToast === 'function') {
-          try { window.AndroidBridge.showToast(`🛑 ${app.name} sınır testi: Kapatma uyarısı gönderildi!`); } catch (e) {}
-        }
-      };
 
       // Sil
       window.__sinirlayiciDelete = (id) => {
@@ -653,7 +636,6 @@
       if (this.checkInterval) clearInterval(this.checkInterval);
       delete window.__sinirlayiciDelete;
       delete window.__selectAppForLimit;
-      delete window.__sinirlayiciTestClose;
       delete window.__openAccessibilitySettings;
     }
   };

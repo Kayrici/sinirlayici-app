@@ -461,9 +461,6 @@
               <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-card); padding-top: 0.65rem; font-size: 0.75rem; color: var(--text-secondary);">
                 <span>${scheduleText}</span>
                 <div style="display: flex; gap: 0.45rem; align-items: center;">
-                  <button class="btn-item-test" data-id="${item.id}" title="Bildirimi cihazda hemen test et" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.35); color: #34d399; padding: 0.35rem 0.65rem; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.75rem;">
-                    🔔 Test Et
-                  </button>
                   <button class="btn-item-edit" data-id="${item.id}" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-card); color: var(--text-primary); padding: 0.35rem 0.65rem; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.75rem;">
                     ✏️ Düzenle
                   </button>
@@ -479,38 +476,6 @@
           `;
         }).join('');
 
-        // Test Bildirimi
-        cardsArea.querySelectorAll('.btn-item-test').forEach(btn => {
-          btn.onclick = () => {
-            const id = btn.dataset.id;
-            const list = getStoredReminders(context);
-            const item = list.find(r => r.id === id);
-            if (!item) return;
-
-            // 1. Hatırlatıcının native depoda varlığını kesinleştir
-            syncReminderToNative(item);
-
-            // 2. Native bildirim mekanizmasını tetikle
-            if (window.AndroidBridge && typeof window.AndroidBridge.triggerReminderNow === 'function') {
-              try {
-                window.AndroidBridge.triggerReminderNow(id);
-              } catch (e) {
-                console.warn('triggerReminderNow hatası:', e);
-              }
-            }
-
-            // 3. Ekranda anında native bildirim tostu göster
-            if (window.AndroidBridge && typeof window.AndroidBridge.showToast === 'function') {
-              try {
-                window.AndroidBridge.showToast(`🔔 ${item.title}: Bildirim tetiklendi!`);
-              } catch (e) {}
-            }
-
-            // 4. Etkileşimli uygulama içi bildirim modalını aç
-            this.triggerInteractiveNotification(item, context);
-            showToast('🔔 Test bildirimi cihaza gönderildi!');
-          };
-        });
 
         // Düzenle
         cardsArea.querySelectorAll('.btn-item-edit').forEach(btn => {
