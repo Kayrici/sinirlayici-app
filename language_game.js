@@ -1,0 +1,2897 @@
+// ARAPÇA EMSİLE, ÇEKİMLER, ZAMİRLER VE KELİME DAĞARCIĞI OYUN MOTORU
+// Vibrate devre dışı bırakılmıştır
+try { if (typeof navigator !== 'undefined') { navigator.vibrate = function() { return false; }; } } catch (_) {}
+
+// 1. TEMEL VERİ SETLERİ
+
+// A) 24 EMSİLE KELİMELERİ
+const DEFAULT_EMSILE_24_WORDS = [
+  { id: 1, word: "نَصَرَ", meaning: "Fiil-i mâzî", translation: "Yardım etti", extraHint: "-dı, -di" },
+  { id: 2, word: "يَنْصُرُ", meaning: "Fiil-i müzâri'", translation: "Yardım ediyor / eder", extraHint: "-yor, -ar, -acak" },
+  { id: 3, word: "نَصْرًا", meaning: "Mastar", translation: "Yardım etmek", extraHint: "-mak, -mek" },
+  { id: 4, word: "نَاصِرٌ", meaning: "İsm-i fâil", translation: "Yardım eden", extraHint: "-an, -en, -ıcı" },
+  { id: 5, word: "مَنْصُورٌ", meaning: "İsm-i mef'ûl", translation: "Yardım edilmiş", extraHint: "-ılan, -ilmiş" },
+  { id: 6, word: "لَمْ يَنْصُرْ", meaning: "Cahd-ı mutlak", translation: "Yardım etmedi", extraHint: "-madı, -medi" },
+  { id: 7, word: "لَمَّا يَنْصُرْ", meaning: "Cahd-ı müstağrak", translation: "Henüz yardım etmedi", extraHint: "henüz -madı" },
+  { id: 8, word: "مَا يَنْصُرُ", meaning: "Nefy-i hâl", translation: "Şimdi yardım etmiyor", extraHint: "-mıyor, -miyor" },
+  { id: 9, word: "لَا يَنْصُرُ", meaning: "Nefy-i istikbâl", translation: "Gelecekte yardım etmez", extraHint: "-mayacak, -maz, -mıyor" },
+  { id: 10, word: "لَنْ يَنْصَرَ", meaning: "Te'kîd-i nefy-i istikbâl", translation: "Asla yardım etmeyecek", extraHint: "asla -mayacak" },
+  { id: 11, word: "لِيَنْصُرْ", meaning: "Emr-i gâib", translation: "Yardım etsin", extraHint: "-sın, -sin" },
+  { id: 12, word: "لَا يَنْصُرْ", meaning: "Nehy-i gâib", translation: "Yardım etmesin", extraHint: "-masın, -mesin" },
+  { id: 13, word: "أُنْصُرْ", meaning: "Emr-i hâzır", translation: "Yardım et", extraHint: "- (sen yap)" },
+  { id: 14, word: "لَا تَنْصُرْ", meaning: "Nehy-i hâzır", translation: "Yardım etme", extraHint: "-ma, -me" },
+  { id: 15, word: "مَنْصَرٌ", meaning: "İsm-i zaman, ism-i mekân, masdar-ı mîmî", translation: "Yardım edecek zaman / mekân", extraHint: "Zaman / Mekân / Mastar" },
+  { id: 16, word: "مِنْصَرٌ", meaning: "İsm-i âlet", translation: "Yardım edecek alet", extraHint: "Alet ismi" },
+  { id: 17, word: "نَصْرَةً", meaning: "Masdar-ı binâ-i merre", translation: "Bir kere yardım etmek", extraHint: "Bir kere yapma" },
+  { id: 18, word: "نِصْرَةً", meaning: "Masdar-ı binâ-i nev'", translation: "Bir çeşit yardım etmek", extraHint: "Bir tarz yapma" },
+  { id: 19, word: "نُصَيْرٌ", meaning: "İsm-i tasgîr", translation: "Azıcık yardım etmek", extraHint: "Küçültme (-cık)" },
+  { id: 20, word: "نَصْرِيٌّ", meaning: "İsm-i mensûb", translation: "Yardım etmeye mensup", extraHint: "Aitlik (-li, -sel)" },
+  { id: 21, word: "نَصَّارٌ", meaning: "Mübalağalı ism-i fâil", translation: "Çok yardım edici", extraHint: "Çok yapan" },
+  { id: 22, word: "أَنْصَرُ", meaning: "İsm-i tafdîl", translation: "Daha çok yardım edici", extraHint: "En / Daha çok" },
+  { id: 23, word: "مَا أَنْصَرَهُ", meaning: "Fiil-i taaccüb-i evvel", translation: "Ne acayip yardım etti!", extraHint: "Ne acayip ...!" },
+  { id: 24, word: "أَنْصِرْ بِهِ", meaning: "Fiil-i taaccüb-i sânî", translation: "Ne güzel yardım etti!", extraHint: "Ne güzel / hoş ...!" }
+];
+
+let EMSILE_24_WORDS = JSON.parse(JSON.stringify(DEFAULT_EMSILE_24_WORDS));
+
+// B) 14 AYRIK ŞAHIS ZAMİRİ (KULLANICI TALEBİ)
+const INDEPENDENT_PRONOUNS_14 = [
+  { id: 1, word: "هُوَ", meaning: "O (erkek)", group: "Gâib (3. Şahıs Eril)" },
+  { id: 2, word: "هُمَا", meaning: "O ikisi (erkek)", group: "Gâib (3. Şahıs Eril)" },
+  { id: 3, word: "هُمْ", meaning: "Onlar (erkek)", group: "Gâib (3. Şahıs Eril)" },
+  { id: 4, word: "هِيَ", meaning: "O (kadın)", group: "Gâibe (3. Şahıs Dişil)" },
+  { id: 5, word: "هُمَا", meaning: "O ikisi (kadın)", group: "Gâibe (3. Şahıs Dişil)" },
+  { id: 6, word: "هُنَّ", meaning: "Onlar (kadın)", group: "Gâibe (3. Şahıs Dişil)" },
+  { id: 7, word: "أَنْتَ", meaning: "Sen (erkek)", group: "Muhâtab (2. Şahıs Eril)" },
+  { id: 8, word: "أَنْتُمَا", meaning: "Siz ikiniz (erkek)", group: "Muhâtab (2. Şahıs Eril)" },
+  { id: 9, word: "أَنْتُمْ", meaning: "Siz (erkek)", group: "Muhâtab (2. Şahıs Eril)" },
+  { id: 10, word: "أَنْتِ", meaning: "Sen (kadın)", group: "Muhâtaba (2. Şahıs Dişil)" },
+  { id: 11, word: "أَنْتُمَا", meaning: "Siz ikiniz (kadın)", group: "Muhâtaba (2. Şahıs Dişil)" },
+  { id: 12, word: "أَنْتُنَّ", meaning: "Siz (kadın)", group: "Muhâtaba (2. Şahıs Dişil)" },
+  { id: 13, word: "أَنَا", meaning: "Ben", group: "Mütekellim (1. Şahıs)" },
+  { id: 14, word: "نَحْنُ", meaning: "Biz", group: "Mütekellim (1. Şahıs)" }
+];
+
+// 14 ŞAHIS ZAMİRİ ANLAMLARI (Çekim Modu İçin)
+const PRONOUN_MEANINGS = [
+  "O (erkek)", "O ikisi (erkek)", "Onlar (erkek)",
+  "O (kadın)", "O ikisi (kadın)", "Onlar (kadın)",
+  "Sen (erkek)", "Siz ikiniz (erkek)", "Siz (erkek)",
+  "Sen (kadın)", "Siz ikiniz (kadın)", "Siz (kadın)",
+  "Ben", "Biz"
+];
+
+// C) 24 SÎGA İÇİN 14 ŞAHIS ÇEKİMİ
+const SIGA_CONJUGATIONS = {
+  1: ["نَصَرَ", "نَصَرَا", "نَصَرُوا", "نَصَرَتْ", "نَصَرَتَا", "نَصَرْنَ", "نَصَرْتَ", "نَصَرْتُمَا", "نَصَرْتُمْ", "نَصَرْتِ", "نَصَرْتُمَا", "نَصَرْتُنَّ", "نَصَرْتُ", "نَصَرْنَا"],
+  2: ["يَنْصُرُ", "يَنْصُرَانِ", "يَنْصُرُونَ", "تَنْصُرُ", "تَنْصُرَانِ", "يَنْصُرْنَ", "تَنْصُرُ", "تَنْصُرَانِ", "تَنْصُرُونَ", "تَنْصُرِينَ", "تَنْصُرَانِ", "تَنْصُرْنَ", "أَنْصُرُ", "نَنْصُرُ"],
+  3: ["نَصْرًا", "نَصْرَانِ", "نَصَرَاتٌ"],
+  4: ["نَاصِرٌ", "نَاصِرَانِ", "نَاصِرُونَ", "نُصَّارٌ (Kırık Cemi)", "نُصَّرُ (Kırık Cemi)", "نَصَرَةٌ (Kırık Cemi)", "نَاصِرَةٌ", "نَاصِرَتَانِ", "نَاصِرَاتٌ", "نَوَاصِرُ (Kırık Cemi)"],
+  5: ["مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ", "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ", "مَنْصُورٌ", "مَنْصُورَانِ", "مَنْصُورُونَ", "مَنْصُورَةٌ", "مَنْصُورَتَانِ", "مَنْصُورَاتٌ", "مَنْصُورٌ", "مَنْصُورُونَ"],
+  6: ["لَمْ يَنْصُرْ", "لَمْ يَنْصُرَا", "لَمْ يَنْصُرُوا", "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ يَنْصُرْنَ", "لَمْ تَنْصُرْ", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرُوا", "لَمْ تَنْصُرِي", "لَمْ تَنْصُرَا", "لَمْ تَنْصُرْنَ", "لَمْ أَنْصُرْ", "لَمْ نَنْصُرْ"],
+  7: ["لَمَّا يَنْصُرْ", "لَمَّا يَنْصُرَا", "لَمَّا يَنْصُرُوا", "لَمَّا تَنْصُرْ", "لَمَّا تَنْصُرَا", "لَمَّا يَنْصُرْنَ", "لَمَّا تَنْصُرْ", "لَمَّا تَنْصُرَا", "لَمَّا تَنْصُرُوا", "لَمَّا تَنْصُرِي", "لَمَّا تَنْصُرَا", "لَمَّا تَنْصُرْنَ", "لَمَّا أَنْصُرْ", "لَمَّا نَنْصُرْ"],
+  8: ["مَا يَنْصُرُ", "مَا يَنْصُرَانِ", "مَا يَنْصُرُونَ", "مَا تَنْصُرُ", "مَا تَنْصُرَانِ", "مَا يَنْصُرْنَ", "مَا تَنْصُرُ", "مَا تَنْصُرَانِ", "مَا تَنْصُرُونَ", "مَا تَنْصُرِينَ", "مَا تَنْصُرَانِ", "مَا تَنْصُرْنَ", "مَا أَنْصُرُ", "مَا نَنْصُرُ"],
+  9: ["لَا يَنْصُرُ", "لَا يَنْصُرَانِ", "لَا يَنْصُرُونَ", "لَا تَنْصُرُ", "لَا تَنْصُرَانِ", "لَا يَنْصُرْنَ", "لَا تَنْصُرُ", "لَا تَنْصُرَانِ", "لَا تَنْصُرُونَ", "لَا تَنْصُرِينَ", "لَا تَنْصُرَانِ", "لَا تَنْصُرْنَ", "لَا أَنْصُرُ", "لَا نَنْصُرُ"],
+  10: ["لَنْ يَنْصَرَ", "لَنْ يَنْصَرَا", "لَنْ يَنْصَرُوا", "لَنْ تَنْصَرَ", "لَنْ تَنْصَرَا", "لَنْ يَنْصَرْنَ", "لَنْ تَنْصَرَ", "لَنْ تَنْصَرَا", "لَنْ تَنْصَرُوا", "لَنْ تَنْصَرِي", "لَنْ تَنْصَرَا", "لَنْ تَنْصَرْنَ", "لَنْ أَنْصَرَ", "لَنْ نَنْصَرَ"],
+  11: ["لِيَنْصُرْ", "لِيَنْصُرَا", "لِيَنْصُرُوا", "لِتَنْصُرْ", "لِتَنْصُرَا", "لِيَنْصُرْنَ", "لِيَنْصُرْ", "لِيَنْصُرَا", "لِيَنْصُرُوا", "لِتَنْصُرِي", "لِتَنْصُرَا", "لِيَنْصُرْنَ", "لِأَنْصُرْ", "لِنَنْصُرْ"],
+  12: ["لَا يَنْصُرْ", "لَا يَنْصُرَا", "لَا يَنْصُرُوا", "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا يَنْصُرْنَ", "لَا يَنْصُرْ", "لَا يَنْصُرَا", "لَا يَنْصُرُوا", "لَا تَنْصُرِي", "لَا تَنْصُرَا", "لَا يَنْصُرْنَ", "لَا أَنْصُرْ", "لَا نَنْصُرْ"],
+  13: ["لِيَنْصُرْ", "لِيَنْصُرَا", "لِيَنْصُرُوا", "لِتَنْصُرْ", "لِتَنْصُرَا", "لِيَنْصُرْنَ", "أُنْصُرْ", "أُنْصُرَا", "أُنْصُرُوا", "أُنْصُرِي", "أُنْصُرَا", "أُنْصُرْنَ", "لِأَنْصُرْ", "لِنَنْصُرْ"],
+  14: ["لَا يَنْصُرْ", "لَا يَنْصُرَا", "لَا يَنْصُرُوا", "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا يَنْصُرْنَ", "لَا تَنْصُرْ", "لَا تَنْصُرَا", "لَا تَنْصُرُوا", "لَا تَنْصُرِي", "لَا تَنْصُرَا", "لَا تَنْصُرْنَ", "لَا أَنْصُرْ", "لَا نَنْصُرْ"],
+  15: ["مَنْصَرٌ", "مَنْصَرَانِ", "مَنَاصِرُ", "مَنْصَرَةٌ", "مَنْصَرَتَانِ", "مَنَاصِرُ", "مَنْصَرٌ", "مَنْصَرَانِ", "مَنَاصِرُ", "مَنْصَرَةٌ", "مَنْصَرَتَانِ", "مَنَاصِرُ", "مَنْصَرٌ", "مَنَاصِرُ"],
+  16: ["مِنْصَرٌ", "مِنْصَرَانِ", "مَنَاصِرُ", "مِنْصَرَةٌ", "مِنْصَرَتَانِ", "مَنَاصِرُ", "مِنْصَرٌ", "مِنْصَرَانِ", "مَنَاصِرُ", "مِنْصَرَةٌ", "مِنْصَرَتَانِ", "مَنَاصِرُ", "مِنْصَرٌ", "مَنَاصِرُ"],
+  17: ["نَصْرَةً", "نَصْرَتَيْنِ", "نَصَرَاتٍ", "نَصْرَةً", "نَصْرَتَيْنِ", "نَصَرَاتٍ", "نَصْرَةً", "نَصْرَتَيْنِ", "نَصَرَاتٍ", "نَصْرَةً", "نَصْرَتَيْنِ", "نَصَرَاتٍ", "نَصْرَةً", "نَصْرَةً"],
+  18: ["نِصْرَةً", "نِصْرَتَيْنِ", "نِصَرَاتٍ", "نِصْرَةً", "نِصْرَتَيْنِ", "نِصَرَاتٍ", "نِصْرَةً", "نِصْرَتَيْنِ", "نِصَرَاتٍ", "نِصْرَةً", "نِصْرَتَيْنِ", "نِصَرَاتٍ", "نِصْرَةً", "نِصْرَةً"],
+  19: ["نُصَيْرٌ", "نُصَيْرَانِ", "نُصَيْرُونَ", "نُصَيْرَةٌ", "نُصَيْرَتَانِ", "نُصَيْرَاتٌ", "نُصَيْرٌ", "نُصَيْرَانِ", "نُصَيْرُونَ", "نُصَيْرَةٌ", "نُصَيْرَتَانِ", "نُصَيْرَاتٌ", "نُصَيْرٌ", "نُصَيْرُونَ"],
+  20: ["نَصْرِيٌّ", "نَصْرِيَّانِ", "نَصْرِيُّونَ", "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ", "نَصْرِيٌّ", "نَصْرِيَّانِ", "نَصْرِيُّونَ", "نَصْرِيَّةٌ", "نَصْرِيَّتَانِ", "نَصْرِيَّاتٌ", "نَصْرِيٌّ", "نَصْرِيُّونَ"],
+  21: ["نَصَّارٌ", "نَصَّارَانِ", "نَصَّارُونَ", "نَصَّارَةٌ", "نَصَّارَتَانِ", "نَصَّارَاتٌ", "نَصَّارٌ", "نَصَّارَانِ", "نَصَّارُونَ", "نَصَّارَةٌ", "نَصَّارَتَانِ", "نَصَّارَاتٌ", "نَصَّارٌ", "نَصَّارُونَ"],
+  22: ["أَنْصَرُ", "أَنْصَرَانِ", "أَنْصَرُونَ", "نُصْرَى", "نُصْرَيَانِ", "نُصْرَيَاتٌ", "أَنْصَرُ", "أَنْصَرَانِ", "أَنْصَرُونَ", "نُصْرَى", "نُصْرَيَانِ", "نُصْرَيَاتٌ", "أَنْصَرُ", "أَنْصَرُونَ"],
+  23: [
+    "مَا أَنْصَرَهُ", "مَا أَنْصَرَهُمَا", "مَا أَنْصَرَهُمْ",
+    "مَا أَنْصَرَهَا", "مَا أَنْصَرَهُمَا", "مَا أَنْصَرَهُنَّ",
+    "مَا أَنْصَرَكَ", "مَا أَنْصَرَكُمَا", "مَا أَنْصَرَكُمْ",
+    "مَا أَنْصَرِكِ", "مَا أَنْصَرَكُمَا", "مَا أَنْصَرَكُنَّ",
+    "مَا أَنْصَرَنِي", "مَا أَنْصَرَنَا"
+  ],
+  24: ["أَنْصِرْ بِهِ", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِمْ", "أَنْصِرْ بِهَا", "أَنْصِرْ بِهِمَا", "أَنْصِرْ بِهِنَّ", "أَنْصِرْ بِكَ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُمْ", "أَنْصِرْ بِكِ", "أَنْصِرْ بِكُمَا", "أَنْصِرْ بِكُنَّ", "أَنْصِرْ بِي", "أَنْصِرْ بِنَا"]
+};
+
+// 14 ŞAHIS / SÎGA ADLARI (TABLO KONUMLARI)
+const PRONOUN_PERSON_NAMES = [
+  "Müzekker Gâib - Müfred (O erkek)",
+  "Müzekker Gâib - Tesniye (O iki erkek)",
+  "Müzekker Gâib - Cemî (Onlar erkek)",
+  "Müennes Gâibe - Müfred (O kadın)",
+  "Müennes Gâibe - Tesniye (O iki kadın)",
+  "Müennes Gâibe - Cemî (Onlar kadın)",
+  "Müzekker Muhatab - Müfred (Sen erkek)",
+  "Müzekker Muhatab - Tesniye (Siz iki erkek)",
+  "Müzekker Muhatab - Cemî (Siz erkekler)",
+  "Müennes Muhataba - Müfred (Sen kadın)",
+  "Müennes Muhataba - Tesniye (Siz iki kadın)",
+  "Müennes Muhataba - Cemî (Siz kadınlar)",
+  "Mütekellim - Müfred / Vahde (Ben)",
+  "Mütekellim - Tesniye / Cemî / Maa'l-gayr (Biz)"
+];
+
+// HER SÎGANIN AYRINTILI 14 ÇEKİMİ VE ANLAMLARI
+const SIGA_CONJUGATION_DETAILS = {
+  1: [
+    {
+      id: 1,
+      word: "نَصَرَ",
+      meaning: "O (erkek) yardım etti",
+      person: "Müzekker Gâib - Müfred",
+      pronoun: "هُوَ",
+      fullDetail: "Yardım etti bir gâib er geçmiş zamanda"
+    },
+    {
+      id: 2,
+      word: "نَصَرَا",
+      meaning: "O iki erkek yardım etti",
+      person: "Müzekker Gâib - Tesniye",
+      pronoun: "هُمَا",
+      fullDetail: "Yardım ettiler iki gâib erler geçmiş zamanda"
+    },
+    {
+      id: 3,
+      word: "نَصَرُوا",
+      meaning: "Onlar (erkek) yardım etti",
+      person: "Müzekker Gâib - Cemî",
+      pronoun: "هُمْ",
+      fullDetail: "Yardım ettiler cemî gâib erler geçmiş zamanda"
+    },
+    {
+      id: 4,
+      word: "نَصَرَتْ",
+      meaning: "O (kadın) yardım etti",
+      person: "Müennes Gâibe - Müfred",
+      pronoun: "هِيَ",
+      fullDetail: "Yardım etti bir gâibe avrat geçmiş zamanda"
+    },
+    {
+      id: 5,
+      word: "نَصَرَتَا",
+      meaning: "O iki kadın yardım etti",
+      person: "Müennes Gâibe - Tesniye",
+      pronoun: "هُمَا",
+      fullDetail: "Yardım ettiler iki gâibe avratlar geçmiş zamanda"
+    },
+    {
+      id: 6,
+      word: "نَصَرْنَ",
+      meaning: "Onlar (kadın) yardım etti",
+      person: "Müennes Gâibe - Cemî",
+      pronoun: "هُنَّ",
+      fullDetail: "Yardım ettiler cemî gâibe avratlar geçmiş zamanda"
+    },
+    {
+      id: 7,
+      word: "نَصَرْتَ",
+      meaning: "Sen (erkek) yardım ettin",
+      person: "Müzekker Muhatab - Müfred",
+      pronoun: "أَنْتَ",
+      fullDetail: "Yardım ettin sen bir hâzır er geçmiş zamanda"
+    },
+    {
+      id: 8,
+      word: "نَصَرْتُمَا",
+      meaning: "Siz iki erkek yardım ettiniz",
+      person: "Müzekker Muhatab - Tesniye",
+      pronoun: "أَنْتُمَا",
+      fullDetail: "Yardım ettiniz siz iki hâzır erler geçmiş zamanda"
+    },
+    {
+      id: 9,
+      word: "نَصَرْتُمْ",
+      meaning: "Siz (erkek) yardım ettiniz",
+      person: "Müzekker Muhatab - Cemî",
+      pronoun: "أَنْتُمْ",
+      fullDetail: "Yardım ettiniz siz cemî hâzır erler geçmiş zamanda"
+    },
+    {
+      id: 10,
+      word: "نَصَرْتِ",
+      meaning: "Sen (kadın) yardım ettin",
+      person: "Müennes Muhataba - Müfred",
+      pronoun: "أَنْتِ",
+      fullDetail: "Yardım ettin sen bir hâzıra avrat geçmiş zamanda"
+    },
+    {
+      id: 11,
+      word: "نَصَرْتُمَا",
+      meaning: "Siz iki kadın yardım ettiniz",
+      person: "Müennes Muhataba - Tesniye",
+      pronoun: "أَنْتُمَا",
+      fullDetail: "Yardım ettiniz siz iki hâzıra avratlar geçmiş zamanda"
+    },
+    {
+      id: 12,
+      word: "نَصَرْتُنَّ",
+      meaning: "Siz (kadın) yardım ettiniz",
+      person: "Müennes Muhataba - Cemî",
+      pronoun: "أَنْتُنَّ",
+      fullDetail: "Yardım ettiniz siz cemî hâzıra avratlar geçmiş zamanda"
+    },
+    {
+      id: 13,
+      word: "نَصَرْتُ",
+      meaning: "Ben yardım ettim",
+      person: "Mütekellim - Müfred (Vahde)",
+      pronoun: "أَنَا",
+      fullDetail: "Yardım ettim ben geçmiş zamanda"
+    },
+    {
+      id: 14,
+      word: "نَصَرْنَا",
+      meaning: "Biz yardım ettik",
+      person: "Mütekellim - Tesniye / Cemî (Maa'l-gayr)",
+      pronoun: "نَحْنُ",
+      fullDetail: "Yardım ettik biz geçmiş zamanda"
+    }
+  ],
+  2: [
+    {
+      id: 1,
+      word: "يَنْصُرُ",
+      meaning: "O (erkek) yardım ediyor",
+      person: "Müzekker Gâib - Müfred",
+      pronoun: "هُوَ",
+      fullDetail: "Yardım eder bir gâib er şimdiki veya gelecek zamanda"
+    },
+    {
+      id: 2,
+      word: "يَنْصُرَانِ",
+      meaning: "O iki erkek yardım ediyor",
+      person: "Müzekker Gâib - Tesniye",
+      pronoun: "هُمَا",
+      fullDetail: "Yardım ederler iki gâib erler şimdiki veya gelecek zamanda"
+    },
+    {
+      id: 3,
+      word: "يَنْصُرُونَ",
+      meaning: "Onlar (erkek) yardım ediyor",
+      person: "Müzekker Gâib - Cemî",
+      pronoun: "هُمْ",
+      fullDetail: "Yardım ederler cemî gâib erler şimdiki veya gelecek zamanda"
+    },
+    {
+      id: 4,
+      word: "تَنْصُرُ",
+      meaning: "O (kadın) yardım ediyor",
+      person: "Müennes Gâibe - Müfred",
+      pronoun: "هِيَ",
+      fullDetail: "Yardım eder bir gâibe avrat şimdiki veya gelecek zamanda"
+    },
+    {
+      id: 5,
+      word: "تَنْصُرَانِ",
+      meaning: "O iki kadın yardım ediyor",
+      person: "Müennes Gâibe - Tesniye",
+      pronoun: "هُمَا",
+      fullDetail: "Yardım ederler iki gâibe avratlar şimdiki veya gelecek zamanda"
+    },
+    {
+      id: 6,
+      word: "يَنْصُرْنَ",
+      meaning: "Onlar (kadın) yardım ediyor",
+      person: "Müennes Gâibe - Cemî",
+      pronoun: "هُنَّ",
+      fullDetail: "Yardım ederler cemî gâibe avratlar şimdiki veya gelecek zamanda"
+    },
+    {
+      id: 7,
+      word: "تَنْصُرُ",
+      meaning: "Sen (erkek) yardım ediyorsun",
+      person: "Müzekker Muhatab - Müfred",
+      pronoun: "أَنْتَ",
+      fullDetail: "Yardım edersin sen bir hâzır er şimdiki veya gelecek zamanda"
+    },
+    {
+      id: 8,
+      word: "تَنْصُرَانِ",
+      meaning: "Siz iki erkek yardım ediyorsunuz",
+      person: "Müzekker Muhatab - Tesniye",
+      pronoun: "أَنْتُمَا",
+      fullDetail: "Yardım edersiniz siz iki hâzır erler şimdiki veya gelecek zamanda"
+    },
+    {
+      id: 9,
+      word: "تَنْصُرُونَ",
+      meaning: "Siz (erkek) yardım ediyorsunuz",
+      person: "Müzekker Muhatab - Cemî",
+      pronoun: "أَنْتُمْ",
+      fullDetail: "Yardım edersiniz siz cemî hâzır erler şimdiki veya gelecek zamanda"
+    },
+    {
+      id: 10,
+      word: "تَنْصُرِينَ",
+      meaning: "Sen (kadın) yardım ediyorsun",
+      person: "Müennes Muhataba - Müfred",
+      pronoun: "أَنْتِ",
+      fullDetail: "Yardım edersin sen bir hâzıra avrat şimdiki veya gelecek zamanda"
+    },
+    {
+      id: 11,
+      word: "تَنْصُرَانِ",
+      meaning: "Siz iki kadın yardım ediyorsunuz",
+      person: "Müennes Muhataba - Tesniye",
+      pronoun: "أَنْتُمَا",
+      fullDetail: "Yardım edersiniz siz iki hâzıra avratlar şimdiki veya gelecek zamanda"
+    },
+    {
+      id: 12,
+      word: "تَنْصُرْنَ",
+      meaning: "Siz (kadın) yardım ediyorsunuz",
+      person: "Müennes Muhataba - Cemî",
+      pronoun: "أَنْتُنَّ",
+      fullDetail: "Yardım edersiniz siz cemî hâzıra avratlar şimdiki veya gelecek zamanda"
+    },
+    {
+      id: 13,
+      word: "أَنْصُرُ",
+      meaning: "Ben yardım ediyorum",
+      person: "Mütekellim - Müfred (Vahde)",
+      pronoun: "أَنَا",
+      fullDetail: "Yardım ederim ben şimdiki veya gelecek zamanda"
+    },
+    {
+      id: 14,
+      word: "نَنْصُرُ",
+      meaning: "Biz yardım ediyoruz",
+      person: "Mütekellim - Tesniye / Cemî (Maa'l-gayr)",
+      pronoun: "نَحْنُ",
+      fullDetail: "Yardım ederiz biz şimdiki veya gelecek zamanda"
+    }
+  ],
+  3: [
+    {
+      id: 1,
+      word: "نَصْرًا",
+      meaning: "Bir yardım etmek",
+      person: "Masdar-ı gayr-i mîmî - Müfred",
+      pronoun: "Müfred (Tekil)",
+      fullDetail: "Masdar-ı gayr-i mîmî müfred, mânâsı: Bir yardım etmek"
+    },
+    {
+      id: 2,
+      word: "نَصْرَانِ",
+      meaning: "İki yardım etmek",
+      person: "Masdar-ı gayr-i mîmî - Tesniye",
+      pronoun: "Tesniye (İkili)",
+      fullDetail: "Masdar-ı gayr-i mîmî tesniye, mânâsı: İki yardım etmek"
+    },
+    {
+      id: 3,
+      word: "نَصَرَاتٌ",
+      meaning: "Çok yardım etmek",
+      person: "Masdar-ı gayr-i mîmî - Cemî",
+      pronoun: "Cemî (Çoğul)",
+      fullDetail: "Masdar-ı gayr-i mîmî cem', mânâsı: Çok yardım etmek"
+    }
+  ],
+  4: [
+    {
+      id: 1,
+      word: "نَاصِرٌ",
+      meaning: "Yardım edici bir er",
+      person: "İsm-i fâil - Müfred Müzekker",
+      pronoun: "Müfred Müzekker",
+      fullDetail: "İsm-i fâil müfred müzekker, mânâsı: Yardım edici bir er"
+    },
+    {
+      id: 2,
+      word: "نَاصِرَانِ",
+      meaning: "Yardım edici iki erler",
+      person: "İsm-i fâil - Tesniye Müzekker",
+      pronoun: "Tesniye Müzekker",
+      fullDetail: "İsm-i fâil tesniye müzekker, mânâsı: Yardım edici iki erler"
+    },
+    {
+      id: 3,
+      word: "نَاصِرُونَ",
+      meaning: "Yardım edici cem' erler (Musahhah)",
+      person: "İsm-i fâil - Cem' Müzekker Musahhah",
+      pronoun: "Cem' Müzekker Musahhah",
+      fullDetail: "İsm-i fâil cem' müzekker musahhah, mânâsı: Yardım edici cem' erler"
+    },
+    {
+      id: 4,
+      word: "نُصَّارٌ (Kırık Cemi)",
+      meaning: "Yardım edici cem' erler (Kırık Cemi)",
+      person: "İsm-i fâil - Cem' Müzekker Mükesser (Kırık Cemi)",
+      pronoun: "Cem' Müzekker (Kırık Cemi)",
+      fullDetail: "İsm-i fâil cem' müzekker mükesser, mânâsı: Yardım edici cem' erler (Kırık Cemi)"
+    },
+    {
+      id: 5,
+      word: "نُصَّرُ (Kırık Cemi)",
+      meaning: "Yardım edici cem' erler (Kırık Cemi)",
+      person: "İsm-i fâil - Cem' Müzekker Mükesser (Kırık Cemi)",
+      pronoun: "Cem' Müzekker (Kırık Cemi)",
+      fullDetail: "İsm-i fâil cem' müzekker mükesser, mânâsı: Yardım edici cem' erler (Kırık Cemi)"
+    },
+    {
+      id: 6,
+      word: "نَصَرَةٌ (Kırık Cemi)",
+      meaning: "Yardım edici cem' erler (Kırık Cemi)",
+      person: "İsm-i fâil - Cem' Müzekker Mükesser (Kırık Cemi)",
+      pronoun: "Cem' Müzekker (Kırık Cemi)",
+      fullDetail: "İsm-i fâil cem' müzekker mükesser, mânâsı: Yardım edici cem' erler (Kırık Cemi)"
+    },
+    {
+      id: 7,
+      word: "نَاصِرَةٌ",
+      meaning: "Yardım edici bir avrat",
+      person: "İsm-i fâil - Müfred Müennes",
+      pronoun: "Müfred Müennes",
+      fullDetail: "İsm-i fâil müfred müennes, mânâsı: Yardım edici bir avrat (kadın)"
+    },
+    {
+      id: 8,
+      word: "نَاصِرَتَانِ",
+      meaning: "Yardım edici iki avratlar",
+      person: "İsm-i fâil - Tesniye Müennes",
+      pronoun: "Tesniye Müennes",
+      fullDetail: "İsm-i fâil tesniye müennes, mânâsı: Yardım edici iki avratlar (kadınlar)"
+    },
+    {
+      id: 9,
+      word: "نَاصِرَاتٌ",
+      meaning: "Yardım edici cem' avratlar (Musahhah)",
+      person: "İsm-i fâil - Cem' Müennes Musahhah",
+      pronoun: "Cem' Müennes Musahhah",
+      fullDetail: "İsm-i fâil cem' müennes musahhah, mânâsı: Yardım edici cem' avratlar (kadınlar)"
+    },
+    {
+      id: 10,
+      word: "نَوَاصِرُ (Kırık Cemi)",
+      meaning: "Yardım edici cem' avratlar (Kırık Cemi)",
+      person: "İsm-i fâil - Cem' Müennes Mükesser (Kırık Cemi)",
+      pronoun: "Cem' Müennes (Kırık Cemi)",
+      fullDetail: "İsm-i fâil cem' müennes mükesser, mânâsı: Yardım edici cem' avratlar (Kırık Cemi)"
+    }
+  ]
+};
+
+// D) 750 ARAPÇA KELİME (OKUNUŞSUZ, ÖZ TÜRKÇE MANALAR)
+const DEFAULT_VOCABULARY_WORDS = [
+  { id: 1, category: "kuran", level: 1, singular: "رَبٌّ", dual: "رَبَّانِ", plural: "أَرْبَابٌ", meaning: "Terbiye eden, mutlak mâlik ve rızık veren" },
+  { id: 2, category: "kuran", level: 1, singular: "آيَةٌ", dual: "آيَتَانِ", plural: "آيَاتٌ", meaning: "İlahî delil, mucize ve Kur'an cümlesi" },
+  { id: 3, category: "kuran", level: 1, singular: "كِتَابٌ", dual: "كِتَابَانِ", plural: "كُتُبٌ", meaning: "Yazılı vahiy, Kur'an ve amel defteri" },
+  { id: 4, category: "kuran", level: 1, singular: "رَسُولٌ", dual: "رَسُولَانِ", plural: "رُسُلٌ", meaning: "Kitap ve şeriat getiren ilahî elçi" },
+  { id: 5, category: "kuran", level: 1, singular: "نَبِيٌّ", dual: "نَبِيَّانِ", plural: "أَنْبِيَاءُ / نَبِيُّونَ", meaning: "Vahiy ve gayb haberi alan peygamber" },
+  { id: 6, category: "kuran", level: 1, singular: "يَوْمٌ", dual: "يَوْمَانِ", plural: "أَيَّامٌ", meaning: "Gün, vakit, kıyamet zamanı" },
+  { id: 7, category: "kuran", level: 1, singular: "سَمَاءٌ", dual: "سَمَاوَانِ", plural: "سَمَاوَاتٌ", meaning: "Yüksek gök, semavat" },
+  { id: 8, category: "kuran", level: 1, singular: "أَرْضٌ", dual: "أَرْضَانِ", plural: "أَرَاضٍ / أَرْضُونَ", meaning: "Yeryüzü, zemin, dünya" },
+  { id: 9, category: "kuran", level: 1, singular: "نَفْسٌ", dual: "نَفْسَانِ", plural: "أَنْفُسٌ / نُفُوسٌ", meaning: "İnsanın kendi zâtı, canı, hevesi" },
+  { id: 10, category: "kuran", level: 1, singular: "قَوْمٌ", dual: "قَوْمَانِ", plural: "أَقْوَامٌ", meaning: "İnsan topluluğu, halk, millet" },
+  { id: 11, category: "kuran", level: 1, singular: "عَبْدٌ", dual: "عَبْدَانِ", plural: "عِبَادٌ / عَبِيدٌ", meaning: "Allah'a boyun eğip ibadet eden insan" },
+  { id: 12, category: "kuran", level: 1, singular: "قَلْبٌ", dual: "قَلْبَانِ", plural: "قُلُوبٌ", meaning: "Gönül, manevî idrak ve iman merkezi" },
+  { id: 13, category: "kuran", level: 1, singular: "عَذَابٌ", dual: "عَذَابَانِ", plural: "أَعْذِبَةٌ", meaning: "Şiddetli elem ve ahiret cezası" },
+  { id: 14, category: "kuran", level: 1, singular: "جَنَّةٌ", dual: "جَنَّتَانِ", plural: "جَنَّاتٌ", meaning: "Ebedî saadet, huzur ve mükâfat yurdu" },
+  { id: 15, category: "kuran", level: 1, singular: "نَارٌ", dual: "نَارَانِ", plural: "نِيرَانٌ", meaning: "Yakıcı ateş, cehennem" },
+  { id: 16, category: "kuran", level: 1, singular: "حَقٌّ", dual: "حَقَّانِ", plural: "حُقُوقٌ", meaning: "Mutlak gerçek, adalet, sabit doğru" },
+  { id: 17, category: "kuran", level: 1, singular: "سَبِيلٌ", dual: "سَبِيلَانِ", plural: "سُبُلٌ", meaning: "Yol, rızaya ulaştıran hak yol" },
+  { id: 18, category: "kuran", level: 1, singular: "أَمْرٌ", dual: "أَمْرَانِ", plural: "أُمُورٌ / أَوَامِرُ", meaning: "İlahî buyruk, ferman, hüküm ve iş" },
+  { id: 19, category: "kuran", level: 1, singular: "شَيْءٌ", dual: "شَيْئَانِ", plural: "أَشْيَاءُ", meaning: "Yaratılmış olan her varlık, nesne" },
+  { id: 20, category: "kuran", level: 1, singular: "مَالٌ", dual: "مَالَانِ", plural: "أَمْوَالٌ", meaning: "Dünya serveti, mülk, meta" },
+  { id: 21, category: "kuran", level: 1, singular: "وَلَدٌ", dual: "وَلَدَانِ", plural: "أَوْلَادٌ / وِلْدَانٌ", meaning: "Çocuk, evlat, nesil" },
+  { id: 22, category: "kuran", level: 1, singular: "عِلْمٌ", dual: "عِلْمَانِ", plural: "عُلُومٌ", meaning: "Kesin bilgi, marifet, hakikat ilmi" },
+  { id: 23, category: "kuran", level: 1, singular: "عَمَلٌ", dual: "عَمَلَانِ", plural: "أَعْمَالٌ", meaning: "Niyetle yapılan iş, fiil, eylem" },
+  { id: 24, category: "kuran", level: 1, singular: "أَهْلٌ", dual: "أَهْلَانِ", plural: "أَهْلُونَ / أَهَالٍ", meaning: "Aile, ev halkı, mensup topluluk" },
+  { id: 25, category: "kuran", level: 1, singular: "بَيْتٌ", dual: "بَيْتَانِ", plural: "بُيُوتٌ / أَبْيَاتٌ", meaning: "Ev, mesken, Kâbe-i Muazzama" },
+  { id: 26, category: "kuran", level: 1, singular: "بَابٌ", dual: "بَابَانِ", plural: "أَبْوَابٌ / بِيبَانٌ", meaning: "Giriş yeri, sema ve cennet kapıları" },
+  { id: 27, category: "kuran", level: 1, singular: "مَلَكٌ", dual: "مَلَكَانِ", plural: "مَلَائِكَةٌ", meaning: "Nurdan yaratılmış itaatkâr varlık" },
+  { id: 28, category: "kuran", level: 1, singular: "إِنْسَانٌ", dual: "إِنْسَانَانِ", plural: "نَاسٌ / أَنَاسِيُّ", meaning: "Akıl ve irade sahibi beşer" },
+  { id: 29, category: "kuran", level: 1, singular: "دِينٌ", dual: "دِينَانِ", plural: "أَدْيَانٌ", meaning: "İtaat, hesap ve ilahî şeriat nizamı" },
+  { id: 30, category: "kuran", level: 1, singular: "قَوْلٌ", dual: "قَوْلَانِ", plural: "أَقْوَالٌ / أَقَاوِيلُ", meaning: "Kelam, lafız, hakikat ifadesi" },
+  { id: 31, category: "kuran", level: 1, singular: "يَدٌ", dual: "يَدَانِ", plural: "أَيْدٍ / أَيَادٍ", meaning: "Organ olan el; güç ve nimet" },
+  { id: 32, category: "kuran", level: 1, singular: "عَيْنٌ", dual: "عَيْنَانِ", plural: "أَعْيُنٌ / عُيُونٌ", meaning: "Görme organı; su pınarı" },
+  { id: 33, category: "kuran", level: 1, singular: "أُذُنٌ", dual: "أُذُنَانِ", plural: "آذَانٌ", meaning: "İşitme ve ibret alma organı" },
+  { id: 34, category: "kuran", level: 1, singular: "لِسَانٌ", dual: "لِسَانَانِ", plural: "أَلْسِنَةٌ", meaning: "Konuşma organı, konuşulan dil ve lehçe" },
+  { id: 35, category: "kuran", level: 1, singular: "وَجْهٌ", dual: "وَجْهَانِ", plural: "وُجُوهٌ / أَوْجُهٌ", meaning: "Çehre, taraf; ilahî rıza" },
+  { id: 36, category: "kuran", level: 1, singular: "رِجْلٌ", dual: "رِجْلَانِ", plural: "أَرْجُلٌ", meaning: "Yürüme ve sebat organı" },
+  { id: 37, category: "kuran", level: 1, singular: "صَدْرٌ", dual: "صَدْرَانِ", plural: "صُدُورٌ", meaning: "Kalbin mahalli olan sine, bağır" },
+  { id: 38, category: "kuran", level: 1, singular: "بَصَرٌ", dual: "بَصَرَانِ", plural: "أَبْصَارٌ", meaning: "Göz nuru, görme ve idrak kabiliyeti" },
+  { id: 39, category: "kuran", level: 1, singular: "سَمْعٌ", dual: "سَمْعَانِ", plural: "أَسْمَاعٌ", meaning: "İşitme ve hak çağrıyı duyma yetisi" },
+  { id: 40, category: "kuran", level: 1, singular: "رَأْسٌ", dual: "رَأْسَانِ", plural: "رُؤُوسٌ", meaning: "Baş, tepe noktası, topluluk lideri" },
+  { id: 41, category: "kuran", level: 1, singular: "شَمْسٌ", dual: "شَمْسَانِ", plural: "شُمُوسٌ", meaning: "Âlemi aydınlatan ve ısıtan kandil" },
+  { id: 42, category: "kuran", level: 1, singular: "قَمَرٌ", dual: "قَمَرَانِ", plural: "أَقْمَارٌ", meaning: "Gecenin aydınlığı, zaman ölçüsü" },
+  { id: 43, category: "kuran", level: 1, singular: "نَجْمٌ", dual: "نَجْمَانِ", plural: "نُجُومٌ / أَنْجُمٌ", meaning: "Gökyüzünü süsleyen ışıklı cisim" },
+  { id: 44, category: "kuran", level: 1, singular: "لَيْلٌ", dual: "لَيْلَانِ", plural: "لَيَالٍ", meaning: "Karanlığın bürüdüğü sükûn vakti" },
+  { id: 45, category: "kuran", level: 1, singular: "نَهَارٌ", dual: "نَهَارَانِ", plural: "أَنْهُرٌ / نُهُرٌ", meaning: "Işıkla aydınlanan çalışma vakti" },
+  { id: 46, category: "kuran", level: 1, singular: "نُورٌ", dual: "نُورَانِ", plural: "أَنْوَارٌ", meaning: "Karanlıkları dağıtan ilahî aydınlık" },
+  { id: 47, category: "kuran", level: 1, singular: "ظُلْمَةٌ", dual: "ظُلْمَتَانِ", plural: "ظُلُمَاتٌ", meaning: "Maddî karanlık, şirk ve cehalet" },
+  { id: 48, category: "kuran", level: 1, singular: "مَاءٌ", dual: "مَاءَانِ", plural: "مِيَاهٌ / أَمْوَاهٌ", meaning: "Canlılara hayat veren temizleyici nimet" },
+  { id: 49, category: "kuran", level: 1, singular: "رِيحٌ", dual: "رِيحَانِ", plural: "رِيَاحٌ / أَرْيَاحٌ", meaning: "Bulutları sevk eden yel, esinti" },
+  { id: 50, category: "kuran", level: 1, singular: "بَحْرٌ", dual: "بَحْرَانِ", plural: "بِحَارٌ / أَبْحُرٌ", meaning: "Uçsuz bucaksız engin su kütlesi" },
+  { id: 51, category: "kuran", level: 1, singular: "جَبَلٌ", dual: "جَبَلَانِ", plural: "جِبَالٌ", meaning: "Yeryüzünü sarsıntıdan koruyan sabit kütle" },
+  { id: 52, category: "kuran", level: 1, singular: "نَهْرٌ", dual: "نَهْرَانِ", plural: "أَنْهَارٌ", meaning: "Yatağında akan tatlı su ırmağı" },
+  { id: 53, category: "kuran", level: 1, singular: "شَجَرَةٌ", dual: "شَجَرَتَانِ", plural: "أَشْجَارٌ / شَجَرٌ", meaning: "Kökü yerde dalları gökte bitki" },
+  { id: 54, category: "kuran", level: 1, singular: "ثَمَرَةٌ", dual: "ثَمَرَتَانِ", plural: "ثَمَرَاتٌ / ثَمَرٌ", meaning: "Bitki ürünü; amel hasılatı" },
+  { id: 55, category: "kuran", level: 1, singular: "طَعَامٌ", dual: "طَعَامَانِ", plural: "أَطْعِمَةٌ", meaning: "İnsanın beslendiği gıda ve rızık" },
+  { id: 56, category: "kuran", level: 1, singular: "مَوْتٌ", dual: "مَوْتَانِ", plural: "أَمْوَاتٌ", meaning: "Ruhun bedenden ayrılıp ahirete göçmesi" },
+  { id: 57, category: "kuran", level: 1, singular: "حَيَاةٌ", dual: "حَيَاتَانِ", plural: "حَيَوَاتٌ", meaning: "Canlılık, dirilik, hakiki varoluş" },
+  { id: 58, category: "kuran", level: 1, singular: "دُنْيَا", dual: "دُنْيَيَانِ", plural: "دُنًى", meaning: "Fani, geçici ilk hayat sahnesi" },
+  { id: 59, category: "kuran", level: 1, singular: "آخِرَةٌ", dual: "آخِرَتَانِ", plural: "آخِرَاتٌ", meaning: "Dünyadan sonraki ebedî hesap yurdu" },
+  { id: 60, category: "kuran", level: 1, singular: "سَاعَةٌ", dual: "سَاعَتَانِ", plural: "سَاعَاتٌ", meaning: "Kâinatın altüst olacağı dehşetli kıyamet anı" },
+  { id: 61, category: "kuran", level: 1, singular: "أَجْرٌ", dual: "أَجْرَانِ", plural: "أُجُورٌ", meaning: "Salih amellere verilen sevap" },
+  { id: 62, category: "kuran", level: 1, singular: "فَضْلٌ", dual: "فَضْلَانِ", plural: "فُضُولٌ / أَفْضَالٌ", meaning: "İlahî bol ihsan, üstünlük ve bereket" },
+  { id: 63, category: "kuran", level: 1, singular: "رَحْمَةٌ", dual: "رَحْمَتَانِ", plural: "رَحَمَاتٌ", meaning: "Her şeyi kuşatan ilahî merhamet" },
+  { id: 64, category: "kuran", level: 1, singular: "نِعْمَةٌ", dual: "نِعْمَتَانِ", plural: "نِعَمٌ / أَنْعُمٌ", meaning: "Maddî ve manevî ilahî bağış, sıhhat" },
+  { id: 65, category: "kuran", level: 1, singular: "حَسَنَةٌ", dual: "حَسَنَتَانِ", plural: "حَسَنَاتٌ", meaning: "Rızaya uygun güzel amel, iyilik" },
+  { id: 66, category: "kuran", level: 1, singular: "سَيِّئَةٌ", dual: "سَيِّئَتَانِ", plural: "سَيِّئَاتٌ", meaning: "Günah, çirkin fiil, fenalık" },
+  { id: 67, category: "kuran", level: 1, singular: "ذَنْبٌ", dual: "ذَنْبَانِ", plural: "ذُنُوبٌ", meaning: "Kişiyi sorumlu kılan vebal ve isyan" },
+  { id: 68, category: "kuran", level: 1, singular: "خَطِيئَةٌ", dual: "خَطِيئَتَانِ", plural: "خَطَايَا / خَطِيئَاتٌ", meaning: "Kasten veya gafletle işlenen ağır günah" },
+  { id: 69, category: "kuran", level: 1, singular: "ظُلْمٌ", dual: "ظُلْمَانِ", plural: "مَظَالِمُ", meaning: "Haddi aşmak, haksızlık, şirk" },
+  { id: 70, category: "kuran", level: 1, singular: "إِثْمٌ", dual: "إِثْمَانِ", plural: "آثَامٌ", meaning: "İnsanı hayırdan alıkoyan ağır günah" },
+  { id: 71, category: "kuran", level: 1, singular: "مُؤْمِنٌ", dual: "مُؤْمِنَانِ", plural: "مُؤْمِنُونَ / مُؤْمِنِينَ", meaning: "Allah'a ihlasla inanıp güvene eren kul" },
+  { id: 72, category: "kuran", level: 1, singular: "كَافِرٌ", dual: "كَافِرَانِ", plural: "كَافِرُونَ / كُفَّارٌ", meaning: "Hakkı ve nimetleri bile bile inkâr eden" },
+  { id: 73, category: "kuran", level: 1, singular: "مُنَافِقٌ", dual: "مُنَافِقَانِ", plural: "مُنَافِقُونَ / مُنَافِقِينَ", meaning: "İçi inkârcı, dışı inanmış ikiyüzlü" },
+  { id: 74, category: "kuran", level: 1, singular: "مُشْرِكٌ", dual: "مُشْرِكَانِ", plural: "مُشْرِكُونَ / مُشْرِكِينَ", meaning: "Allah'a ortak koşan kimse" },
+  { id: 75, category: "kuran", level: 1, singular: "ظَالِمٌ", dual: "ظَالِمَانِ", plural: "ظَالِمُونَ / ظَلَمَةٌ", meaning: "Sınırları çiğneyen, hakkı gasbeden" },
+  { id: 76, category: "kuran", level: 1, singular: "فَاسِقٌ", dual: "فَاسِقَانِ", plural: "فَاسِقُونَ / فُسَّاقٌ", meaning: "İtaatten çıkıp günaha dalan kimse" },
+  { id: 77, category: "kuran", level: 1, singular: "صَالِحٌ", dual: "صَالِحَانِ", plural: "صَالِحُونَ / صُلَحَاءُ", meaning: "Ameli dine uygun, temiz ve dürüst kul" },
+  { id: 78, category: "kuran", level: 1, singular: "صَادِقٌ", dual: "صَادِقَانِ", plural: "صَادِقُونَ / صُدَقَاءُ", meaning: "Sözünde ve inancında dosdoğru olan" },
+  { id: 79, category: "kuran", level: 1, singular: "صَابِرٌ", dual: "صَابِرَانِ", plural: "صَابِرُونَ", meaning: "Güçlüklere ve günaha direnen kul" },
+  { id: 80, category: "kuran", level: 1, singular: "شَاكِرٌ", dual: "شَاكِرَانِ", plural: "شَاكِرُونَ / شُكَّارٌ", meaning: "Nimetin kadrini bilip hamdeden" },
+  { id: 81, category: "kuran", level: 1, singular: "مُحْسِنٌ", dual: "مُحْسِنَانِ", plural: "مُحْسِنُونَ / مُحْسِنِينَ", meaning: "Allah'ı görür gibi ihlasla iyilik eden" },
+  { id: 82, category: "kuran", level: 1, singular: "شَهِيدٌ", dual: "شَهِيدَانِ", plural: "شُهَدَاءُ", meaning: "Hakikate tanıklık eden, canını feda eden" },
+  { id: 83, category: "kuran", level: 1, singular: "عَالِمٌ", dual: "عَالِمَانِ", plural: "عُلَمَاءُ", meaning: "İlmiyle amel eden, derin kavrayışlı zat" },
+  { id: 84, category: "kuran", level: 1, singular: "عَدُوٌّ", dual: "عَدُوَّانِ", plural: "أَعْدَاءٌ", meaning: "İnsanın kötülüğünü isteyen hasım; Şeytan" },
+  { id: 85, category: "kuran", level: 1, singular: "وَلِيٌّ", dual: "وَلِيَّانِ", plural: "أَوْلِيَاءُ", meaning: "Koruyan, yardım eden, takvalı dost" },
+  { id: 86, category: "kuran", level: 1, singular: "نَصِيرٌ", dual: "نَصِيرَانِ", plural: "أَنْصَارٌ", meaning: "Zorlukta yardıma koşan destekçi" },
+  { id: 87, category: "kuran", level: 1, singular: "سُلْطَانٌ", dual: "سُلْطَانَانِ", plural: "سَلَاطِينُ", meaning: "Kesin delil, karşı konulmaz güç" },
+  { id: 88, category: "kuran", level: 1, singular: "بَيِّنَةٌ", dual: "بَيِّنَتَانِ", plural: "بَيِّنَاتٌ", meaning: "Şüphe bırakmayan apaçık delil, mucize" },
+  { id: 89, category: "kuran", level: 1, singular: "حِكْمَةٌ", dual: "حِكْمَتَانِ", plural: "حِكَمٌ", meaning: "Eşyanın hakikatini bilip yerli yerince davranmak" },
+  { id: 90, category: "kuran", level: 1, singular: "كَلِمَةٌ", dual: "كَلِمَتَانِ", plural: "كَلِمَاتٌ / كَلِمٌ", meaning: "İlahî irade fermanı, tevhid sözü" },
+  { id: 91, category: "kuran", level: 1, singular: "حَدِيثٌ", dual: "حَدِيثَانِ", plural: "أَحَادِيثُ", meaning: "Haber, söz, anlatı, Kur'an kıssası" },
+  { id: 92, category: "kuran", level: 1, singular: "مَسْجِدٌ", dual: "مَسْجِدَانِ", plural: "مَسَاجِدُ", meaning: "Allah'a secde ve ibadet edilen mabet" },
+  { id: 93, category: "kuran", level: 1, singular: "مَدِينَةٌ", dual: "مَدِينَتَانِ", plural: "مُدُنٌ / مَدَائِنُ", meaning: "Nüfusun toplandığı yerleşim yeri" },
+  { id: 94, category: "kuran", level: 1, singular: "قَرْيَةٌ", dual: "قَرْيَتَانِ", plural: "قُرًى", meaning: "Kasaba, köy, yerleşim merkezi" },
+  { id: 95, category: "kuran", level: 1, singular: "دَارٌ", dual: "دَارَانِ", plural: "دِيَارٌ / دُورٌ", meaning: "Ev, konut, ebedî ahiret konağı" },
+  { id: 96, category: "kuran", level: 1, singular: "أُمٌّ", dual: "أُمَّانِ", plural: "أُمَّهَاتٌ", meaning: "Asıl, kaynak, hürmete layık valide" },
+  { id: 97, category: "kuran", level: 1, singular: "أَبٌ", dual: "أَبَوَانِ", plural: "آبَاءٌ", meaning: "Nesle vesile olan ata, peder" },
+  { id: 98, category: "kuran", level: 1, singular: "أَخٌ", dual: "أَخَوَانِ", plural: "إِخْوَةٌ / إِخْوَانٌ", meaning: "Öz kardeş ve din kardeşi" },
+  { id: 99, category: "kuran", level: 1, singular: "أُخْتٌ", dual: "أُخْتَانِ", plural: "أَخَوَاتٌ", meaning: "Nesep bağıyla bağlı kız kardeş" },
+  { id: 100, category: "kuran", level: 1, singular: "زَوْجٌ", dual: "زَوْجَانِ", plural: "أَزْوَاجٌ", meaning: "Birbirini tamamlayan eş, hanım veya koca" },
+  { id: 101, category: "kuran", level: 1, singular: "غَيْبٌ", dual: "غَيْبَانِ", plural: "غُيُوبٌ", meaning: "Duyu ötesi, gizli olan ilahî hakikat" },
+  { id: 102, category: "kuran", level: 1, singular: "شَهَادَةٌ", dual: "شَهَادَتَانِ", plural: "شَهَادَاتٌ", meaning: "Gözle görünen mülk âlemi, tanıklık" },
+  { id: 103, category: "kuran", level: 1, singular: "خَلْقٌ", dual: "خَلْقَانِ", plural: "أَخْلَاقٌ", meaning: "Yoktan var etme, yaratılış ve hilkat" },
+  { id: 104, category: "kuran", level: 1, singular: "ظِلٌّ", dual: "ظِلِّانِ", plural: "ظِلَالٌ / أَظْلَالٌ", meaning: "Güneşten koruyan sığınak, himaye" },
+  { id: 105, category: "kuran", level: 1, singular: "حَرُورٌ", dual: "حَرُورَانِ", plural: "حَرَائِرُ", meaning: "Kavurucu sıcak rüzgâr, şiddetli hararet" },
+  { id: 106, category: "kuran", level: 1, singular: "كَوْكَبٌ", dual: "كَوْكَبَانِ", plural: "كَوَاكِبُ", meaning: "Parlak yıldız, gök cismi" },
+  { id: 107, category: "kuran", level: 1, singular: "فُلْكٌ", dual: "فُلْكَانِ", plural: "أَفْلَاكٌ", meaning: "Denizde yüzen büyük gemi" },
+  { id: 108, category: "kuran", level: 1, singular: "جُنْدٌ", dual: "جُنْدَانِ", plural: "أَجْنَادٌ / جُنُودٌ", meaning: "Asker, ilahî ordu ve yardımcı kuvvet" },
+  { id: 109, category: "kuran", level: 1, singular: "حِزْبٌ", dual: "حِزْبَانِ", plural: "أَحْزَابٌ", meaning: "Hak veya batıl taraftarı olan topluluk" },
+  { id: 110, category: "kuran", level: 1, singular: "فِرْقَةٌ", dual: "فِرْقَتَانِ", plural: "فِرَقٌ", meaning: "İnsan grubu, ayrılan zümre" },
+  { id: 111, category: "kuran", level: 1, singular: "طَائِفَةٌ", dual: "طَائِفَتَانِ", plural: "طَوَائِفُ", meaning: "Bir cemaat, zümre, insan topluluğu" },
+  { id: 112, category: "kuran", level: 1, singular: "أُمَّةٌ", dual: "أُمَّتَانِ", plural: "أُمَمٌ", meaning: "Bir peygambere tâbi olan topluluk" },
+  { id: 113, category: "kuran", level: 1, singular: "ذُرِّيَّةٌ", dual: "ذُرِّيَّتَانِ", plural: "ذُرِّيَّاتٌ", meaning: "Soy sop, nesil, evlatlar" },
+  { id: 114, category: "kuran", level: 1, singular: "أَجَلٌ", dual: "أَجَلَانِ", plural: "آجَالٌ", meaning: "Tayin edilmiş ömür sonu, vakit" },
+  { id: 115, category: "kuran", level: 1, singular: "رِزْقٌ", dual: "رِزْقَانِ", plural: "أَرْزَاقٌ", meaning: "Canlıya bahşedilen maddi ve manevi gıda" },
+  { id: 116, category: "kuran", level: 1, singular: "مَعَاشٌ", dual: "مَعَاشَانِ", plural: "مَعَايِشُ", meaning: "Hayat dirlik sebebi, geçim vasıtası" },
+  { id: 117, category: "kuran", level: 1, singular: "مِشْكَاةٌ", dual: "مِشْكَاةَانِ", plural: "مَشَاكٍ", meaning: "Kandil yuvası, ışık veren oyuk" },
+  { id: 118, category: "kuran", level: 1, singular: "زُجَاجَةٌ", dual: "زُجَاجَتَانِ", plural: "زُجَاجَاتٌ", meaning: "Sırça kandil, berrak billur cam" },
+  { id: 119, category: "kuran", level: 1, singular: "حِلْيَةٌ", dual: "حِلْيَتَانِ", plural: "حُلِيٌّ", meaning: "Süs eşyası, ziynet, güzel vasıflar" },
+  { id: 120, category: "kuran", level: 1, singular: "لِبَاسٌ", dual: "لِبَاسَانِ", plural: "أَلْبِسَةٌ / لُبُسٌ", meaning: "Örtünme giysisi; takva ve hayâ örtüsü" },
+  { id: 121, category: "kuran", level: 1, singular: "سُنْدُسٌ", dual: "سُنْدُسَانِ", plural: "سَنَادِسُ", meaning: "Cennet ehlinin ince ipekten elbisesi" },
+  { id: 122, category: "kuran", level: 1, singular: "إِسْتَبْرَقٌ", dual: "إِسْتَبْرَقَانِ", plural: "أَسَابِرِقُ", meaning: "Cennet ehlinin kalın ve parlak ipeği" },
+  { id: 123, category: "kuran", level: 1, singular: "وِزْرٌ", dual: "وِزْرَانِ", plural: "أَوْزَارٌ", meaning: "Ağır günah yükü, mesuliyet" },
+  { id: 124, category: "kuran", level: 1, singular: "إِصْرٌ", dual: "إِصْرَانِ", plural: "آصَارٌ", meaning: "Ağır yük, bağlayıcı ahit ve külfet" },
+  { id: 125, category: "kuran", level: 1, singular: "أَغْلَالٌ", dual: "غُلَّانِ", plural: "أَغْلَالٌ", meaning: "Boyunlara vurulan bukağılar, tasmalar" },
+  { id: 126, category: "kuran", level: 1, singular: "سَلَاسِلُ", dual: "سِلْسِلَتَانِ", plural: "سَلَاسِلُ", meaning: "Cehennem ehlinin bağlandığı zincirler" },
+  { id: 127, category: "kuran", level: 1, singular: "جَحِيمٌ", dual: "جَحِيمَانِ", plural: "جُحُمٌ", meaning: "Şiddetle alevlenen, yakıcı derin ateş" },
+  { id: 128, category: "kuran", level: 1, singular: "سَقَرٌ", dual: "سَقَرَانِ", plural: "أَسْقَارٌ", meaning: "Yakıp kavuran cehennem tabakası" },
+  { id: 129, category: "kuran", level: 1, singular: "زَمْهَرِيرٌ", dual: "زَمْهَرِيرَانِ", plural: "زَمَاهِرُ", meaning: "Dondurucu soğuk azap yeri" },
+  { id: 130, category: "kuran", level: 1, singular: "زَقُّومٌ", dual: "زَقُّومَانِ", plural: "زَقَاقِيمُ", meaning: "Cehennemin dibinde biten acı ağaç" },
+  { id: 131, category: "kuran", level: 1, singular: "غِسْلِينٌ", dual: "غِسْلِينَانِ", plural: "أَغْسِلَةٌ", meaning: "Cehennem ehlinin aktığı cerahatli içecek" },
+  { id: 132, category: "kuran", level: 1, singular: "حَمِيمٌ", dual: "حَمِيمَانِ", plural: "أَحِمَّاءُ", meaning: "Kaynar sıcak su; yakın dost" },
+  { id: 133, category: "kuran", level: 1, singular: "سَلْوَى", dual: "سَلْوَيَانِ", plural: "سَلْوَاتٌ", meaning: "İlahî ikram olan bıldırcın eti" },
+  { id: 134, category: "kuran", level: 1, singular: "مَنٌّ", dual: "مَنَّانِ", plural: "مِنَانٌ", meaning: "Zahmetsizce lütfedilen ilahî kudret helvası" },
+  { id: 135, category: "kuran", level: 1, singular: "عَسَلٌ", dual: "عَسَلَانِ", plural: "أَعْسَالٌ", meaning: "Şifalı saf bal nimeti" },
+  { id: 136, category: "kuran", level: 1, singular: "لَبَنٌ", dual: "لَبَنَانِ", plural: "أَلْبَانٌ", meaning: "Saf ve besleyici temiz süt" },
+  { id: 137, category: "kuran", level: 1, singular: "طِفْلٌ", dual: "طِفْلَانِ", plural: "أَطْفَالٌ", meaning: "Küçük çocuk, sabi" },
+  { id: 138, category: "kuran", level: 1, singular: "شَيْخٌ", dual: "شَيْخَانِ", plural: "شُيُوخٌ / أَشْيَاخٌ", meaning: "İhtiyar kimse; ilim ve maneviyat reisi" },
+  { id: 139, category: "kuran", level: 1, singular: "رَكْعَةٌ", dual: "رَكْعَتَانِ", plural: "رَكَعَاتٌ", meaning: "Namazın rükû ve secdeli her bir cüzü" },
+  { id: 140, category: "kuran", level: 1, singular: "سَجْدَةٌ", dual: "سَجْدَتَانِ", plural: "سَجَدَاتٌ", meaning: "Alnı yere koyup Allah'a boyun eğme" },
+  { id: 141, category: "kuran", level: 1, singular: "مِحْرَابٌ", dual: "مِحْرَابَانِ", plural: "مَحَارِيبُ", meaning: "İbadet yeri, caminin kıble nişi" },
+  { id: 142, category: "kuran", level: 1, singular: "مِنْبَرٌ", dual: "مِنْبَرَانِ", plural: "مَنَابِرُ", meaning: "Hutbe irad edilen yüksek basamaklı kürsü" },
+  { id: 143, category: "kuran", level: 1, singular: "مَسْجِدٌ", dual: "مَسْجِدَانِ", plural: "مَسَاجِدُ", meaning: "Secde edilen mübarek ibadethane" },
+  { id: 144, category: "kuran", level: 1, singular: "فُرْقَانٌ", dual: "فُرْقَانَانِ", plural: "فَرَاقِينُ", meaning: "Hak ile batılı ayıran Kur'an" },
+  { id: 145, category: "kuran", level: 1, singular: "بَيِّنَةٌ", dual: "بَيِّنَتَانِ", plural: "بَيِّنَاتٌ", meaning: "Açık delil, kesin şahit ve huccet" },
+  { id: 146, category: "kuran", level: 1, singular: "بَشِيرٌ", dual: "بَشِيرَانِ", plural: "بُشَرَاءُ", meaning: "Cenneti ve ilahî mükafatı müjdeleyen elçi" },
+  { id: 147, category: "kuran", level: 1, singular: "نَذِيرٌ", dual: "نَذِيرَانِ", plural: "نُذُرٌ", meaning: "İlahî azaba karşı uyaran peygamber" },
+  { id: 148, category: "kuran", level: 1, singular: "مِيثَاقٌ", dual: "مِيثَاقَانِ", plural: "مَوَاثِيقُ", meaning: "Sağlam sözleşme, ezelî ahit" },
+  { id: 149, category: "kuran", level: 1, singular: "حَبْلٌ", dual: "حَبْلَانِ", plural: "حِبَالٌ", meaning: "Sağlam ip; ilahî bağ ve Kur'an" },
+  { id: 150, category: "kuran", level: 1, singular: "عُرْوَةٌ", dual: "عُرْوَتَانِ", plural: "عُرًى", meaning: "Sağlam kulp; sarsılmaz iman bağı" },
+  { id: 151, category: "hadis", level: 2, singular: "سُنَّةٌ", dual: "سُنَّتَانِ", plural: "سُنَنٌ", meaning: "Peygamberimizin söz, fiil ve takrirleri" },
+  { id: 152, category: "hadis", level: 2, singular: "حَدِيثٌ", dual: "حَدِيثَانِ", plural: "أَحَادِيثُ", meaning: "Peygamber efendimizin mübarek sözü ve haberi" },
+  { id: 153, category: "hadis", level: 2, singular: "إِسْنَادٌ", dual: "إِسْنَادَانِ", plural: "أَسَانِيدُ", meaning: "Hadisi nakleden raviler zinciri" },
+  { id: 154, category: "hadis", level: 2, singular: "مَتْنٌ", dual: "مَتْنَانِ", plural: "مُتُونٌ", meaning: "Hadisin asıl lafız ve ibare kısmı" },
+  { id: 155, category: "hadis", level: 2, singular: "رَاوٍ", dual: "رَاوِيَانِ", plural: "رُوَاةٌ", meaning: "Hadis-i şerifi nakleden kimse" },
+  { id: 156, category: "hadis", level: 2, singular: "صِحَّةٌ", dual: "صِحَّتَانِ", plural: "صِحَّاتٌ", meaning: "Hadisin sahih, sağlam ve kusursuz oluşu" },
+  { id: 157, category: "hadis", level: 2, singular: "ضَعْفٌ", dual: "ضَعْفَانِ", plural: "أَضْعَافٌ", meaning: "Hadisin sened veya metnindeki kusur" },
+  { id: 158, category: "hadis", level: 2, singular: "مُتَوَاتِرٌ", dual: "مُتَوَاتِرَانِ", plural: "مُتَوَاتِرَاتٌ", meaning: "Yalan üzerine birleşmesi imkansız topluluğun rivayeti" },
+  { id: 159, category: "hadis", level: 2, singular: "مَشْهُورٌ", dual: "مَشْهُورَانِ", plural: "مَشَاهِيرُ", meaning: "Her tabakada en az üç ravisi bulunan hadis" },
+  { id: 160, category: "hadis", level: 2, singular: "عَزِيزٌ", dual: "عَزِيزَانِ", plural: "أَعِزَّاءُ", meaning: "Her tabakada en az iki ravisi bulunan hadis" },
+  { id: 161, category: "hadis", level: 2, singular: "غَرِيبٌ", dual: "غَرِيبَانِ", plural: "غُرَبَاءُ", meaning: "Senedin herhangi bir yerinde tek kalan rivayet" },
+  { id: 162, category: "hadis", level: 2, singular: "مُرْسَلٌ", dual: "مُرْسَلَانِ", plural: "مُرْسَلَاتٌ", meaning: "Tabiînin sahabi atlayarak doğrudan rivayet ettiği hadis" },
+  { id: 163, category: "hadis", level: 2, singular: "مَوْقُوفٌ", dual: "مَوْقُوفَانِ", plural: "مَوْقُوفَاتٌ", meaning: "Sahabiye nispet edilen söz ve fiil" },
+  { id: 164, category: "hadis", level: 2, singular: "مَقْطُوعٌ", dual: "مَقْطُوعَانِ", plural: "مَقْطُوعَاتٌ", meaning: "Tabiîne nispet edilen söz ve fetva" },
+  { id: 165, category: "hadis", level: 2, singular: "مَوْضُوعٌ", dual: "مَوْضُوعَانِ", plural: "مَوْضُوعَاتٌ", meaning: "Peygamber adına uydurulmuş asılsız rivayet" },
+  { id: 166, category: "hadis", level: 2, singular: "إِجْمَاعٌ", dual: "إِجْمَاعَانِ", plural: "إِجْمَاعَاتٌ", meaning: "İslam müctehidlerinin bir hükümde ittifakı" },
+  { id: 167, category: "hadis", level: 2, singular: "قِيَاسٌ", dual: "قِيَاسَانِ", plural: "أَقْيِسَةٌ", meaning: "Hükmü bilinmeyeni bilinene benzeterek hüküm çıkarma" },
+  { id: 168, category: "hadis", level: 2, singular: "إِجْتِهَادٌ", dual: "إِجْتِهَادَانِ", plural: "إِجْتِهَادَاتٌ", meaning: "Şer'î delillerden hüküm çıkarma gayreti" },
+  { id: 169, category: "hadis", level: 2, singular: "مُجْتَهِدٌ", dual: "مُجْتَهِدَانِ", plural: "مُجْتَهِدُونَ", meaning: "Ayet ve hadisten hüküm çıkarma ehliyetine sahip alim" },
+  { id: 170, category: "hadis", level: 2, singular: "فَتْوَى", dual: "فَتْوَيَانِ", plural: "فَتَاوَى", meaning: "Dini mesele hakkında verilen şer'î hüküm" },
+  { id: 171, category: "hadis", level: 2, singular: "مُفْتٍ", dual: "مُفْتِيَانِ", plural: "مُفْتُونَ", meaning: "Şeriat hükmünü fetva ile bildiren alim" },
+  { id: 172, category: "hadis", level: 2, singular: "تَقْلِيدٌ", dual: "تَقْلِيدَانِ", plural: "تَقَالِيدُ", meaning: "Delilini bilmeden alimin içtihadına uyma" },
+  { id: 173, category: "hadis", level: 2, singular: "مُعَامَلَةٌ", dual: "مُعَامَلَتَانِ", plural: "مُعَامَلَاتٌ", meaning: "İnsanlar arası hukuki ve ticari ilişkiler" },
+  { id: 174, category: "hadis", level: 2, singular: "عُقُوبَةٌ", dual: "عُقُوبَتَانِ", plural: "عُقُوبَاتٌ", meaning: "Şeriatın koyduğu cezai müeyyideler" },
+  { id: 175, category: "hadis", level: 2, singular: "طَهَارَةٌ", dual: "طَهَارَتَانِ", plural: "طَهَارَاتٌ", meaning: "Maddi ve hükmi pisliklerden temizlenme" },
+  { id: 176, category: "hadis", level: 2, singular: "نَجَاسَةٌ", dual: "نَجَاسَتَانِ", plural: "نَجَاسَاتٌ", meaning: "Namaza ve ibadete mani olan pislik" },
+  { id: 177, category: "hadis", level: 2, singular: "حَدَثٌ", dual: "حَدَثَانِ", plural: "أَحْدَاثٌ", meaning: "Abdest veya gusül gerektiren hükmi kirlilik" },
+  { id: 178, category: "hadis", level: 2, singular: "جَنَابَةٌ", dual: "جَنَابَتَانِ", plural: "جَنَابَاتٌ", meaning: "Gusül abdesti almayı gerektiren hal" },
+  { id: 179, category: "hadis", level: 2, singular: "حَيْضٌ", dual: "حَيْضَانِ", plural: "حُيُوضٌ", meaning: "Kadınların muayyen fıtri hali" },
+  { id: 180, category: "hadis", level: 2, singular: "نِفَاسٌ", dual: "نِفَاسَانِ", plural: "أَنْفَاسٌ", meaning: "Doğum sonrası lohusalık dönemi" },
+  { id: 181, category: "hadis", level: 2, singular: "إِسْتِحَاضَةٌ", dual: "إِسْتِحَاضَتَانِ", plural: "إِسْتِحَاضَاتٌ", meaning: "Hastalık ve özür kanaması hali" },
+  { id: 182, category: "hadis", level: 2, singular: "مِسْوَاكٌ", dual: "مِسْوَاكَانِ", plural: "مَسَاوِيكُ", meaning: "Diş temizliğinde kullanılan sünnet fırça" },
+  { id: 183, category: "hadis", level: 2, singular: "خِتَانٌ", dual: "خِتَانَانِ", plural: "خِتَانَاتٌ", meaning: "Erkek çocukların sünnet edilmesi fıtratı" },
+  { id: 184, category: "hadis", level: 2, singular: "إِسْتِنْجَاءٌ", dual: "إِسْتِنْجَاءَانِ", plural: "إِسْتِنْجَاءَاتٌ", meaning: "Tuvalet sonrası su ile yapılan temizlik" },
+  { id: 185, category: "hadis", level: 2, singular: "إِسْتِبْرَاءٌ", dual: "إِسْتِبْرَاءَانِ", plural: "إِسْتِبْرَاءَاتٌ", meaning: "İdrar kalıntısından tamamen arınma gayreti" },
+  { id: 186, category: "hadis", level: 2, singular: "سَهْوٌ", dual: "سَهْوَانِ", plural: "سَهَوَاتٌ", meaning: "Namazda dalgınlıkla yapılan yanılma" },
+  { id: 187, category: "hadis", level: 2, singular: "قِيَامٌ", dual: "قِيَامَانِ", plural: "قِيَامَاتٌ", meaning: "Namazda ayakta durma farzı" },
+  { id: 188, category: "hadis", level: 2, singular: "قِرَاءَةٌ", dual: "قِرَاءَتَانِ", plural: "قِرَاءَاتٌ", meaning: "Namazda Kur'an ayetlerini okuma" },
+  { id: 189, category: "hadis", level: 2, singular: "رُكُوعٌ", dual: "رُكُوعَانِ", plural: "رُكُوعَاتٌ", meaning: "Namazda bel büküp secde öncesi eğilme" },
+  { id: 190, category: "hadis", level: 2, singular: "تَشَهُّدٌ", dual: "تَشَهُّدَانِ", plural: "تَشَهُّدَاتٌ", meaning: "Namaz oturuşunda Ettehiyyâtü okuma" },
+  { id: 191, category: "hadis", level: 2, singular: "نَافِلَةٌ", dual: "نَافِلَتَانِ", plural: "نَوَافِلُ", meaning: "Farz ve vacip dışındaki faziletli sünnet ibadet" },
+  { id: 192, category: "hadis", level: 2, singular: "رَاتِبَةٌ", dual: "رَاتِبَتَانِ", plural: "رَوَاتِبُ", meaning: "Farz namazların öncesi ve sonrasındaki düzenli sünnetler" },
+  { id: 193, category: "hadis", level: 2, singular: "وِتْرٌ", dual: "وِتْرَانِ", plural: "أَوْتَارٌ", meaning: "Gece kılınan tek rek'atlı namaz" },
+  { id: 194, category: "hadis", level: 2, singular: "تَرَاوِيحُ", dual: "تَرْوِيحَتَانِ", plural: "تَرَاوِيحُ", meaning: "Ramazan gecelerinde kılınan sünnet namaz" },
+  { id: 195, category: "hadis", level: 2, singular: "تَهَجُّدٌ", dual: "تَهَجُّدَانِ", plural: "تَهَجُّدَاتٌ", meaning: "Uykudan uyanıp gece kılınan nafile namaz" },
+  { id: 196, category: "hadis", level: 2, singular: "ضُحَى", dual: "ضُحَيَانِ", plural: "أَضْحَاءٌ", meaning: "Kuşluk vaktinde kılınan nafile namaz" },
+  { id: 197, category: "hadis", level: 2, singular: "كُسُوفٌ", dual: "كُسُوفَانِ", plural: "كُسُوفَاتٌ", meaning: "Güneş tutulması esnasında kılınan namaz" },
+  { id: 198, category: "hadis", level: 2, singular: "خُسُوفٌ", dual: "خُسُوفَانِ", plural: "خُسُوفَاتٌ", meaning: "Ay tutulması esnasında kılınan namaz" },
+  { id: 199, category: "hadis", level: 2, singular: "إِسْتِسْقَاءٌ", dual: "إِسْتِسْقَاءَانِ", plural: "إِسْتِسْقَاءَاتٌ", meaning: "Kuraklıkta yapılan yağmur duası ve namazı" },
+  { id: 200, category: "hadis", level: 2, singular: "خُطْبَةٌ", dual: "خُطْبَتَانِ", plural: "خُطَبٌ", meaning: "Cuma ve bayramlarda minberde irad edilen nasihat" },
+  { id: 201, category: "hadis", level: 2, singular: "عِيدٌ", dual: "عِيدَانِ", plural: "أَعْيَادٌ", meaning: "Sevinç ve şükür günü olan Ramazan ve Kurban bayramı" },
+  { id: 202, category: "hadis", level: 2, singular: "عُمْرَةٌ", dual: "عُمْرَتَانِ", plural: "عُمَرٌ", meaning: "Hac mevsimi dışında Beytullah'ı ziyaret" },
+  { id: 203, category: "hadis", level: 2, singular: "طَوَافٌ", dual: "طَوَافَانِ", plural: "طَوَافَاتٌ", meaning: "Kâbe-i Muazzama etrafında yedi defa dönme" },
+  { id: 204, category: "hadis", level: 2, singular: "سَعْيٌ", dual: "سَعْيَانِ", plural: "أَسْعَاءٌ", meaning: "Safa ile Merve tepeleri arasında yedi defa yürüme" },
+  { id: 205, category: "hadis", level: 2, singular: "إِحْرَامٌ", dual: "إِحْرَامَانِ", plural: "إِحْرَامَاتٌ", meaning: "Hac ve umreye başlama niyeti ve beyaz örtüsü" },
+  { id: 206, category: "hadis", level: 2, singular: "تَلْبِيَةٌ", dual: "تَلْبِيَتَانِ", plural: "تَلْبِيَاتٌ", meaning: "Lebbeyk Allahümme lebbeyk diyerek ilahî davete icabet" },
+  { id: 207, category: "hadis", level: 2, singular: "عَرَفَاتٌ", dual: "عَرَفَتَانِ", plural: "عَرَفَاتٌ", meaning: "Arefe günü vakfe yapılan mübarek tepe" },
+  { id: 208, category: "hadis", level: 2, singular: "مُزْدَلِفَةٌ", dual: "مُزْدَلِفَتَانِ", plural: "مُزْدَلِفَاتٌ", meaning: "Arafat ile Mina arasında gece vakfe mahalli" },
+  { id: 209, category: "hadis", level: 2, singular: "مِنًى", dual: "مِنَيَانِ", plural: "أَمْنَاءٌ", meaning: "Şeytan taşlanan ve kurban kesilen mübarek vadi" },
+  { id: 210, category: "hadis", level: 2, singular: "جَمْرَةٌ", dual: "جَمْرَتَانِ", plural: "جَمَرَاتٌ", meaning: "Mina'da taş atılan taş sütun mahalli" },
+  { id: 211, category: "hadis", level: 2, singular: "هَدْيٌ", dual: "هَدْيَانِ", plural: "هَدَايَا", meaning: "Harem-i Şerif'te kesilen kurbanlık hayvan" },
+  { id: 212, category: "hadis", level: 2, singular: "أُضْحِيَّةٌ", dual: "أُضْحِيَّتَانِ", plural: "أَضَاحٍ", meaning: "Kurban bayramı günlerinde kesilen kurban" },
+  { id: 213, category: "hadis", level: 2, singular: "عَقِيقَةٌ", dual: "عَقِيقَتَانِ", plural: "عَقَائِقُ", meaning: "Yeni doğan çocuk için şükür niyetiyle kesilen kurban" },
+  { id: 214, category: "hadis", level: 2, singular: "نِكَاحٌ", dual: "نِكَاحَانِ", plural: "أَنْكِحَةٌ", meaning: "Karı koca arasında akdedilen meşru evlilik bağı" },
+  { id: 215, category: "hadis", level: 2, singular: "طَلَاقٌ", dual: "طَلَاقَانِ", plural: "طَلَاقَاتٌ", meaning: "Evlilik akdinin şer'î usulle sona erdirilmesi" },
+  { id: 216, category: "hadis", level: 2, singular: "مَهْرٌ", dual: "مَهْرَانِ", plural: "مُهُورٌ", meaning: "Erkeğin evlenirken hanımına vermesi gereken mal" },
+  { id: 217, category: "hadis", level: 2, singular: "خُلْعٌ", dual: "خُلْعَانِ", plural: "أَخْلَاعٌ", meaning: "Kadının bedel vererek boşanmayı talep etmesi" },
+  { id: 218, category: "hadis", level: 2, singular: "عِدَّةٌ", dual: "عِدَّتَانِ", plural: "عِدَدٌ", meaning: "Boşanan veya eşi vefat eden kadının bekleme süresi" },
+  { id: 219, category: "hadis", level: 2, singular: "رَضَاعٌ", dual: "رَضَاعَانِ", plural: "أَرْضَاعٌ", meaning: "Süt emzirme ve oluşan süt akrabalığı" },
+  { id: 220, category: "hadis", level: 2, singular: "مِيرَاثٌ", dual: "مِيرَاثَانِ", plural: "مَوَارِيثُ", meaning: "Vefat eden kimseden varislerine kalan tereke" },
+  { id: 221, category: "hadis", level: 2, singular: "فَرِيضَةٌ", dual: "فَرِيضَتَانِ", plural: "فَرَائِضُ", meaning: "Şeriatın belirlediği farz miras payları" },
+  { id: 222, category: "hadis", level: 2, singular: "وَصِيَّةٌ", dual: "وَصِيَّتَانِ", plural: "وَصَايَا", meaning: "Vefat sonrasına yönelik meşru mal tasarrufu" },
+  { id: 223, category: "hadis", level: 2, singular: "بَيْعٌ", dual: "بَيْعَانِ", plural: "بُيُوعٌ", meaning: "Malın başka bir mülkle karşılıklı satımı" },
+  { id: 224, category: "hadis", level: 2, singular: "شِرَاءٌ", dual: "شِرَاءَانِ", plural: "أَشْرِيَةٌ", meaning: "Mal satın alma ve mülk edinme akdi" },
+  { id: 225, category: "hadis", level: 2, singular: "رِبًا", dual: "رِبَوَانِ", plural: "أَرْبَاءٌ", meaning: "Haksız kazanç ve haram kılınan faiz fazlalığı" },
+  { id: 226, category: "hadis", level: 2, singular: "تِجَارَةٌ", dual: "تِجَارَتَانِ", plural: "تِجَارَاتٌ", meaning: "Kâr amacıyla mal alıp satma faaliyeti" },
+  { id: 227, category: "hadis", level: 2, singular: "قَرْضٌ", dual: "قَرْضَانِ", plural: "قُرُوضٌ", meaning: "İhtiyaç sahibine karşılıksız verilen borç" },
+  { id: 228, category: "hadis", level: 2, singular: "رَهْنٌ", dual: "رَهْنَانِ", plural: "رُهُونٌ", meaning: "Borca karşılık teminat olarak tutulan mal" },
+  { id: 229, category: "hadis", level: 2, singular: "وَدِيعَةٌ", dual: "وَدِيعَتَانِ", plural: "وَدَائِعُ", meaning: "Korunması için başkasına bırakılan emanet" },
+  { id: 230, category: "hadis", level: 2, singular: "شَرِكَةٌ", dual: "شَرِكَتَانِ", plural: "شَرِكَاتٌ", meaning: "İki veya daha fazla kişinin ortaklığı" },
+  { id: 231, category: "hadis", level: 2, singular: "وَكَالَةٌ", dual: "وَكَالَتَانِ", plural: "وَكَالَاتٌ", meaning: "Başkasını kendi yerine yetkili kılma" },
+  { id: 232, category: "hadis", level: 2, singular: "قَضَاءٌ", dual: "قَضَاءَانِ", plural: "أَقْضِيَةٌ", meaning: "Hâkimin anlaşmazlıkları hükme bağlaması; geciken ibadeti eda" },
+  { id: 233, category: "hadis", level: 2, singular: "حُكْمٌ", dual: "حُكْمَانِ", plural: "أَحْكَامٌ", meaning: "Şeriatın emir, yasak ve serbestlik kararı" },
+  { id: 234, category: "hadis", level: 2, singular: "شَاهِدٌ", dual: "شَاهِدَانِ", plural: "شُهُودٌ / أَشْهَادٌ", meaning: "Bir olayı bizzat görüp mahkemede beyan eden" },
+  { id: 235, category: "hadis", level: 2, singular: "يَمِينٌ", dual: "يَمِينَانِ", plural: "أَيْمَانٌ", meaning: "Allah adına yapılan kasem ve ant" },
+  { id: 236, category: "hadis", level: 2, singular: "حَدٌّ", dual: "حَدَّانِ", plural: "حُدُودٌ", meaning: "Şeriatın koyduğu kesin cezai müeyyideler" },
+  { id: 237, category: "hadis", level: 2, singular: "قِصَاصٌ", dual: "قِصَاصَانِ", plural: "أَقْصِصَةٌ", meaning: "Cana can, göze göz denk adalet cezası" },
+  { id: 238, category: "hadis", level: 2, singular: "دِيَةٌ", dual: "دِيَتَانِ", plural: "دِيَاتٌ", meaning: "Haksız öldürme ve yaralamada ödenen kan bedeli" },
+  { id: 239, category: "hadis", level: 2, singular: "صُلْحٌ", dual: "صُلْحَانِ", plural: "أَصْلَاحٌ", meaning: "Taraflar arasındaki anlaşmazlığı barışla çözme" },
+  { id: 240, category: "hadis", level: 2, singular: "هِجْرَةٌ", dual: "هِجْرَتَانِ", plural: "هِجْرَاتٌ", meaning: "Dini yaşamak için Mekke'den Medine'ye göç" },
+  { id: 241, category: "hadis", level: 2, singular: "مُهَاجِرٌ", dual: "مُهَاجِرَانِ", plural: "مُهَاجِرُونَ", meaning: "Dini uğruna yurdunu terk eden sahabi" },
+  { id: 242, category: "hadis", level: 2, singular: "أَنْصَارِيٌّ", dual: "أَنْصَارِيَّانِ", plural: "أَنْصَارٌ", meaning: "Medine'de muhacirleri bağrına basan yardımcılar" },
+  { id: 243, category: "hadis", level: 2, singular: "غَزْوَةٌ", dual: "غَزْوَتَانِ", plural: "غَزَوَاتٌ", meaning: "Peygamber efendimizin bizzat katıldığı sefer" },
+  { id: 244, category: "hadis", level: 2, singular: "سَرِيَّةٌ", dual: "سَرِيَّتَانِ", plural: "سَرَايَا", meaning: "Peygamberimizin görevlendirdiği öncü askeri birlik" },
+  { id: 245, category: "hadis", level: 2, singular: "صَحَابِيٌّ", dual: "صَحَابِيَّانِ", plural: "صَحَابَةٌ", meaning: "Peygamberimizi görüp imanla vefat eden kutlu nesil" },
+  { id: 246, category: "hadis", level: 2, singular: "تَابِعِيٌّ", dual: "تَابِعِيَّانِ", plural: "تَابِعُونَ", meaning: "Sahabeyi görüp onlardan ilim alan nesil" },
+  { id: 247, category: "hadis", level: 2, singular: "خَلِيفَةٌ", dual: "خَلِيفَتَانِ", plural: "خُلَفَاءُ", meaning: "Peygamberimizin ardından ümmeti yöneten devlet reisi" },
+  { id: 248, category: "hadis", level: 2, singular: "إِمَامٌ", dual: "إِمَامَانِ", plural: "أَئِمَّةٌ", meaning: "Namazda öne geçen; ümmetin manevi rehberi" },
+  { id: 249, category: "hadis", level: 2, singular: "أَذَانٌ", dual: "أَذَانَانِ", plural: "آذَانٌ", meaning: "Namaz vaktini bildiren ilahî çağrı" },
+  { id: 250, category: "hadis", level: 2, singular: "إِقَامَةٌ", dual: "إِقَامَتَانِ", plural: "إِقَامَاتٌ", meaning: "Farz namaza başlamadan önce okunan çağrı" },
+  { id: 251, category: "hadis", level: 2, singular: "وُضُوءٌ", dual: "وُضُوءَانِ", plural: "أَوْضِئَةٌ", meaning: "Namaz için el, yüz ve ayakları yıkama" },
+  { id: 252, category: "hadis", level: 2, singular: "غُسْلٌ", dual: "غُسْلَانِ", plural: "أَغْسَالٌ", meaning: "Bütün vücudu tepeden tırnağa yıkama" },
+  { id: 253, category: "hadis", level: 2, singular: "تَيَمُّمٌ", dual: "تَيَمُّمَانِ", plural: "تَيَمُّمَاتٌ", meaning: "Su bulunmadığında temiz toprakla niyetlenme" },
+  { id: 254, category: "hadis", level: 2, singular: "قِبْلَةٌ", dual: "قِبْلَتَانِ", plural: "قِبَلٌ", meaning: "Namaz kılarken yönelinen Kâbe istikameti" },
+  { id: 255, category: "hadis", level: 2, singular: "كَعْبَةٌ", dual: "كَعْبَتَانِ", plural: "كِعَابٌ", meaning: "Yeryüzündeki ilk tevhid mabedi, Beytullah" },
+  { id: 256, category: "hadis", level: 2, singular: "سِيَادَةٌ", dual: "سِيَادَتَانِ", plural: "سِيَادَاتٌ", meaning: "Efendilik, liderlik ve yüksek şeref" },
+  { id: 257, category: "hadis", level: 2, singular: "شَرَفٌ", dual: "شَرَفَانِ", plural: "أَشْرَافٌ", meaning: "Yüksek ahlak ve soy asaleti" },
+  { id: 258, category: "hadis", level: 2, singular: "مُرُوءَةٌ", dual: "مُرُوءَتَانِ", plural: "مُرُوءَاتٌ", meaning: "İnsaniyet, cömertlik ve asil yiğitlik" },
+  { id: 259, category: "hadis", level: 2, singular: "فُتُوَّةٌ", dual: "فُتُوَّتَانِ", plural: "فُتُوَّاتٌ", meaning: "Gençlik mertliği, diğerkamlık ve fedakarlık" },
+  { id: 260, category: "hadis", level: 2, singular: "نَخْوَةٌ", dual: "نَخْوَتَانِ", plural: "نَخَوَاتٌ", meaning: "Asalet gayreti ve gurur" },
+  { id: 261, category: "hadis", level: 2, singular: "حَمِيَّةٌ", dual: "حَمِيَّتَانِ", plural: "حَمِيَّاتٌ", meaning: "Hak uğruna koruma gayreti, gayretkeşlik" },
+  { id: 262, category: "hadis", level: 2, singular: "غَيْرَةٌ", dual: "غَيْرَتَانِ", plural: "غَيَرَاتٌ", meaning: "Mukaddesatı koruma kıskançlığı ve duyarlılığı" },
+  { id: 263, category: "hadis", level: 2, singular: "حِلْفٌ", dual: "حِلْفَانِ", plural: "أَحْلَافٌ", meaning: "Mazluma yardım için yapılan dostluk yemini" },
+  { id: 264, category: "hadis", level: 2, singular: "جِوَارٌ", dual: "جِوَارَانِ", plural: "أَجْوِرَةٌ", meaning: "Komşuluk hakkı ve himaye sığınağı" },
+  { id: 265, category: "hadis", level: 2, singular: "جَارٌ", dual: "جَارَانِ", plural: "جِيرَانٌ", meaning: "Yan yana yaşayan komşu, hami" },
+  { id: 266, category: "hadis", level: 2, singular: "ضَيْفٌ", dual: "ضَيْفَانِ", plural: "ضُيُوفٌ / أَضْيَافٌ", meaning: "Eve gelen misafir ve konuk" },
+  { id: 267, category: "hadis", level: 2, singular: "قِرًى", dual: "قِرَيَانِ", plural: "أَقْرَاءٌ", meaning: "Misafire ikram edilen yemek ve ağırlama" },
+  { id: 268, category: "hadis", level: 2, singular: "مَأْدُبَةٌ", dual: "مَأْدُبَتَانِ", plural: "مَآدِبُ", meaning: "İnsanları toplayıp ziyafet verilen sofra" },
+  { id: 269, category: "hadis", level: 2, singular: "وَلِيمَةٌ", dual: "وَلِيمَتَانِ", plural: "وَلَائِمُ", meaning: "Düğün münasebetiyle verilen sünnet ziyafeti" },
+  { id: 270, category: "hadis", level: 2, singular: "عَقِيقٌ", dual: "عَقِيقَانِ", plural: "أَعِقَّةٌ", meaning: "Kırmızı renkli kıymetli akik taşı" },
+  { id: 271, category: "hadis", level: 2, singular: "خَاتَمٌ", dual: "خَاتَمَانِ", plural: "خَوَاتِمُ", meaning: "Parmakta taşınan mühürlü gümüş yüzük" },
+  { id: 272, category: "hadis", level: 2, singular: "نَعْلٌ", dual: "نَعْلَانِ", plural: "نِعَالٌ", meaning: "Ayaklara giyilen sandalet ve ayakkabı" },
+  { id: 273, category: "hadis", level: 2, singular: "رِدَاءٌ", dual: "رِدَاءَانِ", plural: "أَرْدِيَةٌ", meaning: "Omuzlara ve bedenin üstüne sarılan örtü" },
+  { id: 274, category: "hadis", level: 2, singular: "إِزَارٌ", dual: "إِزَارَانِ", plural: "أُزُرٌ", meaning: "Bedenin alt kısmına sarılan peştamal" },
+  { id: 275, category: "hadis", level: 2, singular: "عِمَامَةٌ", dual: "عِمَامَتَانِ", plural: "عَمَائِمُ", meaning: "Başın üzerine sarılan sünnet sarık" },
+  { id: 276, category: "hadis", level: 2, singular: "قَلَنْسُوَةٌ", dual: "قَلَنْسُوَّتَانِ", plural: "قَلَانِسُ", meaning: "Sarığın altına giyilen takke" },
+  { id: 277, category: "hadis", level: 2, singular: "جُبَّةٌ", dual: "جُبَّتَانِ", plural: "جُبَبٌ", meaning: "Elbiselerin üzerine giyilen geniş kaftan" },
+  { id: 278, category: "hadis", level: 2, singular: "عَبَاءَةٌ", dual: "عَبَاءَتَانِ", plural: "أَعْبِيَةٌ", meaning: "Yünden dokunmuş üstlük pelerin" },
+  { id: 279, category: "hadis", level: 2, singular: "بُرْدَةٌ", dual: "بُرْدَتَانِ", plural: "بُرَدٌ", meaning: "Çizgili yün hırka ve örtü" },
+  { id: 280, category: "hadis", level: 2, singular: "شَمْلَةٌ", dual: "شَمْلَتَانِ", plural: "شِمَالٌ", meaning: "Başa veya omuza alınan küçük örtü" },
+  { id: 281, category: "hadis", level: 2, singular: "طَيْلَسَانٌ", dual: "طَيْلَسَانَانِ", plural: "طَيَالِسَةٌ", meaning: "Omuzlara dökülen şal ve cübbe yakası" },
+  { id: 282, category: "hadis", level: 2, singular: "سِوَاكٌ", dual: "سِوَاكَانِ", plural: "سُوُكٌ", meaning: "Ağız ve diş temizleme çubuğu" },
+  { id: 283, category: "hadis", level: 2, singular: "كُحْلٌ", dual: "كُحْلَانِ", plural: "أَكْحَالٌ", meaning: "Gözlere çekilen şifalı ismid sürmesi" },
+  { id: 284, category: "hadis", level: 2, singular: "دُهْنٌ", dual: "دُهْنَانِ", plural: "أَدْهَانٌ", meaning: "Saça ve sakala sürülen temiz yağ" },
+  { id: 285, category: "hadis", level: 2, singular: "طِيبٌ", dual: "طِيبَانِ", plural: "أَطْيَابٌ", meaning: "Hoş koku, esans ve misk" },
+  { id: 286, category: "hadis", level: 2, singular: "مِسْكٌ", dual: "مِسْكَانِ", plural: "أَمْسَاكٌ", meaning: "Ceylandan elde edilen en güzel koku" },
+  { id: 287, category: "hadis", level: 2, singular: "عَنْبَرٌ", dual: "عَنْبَرَانِ", plural: "عَنَابِرُ", meaning: "Denizden çıkan hoş kokulu madde" },
+  { id: 288, category: "hadis", level: 2, singular: "بَخُورٌ", dual: "بَخُورَانِ", plural: "أَبْخِرَةٌ", meaning: "Ateşte yakılıp dumanı tütsülenen tütsü" },
+  { id: 289, category: "hadis", level: 2, singular: "مِجْمَرَةٌ", dual: "مِجْمَرَتَانِ", plural: "مَجَامِرُ", meaning: "İçinde tütsü yakılan buhurdanlık" },
+  { id: 290, category: "hadis", level: 2, singular: "سُرُجٌ", dual: "سِرَاجَانِ", plural: "سُرُجٌ", meaning: "Evleri ve mescitleri aydınlatan kandiller" },
+  { id: 291, category: "hadis", level: 2, singular: "قِنْدِيلٌ", dual: "قِنْدِيلَانِ", plural: "قَنَادِيلُ", meaning: "Yağ ile yanan aydınlatma fanusu" },
+  { id: 292, category: "hadis", level: 2, singular: "حَصِيرٌ", dual: "حَصِيرَانِ", plural: "حُصُرٌ", meaning: "Hurma lifinden örülmüş sergi" },
+  { id: 293, category: "hadis", level: 2, singular: "فِرَاشٌ", dual: "فِرَاشَانِ", plural: "فُرُشٌ", meaning: "Üzerinde yatılan sade yatak" },
+  { id: 294, category: "hadis", level: 2, singular: "وِسَادَةٌ", dual: "وِسَادَتَانِ", plural: "وَسَائِدُ", meaning: "Baş altına konulan yumuşak yastık" },
+  { id: 295, category: "hadis", level: 2, singular: "نُمْرُقَةٌ", dual: "نُمْرُقَتَانِ", plural: "نَمَارِقُ", meaning: "Üzerine yaslanılan küçük minder" },
+  { id: 296, category: "hadis", level: 2, singular: "سِتْرٌ", dual: "سِتْرَانِ", plural: "أَسْتَارٌ / سُتُورٌ", meaning: "Odayı ayıran perde; namazda önüne konan sütre" },
+  { id: 297, category: "hadis", level: 2, singular: "سُتْرَةٌ", dual: "سُتْرَتَانِ", plural: "سُتَرٌ", meaning: "Namaz kılanın önüne koyduğu engel" },
+  { id: 298, category: "hadis", level: 2, singular: "مِطْهَرَةٌ", dual: "مِطْهَرَتَانِ", plural: "مَطَاهِرُ", meaning: "Abdest suyu konulan ibrik ve kap" },
+  { id: 299, category: "hadis", level: 2, singular: "إِبْرِيقٌ", dual: "إِبْرِيقَانِ", plural: "أَبَارِيقُ", meaning: "Kulplu ve emzikli su kabı" },
+  { id: 300, category: "hadis", level: 2, singular: "قَصْعَةٌ", dual: "قَصْعَتَانِ", plural: "قِصَاعٌ", meaning: "İçinden birlikte yemek yenen büyük çanak" },
+  { id: 301, category: "kitap", level: 3, singular: "بُرْهَانٌ", dual: "بُرْهَانَانِ", plural: "بَرَاهِينُ", meaning: "Kesin delil, sarsılmaz hüccet" },
+  { id: 302, category: "kitap", level: 3, singular: "حُجَّةٌ", dual: "حُجَّتَانِ", plural: "حُجَجٌ", meaning: "İkna edici kesin kanıt, senet" },
+  { id: 303, category: "kitap", level: 3, singular: "مَوْجُودٌ", dual: "مَوْجُودَانِ", plural: "مَوْجُودَاتٌ", meaning: "Varlık sahasında bulunan, varlık" },
+  { id: 304, category: "kitap", level: 3, singular: "مَخْلُوقٌ", dual: "مَخْلُوقَانِ", plural: "مَخْلُوقَاتٌ", meaning: "Allah'ın yarattığı varlık" },
+  { id: 305, category: "kitap", level: 3, singular: "مَصْنُوعٌ", dual: "مَصْنُوعَانِ", plural: "مَصْنُوعَاتٌ", meaning: "Sanatla ve hikmetle yaratılmış eser" },
+  { id: 306, category: "kitap", level: 3, singular: "أَثَرٌ", dual: "أَثَرَانِ", plural: "آثَارٌ", meaning: "Sanatın ve kudretin izi, nişanesi" },
+  { id: 307, category: "kitap", level: 3, singular: "سِرٌّ", dual: "سِرَّانِ", plural: "أَسْرَارٌ", meaning: "Gizli hakikat, derin mana ve incelik" },
+  { id: 308, category: "kitap", level: 3, singular: "حَقِيقَةٌ", dual: "حَقِيقَتَانِ", plural: "حَقَائِقُ", meaning: "Bir şeyin aslı, değişmez gerçeği" },
+  { id: 309, category: "kitap", level: 3, singular: "لَطِيفَةٌ", dual: "لَطِيفَتَانِ", plural: "لَطَائِفُ", meaning: "İnsandaki ince manevî his ve duygu" },
+  { id: 310, category: "kitap", level: 3, singular: "مِنَّةٌ", dual: "مِنَّتَانِ", plural: "مِنَنٌ", meaning: "Karşılıksız ilahî iyilik ve ihsan" },
+  { id: 311, category: "kitap", level: 3, singular: "نُكْتَةٌ", dual: "نُكْتَتَانِ", plural: "نُكَتٌ", meaning: "İnce, derin ve hikmetli mana" },
+  { id: 312, category: "kitap", level: 3, singular: "إِشَارَةٌ", dual: "إِشَارَتَانِ", plural: "إِشَارَاتٌ", meaning: "Gizli veya remizli delalet, gösterme" },
+  { id: 313, category: "kitap", level: 3, singular: "لَمْعَةٌ", dual: "لَمْعَتَانِ", plural: "لَمَعَاتٌ", meaning: "Parlayan ışık parıltısı" },
+  { id: 314, category: "kitap", level: 3, singular: "شُعَاعٌ", dual: "شُعَاعَانِ", plural: "أَشِعَّةٌ", meaning: "Işık huzmesi, ışın, güneş ziyası" },
+  { id: 315, category: "kitap", level: 3, singular: "قَطْرَةٌ", dual: "قَطْرَتَانِ", plural: "قَطَرَاتٌ", meaning: "Tek bir su damlası" },
+  { id: 316, category: "kitap", level: 3, singular: "زَهْرَةٌ", dual: "زَهْرَتَانِ", plural: "أَزْهَارٌ", meaning: "Çiçek, parlak güzellik" },
+  { id: 317, category: "kitap", level: 3, singular: "نَافِذَةٌ", dual: "نَافِذَتَانِ", plural: "نَوَافِذُ", meaning: "Dışarıya açılan pencere, menfez" },
+  { id: 318, category: "kitap", level: 3, singular: "مِرْآةٌ", dual: "مِرْآتَانِ", plural: "مَرَايَا", meaning: "Ayna, tecelli yansıma mahalli" },
+  { id: 319, category: "kitap", level: 3, singular: "مِيزَانٌ", dual: "مِيزَانَانِ", plural: "مَوَازِينُ", meaning: "Ölçü, tartı, hassas denge terazisi" },
+  { id: 320, category: "kitap", level: 3, singular: "مِقْيَاسٌ", dual: "مِقْيَاسَانِ", plural: "مَقَايِيسُ", meaning: "Kıyas ölçüsü, ölçüm kıstası" },
+  { id: 321, category: "kitap", level: 3, singular: "مَبْدَأٌ", dual: "مَبْدَآنِ", plural: "مَبَادِئُ", meaning: "Başlangıç, asıl kaynak, ilk esas" },
+  { id: 322, category: "kitap", level: 3, singular: "مُنْتَهَى", dual: "مُنْتَهَيَانِ", plural: "مُنْتَهَيَاتٌ", meaning: "Varış noktası, son merhale, nihayet" },
+  { id: 323, category: "kitap", level: 3, singular: "مَظْهَرٌ", dual: "مَظْهَرَانِ", plural: "مَظَاهِرُ", meaning: "Tecelli yeri, görünme mahalli" },
+  { id: 324, category: "kitap", level: 3, singular: "مَوْرِدٌ", dual: "مَوْرِدَانِ", plural: "مَوَارِدُ", meaning: "Ulaşma yeri, feyiz kaynağı, mecra" },
+  { id: 325, category: "kitap", level: 3, singular: "مَصْدَرٌ", dual: "مَصْدَرَانِ", plural: "مَصَادِرُ", meaning: "Çıkış yeri, köken, menşe" },
+  { id: 326, category: "kitap", level: 3, singular: "مَنْبَعٌ", dual: "مَنْبَعَانِ", plural: "مَنَابِعُ", meaning: "Yerden kaynayan pınar, su gözü" },
+  { id: 327, category: "kitap", level: 3, singular: "عُنْوَانٌ", dual: "عُنْوَانَانِ", plural: "عَنَاوِينُ", meaning: "Adres, başlık, alamet ve hüviyet" },
+  { id: 328, category: "kitap", level: 3, singular: "طَرِيقٌ", dual: "طَرِيقَانِ", plural: "طُرُقٌ", meaning: "Hakikat yolu, manevi seyr yolu" },
+  { id: 329, category: "kitap", level: 3, singular: "مَسْلَكٌ", dual: "مَسْلَكَانِ", plural: "مَسَالِكُ", meaning: "Benimsenen yöntem, gidilen yol" },
+  { id: 330, category: "kitap", level: 3, singular: "مَشْرَبٌ", dual: "مَشْرَبَانِ", plural: "مَشَارِبُ", meaning: "Su içme yeri; manevi mizaç ve neşve" },
+  { id: 331, category: "kitap", level: 3, singular: "رَابِطَةٌ", dual: "رَابِطَتَانِ", plural: "رَوَابِطُ", meaning: "Kalbî bağ, irtibat, alaka" },
+  { id: 332, category: "kitap", level: 3, singular: "وَسِيلَةٌ", dual: "وَسِيلَتَانِ", plural: "وَسَائِلُ", meaning: "Gayeye ulaştıran vasıta, sebep" },
+  { id: 333, category: "kitap", level: 3, singular: "غَايَةٌ", dual: "غَايَتَانِ", plural: "غَايَاتٌ", meaning: "Ulaşılmak istenen nihai hedef, maksat" },
+  { id: 334, category: "kitap", level: 3, singular: "مَقْصَدٌ", dual: "مَقْصَدَانِ", plural: "مَقَاصِدُ", meaning: "Hedeflenen gaye, niyet edilen murat" },
+  { id: 335, category: "kitap", level: 3, singular: "نَتِيجَةٌ", dual: "نَتِيجَتَانِ", plural: "نَتَائِجُ", meaning: "Sonuç, elde edilen hasılat, semere" },
+  { id: 336, category: "kitap", level: 3, singular: "فَائِدَةٌ", dual: "فَائِدَتَانِ", plural: "فَوَائِدُ", meaning: "Sağlanan yarar, elde edilen hayır" },
+  { id: 337, category: "kitap", level: 3, singular: "حَاجَةٌ", dual: "حَاجَتَانِ", plural: "حَاجَاتٌ", meaning: "İhtiyaç duyulan şey, lüzum" },
+  { id: 338, category: "kitap", level: 3, singular: "عَاجِزٌ", dual: "عَاجِزَانِ", plural: "عَاجِزُونَ", meaning: "Kendi gücü yetmeyen, kudretsiz kul" },
+  { id: 339, category: "kitap", level: 3, singular: "فَقِيرٌ", dual: "فَقِيرَانِ", plural: "فُقَرَاءُ", meaning: "İlahî rahmete muhtaç olan kul" },
+  { id: 340, category: "kitap", level: 3, singular: "نِظَامٌ", dual: "نِظَامَانِ", plural: "أَنْظِمَةٌ", meaning: "Düzen, intizam, kâinattaki ahenk" },
+  { id: 341, category: "kitap", level: 3, singular: "قَانُونٌ", dual: "قَانُونَانِ", plural: "قَوَانِينُ", meaning: "İlahî adetullah kuralı, nizam ilkesi" },
+  { id: 342, category: "kitap", level: 3, singular: "دُسْتُورٌ", dual: "دُسْتُورَانِ", plural: "دَسَاتِيرُ", meaning: "Temel kural, hareket prensibi" },
+  { id: 343, category: "kitap", level: 3, singular: "حِجَابٌ", dual: "حِجَابَانِ", plural: "حُجُبٌ", meaning: "Maddî ve manevî perde, engel, örtü" },
+  { id: 344, category: "kitap", level: 3, singular: "سَبَبٌ", dual: "سَبَبَانِ", plural: "أَسْبَابٌ", meaning: "Neticeye perde olan vasıta, vesile" },
+  { id: 345, category: "kitap", level: 3, singular: "عِلَّةٌ", dual: "عِلَّتَانِ", plural: "عِلَلٌ", meaning: "Asıl gerekçe, hakiki sebep ve hikmet" },
+  { id: 346, category: "kitap", level: 3, singular: "زَوَالٌ", dual: "زَوَالَانِ", plural: "أَزْوِلَةٌ", meaning: "Güneşin batışı, yok oluş, sona erme" },
+  { id: 347, category: "kitap", level: 3, singular: "بَقَاءٌ", dual: "بَقَاءَانِ", plural: "بَقَاءَاتٌ", meaning: "Ebedilik, kalıcılık, ölümsüz devam" },
+  { id: 348, category: "kitap", level: 3, singular: "تَجَلٍّ", dual: "تَجَلِّيَانِ", plural: "تَجَلِّيَاتٌ", meaning: "İlahî isim ve sıfatların görünmesi" },
+  { id: 349, category: "kitap", level: 3, singular: "مِثَالٌ", dual: "مِثَالَانِ", plural: "أَمْثِلَةٌ", meaning: "Benzer, örnek, temsilî numune" },
+  { id: 350, category: "kitap", level: 3, singular: "دَلِيلٌ", dual: "دَلِيلَانِ", plural: "أَدِلَّةٌ", meaning: "Hakikate ulaştıran kanıt, rehber" },
+  { id: 351, category: "kitap", level: 3, singular: "رَحْمَةٌ", dual: "رَحْمَتَانِ", plural: "رَحَمَاتٌ", meaning: "Merhamet, acıma, ilahî lütuf ve ihsan" },
+  { id: 352, category: "kitap", level: 3, singular: "حِكْمَةٌ", dual: "حِكْمَتَانِ", plural: "حِكَمٌ", meaning: "Eşyanın hakikati, gaye ve fayda" },
+  { id: 353, category: "kitap", level: 3, singular: "قُدْرَةٌ", dual: "قُدْرَتَانِ", plural: "قُدُرَاتٌ", meaning: "İlahî güç, yaratma ve tasarruf kuvveti" },
+  { id: 354, category: "kitap", level: 3, singular: "إِرَادَةٌ", dual: "إِرَادَتَانِ", plural: "إِرَادَاتٌ", meaning: "Dileme, tercih ve tahsis sıfatı" },
+  { id: 355, category: "kitap", level: 3, singular: "عِزَّةٌ", dual: "عِزَّتَانِ", plural: "أَعِزَّةٌ", meaning: "Üstünlük, galebe ve izzet-i ilahiye" },
+  { id: 356, category: "kitap", level: 3, singular: "عَظَمَةٌ", dual: "عَظَمَتَانِ", plural: "عَظَمَاتٌ", meaning: "Büyüklük, ululuk ve kibriya" },
+  { id: 357, category: "kitap", level: 3, singular: "كَرَمٌ", dual: "كَرَمَانِ", plural: "كُرُومٌ", meaning: "Cömertlik, karşılıksız lütuf ve bağış" },
+  { id: 358, category: "kitap", level: 3, singular: "عَدْلٌ", dual: "عَدْلَانِ", plural: "أَعْدَالٌ", meaning: "Adalet, her şeyi yerli yerine koyma" },
+  { id: 359, category: "kitap", level: 3, singular: "جَلَالٌ", dual: "جَلَالَانِ", plural: "أَجِلَّةٌ", meaning: "Büyüklük, azamet ve haşmet tecellisi" },
+  { id: 360, category: "kitap", level: 3, singular: "جَمَالٌ", dual: "جَمَالَانِ", plural: "جَمَالَاتٌ", meaning: "Güzellik, letafet ve cemal-i ilahi" },
+  { id: 361, category: "kitap", level: 3, singular: "كَمَالٌ", dual: "كَمَالَانِ", plural: "كَمَالَاتٌ", meaning: "Kusursuzluk, olgunluk ve mutlak tamlık" },
+  { id: 362, category: "kitap", level: 3, singular: "سُلْطَانٌ", dual: "سُلْطَانَانِ", plural: "سَلَاطِينُ", meaning: "Hükümranlık, ilahî kudret ve hüccet" },
+  { id: 363, category: "kitap", level: 3, singular: "مُلْكٌ", dual: "مُلْكَانِ", plural: "أَمْلَاكٌ", meaning: "Sahip olunan mülk, alem-i şehadet" },
+  { id: 364, category: "kitap", level: 3, singular: "مَلَكُوتٌ", dual: "مَلَكُوتَانِ", plural: "مَلَكُوتَاتٌ", meaning: "Eşyanın iç yüzü, melekler âlemi" },
+  { id: 365, category: "kitap", level: 3, singular: "رُوحٌ", dual: "رُوحَانِ", plural: "أَرْوَاحٌ", meaning: "Hayat veren cevher, latif ilahî kanun" },
+  { id: 366, category: "kitap", level: 3, singular: "جَسَدٌ", dual: "جَسَدَانِ", plural: "أَجْسَادٌ", meaning: "Maddî beden, et ve kemikten kalıp" },
+  { id: 367, category: "kitap", level: 3, singular: "عَقْلٌ", dual: "عَقْلَانِ", plural: "عُقُولٌ", meaning: "Düşünme, anlama ve idrak aleti" },
+  { id: 368, category: "kitap", level: 3, singular: "فِكْرٌ", dual: "فِكْرَانِ", plural: "أَفْكَارٌ", meaning: "Düşünce, tefekkür ve zihin faaliyeti" },
+  { id: 369, category: "kitap", level: 3, singular: "وَهْمٌ", dual: "وَهْمَانِ", plural: "أَوْهَامٌ", meaning: "Asılsız kuruntu, temelsiz vehim" },
+  { id: 370, category: "kitap", level: 3, singular: "شَكٌّ", dual: "شَكَّانِ", plural: "شُكُوكٌ", meaning: "Tereddüt, kararsızlık ve belirsizlik" },
+  { id: 371, category: "kitap", level: 3, singular: "يَقِينٌ", dual: "يَقِينَانِ", plural: "يَقِينَاتٌ", meaning: "Şüpheden uzak kesin, sarsılmaz bilgi" },
+  { id: 372, category: "kitap", level: 3, singular: "نِيَّةٌ", dual: "نِيَّتَانِ", plural: "نِيَّاتٌ", meaning: "Kalbin kastı, amel yönelişi ve niyet" },
+  { id: 373, category: "kitap", level: 3, singular: "إِخْلَاصٌ", dual: "إِخْلَاصَانِ", plural: "إِخْلَاصَاتٌ", meaning: "Ameli yalnız Allah rızası için yapma" },
+  { id: 374, category: "kitap", level: 3, singular: "صِدْقٌ", dual: "صِدْقَانِ", plural: "أَصْدَاقٌ", meaning: "Doğruluk, gerçeğe uygunluk ve vefa" },
+  { id: 375, category: "kitap", level: 3, singular: "كَذِبٌ", dual: "كَذِبَانِ", plural: "أَكَاذِيبُ", meaning: "Yalan, hakikate aykırı beyan" },
+  { id: 376, category: "kitap", level: 3, singular: "حَسَنَةٌ", dual: "حَسَنَتَانِ", plural: "حَسَنَاتٌ", meaning: "İyilik, güzel amel ve sevap" },
+  { id: 377, category: "kitap", level: 3, singular: "سَيِّئَةٌ", dual: "سَيِّئَتَانِ", plural: "سَيِّئَاتٌ", meaning: "Kötülük, günah ve isyan ameli" },
+  { id: 378, category: "kitap", level: 3, singular: "ثَوَابٌ", dual: "ثَوَابَانِ", plural: "أَثْوِبَةٌ", meaning: "Hayırlı amele verilen ilahî karşılık" },
+  { id: 379, category: "kitap", level: 3, singular: "عِقَابٌ", dual: "عِقَابَانِ", plural: "أَعْقِبَةٌ", meaning: "İsyan ve günaha verilen ceza" },
+  { id: 380, category: "kitap", level: 3, singular: "فِطْرَةٌ", dual: "فِطْرَتَانِ", plural: "فِطَرٌ", meaning: "Yaratılış mayası, ilk saf hilkat" },
+  { id: 381, category: "kitap", level: 3, singular: "خِلْقَةٌ", dual: "خِلْقَتَانِ", plural: "خِلَقٌ", meaning: "Yaratılış şekli, bünye ve suret" },
+  { id: 382, category: "kitap", level: 3, singular: "صُورَةٌ", dual: "صُورَتَانِ", plural: "صُوَرٌ", meaning: "Görünüş, biçim, suret ve şekil" },
+  { id: 383, category: "kitap", level: 3, singular: "مَادَّةٌ", dual: "مَادَّتَانِ", plural: "مَوَادُّ", meaning: "Maddî cevher, cisim ve unsur" },
+  { id: 384, category: "kitap", level: 3, singular: "زَمَانٌ", dual: "زَمَانَانِ", plural: "أَزْمِنَةٌ", meaning: "Vakit, çağ, hareket ve anlar zinciri" },
+  { id: 385, category: "kitap", level: 3, singular: "مَكَانٌ", dual: "مَكَانَانِ", plural: "أَمْكِنَةٌ", meaning: "Yer, mevki, cismin kapladığı alan" },
+  { id: 386, category: "kitap", level: 3, singular: "حَيَاةٌ", dual: "حَيَاتَانِ", plural: "حَيَوَاتٌ", meaning: "Dirilik, can, varlığın neşesi" },
+  { id: 387, category: "kitap", level: 3, singular: "مَوْتٌ", dual: "مَوْتَانِ", plural: "أَمْوَاتٌ", meaning: "Ölüm, vazifeden terhis ve tebdil-i mekan" },
+  { id: 388, category: "kitap", level: 3, singular: "حَشْرٌ", dual: "حَشْرَانِ", plural: "حُشُورٌ", meaning: "Mahşerde toplanma, diriltilip bir araya gelme" },
+  { id: 389, category: "kitap", level: 3, singular: "نَشْرٌ", dual: "نَشْرَانِ", plural: "نُشُورٌ", meaning: "Dağılma, kabirlerden çıkıp yayılma" },
+  { id: 390, category: "kitap", level: 3, singular: "مِيزَانٌ", dual: "مِيزَانَانِ", plural: "مَوَازِينُ", meaning: "Ölçü aleti, adalet ve amel terazisi" },
+  { id: 391, category: "kitap", level: 3, singular: "صِرَاطٌ", dual: "صِرَاطَانِ", plural: "صُرُطٌ", meaning: "Doğru yol; cehennem üzerindeki köprü" },
+  { id: 392, category: "kitap", level: 3, singular: "شَفَاعَةٌ", dual: "شَفَاعَتَانِ", plural: "شَفَاعَاتٌ", meaning: "Bağışlanma dileme, ilahî aracı olma" },
+  { id: 393, category: "kitap", level: 3, singular: "مَغْفِرَةٌ", dual: "مَغْفِرَتَانِ", plural: "مَغَافِرُ", meaning: "Günahları örtme, affetme ve bağışlama" },
+  { id: 394, category: "kitap", level: 3, singular: "تَوْبَةٌ", dual: "تَوْبَتَانِ", plural: "تَوْبَاتٌ", meaning: "Günahtan dönme, pişmanlıkla Allah'a yönelme" },
+  { id: 395, category: "kitap", level: 3, singular: "ذَنْبٌ", dual: "ذَنْبَانِ", plural: "ذُنُوبٌ", meaning: "Günah, ilahî emre aykırı kusur" },
+  { id: 396, category: "kitap", level: 3, singular: "خَطِيئَةٌ", dual: "خَطِيئَتَانِ", plural: "خَطَايَا", meaning: "Kasıtlı veya kasıtsız hata, günah" },
+  { id: 397, category: "kitap", level: 3, singular: "طَاعَةٌ", dual: "طَاعَتَانِ", plural: "طَاعَاتٌ", meaning: "İtaat etme, boyun eğme ve kulluk" },
+  { id: 398, category: "kitap", level: 3, singular: "عِصْيَانٌ", dual: "عِصْيَانَانِ", plural: "أَعْصِيَةٌ", meaning: "İsyan, başkaldırma ve emre itaatsizlik" },
+  { id: 399, category: "kitap", level: 3, singular: "فِسْقٌ", dual: "فِسْقَانِ", plural: "فُسُوقٌ", meaning: "Doğru yoldan çıkma, günaha dalma" },
+  { id: 400, category: "kitap", level: 3, singular: "كُفْرٌ", dual: "كُفْرَانِ", plural: "كُفُورٌ", meaning: "Hakkı örtme, inkâr ve nankörlük" },
+  { id: 401, category: "kitap", level: 3, singular: "نِفَاقٌ", dual: "نِفَاقَانِ", plural: "أَنْفِقَةٌ", meaning: "İkiyüzlülük, inanmadığı halde inanmış görünme" },
+  { id: 402, category: "kitap", level: 3, singular: "شِرْكٌ", dual: "شِرْكَانِ", plural: "أَشْرَاكٌ", meaning: "Allah'a ortak koşma, zatında veya sıfatında şirk" },
+  { id: 403, category: "kitap", level: 3, singular: "تَوْحِيدٌ", dual: "تَوْحِيدَانِ", plural: "تَوْحِيدَاتٌ", meaning: "Allah'ın birliğini tasdik ve ilan etme" },
+  { id: 404, category: "kitap", level: 3, singular: "تَنْزِيهٌ", dual: "تَنْزِيهَانِ", plural: "تَنْزِيهَاتٌ", meaning: "Allah'ı her türlü noksanlıktan yüce tutma" },
+  { id: 405, category: "kitap", level: 3, singular: "تَقْدِيسٌ", dual: "تَقْدِيسَانِ", plural: "تَقْدِيسَاتٌ", meaning: "Mukaddes bilme, paklığını ilan etme" },
+  { id: 406, category: "kitap", level: 3, singular: "تَسْبِيحٌ", dual: "تَسْبِيحَانِ", plural: "تَسْبِيحَاتٌ", meaning: "Sübhanallah diyerek tenzih etme" },
+  { id: 407, category: "kitap", level: 3, singular: "تَمْحِيدٌ", dual: "تَمْحِيدَانِ", plural: "تَمْحِيدَاتٌ", meaning: "Hamd ve sena ederek övme" },
+  { id: 408, category: "kitap", level: 3, singular: "تَكْبِيرٌ", dual: "تَكْبِيرَانِ", plural: "تَكْبِيرَاتٌ", meaning: "Allahu ekber diyerek ululama" },
+  { id: 409, category: "kitap", level: 3, singular: "تَهْلِيلٌ", dual: "تَهْلِيلَانِ", plural: "تَهْلِيلَاتٌ", meaning: "Lâ ilahe illallah diyerek tevhid getirme" },
+  { id: 410, category: "kitap", level: 3, singular: "دُعَاءٌ", dual: "دُعَاءَانِ", plural: "أَدْعِيَةٌ", meaning: "Yalvarma, ilahî dergâha hacet arzı" },
+  { id: 411, category: "kitap", level: 3, singular: "صَلَاةٌ", dual: "صَلَاتَانِ", plural: "صَلَوَاتٌ", meaning: "Namaz, ilahî huzurda ibadet ve dua" },
+  { id: 412, category: "kitap", level: 3, singular: "صَوْمٌ", dual: "صَوْمَانِ", plural: "أَصْوَامٌ", meaning: "Oruç, nefsi haram ve şehevattan men etme" },
+  { id: 413, category: "kitap", level: 3, singular: "زَكَاةٌ", dual: "زَكَاتَانِ", plural: "زَكَوَاتٌ", meaning: "Malın arınması için verilen farz pay" },
+  { id: 414, category: "kitap", level: 3, singular: "حَجٌّ", dual: "حَجَّانِ", plural: "حُجُوجٌ", meaning: "Kâbe-i Muazzama'yı farz niyetiyle ziyaret" },
+  { id: 415, category: "kitap", level: 3, singular: "جِهَادٌ", dual: "جِهَادَانِ", plural: "جِهَادَاتٌ", meaning: "Hak yolunda gayret, nefis ve batılla mücadele" },
+  { id: 416, category: "kitap", level: 3, singular: "تَقْوَى", dual: "تَقْوَيَانِ", plural: "تَقْوَاتٌ", meaning: "Günahtan sakınma, ilahî azaptan korunma" },
+  { id: 417, category: "kitap", level: 3, singular: "وَرَعٌ", dual: "وَرَعَانِ", plural: "أَوْرَاعٌ", meaning: "Şüpheli şeylerden titizlikle kaçınma" },
+  { id: 418, category: "kitap", level: 3, singular: "زُهْدٌ", dual: "زُهْدَانِ", plural: "أَزْهَادٌ", meaning: "Dünyaya kalben bağlanmama, aza kanaat" },
+  { id: 419, category: "kitap", level: 3, singular: "صَبْرٌ", dual: "صَبْرَانِ", plural: "أَصْبَارٌ", meaning: "Zorluklara ve musibetlere tahammül etme" },
+  { id: 420, category: "kitap", level: 3, singular: "شُكْرٌ", dual: "شُكْرَانِ", plural: "شُكُورٌ", meaning: "Nimeti vereni tanıyıp minnettarlık gösterme" },
+  { id: 421, category: "kitap", level: 3, singular: "رِضَا", dual: "رِضَيَانِ", plural: "رِضَاءَاتٌ", meaning: "İlahî kaza ve kadere gönülden boyun eğme" },
+  { id: 422, category: "kitap", level: 3, singular: "تَوَكُّلٌ", dual: "تَوَكُّلَانِ", plural: "تَوَكُّلَاتٌ", meaning: "Sebeplere teşebbüs edip neticeyi Allah'a bırakma" },
+  { id: 423, category: "kitap", level: 3, singular: "خَوْفٌ", dual: "خَوْفَانِ", plural: "مَخَاوِفُ", meaning: "İlahî celal ve gazaptan korkma" },
+  { id: 424, category: "kitap", level: 3, singular: "رَجَاءٌ", dual: "رَجَاءَانِ", plural: "أَرْجِيَةٌ", meaning: "İlahî rahmet ve mağfireti ümit etme" },
+  { id: 425, category: "kitap", level: 3, singular: "حُبٌّ", dual: "حُبَّانِ", plural: "أَحْبَابٌ", meaning: "Sevgi, muhabbet ve gönülden meyil" },
+  { id: 426, category: "kitap", level: 3, singular: "بُغْضٌ", dual: "بُغْضَانِ", plural: "أَبْغَاضٌ", meaning: "Kin, nefret, batıla karşı buğz" },
+  { id: 427, category: "kitap", level: 3, singular: "شَفَقَةٌ", dual: "شَفَقَتَانِ", plural: "شَفَقَاتٌ", meaning: "Karşılıksız acıma, esirgeme ve merhamet" },
+  { id: 428, category: "kitap", level: 3, singular: "عَفْوٌ", dual: "عَفْوَانِ", plural: "أَعْفِيَةٌ", meaning: "Cezadan vazgeçme, kusuru bağışlama" },
+  { id: 429, category: "kitap", level: 3, singular: "صَفْحٌ", dual: "صَفْحَانِ", plural: "صُفُوحٌ", meaning: "Kusuru görmezden gelip yüz çevirme" },
+  { id: 430, category: "kitap", level: 3, singular: "حِلْمٌ", dual: "حِلْمَانِ", plural: "أَحْلَامٌ", meaning: "Öfkeyi yenme, yumuşak huyluluk ve teenni" },
+  { id: 431, category: "kitap", level: 3, singular: "جُودٌ", dual: "جُودَانِ", plural: "أَجْوَادٌ", meaning: "İstenmeden bolca verme, cömertlik" },
+  { id: 432, category: "kitap", level: 3, singular: "بَذْلٌ", dual: "بَذْلَانِ", plural: "بُذُولٌ", meaning: "Fedakarlıkla harcama, esirgemeden verme" },
+  { id: 433, category: "kitap", level: 3, singular: "إِحْسَانٌ", dual: "إِحْسَانَانِ", plural: "إِحْسَانَاتٌ", meaning: "Görevini en güzel yapma, lütufta bulunma" },
+  { id: 434, category: "kitap", level: 3, singular: "عَهْدٌ", dual: "عَهْدَانِ", plural: "عُهُودٌ", meaning: "Verilen söz, ahit ve taahhüt" },
+  { id: 435, category: "kitap", level: 3, singular: "مِيثَاقٌ", dual: "مِيثَاقَانِ", plural: "مَوَاثِيقُ", meaning: "Sağlam sözleşme, yeminli muahede" },
+  { id: 436, category: "kitap", level: 3, singular: "أَمَانَةٌ", dual: "أَمَانَتَانِ", plural: "أَمَانَاتٌ", meaning: "Korunmak üzere tevdi edilen emanet" },
+  { id: 437, category: "kitap", level: 3, singular: "خِيَانَةٌ", dual: "خِيَانَتَانِ", plural: "خِيَانَاتٌ", meaning: "Emanete hıyanet etme, ahdi bozma" },
+  { id: 438, category: "kitap", level: 3, singular: "غَدْرٌ", dual: "غَدْرَانِ", plural: "غُدُورٌ", meaning: "Sözünden dönme, kalleşlik ve vefasızlık" },
+  { id: 439, category: "kitap", level: 3, singular: "حَسَدٌ", dual: "حَسَدَانِ", plural: "أَحْسَادٌ", meaning: "Başkasındaki nimetin yok olmasını isteme" },
+  { id: 440, category: "kitap", level: 3, singular: "كِبْرٌ", dual: "كِبْرَانِ", plural: "أَكْبَارٌ", meaning: "Kendini büyük görüp başkalarını hakir görme" },
+  { id: 441, category: "kitap", level: 3, singular: "عُجْبٌ", dual: "عُجْبَانِ", plural: "أَعْجَابٌ", meaning: "Kendi amelini ve nefsini beğenme" },
+  { id: 442, category: "kitap", level: 3, singular: "رِيَاءٌ", dual: "رِيَاءَانِ", plural: "أَرْيَاءٌ", meaning: "Gösteriş yapma, amelde samimiyetsizlik" },
+  { id: 443, category: "kitap", level: 3, singular: "سُمْعَةٌ", dual: "سُمْعَتَانِ", plural: "سُمْعَاتٌ", meaning: "Şöhret ve duyulma arzusu" },
+  { id: 444, category: "kitap", level: 3, singular: "غَفْلَةٌ", dual: "غَفْلَتَانِ", plural: "غَفَلَاتٌ", meaning: "Hakikatten habersiz olma, aymazlık" },
+  { id: 445, category: "kitap", level: 3, singular: "نِسْيَانٌ", dual: "نِسْيَانَانِ", plural: "نِسْيَانَاتٌ", meaning: "Unutma, hatırdan çıkarma" },
+  { id: 446, category: "kitap", level: 3, singular: "ذِكْرٌ", dual: "ذِكْرَانِ", plural: "أَذْكَارٌ", meaning: "Hatırlama, anma ve dille tesbih etme" },
+  { id: 447, category: "kitap", level: 3, singular: "فَهْمٌ", dual: "فَهْمَانِ", plural: "أَفْهَامٌ", meaning: "Derin kavrayış, idrak ve anlama" },
+  { id: 448, category: "kitap", level: 3, singular: "حِفْظٌ", dual: "حِفْظَانِ", plural: "أَحْفَاظٌ", meaning: "Koruma, muhafaza etme ve belleme" },
+  { id: 449, category: "kitap", level: 3, singular: "نَظَرٌ", dual: "نَظَرَانِ", plural: "أَنْظَارٌ", meaning: "Bakış, ibretle müşahede ve tefekkür" },
+  { id: 450, category: "kitap", level: 3, singular: "شُهُودٌ", dual: "شُهُودَانِ", plural: "أَشْهَادٌ", meaning: "Gözle görme, hazır bulunma ve şahitlik" },
+  { id: 451, category: "genel", level: 4, singular: "مَدِينَةٌ", dual: "مَدِينَتَانِ", plural: "مُدُنٌ", meaning: "Büyük yerleşim yeri, belde" },
+  { id: 452, category: "genel", level: 4, singular: "قَرْيَةٌ", dual: "قَرْيَتَانِ", plural: "قُرًى", meaning: "Kırsal yerleşim yeri, kasaba" },
+  { id: 453, category: "genel", level: 4, singular: "شَارِعٌ", dual: "شَارِعَانِ", plural: "شَوَارِعُ", meaning: "Geniş yol, ana sokak" },
+  { id: 454, category: "genel", level: 4, singular: "زُقَاقٌ", dual: "زُقَاقَانِ", plural: "أَزِقَّةٌ", meaning: "Dar mahalle yolu" },
+  { id: 455, category: "genel", level: 4, singular: "حَيٌّ", dual: "حَيَّانِ", plural: "أَحْيَاءٌ", meaning: "Şehrin semti, bölgesi" },
+  { id: 456, category: "genel", level: 4, singular: "سُوقٌ", dual: "سُوقَانِ", plural: "أَسْوَاقٌ", meaning: "Alışveriş yapılan pazar yeri" },
+  { id: 457, category: "genel", level: 4, singular: "دُكَّانٌ", dual: "دُكَّانَانِ", plural: "دَاكَاكِينُ", meaning: "Küçük ticarethane, mağaza" },
+  { id: 458, category: "genel", level: 4, singular: "مَنْزِلٌ", dual: "مَنْزِلَانِ", plural: "مَنَازِلُ", meaning: "Konak yeri, ev ve mesken" },
+  { id: 459, category: "genel", level: 4, singular: "غُرْفَةٌ", dual: "غُرْفَتَانِ", plural: "غُرَفٌ", meaning: "Evin bölmesi, hücre" },
+  { id: 460, category: "genel", level: 4, singular: "مَطْبَخٌ", dual: "مَطْبَخَانِ", plural: "مَطَابِخُ", meaning: "Yemek pişirilen mekan" },
+  { id: 461, category: "genel", level: 4, singular: "حَمَّامٌ", dual: "حَمَّامَانِ", plural: "حَمَّامَاتٌ", meaning: "Yıkanma yeri, banyo" },
+  { id: 462, category: "genel", level: 4, singular: "شُبَّاكٌ", dual: "شُبَّاكَانِ", plural: "شَبَابِيكُ", meaning: "Işık ve hava menfezi" },
+  { id: 463, category: "genel", level: 4, singular: "سَرِيرٌ", dual: "سَرِيرَانِ", plural: "أَسِرَّةٌ / سُرُرٌ", meaning: "Üzerinde yatılan yatak" },
+  { id: 464, category: "genel", level: 4, singular: "كُرْسِيٌّ", dual: "كُرْسِيَّانِ", plural: "كَرَاسِيُّ", meaning: "Üzerine oturulan koltuk" },
+  { id: 465, category: "genel", level: 4, singular: "مَكْتَبٌ", dual: "مَكْتَبَانِ", plural: "مَكَاتِبُ", meaning: "Yazı masası, yazıhane ve ofis" },
+  { id: 466, category: "genel", level: 4, singular: "قَلَمٌ", dual: "قَلَمَانِ", plural: "أَقْلَامٌ", meaning: "Yazı yazma aleti" },
+  { id: 467, category: "genel", level: 4, singular: "دَفْتَرٌ", dual: "دَفْتَرَانِ", plural: "دَفَاتِرُ", meaning: "Yazı yazılan ciltli yapraklar" },
+  { id: 468, category: "genel", level: 4, singular: "مِحْفَظَةٌ", dual: "مِحْفَظَتَانِ", plural: "مَحَافِظُ", meaning: "Eşya ve kitap konulan çanta" },
+  { id: 469, category: "genel", level: 4, singular: "لَوْحٌ", dual: "لَوْحَانِ", plural: "أَلْوَاحٌ", meaning: "Üzerine yazılan düz levha" },
+  { id: 470, category: "genel", level: 4, singular: "وَرَقَةٌ", dual: "وَرَقَتَانِ", plural: "أَوْرَاقٌ", meaning: "Üzerine yazı yazılan tabaka" },
+  { id: 471, category: "genel", level: 4, singular: "حَرْفٌ", dual: "حَرْفَانِ", plural: "حُرُوفٌ / أَحْرُفٌ", meaning: "Kelimeleri oluşturan alfabe sesi" },
+  { id: 472, category: "genel", level: 4, singular: "كَلِمَةٌ", dual: "كَلِمَتَانِ", plural: "كَلِمَاتٌ / كَلِمٌ", meaning: "Anlamlı lafız ve söz" },
+  { id: 473, category: "genel", level: 4, singular: "جُمْلَةٌ", dual: "جُمْلَتَانِ", plural: "جُمَلٌ", meaning: "Anlamı tam bildiren kelimeler dizisi" },
+  { id: 474, category: "genel", level: 4, singular: "سُؤَالٌ", dual: "سُؤَالَانِ", plural: "أَسْئِلَةٌ", meaning: "Cevap bekleyen istifham" },
+  { id: 475, category: "genel", level: 4, singular: "جَوَابٌ", dual: "جَوَابَانِ", plural: "أَجْوِبَةٌ", meaning: "Soruya verilen karşılık" },
+  { id: 476, category: "genel", level: 4, singular: "مُعَلِّمٌ", dual: "مُعَلِّمَانِ", plural: "مُعَلِّمُونَ", meaning: "İlim ve edep öğreten hoca" },
+  { id: 477, category: "genel", level: 4, singular: "تِلْمِيذٌ", dual: "تِلْمِيذَانِ", plural: "تَلَامِيذُ", meaning: "Ders alan talebe" },
+  { id: 478, category: "genel", level: 4, singular: "مَكْتَبَةٌ", dual: "مَكْتَبَتَانِ", plural: "مَكْتَبَاتٌ", meaning: "Kitapların toplandığı yer" },
+  { id: 479, category: "genel", level: 4, singular: "جَامِعَةٌ", dual: "جَامِعَتَانِ", plural: "جَامِعَاتٌ", meaning: "Yüksek tahsil müessesesi" },
+  { id: 480, category: "genel", level: 4, singular: "مَدْرَسَةٌ", dual: "مَدْرَسَتَانِ", plural: "مَدَارِسُ", meaning: "Ders okutulan mektep" },
+  { id: 481, category: "genel", level: 4, singular: "فَصْلٌ", dual: "فَصْلَانِ", plural: "فُصُولٌ", meaning: "Dershane; yılın mevsimi" },
+  { id: 482, category: "genel", level: 4, singular: "دَرْسٌ", dual: "دَرْسَانِ", plural: "دُرُوسٌ", meaning: "İlim tahsil edilen konu" },
+  { id: 483, category: "genel", level: 4, singular: "إِمْتِحَانٌ", dual: "إِمْتِحَانَانِ", plural: "إِمْتِحَانَاتٌ", meaning: "Bilgi ve ehliyet denemesi" },
+  { id: 484, category: "genel", level: 4, singular: "شَهَادَةٌ", dual: "شَهَادَتَانِ", plural: "شَهَادَاتٌ", meaning: "Mezuniyet ve ehliyet belgesi" },
+  { id: 485, category: "genel", level: 4, singular: "إِدَارَةٌ", dual: "إِدَارَتَانِ", plural: "إِدَارَاتٌ", meaning: "Yönetim birimi ve yöneticilik" },
+  { id: 486, category: "genel", level: 4, singular: "رَئِيسٌ", dual: "رَئِيسَانِ", plural: "رُؤَسَاءُ", meaning: "Topluluğun lideri ve amiri" },
+  { id: 487, category: "genel", level: 4, singular: "طَبِيبٌ", dual: "طَبِيبَانِ", plural: "أَطِبَّاءُ", meaning: "Hastaları tedavi eden doktor" },
+  { id: 488, category: "genel", level: 4, singular: "مُهَنْدِسٌ", dual: "مُهَنْدِسَانِ", plural: "مُهَنْدِسُونَ", meaning: "Yapı ve fen uzmanı" },
+  { id: 489, category: "genel", level: 4, singular: "تَاجِرٌ", dual: "تَاجِرَانِ", plural: "تُجَّارٌ", meaning: "Alışveriş yapan ticaret erbabı" },
+  { id: 490, category: "genel", level: 4, singular: "فَلَّاحٌ", dual: "فَلَّاحَانِ", plural: "فَلَّاحُونَ", meaning: "Toprağı ekip biçen rençber" },
+  { id: 491, category: "genel", level: 4, singular: "نَجَّارٌ", dual: "نَجَّارَانِ", plural: "نَجَّارُونَ", meaning: "Ağaç ve mobilya ustası" },
+  { id: 492, category: "genel", level: 4, singular: "حَدَّادٌ", dual: "حَدَّادَانِ", plural: "حَدَّادُونَ", meaning: "Demiri işleyen usta" },
+  { id: 493, category: "genel", level: 4, singular: "خَيَّاطٌ", dual: "خَيَّاطَانِ", plural: "خَيَّاطُونَ", meaning: "Elbise diken usta" },
+  { id: 494, category: "genel", level: 4, singular: "صَيَّادٌ", dual: "صَيَّادَانِ", plural: "صَيَّادُونَ", meaning: "Kara veya deniz avcısı" },
+  { id: 495, category: "genel", level: 4, singular: "جُنْدِيٌّ", dual: "جُنْدِيَّانِ", plural: "جُنُودٌ", meaning: "Vatanı koruyan er" },
+  { id: 496, category: "genel", level: 4, singular: "شُرْطِيٌّ", dual: "شُرْطِيَّانِ", plural: "شُرْطَةٌ", meaning: "Asayişi sağlayan memur" },
+  { id: 497, category: "genel", level: 4, singular: "حَارِسٌ", dual: "حَارِسَانِ", plural: "حُرَّاسٌ", meaning: "Koruyan ve nöbet tutan kimse" },
+  { id: 498, category: "genel", level: 4, singular: "خَادِمٌ", dual: "خَادِمَانِ", plural: "خُدَّامٌ", meaning: "Hizmet eden görevli" },
+  { id: 499, category: "genel", level: 4, singular: "سَائِقٌ", dual: "سَائِقَانِ", plural: "سَائِقُونَ", meaning: "Araç sevk eden sürücü" },
+  { id: 500, category: "genel", level: 4, singular: "طَيَّارٌ", dual: "طَيَّارَانِ", plural: "طَيَّارُونَ", meaning: "Uçak kullanan havacı" },
+  { id: 501, category: "genel", level: 4, singular: "مَلِكٌ", dual: "مَلِكَانِ", plural: "مُلُوكٌ", meaning: "Ülkeyi yöneten padişah" },
+  { id: 502, category: "genel", level: 4, singular: "وَزِيرٌ", dual: "وَزِيرَانِ", plural: "وُزَرَاءُ", meaning: "Hükümdarın baş yardımcısı" },
+  { id: 503, category: "genel", level: 4, singular: "قَاضٍ", dual: "قَاضِيَانِ", plural: "قُضَاةٌ", meaning: "Mahkemede adalet dağıtan" },
+  { id: 504, category: "genel", level: 4, singular: "أَمِيرٌ", dual: "أَمِيرَانِ", plural: "أُمَرَاءُ", meaning: "Yönetici prens ve ordu kumandanı" },
+  { id: 505, category: "genel", level: 4, singular: "سَفِيرٌ", dual: "سَفِيرَانِ", plural: "سُفَرَاءُ", meaning: "Devleti temsil eden elçi" },
+  { id: 506, category: "genel", level: 4, singular: "رَجُلٌ", dual: "رَجُلَانِ", plural: "رِجَالٌ", meaning: "Yetişkin erkek" },
+  { id: 507, category: "genel", level: 4, singular: "إِمْرَأَةٌ", dual: "إِمْرَأَتَانِ", plural: "نِسَاءٌ", meaning: "Yetişkin hanım" },
+  { id: 508, category: "genel", level: 4, singular: "وَلَدٌ", dual: "وَلَدَانِ", plural: "أَوْلَادٌ", meaning: "Oğul, çocuk" },
+  { id: 509, category: "genel", level: 4, singular: "بِنْتٌ", dual: "بِنْتَانِ", plural: "بَنَاتٌ", meaning: "Evlat olan kız" },
+  { id: 510, category: "genel", level: 4, singular: "شَابٌّ", dual: "شَابَّانِ", plural: "شَبَابٌ / شُبَّانٌ", meaning: "Delikanlı, taze ömürlü kimse" },
+  { id: 511, category: "genel", level: 4, singular: "عَجُوزٌ", dual: "عَجُوزَانِ", plural: "عَجَائِزُ", meaning: "Yaşlı kadın veya erkek" },
+  { id: 512, category: "genel", level: 4, singular: "أَبٌ", dual: "أَبَوَانِ", plural: "آبَاءٌ", meaning: "Peder, hane reisi" },
+  { id: 513, category: "genel", level: 4, singular: "أُمٌّ", dual: "أُمَّانِ", plural: "أُمَّهَاتٌ", meaning: "Valide, şefkat pınarı" },
+  { id: 514, category: "genel", level: 4, singular: "أَخٌ", dual: "أَخَوَانِ", plural: "إِخْوَةٌ / إِخْوَانٌ", meaning: "Erkek kardeş" },
+  { id: 515, category: "genel", level: 4, singular: "أُخْتٌ", dual: "أُخْتَانِ", plural: "أَخَوَاتٌ", meaning: "Kız kardeş, bacı, nesep yakını" },
+  { id: 516, category: "genel", level: 4, singular: "جَدٌّ", dual: "جَدَّانِ", plural: "أَجْدَادٌ", meaning: "Babanın veya annenin babası" },
+  { id: 517, category: "genel", level: 4, singular: "جَدَّةٌ", dual: "جَدَّتَانِ", plural: "جَدَّاتٌ", meaning: "Babanın veya annenin annesi" },
+  { id: 518, category: "genel", level: 4, singular: "عَمٌّ", dual: "عَمَّانِ", plural: "أَعْمَامٌ", meaning: "Babanın erkek kardeşi" },
+  { id: 519, category: "genel", level: 4, singular: "عَمَّةٌ", dual: "عَمَّتَانِ", plural: "عَمَّاتٌ", meaning: "Babanın kız kardeşi" },
+  { id: 520, category: "genel", level: 4, singular: "خَالٌ", dual: "خَالَانِ", plural: "أَخْوَالٌ", meaning: "Annenin erkek kardeşi" },
+  { id: 521, category: "genel", level: 4, singular: "خَالَةٌ", dual: "خَالَتَانِ", plural: "خَالَاتٌ", meaning: "Annenin kız kardeşi" },
+  { id: 522, category: "genel", level: 4, singular: "إِبْنٌ", dual: "إِبْنَانِ", plural: "أَبْنَاءٌ / بَنُونَ", meaning: "Erkek evlat" },
+  { id: 523, category: "genel", level: 4, singular: "إِبْنَةٌ", dual: "إِبْنَتَانِ", plural: "بَنَاتٌ", meaning: "Kız evlat, kız çocuk" },
+  { id: 524, category: "genel", level: 4, singular: "زَوْجٌ", dual: "زَوْجَانِ", plural: "أَزْوَاجٌ", meaning: "Nikahlı koca" },
+  { id: 525, category: "genel", level: 4, singular: "زَوْجَةٌ", dual: "زَوْجَتَانِ", plural: "زَوْجَاتٌ", meaning: "Nikahlı zevce" },
+  { id: 526, category: "genel", level: 4, singular: "صِهْرٌ", dual: "صِهْرَانِ", plural: "أَصْهَارٌ", meaning: "Evlilik yoluyla kazanılan akraba" },
+  { id: 527, category: "genel", level: 4, singular: "قَرِيبٌ", dual: "قَرِيبَانِ", plural: "أَقْرِبَاءُ", meaning: "Kan bağı olan hısım" },
+  { id: 528, category: "genel", level: 4, singular: "غَرِيبٌ", dual: "غَرِيبَانِ", plural: "غُرَبَاءُ", meaning: "Yurdundan uzak olan kimse" },
+  { id: 529, category: "genel", level: 4, singular: "صَدِيقٌ", dual: "صَدِيقَانِ", plural: "أَصْدِقَاءُ", meaning: "Sadakatli candan arkadaş" },
+  { id: 530, category: "genel", level: 4, singular: "عَدُوٌّ", dual: "عَدُوَّانِ", plural: "أَعْدَاءٌ", meaning: "Husumet besleyen hasım" },
+  { id: 531, category: "genel", level: 4, singular: "شَخْصٌ", dual: "شَخْصَانِ", plural: "أَشْخَاصٌ", meaning: "Fert, birey" },
+  { id: 532, category: "genel", level: 4, singular: "نَاسٌ", dual: "نَاسَانِ", plural: "أُنَاسٌ", meaning: "Beşer topluluğu" },
+  { id: 533, category: "genel", level: 4, singular: "حَلْقَةٌ", dual: "حَلْقَتَانِ", plural: "حَلَقَاتٌ", meaning: "İlim meclisi, çember" },
+  { id: 534, category: "genel", level: 4, singular: "صَفٌّ", dual: "صَفَّانِ", plural: "صُفُوفٌ", meaning: "Namazda veya orduda yan yana duruş" },
+  { id: 535, category: "genel", level: 4, singular: "مَجْلِسٌ", dual: "مَجْلِسَانِ", plural: "مَجَالِسُ", meaning: "Oturulan toplantı yeri" },
+  { id: 536, category: "genel", level: 4, singular: "مُجْتَمَعٌ", dual: "مُجْتَمَعَانِ", plural: "مُجْتَمَعَاتٌ", meaning: "Birlikte yaşayan cemiyet" },
+  { id: 537, category: "genel", level: 4, singular: "وَطَنٌ", dual: "وَطَنَانِ", plural: "أَوْطَانٌ", meaning: "Doğulup yaşanılan memleket" },
+  { id: 538, category: "genel", level: 4, singular: "بَلَدٌ", dual: "بَلَدَانِ", plural: "بِلَادٌ / بُلْدَانٌ", meaning: "Diyar, yurt, memleket" },
+  { id: 539, category: "genel", level: 4, singular: "قَارَّةٌ", dual: "قَارَّتَانِ", plural: "قَارَّاتٌ", meaning: "Büyük kara parçası" },
+  { id: 540, category: "genel", level: 4, singular: "جَزِيرَةٌ", dual: "جَزِيرَتَانِ", plural: "جُزُرٌ", meaning: "Dört tarafı suyla çevrili kara" },
+  { id: 541, category: "genel", level: 4, singular: "شِبْهُ جَزِيرَةٍ", dual: "شِبْهَا جَزِيرَةٍ", plural: "أَشْبَاهُ جُزُرٍ", meaning: "Üç tarafı denizle çevrili kara" },
+  { id: 542, category: "genel", level: 4, singular: "نَهْرٌ", dual: "نَهْرَانِ", plural: "أَنْهَارٌ / أَنْهُرٌ", meaning: "Akarsu, ırmak" },
+  { id: 543, category: "genel", level: 4, singular: "بِئْرٌ", dual: "بِئْرَانِ", plural: "آبَارٌ", meaning: "Su çıkarılan derin çukur" },
+  { id: 544, category: "genel", level: 4, singular: "وَادٍ", dual: "وَادِيَانِ", plural: "أَوْدِيَةٌ", meaning: "Dağlar arasındaki çukur akarsu yatağı" },
+  { id: 545, category: "genel", level: 4, singular: "تَلٌّ", dual: "تَلَّانِ", plural: "تِلَالٌ", meaning: "Küçük yükselti" },
+  { id: 546, category: "genel", level: 4, singular: "صَحْرَاءُ", dual: "صَحْرَاوَانِ", plural: "صَحَارَى", meaning: "Kumluk ve kurak geniş alan" },
+  { id: 547, category: "genel", level: 4, singular: "غَابَةٌ", dual: "غَابَتَانِ", plural: "غَابَاتٌ", meaning: "Ağaçlarla kaplı geniş alan" },
+  { id: 548, category: "genel", level: 4, singular: "بُسْتَانٌ", dual: "بُسْتَانَانِ", plural: "بَسَاتِينُ", meaning: "Meyveli ve yeşil alan" },
+  { id: 549, category: "genel", level: 4, singular: "حَدِيقَةٌ", dual: "حَدِيقَتَانِ", plural: "حَدَائِقُ", meaning: "Çiçekli yeşil bahçe" },
+  { id: 550, category: "genel", level: 4, singular: "مَزْرَعَةٌ", dual: "مَزْرَعَتَانِ", plural: "مَزَارِعُ", meaning: "Tarım ve hayvancılık arazisi" },
+  { id: 551, category: "genel", level: 4, singular: "جِسْرٌ", dual: "جِسْرَانِ", plural: "جُسُورٌ", meaning: "Nehir üzerinden geçiren kemer" },
+  { id: 552, category: "genel", level: 4, singular: "نَفَقٌ", dual: "نَفَقَانِ", plural: "أَنْفَاقٌ", meaning: "Dağ veya yer altından açılan yol" },
+  { id: 553, category: "genel", level: 4, singular: "سَيَّارَةٌ", dual: "سَيَّارَتَانِ", plural: "سَيَّارَاتٌ", meaning: "Dört tekerlekli binek araç" },
+  { id: 554, category: "genel", level: 4, singular: "حَافِلَةٌ", dual: "حَافِلَتَانِ", plural: "حَافِلَاتٌ", meaning: "Yolcu taşıyan büyük taşıt" },
+  { id: 555, category: "genel", level: 4, singular: "قِطَارٌ", dual: "قِطَارَانِ", plural: "قِطَارَاتٌ", meaning: "Raylar üzerinde giden katar" },
+  { id: 556, category: "genel", level: 4, singular: "طَائِرَةٌ", dual: "طَائِرَتَانِ", plural: "طَائِرَاتٌ", meaning: "Havada uçan yolcu aracı" },
+  { id: 557, category: "genel", level: 4, singular: "زَوْرَقٌ", dual: "زَوْرَقَانِ", plural: "زَوَارِقُ", meaning: "Küçük deniz kayığı" },
+  { id: 558, category: "genel", level: 4, singular: "دَرَّاجَةٌ", dual: "دَرَّاجَتَانِ", plural: "دَرَّاجَاتٌ", meaning: "İki tekerlekli binek" },
+  { id: 559, category: "genel", level: 4, singular: "مَحَطَّةٌ", dual: "مَحَطَّتَانِ", plural: "مَحَطَّاتٌ", meaning: "Tren ve otobüs durağı" },
+  { id: 560, category: "genel", level: 4, singular: "مَطَارٌ", dual: "مَطَارَانِ", plural: "مَطَارَاتٌ", meaning: "Uçakların kalktığı alan" },
+  { id: 561, category: "genel", level: 4, singular: "سَفَرٌ", dual: "سَفَرَانِ", plural: "أَسْفَارٌ", meaning: "Bir yerden başka yere seyahat" },
+  { id: 562, category: "genel", level: 4, singular: "رِحْلَةٌ", dual: "رِحْلَتَانِ", plural: "رِحْلَاتٌ", meaning: "İbret ve seyahat yolculuğu" },
+  { id: 563, category: "genel", level: 4, singular: "إِقَامَةٌ", dual: "إِقَامَتَانِ", plural: "إِقَامَاتٌ", meaning: "Bir beldede yerleşip kalma" },
+  { id: 564, category: "genel", level: 4, singular: "جَوَازُ سَفَرٍ", dual: "جَوَازَا سَفَرٍ", plural: "جَوَازَاتُ سَفَرٍ", meaning: "Seyahat belgesi" },
+  { id: 565, category: "genel", level: 4, singular: "تَذْكِرَةٌ", dual: "تَذْكِرَتَانِ", plural: "تَذَاكِرُ", meaning: "Giriş ve seyahat fişi" },
+  { id: 566, category: "genel", level: 4, singular: "نُقُودٌ", dual: "نَقْدَانِ", plural: "أَنْقَادٌ", meaning: "Alışverişte kullanılan nakit" },
+  { id: 567, category: "genel", level: 4, singular: "دِينَارٌ", dual: "دِينَارَانِ", plural: "دَنَانِيرُ", meaning: "Altın para birimi" },
+  { id: 568, category: "genel", level: 4, singular: "دِرْهَمٌ", dual: "دِرْهَمَانِ", plural: "دَرَاهِمُ", meaning: "Gümüş para birimi" },
+  { id: 569, category: "genel", level: 4, singular: "لِيرَةٌ", dual: "لِيرَتَانِ", plural: "لِيرَاتٌ", meaning: "Para birimi" },
+  { id: 570, category: "genel", level: 4, singular: "بَنْكٌ", dual: "بَنْكَانِ", plural: "بُنُوكٌ", meaning: "Para muhafaza ve ticaret kurumu" },
+  { id: 571, category: "genel", level: 4, singular: "حِسَابٌ", dual: "حِسَابَانِ", plural: "حِسَابَاتٌ", meaning: "Aritmetik işlem, banka hesabı" },
+  { id: 572, category: "genel", level: 4, singular: "فَاتُورَةٌ", dual: "فَاتُورَتَانِ", plural: "فَوَاتِيرُ", meaning: "Alışveriş masraf dökümü" },
+  { id: 573, category: "genel", level: 4, singular: "شِيكٌ", dual: "شِيكَانِ", plural: "شِيكَاتٌ", meaning: "Ödeme emri evrakı" },
+  { id: 574, category: "genel", level: 4, singular: "مَلْبَسٌ", dual: "مَلْبَسَانِ", plural: "مَلَابِسُ", meaning: "Giyilen giysi" },
+  { id: 575, category: "genel", level: 4, singular: "قَمِيصٌ", dual: "قَمِيصَانِ", plural: "قُمْصَانٌ / أَقْمِصَةٌ", meaning: "Üst bedene giyilen giysi" },
+  { id: 576, category: "genel", level: 4, singular: "ثَوْبٌ", dual: "ثَوْبَانِ", plural: "ثِيَابٌ / أَثْوَابٌ", meaning: "Giyilen kumaş giysi" },
+  { id: 577, category: "genel", level: 4, singular: "سِرْوَالٌ", dual: "سِرْوَالَانِ", plural: "سَرَاوِيلُ", meaning: "Bacakları örten don ve pantolon" },
+  { id: 578, category: "genel", level: 4, singular: "خِمَارٌ", dual: "خِمَارَانِ", plural: "خُمُرٌ", meaning: "Baş ve boynu örten örtü" },
+  { id: 579, category: "genel", level: 4, singular: "جِلْبَابٌ", dual: "جِلْبَابَانِ", plural: "جَلَابِيبُ", meaning: "Dışarı çıkarken giyilen geniş örtü" },
+  { id: 580, category: "genel", level: 4, singular: "حِذَاءٌ", dual: "حِذَاءَانِ", plural: "أَحْذِيَةٌ", meaning: "Ayağa giyilen pabuç" },
+  { id: 581, category: "genel", level: 4, singular: "جَوْرَبٌ", dual: "جَوْرَبَانِ", plural: "جَوَارِبُ", meaning: "Ayağa giyilen örgü kılıf" },
+  { id: 582, category: "genel", level: 4, singular: "قُفَّازٌ", dual: "قُفَّازَانِ", plural: "قَفَافِيزُ", meaning: "Eli örten koruyucu" },
+  { id: 583, category: "genel", level: 4, singular: "مِحْفَظَةُ نُقُودٍ", dual: "مِحْفَظَتَا نُقُودٍ", plural: "مَحَافِظُ نُقُودٍ", meaning: "Para konulan küçük çanta" },
+  { id: 584, category: "genel", level: 4, singular: "مِكْنَسَةٌ", dual: "مِكْنَسَتَانِ", plural: "مَكَانِسُ", meaning: "Toz süpürme aleti" },
+  { id: 585, category: "genel", level: 4, singular: "غَسَّالَةٌ", dual: "غَسَّالَتَانِ", plural: "غَسَّالَاتٌ", meaning: "Giysi yıkama cihazı" },
+  { id: 586, category: "genel", level: 4, singular: "ثَلَّاجَةٌ", dual: "ثَلَّاجَتَانِ", plural: "ثَلَّاجَاتٌ", meaning: "Gıdaları soğuk tutan dolap" },
+  { id: 587, category: "genel", level: 4, singular: "فُرْنٌ", dual: "فُرْنَانِ", plural: "أَفْرَانٌ", meaning: "Ekmek ve yemek pişirme ocağı" },
+  { id: 588, category: "genel", level: 4, singular: "طَبَقٌ", dual: "طَبَقَانِ", plural: "أَطْبَاقٌ", meaning: "Yemek konulan yayvan kap" },
+  { id: 589, category: "genel", level: 4, singular: "فِنْجَانٌ", dual: "فِنْجَانَانِ", plural: "فَنَاجِينُ", meaning: "Kahve ve çay içilen küçük kulplu kap" },
+  { id: 590, category: "genel", level: 4, singular: "كُوبٌ", dual: "كُوبَانِ", plural: "أَكْوَابٌ", meaning: "Su içilen kulpsuz kap" },
+  { id: 591, category: "genel", level: 4, singular: "مِلْعَقَةٌ", dual: "مِلْعَقَتَانِ", plural: "مَلَاعِقُ", meaning: "Çorba ve yemek yeme aleti" },
+  { id: 592, category: "genel", level: 4, singular: "شَوْكَةٌ", dual: "شَوْكَتَانِ", plural: "شُوَاكٌ", meaning: "Yemek alma aleti" },
+  { id: 593, category: "genel", level: 4, singular: "سِكِّينٌ", dual: "سِكِّينَانِ", plural: "سَكَاكِينُ", meaning: "Kesme aleti" },
+  { id: 594, category: "genel", level: 4, singular: "قِدْرٌ", dual: "قِدْرَانِ", plural: "قُدُورٌ", meaning: "Yemek pişirilen derin kap" },
+  { id: 595, category: "genel", level: 4, singular: "كَأْسٌ", dual: "كَأْسَانِ", plural: "كُؤُوسٌ", meaning: "İçecek bardağı" },
+  { id: 596, category: "genel", level: 4, singular: "سَنَةٌ", dual: "سَنَتَانِ", plural: "سَنَوَاتٌ / سِنُونَ", meaning: "On iki aylık yıl müddeti" },
+  { id: 597, category: "genel", level: 4, singular: "عَامٌ", dual: "عَامَانِ", plural: "أَعْوَامٌ", meaning: "Kameri veya şemsi sene" },
+  { id: 598, category: "genel", level: 4, singular: "شَهْرٌ", dual: "شَهْرَانِ", plural: "أَشْهُرٌ / شُهُورٌ", meaning: "Otuz günlük zaman dilimi" },
+  { id: 599, category: "genel", level: 4, singular: "أُسْبُوعٌ", dual: "أُسْبُوعَانِ", plural: "أَسَابِيعُ", meaning: "Yedi günlük zaman süresi" },
+  { id: 600, category: "genel", level: 4, singular: "صَبَاحٌ", dual: "صَبَاحَانِ", plural: "أَصْبَاحٌ", meaning: "Günün ilk aydınlık vakti" },
+  { id: 601, category: "genel", level: 5, singular: "ظُهْرٌ", dual: "ظُهْرَانِ", plural: "أَظْهَارٌ", meaning: "Güneşin tepeyi aştığı vakit" },
+  { id: 602, category: "genel", level: 5, singular: "عَصْرٌ", dual: "عَصْرَانِ", plural: "أَعْصَارٌ", meaning: "Güneşin batmaya meylettiği vakit" },
+  { id: 603, category: "genel", level: 5, singular: "مَسَاءٌ", dual: "مَسَاءَانِ", plural: "أَمْسِيَةٌ", meaning: "Güneşin battığı vakit" },
+  { id: 604, category: "genel", level: 5, singular: "غُرُوبٌ", dual: "غُرُوبَانِ", plural: "غُرُوبَاتٌ", meaning: "Güneşin ufukta kayboluşu" },
+  { id: 605, category: "genel", level: 5, singular: "شُرُوقٌ", dual: "شُرُوقَانِ", plural: "شُرُوقَاتٌ", meaning: "Güneşin ufuktan doğuşu" },
+  { id: 606, category: "genel", level: 5, singular: "سَاعَةٌ", dual: "سَاعَتَانِ", plural: "سَاعَاتٌ", meaning: "Altmış dakikalık zaman dilimi" },
+  { id: 607, category: "genel", level: 5, singular: "دَقِيقَةٌ", dual: "دَقِيقَتَانِ", plural: "دَقَائِقُ", meaning: "Altmış saniyelik zaman" },
+  { id: 608, category: "genel", level: 5, singular: "ثَانِيَةٌ", dual: "ثَانِيَتَانِ", plural: "ثَوَانٍ", meaning: "Dakikanın altmışta biri" },
+  { id: 609, category: "genel", level: 5, singular: "لَحْظَةٌ", dual: "لَحْظَتَانِ", plural: "لَحَظَاتٌ", meaning: "Göz açıp kapama süresi, an" },
+  { id: 610, category: "genel", level: 5, singular: "مَوْسِمٌ", dual: "مَوْسِمَانِ", plural: "مَوَاسِمُ", meaning: "Yılın dört ana döneminden her biri" },
+  { id: 611, category: "genel", level: 5, singular: "رَبِيعٌ", dual: "رَبِيعَانِ", plural: "أَرْبِعَاءُ", meaning: "Ağaçların çiçek açtığı mevsim" },
+  { id: 612, category: "genel", level: 5, singular: "صَيْفٌ", dual: "صَيْفَانِ", plural: "أَصْيَافٌ", meaning: "Sıcak günlerin mevsimi" },
+  { id: 613, category: "genel", level: 5, singular: "خَرِيفٌ", dual: "خَرِيفَانِ", plural: "أَخْرِفَةٌ", meaning: "Yaprakların döküldüğü mevsim" },
+  { id: 614, category: "genel", level: 5, singular: "شِتَاءٌ", dual: "شِتَاءَانِ", plural: "أَشْتِيَةٌ", meaning: "Soğuk ve karlı mevsim" },
+  { id: 615, category: "genel", level: 5, singular: "سَحَابٌ", dual: "سَحَابَانِ", plural: "سُحُبٌ", meaning: "Gökte toplanan su buharı kütlesi" },
+  { id: 616, category: "genel", level: 5, singular: "مَطَرٌ", dual: "مَطَرَانِ", plural: "أَمْطَارٌ", meaning: "Gökten inen bereketli damlalar" },
+  { id: 617, category: "genel", level: 5, singular: "ثَلْجٌ", dual: "ثَلْجَانِ", plural: "ثُلُوجٌ", meaning: "Beyaz kristal yağış" },
+  { id: 618, category: "genel", level: 5, singular: "بَرَدٌ", dual: "بَرَدَانِ", plural: "أَبْرَادٌ", meaning: "Donmuş taneli yağmur damlaları" },
+  { id: 619, category: "genel", level: 5, singular: "ضَبَابٌ", dual: "ضَبَابَانِ", plural: "أَضِبَّةٌ", meaning: "Yere inen yoğun duman bulutu" },
+  { id: 620, category: "genel", level: 5, singular: "عَاصِفَةٌ", dual: "عَاصِفَتَانِ", plural: "عَوَاصِفُ", meaning: "Şiddetli esen kasırga yeli" },
+  { id: 621, category: "genel", level: 5, singular: "حَرَارَةٌ", dual: "حَرَارَتَانِ", plural: "حَرَارَاتٌ", meaning: "Isı derecesi, hararet" },
+  { id: 622, category: "genel", level: 5, singular: "بُرُودَةٌ", dual: "بُرُودَتَانِ", plural: "بُرُودَاتٌ", meaning: "Düşük ısı, ayaz" },
+  { id: 623, category: "genel", level: 5, singular: "رُطُوبَةٌ", dual: "رُطُوبَتَانِ", plural: "رُطُوبَاتٌ", meaning: "Havadaki ıslaklık derecesi" },
+  { id: 624, category: "genel", level: 5, singular: "صَوْتٌ", dual: "صَوْتَانِ", plural: "أَصْوَاتٌ", meaning: "Kulağa ulaşan seda" },
+  { id: 625, category: "genel", level: 5, singular: "صَدًى", dual: "صَدَيَانِ", plural: "أَصْدَاءٌ", meaning: "Sesin duvara çarpıp dönmesi" },
+  { id: 626, category: "genel", level: 5, singular: "نِدَاءٌ", dual: "نِدَاءَانِ", plural: "أَنْدِيَةٌ", meaning: "Seslenme, haykırış" },
+  { id: 627, category: "genel", level: 5, singular: "قِصَّةٌ", dual: "قِصَّتَانِ", plural: "قِصَصٌ", meaning: "İbret verici tarihi anlatı" },
+  { id: 628, category: "genel", level: 5, singular: "حِكَايَةٌ", dual: "حِكَايَتَانِ", plural: "حِكَايَاتٌ", meaning: "Yaşanmış veya kurgusal olay" },
+  { id: 629, category: "genel", level: 5, singular: "رِوَايَةٌ", dual: "رِوَايَتَانِ", plural: "رِوَايَاتٌ", meaning: "Nakil ve geniş edebi anlatı" },
+  { id: 630, category: "genel", level: 5, singular: "شِعْرٌ", dual: "شِعْرَانِ", plural: "أَشْعَارٌ", meaning: "Vezinli ve kafiyeli söz sanatı" },
+  { id: 631, category: "genel", level: 5, singular: "قَصِيدَةٌ", dual: "قَصِيدَتَانِ", plural: "قَصَائِدُ", meaning: "Uzun manzum şiir" },
+  { id: 632, category: "genel", level: 5, singular: "بَيْتُ شِعْرٍ", dual: "بَيْتَا شِعْرٍ", plural: "أَبْيَاتُ شِعْرٍ", meaning: "İki mısradan oluşan dize" },
+  { id: 633, category: "genel", level: 5, singular: "غَزَلٌ", dual: "غَزَلَانِ", plural: "أَغْزَالٌ", meaning: "Aşk ve güzelliği terennüm eden şiir" },
+  { id: 634, category: "genel", level: 5, singular: "مَجَلَّةٌ", dual: "مَجَلَّتَانِ", plural: "مَجَلَّاتٌ", meaning: "Süreli yayın, mevkute, bülten" },
+  { id: 635, category: "genel", level: 5, singular: "جَرِيدَةٌ", dual: "جَرِيدَتَانِ", plural: "جَرَائِدُ", meaning: "Günlük haber neşriyatı" },
+  { id: 636, category: "genel", level: 5, singular: "إِعْلَانٌ", dual: "إِعْلَانَانِ", plural: "إِعْلَانَاتٌ", meaning: "Halka yapılan ilan ve bildiri" },
+  { id: 637, category: "genel", level: 5, singular: "مَكْتُوبٌ", dual: "مَكْتُوبَانِ", plural: "مَكَاتِيبُ", meaning: "Yazılan haberleşme kâğıdı" },
+  { id: 638, category: "genel", level: 5, singular: "بَرِيدٌ", dual: "بَرِيدَانِ", plural: "أَبْرِدَةٌ", meaning: "Mektup ve kargo ulaştırma teşkilatı" },
+  { id: 639, category: "genel", level: 5, singular: "هَاتِفٌ", dual: "هَاتِفَانِ", plural: "هَوَاتِفُ", meaning: "Telefon, ses ileten haberleşme cihazı" },
+  { id: 640, category: "genel", level: 5, singular: "شَبَكَةٌ", dual: "شَبَكَتَانِ", plural: "شَبَكَاتٌ", meaning: "Birbirine bağlı iletişim ağı" },
+  { id: 641, category: "genel", level: 5, singular: "حَاسُوبٌ", dual: "حَاسُوبَانِ", plural: "حَوَاسِيبُ", meaning: "Elektronik hesaplama ve veri cihazı" },
+  { id: 642, category: "genel", level: 5, singular: "شَاشَةٌ", dual: "شَاشَتَانِ", plural: "شَاشَاتٌ", meaning: "Görüntü veren cam panel" },
+  { id: 643, category: "genel", level: 5, singular: "فَوْزٌ", dual: "فَوْزَانِ", plural: "أَفْوَازٌ", meaning: "Başarı, müsabaka galibiyeti" },
+  { id: 644, category: "genel", level: 5, singular: "هَزِيمَةٌ", dual: "هَزِيمَتَانِ", plural: "هَزَائِمُ", meaning: "Yenilgiye uğrama hali" },
+  { id: 645, category: "genel", level: 5, singular: "رِبْحٌ", dual: "رِبْحَانِ", plural: "أَرْبَاحٌ", meaning: "Ticaretten elde edilen fazlalık" },
+  { id: 646, category: "genel", level: 5, singular: "خَسَارَةٌ", dual: "خَسَارَتَانِ", plural: "خَسَائِرُ", meaning: "Mal ve sermaye kaybı" },
+  { id: 647, category: "genel", level: 5, singular: "صِحَّةٌ", dual: "صِحَّتَانِ", plural: "صِحَّاتٌ", meaning: "Afiyet ve beden esenliği" },
+  { id: 648, category: "genel", level: 5, singular: "مَرَضٌ", dual: "مَرَضَانِ", plural: "أَمْرَاضٌ", meaning: "Sıhhatin bozulması hali" },
+  { id: 649, category: "genel", level: 5, singular: "دَوَاءٌ", dual: "دَوَاءَانِ", plural: "أَدْوِيَةٌ", meaning: "Hastalığı iyileştiren şifa vesilesi" },
+  { id: 650, category: "genel", level: 5, singular: "شِفَاءٌ", dual: "شِفَاءَانِ", plural: "أَشْفِيَةٌ", meaning: "Hastalıktan kurtulup iyileşme" },
+  { id: 651, category: "genel", level: 5, singular: "أَلَمٌ", dual: "أَلَمَانِ", plural: "آلَامٌ", meaning: "Bedeni ve ruhi elem" },
+  { id: 652, category: "genel", level: 5, singular: "جُرْحٌ", dual: "جُرْحَانِ", plural: "جُرُوحٌ / جِرَاحٌ", meaning: "Beden dokusunun kesilip yırtılması" },
+  { id: 653, category: "genel", level: 5, singular: "مُسْتَشْفًى", dual: "مُسْتَشْفَيَانِ", plural: "مُسْتَشْفَيَاتٌ", meaning: "Hastaların tedavi edildiği şifahane" },
+  { id: 654, category: "genel", level: 5, singular: "عِيَادَةٌ", dual: "عِيَادَتَانِ", plural: "عِيَادَاتٌ", meaning: "Doktor muayenehanesi" },
+  { id: 655, category: "genel", level: 5, singular: "صَيْدَلِيَّةٌ", dual: "صَيْدَلِيَّتَانِ", plural: "صَيْدَلِيَّاتٌ", meaning: "İlaç yapılan ve satılan yer" },
+  { id: 656, category: "genel", level: 5, singular: "طَعَامٌ", dual: "طَعَامَانِ", plural: "أَطْعِمَةٌ", meaning: "Beslenilen her türlü azık" },
+  { id: 657, category: "genel", level: 5, singular: "خُبْزٌ", dual: "خُبْزَانِ", plural: "أَخْبَازٌ", meaning: "Undan pişirilen temel gıda" },
+  { id: 658, category: "genel", level: 5, singular: "لَحْمٌ", dual: "لَحْمَانِ", plural: "لُحُومٌ", meaning: "Helal hayvan eti gıdası" },
+  { id: 659, category: "genel", level: 5, singular: "سَمَكٌ", dual: "سَمَكَانِ", plural: "أَسْمَاكٌ", meaning: "Denizden çıkan et nimeti" },
+  { id: 660, category: "genel", level: 5, singular: "دَجَاجٌ", dual: "دَجَاجَتَانِ", plural: "دَجَاجَاتٌ", meaning: "Kümes kuşu eti" },
+  { id: 661, category: "genel", level: 5, singular: "بَيْضٌ", dual: "بَيْضَتَانِ", plural: "بُيُوضٌ", meaning: "Kuş ve tavuk yumurtası" },
+  { id: 662, category: "genel", level: 5, singular: "جُبْنٌ", dual: "جُبْنَانِ", plural: "أَجْبَانٌ", meaning: "Sütten mayalanan gıda" },
+  { id: 663, category: "genel", level: 5, singular: "حَلِيبٌ", dual: "حَلِيبَانِ", plural: "أَحْلِبَةٌ", meaning: "Taze sağılmış süt" },
+  { id: 664, category: "genel", level: 5, singular: "زُبْدَةٌ", dual: "زُبْدَتَانِ", plural: "زُبَدٌ", meaning: "Sütün kaymağından çıkarılan yağ" },
+  { id: 665, category: "genel", level: 5, singular: "سُكَّرٌ", dual: "سُكَّرَانِ", plural: "أَسْكَارٌ", meaning: "Tatlı kristal gıda maddesi" },
+  { id: 666, category: "genel", level: 5, singular: "مِلْحٌ", dual: "مِلْحَانِ", plural: "أَمْلَاحٌ", meaning: "Yemeklere lezzet katan mineral" },
+  { id: 667, category: "genel", level: 5, singular: "فَاكِهَةٌ", dual: "فَاكِهَتَانِ", plural: "فَوَاكِهُ", meaning: "Ağaçta yetişen tatlı yemiş" },
+  { id: 668, category: "genel", level: 5, singular: "تُفَّاحٌ", dual: "تُفَّاحَتَانِ", plural: "تُفَّاحَاتٌ", meaning: "Kırmızı ve yeşil lezzetli meyve" },
+  { id: 669, category: "genel", level: 5, singular: "بُرْتُقَالٌ", dual: "بُرْتُقَالَتَانِ", plural: "بُرْتُقَالَاتٌ", meaning: "C vitamini zengini narenciye" },
+  { id: 670, category: "genel", level: 5, singular: "عِنَبٌ", dual: "عِنَبَانِ", plural: "أَعْنَابٌ", meaning: "Asmada yetişen salkım meyve" },
+  { id: 671, category: "genel", level: 5, singular: "تِينٌ", dual: "تِينَتَانِ", plural: "أَتْيَانٌ", meaning: "Mübarek tatlı meyve" },
+  { id: 672, category: "genel", level: 5, singular: "رُمَّانٌ", dual: "رُمَّانَتَانِ", plural: "رَمَامِينُ", meaning: "Taneli kırmızı şifalı meyve" },
+  { id: 673, category: "genel", level: 5, singular: "مَوْزٌ", dual: "مَوْزَتَانِ", plural: "أَمْوَازٌ", meaning: "Tropikal sarı tatlı meyve" },
+  { id: 674, category: "genel", level: 5, singular: "خُضَارٌ", dual: "خُضَارَانِ", plural: "خُضْرَاوَاتٌ", meaning: "Bahçede yetişen yeşillik ve gıdalar" },
+  { id: 675, category: "genel", level: 5, singular: "طَمَاطِمُ", dual: "طَمَاطِمَتَانِ", plural: "طَمَاطِمَاتٌ", meaning: "Kırmızı sulu sebze" },
+  { id: 676, category: "genel", level: 5, singular: "بَطَاطِسُ", dual: "بَطَاطِسَتَانِ", plural: "بَطَاطِسَاتٌ", meaning: "Toprak altında yetişen yumru sebze" },
+  { id: 677, category: "genel", level: 5, singular: "بَصَلٌ", dual: "بَصَلَتَانِ", plural: "أَبْصَالٌ", meaning: "Kat kat yemeklik kuru sebze" },
+  { id: 678, category: "genel", level: 5, singular: "ثَوْمٌ", dual: "ثَوْمَانِ", plural: "أَثْوَامٌ", meaning: "Şifalı kokulu dişli sebze" },
+  { id: 679, category: "genel", level: 5, singular: "جَزَرٌ", dual: "جَزَرَتَانِ", plural: "جَزَرَاتٌ", meaning: "Turuncu kök sebze" },
+  { id: 680, category: "genel", level: 5, singular: "خِيَارٌ", dual: "خِيَارَتَانِ", plural: "أَخْيَارٌ", meaning: "Yeşil taze hıyar sebzesi" },
+  { id: 681, category: "genel", level: 5, singular: "شَايٌ", dual: "شَايَانِ", plural: "أَشْيَاءُ الشَّاي", meaning: "Sıcak demlenen yaprak içeceği" },
+  { id: 682, category: "genel", level: 5, singular: "قَهْوَةٌ", dual: "قَهْوَتَانِ", plural: "قَهَوَاتٌ", meaning: "Kavrulmuş çekirdekten yapılan içecek" },
+  { id: 683, category: "genel", level: 5, singular: "عَصِيرٌ", dual: "عَصِيرَانِ", plural: "عَصَائِرُ", meaning: "Meyvenin sıkılmasıyla elde edilen su" },
+  { id: 684, category: "genel", level: 5, singular: "زَيْتٌ", dual: "زَيْتَانِ", plural: "زُيُوتٌ", meaning: "Zeytinden çıkarılan şifalı yağ" },
+  { id: 685, category: "genel", level: 5, singular: "خَلٌّ", dual: "خَلَّانِ", plural: "خُلُولٌ", meaning: "Mayalanmış ekşi sıvı" },
+  { id: 686, category: "genel", level: 5, singular: "أَرُزٌّ", dual: "أَرُزَّانِ", plural: "آرَازٌ", meaning: "Pilav yapılan beyaz tane" },
+  { id: 687, category: "genel", level: 5, singular: "عَدَسٌ", dual: "عَدَسَانِ", plural: "أَعْدَاسٌ", meaning: "Çorbası yapılan bakliyat" },
+  { id: 688, category: "genel", level: 5, singular: "حِمَّصٌ", dual: "حِمَّصَانِ", plural: "أَحْمَاصٌ", meaning: "Yuvarlak sarı bakliyat" },
+  { id: 689, category: "genel", level: 5, singular: "فُولٌ", dual: "فُولَانِ", plural: "أَفْوَالٌ", meaning: "Taneli yeşil bakliyat" },
+  { id: 690, category: "genel", level: 5, singular: "قَمْحٌ", dual: "قَمْحَانِ", plural: "أَقْمَاحٌ", meaning: "Un ve ekmek yapılan sarı başak" },
+  { id: 691, category: "genel", level: 5, singular: "شَعِيرٌ", dual: "شَعِيرَانِ", plural: "أَشْعَارٌ", meaning: "Başaklı tahıl tanesi" },
+  { id: 692, category: "genel", level: 5, singular: "طَيْرٌ", dual: "طَيْرَانِ", plural: "طُيُورٌ / أَطْيَارٌ", meaning: "Kanatlarıyla havada uçan canlı" },
+  { id: 693, category: "genel", level: 5, singular: "حَمَامَةٌ", dual: "حَمَامَتَانِ", plural: "حَمَامَاتٌ / حَمَائِمُ", meaning: "Barış simgesi evcil kuş" },
+  { id: 694, category: "genel", level: 5, singular: "عُصْفُورٌ", dual: "عُصْفُورَانِ", plural: "عَصَافِيرُ", meaning: "Küçük sevimli ötücü kuş" },
+  { id: 695, category: "genel", level: 5, singular: "غُرَابٌ", dual: "غُرَابَانِ", plural: "غِرْبَانٌ / أَغْرِبَةٌ", meaning: "Siyah tüylü zeki kuş" },
+  { id: 696, category: "genel", level: 5, singular: "نَسْرٌ", dual: "نَسْرَانِ", plural: "نُسُورٌ", meaning: "Yükseklerde uçan yırtıcı kuş" },
+  { id: 697, category: "genel", level: 5, singular: "هُدْهُدٌ", dual: "هُدْهُدَانِ", plural: "هَدَاهِدُ", meaning: "İbik ve süslü tüyleri olan ibretli kuş" },
+  { id: 698, category: "genel", level: 5, singular: "أَسَدٌ", dual: "أَسَدَانِ", plural: "أُسُودٌ / آسَادٌ", meaning: "Ormanların heybetli yırtıcı kralı" },
+  { id: 699, category: "genel", level: 5, singular: "نَمِرٌ", dual: "نَمِرَانِ", plural: "نُمُورٌ", meaning: "Çizgili yırtıcı hayvan" },
+  { id: 700, category: "genel", level: 5, singular: "ذِئْبٌ", dual: "ذِئْبَانِ", plural: "ذِئَابٌ", meaning: "Vahşi yırtıcı sürü hayvanı" },
+  { id: 701, category: "genel", level: 5, singular: "ثَعْلَبٌ", dual: "ثَعْلَبَانِ", plural: "ثَعَالِبُ", meaning: "Kurnaz tüylü kuyruklu hayvan" },
+  { id: 702, category: "genel", level: 5, singular: "دُبٌّ", dual: "دُبَّانِ", plural: "دِبَبَةٌ", meaning: "İri yapılı kış uykusuna yatan hayvan" },
+  { id: 703, category: "genel", level: 5, singular: "فِيلٌ", dual: "فِيلَانِ", plural: "أَفْيَالٌ / فُيُولٌ", meaning: "Hortumlu iri cüsseli hayvan" },
+  { id: 704, category: "genel", level: 5, singular: "حِصَانٌ", dual: "حِصَانَانِ", plural: "أَحْصِنَةٌ", meaning: "Asil binek ve koşu hayvanı" },
+  { id: 705, category: "genel", level: 5, singular: "فَرَسٌ", dual: "فَرَسَانِ", plural: "أَفْرَاسٌ", meaning: "Hızlı koşan binek atı" },
+  { id: 706, category: "genel", level: 5, singular: "بَغْلٌ", dual: "بَغْلَانِ", plural: "بِغَالٌ", meaning: "Yük taşıyan dayanıklı melez hayvan" },
+  { id: 707, category: "genel", level: 5, singular: "حِمَارٌ", dual: "حِمَارَانِ", plural: "حَمِيرٌ / حُمُرٌ", meaning: "Yük taşıyan evcil hayvan" },
+  { id: 708, category: "genel", level: 5, singular: "جَمَلٌ", dual: "جَمَلَانِ", plural: "جِمَالٌ", meaning: "Çöl gemisi dayanıklı hayvan" },
+  { id: 709, category: "genel", level: 5, singular: "نَاقَةٌ", dual: "نَاقَتَانِ", plural: "نُوقٌ", meaning: "Sütü sağılan dişi deve" },
+  { id: 710, category: "genel", level: 5, singular: "بَقَرَةٌ", dual: "بَقَرَتَانِ", plural: "بَقَرَاتٌ / بَقَرٌ", meaning: "Süt ve et veren büyükbaş hayvan" },
+  { id: 711, category: "genel", level: 5, singular: "ثَوْرٌ", dual: "ثَوْرَانِ", plural: "ثِيرَانٌ", meaning: "Çift süren güçlü erkek sığır" },
+  { id: 712, category: "genel", level: 5, singular: "عِجْلٌ", dual: "عِجْلَانِ", plural: "عُجُولٌ", meaning: "İneğin küçük yavrusu" },
+  { id: 713, category: "genel", level: 5, singular: "خَرُوفٌ", dual: "خَرُوفَانِ", plural: "خِرْفَانٌ", meaning: "Koyunun sevimli yavrusu" },
+  { id: 714, category: "genel", level: 5, singular: "كَبْشٌ", dual: "كَبْشَانِ", plural: "كِبَاشٌ", meaning: "Boynuzlu erkek koyun" },
+  { id: 715, category: "genel", level: 5, singular: "شَاةٌ", dual: "شَاتَانِ", plural: "شِيَاهٌ", meaning: "Yün ve süt veren küçükbaş hayvan" },
+  { id: 716, category: "genel", level: 5, singular: "مَاعِزٌ", dual: "مَاعِزَانِ", plural: "مَوَاعِزُ", meaning: "Çevik tırmanıcı boynuzlu hayvan" },
+  { id: 717, category: "genel", level: 5, singular: "كَلْبٌ", dual: "كَلْبَانِ", plural: "كِلَابٌ", meaning: "Sadık bekçi ve av hayvanı" },
+  { id: 718, category: "genel", level: 5, singular: "قِطٌّ", dual: "قِطَّانِ", plural: "قِطَاطٌ", meaning: "Evcil sevimli temiz hayvan" },
+  { id: 719, category: "genel", level: 5, singular: "فَأْرٌ", dual: "فَأْرَانِ", plural: "فِئْرَانٌ", meaning: "Küçük kemirgen hayvan" },
+  { id: 720, category: "genel", level: 5, singular: "أَرْنَبٌ", dual: "أَرْنَبَانِ", plural: "أَرَانِبُ", meaning: "Uzun kulaklı hızlı kemirgen" },
+  { id: 721, category: "genel", level: 5, singular: "نَمْلَةٌ", dual: "نَمْلَتَانِ", plural: "نَمْلٌ / نِمَالٌ", meaning: "Çalışkan ibretli küçük böcek" },
+  { id: 722, category: "genel", level: 5, singular: "نَحْلَةٌ", dual: "نَحْلَتَانِ", plural: "نَحْلٌ", meaning: "İlahî ilhamla bal yapan arı" },
+  { id: 723, category: "genel", level: 5, singular: "ذُبَابٌ", dual: "ذُبَابَانِ", plural: "أَذِبَّةٌ", meaning: "Havada uçan küçük kanatlı" },
+  { id: 724, category: "genel", level: 5, singular: "بَعُوضَةٌ", dual: "بَعُوضَتَانِ", plural: "بَعُوضٌ", meaning: "İnce hortumlu küçük ibretli uçucu" },
+  { id: 725, category: "genel", level: 5, singular: "عَنْكَبُوتٌ", dual: "عَنْكَبُوتَانِ", plural: "عَنَاكِبُ", meaning: "Ağ ören sekiz bacaklı canlı" },
+  { id: 726, category: "genel", level: 5, singular: "عَقْرَبٌ", dual: "عَقْرَبَانِ", plural: "عَقَارِبُ", meaning: "Zehirli iğnesi olan kuyruklu hayvan" },
+  { id: 727, category: "genel", level: 5, singular: "حَيَّةٌ", dual: "حَيَّتَانِ", plural: "حَيَّاتٌ", meaning: "Sürünerek ilerleyen pullu hayvan" },
+  { id: 728, category: "genel", level: 5, singular: "ضِفْدَعٌ", dual: "ضِفْدَعَانِ", plural: "ضَفَادِعُ", meaning: "Suda ve karada zıplayan canlı" },
+  { id: 729, category: "genel", level: 5, singular: "دُودَةٌ", dual: "دُودَتَانِ", plural: "دِيدَانٌ", meaning: "Toprakta yaşayan omurgasız" },
+  { id: 730, category: "genel", level: 5, singular: "شَجَرَةٌ", dual: "شَجَرَتَانِ", plural: "أَشْجَارٌ", meaning: "Kökü yerde dalları gökte bitki" },
+  { id: 731, category: "genel", level: 5, singular: "غُصْنٌ", dual: "غُصْنَانِ", plural: "أَغْصَانٌ", meaning: "Ağacın yaprak ve meyve taşıyan kolu" },
+  { id: 732, category: "genel", level: 5, singular: "وَرَقَةُ شَجَرٍ", dual: "وَرَقَتَا شَجَرٍ", plural: "أَوْرَاقُ شَجَرٍ", meaning: "Ağacın yeşil örtüsü" },
+  { id: 733, category: "genel", level: 5, singular: "زَهْرَةٌ", dual: "زَهْرَتَانِ", plural: "أَزْهَارٌ / زُهُورٌ", meaning: "Güzel kokulu ve renkli bitki tacı" },
+  { id: 734, category: "genel", level: 5, singular: "شَوْكٌ", dual: "شَوْكَتَانِ", plural: "أَشْوَاكٌ", meaning: "Bitkilerin sivri koruyucu ucu" },
+  { id: 735, category: "genel", level: 5, singular: "جِذْعٌ", dual: "جِذْعَانِ", plural: "جُذُوعٌ", meaning: "Ağacın kalın ana direği" },
+  { id: 736, category: "genel", level: 5, singular: "عِرْقٌ", dual: "عِرْقَانِ", plural: "عُرُوقٌ", meaning: "Ağacın kökü; bedendeki kan damarı" },
+  { id: 737, category: "genel", level: 5, singular: "حَبَّةٌ", dual: "حَبَّتَانِ", plural: "حُبُوبٌ", meaning: "Bitkinin üreme çekirdeği" },
+  { id: 738, category: "genel", level: 5, singular: "نَوَاةٌ", dual: "نَوَاةَانِ", plural: "نَوَيَاتٌ", meaning: "Hurma ve zeytinin sert çekirdeği" },
+  { id: 739, category: "genel", level: 5, singular: "عَظْمٌ", dual: "عَظْمَانِ", plural: "عِظَامٌ", meaning: "Bedeni ayakta tutan sert iskelet" },
+  { id: 740, category: "genel", level: 5, singular: "دَمٌ", dual: "دَمَانِ", plural: "دِمَاءٌ", meaning: "Canlıya hayat taşıyan kırmızı sıvı" },
+  { id: 741, category: "genel", level: 5, singular: "جِلْدٌ", dual: "جِلْدَانِ", plural: "جُلُودٌ", meaning: "Bedeni kaplayan koruyucu ten" },
+  { id: 742, category: "genel", level: 5, singular: "شَعْرٌ", dual: "شَعْرَانِ", plural: "أَشْعَارٌ", meaning: "Başta ve bedende biten teller" },
+  { id: 743, category: "genel", level: 5, singular: "ظُفْرٌ", dual: "ظُفْرَانِ", plural: "أَظْفَارٌ", meaning: "Parmak uçlarındaki sert tabaka" },
+  { id: 744, category: "genel", level: 5, singular: "سِنٌّ", dual: "سِنَّانِ", plural: "أَسْنَانٌ", meaning: "Ağızdaki çiğneme organı; yaş" },
+  { id: 745, category: "genel", level: 5, singular: "ضِرْسٌ", dual: "ضِرْسَانِ", plural: "أَضْرَاسٌ", meaning: "Çenenin gerisindeki öğütücü diş" },
+  { id: 746, category: "genel", level: 5, singular: "رِيقٌ", dual: "رِيقَانِ", plural: "أَرْيَاقٌ", meaning: "Ağızdaki sindirici ıslaklık" },
+  { id: 747, category: "genel", level: 5, singular: "عَرَقٌ", dual: "عَرَقَانِ", plural: "أَعْرَاقٌ", meaning: "Bedenin sıcaktan salgıladığı su" },
+  { id: 748, category: "genel", level: 5, singular: "دَمْعٌ", dual: "دَمْعَانِ", plural: "دُمُوعٌ", meaning: "Gözden dökülen şeffaf damla" },
+  { id: 749, category: "genel", level: 5, singular: "بَسْمَةٌ", dual: "بَسْمَتَانِ", plural: "بَسَمَاتٌ", meaning: "Yüzdeki sevimli tatlı gülüş" },
+  { id: 750, category: "genel", level: 5, singular: "ضَحْكَةٌ", dual: "ضَحْكَتَانِ", plural: "ضَحَكَاتٌ", meaning: "Sesli sevinç gülüşü" },
+  { id: 751, category: "soru", level: 1, singular: "مَا", dual: "-", plural: "-", meaning: "Ne? (soru edatı)" },
+  { id: 752, category: "soru", level: 1, singular: "مَاذَا", dual: "-", plural: "-", meaning: "Ne?, Nedir? (fiillerden önce soru edatı)" },
+  { id: 753, category: "soru", level: 1, singular: "مَنْ", dual: "-", plural: "-", meaning: "Kim? (şahıs soru edatı)" },
+  { id: 754, category: "soru", level: 1, singular: "أَيْنَ", dual: "-", plural: "-", meaning: "Nerede?, Nereye? (mekân soru edatı)" },
+  { id: 755, category: "soru", level: 1, singular: "هَلْ", dual: "-", plural: "-", meaning: "Mı?, Mi? (tasdik soru edatı)" },
+  { id: 756, category: "edat", level: 1, singular: "أَوْ", dual: "-", plural: "-", meaning: "Veya, ya da (atıf harfi)" },
+  { id: 757, category: "edat", level: 1, singular: "مَعَ", dual: "-", plural: "-", meaning: "İle, beraber, birlikte (birliktelik zarfı)" },
+  { id: 758, category: "genel", level: 1, singular: "أُسْرَةٌ", dual: "أُسْرَتَانِ", plural: "أُسَرٌ", meaning: "Aile, çekirdek aile" },
+  { id: 759, category: "soru", level: 2, singular: "كَيْفَ", dual: "-", plural: "-", meaning: "Nasıl? (durum/hâl soru edatı)" },
+  { id: 760, category: "soru", level: 2, singular: "كَمْ", dual: "-", plural: "-", meaning: "Kaç?, Ne kadar? (sayı/miktar soru edatı)" },
+  { id: 761, category: "soru", level: 2, singular: "مَتَى", dual: "-", plural: "-", meaning: "Ne zaman? (vakit soru edatı)" },
+  { id: 762, category: "soru", level: 2, singular: "لِمَاذَا", dual: "-", plural: "-", meaning: "Niçin?, Neden? (sebep soru edatı)" },
+  { id: 763, category: "edat", level: 2, singular: "لِي", dual: "-", plural: "-", meaning: "Benim var, bana aittir" },
+  { id: 764, category: "edat", level: 2, singular: "عِنْدِي", dual: "-", plural: "-", meaning: "Benim var, yanımda mevcuttur" },
+  { id: 765, category: "edat", level: 2, singular: "لِـ", dual: "-", plural: "-", meaning: "... için, ...-e ait (aitlik ve mülkiyet harfi)" },
+  { id: 766, category: "genel", level: 2, singular: "جَوَّالٌ", dual: "جَوَّالَانِ", plural: "جَوَّالَاتٌ", meaning: "Cep telefonu, taşınabilir telefon" },
+  { id: 767, category: "edat", level: 3, singular: "بَيْنَ", dual: "-", plural: "-", meaning: "Arasında, ortasında (konum zarfı)" },
+  { id: 768, category: "gramer", level: 3, singular: "لَيْسَ", dual: "-", plural: "-", meaning: "Değildir, değil (olumsuzluk fiili)" },
+  { id: 769, category: "gramer", level: 3, singular: "لَسْتُ", dual: "-", plural: "-", meaning: "Ben değilim (leyse'nin nefsi mütekellim vahde çekimi)" },
+  { id: 770, category: "soru", level: 3, singular: "أَيُّ / أَيَّةُ", dual: "-", plural: "-", meaning: "Hangi? (belirteç soru edatı)" },
+  { id: 771, category: "genel", level: 3, singular: "أَعْزَبُ", dual: "أَعْزَبَانِ", plural: "عُزَّابٌ", meaning: "Bekâr (evlenmemiş kimse)" },
+  { id: 772, category: "genel", level: 3, singular: "مُتَزَوِّجٌ", dual: "مُتَزَوِّجَانِ", plural: "مُتَزَوِّجُونَ", meaning: "Evli (nikâhlı kimse)" },
+  { id: 773, category: "genel", level: 4, singular: "مَخْطُوبٌ", dual: "مَخْطُوبَانِ", plural: "مَخْطُوبُونَ", meaning: "Nişanlı, sözlü kimse" },
+  { id: 774, category: "genel", level: 4, singular: "مُطَلَّقٌ", dual: "مُطَلَّقَانِ", plural: "مُطَلَّقُونَ", meaning: "Boşanmış, ayrılmış kimse" },
+  { id: 775, category: "genel", level: 4, singular: "لَقَبٌ", dual: "لَقَبَانِ", plural: "أَلْقَابٌ", meaning: "Soyadı, lakap, unvan" },
+  { id: 776, category: "genel", level: 4, singular: "جِيئَةٌ", dual: "-", plural: "-", meaning: "Gelmek, geliş (mastar)" },
+  { id: 777, category: "genel", level: 5, singular: "تَصْوِيرٌ", dual: "تَصْوِيرَانِ", plural: "تَصَاوِيرُ", meaning: "Fotoğraf çekmek, resmetmek, tasvir" },
+  { id: 778, category: "genel", level: 5, singular: "سِبَاحَةٌ", dual: "سِبَاحَتَانِ", plural: "سِبَاحَاتٌ", meaning: "Yüzmek, yüzme sporu" },
+];
+
+let VOCABULARY_WORDS = JSON.parse(JSON.stringify(DEFAULT_VOCABULARY_WORDS));
+
+try {
+  const cachedVocab = localStorage.getItem('synced_vocab_words_v3');
+  if (cachedVocab) {
+    const parsed = JSON.parse(cachedVocab);
+    if (Array.isArray(parsed) && parsed.length >= DEFAULT_VOCABULARY_WORDS.length) {
+      VOCABULARY_WORDS = parsed;
+    }
+  }
+} catch (_) {}
+
+async function syncWordsFromCloud() {
+  try {
+    const res = await fetch('https://kayrici.github.io/sinirlayici-app/words_dataset.json?t=' + Date.now());
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && data.length >= DEFAULT_VOCABULARY_WORDS.length) {
+        VOCABULARY_WORDS = data;
+        localStorage.setItem('synced_vocab_words_v3', JSON.stringify(data));
+      }
+    }
+  } catch (_) {}
+}
+
+// 2. SES SİSTEMİ
+class LangSoundManager {
+  constructor() {
+    this.ctx = null;
+    this.isMuted = false;
+  }
+
+  init() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) this.ctx = new AudioCtx();
+    }
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+  }
+
+  playCorrect() {
+    if (this.isMuted) return;
+    try {
+      this.init();
+      if (!this.ctx) return;
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(523.25, now);
+      osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.12);
+      gain.gain.setValueAtTime(0.18, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+      osc.start(now);
+      osc.stop(now + 0.28);
+    } catch(e) {}
+  }
+
+  playWrong() {
+    if (this.isMuted) return;
+    try {
+      this.init();
+      if (!this.ctx) return;
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(220, now);
+      osc.frequency.exponentialRampToValueAtTime(146.83, now + 0.22);
+      gain.gain.setValueAtTime(0.22, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
+      osc.start(now);
+      osc.stop(now + 0.32);
+    } catch(e) {}
+  }
+
+  playFlip() {
+    if (this.isMuted) return;
+    try {
+      this.init();
+      if (!this.ctx) return;
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(350, now);
+      osc.frequency.exponentialRampToValueAtTime(600, now + 0.08);
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+      osc.start(now);
+      osc.stop(now + 0.08);
+    } catch(e) {}
+  }
+}
+
+const langSounds = new LangSoundManager();
+
+// 3. OYUN MOTORU
+class LanguageGameEngine {
+  constructor() {
+    this.currentGameMode = 'emsile24';
+    this.currentVocabLevel = 1; // 'emsile24' | 'sigaPronouns' | 'vocab' | 'pronouns'
+    this.selectedSigaId = 1;
+    this.currentQuizWords = [];
+    this.shuffledIndices = [];
+    this.currentOrderIndex = 0;
+    this.currentWord = null;
+    this.isAnswering = false;
+    this.lastMissedWordId = null;
+    this.currentCorrectAnswerKey = "";
+    this.vocabStats = {};
+  }
+
+  // ==========================================
+  // KULLANICI PROFİLİ VE İLERLEME YÖNETİMİ
+  // ==========================================
+
+  getUserProgress(userId = null) {
+    const key = `app_progress`;
+    try {
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && Array.isArray(parsed.unlockedMenus)) {
+          if (!parsed.unlockedMenus.includes('emsile24')) {
+            parsed.unlockedMenus.unshift('emsile24');
+          }
+          if (!parsed.streaks) parsed.streaks = {};
+          if (!parsed.muttarideUnlocked || !Array.isArray(parsed.muttarideUnlocked) || parsed.muttarideUnlocked.length === 0) {
+            parsed.muttarideUnlocked = [1];
+          }
+          if (!parsed.muttarideStreaks) parsed.muttarideStreaks = {};
+          if (!parsed.vocabUnlockedLevels || !Array.isArray(parsed.vocabUnlockedLevels) || parsed.vocabUnlockedLevels.length === 0) {
+            parsed.vocabUnlockedLevels = [1];
+          }
+          if (!parsed.vocabStreaks) parsed.vocabStreaks = {};
+          return parsed;
+        }
+      }
+    } catch (_) {}
+    return {
+      unlockedMenus: ['emsile24'],
+      streaks: { emsile24: 0, pronouns: 0 },
+      muttarideUnlocked: [1],
+      muttarideStreaks: {},
+      vocabUnlockedLevels: [1],
+      vocabStreaks: {}
+    };
+  }
+
+  saveUserProgress(prog, userId = null) {
+    const key = `app_progress`;
+    try {
+      localStorage.setItem(key, JSON.stringify(prog));
+    } catch (_) {}
+  }
+
+  updateMenuVisibility() {
+    const prog = this.getUserProgress();
+    // const activeUser = this.getActiveUser();
+
+    // User name display removed for anonymous mode
+
+    const cardEmsile24 = document.getElementById("langMenuCardEmsile24");
+    const cardPronouns = document.getElementById("langMenuCardPronouns");
+    const cardSigaPronouns = document.getElementById("langMenuCardSigaPronouns");
+    const cardVocab = document.getElementById("langMenuCardVocab");
+
+    if (cardEmsile24) cardEmsile24.style.display = "flex";
+
+    const isPronounsOpen = prog.unlockedMenus && prog.unlockedMenus.includes('pronouns');
+    if (cardPronouns) cardPronouns.style.display = isPronounsOpen ? "flex" : "none";
+
+    const isSigaPronounsOpen = prog.unlockedMenus && prog.unlockedMenus.includes('sigaPronouns');
+    if (cardSigaPronouns) cardSigaPronouns.style.display = isSigaPronounsOpen ? "flex" : "none";
+
+    const isVocabOpen = prog.unlockedMenus && prog.unlockedMenus.includes('vocab');
+    if (cardVocab) cardVocab.style.display = isVocabOpen ? "flex" : "none";
+  }
+
+  getTargetStreakForSiga(sigaId) {
+    const targets = {
+      1: 15,
+      2: 15,
+      3: 4,
+      4: 15
+    };
+    return targets[sigaId] || 15;
+  }
+
+  updateStreakSquareUI() {
+    const square = document.getElementById("langStreakSquare");
+    const ratioEl = document.getElementById("langStreakRatio");
+    if (!square || !ratioEl) return;
+
+    const prog = this.getUserProgress();
+    let target = 0;
+    let current = 0;
+
+    if (this.currentGameMode === 'muttarideMixed') {
+      square.style.display = "none";
+      return;
+    }
+    if (this.currentGameMode === 'emsile24') {
+      target = 30;
+      current = (prog.streaks && prog.streaks.emsile24) || 0;
+    } else if (this.currentGameMode === 'pronouns') {
+      target = 15;
+      current = (prog.streaks && prog.streaks.pronouns) || 0;
+    } else if (this.currentGameMode === 'sigaPronouns') {
+      target = this.getTargetStreakForSiga(this.selectedSigaId);
+      current = (prog.muttarideStreaks && prog.muttarideStreaks[this.selectedSigaId]) || 0;
+    } else if (this.currentGameMode === 'vocab') {
+      target = 50;
+      current = (prog.vocabStreaks && prog.vocabStreaks[this.currentVocabLevel]) || 0;
+    } else {
+      square.style.display = "none";
+      return;
+    }
+
+    square.style.display = "flex";
+    ratioEl.textContent = `${current}/${target}`;
+
+    if (current >= target) {
+      square.classList.add("streak-completed");
+    } else {
+      square.classList.remove("streak-completed");
+    }
+  }
+
+  processAnswerStreak(isCorrect) {
+    if (this.currentGameMode === 'muttarideMixed') {
+      return;
+    }
+    const prog = this.getUserProgress();
+    if (!prog.streaks) prog.streaks = {};
+    if (!prog.muttarideStreaks) prog.muttarideStreaks = {};
+    if (!prog.muttarideUnlocked) prog.muttarideUnlocked = [1];
+
+    // 1. EMSİLE-İ MUHTELİFE MODU: 30 Doğru -> Zamirler Menüsü Açılır
+    if (this.currentGameMode === 'emsile24') {
+      const target = 30;
+      if (isCorrect) {
+        const newStreak = (prog.streaks['emsile24'] || 0) + 1;
+        prog.streaks['emsile24'] = newStreak;
+        let justUnlocked = false;
+        if (newStreak >= target && !prog.unlockedMenus.includes('pronouns')) {
+          prog.unlockedMenus.push('pronouns');
+          justUnlocked = true;
+        }
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+
+        if (justUnlocked) {
+          setTimeout(() => {
+            this.showUnlockSuccessModal(
+              "Zamirler Menüsü Açıldı!",
+              "Tebrikler! Emsile-i Muhtelife'de üst üste 30 doğru yaptınız. İkinci seçenek olarak Zamirler menüsü açıldı!",
+              'pronouns'
+            );
+          }, 450);
+        }
+      } else {
+        prog.streaks['emsile24'] = 0;
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+      }
+      return;
+    }
+
+    // 2. ZAMİRLER MODU: 15 Doğru -> HEM Emsile-i Muttaride HEM Kelimeler AYNI ANDA AÇILIR!
+    if (this.currentGameMode === 'pronouns') {
+      const target = 15;
+      if (isCorrect) {
+        const newStreak = (prog.streaks['pronouns'] || 0) + 1;
+        prog.streaks['pronouns'] = newStreak;
+        let justUnlocked = false;
+        if (newStreak >= target) {
+          if (!prog.unlockedMenus.includes('sigaPronouns')) {
+            prog.unlockedMenus.push('sigaPronouns');
+            justUnlocked = true;
+          }
+          if (!prog.unlockedMenus.includes('vocab')) {
+            prog.unlockedMenus.push('vocab');
+            justUnlocked = true;
+          }
+        }
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+
+        if (justUnlocked) {
+          setTimeout(() => {
+            this.showUnlockSuccessModal(
+              "Emsile-i Muttaride ve Kelimeler Açıldı!",
+              "Tebrikler! Zamirler bölümünde üst üste 15 doğru yaptınız. Ana ekranda Emsile-i Muttaride ve Kelimeler menüleri açıldı!",
+              'sigaPronouns'
+            );
+          }, 450);
+        }
+      } else {
+        prog.streaks['pronouns'] = 0;
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+      }
+      return;
+    }
+
+    // 3. EMSİLE-İ MUTTARİDE MODU: O sîgada hedef doğru -> Sonraki Sîga Açılır (24 Çekim Kademeli)
+    if (this.currentGameMode === 'sigaPronouns') {
+      const target = this.getTargetStreakForSiga(this.selectedSigaId);
+      const curStreak = prog.muttarideStreaks[this.selectedSigaId] || 0;
+
+      if (isCorrect) {
+        const newStreak = curStreak + 1;
+        prog.muttarideStreaks[this.selectedSigaId] = newStreak;
+        const nextSigaId = this.selectedSigaId + 1;
+        let justUnlockedNext = false;
+
+        if (newStreak >= target && nextSigaId <= 24) {
+          if (!prog.muttarideUnlocked.includes(nextSigaId)) {
+            prog.muttarideUnlocked.push(nextSigaId);
+            justUnlockedNext = true;
+          }
+        }
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+
+        if (justUnlockedNext) {
+          const curSigaObj = EMSILE_24_WORDS.find(w => w.id === this.selectedSigaId) || { word: "نَصَرَ", meaning: `${this.selectedSigaId}. Çekim` };
+          const nextSigaObj = EMSILE_24_WORDS.find(w => w.id === nextSigaId) || { word: "يَنْصُرُ", meaning: `${nextSigaId}. Çekim` };
+          let unlockMsg = `Tebrikler! ${curSigaObj.word} (${curSigaObj.meaning}) çekiminde üst üste ${target} doğru yaptınız. ${nextSigaId}. çekim olan ${nextSigaObj.word} (${nextSigaObj.meaning}) açıldı!`;
+          if (nextSigaId === 5) {
+            unlockMsg += " Ayrıca 4. seviyeyi geçtiğiniz için menünün en üstünde 'Karışık (Deneme Sınavı)' modu açıldı!";
+          }
+          setTimeout(() => {
+            this.showUnlockSuccessModal(
+              `${nextSigaObj.word} (${nextSigaObj.meaning}) Açıldı!`,
+              unlockMsg,
+              'nextSiga_' + nextSigaId
+            );
+          }, 450);
+        }
+      } else {
+        // YANLIŞ CEVAP: O anki sîganın üst üste serisi sıfırlanır!
+        prog.muttarideStreaks[this.selectedSigaId] = 0;
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+      }
+      return;
+    }
+
+    // 4. KELİMELER MODU: O seviyede 50 Doğru -> Sonraki Seviye Açılır (5 Seviye Kademeli)
+    if (this.currentGameMode === 'vocab') {
+      const target = 50;
+      if (!prog.vocabStreaks) prog.vocabStreaks = {};
+      if (!prog.vocabUnlockedLevels) prog.vocabUnlockedLevels = [1];
+      const curStreak = prog.vocabStreaks[this.currentVocabLevel] || 0;
+
+      if (isCorrect) {
+        const newStreak = curStreak + 1;
+        prog.vocabStreaks[this.currentVocabLevel] = newStreak;
+        const nextLevel = this.currentVocabLevel + 1;
+        let justUnlockedNext = false;
+
+        if (newStreak >= target && nextLevel <= 5) {
+          if (!prog.vocabUnlockedLevels.includes(nextLevel)) {
+            prog.vocabUnlockedLevels.push(nextLevel);
+            justUnlockedNext = true;
+          }
+        }
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+
+        if (justUnlockedNext) {
+          setTimeout(() => {
+            this.showUnlockSuccessModal(
+              `${nextLevel}. Seviye Açıldı!`,
+              `Tebrikler! ${this.currentVocabLevel}. Seviyede üst üste 50 doğru yaptınız. ${nextLevel}. Seviye (${nextLevel * 150} kelime) açıldı!`,
+              'nextVocabLevel_' + nextLevel
+            );
+          }, 450);
+        }
+      } else {
+        // YANLIŞ CEVAP: O anki seviyenin üst üste serisi sıfırlanır!
+        prog.vocabStreaks[this.currentVocabLevel] = 0;
+        this.saveUserProgress(prog);
+        this.updateStreakSquareUI();
+      }
+      return;
+    }
+  }
+
+  showUnlockSuccessModal(title, desc, unlockKey) {
+    this.lastUnlockedMenuKey = unlockKey;
+    const modal = document.getElementById("langUnlockSuccessModal");
+    const titleEl = document.getElementById("langUnlockSuccessTitle");
+    const descEl = document.getElementById("langUnlockSuccessDesc");
+    if (titleEl) titleEl.textContent = title;
+    if (descEl) descEl.textContent = desc;
+    if (modal) modal.style.display = "flex";
+    this.updateMenuVisibility();
+    langSounds.playCorrect();
+  }
+
+  closeUnlockModal() {
+    const modal = document.getElementById("langUnlockSuccessModal");
+    if (modal) modal.style.display = "none";
+  }
+
+  goToUnlockedMenu() {
+    this.closeUnlockModal();
+    this.updateMenuVisibility();
+    if (this.lastUnlockedMenuKey && this.lastUnlockedMenuKey.startsWith('nextSiga_')) {
+      const nextId = parseInt(this.lastUnlockedMenuKey.replace('nextSiga_', ''), 10);
+      if (nextId && nextId <= 24) {
+        this.startSigaPronounGame(nextId);
+        return;
+      }
+    }
+    if (this.lastUnlockedMenuKey === 'pronouns') {
+      this.startPronounsGame();
+    } else if (this.lastUnlockedMenuKey === 'sigaPronouns') {
+      this.openSigaSelectionMenu();
+    } else if (this.lastUnlockedMenuKey === 'vocab') {
+      this.startVocabGame();
+    } else {
+      this.showMainMenu();
+    }
+  }
+
+  // KULLANICI PROFİLİ KALDIRILDI (ANONİM ÇALIŞIR)
+  openUserProfileModal() {}
+  closeUserProfileModal() {}
+
+  start() {
+    this.showMainMenu();
+  }
+
+  showMainMenu() {
+    const quizSec = document.getElementById("langQuizSection");
+    const tableSec = document.getElementById("langTableSection");
+    const isQuizOrTable = (quizSec && quizSec.style.display !== "none") || (tableSec && tableSec.style.display !== "none");
+    if (isQuizOrTable && (this.currentGameMode === 'sigaPronouns' || this.currentGameMode === 'muttarideMixed')) {
+      this.openSigaSelectionMenu();
+      return;
+    }
+    if (isQuizOrTable && this.currentGameMode === 'vocab') {
+      this.openVocabCategoryMenu();
+      return;
+    }
+    this.showScreen("langMainMenuSection");
+    const btnMenu = document.getElementById("btnLangMenu");
+    const btnTable = document.getElementById("btnLangToggleTable");
+    const title = document.getElementById("langModalTitle");
+    const badge = document.getElementById("langPillBadge");
+
+    if (btnMenu) btnMenu.style.display = "none";
+    if (btnTable) btnTable.style.display = "none";
+    if (title) title.textContent = "Arapça";
+    if (badge) badge.style.display = "none";
+    this.updateMenuVisibility();
+  }
+
+  showScreen(screenId) {
+    const screens = ["langMainMenuSection", "langSigaSelectionSection", "langVocabCategorySection", "langQuizSection", "langTableSection"];
+    screens.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = (id === screenId ? "flex" : "none");
+    });
+
+    if (screenId === "langMainMenuSection") {
+      this.updateMenuVisibility();
+    } else if (screenId === "langQuizSection") {
+      this.updateStreakSquareUI();
+    }
+
+    const btnMenu = document.getElementById("btnLangMenu");
+    const btnTable = document.getElementById("btnLangToggleTable");
+    const title = document.getElementById("langModalTitle");
+
+    if (screenId === "langQuizSection" || screenId === "langTableSection") {
+      if (btnMenu) btnMenu.style.display = "inline-flex";
+      // Kelime, Zamirler ve Karışık modunda tablo butonu gizli
+      const hideTable = (this.currentGameMode === "vocab" || this.currentGameMode === "pronouns" || this.currentGameMode === "muttarideMixed");
+      if (btnTable) btnTable.style.display = hideTable ? "none" : "inline-flex";
+
+      if (title) {
+        if (this.currentGameMode === 'emsile24') {
+          title.textContent = "Emsile-i Muhtelife";
+        } else if (this.currentGameMode === 'vocab') {
+          title.textContent = "Kelimeler";
+        } else if (this.currentGameMode === 'pronouns') {
+          title.textContent = "Zamirler";
+        } else if (this.currentGameMode === 'muttarideMixed') {
+          title.textContent = "Karışık (Deneme Sınavı)";
+        } else {
+          const s = EMSILE_24_WORDS.find(w => w.id === this.selectedSigaId) || EMSILE_24_WORDS[0];
+          title.textContent = `${s.meaning} Çekimi`;
+        }
+      }
+    } else if (screenId === "langSigaSelectionSection") {
+      if (btnMenu) btnMenu.style.display = "inline-flex";
+      if (btnTable) btnTable.style.display = "none";
+      if (title) title.textContent = "Emsile-i Muttaride (24 Çekim)";
+    }
+  }
+
+  // 1. Mod: 24 Sîga Oyunu
+  startEmsileGame() {
+    this.currentGameMode = 'emsile24';
+    this.currentVocabLevel = 1;
+    this.currentQuizWords = EMSILE_24_WORDS.slice();
+    this.initShuffledIndices();
+    this.currentOrderIndex = 0;
+    this.showScreen("langQuizSection");
+    this.renderQuestion();
+  }
+
+  // 2. Mod: Zamir Çekimi Seçim Menüsü
+  openSigaSelectionMenu() {
+    this.renderSigaGrid();
+    this.showScreen("langSigaSelectionSection");
+  }
+
+    renderSigaGrid() {
+    const grid = document.getElementById("langSigaGridList");
+    if (!grid) return;
+    grid.innerHTML = "";
+
+    const prog = this.getUserProgress();
+    const unlockedSigaList = (prog.muttarideUnlocked && Array.isArray(prog.muttarideUnlocked)) ? prog.muttarideUnlocked : [1];
+    const maxUnlocked = Math.max(...unlockedSigaList);
+
+    // KULLANICI İSTEĞİ: Kişi eğer seviye 4'ü geçerse (5'i açarsa) tüm alt menülerin üstünde
+    // "Karışık" isminde bir menü olacak. Şu ana kadar açılan tüm seviyeler sorulacak.
+    if (maxUnlocked >= 5) {
+      const mixedCard = document.createElement("div");
+      mixedCard.id = "btnMuttarideMixed";
+      mixedCard.className = "siga-mixed-banner-card";
+      mixedCard.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="font-size: 1.6rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.35), rgba(168, 85, 247, 0.35)); border-radius: 12px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(168, 85, 247, 0.4); flex-shrink: 0;">🔀</div>
+            <div style="text-align: left;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.15rem; font-weight: 800; color: #fff;">Karışık</span>
+                <span style="font-size: 0.68rem; background: linear-gradient(135deg, #6366f1, #a855f7); color: #fff; padding: 2px 8px; border-radius: 10px; font-weight: 700; letter-spacing: 0.4px;">DENEME SINAVI</span>
+              </div>
+              <p style="margin: 2px 0 0 0; font-size: 0.78rem; color: #94a3b8;">Şu ana kadar açılan tüm çekimlerden karma sorular (Sayaçsız Serbest Sınav)</p>
+            </div>
+          </div>
+          <div class="siga-mixed-btn" style="background: rgba(99, 102, 241, 0.2); border: 1px solid rgba(99, 102, 241, 0.6); color: #a5b4fc; font-weight: 700; font-size: 0.85rem; padding: 8px 16px; border-radius: 10px; display: flex; align-items: center; gap: 6px; flex-shrink: 0;">
+            <span>Sınava Başla</span>
+            <span>➔</span>
+          </div>
+        </div>
+      `;
+      mixedCard.addEventListener("click", () => this.startMuttarideMixedGame());
+      grid.appendChild(mixedCard);
+    }
+
+    // KULLANICI DÜZENİ: 5 satır (5, 5, 4, 5, 5 çekim)
+    const rowDefinitions = [
+      { rowNum: 1, slice: [0, 5], count: 5 },
+      { rowNum: 2, slice: [5, 10], count: 5 },
+      { rowNum: 3, slice: [10, 14], count: 4 },
+      { rowNum: 4, slice: [14, 19], count: 5 },
+      { rowNum: 5, slice: [19, 24], count: 5 }
+    ];
+
+    rowDefinitions.forEach(def => {
+      const rowDiv = document.createElement("div");
+      rowDiv.className = "siga-5col-row";
+
+      const rowItems = EMSILE_24_WORDS.slice(def.slice[0], def.slice[1]);
+      rowItems.forEach(siga => {
+        const isUnlocked = unlockedSigaList.includes(siga.id);
+        const card = document.createElement("div");
+        card.className = `lang-siga-card ${isUnlocked ? 'unlocked' : 'locked'}`;
+        if (!isUnlocked) {
+          card.style.opacity = "0.52";
+          card.style.cursor = "not-allowed";
+          card.style.filter = "grayscale(35%)";
+        }
+        card.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <span class="lang-siga-num-badge">${siga.id}</span>
+            ${!isUnlocked ? '<span style="font-size: 0.68rem; background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 1px 5px; border-radius: 5px; font-weight: 700;">🔒</span>' : '<span style="font-size: 0.68rem; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 1px 5px; border-radius: 5px; font-weight: 700;">✓</span>'}
+          </div>
+          <div class="lang-siga-arabic-word arabic-font" style="font-size: 1.35rem; font-weight: 800; color: #fff; margin: 2px 0;">${siga.word}</div>
+          <div class="lang-siga-meaning-title" style="font-size: 0.72rem; color: #818cf8; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;" title="${escapeHtml(siga.meaning)}">${escapeHtml(siga.meaning)}</div>
+        `;
+        if (isUnlocked) {
+          card.addEventListener("click", () => this.startSigaPronounGame(siga.id));
+        } else {
+          card.addEventListener("click", () => {
+            const reqStreak = this.getTargetStreakForSiga(siga.id - 1);
+            alert(`🔒 Bu çekimin açılması için önceki çekimde üst üste ${reqStreak} doğru yapmalısınız.`);
+          });
+        }
+        rowDiv.appendChild(card);
+      });
+
+      // 3. satırda 4 çekim olduğu için 5. sütunu boş placeholder ile doldur
+      if (def.count === 4) {
+        const placeholder = document.createElement("div");
+        placeholder.style.visibility = "hidden";
+        placeholder.className = "lang-siga-card";
+        rowDiv.appendChild(placeholder);
+      }
+
+      grid.appendChild(rowDiv);
+    });
+  }
+
+  startMuttarideMixedGame() {
+    this.currentGameMode = 'muttarideMixed';
+    this.selectedSigaId = null;
+
+    const prog = this.getUserProgress();
+    const unlockedList = (prog.muttarideUnlocked && Array.isArray(prog.muttarideUnlocked)) ? prog.muttarideUnlocked : [1];
+
+    let mixedWords = [];
+    let nextId = 1;
+
+    unlockedList.forEach(sigaId => {
+      let items = [];
+      if (SIGA_CONJUGATION_DETAILS && SIGA_CONJUGATION_DETAILS[sigaId]) {
+        items = JSON.parse(JSON.stringify(SIGA_CONJUGATION_DETAILS[sigaId]));
+      } else {
+        const forms = (typeof SIGA_CONJUGATIONS !== 'undefined' && SIGA_CONJUGATIONS[sigaId]) ? SIGA_CONJUGATIONS[sigaId] : [];
+        for (let i = 0; i < forms.length; i++) {
+          items.push({
+            id: i + 1,
+            word: forms[i] || forms[0],
+            meaning: (typeof PRONOUN_MEANINGS !== 'undefined' && PRONOUN_MEANINGS[i]) ? PRONOUN_MEANINGS[i] : "",
+            translation: (typeof PRONOUN_MEANINGS !== 'undefined' && PRONOUN_MEANINGS[i]) ? PRONOUN_MEANINGS[i] : "",
+            person: (typeof PRONOUN_PERSON_NAMES !== 'undefined' && PRONOUN_PERSON_NAMES[i]) ? PRONOUN_PERSON_NAMES[i] : "",
+            pronoun: (typeof INDEPENDENT_PRONOUNS_14 !== 'undefined' && INDEPENDENT_PRONOUNS_14[i]) ? INDEPENDENT_PRONOUNS_14[i].word : "",
+            fullDetail: ""
+          });
+        }
+      }
+
+      items.forEach(item => {
+        const clone = Object.assign({}, item);
+        clone.origId = item.id;
+        clone.sigaId = sigaId;
+        clone.id = nextId++;
+        mixedWords.push(clone);
+      });
+    });
+
+    if (mixedWords.length === 0) {
+      mixedWords = JSON.parse(JSON.stringify(SIGA_CONJUGATION_DETAILS[1] || []));
+    }
+
+    this.currentQuizWords = mixedWords;
+    this.initShuffledIndices();
+    this.currentOrderIndex = 0;
+
+    this.showScreen("langQuizSection");
+
+    const square = document.getElementById("langStreakSquare");
+    if (square) square.style.display = "none";
+
+    const title = document.getElementById("langModalTitle");
+    if (title) title.textContent = "Karışık (Deneme Sınavı)";
+
+    this.renderQuestion();
+  }
+
+  startSigaPronounGame(sigaId) {
+    this.currentGameMode = 'sigaPronouns';
+    this.selectedSigaId = sigaId;
+
+    if (SIGA_CONJUGATION_DETAILS[sigaId]) {
+      this.currentQuizWords = JSON.parse(JSON.stringify(SIGA_CONJUGATION_DETAILS[sigaId]));
+    } else {
+      const forms = SIGA_CONJUGATIONS[sigaId] || SIGA_CONJUGATIONS[1];
+      const list = [];
+      for (let i = 0; i < 14; i++) {
+        list.push({
+          id: i + 1,
+          word: forms[i] || forms[0],
+          meaning: PRONOUN_MEANINGS[i],
+          translation: PRONOUN_MEANINGS[i],
+          person: PRONOUN_PERSON_NAMES[i] || PRONOUN_MEANINGS[i],
+          pronoun: INDEPENDENT_PRONOUNS_14[i] ? INDEPENDENT_PRONOUNS_14[i].word : "",
+          fullDetail: ""
+        });
+      }
+      this.currentQuizWords = list;
+    }
+
+    this.initShuffledIndices();
+    this.showScreen("langQuizSection");
+    this.renderQuestion();
+  }
+
+  // 3. Mod: Kelimeler Seviye Menüsü (1. Seviye'den 5. Seviye'ye 50 Doğru İle Kademeli)
+  openVocabCategoryMenu() {
+    this.currentGameMode = 'vocab';
+    this.renderVocabLevelsGrid();
+    this.showScreen("langVocabCategorySection");
+    const btnMenu = document.getElementById("btnLangMenu");
+    const btnTable = document.getElementById("btnLangToggleTable");
+    const title = document.getElementById("langModalTitle");
+    const badge = document.getElementById("langPillBadge");
+
+    if (btnMenu) btnMenu.style.display = "inline-flex";
+    if (btnTable) btnTable.style.display = "none";
+    if (title) title.textContent = "Kelimeler";
+    if (badge) badge.style.display = "none";
+  }
+
+  renderVocabLevelsGrid() {
+    const grid = document.getElementById("langVocabLevelsGrid");
+    if (!grid) return;
+    grid.innerHTML = "";
+
+    const prog = this.getUserProgress();
+    const unlockedLevels = (prog.vocabUnlockedLevels && Array.isArray(prog.vocabUnlockedLevels)) ? prog.vocabUnlockedLevels : [1];
+
+    const countL1 = VOCABULARY_WORDS.filter(w => (w.level || 1) === 1).length;
+    const countL2 = VOCABULARY_WORDS.filter(w => (w.level || 1) === 2).length;
+    const countL3 = VOCABULARY_WORDS.filter(w => (w.level || 1) === 3).length;
+    const countL4 = VOCABULARY_WORDS.filter(w => (w.level || 1) === 4).length;
+    const countL5 = VOCABULARY_WORDS.filter(w => (w.level || 1) === 5).length;
+    const totalUpTo = (lvl) => VOCABULARY_WORDS.filter(w => (w.level || 1) <= lvl).length;
+
+    const levelsConfig = [
+      { level: 1, title: "1. Seviye", wordCount: totalUpTo(1), desc: `${countL1} temel kelime ve soru edatı` },
+      { level: 2, title: "2. Seviye", wordCount: totalUpTo(2), desc: `Önceki seviyeye +${countL2} yeni kelime (Toplam ${totalUpTo(2)})` },
+      { level: 3, title: "3. Seviye", wordCount: totalUpTo(3), desc: `Önceki seviyeye +${countL3} yeni kelime (Toplam ${totalUpTo(3)})` },
+      { level: 4, title: "4. Seviye", wordCount: totalUpTo(4), desc: `Önceki seviyeye +${countL4} yeni kelime (Toplam ${totalUpTo(4)})` },
+      { level: 5, title: "5. Seviye", wordCount: totalUpTo(5), desc: `${totalUpTo(5)} kelimenin tamamı (+${countL5} yeni kelime)` }
+    ];
+
+    levelsConfig.forEach(cfg => {
+      const isUnlocked = unlockedLevels.includes(cfg.level);
+      const card = document.createElement("div");
+      card.className = "menu-choice-card";
+      if (!isUnlocked) {
+        card.style.opacity = "0.52";
+        card.style.cursor = "not-allowed";
+        card.style.filter = "grayscale(35%)";
+      }
+
+      card.innerHTML = `
+        <div class="choice-texts">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <h3 class="choice-clean-title" style="margin: 0; font-size: 1.1rem; color: #fff;">${cfg.title}</h3>
+            ${!isUnlocked ? '<span style="font-size: 0.72rem; background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 2px 7px; border-radius: 6px; font-weight: 700;">🔒 Kilitli</span>' : '<span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 7px; border-radius: 6px; font-weight: 700;">✓ Açık</span>'}
+          </div>
+          <p style="font-size: 0.78rem; color: #94a3b8; margin: 0 0 10px 0;">${cfg.desc}</p>
+        </div>
+        <button type="button" class="btn-start-choice" style="${cfg.level === 5 ? 'background: linear-gradient(135deg, #10b981, #059669);' : ''}">
+          <span>${isUnlocked ? 'Oyuna Başla' : '🔒 Kilitli'}</span>
+        </button>
+      `;
+
+      if (isUnlocked) {
+        card.addEventListener("click", () => this.startVocabLevel(cfg.level));
+      } else {
+        card.addEventListener("click", () => {
+          alert(`🔒 ${cfg.level}. Seviyenin açılması için bir önceki seviyede üst üste 50 doğru yapmalısınız.`);
+        });
+      }
+      grid.appendChild(card);
+    });
+  }
+
+  startVocabLevel(level = 1) {
+    this.currentGameMode = 'vocab';
+    this.currentVocabLevel = level;
+    this.currentQuizWords = VOCABULARY_WORDS.filter(w => (w.level || 1) <= level);
+    const count = this.currentQuizWords.length;
+    this.initShuffledIndices();
+    this.showScreen("langQuizSection");
+
+    const btnTable = document.getElementById("btnLangToggleTable");
+    if (btnTable) btnTable.style.display = "none";
+
+    const title = document.getElementById("langModalTitle");
+    if (title) title.textContent = `${level}. Seviye (${count} Kelime)`;
+
+    this.renderQuestion();
+  }
+
+  startVocabCategory(cat = 'all') {
+    this.startVocabLevel(1);
+  }
+
+  startVocabGame() {
+    this.openVocabCategoryMenu();
+  }
+
+  // 4. Mod: ZAMİRLER OYUNU (KULLANICI İSTEĞİ: 14 AYRIK ŞAHIS ZAMİRİ)
+  startPronounsGame() {
+    this.currentGameMode = 'pronouns';
+    this.currentQuizWords = INDEPENDENT_PRONOUNS_14.slice();
+    this.initShuffledIndices();
+    this.currentOrderIndex = 0;
+    this.showScreen("langQuizSection");
+
+    const btnTable = document.getElementById("btnLangToggleTable");
+    if (btnTable) btnTable.style.display = "none";
+
+    const title = document.getElementById("langModalTitle");
+    if (title) title.textContent = "Zamirler";
+
+    this.renderQuestion();
+  }
+
+  initShuffledIndices() {
+    this.shuffledIndices = [];
+    for (let i = 0; i < this.currentQuizWords.length; i++) this.shuffledIndices.push(i);
+    for (let i = this.shuffledIndices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.shuffledIndices[i], this.shuffledIndices[j]] = [this.shuffledIndices[j], this.shuffledIndices[i]];
+    }
+    this.currentOrderIndex = 0;
+  }
+
+  // ADAPTİF TEKRAR & İSTATİSTİK SİSTEMİ (LEITNER / DİNAMİK SIKLIK KURALI)
+  // Her kullanıcının kelime istatistikleri kendi profili altında ayrı saklanır.
+  loadVocabStats() {
+    try {
+      const uId = this.getActiveUserId();
+      const saved = localStorage.getItem('vocab_adaptive_stats_' + uId);
+      this.vocabStats = saved ? JSON.parse(saved) : {};
+    } catch (_) {
+      this.vocabStats = {};
+    }
+  }
+
+  saveVocabStats() {
+    try {
+      const uId = this.getActiveUserId();
+      localStorage.setItem('vocab_adaptive_stats_' + uId, JSON.stringify(this.vocabStats));
+    } catch (_) {}
+  }
+
+  getWordWeight(wordId) {
+    if (!this.vocabStats) this.loadVocabStats();
+    const st = this.vocabStats[wordId];
+    const streak = (st && typeof st.streak === 'number') ? st.streak : 0;
+    // KULLANICI KURALI:
+    // Kullanıcı bir kelimeye sürekli doğru cevap veriyorsa, o kelimenin o seviyede de,
+    // sonraki seviyelerde de, önceki seviyelerde de karşısına çıkma olasılığı düşürülür.
+    // Kullanıcı yanlış cevap verene kadar bu düşük olasılık korunur.
+    if (streak <= 0) {
+      return 1.0; // İlk hali: %100 normal olasılık
+    }
+    // Her doğru cevapta olasılık kademeli olarak düşürülür (0.72 çarpanı)
+    const reduced = Math.pow(0.72, streak);
+    return Math.max(0.02, reduced); // Minimum %2 taban ağırlık
+  }
+
+  recordVocabAnswer(wordId, isCorrect) {
+    this.loadVocabStats();
+    if (!this.vocabStats[wordId]) {
+      this.vocabStats[wordId] = { streak: 0, totalCorrect: 0, totalWrong: 0 };
+    }
+    const entry = this.vocabStats[wordId];
+    if (isCorrect) {
+      entry.streak = (entry.streak || 0) + 1;
+      entry.totalCorrect = (entry.totalCorrect || 0) + 1;
+    } else {
+      // KULLANICI KURALI:
+      // Yanlış cevap verildiğinde ise kelimenin tekrar sorulma olasılığı ilk haline getirilir!
+      entry.streak = 0;
+      entry.totalWrong = (entry.totalWrong || 0) + 1;
+    }
+    this.saveVocabStats();
+  }
+
+  pickNextVocabIndex() {
+    if (!this.currentQuizWords || this.currentQuizWords.length === 0) return 0;
+    if (this.currentQuizWords.length === 1) return 0;
+
+    const weights = this.currentQuizWords.map(w => this.getWordWeight(w.id));
+    let totalWeight = 0;
+    for (let i = 0; i < weights.length; i++) {
+      if (this.currentWord && this.currentQuizWords[i].id === this.currentWord.id && this.currentQuizWords.length > 2) {
+        weights[i] *= 0.05;
+      }
+      totalWeight += weights[i];
+    }
+
+    if (totalWeight <= 0) {
+      return Math.floor(Math.random() * this.currentQuizWords.length);
+    }
+
+    const rand = Math.random() * totalWeight;
+    let cumulative = 0;
+    for (let i = 0; i < weights.length; i++) {
+      cumulative += weights[i];
+      if (rand <= cumulative) return i;
+    }
+    return this.currentQuizWords.length - 1;
+  }
+
+  renderQuestion() {
+    this.isAnswering = false;
+    this.updateStreakSquareUI();
+
+    const feedbackBar = document.getElementById("langQuizFeedbackBar");
+    if (feedbackBar) feedbackBar.style.display = "none";
+
+    let targetIdx;
+    if (this.currentGameMode === 'vocab') {
+      targetIdx = this.pickNextVocabIndex();
+      this.currentOrderIndex = targetIdx;
+    } else {
+      if (this.shuffledIndices.length === 0) this.initShuffledIndices();
+      targetIdx = this.shuffledIndices[this.currentOrderIndex];
+    }
+    this.currentWord = this.currentQuizWords[targetIdx];
+
+    const targetWordEl = document.getElementById("langTargetWord");
+    const targetContainer = document.getElementById("langTargetWordContainer") || (targetWordEl ? targetWordEl.parentElement : null);
+    const trackerEl = document.getElementById("langCurrentIndex");
+    const captionEl = document.getElementById("langTargetCaption");
+
+    if (trackerEl) {
+      trackerEl.textContent = `${this.currentOrderIndex + 1} / ${this.currentQuizWords.length}`;
+    }
+
+    let questionConfig = null;
+
+    if (this.currentGameMode === 'vocab') {
+      // KELİME MODU: Çift Yönlü
+      const qTypes = ['VOCAB_ARABIC_TO_MEANING', 'VOCAB_MEANING_TO_ARABIC'];
+      const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
+
+      if (chosenType === 'VOCAB_ARABIC_TO_MEANING') {
+        const hasTriplet = this.currentWord.dual && this.currentWord.dual !== '-';
+        questionConfig = {
+          mode: 'vocab_ar_to_tr',
+          instruction: hasTriplet ? "Bu kelimelerin (Tekil / İkili / Çoğul) Türkçe anlamı nedir?" : "Bu ifadenin Türkçe anlamı nedir?",
+          correctKey: this.currentWord.meaning,
+          choices: this.generateVocabChoices(this.currentWord, 'meaning')
+        };
+        if (targetContainer) {
+          targetContainer.innerHTML = hasTriplet ? `
+            <div class="vocab-triplet-display" dir="ltr" style="display:flex; justify-content:center; align-items:center; gap:8px; margin:6px 0;">
+              <div class="triplet-col" style="display:flex; flex-direction:column; align-items:center; background:rgba(30,41,59,0.7); padding:6px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.1);">
+                <span style="font-size:0.65rem; color:#818cf8; font-weight:700;">ÇOĞUL</span>
+                <span class="arabic-font" style="font-size:1.5rem; color:#fff; direction:rtl;">${this.currentWord.plural}</span>
+              </div>
+              <span style="font-size:1.4rem; color:#94a3b8; font-weight:700;">/</span>
+              <div class="triplet-col" style="display:flex; flex-direction:column; align-items:center; background:rgba(30,41,59,0.7); padding:6px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.1);">
+                <span style="font-size:0.65rem; color:#818cf8; font-weight:700;">İKİLİ</span>
+                <span class="arabic-font" style="font-size:1.5rem; color:#fff; direction:rtl;">${this.currentWord.dual}</span>
+              </div>
+              <span style="font-size:1.4rem; color:#94a3b8; font-weight:700;">/</span>
+              <div class="triplet-col" style="display:flex; flex-direction:column; align-items:center; background:rgba(30,41,59,0.7); padding:6px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.1);">
+                <span style="font-size:0.65rem; color:#818cf8; font-weight:700;">TEKİL</span>
+                <span class="arabic-font" style="font-size:1.5rem; color:#fff; direction:rtl;">${this.currentWord.singular}</span>
+              </div>
+            </div>
+          ` : `
+            <div class="vocab-triplet-display" dir="ltr" style="display:flex; justify-content:center; align-items:center; margin:6px 0;">
+              <div class="triplet-col" style="display:flex; flex-direction:column; align-items:center; background:rgba(30,41,59,0.7); padding:10px 24px; border-radius:10px; border:1px solid rgba(255,255,255,0.1);">
+                <span style="font-size:0.65rem; color:#818cf8; font-weight:700;">KELİME / EDAT</span>
+                <span class="arabic-font" style="font-size:2rem; color:#fff; direction:rtl;">${this.currentWord.singular}</span>
+              </div>
+            </div>
+          `;
+        }
+      } else {
+        const hasTriplet = this.currentWord.dual && this.currentWord.dual !== '-';
+        questionConfig = {
+          mode: 'vocab_tr_to_ar',
+          instruction: hasTriplet ? "Bu anlamın Tekil / İkili / Çoğul Arapça karşılığı hangisidir?" : "Bu anlamın Arapça karşılığı hangisidir?",
+          correctKey: this.currentWord.id,
+          choices: this.generateVocabChoices(this.currentWord, 'arabic')
+        };
+        if (targetContainer) {
+          targetContainer.innerHTML = `
+            <h1 class="lang-target-word-text latin-font" id="langTargetWord">${escapeHtml(this.currentWord.meaning)}</h1>
+          `;
+        }
+      }
+
+    } else if (this.currentGameMode === 'pronouns') {
+      // 4. Mod: ZAMİRLER MODU (Çift Yönlü: Arapça ➔ Anlam veya Anlam ➔ Arapça)
+      const qTypes = ['PRONOUN_AR_TO_TR', 'PRONOUN_TR_TO_AR'];
+      const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
+
+      if (chosenType === 'PRONOUN_AR_TO_TR') {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu zamirin anlamı hangisidir?",
+          correctKey: this.currentWord.meaning,
+          promptText: this.currentWord.word,
+          isPromptArabic: true,
+          isChoiceArabic: false,
+          choices: this.generatePronounChoices(this.currentWord, 'meaning')
+        };
+      } else {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu anlama gelen Arapça zamir hangisidir?",
+          correctKey: this.currentWord.word,
+          promptText: this.currentWord.meaning,
+          isPromptArabic: false,
+          isChoiceArabic: true,
+          choices: this.generatePronounChoices(this.currentWord, 'word')
+        };
+      }
+
+      if (targetContainer) {
+        targetContainer.innerHTML = `
+          <h1 class="lang-target-word-text ${questionConfig.isPromptArabic ? 'arabic-font' : 'latin-font'}" id="langTargetWord">${escapeHtml(questionConfig.promptText)}</h1>
+        `;
+      }
+
+    } else if (this.currentGameMode === 'emsile24') {
+      const qTypes = ['ARABIC_TO_MEANING', 'ARABIC_TO_TRANSLATION', 'MEANING_TO_ARABIC', 'TRANSLATION_TO_ARABIC'];
+      const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
+
+      if (chosenType === 'ARABIC_TO_MEANING') {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu kelimenin sîga terimi (başlığı) nedir?",
+          correctKey: this.currentWord.meaning,
+          promptText: this.currentWord.word,
+          isPromptArabic: true,
+          isChoiceArabic: false,
+          choices: this.generateSimpleChoices(this.currentWord.meaning, EMSILE_24_WORDS.map(w => w.meaning))
+        };
+      } else if (chosenType === 'ARABIC_TO_TRANSLATION') {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu kelimenin Türkçe fiil manası (çevirisi) nedir?",
+          correctKey: this.currentWord.translation,
+          promptText: this.currentWord.word,
+          isPromptArabic: true,
+          isChoiceArabic: false,
+          choices: this.generateSimpleChoices(this.currentWord.translation, EMSILE_24_WORDS.map(w => w.translation))
+        };
+      } else if (chosenType === 'MEANING_TO_ARABIC') {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu sîga teriminin Arapça çekimi hangisidir?",
+          correctKey: this.currentWord.word,
+          promptText: this.currentWord.meaning,
+          isPromptArabic: false,
+          isChoiceArabic: true,
+          choices: this.generateSimpleChoices(this.currentWord.word, EMSILE_24_WORDS.map(w => w.word))
+        };
+      } else {
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu manaya gelen Arapça çekim hangisidir?",
+          correctKey: this.currentWord.word,
+          promptText: this.currentWord.translation,
+          isPromptArabic: false,
+          isChoiceArabic: true,
+          choices: this.generateSimpleChoices(this.currentWord.word, EMSILE_24_WORDS.map(w => w.word))
+        };
+      }
+
+      if (targetContainer) {
+        targetContainer.innerHTML = `
+          <h1 class="lang-target-word-text ${questionConfig.isPromptArabic ? 'arabic-font' : 'latin-font'}" id="langTargetWord">${escapeHtml(questionConfig.promptText)}</h1>
+        `;
+      }
+
+    } else {
+      // Siga Pronouns (Zamirlere Göre Çekim)
+      const curWord = this.currentWord;
+      const qTypes = ['AR_TO_MEANING', 'MEANING_TO_AR', 'AR_TO_PERSON', 'PERSON_TO_AR'];
+      const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
+
+      const extraAr = ["نَصْرَةً", "نِصْرَةً", "مَنْصَرٌ", "نُصَيْرٌ", "نَاصِرٌ", "مَنْصُورٌ"];
+      const extraMeaning = ["Bir kere yardım etmek", "Bir türlü yardım etmek", "Yardım edecek zaman/mekân", "Küçük yardım etmek", "Yardım eden bir er", "Yardım olunmuş bir er"];
+      const extraPerson = ["Masdar-ı bina-i merre", "Masdar-ı bina-i nev'i", "İsm-i mekân / zaman", "İsm-i tasgîr", "İsm-i fâil - Müzekker", "İsm-i mef'ûl - Müzekker"];
+
+      if (chosenType === 'AR_TO_MEANING') {
+        const correct = curWord.meaning;
+        const siblingMeanings = this.currentQuizWords
+          .filter(w => w.word === curWord.word)
+          .map(w => w.meaning);
+        const pool = this.currentQuizWords
+          .map(w => w.meaning)
+          .filter(m => m === correct || !siblingMeanings.includes(m));
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu çekimin Türkçe anlamı nedir?",
+          correctKey: correct,
+          promptText: curWord.word,
+          isPromptArabic: true,
+          isChoiceArabic: false,
+          choices: this.generateDistinctChoices(correct, pool, extraMeaning)
+        };
+      } else if (chosenType === 'MEANING_TO_AR') {
+        const correct = curWord.word;
+        const siblingWordsWithSameMeaning = this.currentQuizWords
+          .filter(w => w.meaning === curWord.meaning && w.word !== curWord.word)
+          .map(w => w.word);
+        const pool = this.currentQuizWords
+          .map(w => w.word)
+          .filter(w => !siblingWordsWithSameMeaning.includes(w));
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu Türkçe anlama gelen Arapça çekim hangisidir?",
+          correctKey: correct,
+          promptText: curWord.meaning,
+          isPromptArabic: false,
+          isChoiceArabic: true,
+          choices: this.generateDistinctChoices(correct, pool, extraAr)
+        };
+      } else if (chosenType === 'AR_TO_PERSON') {
+        const correct = curWord.person || curWord.meaning;
+        const siblingPersons = this.currentQuizWords
+          .filter(w => w.word === curWord.word)
+          .map(w => w.person || w.meaning);
+        const pool = this.currentQuizWords
+          .map(w => w.person || w.meaning)
+          .filter(p => p === correct || !siblingPersons.includes(p));
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu çekim hangi şahsa ve sigaya aittir?",
+          correctKey: correct,
+          promptText: curWord.word,
+          isPromptArabic: true,
+          isChoiceArabic: false,
+          choices: this.generateDistinctChoices(correct, pool, extraPerson)
+        };
+      } else {
+        const correct = curWord.word;
+        const personText = curWord.person || curWord.meaning;
+        const siblingWordsWithSamePerson = this.currentQuizWords
+          .filter(w => (w.person || w.meaning) === personText && w.word !== curWord.word)
+          .map(w => w.word);
+        const pool = this.currentQuizWords
+          .map(w => w.word)
+          .filter(w => !siblingWordsWithSamePerson.includes(w));
+        questionConfig = {
+          mode: 'text_simple',
+          instruction: "Bu şahıs ve sîgaya ait Arapça çekim hangisidir?",
+          correctKey: correct,
+          promptText: personText,
+          isPromptArabic: false,
+          isChoiceArabic: true,
+          choices: this.generateDistinctChoices(correct, pool, extraAr)
+        };
+      }
+
+      if (targetContainer) {
+        targetContainer.innerHTML = `
+          <h1 class="lang-target-word-text ${questionConfig.isPromptArabic ? 'arabic-font' : 'latin-font'}" id="langTargetWord">${escapeHtml(questionConfig.promptText)}</h1>
+        `;
+      }
+    }
+
+    this.currentCorrectAnswerKey = questionConfig.correctKey;
+    if (captionEl) captionEl.textContent = questionConfig.instruction;
+
+    this.renderOptionsGrid(questionConfig);
+  }
+
+  generateDistinctChoices(correctAnswer, pool, extraFallbacks = []) {
+    const uniquePool = Array.from(new Set(pool.filter(opt => opt && opt !== correctAnswer)));
+    if (uniquePool.length < 4 && Array.isArray(extraFallbacks)) {
+      for (const fb of extraFallbacks) {
+        if (fb && fb !== correctAnswer && !uniquePool.includes(fb)) {
+          uniquePool.push(fb);
+          if (uniquePool.length >= 4) break;
+        }
+      }
+    }
+    for (let i = uniquePool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [uniquePool[i], uniquePool[j]] = [uniquePool[j], uniquePool[i]];
+    }
+    const chosen = [correctAnswer, ...uniquePool.slice(0, 4)];
+    for (let i = chosen.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [chosen[i], chosen[j]] = [chosen[j], chosen[i]];
+    }
+    return chosen;
+  }
+
+  generateSimpleChoices(correctAnswer, pool) {
+    const distractors = pool.filter(opt => opt !== correctAnswer);
+    for (let i = distractors.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [distractors[i], distractors[j]] = [distractors[j], distractors[i]];
+    }
+    const chosen = [correctAnswer, ...distractors.slice(0, 4)];
+    for (let i = chosen.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [chosen[i], chosen[j]] = [chosen[j], chosen[i]];
+    }
+    return chosen;
+  }
+
+  generateVocabChoices(targetWord, type) {
+    const others = VOCABULARY_WORDS.filter(w => w.id !== targetWord.id);
+    for (let i = others.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [others[i], others[j]] = [others[j], others[i]];
+    }
+    const chosen = [targetWord, ...others.slice(0, 4)];
+    for (let i = chosen.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [chosen[i], chosen[j]] = [chosen[j], chosen[i]];
+    }
+    return chosen;
+  }
+
+  generatePronounChoices(targetItem, type) {
+    // type: 'meaning' veya 'word'
+    const correctVal = targetItem[type];
+    const uniquePool = [];
+    const seen = new Set();
+    seen.add(correctVal);
+
+    // Aynı kelimeye ait diğer varyantı eleyerek kafa karışıklığını önle (örn: هُمَا için diğer هُمَا)
+    for (const item of INDEPENDENT_PRONOUNS_14) {
+      const val = item[type];
+      if (!seen.has(val) && item.word !== targetItem.word) {
+        seen.add(val);
+        uniquePool.push(val);
+      }
+    }
+
+    for (let i = uniquePool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [uniquePool[i], uniquePool[j]] = [uniquePool[j], uniquePool[i]];
+    }
+
+    const chosen = [correctVal, ...uniquePool.slice(0, 4)];
+    for (let i = chosen.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [chosen[i], chosen[j]] = [chosen[j], chosen[i]];
+    }
+    return chosen;
+  }
+
+  renderOptionsGrid(cfg) {
+    const grid = document.getElementById("langOptionsGrid");
+    if (!grid) return;
+    grid.innerHTML = "";
+    const letters = ["A", "B", "C", "D", "E"];
+
+    if (cfg.mode === 'vocab_tr_to_ar') {
+      cfg.choices.forEach((choiceWord, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "lang-option-btn";
+        btn.setAttribute("type", "button");
+        btn.setAttribute("data-key", choiceWord.id);
+
+        const hasTriplet = choiceWord.dual && choiceWord.dual !== '-';
+        btn.innerHTML = `
+          <span class="lang-opt-letter">${letters[idx]}</span>
+          <div class="lang-opt-content" dir="ltr" style="display:inline-flex; align-items:center; gap:8px;">
+            ${hasTriplet ? `
+            <span class="arabic-font" style="font-size:1.35rem; direction:rtl;">${escapeHtml(choiceWord.plural)}</span>
+            <span style="color:#818cf8; font-weight:700;">/</span>
+            <span class="arabic-font" style="font-size:1.35rem; direction:rtl;">${escapeHtml(choiceWord.dual)}</span>
+            <span style="color:#818cf8; font-weight:700;">/</span>
+            <span class="arabic-font" style="font-size:1.35rem; direction:rtl;">${escapeHtml(choiceWord.singular)}</span>
+            ` : `
+            <span class="arabic-font" style="font-size:1.4rem; font-weight:700; direction:rtl;">${escapeHtml(choiceWord.singular)}</span>
+            `}
+          </div>
+        `;
+        btn.addEventListener("click", () => this.handleAnswer(choiceWord.id, btn));
+        grid.appendChild(btn);
+      });
+
+    } else if (cfg.mode === 'vocab_ar_to_tr') {
+      cfg.choices.forEach((choiceWord, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "lang-option-btn";
+        btn.setAttribute("type", "button");
+        btn.setAttribute("data-key", choiceWord.meaning);
+
+        btn.innerHTML = `
+          <span class="lang-opt-letter">${letters[idx]}</span>
+          <div class="lang-opt-content">
+            <span class="lang-opt-text">${escapeHtml(choiceWord.meaning)}</span>
+          </div>
+        `;
+        btn.addEventListener("click", () => this.handleAnswer(choiceWord.meaning, btn));
+        grid.appendChild(btn);
+      });
+
+    } else {
+      cfg.choices.forEach((choiceText, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "lang-option-btn";
+        btn.setAttribute("type", "button");
+        btn.setAttribute("data-key", choiceText);
+
+        const arabicCls = cfg.isChoiceArabic ? "arabic-font" : "";
+
+        btn.innerHTML = `
+          <span class="lang-opt-letter">${letters[idx]}</span>
+          <div class="lang-opt-content">
+            <span class="lang-opt-text ${arabicCls}">${escapeHtml(choiceText)}</span>
+          </div>
+        `;
+        btn.addEventListener("click", () => this.handleAnswer(choiceText, btn));
+        grid.appendChild(btn);
+      });
+    }
+  }
+
+  handleAnswer(selectedKey, clickedBtn) {
+    if (this.isAnswering) return;
+    this.isAnswering = true;
+
+    const isCorrect = (String(selectedKey) === String(this.currentCorrectAnswerKey));
+
+    if (isCorrect) {
+      this.processAnswerStreak(true);
+      clickedBtn.classList.add("correct-choice");
+      langSounds.playCorrect();
+
+      if (this.currentGameMode === 'vocab' && this.currentWord) {
+        this.recordVocabAnswer(this.currentWord.id, true);
+      }
+
+      setTimeout(() => {
+        if (this.currentGameMode === 'vocab') {
+          this.renderQuestion();
+        } else {
+          this.currentOrderIndex = (this.currentOrderIndex + 1) % this.currentQuizWords.length;
+          if (this.currentOrderIndex === 0) this.initShuffledIndices();
+          this.renderQuestion();
+        }
+      }, 380);
+    } else {
+      this.processAnswerStreak(false);
+      clickedBtn.classList.add("wrong-choice");
+      langSounds.playWrong();
+
+      const grid = document.getElementById("langOptionsGrid");
+      if (grid) {
+        grid.querySelectorAll(".lang-option-btn").forEach(btn => {
+          if (String(btn.getAttribute("data-key")) === String(this.currentCorrectAnswerKey)) {
+            btn.classList.add("correct-choice");
+          }
+        });
+      }
+
+      this.lastMissedWordId = this.currentWord.id;
+
+      if (this.currentGameMode === 'vocab' && this.currentWord) {
+        this.recordVocabAnswer(this.currentWord.id, false);
+      }
+
+      if (this.currentGameMode === 'vocab' || this.currentGameMode === 'pronouns' || this.currentGameMode === 'muttarideMixed') {
+        // Kelime, Zamirler veya Karışık bölümünde yanlış yapılınca tabloya gitme, Devam Et göster
+        const feedbackBar = document.getElementById("langQuizFeedbackBar");
+        if (feedbackBar) {
+          feedbackBar.style.display = "flex";
+          feedbackBar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      } else {
+        setTimeout(() => {
+          this.showTableSection(this.lastMissedWordId);
+        }, 650);
+      }
+    }
+  }
+
+  showTableSection(highlightId = null) {
+    if (this.currentGameMode === "vocab" || this.currentGameMode === "pronouns") return;
+    this.showScreen("langTableSection");
+    this.renderCardsGrid(highlightId);
+  }
+
+  continueQuiz() {
+    this.showScreen("langQuizSection");
+    this.currentOrderIndex = (this.currentOrderIndex + 1) % this.currentQuizWords.length;
+    this.renderQuestion();
+  }
+
+  toggleTableDirectly() {
+    if (this.currentGameMode === "vocab" || this.currentGameMode === "pronouns") return;
+    const tableSec = document.getElementById("langTableSection");
+    if (tableSec && tableSec.style.display !== "none") {
+      this.continueQuiz();
+    } else {
+      this.showTableSection(null);
+    }
+  }
+
+  renderCardsGrid(highlightId = null) {
+    const gridEl = document.getElementById("langCardsGrid");
+    const bannerTitle = document.getElementById("langTableBannerTitle");
+    const bannerDesc = document.getElementById("langTableBannerDesc");
+    const bannerIcon = document.getElementById("langTableIcon");
+    if (!gridEl) return;
+    gridEl.innerHTML = "";
+
+    if (this.currentGameMode === 'emsile24') {
+      if (bannerIcon) bannerIcon.textContent = "📖";
+      if (bannerTitle) bannerTitle.textContent = "24 Sîga Tablosu (Sağdan Sola)";
+      if (bannerDesc) bannerDesc.textContent = "Kartın arkasında sîga başlığı ve Türkçe fiil manası yer alır.";
+
+      gridEl.className = "emsile-table-wrapper";
+
+      const rowDefinitions = [
+        { rowNum: 1, count: 5, slice: [0, 5], className: "cols-5" },
+        { rowNum: 2, count: 5, slice: [5, 10], className: "cols-5" },
+        { rowNum: 3, count: 4, slice: [10, 14], className: "cols-4" },
+        { rowNum: 4, count: 5, slice: [14, 19], className: "cols-5" },
+        { rowNum: 5, count: 5, slice: [19, 24], className: "cols-5" }
+      ];
+
+      rowDefinitions.forEach(def => {
+        const rowItems = this.currentQuizWords.slice(def.slice[0], def.slice[1]);
+        const rowDiv = document.createElement("div");
+        rowDiv.className = `emsile-row ${def.className}`;
+        rowDiv.setAttribute("data-row", def.rowNum);
+
+        rowItems.forEach(item => {
+          rowDiv.appendChild(this.createCard(item, highlightId));
+        });
+
+        gridEl.appendChild(rowDiv);
+      });
+    } else if (this.currentQuizWords.length === 3) {
+      const s = EMSILE_24_WORDS.find(w => w.id === this.selectedSigaId) || { meaning: "Masdar-ı Gayr-i Mîmî", word: "نَصْرًا" };
+      if (bannerIcon) bannerIcon.textContent = "📜";
+      if (bannerTitle) bannerTitle.textContent = `${s.meaning} (${s.word}) Tablosu`;
+      if (bannerDesc) bannerDesc.textContent = "Müfred, Tesniye ve Cemî çekimleri (Sağdan Sola)";
+
+      gridEl.className = "emsile-table-wrapper";
+
+      const rowDiv = document.createElement("div");
+      rowDiv.className = "emsile-row cols-3";
+      rowDiv.setAttribute("data-row", 1);
+
+      this.currentQuizWords.forEach(item => {
+        rowDiv.appendChild(this.createCard(item, highlightId));
+      });
+
+      gridEl.appendChild(rowDiv);
+    } else if (this.currentQuizWords.length === 10) {
+      const s = EMSILE_24_WORDS.find(w => w.id === this.selectedSigaId) || { meaning: "İsm-i Fâil", word: "نَاصِرٌ" };
+      if (bannerIcon) bannerIcon.textContent = "👤";
+      if (bannerTitle) bannerTitle.textContent = `${s.meaning} (${s.word}) Tablosu (Sağdan Sola)`;
+      if (bannerDesc) bannerDesc.textContent = "Müfred, Tesniye ve Cemî (Musahhah & Kırık Cemi) çekimleri";
+
+      gridEl.className = "emsile-table-wrapper";
+
+      const rowsDef = [
+        { rowNum: 1, slice: [0, 4] },
+        { rowNum: 2, slice: [4, 8] },
+        { rowNum: 3, slice: [8, 10] }
+      ];
+
+      rowsDef.forEach(def => {
+        const rowItems = this.currentQuizWords.slice(def.slice[0], def.slice[1]);
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "emsile-row";
+        rowDiv.style.gridTemplateColumns = "repeat(4, 1fr)";
+        rowDiv.style.width = "100%";
+        rowDiv.style.margin = "0";
+        rowDiv.setAttribute("data-row", def.rowNum);
+
+        rowItems.forEach(item => {
+          rowDiv.appendChild(this.createCard(item, highlightId));
+        });
+
+        gridEl.appendChild(rowDiv);
+      });
+    } else {
+      const s = EMSILE_24_WORDS.find(w => w.id === this.selectedSigaId) || EMSILE_24_WORDS[0];
+      if (bannerIcon) bannerIcon.textContent = "👤";
+      if (bannerTitle) bannerTitle.textContent = `${s.meaning} - 14 Zamir Tablosu`;
+      if (bannerDesc) bannerDesc.textContent = "Son satırda 'Ben' tek sütun, 'Biz' sol ve ortayı kaplar.";
+
+      gridEl.className = "emsile-table-wrapper";
+
+      const zamirRows = [
+        { rowNum: 1, slice: [0, 3] },
+        { rowNum: 2, slice: [3, 6] },
+        { rowNum: 3, slice: [6, 9] },
+        { rowNum: 4, slice: [9, 12] }
+      ];
+
+      zamirRows.forEach(def => {
+        const rowItems = this.currentQuizWords.slice(def.slice[0], def.slice[1]);
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "emsile-row cols-3";
+        rowDiv.setAttribute("data-row", def.rowNum);
+
+        rowItems.forEach(item => {
+          rowDiv.appendChild(this.createCard(item, highlightId));
+        });
+
+        gridEl.appendChild(rowDiv);
+      });
+
+      if (this.currentQuizWords.length >= 14) {
+        const row5Div = document.createElement("div");
+        row5Div.className = "emsile-row zamir-row-5";
+        row5Div.setAttribute("data-row", 5);
+
+        const itemBen = this.currentQuizWords[12];
+        const itemBiz = this.currentQuizWords[13];
+
+        const cardBen = this.createCard(itemBen, highlightId);
+        const cardBiz = this.createCard(itemBiz, highlightId, true);
+
+        row5Div.appendChild(cardBen);
+        row5Div.appendChild(cardBiz);
+        gridEl.appendChild(row5Div);
+      }
+    }
+
+    if (highlightId) {
+      setTimeout(() => {
+        const el = gridEl.querySelector(`.lang-flip-card[data-id="${highlightId}"]`);
+        if (el && typeof el.scrollIntoView === 'function') {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 180);
+    }
+  }
+
+  createCard(item, highlightId = null, isSpan2 = false) {
+    const isMissed = (highlightId && item.id === highlightId);
+    const card = document.createElement("div");
+    card.className = `lang-flip-card ${isSpan2 ? "card-span-2" : ""} ${isMissed ? "missed-highlight" : ""}`;
+    card.setAttribute("data-id", item.id);
+
+    const transHtml = item.person ? `<div class="card-trans-text" style="color: #818cf8; font-weight: 700; font-size: 0.76rem; margin-top: 3px;">${escapeHtml(item.person)}</div>` : (item.translation ? `<div class="card-trans-text">(${escapeHtml(item.translation)})</div>` : "");
+    const extraHtml = item.fullDetail ? `<div class="card-extra-hint" style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px;">${escapeHtml(item.fullDetail)}</div>` : (item.extraHint ? `<div class="card-extra-hint">${escapeHtml(item.extraHint)}</div>` : "");
+
+    card.innerHTML = `
+      <div class="lang-flip-card-inner">
+        <div class="lang-flip-card-front">
+          <span class="lang-card-num-badge">${item.id}</span>
+          <div class="lang-card-word-title arabic-font">${item.word}</div>
+          <div class="lang-card-tap-hint">🔄 Anlamı ve Çevirisi</div>
+        </div>
+        <div class="lang-flip-card-back">
+          <div class="lang-card-answer-title">${escapeHtml(item.meaning)}</div>
+          ${transHtml}
+          ${extraHtml}
+          <div class="lang-card-check-icon">✓</div>
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", () => {
+      card.classList.toggle("flipped");
+      langSounds.playFlip();
+    });
+
+    return card;
+  }
+
+  toggleSound() {
+    langSounds.isMuted = !langSounds.isMuted;
+    const btn = document.getElementById("langSoundBtn");
+    if (btn) btn.textContent = langSounds.isMuted ? "🔇" : "🔊";
+  }
+}
+
+// 4. GLOBAL BAŞLATICI VE KÖPRÜLER
+const languageGame = new LanguageGameEngine();
+window.languageGame = languageGame;
+
+function openLanguageGameModal() {
+  const modal = document.getElementById("languageGameModal");
+  if (modal) {
+    modal.style.display = "flex";
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+    languageGame.start();
+  }
+}
+window.openLanguageGameModal = openLanguageGameModal;
+
+function closeLanguageGameModal() {
+  const modal = document.getElementById("languageGameModal");
+  if (modal) {
+    modal.style.display = "none";
+    modal.classList.remove("active");
+  }
+  if (window.speechSynthesis) {
+    try { window.speechSynthesis.cancel(); } catch(_) {}
+  }
+  if (window.languageGame && typeof window.languageGame.showMainMenu === "function") {
+    try { window.languageGame.showMainMenu(); } catch(_) {}
+  }
+  document.body.style.overflow = "";
+  if (typeof switchTab === 'function') {
+    switchTab('limits');
+  }
+  if (typeof showToast === 'function') {
+    showToast("🏠 Ana Menüye Dönüldü.");
+  }
+}
+window.closeLanguageGameModal = closeLanguageGameModal;
+
+function advanceLanguageGameQuestion() {
+  const bar = document.getElementById("langQuizFeedbackBar");
+  if (bar) bar.style.display = "none";
+  if (window.languageGame) {
+    window.languageGame.isAnswering = false;
+    if (window.languageGame.currentGameMode === 'vocab') {
+      window.languageGame.renderQuestion();
+    } else {
+      window.languageGame.currentOrderIndex = (window.languageGame.currentOrderIndex + 1) % window.languageGame.currentQuizWords.length;
+      if (window.languageGame.currentOrderIndex === 0) window.languageGame.initShuffledIndices();
+      window.languageGame.renderQuestion();
+    }
+  }
+}
+window.advanceLanguageGameQuestion = advanceLanguageGameQuestion;
+
+function toggleLanguageTable() {
+  languageGame.toggleTableDirectly();
+}
+window.toggleLanguageTable = toggleLanguageTable;
+
+function continueLanguageQuiz() {
+  languageGame.continueQuiz();
+}
+window.continueLanguageQuiz = continueLanguageQuiz;
+
+function escapeHtml(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.AndroidBridge && typeof window.AndroidBridge.shouldOpenLanguageGame === 'function') {
+    if (window.AndroidBridge.shouldOpenLanguageGame()) {
+      openLanguageGameModal();
+    }
+  }
+});

@@ -1,0 +1,1 @@
+# Egitici Oyunlar ve Arapca Dil Modulleri Portali\n\nBu repo yalnizca bagimsiz egitici oyunlari, kelime havuzunu ve hikaye modullerini barindirir.\n

@@ -1,0 +1,7004 @@
+[
+  {
+    "id": 1,
+    "category": "kuran",
+    "singular": "رَبٌّ",
+    "dual": "رَبَّانِ",
+    "plural": "أَرْبَابٌ",
+    "meaning": "Terbiye eden, mutlak mâlik ve rızık veren",
+    "level": 1
+  },
+  {
+    "id": 2,
+    "category": "kuran",
+    "singular": "آيَةٌ",
+    "dual": "آيَتَانِ",
+    "plural": "آيَاتٌ",
+    "meaning": "İlahî delil, mucize ve Kur'an cümlesi",
+    "level": 1
+  },
+  {
+    "id": 3,
+    "category": "kuran",
+    "singular": "كِتَابٌ",
+    "dual": "كِتَابَانِ",
+    "plural": "كُتُبٌ",
+    "meaning": "Yazılı vahiy, Kur'an ve amel defteri",
+    "level": 1
+  },
+  {
+    "id": 4,
+    "category": "kuran",
+    "singular": "رَسُولٌ",
+    "dual": "رَسُولَانِ",
+    "plural": "رُسُلٌ",
+    "meaning": "Kitap ve şeriat getiren ilahî elçi",
+    "level": 1
+  },
+  {
+    "id": 5,
+    "category": "kuran",
+    "singular": "نَبِيٌّ",
+    "dual": "نَبِيَّانِ",
+    "plural": "أَنْبِيَاءُ / نَبِيُّونَ",
+    "meaning": "Vahiy ve gayb haberi alan peygamber",
+    "level": 1
+  },
+  {
+    "id": 6,
+    "category": "kuran",
+    "singular": "يَوْمٌ",
+    "dual": "يَوْمَانِ",
+    "plural": "أَيَّامٌ",
+    "meaning": "Gün, vakit, kıyamet zamanı",
+    "level": 1
+  },
+  {
+    "id": 7,
+    "category": "kuran",
+    "singular": "سَمَاءٌ",
+    "dual": "سَمَاوَانِ",
+    "plural": "سَمَاوَاتٌ",
+    "meaning": "Yüksek gök, semavat",
+    "level": 1
+  },
+  {
+    "id": 8,
+    "category": "kuran",
+    "singular": "أَرْضٌ",
+    "dual": "أَرْضَانِ",
+    "plural": "أَرَاضٍ / أَرْضُونَ",
+    "meaning": "Yeryüzü, zemin, dünya",
+    "level": 1
+  },
+  {
+    "id": 9,
+    "category": "kuran",
+    "singular": "نَفْسٌ",
+    "dual": "نَفْسَانِ",
+    "plural": "أَنْفُسٌ / نُفُوسٌ",
+    "meaning": "İnsanın kendi zâtı, canı, hevesi",
+    "level": 1
+  },
+  {
+    "id": 10,
+    "category": "kuran",
+    "singular": "قَوْمٌ",
+    "dual": "قَوْمَانِ",
+    "plural": "أَقْوَامٌ",
+    "meaning": "İnsan topluluğu, halk, millet",
+    "level": 1
+  },
+  {
+    "id": 11,
+    "category": "kuran",
+    "singular": "عَبْدٌ",
+    "dual": "عَبْدَانِ",
+    "plural": "عِبَادٌ / عَبِيدٌ",
+    "meaning": "Allah'a boyun eğip ibadet eden insan",
+    "level": 1
+  },
+  {
+    "id": 12,
+    "category": "kuran",
+    "singular": "قَلْبٌ",
+    "dual": "قَلْبَانِ",
+    "plural": "قُلُوبٌ",
+    "meaning": "Gönül, manevî idrak ve iman merkezi",
+    "level": 1
+  },
+  {
+    "id": 13,
+    "category": "kuran",
+    "singular": "عَذَابٌ",
+    "dual": "عَذَابَانِ",
+    "plural": "أَعْذِبَةٌ",
+    "meaning": "Şiddetli elem ve ahiret cezası",
+    "level": 1
+  },
+  {
+    "id": 14,
+    "category": "kuran",
+    "singular": "جَنَّةٌ",
+    "dual": "جَنَّتَانِ",
+    "plural": "جَنَّاتٌ",
+    "meaning": "Ebedî saadet, huzur ve mükâfat yurdu",
+    "level": 1
+  },
+  {
+    "id": 15,
+    "category": "kuran",
+    "singular": "نَارٌ",
+    "dual": "نَارَانِ",
+    "plural": "نِيرَانٌ",
+    "meaning": "Yakıcı ateş, cehennem",
+    "level": 1
+  },
+  {
+    "id": 16,
+    "category": "kuran",
+    "singular": "حَقٌّ",
+    "dual": "حَقَّانِ",
+    "plural": "حُقُوقٌ",
+    "meaning": "Mutlak gerçek, adalet, sabit doğru",
+    "level": 1
+  },
+  {
+    "id": 17,
+    "category": "kuran",
+    "singular": "سَبِيلٌ",
+    "dual": "سَبِيلَانِ",
+    "plural": "سُبُلٌ",
+    "meaning": "Yol, rızaya ulaştıran hak yol",
+    "level": 1
+  },
+  {
+    "id": 18,
+    "category": "kuran",
+    "singular": "أَمْرٌ",
+    "dual": "أَمْرَانِ",
+    "plural": "أُمُورٌ / أَوَامِرُ",
+    "meaning": "İlahî buyruk, ferman, hüküm ve iş",
+    "level": 1
+  },
+  {
+    "id": 19,
+    "category": "kuran",
+    "singular": "شَيْءٌ",
+    "dual": "شَيْئَانِ",
+    "plural": "أَشْيَاءُ",
+    "meaning": "Yaratılmış olan her varlık, nesne",
+    "level": 1
+  },
+  {
+    "id": 20,
+    "category": "kuran",
+    "singular": "مَالٌ",
+    "dual": "مَالَانِ",
+    "plural": "أَمْوَالٌ",
+    "meaning": "Dünya serveti, mülk, meta",
+    "level": 1
+  },
+  {
+    "id": 21,
+    "category": "kuran",
+    "singular": "وَلَدٌ",
+    "dual": "وَلَدَانِ",
+    "plural": "أَوْلَادٌ / وِلْدَانٌ",
+    "meaning": "Çocuk, evlat, nesil",
+    "level": 1
+  },
+  {
+    "id": 22,
+    "category": "kuran",
+    "singular": "عِلْمٌ",
+    "dual": "عِلْمَانِ",
+    "plural": "عُلُومٌ",
+    "meaning": "Kesin bilgi, marifet, hakikat ilmi",
+    "level": 1
+  },
+  {
+    "id": 23,
+    "category": "kuran",
+    "singular": "عَمَلٌ",
+    "dual": "عَمَلَانِ",
+    "plural": "أَعْمَالٌ",
+    "meaning": "Niyetle yapılan iş, fiil, eylem",
+    "level": 1
+  },
+  {
+    "id": 24,
+    "category": "kuran",
+    "singular": "أَهْلٌ",
+    "dual": "أَهْلَانِ",
+    "plural": "أَهْلُونَ / أَهَالٍ",
+    "meaning": "Aile, ev halkı, mensup topluluk",
+    "level": 1
+  },
+  {
+    "id": 25,
+    "category": "kuran",
+    "singular": "بَيْتٌ",
+    "dual": "بَيْتَانِ",
+    "plural": "بُيُوتٌ / أَبْيَاتٌ",
+    "meaning": "Ev, mesken, Kâbe-i Muazzama",
+    "level": 1
+  },
+  {
+    "id": 26,
+    "category": "kuran",
+    "singular": "بَابٌ",
+    "dual": "بَابَانِ",
+    "plural": "أَبْوَابٌ / بِيبَانٌ",
+    "meaning": "Giriş yeri, sema ve cennet kapıları",
+    "level": 1
+  },
+  {
+    "id": 27,
+    "category": "kuran",
+    "singular": "مَلَكٌ",
+    "dual": "مَلَكَانِ",
+    "plural": "مَلَائِكَةٌ",
+    "meaning": "Nurdan yaratılmış itaatkâr varlık",
+    "level": 1
+  },
+  {
+    "id": 28,
+    "category": "kuran",
+    "singular": "إِنْسَانٌ",
+    "dual": "إِنْسَانَانِ",
+    "plural": "نَاسٌ / أَنَاسِيُّ",
+    "meaning": "Akıl ve irade sahibi beşer",
+    "level": 1
+  },
+  {
+    "id": 29,
+    "category": "kuran",
+    "singular": "دِينٌ",
+    "dual": "دِينَانِ",
+    "plural": "أَدْيَانٌ",
+    "meaning": "İtaat, hesap ve ilahî şeriat nizamı",
+    "level": 1
+  },
+  {
+    "id": 30,
+    "category": "kuran",
+    "singular": "قَوْلٌ",
+    "dual": "قَوْلَانِ",
+    "plural": "أَقْوَالٌ / أَقَاوِيلُ",
+    "meaning": "Kelam, lafız, hakikat ifadesi",
+    "level": 1
+  },
+  {
+    "id": 31,
+    "category": "kuran",
+    "singular": "يَدٌ",
+    "dual": "يَدَانِ",
+    "plural": "أَيْدٍ / أَيَادٍ",
+    "meaning": "Organ olan el; güç ve nimet",
+    "level": 1
+  },
+  {
+    "id": 32,
+    "category": "kuran",
+    "singular": "عَيْنٌ",
+    "dual": "عَيْنَانِ",
+    "plural": "أَعْيُنٌ / عُيُونٌ",
+    "meaning": "Görme organı; su pınarı",
+    "level": 1
+  },
+  {
+    "id": 33,
+    "category": "kuran",
+    "singular": "أُذُنٌ",
+    "dual": "أُذُنَانِ",
+    "plural": "آذَانٌ",
+    "meaning": "İşitme ve ibret alma organı",
+    "level": 1
+  },
+  {
+    "id": 34,
+    "category": "kuran",
+    "singular": "لِسَانٌ",
+    "dual": "لِسَانَانِ",
+    "plural": "أَلْسِنَةٌ",
+    "meaning": "Konuşma organı, konuşulan dil ve lehçe",
+    "level": 1
+  },
+  {
+    "id": 35,
+    "category": "kuran",
+    "singular": "وَجْهٌ",
+    "dual": "وَجْهَانِ",
+    "plural": "وُجُوهٌ / أَوْجُهٌ",
+    "meaning": "Çehre, taraf; ilahî rıza",
+    "level": 1
+  },
+  {
+    "id": 36,
+    "category": "kuran",
+    "singular": "رِجْلٌ",
+    "dual": "رِجْلَانِ",
+    "plural": "أَرْجُلٌ",
+    "meaning": "Yürüme ve sebat organı",
+    "level": 1
+  },
+  {
+    "id": 37,
+    "category": "kuran",
+    "singular": "صَدْرٌ",
+    "dual": "صَدْرَانِ",
+    "plural": "صُدُورٌ",
+    "meaning": "Kalbin mahalli olan sine, bağır",
+    "level": 1
+  },
+  {
+    "id": 38,
+    "category": "kuran",
+    "singular": "بَصَرٌ",
+    "dual": "بَصَرَانِ",
+    "plural": "أَبْصَارٌ",
+    "meaning": "Göz nuru, görme ve idrak kabiliyeti",
+    "level": 1
+  },
+  {
+    "id": 39,
+    "category": "kuran",
+    "singular": "سَمْعٌ",
+    "dual": "سَمْعَانِ",
+    "plural": "أَسْمَاعٌ",
+    "meaning": "İşitme ve hak çağrıyı duyma yetisi",
+    "level": 1
+  },
+  {
+    "id": 40,
+    "category": "kuran",
+    "singular": "رَأْسٌ",
+    "dual": "رَأْسَانِ",
+    "plural": "رُؤُوسٌ",
+    "meaning": "Baş, tepe noktası, topluluk lideri",
+    "level": 1
+  },
+  {
+    "id": 41,
+    "category": "kuran",
+    "singular": "شَمْسٌ",
+    "dual": "شَمْسَانِ",
+    "plural": "شُمُوسٌ",
+    "meaning": "Âlemi aydınlatan ve ısıtan kandil",
+    "level": 1
+  },
+  {
+    "id": 42,
+    "category": "kuran",
+    "singular": "قَمَرٌ",
+    "dual": "قَمَرَانِ",
+    "plural": "أَقْمَارٌ",
+    "meaning": "Gecenin aydınlığı, zaman ölçüsü",
+    "level": 1
+  },
+  {
+    "id": 43,
+    "category": "kuran",
+    "singular": "نَجْمٌ",
+    "dual": "نَجْمَانِ",
+    "plural": "نُجُومٌ / أَنْجُمٌ",
+    "meaning": "Gökyüzünü süsleyen ışıklı cisim",
+    "level": 1
+  },
+  {
+    "id": 44,
+    "category": "kuran",
+    "singular": "لَيْلٌ",
+    "dual": "لَيْلَانِ",
+    "plural": "لَيَالٍ",
+    "meaning": "Karanlığın bürüdüğü sükûn vakti",
+    "level": 1
+  },
+  {
+    "id": 45,
+    "category": "kuran",
+    "singular": "نَهَارٌ",
+    "dual": "نَهَارَانِ",
+    "plural": "أَنْهُرٌ / نُهُرٌ",
+    "meaning": "Işıkla aydınlanan çalışma vakti",
+    "level": 1
+  },
+  {
+    "id": 46,
+    "category": "kuran",
+    "singular": "نُورٌ",
+    "dual": "نُورَانِ",
+    "plural": "أَنْوَارٌ",
+    "meaning": "Karanlıkları dağıtan ilahî aydınlık",
+    "level": 1
+  },
+  {
+    "id": 47,
+    "category": "kuran",
+    "singular": "ظُلْمَةٌ",
+    "dual": "ظُلْمَتَانِ",
+    "plural": "ظُلُمَاتٌ",
+    "meaning": "Maddî karanlık, şirk ve cehalet",
+    "level": 1
+  },
+  {
+    "id": 48,
+    "category": "kuran",
+    "singular": "مَاءٌ",
+    "dual": "مَاءَانِ",
+    "plural": "مِيَاهٌ / أَمْوَاهٌ",
+    "meaning": "Canlılara hayat veren temizleyici nimet",
+    "level": 1
+  },
+  {
+    "id": 49,
+    "category": "kuran",
+    "singular": "رِيحٌ",
+    "dual": "رِيحَانِ",
+    "plural": "رِيَاحٌ / أَرْيَاحٌ",
+    "meaning": "Bulutları sevk eden yel, esinti",
+    "level": 1
+  },
+  {
+    "id": 50,
+    "category": "kuran",
+    "singular": "بَحْرٌ",
+    "dual": "بَحْرَانِ",
+    "plural": "بِحَارٌ / أَبْحُرٌ",
+    "meaning": "Uçsuz bucaksız engin su kütlesi",
+    "level": 1
+  },
+  {
+    "id": 51,
+    "category": "kuran",
+    "singular": "جَبَلٌ",
+    "dual": "جَبَلَانِ",
+    "plural": "جِبَالٌ",
+    "meaning": "Yeryüzünü sarsıntıdan koruyan sabit kütle",
+    "level": 1
+  },
+  {
+    "id": 52,
+    "category": "kuran",
+    "singular": "نَهْرٌ",
+    "dual": "نَهْرَانِ",
+    "plural": "أَنْهَارٌ",
+    "meaning": "Yatağında akan tatlı su ırmağı",
+    "level": 1
+  },
+  {
+    "id": 53,
+    "category": "kuran",
+    "singular": "شَجَرَةٌ",
+    "dual": "شَجَرَتَانِ",
+    "plural": "أَشْجَارٌ / شَجَرٌ",
+    "meaning": "Kökü yerde dalları gökte bitki",
+    "level": 1
+  },
+  {
+    "id": 54,
+    "category": "kuran",
+    "singular": "ثَمَرَةٌ",
+    "dual": "ثَمَرَتَانِ",
+    "plural": "ثَمَرَاتٌ / ثَمَرٌ",
+    "meaning": "Bitki ürünü; amel hasılatı",
+    "level": 1
+  },
+  {
+    "id": 55,
+    "category": "kuran",
+    "singular": "طَعَامٌ",
+    "dual": "طَعَامَانِ",
+    "plural": "أَطْعِمَةٌ",
+    "meaning": "İnsanın beslendiği gıda ve rızık",
+    "level": 1
+  },
+  {
+    "id": 56,
+    "category": "kuran",
+    "singular": "مَوْتٌ",
+    "dual": "مَوْتَانِ",
+    "plural": "أَمْوَاتٌ",
+    "meaning": "Ruhun bedenden ayrılıp ahirete göçmesi",
+    "level": 1
+  },
+  {
+    "id": 57,
+    "category": "kuran",
+    "singular": "حَيَاةٌ",
+    "dual": "حَيَاتَانِ",
+    "plural": "حَيَوَاتٌ",
+    "meaning": "Canlılık, dirilik, hakiki varoluş",
+    "level": 1
+  },
+  {
+    "id": 58,
+    "category": "kuran",
+    "singular": "دُنْيَا",
+    "dual": "دُنْيَيَانِ",
+    "plural": "دُنًى",
+    "meaning": "Fani, geçici ilk hayat sahnesi",
+    "level": 1
+  },
+  {
+    "id": 59,
+    "category": "kuran",
+    "singular": "آخِرَةٌ",
+    "dual": "آخِرَتَانِ",
+    "plural": "آخِرَاتٌ",
+    "meaning": "Dünyadan sonraki ebedî hesap yurdu",
+    "level": 1
+  },
+  {
+    "id": 60,
+    "category": "kuran",
+    "singular": "سَاعَةٌ",
+    "dual": "سَاعَتَانِ",
+    "plural": "سَاعَاتٌ",
+    "meaning": "Kâinatın altüst olacağı dehşetli kıyamet anı",
+    "level": 1
+  },
+  {
+    "id": 61,
+    "category": "kuran",
+    "singular": "أَجْرٌ",
+    "dual": "أَجْرَانِ",
+    "plural": "أُجُورٌ",
+    "meaning": "Salih amellere verilen sevap",
+    "level": 1
+  },
+  {
+    "id": 62,
+    "category": "kuran",
+    "singular": "فَضْلٌ",
+    "dual": "فَضْلَانِ",
+    "plural": "فُضُولٌ / أَفْضَالٌ",
+    "meaning": "İlahî bol ihsan, üstünlük ve bereket",
+    "level": 1
+  },
+  {
+    "id": 63,
+    "category": "kuran",
+    "singular": "رَحْمَةٌ",
+    "dual": "رَحْمَتَانِ",
+    "plural": "رَحَمَاتٌ",
+    "meaning": "Her şeyi kuşatan ilahî merhamet",
+    "level": 1
+  },
+  {
+    "id": 64,
+    "category": "kuran",
+    "singular": "نِعْمَةٌ",
+    "dual": "نِعْمَتَانِ",
+    "plural": "نِعَمٌ / أَنْعُمٌ",
+    "meaning": "Maddî ve manevî ilahî bağış, sıhhat",
+    "level": 1
+  },
+  {
+    "id": 65,
+    "category": "kuran",
+    "singular": "حَسَنَةٌ",
+    "dual": "حَسَنَتَانِ",
+    "plural": "حَسَنَاتٌ",
+    "meaning": "Rızaya uygun güzel amel, iyilik",
+    "level": 1
+  },
+  {
+    "id": 66,
+    "category": "kuran",
+    "singular": "سَيِّئَةٌ",
+    "dual": "سَيِّئَتَانِ",
+    "plural": "سَيِّئَاتٌ",
+    "meaning": "Günah, çirkin fiil, fenalık",
+    "level": 1
+  },
+  {
+    "id": 67,
+    "category": "kuran",
+    "singular": "ذَنْبٌ",
+    "dual": "ذَنْبَانِ",
+    "plural": "ذُنُوبٌ",
+    "meaning": "Kişiyi sorumlu kılan vebal ve isyan",
+    "level": 1
+  },
+  {
+    "id": 68,
+    "category": "kuran",
+    "singular": "خَطِيئَةٌ",
+    "dual": "خَطِيئَتَانِ",
+    "plural": "خَطَايَا / خَطِيئَاتٌ",
+    "meaning": "Kasten veya gafletle işlenen ağır günah",
+    "level": 1
+  },
+  {
+    "id": 69,
+    "category": "kuran",
+    "singular": "ظُلْمٌ",
+    "dual": "ظُلْمَانِ",
+    "plural": "مَظَالِمُ",
+    "meaning": "Haddi aşmak, haksızlık, şirk",
+    "level": 1
+  },
+  {
+    "id": 70,
+    "category": "kuran",
+    "singular": "إِثْمٌ",
+    "dual": "إِثْمَانِ",
+    "plural": "آثَامٌ",
+    "meaning": "İnsanı hayırdan alıkoyan ağır günah",
+    "level": 1
+  },
+  {
+    "id": 71,
+    "category": "kuran",
+    "singular": "مُؤْمِنٌ",
+    "dual": "مُؤْمِنَانِ",
+    "plural": "مُؤْمِنُونَ / مُؤْمِنِينَ",
+    "meaning": "Allah'a ihlasla inanıp güvene eren kul",
+    "level": 1
+  },
+  {
+    "id": 72,
+    "category": "kuran",
+    "singular": "كَافِرٌ",
+    "dual": "كَافِرَانِ",
+    "plural": "كَافِرُونَ / كُفَّارٌ",
+    "meaning": "Hakkı ve nimetleri bile bile inkâr eden",
+    "level": 1
+  },
+  {
+    "id": 73,
+    "category": "kuran",
+    "singular": "مُنَافِقٌ",
+    "dual": "مُنَافِقَانِ",
+    "plural": "مُنَافِقُونَ / مُنَافِقِينَ",
+    "meaning": "İçi inkârcı, dışı inanmış ikiyüzlü",
+    "level": 1
+  },
+  {
+    "id": 74,
+    "category": "kuran",
+    "singular": "مُشْرِكٌ",
+    "dual": "مُشْرِكَانِ",
+    "plural": "مُشْرِكُونَ / مُشْرِكِينَ",
+    "meaning": "Allah'a ortak koşan kimse",
+    "level": 1
+  },
+  {
+    "id": 75,
+    "category": "kuran",
+    "singular": "ظَالِمٌ",
+    "dual": "ظَالِمَانِ",
+    "plural": "ظَالِمُونَ / ظَلَمَةٌ",
+    "meaning": "Sınırları çiğneyen, hakkı gasbeden",
+    "level": 1
+  },
+  {
+    "id": 76,
+    "category": "kuran",
+    "singular": "فَاسِقٌ",
+    "dual": "فَاسِقَانِ",
+    "plural": "فَاسِقُونَ / فُسَّاقٌ",
+    "meaning": "İtaatten çıkıp günaha dalan kimse",
+    "level": 1
+  },
+  {
+    "id": 77,
+    "category": "kuran",
+    "singular": "صَالِحٌ",
+    "dual": "صَالِحَانِ",
+    "plural": "صَالِحُونَ / صُلَحَاءُ",
+    "meaning": "Ameli dine uygun, temiz ve dürüst kul",
+    "level": 1
+  },
+  {
+    "id": 78,
+    "category": "kuran",
+    "singular": "صَادِقٌ",
+    "dual": "صَادِقَانِ",
+    "plural": "صَادِقُونَ / صُدَقَاءُ",
+    "meaning": "Sözünde ve inancında dosdoğru olan",
+    "level": 1
+  },
+  {
+    "id": 79,
+    "category": "kuran",
+    "singular": "صَابِرٌ",
+    "dual": "صَابِرَانِ",
+    "plural": "صَابِرُونَ",
+    "meaning": "Güçlüklere ve günaha direnen kul",
+    "level": 1
+  },
+  {
+    "id": 80,
+    "category": "kuran",
+    "singular": "شَاكِرٌ",
+    "dual": "شَاكِرَانِ",
+    "plural": "شَاكِرُونَ / شُكَّارٌ",
+    "meaning": "Nimetin kadrini bilip hamdeden",
+    "level": 1
+  },
+  {
+    "id": 81,
+    "category": "kuran",
+    "singular": "مُحْسِنٌ",
+    "dual": "مُحْسِنَانِ",
+    "plural": "مُحْسِنُونَ / مُحْسِنِينَ",
+    "meaning": "Allah'ı görür gibi ihlasla iyilik eden",
+    "level": 1
+  },
+  {
+    "id": 82,
+    "category": "kuran",
+    "singular": "شَهِيدٌ",
+    "dual": "شَهِيدَانِ",
+    "plural": "شُهَدَاءُ",
+    "meaning": "Hakikate tanıklık eden, canını feda eden",
+    "level": 1
+  },
+  {
+    "id": 83,
+    "category": "kuran",
+    "singular": "عَالِمٌ",
+    "dual": "عَالِمَانِ",
+    "plural": "عُلَمَاءُ",
+    "meaning": "İlmiyle amel eden, derin kavrayışlı zat",
+    "level": 1
+  },
+  {
+    "id": 84,
+    "category": "kuran",
+    "singular": "عَدُوٌّ",
+    "dual": "عَدُوَّانِ",
+    "plural": "أَعْدَاءٌ",
+    "meaning": "İnsanın kötülüğünü isteyen hasım; Şeytan",
+    "level": 1
+  },
+  {
+    "id": 85,
+    "category": "kuran",
+    "singular": "وَلِيٌّ",
+    "dual": "وَلِيَّانِ",
+    "plural": "أَوْلِيَاءُ",
+    "meaning": "Koruyan, yardım eden, takvalı dost",
+    "level": 1
+  },
+  {
+    "id": 86,
+    "category": "kuran",
+    "singular": "نَصِيرٌ",
+    "dual": "نَصِيرَانِ",
+    "plural": "أَنْصَارٌ",
+    "meaning": "Zorlukta yardıma koşan destekçi",
+    "level": 1
+  },
+  {
+    "id": 87,
+    "category": "kuran",
+    "singular": "سُلْطَانٌ",
+    "dual": "سُلْطَانَانِ",
+    "plural": "سَلَاطِينُ",
+    "meaning": "Kesin delil, karşı konulmaz güç",
+    "level": 1
+  },
+  {
+    "id": 88,
+    "category": "kuran",
+    "singular": "بَيِّنَةٌ",
+    "dual": "بَيِّنَتَانِ",
+    "plural": "بَيِّنَاتٌ",
+    "meaning": "Şüphe bırakmayan apaçık delil, mucize",
+    "level": 1
+  },
+  {
+    "id": 89,
+    "category": "kuran",
+    "singular": "حِكْمَةٌ",
+    "dual": "حِكْمَتَانِ",
+    "plural": "حِكَمٌ",
+    "meaning": "Eşyanın hakikatini bilip yerli yerince davranmak",
+    "level": 1
+  },
+  {
+    "id": 90,
+    "category": "kuran",
+    "singular": "كَلِمَةٌ",
+    "dual": "كَلِمَتَانِ",
+    "plural": "كَلِمَاتٌ / كَلِمٌ",
+    "meaning": "İlahî irade fermanı, tevhid sözü",
+    "level": 1
+  },
+  {
+    "id": 91,
+    "category": "kuran",
+    "singular": "حَدِيثٌ",
+    "dual": "حَدِيثَانِ",
+    "plural": "أَحَادِيثُ",
+    "meaning": "Haber, söz, anlatı, Kur'an kıssası",
+    "level": 1
+  },
+  {
+    "id": 92,
+    "category": "kuran",
+    "singular": "مَسْجِدٌ",
+    "dual": "مَسْجِدَانِ",
+    "plural": "مَسَاجِدُ",
+    "meaning": "Allah'a secde ve ibadet edilen mabet",
+    "level": 1
+  },
+  {
+    "id": 93,
+    "category": "kuran",
+    "singular": "مَدِينَةٌ",
+    "dual": "مَدِينَتَانِ",
+    "plural": "مُدُنٌ / مَدَائِنُ",
+    "meaning": "Nüfusun toplandığı yerleşim yeri",
+    "level": 1
+  },
+  {
+    "id": 94,
+    "category": "kuran",
+    "singular": "قَرْيَةٌ",
+    "dual": "قَرْيَتَانِ",
+    "plural": "قُرًى",
+    "meaning": "Kasaba, köy, yerleşim merkezi",
+    "level": 1
+  },
+  {
+    "id": 95,
+    "category": "kuran",
+    "singular": "دَارٌ",
+    "dual": "دَارَانِ",
+    "plural": "دِيَارٌ / دُورٌ",
+    "meaning": "Ev, konut, ebedî ahiret konağı",
+    "level": 1
+  },
+  {
+    "id": 96,
+    "category": "kuran",
+    "singular": "أُمٌّ",
+    "dual": "أُمَّانِ",
+    "plural": "أُمَّهَاتٌ",
+    "meaning": "Asıl, kaynak, hürmete layık valide",
+    "level": 1
+  },
+  {
+    "id": 97,
+    "category": "kuran",
+    "singular": "أَبٌ",
+    "dual": "أَبَوَانِ",
+    "plural": "آبَاءٌ",
+    "meaning": "Nesle vesile olan ata, peder",
+    "level": 1
+  },
+  {
+    "id": 98,
+    "category": "kuran",
+    "singular": "أَخٌ",
+    "dual": "أَخَوَانِ",
+    "plural": "إِخْوَةٌ / إِخْوَانٌ",
+    "meaning": "Öz kardeş ve din kardeşi",
+    "level": 1
+  },
+  {
+    "id": 99,
+    "category": "kuran",
+    "singular": "أُخْتٌ",
+    "dual": "أُخْتَانِ",
+    "plural": "أَخَوَاتٌ",
+    "meaning": "Nesep bağıyla bağlı kız kardeş",
+    "level": 1
+  },
+  {
+    "id": 100,
+    "category": "kuran",
+    "singular": "زَوْجٌ",
+    "dual": "زَوْجَانِ",
+    "plural": "أَزْوَاجٌ",
+    "meaning": "Birbirini tamamlayan eş, hanım veya koca",
+    "level": 1
+  },
+  {
+    "id": 101,
+    "category": "kuran",
+    "singular": "غَيْبٌ",
+    "dual": "غَيْبَانِ",
+    "plural": "غُيُوبٌ",
+    "meaning": "Duyu ötesi, gizli olan ilahî hakikat",
+    "level": 1
+  },
+  {
+    "id": 102,
+    "category": "kuran",
+    "singular": "شَهَادَةٌ",
+    "dual": "شَهَادَتَانِ",
+    "plural": "شَهَادَاتٌ",
+    "meaning": "Gözle görünen mülk âlemi, tanıklık",
+    "level": 1
+  },
+  {
+    "id": 103,
+    "category": "kuran",
+    "singular": "خَلْقٌ",
+    "dual": "خَلْقَانِ",
+    "plural": "أَخْلَاقٌ",
+    "meaning": "Yoktan var etme, yaratılış ve hilkat",
+    "level": 1
+  },
+  {
+    "id": 104,
+    "category": "kuran",
+    "singular": "ظِلٌّ",
+    "dual": "ظِلِّانِ",
+    "plural": "ظِلَالٌ / أَظْلَالٌ",
+    "meaning": "Güneşten koruyan sığınak, himaye",
+    "level": 1
+  },
+  {
+    "id": 105,
+    "category": "kuran",
+    "singular": "حَرُورٌ",
+    "dual": "حَرُورَانِ",
+    "plural": "حَرَائِرُ",
+    "meaning": "Kavurucu sıcak rüzgâr, şiddetli hararet",
+    "level": 1
+  },
+  {
+    "id": 106,
+    "category": "kuran",
+    "singular": "كَوْكَبٌ",
+    "dual": "كَوْكَبَانِ",
+    "plural": "كَوَاكِبُ",
+    "meaning": "Parlak yıldız, gök cismi",
+    "level": 1
+  },
+  {
+    "id": 107,
+    "category": "kuran",
+    "singular": "فُلْكٌ",
+    "dual": "فُلْكَانِ",
+    "plural": "أَفْلَاكٌ",
+    "meaning": "Denizde yüzen büyük gemi",
+    "level": 1
+  },
+  {
+    "id": 108,
+    "category": "kuran",
+    "singular": "جُنْدٌ",
+    "dual": "جُنْدَانِ",
+    "plural": "أَجْنَادٌ / جُنُودٌ",
+    "meaning": "Asker, ilahî ordu ve yardımcı kuvvet",
+    "level": 1
+  },
+  {
+    "id": 109,
+    "category": "kuran",
+    "singular": "حِزْبٌ",
+    "dual": "حِزْبَانِ",
+    "plural": "أَحْزَابٌ",
+    "meaning": "Hak veya batıl taraftarı olan topluluk",
+    "level": 1
+  },
+  {
+    "id": 110,
+    "category": "kuran",
+    "singular": "فِرْقَةٌ",
+    "dual": "فِرْقَتَانِ",
+    "plural": "فِرَقٌ",
+    "meaning": "İnsan grubu, ayrılan zümre",
+    "level": 1
+  },
+  {
+    "id": 111,
+    "category": "kuran",
+    "singular": "طَائِفَةٌ",
+    "dual": "طَائِفَتَانِ",
+    "plural": "طَوَائِفُ",
+    "meaning": "Bir cemaat, zümre, insan topluluğu",
+    "level": 1
+  },
+  {
+    "id": 112,
+    "category": "kuran",
+    "singular": "أُمَّةٌ",
+    "dual": "أُمَّتَانِ",
+    "plural": "أُمَمٌ",
+    "meaning": "Bir peygambere tâbi olan topluluk",
+    "level": 1
+  },
+  {
+    "id": 113,
+    "category": "kuran",
+    "singular": "ذُرِّيَّةٌ",
+    "dual": "ذُرِّيَّتَانِ",
+    "plural": "ذُرِّيَّاتٌ",
+    "meaning": "Soy sop, nesil, evlatlar",
+    "level": 1
+  },
+  {
+    "id": 114,
+    "category": "kuran",
+    "singular": "أَجَلٌ",
+    "dual": "أَجَلَانِ",
+    "plural": "آجَالٌ",
+    "meaning": "Tayin edilmiş ömür sonu, vakit",
+    "level": 1
+  },
+  {
+    "id": 115,
+    "category": "kuran",
+    "singular": "رِزْقٌ",
+    "dual": "رِزْقَانِ",
+    "plural": "أَرْزَاقٌ",
+    "meaning": "Canlıya bahşedilen maddi ve manevi gıda",
+    "level": 1
+  },
+  {
+    "id": 116,
+    "category": "kuran",
+    "singular": "مَعَاشٌ",
+    "dual": "مَعَاشَانِ",
+    "plural": "مَعَايِشُ",
+    "meaning": "Hayat dirlik sebebi, geçim vasıtası",
+    "level": 1
+  },
+  {
+    "id": 117,
+    "category": "kuran",
+    "singular": "مِشْكَاةٌ",
+    "dual": "مِشْكَاةَانِ",
+    "plural": "مَشَاكٍ",
+    "meaning": "Kandil yuvası, ışık veren oyuk",
+    "level": 1
+  },
+  {
+    "id": 118,
+    "category": "kuran",
+    "singular": "زُجَاجَةٌ",
+    "dual": "زُجَاجَتَانِ",
+    "plural": "زُجَاجَاتٌ",
+    "meaning": "Sırça kandil, berrak billur cam",
+    "level": 1
+  },
+  {
+    "id": 119,
+    "category": "kuran",
+    "singular": "حِلْيَةٌ",
+    "dual": "حِلْيَتَانِ",
+    "plural": "حُلِيٌّ",
+    "meaning": "Süs eşyası, ziynet, güzel vasıflar",
+    "level": 1
+  },
+  {
+    "id": 120,
+    "category": "kuran",
+    "singular": "لِبَاسٌ",
+    "dual": "لِبَاسَانِ",
+    "plural": "أَلْبِسَةٌ / لُبُسٌ",
+    "meaning": "Örtünme giysisi; takva ve hayâ örtüsü",
+    "level": 1
+  },
+  {
+    "id": 121,
+    "category": "kuran",
+    "singular": "سُنْدُسٌ",
+    "dual": "سُنْدُسَانِ",
+    "plural": "سَنَادِسُ",
+    "meaning": "Cennet ehlinin ince ipekten elbisesi",
+    "level": 1
+  },
+  {
+    "id": 122,
+    "category": "kuran",
+    "singular": "إِسْتَبْرَقٌ",
+    "dual": "إِسْتَبْرَقَانِ",
+    "plural": "أَسَابِرِقُ",
+    "meaning": "Cennet ehlinin kalın ve parlak ipeği",
+    "level": 1
+  },
+  {
+    "id": 123,
+    "category": "kuran",
+    "singular": "وِزْرٌ",
+    "dual": "وِزْرَانِ",
+    "plural": "أَوْزَارٌ",
+    "meaning": "Ağır günah yükü, mesuliyet",
+    "level": 1
+  },
+  {
+    "id": 124,
+    "category": "kuran",
+    "singular": "إِصْرٌ",
+    "dual": "إِصْرَانِ",
+    "plural": "آصَارٌ",
+    "meaning": "Ağır yük, bağlayıcı ahit ve külfet",
+    "level": 1
+  },
+  {
+    "id": 125,
+    "category": "kuran",
+    "singular": "أَغْلَالٌ",
+    "dual": "غُلَّانِ",
+    "plural": "أَغْلَالٌ",
+    "meaning": "Boyunlara vurulan bukağılar, tasmalar",
+    "level": 1
+  },
+  {
+    "id": 126,
+    "category": "kuran",
+    "singular": "سَلَاسِلُ",
+    "dual": "سِلْسِلَتَانِ",
+    "plural": "سَلَاسِلُ",
+    "meaning": "Cehennem ehlinin bağlandığı zincirler",
+    "level": 1
+  },
+  {
+    "id": 127,
+    "category": "kuran",
+    "singular": "جَحِيمٌ",
+    "dual": "جَحِيمَانِ",
+    "plural": "جُحُمٌ",
+    "meaning": "Şiddetle alevlenen, yakıcı derin ateş",
+    "level": 1
+  },
+  {
+    "id": 128,
+    "category": "kuran",
+    "singular": "سَقَرٌ",
+    "dual": "سَقَرَانِ",
+    "plural": "أَسْقَارٌ",
+    "meaning": "Yakıp kavuran cehennem tabakası",
+    "level": 1
+  },
+  {
+    "id": 129,
+    "category": "kuran",
+    "singular": "زَمْهَرِيرٌ",
+    "dual": "زَمْهَرِيرَانِ",
+    "plural": "زَمَاهِرُ",
+    "meaning": "Dondurucu soğuk azap yeri",
+    "level": 1
+  },
+  {
+    "id": 130,
+    "category": "kuran",
+    "singular": "زَقُّومٌ",
+    "dual": "زَقُّومَانِ",
+    "plural": "زَقَاقِيمُ",
+    "meaning": "Cehennemin dibinde biten acı ağaç",
+    "level": 1
+  },
+  {
+    "id": 131,
+    "category": "kuran",
+    "singular": "غِسْلِينٌ",
+    "dual": "غِسْلِينَانِ",
+    "plural": "أَغْسِلَةٌ",
+    "meaning": "Cehennem ehlinin aktığı cerahatli içecek",
+    "level": 1
+  },
+  {
+    "id": 132,
+    "category": "kuran",
+    "singular": "حَمِيمٌ",
+    "dual": "حَمِيمَانِ",
+    "plural": "أَحِمَّاءُ",
+    "meaning": "Kaynar sıcak su; yakın dost",
+    "level": 1
+  },
+  {
+    "id": 133,
+    "category": "kuran",
+    "singular": "سَلْوَى",
+    "dual": "سَلْوَيَانِ",
+    "plural": "سَلْوَاتٌ",
+    "meaning": "İlahî ikram olan bıldırcın eti",
+    "level": 1
+  },
+  {
+    "id": 134,
+    "category": "kuran",
+    "singular": "مَنٌّ",
+    "dual": "مَنَّانِ",
+    "plural": "مِنَانٌ",
+    "meaning": "Zahmetsizce lütfedilen ilahî kudret helvası",
+    "level": 1
+  },
+  {
+    "id": 135,
+    "category": "kuran",
+    "singular": "عَسَلٌ",
+    "dual": "عَسَلَانِ",
+    "plural": "أَعْسَالٌ",
+    "meaning": "Şifalı saf bal nimeti",
+    "level": 1
+  },
+  {
+    "id": 136,
+    "category": "kuran",
+    "singular": "لَبَنٌ",
+    "dual": "لَبَنَانِ",
+    "plural": "أَلْبَانٌ",
+    "meaning": "Saf ve besleyici temiz süt",
+    "level": 1
+  },
+  {
+    "id": 137,
+    "category": "kuran",
+    "singular": "طِفْلٌ",
+    "dual": "طِفْلَانِ",
+    "plural": "أَطْفَالٌ",
+    "meaning": "Küçük çocuk, sabi",
+    "level": 1
+  },
+  {
+    "id": 138,
+    "category": "kuran",
+    "singular": "شَيْخٌ",
+    "dual": "شَيْخَانِ",
+    "plural": "شُيُوخٌ / أَشْيَاخٌ",
+    "meaning": "İhtiyar kimse; ilim ve maneviyat reisi",
+    "level": 1
+  },
+  {
+    "id": 139,
+    "category": "kuran",
+    "singular": "رَكْعَةٌ",
+    "dual": "رَكْعَتَانِ",
+    "plural": "رَكَعَاتٌ",
+    "meaning": "Namazın rükû ve secdeli her bir cüzü",
+    "level": 1
+  },
+  {
+    "id": 140,
+    "category": "kuran",
+    "singular": "سَجْدَةٌ",
+    "dual": "سَجْدَتَانِ",
+    "plural": "سَجَدَاتٌ",
+    "meaning": "Alnı yere koyup Allah'a boyun eğme",
+    "level": 1
+  },
+  {
+    "id": 141,
+    "category": "kuran",
+    "singular": "مِحْرَابٌ",
+    "dual": "مِحْرَابَانِ",
+    "plural": "مَحَارِيبُ",
+    "meaning": "İbadet yeri, caminin kıble nişi",
+    "level": 1
+  },
+  {
+    "id": 142,
+    "category": "kuran",
+    "singular": "مِنْبَرٌ",
+    "dual": "مِنْبَرَانِ",
+    "plural": "مَنَابِرُ",
+    "meaning": "Hutbe irad edilen yüksek basamaklı kürsü",
+    "level": 1
+  },
+  {
+    "id": 143,
+    "category": "kuran",
+    "singular": "مَسْجِدٌ",
+    "dual": "مَسْجِدَانِ",
+    "plural": "مَسَاجِدُ",
+    "meaning": "Secde edilen mübarek ibadethane",
+    "level": 1
+  },
+  {
+    "id": 144,
+    "category": "kuran",
+    "singular": "فُرْقَانٌ",
+    "dual": "فُرْقَانَانِ",
+    "plural": "فَرَاقِينُ",
+    "meaning": "Hak ile batılı ayıran Kur'an",
+    "level": 1
+  },
+  {
+    "id": 145,
+    "category": "kuran",
+    "singular": "بَيِّنَةٌ",
+    "dual": "بَيِّنَتَانِ",
+    "plural": "بَيِّنَاتٌ",
+    "meaning": "Açık delil, kesin şahit ve huccet",
+    "level": 1
+  },
+  {
+    "id": 146,
+    "category": "kuran",
+    "singular": "بَشِيرٌ",
+    "dual": "بَشِيرَانِ",
+    "plural": "بُشَرَاءُ",
+    "meaning": "Cenneti ve ilahî mükafatı müjdeleyen elçi",
+    "level": 1
+  },
+  {
+    "id": 147,
+    "category": "kuran",
+    "singular": "نَذِيرٌ",
+    "dual": "نَذِيرَانِ",
+    "plural": "نُذُرٌ",
+    "meaning": "İlahî azaba karşı uyaran peygamber",
+    "level": 1
+  },
+  {
+    "id": 148,
+    "category": "kuran",
+    "singular": "مِيثَاقٌ",
+    "dual": "مِيثَاقَانِ",
+    "plural": "مَوَاثِيقُ",
+    "meaning": "Sağlam sözleşme, ezelî ahit",
+    "level": 1
+  },
+  {
+    "id": 149,
+    "category": "kuran",
+    "singular": "حَبْلٌ",
+    "dual": "حَبْلَانِ",
+    "plural": "حِبَالٌ",
+    "meaning": "Sağlam ip; ilahî bağ ve Kur'an",
+    "level": 1
+  },
+  {
+    "id": 150,
+    "category": "kuran",
+    "singular": "عُرْوَةٌ",
+    "dual": "عُرْوَتَانِ",
+    "plural": "عُرًى",
+    "meaning": "Sağlam kulp; sarsılmaz iman bağı",
+    "level": 1
+  },
+  {
+    "id": 151,
+    "category": "hadis",
+    "singular": "سُنَّةٌ",
+    "dual": "سُنَّتَانِ",
+    "plural": "سُنَنٌ",
+    "meaning": "Peygamberimizin söz, fiil ve takrirleri",
+    "level": 2
+  },
+  {
+    "id": 152,
+    "category": "hadis",
+    "singular": "حَدِيثٌ",
+    "dual": "حَدِيثَانِ",
+    "plural": "أَحَادِيثُ",
+    "meaning": "Peygamber efendimizin mübarek sözü ve haberi",
+    "level": 2
+  },
+  {
+    "id": 153,
+    "category": "hadis",
+    "singular": "إِسْنَادٌ",
+    "dual": "إِسْنَادَانِ",
+    "plural": "أَسَانِيدُ",
+    "meaning": "Hadisi nakleden raviler zinciri",
+    "level": 2
+  },
+  {
+    "id": 154,
+    "category": "hadis",
+    "singular": "مَتْنٌ",
+    "dual": "مَتْنَانِ",
+    "plural": "مُتُونٌ",
+    "meaning": "Hadisin asıl lafız ve ibare kısmı",
+    "level": 2
+  },
+  {
+    "id": 155,
+    "category": "hadis",
+    "singular": "رَاوٍ",
+    "dual": "رَاوِيَانِ",
+    "plural": "رُوَاةٌ",
+    "meaning": "Hadis-i şerifi nakleden kimse",
+    "level": 2
+  },
+  {
+    "id": 156,
+    "category": "hadis",
+    "singular": "صِحَّةٌ",
+    "dual": "صِحَّتَانِ",
+    "plural": "صِحَّاتٌ",
+    "meaning": "Hadisin sahih, sağlam ve kusursuz oluşu",
+    "level": 2
+  },
+  {
+    "id": 157,
+    "category": "hadis",
+    "singular": "ضَعْفٌ",
+    "dual": "ضَعْفَانِ",
+    "plural": "أَضْعَافٌ",
+    "meaning": "Hadisin sened veya metnindeki kusur",
+    "level": 2
+  },
+  {
+    "id": 158,
+    "category": "hadis",
+    "singular": "مُتَوَاتِرٌ",
+    "dual": "مُتَوَاتِرَانِ",
+    "plural": "مُتَوَاتِرَاتٌ",
+    "meaning": "Yalan üzerine birleşmesi imkansız topluluğun rivayeti",
+    "level": 2
+  },
+  {
+    "id": 159,
+    "category": "hadis",
+    "singular": "مَشْهُورٌ",
+    "dual": "مَشْهُورَانِ",
+    "plural": "مَشَاهِيرُ",
+    "meaning": "Her tabakada en az üç ravisi bulunan hadis",
+    "level": 2
+  },
+  {
+    "id": 160,
+    "category": "hadis",
+    "singular": "عَزِيزٌ",
+    "dual": "عَزِيزَانِ",
+    "plural": "أَعِزَّاءُ",
+    "meaning": "Her tabakada en az iki ravisi bulunan hadis",
+    "level": 2
+  },
+  {
+    "id": 161,
+    "category": "hadis",
+    "singular": "غَرِيبٌ",
+    "dual": "غَرِيبَانِ",
+    "plural": "غُرَبَاءُ",
+    "meaning": "Senedin herhangi bir yerinde tek kalan rivayet",
+    "level": 2
+  },
+  {
+    "id": 162,
+    "category": "hadis",
+    "singular": "مُرْسَلٌ",
+    "dual": "مُرْسَلَانِ",
+    "plural": "مُرْسَلَاتٌ",
+    "meaning": "Tabiînin sahabi atlayarak doğrudan rivayet ettiği hadis",
+    "level": 2
+  },
+  {
+    "id": 163,
+    "category": "hadis",
+    "singular": "مَوْقُوفٌ",
+    "dual": "مَوْقُوفَانِ",
+    "plural": "مَوْقُوفَاتٌ",
+    "meaning": "Sahabiye nispet edilen söz ve fiil",
+    "level": 2
+  },
+  {
+    "id": 164,
+    "category": "hadis",
+    "singular": "مَقْطُوعٌ",
+    "dual": "مَقْطُوعَانِ",
+    "plural": "مَقْطُوعَاتٌ",
+    "meaning": "Tabiîne nispet edilen söz ve fetva",
+    "level": 2
+  },
+  {
+    "id": 165,
+    "category": "hadis",
+    "singular": "مَوْضُوعٌ",
+    "dual": "مَوْضُوعَانِ",
+    "plural": "مَوْضُوعَاتٌ",
+    "meaning": "Peygamber adına uydurulmuş asılsız rivayet",
+    "level": 2
+  },
+  {
+    "id": 166,
+    "category": "hadis",
+    "singular": "إِجْمَاعٌ",
+    "dual": "إِجْمَاعَانِ",
+    "plural": "إِجْمَاعَاتٌ",
+    "meaning": "İslam müctehidlerinin bir hükümde ittifakı",
+    "level": 2
+  },
+  {
+    "id": 167,
+    "category": "hadis",
+    "singular": "قِيَاسٌ",
+    "dual": "قِيَاسَانِ",
+    "plural": "أَقْيِسَةٌ",
+    "meaning": "Hükmü bilinmeyeni bilinene benzeterek hüküm çıkarma",
+    "level": 2
+  },
+  {
+    "id": 168,
+    "category": "hadis",
+    "singular": "إِجْتِهَادٌ",
+    "dual": "إِجْتِهَادَانِ",
+    "plural": "إِجْتِهَادَاتٌ",
+    "meaning": "Şer'î delillerden hüküm çıkarma gayreti",
+    "level": 2
+  },
+  {
+    "id": 169,
+    "category": "hadis",
+    "singular": "مُجْتَهِدٌ",
+    "dual": "مُجْتَهِدَانِ",
+    "plural": "مُجْتَهِدُونَ",
+    "meaning": "Ayet ve hadisten hüküm çıkarma ehliyetine sahip alim",
+    "level": 2
+  },
+  {
+    "id": 170,
+    "category": "hadis",
+    "singular": "فَتْوَى",
+    "dual": "فَتْوَيَانِ",
+    "plural": "فَتَاوَى",
+    "meaning": "Dini mesele hakkında verilen şer'î hüküm",
+    "level": 2
+  },
+  {
+    "id": 171,
+    "category": "hadis",
+    "singular": "مُفْتٍ",
+    "dual": "مُفْتِيَانِ",
+    "plural": "مُفْتُونَ",
+    "meaning": "Şeriat hükmünü fetva ile bildiren alim",
+    "level": 2
+  },
+  {
+    "id": 172,
+    "category": "hadis",
+    "singular": "تَقْلِيدٌ",
+    "dual": "تَقْلِيدَانِ",
+    "plural": "تَقَالِيدُ",
+    "meaning": "Delilini bilmeden alimin içtihadına uyma",
+    "level": 2
+  },
+  {
+    "id": 173,
+    "category": "hadis",
+    "singular": "مُعَامَلَةٌ",
+    "dual": "مُعَامَلَتَانِ",
+    "plural": "مُعَامَلَاتٌ",
+    "meaning": "İnsanlar arası hukuki ve ticari ilişkiler",
+    "level": 2
+  },
+  {
+    "id": 174,
+    "category": "hadis",
+    "singular": "عُقُوبَةٌ",
+    "dual": "عُقُوبَتَانِ",
+    "plural": "عُقُوبَاتٌ",
+    "meaning": "Şeriatın koyduğu cezai müeyyideler",
+    "level": 2
+  },
+  {
+    "id": 175,
+    "category": "hadis",
+    "singular": "طَهَارَةٌ",
+    "dual": "طَهَارَتَانِ",
+    "plural": "طَهَارَاتٌ",
+    "meaning": "Maddi ve hükmi pisliklerden temizlenme",
+    "level": 2
+  },
+  {
+    "id": 176,
+    "category": "hadis",
+    "singular": "نَجَاسَةٌ",
+    "dual": "نَجَاسَتَانِ",
+    "plural": "نَجَاسَاتٌ",
+    "meaning": "Namaza ve ibadete mani olan pislik",
+    "level": 2
+  },
+  {
+    "id": 177,
+    "category": "hadis",
+    "singular": "حَدَثٌ",
+    "dual": "حَدَثَانِ",
+    "plural": "أَحْدَاثٌ",
+    "meaning": "Abdest veya gusül gerektiren hükmi kirlilik",
+    "level": 2
+  },
+  {
+    "id": 178,
+    "category": "hadis",
+    "singular": "جَنَابَةٌ",
+    "dual": "جَنَابَتَانِ",
+    "plural": "جَنَابَاتٌ",
+    "meaning": "Gusül abdesti almayı gerektiren hal",
+    "level": 2
+  },
+  {
+    "id": 179,
+    "category": "hadis",
+    "singular": "حَيْضٌ",
+    "dual": "حَيْضَانِ",
+    "plural": "حُيُوضٌ",
+    "meaning": "Kadınların muayyen fıtri hali",
+    "level": 2
+  },
+  {
+    "id": 180,
+    "category": "hadis",
+    "singular": "نِفَاسٌ",
+    "dual": "نِفَاسَانِ",
+    "plural": "أَنْفَاسٌ",
+    "meaning": "Doğum sonrası lohusalık dönemi",
+    "level": 2
+  },
+  {
+    "id": 181,
+    "category": "hadis",
+    "singular": "إِسْتِحَاضَةٌ",
+    "dual": "إِسْتِحَاضَتَانِ",
+    "plural": "إِسْتِحَاضَاتٌ",
+    "meaning": "Hastalık ve özür kanaması hali",
+    "level": 2
+  },
+  {
+    "id": 182,
+    "category": "hadis",
+    "singular": "مِسْوَاكٌ",
+    "dual": "مِسْوَاكَانِ",
+    "plural": "مَسَاوِيكُ",
+    "meaning": "Diş temizliğinde kullanılan sünnet fırça",
+    "level": 2
+  },
+  {
+    "id": 183,
+    "category": "hadis",
+    "singular": "خِتَانٌ",
+    "dual": "خِتَانَانِ",
+    "plural": "خِتَانَاتٌ",
+    "meaning": "Erkek çocukların sünnet edilmesi fıtratı",
+    "level": 2
+  },
+  {
+    "id": 184,
+    "category": "hadis",
+    "singular": "إِسْتِنْجَاءٌ",
+    "dual": "إِسْتِنْجَاءَانِ",
+    "plural": "إِسْتِنْجَاءَاتٌ",
+    "meaning": "Tuvalet sonrası su ile yapılan temizlik",
+    "level": 2
+  },
+  {
+    "id": 185,
+    "category": "hadis",
+    "singular": "إِسْتِبْرَاءٌ",
+    "dual": "إِسْتِبْرَاءَانِ",
+    "plural": "إِسْتِبْرَاءَاتٌ",
+    "meaning": "İdrar kalıntısından tamamen arınma gayreti",
+    "level": 2
+  },
+  {
+    "id": 186,
+    "category": "hadis",
+    "singular": "سَهْوٌ",
+    "dual": "سَهْوَانِ",
+    "plural": "سَهَوَاتٌ",
+    "meaning": "Namazda dalgınlıkla yapılan yanılma",
+    "level": 2
+  },
+  {
+    "id": 187,
+    "category": "hadis",
+    "singular": "قِيَامٌ",
+    "dual": "قِيَامَانِ",
+    "plural": "قِيَامَاتٌ",
+    "meaning": "Namazda ayakta durma farzı",
+    "level": 2
+  },
+  {
+    "id": 188,
+    "category": "hadis",
+    "singular": "قِرَاءَةٌ",
+    "dual": "قِرَاءَتَانِ",
+    "plural": "قِرَاءَاتٌ",
+    "meaning": "Namazda Kur'an ayetlerini okuma",
+    "level": 2
+  },
+  {
+    "id": 189,
+    "category": "hadis",
+    "singular": "رُكُوعٌ",
+    "dual": "رُكُوعَانِ",
+    "plural": "رُكُوعَاتٌ",
+    "meaning": "Namazda bel büküp secde öncesi eğilme",
+    "level": 2
+  },
+  {
+    "id": 190,
+    "category": "hadis",
+    "singular": "تَشَهُّدٌ",
+    "dual": "تَشَهُّدَانِ",
+    "plural": "تَشَهُّدَاتٌ",
+    "meaning": "Namaz oturuşunda Ettehiyyâtü okuma",
+    "level": 2
+  },
+  {
+    "id": 191,
+    "category": "hadis",
+    "singular": "نَافِلَةٌ",
+    "dual": "نَافِلَتَانِ",
+    "plural": "نَوَافِلُ",
+    "meaning": "Farz ve vacip dışındaki faziletli sünnet ibadet",
+    "level": 2
+  },
+  {
+    "id": 192,
+    "category": "hadis",
+    "singular": "رَاتِبَةٌ",
+    "dual": "رَاتِبَتَانِ",
+    "plural": "رَوَاتِبُ",
+    "meaning": "Farz namazların öncesi ve sonrasındaki düzenli sünnetler",
+    "level": 2
+  },
+  {
+    "id": 193,
+    "category": "hadis",
+    "singular": "وِتْرٌ",
+    "dual": "وِتْرَانِ",
+    "plural": "أَوْتَارٌ",
+    "meaning": "Gece kılınan tek rek'atlı namaz",
+    "level": 2
+  },
+  {
+    "id": 194,
+    "category": "hadis",
+    "singular": "تَرَاوِيحُ",
+    "dual": "تَرْوِيحَتَانِ",
+    "plural": "تَرَاوِيحُ",
+    "meaning": "Ramazan gecelerinde kılınan sünnet namaz",
+    "level": 2
+  },
+  {
+    "id": 195,
+    "category": "hadis",
+    "singular": "تَهَجُّدٌ",
+    "dual": "تَهَجُّدَانِ",
+    "plural": "تَهَجُّدَاتٌ",
+    "meaning": "Uykudan uyanıp gece kılınan nafile namaz",
+    "level": 2
+  },
+  {
+    "id": 196,
+    "category": "hadis",
+    "singular": "ضُحَى",
+    "dual": "ضُحَيَانِ",
+    "plural": "أَضْحَاءٌ",
+    "meaning": "Kuşluk vaktinde kılınan nafile namaz",
+    "level": 2
+  },
+  {
+    "id": 197,
+    "category": "hadis",
+    "singular": "كُسُوفٌ",
+    "dual": "كُسُوفَانِ",
+    "plural": "كُسُوفَاتٌ",
+    "meaning": "Güneş tutulması esnasında kılınan namaz",
+    "level": 2
+  },
+  {
+    "id": 198,
+    "category": "hadis",
+    "singular": "خُسُوفٌ",
+    "dual": "خُسُوفَانِ",
+    "plural": "خُسُوفَاتٌ",
+    "meaning": "Ay tutulması esnasında kılınan namaz",
+    "level": 2
+  },
+  {
+    "id": 199,
+    "category": "hadis",
+    "singular": "إِسْتِسْقَاءٌ",
+    "dual": "إِسْتِسْقَاءَانِ",
+    "plural": "إِسْتِسْقَاءَاتٌ",
+    "meaning": "Kuraklıkta yapılan yağmur duası ve namazı",
+    "level": 2
+  },
+  {
+    "id": 200,
+    "category": "hadis",
+    "singular": "خُطْبَةٌ",
+    "dual": "خُطْبَتَانِ",
+    "plural": "خُطَبٌ",
+    "meaning": "Cuma ve bayramlarda minberde irad edilen nasihat",
+    "level": 2
+  },
+  {
+    "id": 201,
+    "category": "hadis",
+    "singular": "عِيدٌ",
+    "dual": "عِيدَانِ",
+    "plural": "أَعْيَادٌ",
+    "meaning": "Sevinç ve şükür günü olan Ramazan ve Kurban bayramı",
+    "level": 2
+  },
+  {
+    "id": 202,
+    "category": "hadis",
+    "singular": "عُمْرَةٌ",
+    "dual": "عُمْرَتَانِ",
+    "plural": "عُمَرٌ",
+    "meaning": "Hac mevsimi dışında Beytullah'ı ziyaret",
+    "level": 2
+  },
+  {
+    "id": 203,
+    "category": "hadis",
+    "singular": "طَوَافٌ",
+    "dual": "طَوَافَانِ",
+    "plural": "طَوَافَاتٌ",
+    "meaning": "Kâbe-i Muazzama etrafında yedi defa dönme",
+    "level": 2
+  },
+  {
+    "id": 204,
+    "category": "hadis",
+    "singular": "سَعْيٌ",
+    "dual": "سَعْيَانِ",
+    "plural": "أَسْعَاءٌ",
+    "meaning": "Safa ile Merve tepeleri arasında yedi defa yürüme",
+    "level": 2
+  },
+  {
+    "id": 205,
+    "category": "hadis",
+    "singular": "إِحْرَامٌ",
+    "dual": "إِحْرَامَانِ",
+    "plural": "إِحْرَامَاتٌ",
+    "meaning": "Hac ve umreye başlama niyeti ve beyaz örtüsü",
+    "level": 2
+  },
+  {
+    "id": 206,
+    "category": "hadis",
+    "singular": "تَلْبِيَةٌ",
+    "dual": "تَلْبِيَتَانِ",
+    "plural": "تَلْبِيَاتٌ",
+    "meaning": "Lebbeyk Allahümme lebbeyk diyerek ilahî davete icabet",
+    "level": 2
+  },
+  {
+    "id": 207,
+    "category": "hadis",
+    "singular": "عَرَفَاتٌ",
+    "dual": "عَرَفَتَانِ",
+    "plural": "عَرَفَاتٌ",
+    "meaning": "Arefe günü vakfe yapılan mübarek tepe",
+    "level": 2
+  },
+  {
+    "id": 208,
+    "category": "hadis",
+    "singular": "مُزْدَلِفَةٌ",
+    "dual": "مُزْدَلِفَتَانِ",
+    "plural": "مُزْدَلِفَاتٌ",
+    "meaning": "Arafat ile Mina arasında gece vakfe mahalli",
+    "level": 2
+  },
+  {
+    "id": 209,
+    "category": "hadis",
+    "singular": "مِنًى",
+    "dual": "مِنَيَانِ",
+    "plural": "أَمْنَاءٌ",
+    "meaning": "Şeytan taşlanan ve kurban kesilen mübarek vadi",
+    "level": 2
+  },
+  {
+    "id": 210,
+    "category": "hadis",
+    "singular": "جَمْرَةٌ",
+    "dual": "جَمْرَتَانِ",
+    "plural": "جَمَرَاتٌ",
+    "meaning": "Mina'da taş atılan taş sütun mahalli",
+    "level": 2
+  },
+  {
+    "id": 211,
+    "category": "hadis",
+    "singular": "هَدْيٌ",
+    "dual": "هَدْيَانِ",
+    "plural": "هَدَايَا",
+    "meaning": "Harem-i Şerif'te kesilen kurbanlık hayvan",
+    "level": 2
+  },
+  {
+    "id": 212,
+    "category": "hadis",
+    "singular": "أُضْحِيَّةٌ",
+    "dual": "أُضْحِيَّتَانِ",
+    "plural": "أَضَاحٍ",
+    "meaning": "Kurban bayramı günlerinde kesilen kurban",
+    "level": 2
+  },
+  {
+    "id": 213,
+    "category": "hadis",
+    "singular": "عَقِيقَةٌ",
+    "dual": "عَقِيقَتَانِ",
+    "plural": "عَقَائِقُ",
+    "meaning": "Yeni doğan çocuk için şükür niyetiyle kesilen kurban",
+    "level": 2
+  },
+  {
+    "id": 214,
+    "category": "hadis",
+    "singular": "نِكَاحٌ",
+    "dual": "نِكَاحَانِ",
+    "plural": "أَنْكِحَةٌ",
+    "meaning": "Karı koca arasında akdedilen meşru evlilik bağı",
+    "level": 2
+  },
+  {
+    "id": 215,
+    "category": "hadis",
+    "singular": "طَلَاقٌ",
+    "dual": "طَلَاقَانِ",
+    "plural": "طَلَاقَاتٌ",
+    "meaning": "Evlilik akdinin şer'î usulle sona erdirilmesi",
+    "level": 2
+  },
+  {
+    "id": 216,
+    "category": "hadis",
+    "singular": "مَهْرٌ",
+    "dual": "مَهْرَانِ",
+    "plural": "مُهُورٌ",
+    "meaning": "Erkeğin evlenirken hanımına vermesi gereken mal",
+    "level": 2
+  },
+  {
+    "id": 217,
+    "category": "hadis",
+    "singular": "خُلْعٌ",
+    "dual": "خُلْعَانِ",
+    "plural": "أَخْلَاعٌ",
+    "meaning": "Kadının bedel vererek boşanmayı talep etmesi",
+    "level": 2
+  },
+  {
+    "id": 218,
+    "category": "hadis",
+    "singular": "عِدَّةٌ",
+    "dual": "عِدَّتَانِ",
+    "plural": "عِدَدٌ",
+    "meaning": "Boşanan veya eşi vefat eden kadının bekleme süresi",
+    "level": 2
+  },
+  {
+    "id": 219,
+    "category": "hadis",
+    "singular": "رَضَاعٌ",
+    "dual": "رَضَاعَانِ",
+    "plural": "أَرْضَاعٌ",
+    "meaning": "Süt emzirme ve oluşan süt akrabalığı",
+    "level": 2
+  },
+  {
+    "id": 220,
+    "category": "hadis",
+    "singular": "مِيرَاثٌ",
+    "dual": "مِيرَاثَانِ",
+    "plural": "مَوَارِيثُ",
+    "meaning": "Vefat eden kimseden varislerine kalan tereke",
+    "level": 2
+  },
+  {
+    "id": 221,
+    "category": "hadis",
+    "singular": "فَرِيضَةٌ",
+    "dual": "فَرِيضَتَانِ",
+    "plural": "فَرَائِضُ",
+    "meaning": "Şeriatın belirlediği farz miras payları",
+    "level": 2
+  },
+  {
+    "id": 222,
+    "category": "hadis",
+    "singular": "وَصِيَّةٌ",
+    "dual": "وَصِيَّتَانِ",
+    "plural": "وَصَايَا",
+    "meaning": "Vefat sonrasına yönelik meşru mal tasarrufu",
+    "level": 2
+  },
+  {
+    "id": 223,
+    "category": "hadis",
+    "singular": "بَيْعٌ",
+    "dual": "بَيْعَانِ",
+    "plural": "بُيُوعٌ",
+    "meaning": "Malın başka bir mülkle karşılıklı satımı",
+    "level": 2
+  },
+  {
+    "id": 224,
+    "category": "hadis",
+    "singular": "شِرَاءٌ",
+    "dual": "شِرَاءَانِ",
+    "plural": "أَشْرِيَةٌ",
+    "meaning": "Mal satın alma ve mülk edinme akdi",
+    "level": 2
+  },
+  {
+    "id": 225,
+    "category": "hadis",
+    "singular": "رِبًا",
+    "dual": "رِبَوَانِ",
+    "plural": "أَرْبَاءٌ",
+    "meaning": "Haksız kazanç ve haram kılınan faiz fazlalığı",
+    "level": 2
+  },
+  {
+    "id": 226,
+    "category": "hadis",
+    "singular": "تِجَارَةٌ",
+    "dual": "تِجَارَتَانِ",
+    "plural": "تِجَارَاتٌ",
+    "meaning": "Kâr amacıyla mal alıp satma faaliyeti",
+    "level": 2
+  },
+  {
+    "id": 227,
+    "category": "hadis",
+    "singular": "قَرْضٌ",
+    "dual": "قَرْضَانِ",
+    "plural": "قُرُوضٌ",
+    "meaning": "İhtiyaç sahibine karşılıksız verilen borç",
+    "level": 2
+  },
+  {
+    "id": 228,
+    "category": "hadis",
+    "singular": "رَهْنٌ",
+    "dual": "رَهْنَانِ",
+    "plural": "رُهُونٌ",
+    "meaning": "Borca karşılık teminat olarak tutulan mal",
+    "level": 2
+  },
+  {
+    "id": 229,
+    "category": "hadis",
+    "singular": "وَدِيعَةٌ",
+    "dual": "وَدِيعَتَانِ",
+    "plural": "وَدَائِعُ",
+    "meaning": "Korunması için başkasına bırakılan emanet",
+    "level": 2
+  },
+  {
+    "id": 230,
+    "category": "hadis",
+    "singular": "شَرِكَةٌ",
+    "dual": "شَرِكَتَانِ",
+    "plural": "شَرِكَاتٌ",
+    "meaning": "İki veya daha fazla kişinin ortaklığı",
+    "level": 2
+  },
+  {
+    "id": 231,
+    "category": "hadis",
+    "singular": "وَكَالَةٌ",
+    "dual": "وَكَالَتَانِ",
+    "plural": "وَكَالَاتٌ",
+    "meaning": "Başkasını kendi yerine yetkili kılma",
+    "level": 2
+  },
+  {
+    "id": 232,
+    "category": "hadis",
+    "singular": "قَضَاءٌ",
+    "dual": "قَضَاءَانِ",
+    "plural": "أَقْضِيَةٌ",
+    "meaning": "Hâkimin anlaşmazlıkları hükme bağlaması; geciken ibadeti eda",
+    "level": 2
+  },
+  {
+    "id": 233,
+    "category": "hadis",
+    "singular": "حُكْمٌ",
+    "dual": "حُكْمَانِ",
+    "plural": "أَحْكَامٌ",
+    "meaning": "Şeriatın emir, yasak ve serbestlik kararı",
+    "level": 2
+  },
+  {
+    "id": 234,
+    "category": "hadis",
+    "singular": "شَاهِدٌ",
+    "dual": "شَاهِدَانِ",
+    "plural": "شُهُودٌ / أَشْهَادٌ",
+    "meaning": "Bir olayı bizzat görüp mahkemede beyan eden",
+    "level": 2
+  },
+  {
+    "id": 235,
+    "category": "hadis",
+    "singular": "يَمِينٌ",
+    "dual": "يَمِينَانِ",
+    "plural": "أَيْمَانٌ",
+    "meaning": "Allah adına yapılan kasem ve ant",
+    "level": 2
+  },
+  {
+    "id": 236,
+    "category": "hadis",
+    "singular": "حَدٌّ",
+    "dual": "حَدَّانِ",
+    "plural": "حُدُودٌ",
+    "meaning": "Şeriatın koyduğu kesin cezai müeyyideler",
+    "level": 2
+  },
+  {
+    "id": 237,
+    "category": "hadis",
+    "singular": "قِصَاصٌ",
+    "dual": "قِصَاصَانِ",
+    "plural": "أَقْصِصَةٌ",
+    "meaning": "Cana can, göze göz denk adalet cezası",
+    "level": 2
+  },
+  {
+    "id": 238,
+    "category": "hadis",
+    "singular": "دِيَةٌ",
+    "dual": "دِيَتَانِ",
+    "plural": "دِيَاتٌ",
+    "meaning": "Haksız öldürme ve yaralamada ödenen kan bedeli",
+    "level": 2
+  },
+  {
+    "id": 239,
+    "category": "hadis",
+    "singular": "صُلْحٌ",
+    "dual": "صُلْحَانِ",
+    "plural": "أَصْلَاحٌ",
+    "meaning": "Taraflar arasındaki anlaşmazlığı barışla çözme",
+    "level": 2
+  },
+  {
+    "id": 240,
+    "category": "hadis",
+    "singular": "هِجْرَةٌ",
+    "dual": "هِجْرَتَانِ",
+    "plural": "هِجْرَاتٌ",
+    "meaning": "Dini yaşamak için Mekke'den Medine'ye göç",
+    "level": 2
+  },
+  {
+    "id": 241,
+    "category": "hadis",
+    "singular": "مُهَاجِرٌ",
+    "dual": "مُهَاجِرَانِ",
+    "plural": "مُهَاجِرُونَ",
+    "meaning": "Dini uğruna yurdunu terk eden sahabi",
+    "level": 2
+  },
+  {
+    "id": 242,
+    "category": "hadis",
+    "singular": "أَنْصَارِيٌّ",
+    "dual": "أَنْصَارِيَّانِ",
+    "plural": "أَنْصَارٌ",
+    "meaning": "Medine'de muhacirleri bağrına basan yardımcılar",
+    "level": 2
+  },
+  {
+    "id": 243,
+    "category": "hadis",
+    "singular": "غَزْوَةٌ",
+    "dual": "غَزْوَتَانِ",
+    "plural": "غَزَوَاتٌ",
+    "meaning": "Peygamber efendimizin bizzat katıldığı sefer",
+    "level": 2
+  },
+  {
+    "id": 244,
+    "category": "hadis",
+    "singular": "سَرِيَّةٌ",
+    "dual": "سَرِيَّتَانِ",
+    "plural": "سَرَايَا",
+    "meaning": "Peygamberimizin görevlendirdiği öncü askeri birlik",
+    "level": 2
+  },
+  {
+    "id": 245,
+    "category": "hadis",
+    "singular": "صَحَابِيٌّ",
+    "dual": "صَحَابِيَّانِ",
+    "plural": "صَحَابَةٌ",
+    "meaning": "Peygamberimizi görüp imanla vefat eden kutlu nesil",
+    "level": 2
+  },
+  {
+    "id": 246,
+    "category": "hadis",
+    "singular": "تَابِعِيٌّ",
+    "dual": "تَابِعِيَّانِ",
+    "plural": "تَابِعُونَ",
+    "meaning": "Sahabeyi görüp onlardan ilim alan nesil",
+    "level": 2
+  },
+  {
+    "id": 247,
+    "category": "hadis",
+    "singular": "خَلِيفَةٌ",
+    "dual": "خَلِيفَتَانِ",
+    "plural": "خُلَفَاءُ",
+    "meaning": "Peygamberimizin ardından ümmeti yöneten devlet reisi",
+    "level": 2
+  },
+  {
+    "id": 248,
+    "category": "hadis",
+    "singular": "إِمَامٌ",
+    "dual": "إِمَامَانِ",
+    "plural": "أَئِمَّةٌ",
+    "meaning": "Namazda öne geçen; ümmetin manevi rehberi",
+    "level": 2
+  },
+  {
+    "id": 249,
+    "category": "hadis",
+    "singular": "أَذَانٌ",
+    "dual": "أَذَانَانِ",
+    "plural": "آذَانٌ",
+    "meaning": "Namaz vaktini bildiren ilahî çağrı",
+    "level": 2
+  },
+  {
+    "id": 250,
+    "category": "hadis",
+    "singular": "إِقَامَةٌ",
+    "dual": "إِقَامَتَانِ",
+    "plural": "إِقَامَاتٌ",
+    "meaning": "Farz namaza başlamadan önce okunan çağrı",
+    "level": 2
+  },
+  {
+    "id": 251,
+    "category": "hadis",
+    "singular": "وُضُوءٌ",
+    "dual": "وُضُوءَانِ",
+    "plural": "أَوْضِئَةٌ",
+    "meaning": "Namaz için el, yüz ve ayakları yıkama",
+    "level": 2
+  },
+  {
+    "id": 252,
+    "category": "hadis",
+    "singular": "غُسْلٌ",
+    "dual": "غُسْلَانِ",
+    "plural": "أَغْسَالٌ",
+    "meaning": "Bütün vücudu tepeden tırnağa yıkama",
+    "level": 2
+  },
+  {
+    "id": 253,
+    "category": "hadis",
+    "singular": "تَيَمُّمٌ",
+    "dual": "تَيَمُّمَانِ",
+    "plural": "تَيَمُّمَاتٌ",
+    "meaning": "Su bulunmadığında temiz toprakla niyetlenme",
+    "level": 2
+  },
+  {
+    "id": 254,
+    "category": "hadis",
+    "singular": "قِبْلَةٌ",
+    "dual": "قِبْلَتَانِ",
+    "plural": "قِبَلٌ",
+    "meaning": "Namaz kılarken yönelinen Kâbe istikameti",
+    "level": 2
+  },
+  {
+    "id": 255,
+    "category": "hadis",
+    "singular": "كَعْبَةٌ",
+    "dual": "كَعْبَتَانِ",
+    "plural": "كِعَابٌ",
+    "meaning": "Yeryüzündeki ilk tevhid mabedi, Beytullah",
+    "level": 2
+  },
+  {
+    "id": 256,
+    "category": "hadis",
+    "singular": "سِيَادَةٌ",
+    "dual": "سِيَادَتَانِ",
+    "plural": "سِيَادَاتٌ",
+    "meaning": "Efendilik, liderlik ve yüksek şeref",
+    "level": 2
+  },
+  {
+    "id": 257,
+    "category": "hadis",
+    "singular": "شَرَفٌ",
+    "dual": "شَرَفَانِ",
+    "plural": "أَشْرَافٌ",
+    "meaning": "Yüksek ahlak ve soy asaleti",
+    "level": 2
+  },
+  {
+    "id": 258,
+    "category": "hadis",
+    "singular": "مُرُوءَةٌ",
+    "dual": "مُرُوءَتَانِ",
+    "plural": "مُرُوءَاتٌ",
+    "meaning": "İnsaniyet, cömertlik ve asil yiğitlik",
+    "level": 2
+  },
+  {
+    "id": 259,
+    "category": "hadis",
+    "singular": "فُتُوَّةٌ",
+    "dual": "فُتُوَّتَانِ",
+    "plural": "فُتُوَّاتٌ",
+    "meaning": "Gençlik mertliği, diğerkamlık ve fedakarlık",
+    "level": 2
+  },
+  {
+    "id": 260,
+    "category": "hadis",
+    "singular": "نَخْوَةٌ",
+    "dual": "نَخْوَتَانِ",
+    "plural": "نَخَوَاتٌ",
+    "meaning": "Asalet gayreti ve gurur",
+    "level": 2
+  },
+  {
+    "id": 261,
+    "category": "hadis",
+    "singular": "حَمِيَّةٌ",
+    "dual": "حَمِيَّتَانِ",
+    "plural": "حَمِيَّاتٌ",
+    "meaning": "Hak uğruna koruma gayreti, gayretkeşlik",
+    "level": 2
+  },
+  {
+    "id": 262,
+    "category": "hadis",
+    "singular": "غَيْرَةٌ",
+    "dual": "غَيْرَتَانِ",
+    "plural": "غَيَرَاتٌ",
+    "meaning": "Mukaddesatı koruma kıskançlığı ve duyarlılığı",
+    "level": 2
+  },
+  {
+    "id": 263,
+    "category": "hadis",
+    "singular": "حِلْفٌ",
+    "dual": "حِلْفَانِ",
+    "plural": "أَحْلَافٌ",
+    "meaning": "Mazluma yardım için yapılan dostluk yemini",
+    "level": 2
+  },
+  {
+    "id": 264,
+    "category": "hadis",
+    "singular": "جِوَارٌ",
+    "dual": "جِوَارَانِ",
+    "plural": "أَجْوِرَةٌ",
+    "meaning": "Komşuluk hakkı ve himaye sığınağı",
+    "level": 2
+  },
+  {
+    "id": 265,
+    "category": "hadis",
+    "singular": "جَارٌ",
+    "dual": "جَارَانِ",
+    "plural": "جِيرَانٌ",
+    "meaning": "Yan yana yaşayan komşu, hami",
+    "level": 2
+  },
+  {
+    "id": 266,
+    "category": "hadis",
+    "singular": "ضَيْفٌ",
+    "dual": "ضَيْفَانِ",
+    "plural": "ضُيُوفٌ / أَضْيَافٌ",
+    "meaning": "Eve gelen misafir ve konuk",
+    "level": 2
+  },
+  {
+    "id": 267,
+    "category": "hadis",
+    "singular": "قِرًى",
+    "dual": "قِرَيَانِ",
+    "plural": "أَقْرَاءٌ",
+    "meaning": "Misafire ikram edilen yemek ve ağırlama",
+    "level": 2
+  },
+  {
+    "id": 268,
+    "category": "hadis",
+    "singular": "مَأْدُبَةٌ",
+    "dual": "مَأْدُبَتَانِ",
+    "plural": "مَآدِبُ",
+    "meaning": "İnsanları toplayıp ziyafet verilen sofra",
+    "level": 2
+  },
+  {
+    "id": 269,
+    "category": "hadis",
+    "singular": "وَلِيمَةٌ",
+    "dual": "وَلِيمَتَانِ",
+    "plural": "وَلَائِمُ",
+    "meaning": "Düğün münasebetiyle verilen sünnet ziyafeti",
+    "level": 2
+  },
+  {
+    "id": 270,
+    "category": "hadis",
+    "singular": "عَقِيقٌ",
+    "dual": "عَقِيقَانِ",
+    "plural": "أَعِقَّةٌ",
+    "meaning": "Kırmızı renkli kıymetli akik taşı",
+    "level": 2
+  },
+  {
+    "id": 271,
+    "category": "hadis",
+    "singular": "خَاتَمٌ",
+    "dual": "خَاتَمَانِ",
+    "plural": "خَوَاتِمُ",
+    "meaning": "Parmakta taşınan mühürlü gümüş yüzük",
+    "level": 2
+  },
+  {
+    "id": 272,
+    "category": "hadis",
+    "singular": "نَعْلٌ",
+    "dual": "نَعْلَانِ",
+    "plural": "نِعَالٌ",
+    "meaning": "Ayaklara giyilen sandalet ve ayakkabı",
+    "level": 2
+  },
+  {
+    "id": 273,
+    "category": "hadis",
+    "singular": "رِدَاءٌ",
+    "dual": "رِدَاءَانِ",
+    "plural": "أَرْدِيَةٌ",
+    "meaning": "Omuzlara ve bedenin üstüne sarılan örtü",
+    "level": 2
+  },
+  {
+    "id": 274,
+    "category": "hadis",
+    "singular": "إِزَارٌ",
+    "dual": "إِزَارَانِ",
+    "plural": "أُزُرٌ",
+    "meaning": "Bedenin alt kısmına sarılan peştamal",
+    "level": 2
+  },
+  {
+    "id": 275,
+    "category": "hadis",
+    "singular": "عِمَامَةٌ",
+    "dual": "عِمَامَتَانِ",
+    "plural": "عَمَائِمُ",
+    "meaning": "Başın üzerine sarılan sünnet sarık",
+    "level": 2
+  },
+  {
+    "id": 276,
+    "category": "hadis",
+    "singular": "قَلَنْسُوَةٌ",
+    "dual": "قَلَنْسُوَّتَانِ",
+    "plural": "قَلَانِسُ",
+    "meaning": "Sarığın altına giyilen takke",
+    "level": 2
+  },
+  {
+    "id": 277,
+    "category": "hadis",
+    "singular": "جُبَّةٌ",
+    "dual": "جُبَّتَانِ",
+    "plural": "جُبَبٌ",
+    "meaning": "Elbiselerin üzerine giyilen geniş kaftan",
+    "level": 2
+  },
+  {
+    "id": 278,
+    "category": "hadis",
+    "singular": "عَبَاءَةٌ",
+    "dual": "عَبَاءَتَانِ",
+    "plural": "أَعْبِيَةٌ",
+    "meaning": "Yünden dokunmuş üstlük pelerin",
+    "level": 2
+  },
+  {
+    "id": 279,
+    "category": "hadis",
+    "singular": "بُرْدَةٌ",
+    "dual": "بُرْدَتَانِ",
+    "plural": "بُرَدٌ",
+    "meaning": "Çizgili yün hırka ve örtü",
+    "level": 2
+  },
+  {
+    "id": 280,
+    "category": "hadis",
+    "singular": "شَمْلَةٌ",
+    "dual": "شَمْلَتَانِ",
+    "plural": "شِمَالٌ",
+    "meaning": "Başa veya omuza alınan küçük örtü",
+    "level": 2
+  },
+  {
+    "id": 281,
+    "category": "hadis",
+    "singular": "طَيْلَسَانٌ",
+    "dual": "طَيْلَسَانَانِ",
+    "plural": "طَيَالِسَةٌ",
+    "meaning": "Omuzlara dökülen şal ve cübbe yakası",
+    "level": 2
+  },
+  {
+    "id": 282,
+    "category": "hadis",
+    "singular": "سِوَاكٌ",
+    "dual": "سِوَاكَانِ",
+    "plural": "سُوُكٌ",
+    "meaning": "Ağız ve diş temizleme çubuğu",
+    "level": 2
+  },
+  {
+    "id": 283,
+    "category": "hadis",
+    "singular": "كُحْلٌ",
+    "dual": "كُحْلَانِ",
+    "plural": "أَكْحَالٌ",
+    "meaning": "Gözlere çekilen şifalı ismid sürmesi",
+    "level": 2
+  },
+  {
+    "id": 284,
+    "category": "hadis",
+    "singular": "دُهْنٌ",
+    "dual": "دُهْنَانِ",
+    "plural": "أَدْهَانٌ",
+    "meaning": "Saça ve sakala sürülen temiz yağ",
+    "level": 2
+  },
+  {
+    "id": 285,
+    "category": "hadis",
+    "singular": "طِيبٌ",
+    "dual": "طِيبَانِ",
+    "plural": "أَطْيَابٌ",
+    "meaning": "Hoş koku, esans ve misk",
+    "level": 2
+  },
+  {
+    "id": 286,
+    "category": "hadis",
+    "singular": "مِسْكٌ",
+    "dual": "مِسْكَانِ",
+    "plural": "أَمْسَاكٌ",
+    "meaning": "Ceylandan elde edilen en güzel koku",
+    "level": 2
+  },
+  {
+    "id": 287,
+    "category": "hadis",
+    "singular": "عَنْبَرٌ",
+    "dual": "عَنْبَرَانِ",
+    "plural": "عَنَابِرُ",
+    "meaning": "Denizden çıkan hoş kokulu madde",
+    "level": 2
+  },
+  {
+    "id": 288,
+    "category": "hadis",
+    "singular": "بَخُورٌ",
+    "dual": "بَخُورَانِ",
+    "plural": "أَبْخِرَةٌ",
+    "meaning": "Ateşte yakılıp dumanı tütsülenen tütsü",
+    "level": 2
+  },
+  {
+    "id": 289,
+    "category": "hadis",
+    "singular": "مِجْمَرَةٌ",
+    "dual": "مِجْمَرَتَانِ",
+    "plural": "مَجَامِرُ",
+    "meaning": "İçinde tütsü yakılan buhurdanlık",
+    "level": 2
+  },
+  {
+    "id": 290,
+    "category": "hadis",
+    "singular": "سُرُجٌ",
+    "dual": "سِرَاجَانِ",
+    "plural": "سُرُجٌ",
+    "meaning": "Evleri ve mescitleri aydınlatan kandiller",
+    "level": 2
+  },
+  {
+    "id": 291,
+    "category": "hadis",
+    "singular": "قِنْدِيلٌ",
+    "dual": "قِنْدِيلَانِ",
+    "plural": "قَنَادِيلُ",
+    "meaning": "Yağ ile yanan aydınlatma fanusu",
+    "level": 2
+  },
+  {
+    "id": 292,
+    "category": "hadis",
+    "singular": "حَصِيرٌ",
+    "dual": "حَصِيرَانِ",
+    "plural": "حُصُرٌ",
+    "meaning": "Hurma lifinden örülmüş sergi",
+    "level": 2
+  },
+  {
+    "id": 293,
+    "category": "hadis",
+    "singular": "فِرَاشٌ",
+    "dual": "فِرَاشَانِ",
+    "plural": "فُرُشٌ",
+    "meaning": "Üzerinde yatılan sade yatak",
+    "level": 2
+  },
+  {
+    "id": 294,
+    "category": "hadis",
+    "singular": "وِسَادَةٌ",
+    "dual": "وِسَادَتَانِ",
+    "plural": "وَسَائِدُ",
+    "meaning": "Baş altına konulan yumuşak yastık",
+    "level": 2
+  },
+  {
+    "id": 295,
+    "category": "hadis",
+    "singular": "نُمْرُقَةٌ",
+    "dual": "نُمْرُقَتَانِ",
+    "plural": "نَمَارِقُ",
+    "meaning": "Üzerine yaslanılan küçük minder",
+    "level": 2
+  },
+  {
+    "id": 296,
+    "category": "hadis",
+    "singular": "سِتْرٌ",
+    "dual": "سِتْرَانِ",
+    "plural": "أَسْتَارٌ / سُتُورٌ",
+    "meaning": "Odayı ayıran perde; namazda önüne konan sütre",
+    "level": 2
+  },
+  {
+    "id": 297,
+    "category": "hadis",
+    "singular": "سُتْرَةٌ",
+    "dual": "سُتْرَتَانِ",
+    "plural": "سُتَرٌ",
+    "meaning": "Namaz kılanın önüne koyduğu engel",
+    "level": 2
+  },
+  {
+    "id": 298,
+    "category": "hadis",
+    "singular": "مِطْهَرَةٌ",
+    "dual": "مِطْهَرَتَانِ",
+    "plural": "مَطَاهِرُ",
+    "meaning": "Abdest suyu konulan ibrik ve kap",
+    "level": 2
+  },
+  {
+    "id": 299,
+    "category": "hadis",
+    "singular": "إِبْرِيقٌ",
+    "dual": "إِبْرِيقَانِ",
+    "plural": "أَبَارِيقُ",
+    "meaning": "Kulplu ve emzikli su kabı",
+    "level": 2
+  },
+  {
+    "id": 300,
+    "category": "hadis",
+    "singular": "قَصْعَةٌ",
+    "dual": "قَصْعَتَانِ",
+    "plural": "قِصَاعٌ",
+    "meaning": "İçinden birlikte yemek yenen büyük çanak",
+    "level": 2
+  },
+  {
+    "id": 301,
+    "category": "kitap",
+    "singular": "بُرْهَانٌ",
+    "dual": "بُرْهَانَانِ",
+    "plural": "بَرَاهِينُ",
+    "meaning": "Kesin delil, sarsılmaz hüccet",
+    "level": 3
+  },
+  {
+    "id": 302,
+    "category": "kitap",
+    "singular": "حُجَّةٌ",
+    "dual": "حُجَّتَانِ",
+    "plural": "حُجَجٌ",
+    "meaning": "İkna edici kesin kanıt, senet",
+    "level": 3
+  },
+  {
+    "id": 303,
+    "category": "kitap",
+    "singular": "مَوْجُودٌ",
+    "dual": "مَوْجُودَانِ",
+    "plural": "مَوْجُودَاتٌ",
+    "meaning": "Varlık sahasında bulunan, varlık",
+    "level": 3
+  },
+  {
+    "id": 304,
+    "category": "kitap",
+    "singular": "مَخْلُوقٌ",
+    "dual": "مَخْلُوقَانِ",
+    "plural": "مَخْلُوقَاتٌ",
+    "meaning": "Allah'ın yarattığı varlık",
+    "level": 3
+  },
+  {
+    "id": 305,
+    "category": "kitap",
+    "singular": "مَصْنُوعٌ",
+    "dual": "مَصْنُوعَانِ",
+    "plural": "مَصْنُوعَاتٌ",
+    "meaning": "Sanatla ve hikmetle yaratılmış eser",
+    "level": 3
+  },
+  {
+    "id": 306,
+    "category": "kitap",
+    "singular": "أَثَرٌ",
+    "dual": "أَثَرَانِ",
+    "plural": "آثَارٌ",
+    "meaning": "Sanatın ve kudretin izi, nişanesi",
+    "level": 3
+  },
+  {
+    "id": 307,
+    "category": "kitap",
+    "singular": "سِرٌّ",
+    "dual": "سِرَّانِ",
+    "plural": "أَسْرَارٌ",
+    "meaning": "Gizli hakikat, derin mana ve incelik",
+    "level": 3
+  },
+  {
+    "id": 308,
+    "category": "kitap",
+    "singular": "حَقِيقَةٌ",
+    "dual": "حَقِيقَتَانِ",
+    "plural": "حَقَائِقُ",
+    "meaning": "Bir şeyin aslı, değişmez gerçeği",
+    "level": 3
+  },
+  {
+    "id": 309,
+    "category": "kitap",
+    "singular": "لَطِيفَةٌ",
+    "dual": "لَطِيفَتَانِ",
+    "plural": "لَطَائِفُ",
+    "meaning": "İnsandaki ince manevî his ve duygu",
+    "level": 3
+  },
+  {
+    "id": 310,
+    "category": "kitap",
+    "singular": "مِنَّةٌ",
+    "dual": "مِنَّتَانِ",
+    "plural": "مِنَنٌ",
+    "meaning": "Karşılıksız ilahî iyilik ve ihsan",
+    "level": 3
+  },
+  {
+    "id": 311,
+    "category": "kitap",
+    "singular": "نُكْتَةٌ",
+    "dual": "نُكْتَتَانِ",
+    "plural": "نُكَتٌ",
+    "meaning": "İnce, derin ve hikmetli mana",
+    "level": 3
+  },
+  {
+    "id": 312,
+    "category": "kitap",
+    "singular": "إِشَارَةٌ",
+    "dual": "إِشَارَتَانِ",
+    "plural": "إِشَارَاتٌ",
+    "meaning": "Gizli veya remizli delalet, gösterme",
+    "level": 3
+  },
+  {
+    "id": 313,
+    "category": "kitap",
+    "singular": "لَمْعَةٌ",
+    "dual": "لَمْعَتَانِ",
+    "plural": "لَمَعَاتٌ",
+    "meaning": "Parlayan ışık parıltısı",
+    "level": 3
+  },
+  {
+    "id": 314,
+    "category": "kitap",
+    "singular": "شُعَاعٌ",
+    "dual": "شُعَاعَانِ",
+    "plural": "أَشِعَّةٌ",
+    "meaning": "Işık huzmesi, ışın, güneş ziyası",
+    "level": 3
+  },
+  {
+    "id": 315,
+    "category": "kitap",
+    "singular": "قَطْرَةٌ",
+    "dual": "قَطْرَتَانِ",
+    "plural": "قَطَرَاتٌ",
+    "meaning": "Tek bir su damlası",
+    "level": 3
+  },
+  {
+    "id": 316,
+    "category": "kitap",
+    "singular": "زَهْرَةٌ",
+    "dual": "زَهْرَتَانِ",
+    "plural": "أَزْهَارٌ",
+    "meaning": "Çiçek, parlak güzellik",
+    "level": 3
+  },
+  {
+    "id": 317,
+    "category": "kitap",
+    "singular": "نَافِذَةٌ",
+    "dual": "نَافِذَتَانِ",
+    "plural": "نَوَافِذُ",
+    "meaning": "Dışarıya açılan pencere, menfez",
+    "level": 3
+  },
+  {
+    "id": 318,
+    "category": "kitap",
+    "singular": "مِرْآةٌ",
+    "dual": "مِرْآتَانِ",
+    "plural": "مَرَايَا",
+    "meaning": "Ayna, tecelli yansıma mahalli",
+    "level": 3
+  },
+  {
+    "id": 319,
+    "category": "kitap",
+    "singular": "مِيزَانٌ",
+    "dual": "مِيزَانَانِ",
+    "plural": "مَوَازِينُ",
+    "meaning": "Ölçü, tartı, hassas denge terazisi",
+    "level": 3
+  },
+  {
+    "id": 320,
+    "category": "kitap",
+    "singular": "مِقْيَاسٌ",
+    "dual": "مِقْيَاسَانِ",
+    "plural": "مَقَايِيسُ",
+    "meaning": "Kıyas ölçüsü, ölçüm kıstası",
+    "level": 3
+  },
+  {
+    "id": 321,
+    "category": "kitap",
+    "singular": "مَبْدَأٌ",
+    "dual": "مَبْدَآنِ",
+    "plural": "مَبَادِئُ",
+    "meaning": "Başlangıç, asıl kaynak, ilk esas",
+    "level": 3
+  },
+  {
+    "id": 322,
+    "category": "kitap",
+    "singular": "مُنْتَهَى",
+    "dual": "مُنْتَهَيَانِ",
+    "plural": "مُنْتَهَيَاتٌ",
+    "meaning": "Varış noktası, son merhale, nihayet",
+    "level": 3
+  },
+  {
+    "id": 323,
+    "category": "kitap",
+    "singular": "مَظْهَرٌ",
+    "dual": "مَظْهَرَانِ",
+    "plural": "مَظَاهِرُ",
+    "meaning": "Tecelli yeri, görünme mahalli",
+    "level": 3
+  },
+  {
+    "id": 324,
+    "category": "kitap",
+    "singular": "مَوْرِدٌ",
+    "dual": "مَوْرِدَانِ",
+    "plural": "مَوَارِدُ",
+    "meaning": "Ulaşma yeri, feyiz kaynağı, mecra",
+    "level": 3
+  },
+  {
+    "id": 325,
+    "category": "kitap",
+    "singular": "مَصْدَرٌ",
+    "dual": "مَصْدَرَانِ",
+    "plural": "مَصَادِرُ",
+    "meaning": "Çıkış yeri, köken, menşe",
+    "level": 3
+  },
+  {
+    "id": 326,
+    "category": "kitap",
+    "singular": "مَنْبَعٌ",
+    "dual": "مَنْبَعَانِ",
+    "plural": "مَنَابِعُ",
+    "meaning": "Yerden kaynayan pınar, su gözü",
+    "level": 3
+  },
+  {
+    "id": 327,
+    "category": "kitap",
+    "singular": "عُنْوَانٌ",
+    "dual": "عُنْوَانَانِ",
+    "plural": "عَنَاوِينُ",
+    "meaning": "Adres, başlık, alamet ve hüviyet",
+    "level": 3
+  },
+  {
+    "id": 328,
+    "category": "kitap",
+    "singular": "طَرِيقٌ",
+    "dual": "طَرِيقَانِ",
+    "plural": "طُرُقٌ",
+    "meaning": "Hakikat yolu, manevi seyr yolu",
+    "level": 3
+  },
+  {
+    "id": 329,
+    "category": "kitap",
+    "singular": "مَسْلَكٌ",
+    "dual": "مَسْلَكَانِ",
+    "plural": "مَسَالِكُ",
+    "meaning": "Benimsenen yöntem, gidilen yol",
+    "level": 3
+  },
+  {
+    "id": 330,
+    "category": "kitap",
+    "singular": "مَشْرَبٌ",
+    "dual": "مَشْرَبَانِ",
+    "plural": "مَشَارِبُ",
+    "meaning": "Su içme yeri; manevi mizaç ve neşve",
+    "level": 3
+  },
+  {
+    "id": 331,
+    "category": "kitap",
+    "singular": "رَابِطَةٌ",
+    "dual": "رَابِطَتَانِ",
+    "plural": "رَوَابِطُ",
+    "meaning": "Kalbî bağ, irtibat, alaka",
+    "level": 3
+  },
+  {
+    "id": 332,
+    "category": "kitap",
+    "singular": "وَسِيلَةٌ",
+    "dual": "وَسِيلَتَانِ",
+    "plural": "وَسَائِلُ",
+    "meaning": "Gayeye ulaştıran vasıta, sebep",
+    "level": 3
+  },
+  {
+    "id": 333,
+    "category": "kitap",
+    "singular": "غَايَةٌ",
+    "dual": "غَايَتَانِ",
+    "plural": "غَايَاتٌ",
+    "meaning": "Ulaşılmak istenen nihai hedef, maksat",
+    "level": 3
+  },
+  {
+    "id": 334,
+    "category": "kitap",
+    "singular": "مَقْصَدٌ",
+    "dual": "مَقْصَدَانِ",
+    "plural": "مَقَاصِدُ",
+    "meaning": "Hedeflenen gaye, niyet edilen murat",
+    "level": 3
+  },
+  {
+    "id": 335,
+    "category": "kitap",
+    "singular": "نَتِيجَةٌ",
+    "dual": "نَتِيجَتَانِ",
+    "plural": "نَتَائِجُ",
+    "meaning": "Sonuç, elde edilen hasılat, semere",
+    "level": 3
+  },
+  {
+    "id": 336,
+    "category": "kitap",
+    "singular": "فَائِدَةٌ",
+    "dual": "فَائِدَتَانِ",
+    "plural": "فَوَائِدُ",
+    "meaning": "Sağlanan yarar, elde edilen hayır",
+    "level": 3
+  },
+  {
+    "id": 337,
+    "category": "kitap",
+    "singular": "حَاجَةٌ",
+    "dual": "حَاجَتَانِ",
+    "plural": "حَاجَاتٌ",
+    "meaning": "İhtiyaç duyulan şey, lüzum",
+    "level": 3
+  },
+  {
+    "id": 338,
+    "category": "kitap",
+    "singular": "عَاجِزٌ",
+    "dual": "عَاجِزَانِ",
+    "plural": "عَاجِزُونَ",
+    "meaning": "Kendi gücü yetmeyen, kudretsiz kul",
+    "level": 3
+  },
+  {
+    "id": 339,
+    "category": "kitap",
+    "singular": "فَقِيرٌ",
+    "dual": "فَقِيرَانِ",
+    "plural": "فُقَرَاءُ",
+    "meaning": "İlahî rahmete muhtaç olan kul",
+    "level": 3
+  },
+  {
+    "id": 340,
+    "category": "kitap",
+    "singular": "نِظَامٌ",
+    "dual": "نِظَامَانِ",
+    "plural": "أَنْظِمَةٌ",
+    "meaning": "Düzen, intizam, kâinattaki ahenk",
+    "level": 3
+  },
+  {
+    "id": 341,
+    "category": "kitap",
+    "singular": "قَانُونٌ",
+    "dual": "قَانُونَانِ",
+    "plural": "قَوَانِينُ",
+    "meaning": "İlahî adetullah kuralı, nizam ilkesi",
+    "level": 3
+  },
+  {
+    "id": 342,
+    "category": "kitap",
+    "singular": "دُسْتُورٌ",
+    "dual": "دُسْتُورَانِ",
+    "plural": "دَسَاتِيرُ",
+    "meaning": "Temel kural, hareket prensibi",
+    "level": 3
+  },
+  {
+    "id": 343,
+    "category": "kitap",
+    "singular": "حِجَابٌ",
+    "dual": "حِجَابَانِ",
+    "plural": "حُجُبٌ",
+    "meaning": "Maddî ve manevî perde, engel, örtü",
+    "level": 3
+  },
+  {
+    "id": 344,
+    "category": "kitap",
+    "singular": "سَبَبٌ",
+    "dual": "سَبَبَانِ",
+    "plural": "أَسْبَابٌ",
+    "meaning": "Neticeye perde olan vasıta, vesile",
+    "level": 3
+  },
+  {
+    "id": 345,
+    "category": "kitap",
+    "singular": "عِلَّةٌ",
+    "dual": "عِلَّتَانِ",
+    "plural": "عِلَلٌ",
+    "meaning": "Asıl gerekçe, hakiki sebep ve hikmet",
+    "level": 3
+  },
+  {
+    "id": 346,
+    "category": "kitap",
+    "singular": "زَوَالٌ",
+    "dual": "زَوَالَانِ",
+    "plural": "أَزْوِلَةٌ",
+    "meaning": "Güneşin batışı, yok oluş, sona erme",
+    "level": 3
+  },
+  {
+    "id": 347,
+    "category": "kitap",
+    "singular": "بَقَاءٌ",
+    "dual": "بَقَاءَانِ",
+    "plural": "بَقَاءَاتٌ",
+    "meaning": "Ebedilik, kalıcılık, ölümsüz devam",
+    "level": 3
+  },
+  {
+    "id": 348,
+    "category": "kitap",
+    "singular": "تَجَلٍّ",
+    "dual": "تَجَلِّيَانِ",
+    "plural": "تَجَلِّيَاتٌ",
+    "meaning": "İlahî isim ve sıfatların görünmesi",
+    "level": 3
+  },
+  {
+    "id": 349,
+    "category": "kitap",
+    "singular": "مِثَالٌ",
+    "dual": "مِثَالَانِ",
+    "plural": "أَمْثِلَةٌ",
+    "meaning": "Benzer, örnek, temsilî numune",
+    "level": 3
+  },
+  {
+    "id": 350,
+    "category": "kitap",
+    "singular": "دَلِيلٌ",
+    "dual": "دَلِيلَانِ",
+    "plural": "أَدِلَّةٌ",
+    "meaning": "Hakikate ulaştıran kanıt, rehber",
+    "level": 3
+  },
+  {
+    "id": 351,
+    "category": "kitap",
+    "singular": "رَحْمَةٌ",
+    "dual": "رَحْمَتَانِ",
+    "plural": "رَحَمَاتٌ",
+    "meaning": "Merhamet, acıma, ilahî lütuf ve ihsan",
+    "level": 3
+  },
+  {
+    "id": 352,
+    "category": "kitap",
+    "singular": "حِكْمَةٌ",
+    "dual": "حِكْمَتَانِ",
+    "plural": "حِكَمٌ",
+    "meaning": "Eşyanın hakikati, gaye ve fayda",
+    "level": 3
+  },
+  {
+    "id": 353,
+    "category": "kitap",
+    "singular": "قُدْرَةٌ",
+    "dual": "قُدْرَتَانِ",
+    "plural": "قُدُرَاتٌ",
+    "meaning": "İlahî güç, yaratma ve tasarruf kuvveti",
+    "level": 3
+  },
+  {
+    "id": 354,
+    "category": "kitap",
+    "singular": "إِرَادَةٌ",
+    "dual": "إِرَادَتَانِ",
+    "plural": "إِرَادَاتٌ",
+    "meaning": "Dileme, tercih ve tahsis sıfatı",
+    "level": 3
+  },
+  {
+    "id": 355,
+    "category": "kitap",
+    "singular": "عِزَّةٌ",
+    "dual": "عِزَّتَانِ",
+    "plural": "أَعِزَّةٌ",
+    "meaning": "Üstünlük, galebe ve izzet-i ilahiye",
+    "level": 3
+  },
+  {
+    "id": 356,
+    "category": "kitap",
+    "singular": "عَظَمَةٌ",
+    "dual": "عَظَمَتَانِ",
+    "plural": "عَظَمَاتٌ",
+    "meaning": "Büyüklük, ululuk ve kibriya",
+    "level": 3
+  },
+  {
+    "id": 357,
+    "category": "kitap",
+    "singular": "كَرَمٌ",
+    "dual": "كَرَمَانِ",
+    "plural": "كُرُومٌ",
+    "meaning": "Cömertlik, karşılıksız lütuf ve bağış",
+    "level": 3
+  },
+  {
+    "id": 358,
+    "category": "kitap",
+    "singular": "عَدْلٌ",
+    "dual": "عَدْلَانِ",
+    "plural": "أَعْدَالٌ",
+    "meaning": "Adalet, her şeyi yerli yerine koyma",
+    "level": 3
+  },
+  {
+    "id": 359,
+    "category": "kitap",
+    "singular": "جَلَالٌ",
+    "dual": "جَلَالَانِ",
+    "plural": "أَجِلَّةٌ",
+    "meaning": "Büyüklük, azamet ve haşmet tecellisi",
+    "level": 3
+  },
+  {
+    "id": 360,
+    "category": "kitap",
+    "singular": "جَمَالٌ",
+    "dual": "جَمَالَانِ",
+    "plural": "جَمَالَاتٌ",
+    "meaning": "Güzellik, letafet ve cemal-i ilahi",
+    "level": 3
+  },
+  {
+    "id": 361,
+    "category": "kitap",
+    "singular": "كَمَالٌ",
+    "dual": "كَمَالَانِ",
+    "plural": "كَمَالَاتٌ",
+    "meaning": "Kusursuzluk, olgunluk ve mutlak tamlık",
+    "level": 3
+  },
+  {
+    "id": 362,
+    "category": "kitap",
+    "singular": "سُلْطَانٌ",
+    "dual": "سُلْطَانَانِ",
+    "plural": "سَلَاطِينُ",
+    "meaning": "Hükümranlık, ilahî kudret ve hüccet",
+    "level": 3
+  },
+  {
+    "id": 363,
+    "category": "kitap",
+    "singular": "مُلْكٌ",
+    "dual": "مُلْكَانِ",
+    "plural": "أَمْلَاكٌ",
+    "meaning": "Sahip olunan mülk, alem-i şehadet",
+    "level": 3
+  },
+  {
+    "id": 364,
+    "category": "kitap",
+    "singular": "مَلَكُوتٌ",
+    "dual": "مَلَكُوتَانِ",
+    "plural": "مَلَكُوتَاتٌ",
+    "meaning": "Eşyanın iç yüzü, melekler âlemi",
+    "level": 3
+  },
+  {
+    "id": 365,
+    "category": "kitap",
+    "singular": "رُوحٌ",
+    "dual": "رُوحَانِ",
+    "plural": "أَرْوَاحٌ",
+    "meaning": "Hayat veren cevher, latif ilahî kanun",
+    "level": 3
+  },
+  {
+    "id": 366,
+    "category": "kitap",
+    "singular": "جَسَدٌ",
+    "dual": "جَسَدَانِ",
+    "plural": "أَجْسَادٌ",
+    "meaning": "Maddî beden, et ve kemikten kalıp",
+    "level": 3
+  },
+  {
+    "id": 367,
+    "category": "kitap",
+    "singular": "عَقْلٌ",
+    "dual": "عَقْلَانِ",
+    "plural": "عُقُولٌ",
+    "meaning": "Düşünme, anlama ve idrak aleti",
+    "level": 3
+  },
+  {
+    "id": 368,
+    "category": "kitap",
+    "singular": "فِكْرٌ",
+    "dual": "فِكْرَانِ",
+    "plural": "أَفْكَارٌ",
+    "meaning": "Düşünce, tefekkür ve zihin faaliyeti",
+    "level": 3
+  },
+  {
+    "id": 369,
+    "category": "kitap",
+    "singular": "وَهْمٌ",
+    "dual": "وَهْمَانِ",
+    "plural": "أَوْهَامٌ",
+    "meaning": "Asılsız kuruntu, temelsiz vehim",
+    "level": 3
+  },
+  {
+    "id": 370,
+    "category": "kitap",
+    "singular": "شَكٌّ",
+    "dual": "شَكَّانِ",
+    "plural": "شُكُوكٌ",
+    "meaning": "Tereddüt, kararsızlık ve belirsizlik",
+    "level": 3
+  },
+  {
+    "id": 371,
+    "category": "kitap",
+    "singular": "يَقِينٌ",
+    "dual": "يَقِينَانِ",
+    "plural": "يَقِينَاتٌ",
+    "meaning": "Şüpheden uzak kesin, sarsılmaz bilgi",
+    "level": 3
+  },
+  {
+    "id": 372,
+    "category": "kitap",
+    "singular": "نِيَّةٌ",
+    "dual": "نِيَّتَانِ",
+    "plural": "نِيَّاتٌ",
+    "meaning": "Kalbin kastı, amel yönelişi ve niyet",
+    "level": 3
+  },
+  {
+    "id": 373,
+    "category": "kitap",
+    "singular": "إِخْلَاصٌ",
+    "dual": "إِخْلَاصَانِ",
+    "plural": "إِخْلَاصَاتٌ",
+    "meaning": "Ameli yalnız Allah rızası için yapma",
+    "level": 3
+  },
+  {
+    "id": 374,
+    "category": "kitap",
+    "singular": "صِدْقٌ",
+    "dual": "صِدْقَانِ",
+    "plural": "أَصْدَاقٌ",
+    "meaning": "Doğruluk, gerçeğe uygunluk ve vefa",
+    "level": 3
+  },
+  {
+    "id": 375,
+    "category": "kitap",
+    "singular": "كَذِبٌ",
+    "dual": "كَذِبَانِ",
+    "plural": "أَكَاذِيبُ",
+    "meaning": "Yalan, hakikate aykırı beyan",
+    "level": 3
+  },
+  {
+    "id": 376,
+    "category": "kitap",
+    "singular": "حَسَنَةٌ",
+    "dual": "حَسَنَتَانِ",
+    "plural": "حَسَنَاتٌ",
+    "meaning": "İyilik, güzel amel ve sevap",
+    "level": 3
+  },
+  {
+    "id": 377,
+    "category": "kitap",
+    "singular": "سَيِّئَةٌ",
+    "dual": "سَيِّئَتَانِ",
+    "plural": "سَيِّئَاتٌ",
+    "meaning": "Kötülük, günah ve isyan ameli",
+    "level": 3
+  },
+  {
+    "id": 378,
+    "category": "kitap",
+    "singular": "ثَوَابٌ",
+    "dual": "ثَوَابَانِ",
+    "plural": "أَثْوِبَةٌ",
+    "meaning": "Hayırlı amele verilen ilahî karşılık",
+    "level": 3
+  },
+  {
+    "id": 379,
+    "category": "kitap",
+    "singular": "عِقَابٌ",
+    "dual": "عِقَابَانِ",
+    "plural": "أَعْقِبَةٌ",
+    "meaning": "İsyan ve günaha verilen ceza",
+    "level": 3
+  },
+  {
+    "id": 380,
+    "category": "kitap",
+    "singular": "فِطْرَةٌ",
+    "dual": "فِطْرَتَانِ",
+    "plural": "فِطَرٌ",
+    "meaning": "Yaratılış mayası, ilk saf hilkat",
+    "level": 3
+  },
+  {
+    "id": 381,
+    "category": "kitap",
+    "singular": "خِلْقَةٌ",
+    "dual": "خِلْقَتَانِ",
+    "plural": "خِلَقٌ",
+    "meaning": "Yaratılış şekli, bünye ve suret",
+    "level": 3
+  },
+  {
+    "id": 382,
+    "category": "kitap",
+    "singular": "صُورَةٌ",
+    "dual": "صُورَتَانِ",
+    "plural": "صُوَرٌ",
+    "meaning": "Görünüş, biçim, suret ve şekil",
+    "level": 3
+  },
+  {
+    "id": 383,
+    "category": "kitap",
+    "singular": "مَادَّةٌ",
+    "dual": "مَادَّتَانِ",
+    "plural": "مَوَادُّ",
+    "meaning": "Maddî cevher, cisim ve unsur",
+    "level": 3
+  },
+  {
+    "id": 384,
+    "category": "kitap",
+    "singular": "زَمَانٌ",
+    "dual": "زَمَانَانِ",
+    "plural": "أَزْمِنَةٌ",
+    "meaning": "Vakit, çağ, hareket ve anlar zinciri",
+    "level": 3
+  },
+  {
+    "id": 385,
+    "category": "kitap",
+    "singular": "مَكَانٌ",
+    "dual": "مَكَانَانِ",
+    "plural": "أَمْكِنَةٌ",
+    "meaning": "Yer, mevki, cismin kapladığı alan",
+    "level": 3
+  },
+  {
+    "id": 386,
+    "category": "kitap",
+    "singular": "حَيَاةٌ",
+    "dual": "حَيَاتَانِ",
+    "plural": "حَيَوَاتٌ",
+    "meaning": "Dirilik, can, varlığın neşesi",
+    "level": 3
+  },
+  {
+    "id": 387,
+    "category": "kitap",
+    "singular": "مَوْتٌ",
+    "dual": "مَوْتَانِ",
+    "plural": "أَمْوَاتٌ",
+    "meaning": "Ölüm, vazifeden terhis ve tebdil-i mekan",
+    "level": 3
+  },
+  {
+    "id": 388,
+    "category": "kitap",
+    "singular": "حَشْرٌ",
+    "dual": "حَشْرَانِ",
+    "plural": "حُشُورٌ",
+    "meaning": "Mahşerde toplanma, diriltilip bir araya gelme",
+    "level": 3
+  },
+  {
+    "id": 389,
+    "category": "kitap",
+    "singular": "نَشْرٌ",
+    "dual": "نَشْرَانِ",
+    "plural": "نُشُورٌ",
+    "meaning": "Dağılma, kabirlerden çıkıp yayılma",
+    "level": 3
+  },
+  {
+    "id": 390,
+    "category": "kitap",
+    "singular": "مِيزَانٌ",
+    "dual": "مِيزَانَانِ",
+    "plural": "مَوَازِينُ",
+    "meaning": "Ölçü aleti, adalet ve amel terazisi",
+    "level": 3
+  },
+  {
+    "id": 391,
+    "category": "kitap",
+    "singular": "صِرَاطٌ",
+    "dual": "صِرَاطَانِ",
+    "plural": "صُرُطٌ",
+    "meaning": "Doğru yol; cehennem üzerindeki köprü",
+    "level": 3
+  },
+  {
+    "id": 392,
+    "category": "kitap",
+    "singular": "شَفَاعَةٌ",
+    "dual": "شَفَاعَتَانِ",
+    "plural": "شَفَاعَاتٌ",
+    "meaning": "Bağışlanma dileme, ilahî aracı olma",
+    "level": 3
+  },
+  {
+    "id": 393,
+    "category": "kitap",
+    "singular": "مَغْفِرَةٌ",
+    "dual": "مَغْفِرَتَانِ",
+    "plural": "مَغَافِرُ",
+    "meaning": "Günahları örtme, affetme ve bağışlama",
+    "level": 3
+  },
+  {
+    "id": 394,
+    "category": "kitap",
+    "singular": "تَوْبَةٌ",
+    "dual": "تَوْبَتَانِ",
+    "plural": "تَوْبَاتٌ",
+    "meaning": "Günahtan dönme, pişmanlıkla Allah'a yönelme",
+    "level": 3
+  },
+  {
+    "id": 395,
+    "category": "kitap",
+    "singular": "ذَنْبٌ",
+    "dual": "ذَنْبَانِ",
+    "plural": "ذُنُوبٌ",
+    "meaning": "Günah, ilahî emre aykırı kusur",
+    "level": 3
+  },
+  {
+    "id": 396,
+    "category": "kitap",
+    "singular": "خَطِيئَةٌ",
+    "dual": "خَطِيئَتَانِ",
+    "plural": "خَطَايَا",
+    "meaning": "Kasıtlı veya kasıtsız hata, günah",
+    "level": 3
+  },
+  {
+    "id": 397,
+    "category": "kitap",
+    "singular": "طَاعَةٌ",
+    "dual": "طَاعَتَانِ",
+    "plural": "طَاعَاتٌ",
+    "meaning": "İtaat etme, boyun eğme ve kulluk",
+    "level": 3
+  },
+  {
+    "id": 398,
+    "category": "kitap",
+    "singular": "عِصْيَانٌ",
+    "dual": "عِصْيَانَانِ",
+    "plural": "أَعْصِيَةٌ",
+    "meaning": "İsyan, başkaldırma ve emre itaatsizlik",
+    "level": 3
+  },
+  {
+    "id": 399,
+    "category": "kitap",
+    "singular": "فِسْقٌ",
+    "dual": "فِسْقَانِ",
+    "plural": "فُسُوقٌ",
+    "meaning": "Doğru yoldan çıkma, günaha dalma",
+    "level": 3
+  },
+  {
+    "id": 400,
+    "category": "kitap",
+    "singular": "كُفْرٌ",
+    "dual": "كُفْرَانِ",
+    "plural": "كُفُورٌ",
+    "meaning": "Hakkı örtme, inkâr ve nankörlük",
+    "level": 3
+  },
+  {
+    "id": 401,
+    "category": "kitap",
+    "singular": "نِفَاقٌ",
+    "dual": "نِفَاقَانِ",
+    "plural": "أَنْفِقَةٌ",
+    "meaning": "İkiyüzlülük, inanmadığı halde inanmış görünme",
+    "level": 3
+  },
+  {
+    "id": 402,
+    "category": "kitap",
+    "singular": "شِرْكٌ",
+    "dual": "شِرْكَانِ",
+    "plural": "أَشْرَاكٌ",
+    "meaning": "Allah'a ortak koşma, zatında veya sıfatında şirk",
+    "level": 3
+  },
+  {
+    "id": 403,
+    "category": "kitap",
+    "singular": "تَوْحِيدٌ",
+    "dual": "تَوْحِيدَانِ",
+    "plural": "تَوْحِيدَاتٌ",
+    "meaning": "Allah'ın birliğini tasdik ve ilan etme",
+    "level": 3
+  },
+  {
+    "id": 404,
+    "category": "kitap",
+    "singular": "تَنْزِيهٌ",
+    "dual": "تَنْزِيهَانِ",
+    "plural": "تَنْزِيهَاتٌ",
+    "meaning": "Allah'ı her türlü noksanlıktan yüce tutma",
+    "level": 3
+  },
+  {
+    "id": 405,
+    "category": "kitap",
+    "singular": "تَقْدِيسٌ",
+    "dual": "تَقْدِيسَانِ",
+    "plural": "تَقْدِيسَاتٌ",
+    "meaning": "Mukaddes bilme, paklığını ilan etme",
+    "level": 3
+  },
+  {
+    "id": 406,
+    "category": "kitap",
+    "singular": "تَسْبِيحٌ",
+    "dual": "تَسْبِيحَانِ",
+    "plural": "تَسْبِيحَاتٌ",
+    "meaning": "Sübhanallah diyerek tenzih etme",
+    "level": 3
+  },
+  {
+    "id": 407,
+    "category": "kitap",
+    "singular": "تَمْحِيدٌ",
+    "dual": "تَمْحِيدَانِ",
+    "plural": "تَمْحِيدَاتٌ",
+    "meaning": "Hamd ve sena ederek övme",
+    "level": 3
+  },
+  {
+    "id": 408,
+    "category": "kitap",
+    "singular": "تَكْبِيرٌ",
+    "dual": "تَكْبِيرَانِ",
+    "plural": "تَكْبِيرَاتٌ",
+    "meaning": "Allahu ekber diyerek ululama",
+    "level": 3
+  },
+  {
+    "id": 409,
+    "category": "kitap",
+    "singular": "تَهْلِيلٌ",
+    "dual": "تَهْلِيلَانِ",
+    "plural": "تَهْلِيلَاتٌ",
+    "meaning": "Lâ ilahe illallah diyerek tevhid getirme",
+    "level": 3
+  },
+  {
+    "id": 410,
+    "category": "kitap",
+    "singular": "دُعَاءٌ",
+    "dual": "دُعَاءَانِ",
+    "plural": "أَدْعِيَةٌ",
+    "meaning": "Yalvarma, ilahî dergâha hacet arzı",
+    "level": 3
+  },
+  {
+    "id": 411,
+    "category": "kitap",
+    "singular": "صَلَاةٌ",
+    "dual": "صَلَاتَانِ",
+    "plural": "صَلَوَاتٌ",
+    "meaning": "Namaz, ilahî huzurda ibadet ve dua",
+    "level": 3
+  },
+  {
+    "id": 412,
+    "category": "kitap",
+    "singular": "صَوْمٌ",
+    "dual": "صَوْمَانِ",
+    "plural": "أَصْوَامٌ",
+    "meaning": "Oruç, nefsi haram ve şehevattan men etme",
+    "level": 3
+  },
+  {
+    "id": 413,
+    "category": "kitap",
+    "singular": "زَكَاةٌ",
+    "dual": "زَكَاتَانِ",
+    "plural": "زَكَوَاتٌ",
+    "meaning": "Malın arınması için verilen farz pay",
+    "level": 3
+  },
+  {
+    "id": 414,
+    "category": "kitap",
+    "singular": "حَجٌّ",
+    "dual": "حَجَّانِ",
+    "plural": "حُجُوجٌ",
+    "meaning": "Kâbe-i Muazzama'yı farz niyetiyle ziyaret",
+    "level": 3
+  },
+  {
+    "id": 415,
+    "category": "kitap",
+    "singular": "جِهَادٌ",
+    "dual": "جِهَادَانِ",
+    "plural": "جِهَادَاتٌ",
+    "meaning": "Hak yolunda gayret, nefis ve batılla mücadele",
+    "level": 3
+  },
+  {
+    "id": 416,
+    "category": "kitap",
+    "singular": "تَقْوَى",
+    "dual": "تَقْوَيَانِ",
+    "plural": "تَقْوَاتٌ",
+    "meaning": "Günahtan sakınma, ilahî azaptan korunma",
+    "level": 3
+  },
+  {
+    "id": 417,
+    "category": "kitap",
+    "singular": "وَرَعٌ",
+    "dual": "وَرَعَانِ",
+    "plural": "أَوْرَاعٌ",
+    "meaning": "Şüpheli şeylerden titizlikle kaçınma",
+    "level": 3
+  },
+  {
+    "id": 418,
+    "category": "kitap",
+    "singular": "زُهْدٌ",
+    "dual": "زُهْدَانِ",
+    "plural": "أَزْهَادٌ",
+    "meaning": "Dünyaya kalben bağlanmama, aza kanaat",
+    "level": 3
+  },
+  {
+    "id": 419,
+    "category": "kitap",
+    "singular": "صَبْرٌ",
+    "dual": "صَبْرَانِ",
+    "plural": "أَصْبَارٌ",
+    "meaning": "Zorluklara ve musibetlere tahammül etme",
+    "level": 3
+  },
+  {
+    "id": 420,
+    "category": "kitap",
+    "singular": "شُكْرٌ",
+    "dual": "شُكْرَانِ",
+    "plural": "شُكُورٌ",
+    "meaning": "Nimeti vereni tanıyıp minnettarlık gösterme",
+    "level": 3
+  },
+  {
+    "id": 421,
+    "category": "kitap",
+    "singular": "رِضَا",
+    "dual": "رِضَيَانِ",
+    "plural": "رِضَاءَاتٌ",
+    "meaning": "İlahî kaza ve kadere gönülden boyun eğme",
+    "level": 3
+  },
+  {
+    "id": 422,
+    "category": "kitap",
+    "singular": "تَوَكُّلٌ",
+    "dual": "تَوَكُّلَانِ",
+    "plural": "تَوَكُّلَاتٌ",
+    "meaning": "Sebeplere teşebbüs edip neticeyi Allah'a bırakma",
+    "level": 3
+  },
+  {
+    "id": 423,
+    "category": "kitap",
+    "singular": "خَوْفٌ",
+    "dual": "خَوْفَانِ",
+    "plural": "مَخَاوِفُ",
+    "meaning": "İlahî celal ve gazaptan korkma",
+    "level": 3
+  },
+  {
+    "id": 424,
+    "category": "kitap",
+    "singular": "رَجَاءٌ",
+    "dual": "رَجَاءَانِ",
+    "plural": "أَرْجِيَةٌ",
+    "meaning": "İlahî rahmet ve mağfireti ümit etme",
+    "level": 3
+  },
+  {
+    "id": 425,
+    "category": "kitap",
+    "singular": "حُبٌّ",
+    "dual": "حُبَّانِ",
+    "plural": "أَحْبَابٌ",
+    "meaning": "Sevgi, muhabbet ve gönülden meyil",
+    "level": 3
+  },
+  {
+    "id": 426,
+    "category": "kitap",
+    "singular": "بُغْضٌ",
+    "dual": "بُغْضَانِ",
+    "plural": "أَبْغَاضٌ",
+    "meaning": "Kin, nefret, batıla karşı buğz",
+    "level": 3
+  },
+  {
+    "id": 427,
+    "category": "kitap",
+    "singular": "شَفَقَةٌ",
+    "dual": "شَفَقَتَانِ",
+    "plural": "شَفَقَاتٌ",
+    "meaning": "Karşılıksız acıma, esirgeme ve merhamet",
+    "level": 3
+  },
+  {
+    "id": 428,
+    "category": "kitap",
+    "singular": "عَفْوٌ",
+    "dual": "عَفْوَانِ",
+    "plural": "أَعْفِيَةٌ",
+    "meaning": "Cezadan vazgeçme, kusuru bağışlama",
+    "level": 3
+  },
+  {
+    "id": 429,
+    "category": "kitap",
+    "singular": "صَفْحٌ",
+    "dual": "صَفْحَانِ",
+    "plural": "صُفُوحٌ",
+    "meaning": "Kusuru görmezden gelip yüz çevirme",
+    "level": 3
+  },
+  {
+    "id": 430,
+    "category": "kitap",
+    "singular": "حِلْمٌ",
+    "dual": "حِلْمَانِ",
+    "plural": "أَحْلَامٌ",
+    "meaning": "Öfkeyi yenme, yumuşak huyluluk ve teenni",
+    "level": 3
+  },
+  {
+    "id": 431,
+    "category": "kitap",
+    "singular": "جُودٌ",
+    "dual": "جُودَانِ",
+    "plural": "أَجْوَادٌ",
+    "meaning": "İstenmeden bolca verme, cömertlik",
+    "level": 3
+  },
+  {
+    "id": 432,
+    "category": "kitap",
+    "singular": "بَذْلٌ",
+    "dual": "بَذْلَانِ",
+    "plural": "بُذُولٌ",
+    "meaning": "Fedakarlıkla harcama, esirgemeden verme",
+    "level": 3
+  },
+  {
+    "id": 433,
+    "category": "kitap",
+    "singular": "إِحْسَانٌ",
+    "dual": "إِحْسَانَانِ",
+    "plural": "إِحْسَانَاتٌ",
+    "meaning": "Görevini en güzel yapma, lütufta bulunma",
+    "level": 3
+  },
+  {
+    "id": 434,
+    "category": "kitap",
+    "singular": "عَهْدٌ",
+    "dual": "عَهْدَانِ",
+    "plural": "عُهُودٌ",
+    "meaning": "Verilen söz, ahit ve taahhüt",
+    "level": 3
+  },
+  {
+    "id": 435,
+    "category": "kitap",
+    "singular": "مِيثَاقٌ",
+    "dual": "مِيثَاقَانِ",
+    "plural": "مَوَاثِيقُ",
+    "meaning": "Sağlam sözleşme, yeminli muahede",
+    "level": 3
+  },
+  {
+    "id": 436,
+    "category": "kitap",
+    "singular": "أَمَانَةٌ",
+    "dual": "أَمَانَتَانِ",
+    "plural": "أَمَانَاتٌ",
+    "meaning": "Korunmak üzere tevdi edilen emanet",
+    "level": 3
+  },
+  {
+    "id": 437,
+    "category": "kitap",
+    "singular": "خِيَانَةٌ",
+    "dual": "خِيَانَتَانِ",
+    "plural": "خِيَانَاتٌ",
+    "meaning": "Emanete hıyanet etme, ahdi bozma",
+    "level": 3
+  },
+  {
+    "id": 438,
+    "category": "kitap",
+    "singular": "غَدْرٌ",
+    "dual": "غَدْرَانِ",
+    "plural": "غُدُورٌ",
+    "meaning": "Sözünden dönme, kalleşlik ve vefasızlık",
+    "level": 3
+  },
+  {
+    "id": 439,
+    "category": "kitap",
+    "singular": "حَسَدٌ",
+    "dual": "حَسَدَانِ",
+    "plural": "أَحْسَادٌ",
+    "meaning": "Başkasındaki nimetin yok olmasını isteme",
+    "level": 3
+  },
+  {
+    "id": 440,
+    "category": "kitap",
+    "singular": "كِبْرٌ",
+    "dual": "كِبْرَانِ",
+    "plural": "أَكْبَارٌ",
+    "meaning": "Kendini büyük görüp başkalarını hakir görme",
+    "level": 3
+  },
+  {
+    "id": 441,
+    "category": "kitap",
+    "singular": "عُجْبٌ",
+    "dual": "عُجْبَانِ",
+    "plural": "أَعْجَابٌ",
+    "meaning": "Kendi amelini ve nefsini beğenme",
+    "level": 3
+  },
+  {
+    "id": 442,
+    "category": "kitap",
+    "singular": "رِيَاءٌ",
+    "dual": "رِيَاءَانِ",
+    "plural": "أَرْيَاءٌ",
+    "meaning": "Gösteriş yapma, amelde samimiyetsizlik",
+    "level": 3
+  },
+  {
+    "id": 443,
+    "category": "kitap",
+    "singular": "سُمْعَةٌ",
+    "dual": "سُمْعَتَانِ",
+    "plural": "سُمْعَاتٌ",
+    "meaning": "Şöhret ve duyulma arzusu",
+    "level": 3
+  },
+  {
+    "id": 444,
+    "category": "kitap",
+    "singular": "غَفْلَةٌ",
+    "dual": "غَفْلَتَانِ",
+    "plural": "غَفَلَاتٌ",
+    "meaning": "Hakikatten habersiz olma, aymazlık",
+    "level": 3
+  },
+  {
+    "id": 445,
+    "category": "kitap",
+    "singular": "نِسْيَانٌ",
+    "dual": "نِسْيَانَانِ",
+    "plural": "نِسْيَانَاتٌ",
+    "meaning": "Unutma, hatırdan çıkarma",
+    "level": 3
+  },
+  {
+    "id": 446,
+    "category": "kitap",
+    "singular": "ذِكْرٌ",
+    "dual": "ذِكْرَانِ",
+    "plural": "أَذْكَارٌ",
+    "meaning": "Hatırlama, anma ve dille tesbih etme",
+    "level": 3
+  },
+  {
+    "id": 447,
+    "category": "kitap",
+    "singular": "فَهْمٌ",
+    "dual": "فَهْمَانِ",
+    "plural": "أَفْهَامٌ",
+    "meaning": "Derin kavrayış, idrak ve anlama",
+    "level": 3
+  },
+  {
+    "id": 448,
+    "category": "kitap",
+    "singular": "حِفْظٌ",
+    "dual": "حِفْظَانِ",
+    "plural": "أَحْفَاظٌ",
+    "meaning": "Koruma, muhafaza etme ve belleme",
+    "level": 3
+  },
+  {
+    "id": 449,
+    "category": "kitap",
+    "singular": "نَظَرٌ",
+    "dual": "نَظَرَانِ",
+    "plural": "أَنْظَارٌ",
+    "meaning": "Bakış, ibretle müşahede ve tefekkür",
+    "level": 3
+  },
+  {
+    "id": 450,
+    "category": "kitap",
+    "singular": "شُهُودٌ",
+    "dual": "شُهُودَانِ",
+    "plural": "أَشْهَادٌ",
+    "meaning": "Gözle görme, hazır bulunma ve şahitlik",
+    "level": 3
+  },
+  {
+    "id": 451,
+    "category": "genel",
+    "singular": "مَدِينَةٌ",
+    "dual": "مَدِينَتَانِ",
+    "plural": "مُدُنٌ",
+    "meaning": "Büyük yerleşim yeri, belde",
+    "level": 4
+  },
+  {
+    "id": 452,
+    "category": "genel",
+    "singular": "قَرْيَةٌ",
+    "dual": "قَرْيَتَانِ",
+    "plural": "قُرًى",
+    "meaning": "Kırsal yerleşim yeri, kasaba",
+    "level": 4
+  },
+  {
+    "id": 453,
+    "category": "genel",
+    "singular": "شَارِعٌ",
+    "dual": "شَارِعَانِ",
+    "plural": "شَوَارِعُ",
+    "meaning": "Geniş yol, ana sokak",
+    "level": 4
+  },
+  {
+    "id": 454,
+    "category": "genel",
+    "singular": "زُقَاقٌ",
+    "dual": "زُقَاقَانِ",
+    "plural": "أَزِقَّةٌ",
+    "meaning": "Dar mahalle yolu",
+    "level": 4
+  },
+  {
+    "id": 455,
+    "category": "genel",
+    "singular": "حَيٌّ",
+    "dual": "حَيَّانِ",
+    "plural": "أَحْيَاءٌ",
+    "meaning": "Şehrin semti, bölgesi",
+    "level": 4
+  },
+  {
+    "id": 456,
+    "category": "genel",
+    "singular": "سُوقٌ",
+    "dual": "سُوقَانِ",
+    "plural": "أَسْوَاقٌ",
+    "meaning": "Alışveriş yapılan pazar yeri",
+    "level": 4
+  },
+  {
+    "id": 457,
+    "category": "genel",
+    "singular": "دُكَّانٌ",
+    "dual": "دُكَّانَانِ",
+    "plural": "دَاكَاكِينُ",
+    "meaning": "Küçük ticarethane, mağaza",
+    "level": 4
+  },
+  {
+    "id": 458,
+    "category": "genel",
+    "singular": "مَنْزِلٌ",
+    "dual": "مَنْزِلَانِ",
+    "plural": "مَنَازِلُ",
+    "meaning": "Konak yeri, ev ve mesken",
+    "level": 4
+  },
+  {
+    "id": 459,
+    "category": "genel",
+    "singular": "غُرْفَةٌ",
+    "dual": "غُرْفَتَانِ",
+    "plural": "غُرَفٌ",
+    "meaning": "Evin bölmesi, hücre",
+    "level": 4
+  },
+  {
+    "id": 460,
+    "category": "genel",
+    "singular": "مَطْبَخٌ",
+    "dual": "مَطْبَخَانِ",
+    "plural": "مَطَابِخُ",
+    "meaning": "Yemek pişirilen mekan",
+    "level": 4
+  },
+  {
+    "id": 461,
+    "category": "genel",
+    "singular": "حَمَّامٌ",
+    "dual": "حَمَّامَانِ",
+    "plural": "حَمَّامَاتٌ",
+    "meaning": "Yıkanma yeri, banyo",
+    "level": 4
+  },
+  {
+    "id": 462,
+    "category": "genel",
+    "singular": "شُبَّاكٌ",
+    "dual": "شُبَّاكَانِ",
+    "plural": "شَبَابِيكُ",
+    "meaning": "Işık ve hava menfezi",
+    "level": 4
+  },
+  {
+    "id": 463,
+    "category": "genel",
+    "singular": "سَرِيرٌ",
+    "dual": "سَرِيرَانِ",
+    "plural": "أَسِرَّةٌ / سُرُرٌ",
+    "meaning": "Üzerinde yatılan yatak",
+    "level": 4
+  },
+  {
+    "id": 464,
+    "category": "genel",
+    "singular": "كُرْسِيٌّ",
+    "dual": "كُرْسِيَّانِ",
+    "plural": "كَرَاسِيُّ",
+    "meaning": "Üzerine oturulan koltuk",
+    "level": 4
+  },
+  {
+    "id": 465,
+    "category": "genel",
+    "singular": "مَكْتَبٌ",
+    "dual": "مَكْتَبَانِ",
+    "plural": "مَكَاتِبُ",
+    "meaning": "Yazı masası, yazıhane ve ofis",
+    "level": 4
+  },
+  {
+    "id": 466,
+    "category": "genel",
+    "singular": "قَلَمٌ",
+    "dual": "قَلَمَانِ",
+    "plural": "أَقْلَامٌ",
+    "meaning": "Yazı yazma aleti",
+    "level": 4
+  },
+  {
+    "id": 467,
+    "category": "genel",
+    "singular": "دَفْتَرٌ",
+    "dual": "دَفْتَرَانِ",
+    "plural": "دَفَاتِرُ",
+    "meaning": "Yazı yazılan ciltli yapraklar",
+    "level": 4
+  },
+  {
+    "id": 468,
+    "category": "genel",
+    "singular": "مِحْفَظَةٌ",
+    "dual": "مِحْفَظَتَانِ",
+    "plural": "مَحَافِظُ",
+    "meaning": "Eşya ve kitap konulan çanta",
+    "level": 4
+  },
+  {
+    "id": 469,
+    "category": "genel",
+    "singular": "لَوْحٌ",
+    "dual": "لَوْحَانِ",
+    "plural": "أَلْوَاحٌ",
+    "meaning": "Üzerine yazılan düz levha",
+    "level": 4
+  },
+  {
+    "id": 470,
+    "category": "genel",
+    "singular": "وَرَقَةٌ",
+    "dual": "وَرَقَتَانِ",
+    "plural": "أَوْرَاقٌ",
+    "meaning": "Üzerine yazı yazılan tabaka",
+    "level": 4
+  },
+  {
+    "id": 471,
+    "category": "genel",
+    "singular": "حَرْفٌ",
+    "dual": "حَرْفَانِ",
+    "plural": "حُرُوفٌ / أَحْرُفٌ",
+    "meaning": "Kelimeleri oluşturan alfabe sesi",
+    "level": 4
+  },
+  {
+    "id": 472,
+    "category": "genel",
+    "singular": "كَلِمَةٌ",
+    "dual": "كَلِمَتَانِ",
+    "plural": "كَلِمَاتٌ / كَلِمٌ",
+    "meaning": "Anlamlı lafız ve söz",
+    "level": 4
+  },
+  {
+    "id": 473,
+    "category": "genel",
+    "singular": "جُمْلَةٌ",
+    "dual": "جُمْلَتَانِ",
+    "plural": "جُمَلٌ",
+    "meaning": "Anlamı tam bildiren kelimeler dizisi",
+    "level": 4
+  },
+  {
+    "id": 474,
+    "category": "genel",
+    "singular": "سُؤَالٌ",
+    "dual": "سُؤَالَانِ",
+    "plural": "أَسْئِلَةٌ",
+    "meaning": "Cevap bekleyen istifham",
+    "level": 4
+  },
+  {
+    "id": 475,
+    "category": "genel",
+    "singular": "جَوَابٌ",
+    "dual": "جَوَابَانِ",
+    "plural": "أَجْوِبَةٌ",
+    "meaning": "Soruya verilen karşılık",
+    "level": 4
+  },
+  {
+    "id": 476,
+    "category": "genel",
+    "singular": "مُعَلِّمٌ",
+    "dual": "مُعَلِّمَانِ",
+    "plural": "مُعَلِّمُونَ",
+    "meaning": "İlim ve edep öğreten hoca",
+    "level": 4
+  },
+  {
+    "id": 477,
+    "category": "genel",
+    "singular": "تِلْمِيذٌ",
+    "dual": "تِلْمِيذَانِ",
+    "plural": "تَلَامِيذُ",
+    "meaning": "Ders alan talebe",
+    "level": 4
+  },
+  {
+    "id": 478,
+    "category": "genel",
+    "singular": "مَكْتَبَةٌ",
+    "dual": "مَكْتَبَتَانِ",
+    "plural": "مَكْتَبَاتٌ",
+    "meaning": "Kitapların toplandığı yer",
+    "level": 4
+  },
+  {
+    "id": 479,
+    "category": "genel",
+    "singular": "جَامِعَةٌ",
+    "dual": "جَامِعَتَانِ",
+    "plural": "جَامِعَاتٌ",
+    "meaning": "Yüksek tahsil müessesesi",
+    "level": 4
+  },
+  {
+    "id": 480,
+    "category": "genel",
+    "singular": "مَدْرَسَةٌ",
+    "dual": "مَدْرَسَتَانِ",
+    "plural": "مَدَارِسُ",
+    "meaning": "Ders okutulan mektep",
+    "level": 4
+  },
+  {
+    "id": 481,
+    "category": "genel",
+    "singular": "فَصْلٌ",
+    "dual": "فَصْلَانِ",
+    "plural": "فُصُولٌ",
+    "meaning": "Dershane; yılın mevsimi",
+    "level": 4
+  },
+  {
+    "id": 482,
+    "category": "genel",
+    "singular": "دَرْسٌ",
+    "dual": "دَرْسَانِ",
+    "plural": "دُرُوسٌ",
+    "meaning": "İlim tahsil edilen konu",
+    "level": 4
+  },
+  {
+    "id": 483,
+    "category": "genel",
+    "singular": "إِمْتِحَانٌ",
+    "dual": "إِمْتِحَانَانِ",
+    "plural": "إِمْتِحَانَاتٌ",
+    "meaning": "Bilgi ve ehliyet denemesi",
+    "level": 4
+  },
+  {
+    "id": 484,
+    "category": "genel",
+    "singular": "شَهَادَةٌ",
+    "dual": "شَهَادَتَانِ",
+    "plural": "شَهَادَاتٌ",
+    "meaning": "Mezuniyet ve ehliyet belgesi",
+    "level": 4
+  },
+  {
+    "id": 485,
+    "category": "genel",
+    "singular": "إِدَارَةٌ",
+    "dual": "إِدَارَتَانِ",
+    "plural": "إِدَارَاتٌ",
+    "meaning": "Yönetim birimi ve yöneticilik",
+    "level": 4
+  },
+  {
+    "id": 486,
+    "category": "genel",
+    "singular": "رَئِيسٌ",
+    "dual": "رَئِيسَانِ",
+    "plural": "رُؤَسَاءُ",
+    "meaning": "Topluluğun lideri ve amiri",
+    "level": 4
+  },
+  {
+    "id": 487,
+    "category": "genel",
+    "singular": "طَبِيبٌ",
+    "dual": "طَبِيبَانِ",
+    "plural": "أَطِبَّاءُ",
+    "meaning": "Hastaları tedavi eden doktor",
+    "level": 4
+  },
+  {
+    "id": 488,
+    "category": "genel",
+    "singular": "مُهَنْدِسٌ",
+    "dual": "مُهَنْدِسَانِ",
+    "plural": "مُهَنْدِسُونَ",
+    "meaning": "Yapı ve fen uzmanı",
+    "level": 4
+  },
+  {
+    "id": 489,
+    "category": "genel",
+    "singular": "تَاجِرٌ",
+    "dual": "تَاجِرَانِ",
+    "plural": "تُجَّارٌ",
+    "meaning": "Alışveriş yapan ticaret erbabı",
+    "level": 4
+  },
+  {
+    "id": 490,
+    "category": "genel",
+    "singular": "فَلَّاحٌ",
+    "dual": "فَلَّاحَانِ",
+    "plural": "فَلَّاحُونَ",
+    "meaning": "Toprağı ekip biçen rençber",
+    "level": 4
+  },
+  {
+    "id": 491,
+    "category": "genel",
+    "singular": "نَجَّارٌ",
+    "dual": "نَجَّارَانِ",
+    "plural": "نَجَّارُونَ",
+    "meaning": "Ağaç ve mobilya ustası",
+    "level": 4
+  },
+  {
+    "id": 492,
+    "category": "genel",
+    "singular": "حَدَّادٌ",
+    "dual": "حَدَّادَانِ",
+    "plural": "حَدَّادُونَ",
+    "meaning": "Demiri işleyen usta",
+    "level": 4
+  },
+  {
+    "id": 493,
+    "category": "genel",
+    "singular": "خَيَّاطٌ",
+    "dual": "خَيَّاطَانِ",
+    "plural": "خَيَّاطُونَ",
+    "meaning": "Elbise diken usta",
+    "level": 4
+  },
+  {
+    "id": 494,
+    "category": "genel",
+    "singular": "صَيَّادٌ",
+    "dual": "صَيَّادَانِ",
+    "plural": "صَيَّادُونَ",
+    "meaning": "Kara veya deniz avcısı",
+    "level": 4
+  },
+  {
+    "id": 495,
+    "category": "genel",
+    "singular": "جُنْدِيٌّ",
+    "dual": "جُنْدِيَّانِ",
+    "plural": "جُنُودٌ",
+    "meaning": "Vatanı koruyan er",
+    "level": 4
+  },
+  {
+    "id": 496,
+    "category": "genel",
+    "singular": "شُرْطِيٌّ",
+    "dual": "شُرْطِيَّانِ",
+    "plural": "شُرْطَةٌ",
+    "meaning": "Asayişi sağlayan memur",
+    "level": 4
+  },
+  {
+    "id": 497,
+    "category": "genel",
+    "singular": "حَارِسٌ",
+    "dual": "حَارِسَانِ",
+    "plural": "حُرَّاسٌ",
+    "meaning": "Koruyan ve nöbet tutan kimse",
+    "level": 4
+  },
+  {
+    "id": 498,
+    "category": "genel",
+    "singular": "خَادِمٌ",
+    "dual": "خَادِمَانِ",
+    "plural": "خُدَّامٌ",
+    "meaning": "Hizmet eden görevli",
+    "level": 4
+  },
+  {
+    "id": 499,
+    "category": "genel",
+    "singular": "سَائِقٌ",
+    "dual": "سَائِقَانِ",
+    "plural": "سَائِقُونَ",
+    "meaning": "Araç sevk eden sürücü",
+    "level": 4
+  },
+  {
+    "id": 500,
+    "category": "genel",
+    "singular": "طَيَّارٌ",
+    "dual": "طَيَّارَانِ",
+    "plural": "طَيَّارُونَ",
+    "meaning": "Uçak kullanan havacı",
+    "level": 4
+  },
+  {
+    "id": 501,
+    "category": "genel",
+    "singular": "مَلِكٌ",
+    "dual": "مَلِكَانِ",
+    "plural": "مُلُوكٌ",
+    "meaning": "Ülkeyi yöneten padişah",
+    "level": 4
+  },
+  {
+    "id": 502,
+    "category": "genel",
+    "singular": "وَزِيرٌ",
+    "dual": "وَزِيرَانِ",
+    "plural": "وُزَرَاءُ",
+    "meaning": "Hükümdarın baş yardımcısı",
+    "level": 4
+  },
+  {
+    "id": 503,
+    "category": "genel",
+    "singular": "قَاضٍ",
+    "dual": "قَاضِيَانِ",
+    "plural": "قُضَاةٌ",
+    "meaning": "Mahkemede adalet dağıtan",
+    "level": 4
+  },
+  {
+    "id": 504,
+    "category": "genel",
+    "singular": "أَمِيرٌ",
+    "dual": "أَمِيرَانِ",
+    "plural": "أُمَرَاءُ",
+    "meaning": "Yönetici prens ve ordu kumandanı",
+    "level": 4
+  },
+  {
+    "id": 505,
+    "category": "genel",
+    "singular": "سَفِيرٌ",
+    "dual": "سَفِيرَانِ",
+    "plural": "سُفَرَاءُ",
+    "meaning": "Devleti temsil eden elçi",
+    "level": 4
+  },
+  {
+    "id": 506,
+    "category": "genel",
+    "singular": "رَجُلٌ",
+    "dual": "رَجُلَانِ",
+    "plural": "رِجَالٌ",
+    "meaning": "Yetişkin erkek",
+    "level": 4
+  },
+  {
+    "id": 507,
+    "category": "genel",
+    "singular": "إِمْرَأَةٌ",
+    "dual": "إِمْرَأَتَانِ",
+    "plural": "نِسَاءٌ",
+    "meaning": "Yetişkin hanım",
+    "level": 4
+  },
+  {
+    "id": 508,
+    "category": "genel",
+    "singular": "وَلَدٌ",
+    "dual": "وَلَدَانِ",
+    "plural": "أَوْلَادٌ",
+    "meaning": "Oğul, çocuk",
+    "level": 4
+  },
+  {
+    "id": 509,
+    "category": "genel",
+    "singular": "بِنْتٌ",
+    "dual": "بِنْتَانِ",
+    "plural": "بَنَاتٌ",
+    "meaning": "Evlat olan kız",
+    "level": 4
+  },
+  {
+    "id": 510,
+    "category": "genel",
+    "singular": "شَابٌّ",
+    "dual": "شَابَّانِ",
+    "plural": "شَبَابٌ / شُبَّانٌ",
+    "meaning": "Delikanlı, taze ömürlü kimse",
+    "level": 4
+  },
+  {
+    "id": 511,
+    "category": "genel",
+    "singular": "عَجُوزٌ",
+    "dual": "عَجُوزَانِ",
+    "plural": "عَجَائِزُ",
+    "meaning": "Yaşlı kadın veya erkek",
+    "level": 4
+  },
+  {
+    "id": 512,
+    "category": "genel",
+    "singular": "أَبٌ",
+    "dual": "أَبَوَانِ",
+    "plural": "آبَاءٌ",
+    "meaning": "Peder, hane reisi",
+    "level": 4
+  },
+  {
+    "id": 513,
+    "category": "genel",
+    "singular": "أُمٌّ",
+    "dual": "أُمَّانِ",
+    "plural": "أُمَّهَاتٌ",
+    "meaning": "Valide, şefkat pınarı",
+    "level": 4
+  },
+  {
+    "id": 514,
+    "category": "genel",
+    "singular": "أَخٌ",
+    "dual": "أَخَوَانِ",
+    "plural": "إِخْوَةٌ / إِخْوَانٌ",
+    "meaning": "Erkek kardeş",
+    "level": 4
+  },
+  {
+    "id": 515,
+    "category": "genel",
+    "singular": "أُخْتٌ",
+    "dual": "أُخْتَانِ",
+    "plural": "أَخَوَاتٌ",
+    "meaning": "Kız kardeş, bacı, nesep yakını",
+    "level": 4
+  },
+  {
+    "id": 516,
+    "category": "genel",
+    "singular": "جَدٌّ",
+    "dual": "جَدَّانِ",
+    "plural": "أَجْدَادٌ",
+    "meaning": "Babanın veya annenin babası",
+    "level": 4
+  },
+  {
+    "id": 517,
+    "category": "genel",
+    "singular": "جَدَّةٌ",
+    "dual": "جَدَّتَانِ",
+    "plural": "جَدَّاتٌ",
+    "meaning": "Babanın veya annenin annesi",
+    "level": 4
+  },
+  {
+    "id": 518,
+    "category": "genel",
+    "singular": "عَمٌّ",
+    "dual": "عَمَّانِ",
+    "plural": "أَعْمَامٌ",
+    "meaning": "Babanın erkek kardeşi",
+    "level": 4
+  },
+  {
+    "id": 519,
+    "category": "genel",
+    "singular": "عَمَّةٌ",
+    "dual": "عَمَّتَانِ",
+    "plural": "عَمَّاتٌ",
+    "meaning": "Babanın kız kardeşi",
+    "level": 4
+  },
+  {
+    "id": 520,
+    "category": "genel",
+    "singular": "خَالٌ",
+    "dual": "خَالَانِ",
+    "plural": "أَخْوَالٌ",
+    "meaning": "Annenin erkek kardeşi",
+    "level": 4
+  },
+  {
+    "id": 521,
+    "category": "genel",
+    "singular": "خَالَةٌ",
+    "dual": "خَالَتَانِ",
+    "plural": "خَالَاتٌ",
+    "meaning": "Annenin kız kardeşi",
+    "level": 4
+  },
+  {
+    "id": 522,
+    "category": "genel",
+    "singular": "إِبْنٌ",
+    "dual": "إِبْنَانِ",
+    "plural": "أَبْنَاءٌ / بَنُونَ",
+    "meaning": "Erkek evlat",
+    "level": 4
+  },
+  {
+    "id": 523,
+    "category": "genel",
+    "singular": "إِبْنَةٌ",
+    "dual": "إِبْنَتَانِ",
+    "plural": "بَنَاتٌ",
+    "meaning": "Kız evlat, kız çocuk",
+    "level": 4
+  },
+  {
+    "id": 524,
+    "category": "genel",
+    "singular": "زَوْجٌ",
+    "dual": "زَوْجَانِ",
+    "plural": "أَزْوَاجٌ",
+    "meaning": "Nikahlı koca",
+    "level": 4
+  },
+  {
+    "id": 525,
+    "category": "genel",
+    "singular": "زَوْجَةٌ",
+    "dual": "زَوْجَتَانِ",
+    "plural": "زَوْجَاتٌ",
+    "meaning": "Nikahlı zevce",
+    "level": 4
+  },
+  {
+    "id": 526,
+    "category": "genel",
+    "singular": "صِهْرٌ",
+    "dual": "صِهْرَانِ",
+    "plural": "أَصْهَارٌ",
+    "meaning": "Evlilik yoluyla kazanılan akraba",
+    "level": 4
+  },
+  {
+    "id": 527,
+    "category": "genel",
+    "singular": "قَرِيبٌ",
+    "dual": "قَرِيبَانِ",
+    "plural": "أَقْرِبَاءُ",
+    "meaning": "Kan bağı olan hısım",
+    "level": 4
+  },
+  {
+    "id": 528,
+    "category": "genel",
+    "singular": "غَرِيبٌ",
+    "dual": "غَرِيبَانِ",
+    "plural": "غُرَبَاءُ",
+    "meaning": "Yurdundan uzak olan kimse",
+    "level": 4
+  },
+  {
+    "id": 529,
+    "category": "genel",
+    "singular": "صَدِيقٌ",
+    "dual": "صَدِيقَانِ",
+    "plural": "أَصْدِقَاءُ",
+    "meaning": "Sadakatli candan arkadaş",
+    "level": 4
+  },
+  {
+    "id": 530,
+    "category": "genel",
+    "singular": "عَدُوٌّ",
+    "dual": "عَدُوَّانِ",
+    "plural": "أَعْدَاءٌ",
+    "meaning": "Husumet besleyen hasım",
+    "level": 4
+  },
+  {
+    "id": 531,
+    "category": "genel",
+    "singular": "شَخْصٌ",
+    "dual": "شَخْصَانِ",
+    "plural": "أَشْخَاصٌ",
+    "meaning": "Fert, birey",
+    "level": 4
+  },
+  {
+    "id": 532,
+    "category": "genel",
+    "singular": "نَاسٌ",
+    "dual": "نَاسَانِ",
+    "plural": "أُنَاسٌ",
+    "meaning": "Beşer topluluğu",
+    "level": 4
+  },
+  {
+    "id": 533,
+    "category": "genel",
+    "singular": "حَلْقَةٌ",
+    "dual": "حَلْقَتَانِ",
+    "plural": "حَلَقَاتٌ",
+    "meaning": "İlim meclisi, çember",
+    "level": 4
+  },
+  {
+    "id": 534,
+    "category": "genel",
+    "singular": "صَفٌّ",
+    "dual": "صَفَّانِ",
+    "plural": "صُفُوفٌ",
+    "meaning": "Namazda veya orduda yan yana duruş",
+    "level": 4
+  },
+  {
+    "id": 535,
+    "category": "genel",
+    "singular": "مَجْلِسٌ",
+    "dual": "مَجْلِسَانِ",
+    "plural": "مَجَالِسُ",
+    "meaning": "Oturulan toplantı yeri",
+    "level": 4
+  },
+  {
+    "id": 536,
+    "category": "genel",
+    "singular": "مُجْتَمَعٌ",
+    "dual": "مُجْتَمَعَانِ",
+    "plural": "مُجْتَمَعَاتٌ",
+    "meaning": "Birlikte yaşayan cemiyet",
+    "level": 4
+  },
+  {
+    "id": 537,
+    "category": "genel",
+    "singular": "وَطَنٌ",
+    "dual": "وَطَنَانِ",
+    "plural": "أَوْطَانٌ",
+    "meaning": "Doğulup yaşanılan memleket",
+    "level": 4
+  },
+  {
+    "id": 538,
+    "category": "genel",
+    "singular": "بَلَدٌ",
+    "dual": "بَلَدَانِ",
+    "plural": "بِلَادٌ / بُلْدَانٌ",
+    "meaning": "Diyar, yurt, memleket",
+    "level": 4
+  },
+  {
+    "id": 539,
+    "category": "genel",
+    "singular": "قَارَّةٌ",
+    "dual": "قَارَّتَانِ",
+    "plural": "قَارَّاتٌ",
+    "meaning": "Büyük kara parçası",
+    "level": 4
+  },
+  {
+    "id": 540,
+    "category": "genel",
+    "singular": "جَزِيرَةٌ",
+    "dual": "جَزِيرَتَانِ",
+    "plural": "جُزُرٌ",
+    "meaning": "Dört tarafı suyla çevrili kara",
+    "level": 4
+  },
+  {
+    "id": 541,
+    "category": "genel",
+    "singular": "شِبْهُ جَزِيرَةٍ",
+    "dual": "شِبْهَا جَزِيرَةٍ",
+    "plural": "أَشْبَاهُ جُزُرٍ",
+    "meaning": "Üç tarafı denizle çevrili kara",
+    "level": 4
+  },
+  {
+    "id": 542,
+    "category": "genel",
+    "singular": "نَهْرٌ",
+    "dual": "نَهْرَانِ",
+    "plural": "أَنْهَارٌ / أَنْهُرٌ",
+    "meaning": "Akarsu, ırmak",
+    "level": 4
+  },
+  {
+    "id": 543,
+    "category": "genel",
+    "singular": "بِئْرٌ",
+    "dual": "بِئْرَانِ",
+    "plural": "آبَارٌ",
+    "meaning": "Su çıkarılan derin çukur",
+    "level": 4
+  },
+  {
+    "id": 544,
+    "category": "genel",
+    "singular": "وَادٍ",
+    "dual": "وَادِيَانِ",
+    "plural": "أَوْدِيَةٌ",
+    "meaning": "Dağlar arasındaki çukur akarsu yatağı",
+    "level": 4
+  },
+  {
+    "id": 545,
+    "category": "genel",
+    "singular": "تَلٌّ",
+    "dual": "تَلَّانِ",
+    "plural": "تِلَالٌ",
+    "meaning": "Küçük yükselti",
+    "level": 4
+  },
+  {
+    "id": 546,
+    "category": "genel",
+    "singular": "صَحْرَاءُ",
+    "dual": "صَحْرَاوَانِ",
+    "plural": "صَحَارَى",
+    "meaning": "Kumluk ve kurak geniş alan",
+    "level": 4
+  },
+  {
+    "id": 547,
+    "category": "genel",
+    "singular": "غَابَةٌ",
+    "dual": "غَابَتَانِ",
+    "plural": "غَابَاتٌ",
+    "meaning": "Ağaçlarla kaplı geniş alan",
+    "level": 4
+  },
+  {
+    "id": 548,
+    "category": "genel",
+    "singular": "بُسْتَانٌ",
+    "dual": "بُسْتَانَانِ",
+    "plural": "بَسَاتِينُ",
+    "meaning": "Meyveli ve yeşil alan",
+    "level": 4
+  },
+  {
+    "id": 549,
+    "category": "genel",
+    "singular": "حَدِيقَةٌ",
+    "dual": "حَدِيقَتَانِ",
+    "plural": "حَدَائِقُ",
+    "meaning": "Çiçekli yeşil bahçe",
+    "level": 4
+  },
+  {
+    "id": 550,
+    "category": "genel",
+    "singular": "مَزْرَعَةٌ",
+    "dual": "مَزْرَعَتَانِ",
+    "plural": "مَزَارِعُ",
+    "meaning": "Tarım ve hayvancılık arazisi",
+    "level": 4
+  },
+  {
+    "id": 551,
+    "category": "genel",
+    "singular": "جِسْرٌ",
+    "dual": "جِسْرَانِ",
+    "plural": "جُسُورٌ",
+    "meaning": "Nehir üzerinden geçiren kemer",
+    "level": 4
+  },
+  {
+    "id": 552,
+    "category": "genel",
+    "singular": "نَفَقٌ",
+    "dual": "نَفَقَانِ",
+    "plural": "أَنْفَاقٌ",
+    "meaning": "Dağ veya yer altından açılan yol",
+    "level": 4
+  },
+  {
+    "id": 553,
+    "category": "genel",
+    "singular": "سَيَّارَةٌ",
+    "dual": "سَيَّارَتَانِ",
+    "plural": "سَيَّارَاتٌ",
+    "meaning": "Dört tekerlekli binek araç",
+    "level": 4
+  },
+  {
+    "id": 554,
+    "category": "genel",
+    "singular": "حَافِلَةٌ",
+    "dual": "حَافِلَتَانِ",
+    "plural": "حَافِلَاتٌ",
+    "meaning": "Yolcu taşıyan büyük taşıt",
+    "level": 4
+  },
+  {
+    "id": 555,
+    "category": "genel",
+    "singular": "قِطَارٌ",
+    "dual": "قِطَارَانِ",
+    "plural": "قِطَارَاتٌ",
+    "meaning": "Raylar üzerinde giden katar",
+    "level": 4
+  },
+  {
+    "id": 556,
+    "category": "genel",
+    "singular": "طَائِرَةٌ",
+    "dual": "طَائِرَتَانِ",
+    "plural": "طَائِرَاتٌ",
+    "meaning": "Havada uçan yolcu aracı",
+    "level": 4
+  },
+  {
+    "id": 557,
+    "category": "genel",
+    "singular": "زَوْرَقٌ",
+    "dual": "زَوْرَقَانِ",
+    "plural": "زَوَارِقُ",
+    "meaning": "Küçük deniz kayığı",
+    "level": 4
+  },
+  {
+    "id": 558,
+    "category": "genel",
+    "singular": "دَرَّاجَةٌ",
+    "dual": "دَرَّاجَتَانِ",
+    "plural": "دَرَّاجَاتٌ",
+    "meaning": "İki tekerlekli binek",
+    "level": 4
+  },
+  {
+    "id": 559,
+    "category": "genel",
+    "singular": "مَحَطَّةٌ",
+    "dual": "مَحَطَّتَانِ",
+    "plural": "مَحَطَّاتٌ",
+    "meaning": "Tren ve otobüs durağı",
+    "level": 4
+  },
+  {
+    "id": 560,
+    "category": "genel",
+    "singular": "مَطَارٌ",
+    "dual": "مَطَارَانِ",
+    "plural": "مَطَارَاتٌ",
+    "meaning": "Uçakların kalktığı alan",
+    "level": 4
+  },
+  {
+    "id": 561,
+    "category": "genel",
+    "singular": "سَفَرٌ",
+    "dual": "سَفَرَانِ",
+    "plural": "أَسْفَارٌ",
+    "meaning": "Bir yerden başka yere seyahat",
+    "level": 4
+  },
+  {
+    "id": 562,
+    "category": "genel",
+    "singular": "رِحْلَةٌ",
+    "dual": "رِحْلَتَانِ",
+    "plural": "رِحْلَاتٌ",
+    "meaning": "İbret ve seyahat yolculuğu",
+    "level": 4
+  },
+  {
+    "id": 563,
+    "category": "genel",
+    "singular": "إِقَامَةٌ",
+    "dual": "إِقَامَتَانِ",
+    "plural": "إِقَامَاتٌ",
+    "meaning": "Bir beldede yerleşip kalma",
+    "level": 4
+  },
+  {
+    "id": 564,
+    "category": "genel",
+    "singular": "جَوَازُ سَفَرٍ",
+    "dual": "جَوَازَا سَفَرٍ",
+    "plural": "جَوَازَاتُ سَفَرٍ",
+    "meaning": "Seyahat belgesi",
+    "level": 4
+  },
+  {
+    "id": 565,
+    "category": "genel",
+    "singular": "تَذْكِرَةٌ",
+    "dual": "تَذْكِرَتَانِ",
+    "plural": "تَذَاكِرُ",
+    "meaning": "Giriş ve seyahat fişi",
+    "level": 4
+  },
+  {
+    "id": 566,
+    "category": "genel",
+    "singular": "نُقُودٌ",
+    "dual": "نَقْدَانِ",
+    "plural": "أَنْقَادٌ",
+    "meaning": "Alışverişte kullanılan nakit",
+    "level": 4
+  },
+  {
+    "id": 567,
+    "category": "genel",
+    "singular": "دِينَارٌ",
+    "dual": "دِينَارَانِ",
+    "plural": "دَنَانِيرُ",
+    "meaning": "Altın para birimi",
+    "level": 4
+  },
+  {
+    "id": 568,
+    "category": "genel",
+    "singular": "دِرْهَمٌ",
+    "dual": "دِرْهَمَانِ",
+    "plural": "دَرَاهِمُ",
+    "meaning": "Gümüş para birimi",
+    "level": 4
+  },
+  {
+    "id": 569,
+    "category": "genel",
+    "singular": "لِيرَةٌ",
+    "dual": "لِيرَتَانِ",
+    "plural": "لِيرَاتٌ",
+    "meaning": "Para birimi",
+    "level": 4
+  },
+  {
+    "id": 570,
+    "category": "genel",
+    "singular": "بَنْكٌ",
+    "dual": "بَنْكَانِ",
+    "plural": "بُنُوكٌ",
+    "meaning": "Para muhafaza ve ticaret kurumu",
+    "level": 4
+  },
+  {
+    "id": 571,
+    "category": "genel",
+    "singular": "حِسَابٌ",
+    "dual": "حِسَابَانِ",
+    "plural": "حِسَابَاتٌ",
+    "meaning": "Aritmetik işlem, banka hesabı",
+    "level": 4
+  },
+  {
+    "id": 572,
+    "category": "genel",
+    "singular": "فَاتُورَةٌ",
+    "dual": "فَاتُورَتَانِ",
+    "plural": "فَوَاتِيرُ",
+    "meaning": "Alışveriş masraf dökümü",
+    "level": 4
+  },
+  {
+    "id": 573,
+    "category": "genel",
+    "singular": "شِيكٌ",
+    "dual": "شِيكَانِ",
+    "plural": "شِيكَاتٌ",
+    "meaning": "Ödeme emri evrakı",
+    "level": 4
+  },
+  {
+    "id": 574,
+    "category": "genel",
+    "singular": "مَلْبَسٌ",
+    "dual": "مَلْبَسَانِ",
+    "plural": "مَلَابِسُ",
+    "meaning": "Giyilen giysi",
+    "level": 4
+  },
+  {
+    "id": 575,
+    "category": "genel",
+    "singular": "قَمِيصٌ",
+    "dual": "قَمِيصَانِ",
+    "plural": "قُمْصَانٌ / أَقْمِصَةٌ",
+    "meaning": "Üst bedene giyilen giysi",
+    "level": 4
+  },
+  {
+    "id": 576,
+    "category": "genel",
+    "singular": "ثَوْبٌ",
+    "dual": "ثَوْبَانِ",
+    "plural": "ثِيَابٌ / أَثْوَابٌ",
+    "meaning": "Giyilen kumaş giysi",
+    "level": 4
+  },
+  {
+    "id": 577,
+    "category": "genel",
+    "singular": "سِرْوَالٌ",
+    "dual": "سِرْوَالَانِ",
+    "plural": "سَرَاوِيلُ",
+    "meaning": "Bacakları örten don ve pantolon",
+    "level": 4
+  },
+  {
+    "id": 578,
+    "category": "genel",
+    "singular": "خِمَارٌ",
+    "dual": "خِمَارَانِ",
+    "plural": "خُمُرٌ",
+    "meaning": "Baş ve boynu örten örtü",
+    "level": 4
+  },
+  {
+    "id": 579,
+    "category": "genel",
+    "singular": "جِلْبَابٌ",
+    "dual": "جِلْبَابَانِ",
+    "plural": "جَلَابِيبُ",
+    "meaning": "Dışarı çıkarken giyilen geniş örtü",
+    "level": 4
+  },
+  {
+    "id": 580,
+    "category": "genel",
+    "singular": "حِذَاءٌ",
+    "dual": "حِذَاءَانِ",
+    "plural": "أَحْذِيَةٌ",
+    "meaning": "Ayağa giyilen pabuç",
+    "level": 4
+  },
+  {
+    "id": 581,
+    "category": "genel",
+    "singular": "جَوْرَبٌ",
+    "dual": "جَوْرَبَانِ",
+    "plural": "جَوَارِبُ",
+    "meaning": "Ayağa giyilen örgü kılıf",
+    "level": 4
+  },
+  {
+    "id": 582,
+    "category": "genel",
+    "singular": "قُفَّازٌ",
+    "dual": "قُفَّازَانِ",
+    "plural": "قَفَافِيزُ",
+    "meaning": "Eli örten koruyucu",
+    "level": 4
+  },
+  {
+    "id": 583,
+    "category": "genel",
+    "singular": "مِحْفَظَةُ نُقُودٍ",
+    "dual": "مِحْفَظَتَا نُقُودٍ",
+    "plural": "مَحَافِظُ نُقُودٍ",
+    "meaning": "Para konulan küçük çanta",
+    "level": 4
+  },
+  {
+    "id": 584,
+    "category": "genel",
+    "singular": "مِكْنَسَةٌ",
+    "dual": "مِكْنَسَتَانِ",
+    "plural": "مَكَانِسُ",
+    "meaning": "Toz süpürme aleti",
+    "level": 4
+  },
+  {
+    "id": 585,
+    "category": "genel",
+    "singular": "غَسَّالَةٌ",
+    "dual": "غَسَّالَتَانِ",
+    "plural": "غَسَّالَاتٌ",
+    "meaning": "Giysi yıkama cihazı",
+    "level": 4
+  },
+  {
+    "id": 586,
+    "category": "genel",
+    "singular": "ثَلَّاجَةٌ",
+    "dual": "ثَلَّاجَتَانِ",
+    "plural": "ثَلَّاجَاتٌ",
+    "meaning": "Gıdaları soğuk tutan dolap",
+    "level": 4
+  },
+  {
+    "id": 587,
+    "category": "genel",
+    "singular": "فُرْنٌ",
+    "dual": "فُرْنَانِ",
+    "plural": "أَفْرَانٌ",
+    "meaning": "Ekmek ve yemek pişirme ocağı",
+    "level": 4
+  },
+  {
+    "id": 588,
+    "category": "genel",
+    "singular": "طَبَقٌ",
+    "dual": "طَبَقَانِ",
+    "plural": "أَطْبَاقٌ",
+    "meaning": "Yemek konulan yayvan kap",
+    "level": 4
+  },
+  {
+    "id": 589,
+    "category": "genel",
+    "singular": "فِنْجَانٌ",
+    "dual": "فِنْجَانَانِ",
+    "plural": "فَنَاجِينُ",
+    "meaning": "Kahve ve çay içilen küçük kulplu kap",
+    "level": 4
+  },
+  {
+    "id": 590,
+    "category": "genel",
+    "singular": "كُوبٌ",
+    "dual": "كُوبَانِ",
+    "plural": "أَكْوَابٌ",
+    "meaning": "Su içilen kulpsuz kap",
+    "level": 4
+  },
+  {
+    "id": 591,
+    "category": "genel",
+    "singular": "مِلْعَقَةٌ",
+    "dual": "مِلْعَقَتَانِ",
+    "plural": "مَلَاعِقُ",
+    "meaning": "Çorba ve yemek yeme aleti",
+    "level": 4
+  },
+  {
+    "id": 592,
+    "category": "genel",
+    "singular": "شَوْكَةٌ",
+    "dual": "شَوْكَتَانِ",
+    "plural": "شُوَاكٌ",
+    "meaning": "Yemek alma aleti",
+    "level": 4
+  },
+  {
+    "id": 593,
+    "category": "genel",
+    "singular": "سِكِّينٌ",
+    "dual": "سِكِّينَانِ",
+    "plural": "سَكَاكِينُ",
+    "meaning": "Kesme aleti",
+    "level": 4
+  },
+  {
+    "id": 594,
+    "category": "genel",
+    "singular": "قِدْرٌ",
+    "dual": "قِدْرَانِ",
+    "plural": "قُدُورٌ",
+    "meaning": "Yemek pişirilen derin kap",
+    "level": 4
+  },
+  {
+    "id": 595,
+    "category": "genel",
+    "singular": "كَأْسٌ",
+    "dual": "كَأْسَانِ",
+    "plural": "كُؤُوسٌ",
+    "meaning": "İçecek bardağı",
+    "level": 4
+  },
+  {
+    "id": 596,
+    "category": "genel",
+    "singular": "سَنَةٌ",
+    "dual": "سَنَتَانِ",
+    "plural": "سَنَوَاتٌ / سِنُونَ",
+    "meaning": "On iki aylık yıl müddeti",
+    "level": 4
+  },
+  {
+    "id": 597,
+    "category": "genel",
+    "singular": "عَامٌ",
+    "dual": "عَامَانِ",
+    "plural": "أَعْوَامٌ",
+    "meaning": "Kameri veya şemsi sene",
+    "level": 4
+  },
+  {
+    "id": 598,
+    "category": "genel",
+    "singular": "شَهْرٌ",
+    "dual": "شَهْرَانِ",
+    "plural": "أَشْهُرٌ / شُهُورٌ",
+    "meaning": "Otuz günlük zaman dilimi",
+    "level": 4
+  },
+  {
+    "id": 599,
+    "category": "genel",
+    "singular": "أُسْبُوعٌ",
+    "dual": "أُسْبُوعَانِ",
+    "plural": "أَسَابِيعُ",
+    "meaning": "Yedi günlük zaman süresi",
+    "level": 4
+  },
+  {
+    "id": 600,
+    "category": "genel",
+    "singular": "صَبَاحٌ",
+    "dual": "صَبَاحَانِ",
+    "plural": "أَصْبَاحٌ",
+    "meaning": "Günün ilk aydınlık vakti",
+    "level": 4
+  },
+  {
+    "id": 601,
+    "category": "genel",
+    "singular": "ظُهْرٌ",
+    "dual": "ظُهْرَانِ",
+    "plural": "أَظْهَارٌ",
+    "meaning": "Güneşin tepeyi aştığı vakit",
+    "level": 5
+  },
+  {
+    "id": 602,
+    "category": "genel",
+    "singular": "عَصْرٌ",
+    "dual": "عَصْرَانِ",
+    "plural": "أَعْصَارٌ",
+    "meaning": "Güneşin batmaya meylettiği vakit",
+    "level": 5
+  },
+  {
+    "id": 603,
+    "category": "genel",
+    "singular": "مَسَاءٌ",
+    "dual": "مَسَاءَانِ",
+    "plural": "أَمْسِيَةٌ",
+    "meaning": "Güneşin battığı vakit",
+    "level": 5
+  },
+  {
+    "id": 604,
+    "category": "genel",
+    "singular": "غُرُوبٌ",
+    "dual": "غُرُوبَانِ",
+    "plural": "غُرُوبَاتٌ",
+    "meaning": "Güneşin ufukta kayboluşu",
+    "level": 5
+  },
+  {
+    "id": 605,
+    "category": "genel",
+    "singular": "شُرُوقٌ",
+    "dual": "شُرُوقَانِ",
+    "plural": "شُرُوقَاتٌ",
+    "meaning": "Güneşin ufuktan doğuşu",
+    "level": 5
+  },
+  {
+    "id": 606,
+    "category": "genel",
+    "singular": "سَاعَةٌ",
+    "dual": "سَاعَتَانِ",
+    "plural": "سَاعَاتٌ",
+    "meaning": "Altmış dakikalık zaman dilimi",
+    "level": 5
+  },
+  {
+    "id": 607,
+    "category": "genel",
+    "singular": "دَقِيقَةٌ",
+    "dual": "دَقِيقَتَانِ",
+    "plural": "دَقَائِقُ",
+    "meaning": "Altmış saniyelik zaman",
+    "level": 5
+  },
+  {
+    "id": 608,
+    "category": "genel",
+    "singular": "ثَانِيَةٌ",
+    "dual": "ثَانِيَتَانِ",
+    "plural": "ثَوَانٍ",
+    "meaning": "Dakikanın altmışta biri",
+    "level": 5
+  },
+  {
+    "id": 609,
+    "category": "genel",
+    "singular": "لَحْظَةٌ",
+    "dual": "لَحْظَتَانِ",
+    "plural": "لَحَظَاتٌ",
+    "meaning": "Göz açıp kapama süresi, an",
+    "level": 5
+  },
+  {
+    "id": 610,
+    "category": "genel",
+    "singular": "مَوْسِمٌ",
+    "dual": "مَوْسِمَانِ",
+    "plural": "مَوَاسِمُ",
+    "meaning": "Yılın dört ana döneminden her biri",
+    "level": 5
+  },
+  {
+    "id": 611,
+    "category": "genel",
+    "singular": "رَبِيعٌ",
+    "dual": "رَبِيعَانِ",
+    "plural": "أَرْبِعَاءُ",
+    "meaning": "Ağaçların çiçek açtığı mevsim",
+    "level": 5
+  },
+  {
+    "id": 612,
+    "category": "genel",
+    "singular": "صَيْفٌ",
+    "dual": "صَيْفَانِ",
+    "plural": "أَصْيَافٌ",
+    "meaning": "Sıcak günlerin mevsimi",
+    "level": 5
+  },
+  {
+    "id": 613,
+    "category": "genel",
+    "singular": "خَرِيفٌ",
+    "dual": "خَرِيفَانِ",
+    "plural": "أَخْرِفَةٌ",
+    "meaning": "Yaprakların döküldüğü mevsim",
+    "level": 5
+  },
+  {
+    "id": 614,
+    "category": "genel",
+    "singular": "شِتَاءٌ",
+    "dual": "شِتَاءَانِ",
+    "plural": "أَشْتِيَةٌ",
+    "meaning": "Soğuk ve karlı mevsim",
+    "level": 5
+  },
+  {
+    "id": 615,
+    "category": "genel",
+    "singular": "سَحَابٌ",
+    "dual": "سَحَابَانِ",
+    "plural": "سُحُبٌ",
+    "meaning": "Gökte toplanan su buharı kütlesi",
+    "level": 5
+  },
+  {
+    "id": 616,
+    "category": "genel",
+    "singular": "مَطَرٌ",
+    "dual": "مَطَرَانِ",
+    "plural": "أَمْطَارٌ",
+    "meaning": "Gökten inen bereketli damlalar",
+    "level": 5
+  },
+  {
+    "id": 617,
+    "category": "genel",
+    "singular": "ثَلْجٌ",
+    "dual": "ثَلْجَانِ",
+    "plural": "ثُلُوجٌ",
+    "meaning": "Beyaz kristal yağış",
+    "level": 5
+  },
+  {
+    "id": 618,
+    "category": "genel",
+    "singular": "بَرَدٌ",
+    "dual": "بَرَدَانِ",
+    "plural": "أَبْرَادٌ",
+    "meaning": "Donmuş taneli yağmur damlaları",
+    "level": 5
+  },
+  {
+    "id": 619,
+    "category": "genel",
+    "singular": "ضَبَابٌ",
+    "dual": "ضَبَابَانِ",
+    "plural": "أَضِبَّةٌ",
+    "meaning": "Yere inen yoğun duman bulutu",
+    "level": 5
+  },
+  {
+    "id": 620,
+    "category": "genel",
+    "singular": "عَاصِفَةٌ",
+    "dual": "عَاصِفَتَانِ",
+    "plural": "عَوَاصِفُ",
+    "meaning": "Şiddetli esen kasırga yeli",
+    "level": 5
+  },
+  {
+    "id": 621,
+    "category": "genel",
+    "singular": "حَرَارَةٌ",
+    "dual": "حَرَارَتَانِ",
+    "plural": "حَرَارَاتٌ",
+    "meaning": "Isı derecesi, hararet",
+    "level": 5
+  },
+  {
+    "id": 622,
+    "category": "genel",
+    "singular": "بُرُودَةٌ",
+    "dual": "بُرُودَتَانِ",
+    "plural": "بُرُودَاتٌ",
+    "meaning": "Düşük ısı, ayaz",
+    "level": 5
+  },
+  {
+    "id": 623,
+    "category": "genel",
+    "singular": "رُطُوبَةٌ",
+    "dual": "رُطُوبَتَانِ",
+    "plural": "رُطُوبَاتٌ",
+    "meaning": "Havadaki ıslaklık derecesi",
+    "level": 5
+  },
+  {
+    "id": 624,
+    "category": "genel",
+    "singular": "صَوْتٌ",
+    "dual": "صَوْتَانِ",
+    "plural": "أَصْوَاتٌ",
+    "meaning": "Kulağa ulaşan seda",
+    "level": 5
+  },
+  {
+    "id": 625,
+    "category": "genel",
+    "singular": "صَدًى",
+    "dual": "صَدَيَانِ",
+    "plural": "أَصْدَاءٌ",
+    "meaning": "Sesin duvara çarpıp dönmesi",
+    "level": 5
+  },
+  {
+    "id": 626,
+    "category": "genel",
+    "singular": "نِدَاءٌ",
+    "dual": "نِدَاءَانِ",
+    "plural": "أَنْدِيَةٌ",
+    "meaning": "Seslenme, haykırış",
+    "level": 5
+  },
+  {
+    "id": 627,
+    "category": "genel",
+    "singular": "قِصَّةٌ",
+    "dual": "قِصَّتَانِ",
+    "plural": "قِصَصٌ",
+    "meaning": "İbret verici tarihi anlatı",
+    "level": 5
+  },
+  {
+    "id": 628,
+    "category": "genel",
+    "singular": "حِكَايَةٌ",
+    "dual": "حِكَايَتَانِ",
+    "plural": "حِكَايَاتٌ",
+    "meaning": "Yaşanmış veya kurgusal olay",
+    "level": 5
+  },
+  {
+    "id": 629,
+    "category": "genel",
+    "singular": "رِوَايَةٌ",
+    "dual": "رِوَايَتَانِ",
+    "plural": "رِوَايَاتٌ",
+    "meaning": "Nakil ve geniş edebi anlatı",
+    "level": 5
+  },
+  {
+    "id": 630,
+    "category": "genel",
+    "singular": "شِعْرٌ",
+    "dual": "شِعْرَانِ",
+    "plural": "أَشْعَارٌ",
+    "meaning": "Vezinli ve kafiyeli söz sanatı",
+    "level": 5
+  },
+  {
+    "id": 631,
+    "category": "genel",
+    "singular": "قَصِيدَةٌ",
+    "dual": "قَصِيدَتَانِ",
+    "plural": "قَصَائِدُ",
+    "meaning": "Uzun manzum şiir",
+    "level": 5
+  },
+  {
+    "id": 632,
+    "category": "genel",
+    "singular": "بَيْتُ شِعْرٍ",
+    "dual": "بَيْتَا شِعْرٍ",
+    "plural": "أَبْيَاتُ شِعْرٍ",
+    "meaning": "İki mısradan oluşan dize",
+    "level": 5
+  },
+  {
+    "id": 633,
+    "category": "genel",
+    "singular": "غَزَلٌ",
+    "dual": "غَزَلَانِ",
+    "plural": "أَغْزَالٌ",
+    "meaning": "Aşk ve güzelliği terennüm eden şiir",
+    "level": 5
+  },
+  {
+    "id": 634,
+    "category": "genel",
+    "singular": "مَجَلَّةٌ",
+    "dual": "مَجَلَّتَانِ",
+    "plural": "مَجَلَّاتٌ",
+    "meaning": "Süreli yayın, mevkute, bülten",
+    "level": 5
+  },
+  {
+    "id": 635,
+    "category": "genel",
+    "singular": "جَرِيدَةٌ",
+    "dual": "جَرِيدَتَانِ",
+    "plural": "جَرَائِدُ",
+    "meaning": "Günlük haber neşriyatı",
+    "level": 5
+  },
+  {
+    "id": 636,
+    "category": "genel",
+    "singular": "إِعْلَانٌ",
+    "dual": "إِعْلَانَانِ",
+    "plural": "إِعْلَانَاتٌ",
+    "meaning": "Halka yapılan ilan ve bildiri",
+    "level": 5
+  },
+  {
+    "id": 637,
+    "category": "genel",
+    "singular": "مَكْتُوبٌ",
+    "dual": "مَكْتُوبَانِ",
+    "plural": "مَكَاتِيبُ",
+    "meaning": "Yazılan haberleşme kâğıdı",
+    "level": 5
+  },
+  {
+    "id": 638,
+    "category": "genel",
+    "singular": "بَرِيدٌ",
+    "dual": "بَرِيدَانِ",
+    "plural": "أَبْرِدَةٌ",
+    "meaning": "Mektup ve kargo ulaştırma teşkilatı",
+    "level": 5
+  },
+  {
+    "id": 639,
+    "category": "genel",
+    "singular": "هَاتِفٌ",
+    "dual": "هَاتِفَانِ",
+    "plural": "هَوَاتِفُ",
+    "meaning": "Telefon, ses ileten haberleşme cihazı",
+    "level": 5
+  },
+  {
+    "id": 640,
+    "category": "genel",
+    "singular": "شَبَكَةٌ",
+    "dual": "شَبَكَتَانِ",
+    "plural": "شَبَكَاتٌ",
+    "meaning": "Birbirine bağlı iletişim ağı",
+    "level": 5
+  },
+  {
+    "id": 641,
+    "category": "genel",
+    "singular": "حَاسُوبٌ",
+    "dual": "حَاسُوبَانِ",
+    "plural": "حَوَاسِيبُ",
+    "meaning": "Elektronik hesaplama ve veri cihazı",
+    "level": 5
+  },
+  {
+    "id": 642,
+    "category": "genel",
+    "singular": "شَاشَةٌ",
+    "dual": "شَاشَتَانِ",
+    "plural": "شَاشَاتٌ",
+    "meaning": "Görüntü veren cam panel",
+    "level": 5
+  },
+  {
+    "id": 643,
+    "category": "genel",
+    "singular": "فَوْزٌ",
+    "dual": "فَوْزَانِ",
+    "plural": "أَفْوَازٌ",
+    "meaning": "Başarı, müsabaka galibiyeti",
+    "level": 5
+  },
+  {
+    "id": 644,
+    "category": "genel",
+    "singular": "هَزِيمَةٌ",
+    "dual": "هَزِيمَتَانِ",
+    "plural": "هَزَائِمُ",
+    "meaning": "Yenilgiye uğrama hali",
+    "level": 5
+  },
+  {
+    "id": 645,
+    "category": "genel",
+    "singular": "رِبْحٌ",
+    "dual": "رِبْحَانِ",
+    "plural": "أَرْبَاحٌ",
+    "meaning": "Ticaretten elde edilen fazlalık",
+    "level": 5
+  },
+  {
+    "id": 646,
+    "category": "genel",
+    "singular": "خَسَارَةٌ",
+    "dual": "خَسَارَتَانِ",
+    "plural": "خَسَائِرُ",
+    "meaning": "Mal ve sermaye kaybı",
+    "level": 5
+  },
+  {
+    "id": 647,
+    "category": "genel",
+    "singular": "صِحَّةٌ",
+    "dual": "صِحَّتَانِ",
+    "plural": "صِحَّاتٌ",
+    "meaning": "Afiyet ve beden esenliği",
+    "level": 5
+  },
+  {
+    "id": 648,
+    "category": "genel",
+    "singular": "مَرَضٌ",
+    "dual": "مَرَضَانِ",
+    "plural": "أَمْرَاضٌ",
+    "meaning": "Sıhhatin bozulması hali",
+    "level": 5
+  },
+  {
+    "id": 649,
+    "category": "genel",
+    "singular": "دَوَاءٌ",
+    "dual": "دَوَاءَانِ",
+    "plural": "أَدْوِيَةٌ",
+    "meaning": "Hastalığı iyileştiren şifa vesilesi",
+    "level": 5
+  },
+  {
+    "id": 650,
+    "category": "genel",
+    "singular": "شِفَاءٌ",
+    "dual": "شِفَاءَانِ",
+    "plural": "أَشْفِيَةٌ",
+    "meaning": "Hastalıktan kurtulup iyileşme",
+    "level": 5
+  },
+  {
+    "id": 651,
+    "category": "genel",
+    "singular": "أَلَمٌ",
+    "dual": "أَلَمَانِ",
+    "plural": "آلَامٌ",
+    "meaning": "Bedeni ve ruhi elem",
+    "level": 5
+  },
+  {
+    "id": 652,
+    "category": "genel",
+    "singular": "جُرْحٌ",
+    "dual": "جُرْحَانِ",
+    "plural": "جُرُوحٌ / جِرَاحٌ",
+    "meaning": "Beden dokusunun kesilip yırtılması",
+    "level": 5
+  },
+  {
+    "id": 653,
+    "category": "genel",
+    "singular": "مُسْتَشْفًى",
+    "dual": "مُسْتَشْفَيَانِ",
+    "plural": "مُسْتَشْفَيَاتٌ",
+    "meaning": "Hastaların tedavi edildiği şifahane",
+    "level": 5
+  },
+  {
+    "id": 654,
+    "category": "genel",
+    "singular": "عِيَادَةٌ",
+    "dual": "عِيَادَتَانِ",
+    "plural": "عِيَادَاتٌ",
+    "meaning": "Doktor muayenehanesi",
+    "level": 5
+  },
+  {
+    "id": 655,
+    "category": "genel",
+    "singular": "صَيْدَلِيَّةٌ",
+    "dual": "صَيْدَلِيَّتَانِ",
+    "plural": "صَيْدَلِيَّاتٌ",
+    "meaning": "İlaç yapılan ve satılan yer",
+    "level": 5
+  },
+  {
+    "id": 656,
+    "category": "genel",
+    "singular": "طَعَامٌ",
+    "dual": "طَعَامَانِ",
+    "plural": "أَطْعِمَةٌ",
+    "meaning": "Beslenilen her türlü azık",
+    "level": 5
+  },
+  {
+    "id": 657,
+    "category": "genel",
+    "singular": "خُبْزٌ",
+    "dual": "خُبْزَانِ",
+    "plural": "أَخْبَازٌ",
+    "meaning": "Undan pişirilen temel gıda",
+    "level": 5
+  },
+  {
+    "id": 658,
+    "category": "genel",
+    "singular": "لَحْمٌ",
+    "dual": "لَحْمَانِ",
+    "plural": "لُحُومٌ",
+    "meaning": "Helal hayvan eti gıdası",
+    "level": 5
+  },
+  {
+    "id": 659,
+    "category": "genel",
+    "singular": "سَمَكٌ",
+    "dual": "سَمَكَانِ",
+    "plural": "أَسْمَاكٌ",
+    "meaning": "Denizden çıkan et nimeti",
+    "level": 5
+  },
+  {
+    "id": 660,
+    "category": "genel",
+    "singular": "دَجَاجٌ",
+    "dual": "دَجَاجَتَانِ",
+    "plural": "دَجَاجَاتٌ",
+    "meaning": "Kümes kuşu eti",
+    "level": 5
+  },
+  {
+    "id": 661,
+    "category": "genel",
+    "singular": "بَيْضٌ",
+    "dual": "بَيْضَتَانِ",
+    "plural": "بُيُوضٌ",
+    "meaning": "Kuş ve tavuk yumurtası",
+    "level": 5
+  },
+  {
+    "id": 662,
+    "category": "genel",
+    "singular": "جُبْنٌ",
+    "dual": "جُبْنَانِ",
+    "plural": "أَجْبَانٌ",
+    "meaning": "Sütten mayalanan gıda",
+    "level": 5
+  },
+  {
+    "id": 663,
+    "category": "genel",
+    "singular": "حَلِيبٌ",
+    "dual": "حَلِيبَانِ",
+    "plural": "أَحْلِبَةٌ",
+    "meaning": "Taze sağılmış süt",
+    "level": 5
+  },
+  {
+    "id": 664,
+    "category": "genel",
+    "singular": "زُبْدَةٌ",
+    "dual": "زُبْدَتَانِ",
+    "plural": "زُبَدٌ",
+    "meaning": "Sütün kaymağından çıkarılan yağ",
+    "level": 5
+  },
+  {
+    "id": 665,
+    "category": "genel",
+    "singular": "سُكَّرٌ",
+    "dual": "سُكَّرَانِ",
+    "plural": "أَسْكَارٌ",
+    "meaning": "Tatlı kristal gıda maddesi",
+    "level": 5
+  },
+  {
+    "id": 666,
+    "category": "genel",
+    "singular": "مِلْحٌ",
+    "dual": "مِلْحَانِ",
+    "plural": "أَمْلَاحٌ",
+    "meaning": "Yemeklere lezzet katan mineral",
+    "level": 5
+  },
+  {
+    "id": 667,
+    "category": "genel",
+    "singular": "فَاكِهَةٌ",
+    "dual": "فَاكِهَتَانِ",
+    "plural": "فَوَاكِهُ",
+    "meaning": "Ağaçta yetişen tatlı yemiş",
+    "level": 5
+  },
+  {
+    "id": 668,
+    "category": "genel",
+    "singular": "تُفَّاحٌ",
+    "dual": "تُفَّاحَتَانِ",
+    "plural": "تُفَّاحَاتٌ",
+    "meaning": "Kırmızı ve yeşil lezzetli meyve",
+    "level": 5
+  },
+  {
+    "id": 669,
+    "category": "genel",
+    "singular": "بُرْتُقَالٌ",
+    "dual": "بُرْتُقَالَتَانِ",
+    "plural": "بُرْتُقَالَاتٌ",
+    "meaning": "C vitamini zengini narenciye",
+    "level": 5
+  },
+  {
+    "id": 670,
+    "category": "genel",
+    "singular": "عِنَبٌ",
+    "dual": "عِنَبَانِ",
+    "plural": "أَعْنَابٌ",
+    "meaning": "Asmada yetişen salkım meyve",
+    "level": 5
+  },
+  {
+    "id": 671,
+    "category": "genel",
+    "singular": "تِينٌ",
+    "dual": "تِينَتَانِ",
+    "plural": "أَتْيَانٌ",
+    "meaning": "Mübarek tatlı meyve",
+    "level": 5
+  },
+  {
+    "id": 672,
+    "category": "genel",
+    "singular": "رُمَّانٌ",
+    "dual": "رُمَّانَتَانِ",
+    "plural": "رَمَامِينُ",
+    "meaning": "Taneli kırmızı şifalı meyve",
+    "level": 5
+  },
+  {
+    "id": 673,
+    "category": "genel",
+    "singular": "مَوْزٌ",
+    "dual": "مَوْزَتَانِ",
+    "plural": "أَمْوَازٌ",
+    "meaning": "Tropikal sarı tatlı meyve",
+    "level": 5
+  },
+  {
+    "id": 674,
+    "category": "genel",
+    "singular": "خُضَارٌ",
+    "dual": "خُضَارَانِ",
+    "plural": "خُضْرَاوَاتٌ",
+    "meaning": "Bahçede yetişen yeşillik ve gıdalar",
+    "level": 5
+  },
+  {
+    "id": 675,
+    "category": "genel",
+    "singular": "طَمَاطِمُ",
+    "dual": "طَمَاطِمَتَانِ",
+    "plural": "طَمَاطِمَاتٌ",
+    "meaning": "Kırmızı sulu sebze",
+    "level": 5
+  },
+  {
+    "id": 676,
+    "category": "genel",
+    "singular": "بَطَاطِسُ",
+    "dual": "بَطَاطِسَتَانِ",
+    "plural": "بَطَاطِسَاتٌ",
+    "meaning": "Toprak altında yetişen yumru sebze",
+    "level": 5
+  },
+  {
+    "id": 677,
+    "category": "genel",
+    "singular": "بَصَلٌ",
+    "dual": "بَصَلَتَانِ",
+    "plural": "أَبْصَالٌ",
+    "meaning": "Kat kat yemeklik kuru sebze",
+    "level": 5
+  },
+  {
+    "id": 678,
+    "category": "genel",
+    "singular": "ثَوْمٌ",
+    "dual": "ثَوْمَانِ",
+    "plural": "أَثْوَامٌ",
+    "meaning": "Şifalı kokulu dişli sebze",
+    "level": 5
+  },
+  {
+    "id": 679,
+    "category": "genel",
+    "singular": "جَزَرٌ",
+    "dual": "جَزَرَتَانِ",
+    "plural": "جَزَرَاتٌ",
+    "meaning": "Turuncu kök sebze",
+    "level": 5
+  },
+  {
+    "id": 680,
+    "category": "genel",
+    "singular": "خِيَارٌ",
+    "dual": "خِيَارَتَانِ",
+    "plural": "أَخْيَارٌ",
+    "meaning": "Yeşil taze hıyar sebzesi",
+    "level": 5
+  },
+  {
+    "id": 681,
+    "category": "genel",
+    "singular": "شَايٌ",
+    "dual": "شَايَانِ",
+    "plural": "أَشْيَاءُ الشَّاي",
+    "meaning": "Sıcak demlenen yaprak içeceği",
+    "level": 5
+  },
+  {
+    "id": 682,
+    "category": "genel",
+    "singular": "قَهْوَةٌ",
+    "dual": "قَهْوَتَانِ",
+    "plural": "قَهَوَاتٌ",
+    "meaning": "Kavrulmuş çekirdekten yapılan içecek",
+    "level": 5
+  },
+  {
+    "id": 683,
+    "category": "genel",
+    "singular": "عَصِيرٌ",
+    "dual": "عَصِيرَانِ",
+    "plural": "عَصَائِرُ",
+    "meaning": "Meyvenin sıkılmasıyla elde edilen su",
+    "level": 5
+  },
+  {
+    "id": 684,
+    "category": "genel",
+    "singular": "زَيْتٌ",
+    "dual": "زَيْتَانِ",
+    "plural": "زُيُوتٌ",
+    "meaning": "Zeytinden çıkarılan şifalı yağ",
+    "level": 5
+  },
+  {
+    "id": 685,
+    "category": "genel",
+    "singular": "خَلٌّ",
+    "dual": "خَلَّانِ",
+    "plural": "خُلُولٌ",
+    "meaning": "Mayalanmış ekşi sıvı",
+    "level": 5
+  },
+  {
+    "id": 686,
+    "category": "genel",
+    "singular": "أَرُزٌّ",
+    "dual": "أَرُزَّانِ",
+    "plural": "آرَازٌ",
+    "meaning": "Pilav yapılan beyaz tane",
+    "level": 5
+  },
+  {
+    "id": 687,
+    "category": "genel",
+    "singular": "عَدَسٌ",
+    "dual": "عَدَسَانِ",
+    "plural": "أَعْدَاسٌ",
+    "meaning": "Çorbası yapılan bakliyat",
+    "level": 5
+  },
+  {
+    "id": 688,
+    "category": "genel",
+    "singular": "حِمَّصٌ",
+    "dual": "حِمَّصَانِ",
+    "plural": "أَحْمَاصٌ",
+    "meaning": "Yuvarlak sarı bakliyat",
+    "level": 5
+  },
+  {
+    "id": 689,
+    "category": "genel",
+    "singular": "فُولٌ",
+    "dual": "فُولَانِ",
+    "plural": "أَفْوَالٌ",
+    "meaning": "Taneli yeşil bakliyat",
+    "level": 5
+  },
+  {
+    "id": 690,
+    "category": "genel",
+    "singular": "قَمْحٌ",
+    "dual": "قَمْحَانِ",
+    "plural": "أَقْمَاحٌ",
+    "meaning": "Un ve ekmek yapılan sarı başak",
+    "level": 5
+  },
+  {
+    "id": 691,
+    "category": "genel",
+    "singular": "شَعِيرٌ",
+    "dual": "شَعِيرَانِ",
+    "plural": "أَشْعَارٌ",
+    "meaning": "Başaklı tahıl tanesi",
+    "level": 5
+  },
+  {
+    "id": 692,
+    "category": "genel",
+    "singular": "طَيْرٌ",
+    "dual": "طَيْرَانِ",
+    "plural": "طُيُورٌ / أَطْيَارٌ",
+    "meaning": "Kanatlarıyla havada uçan canlı",
+    "level": 5
+  },
+  {
+    "id": 693,
+    "category": "genel",
+    "singular": "حَمَامَةٌ",
+    "dual": "حَمَامَتَانِ",
+    "plural": "حَمَامَاتٌ / حَمَائِمُ",
+    "meaning": "Barış simgesi evcil kuş",
+    "level": 5
+  },
+  {
+    "id": 694,
+    "category": "genel",
+    "singular": "عُصْفُورٌ",
+    "dual": "عُصْفُورَانِ",
+    "plural": "عَصَافِيرُ",
+    "meaning": "Küçük sevimli ötücü kuş",
+    "level": 5
+  },
+  {
+    "id": 695,
+    "category": "genel",
+    "singular": "غُرَابٌ",
+    "dual": "غُرَابَانِ",
+    "plural": "غِرْبَانٌ / أَغْرِبَةٌ",
+    "meaning": "Siyah tüylü zeki kuş",
+    "level": 5
+  },
+  {
+    "id": 696,
+    "category": "genel",
+    "singular": "نَسْرٌ",
+    "dual": "نَسْرَانِ",
+    "plural": "نُسُورٌ",
+    "meaning": "Yükseklerde uçan yırtıcı kuş",
+    "level": 5
+  },
+  {
+    "id": 697,
+    "category": "genel",
+    "singular": "هُدْهُدٌ",
+    "dual": "هُدْهُدَانِ",
+    "plural": "هَدَاهِدُ",
+    "meaning": "İbik ve süslü tüyleri olan ibretli kuş",
+    "level": 5
+  },
+  {
+    "id": 698,
+    "category": "genel",
+    "singular": "أَسَدٌ",
+    "dual": "أَسَدَانِ",
+    "plural": "أُسُودٌ / آسَادٌ",
+    "meaning": "Ormanların heybetli yırtıcı kralı",
+    "level": 5
+  },
+  {
+    "id": 699,
+    "category": "genel",
+    "singular": "نَمِرٌ",
+    "dual": "نَمِرَانِ",
+    "plural": "نُمُورٌ",
+    "meaning": "Çizgili yırtıcı hayvan",
+    "level": 5
+  },
+  {
+    "id": 700,
+    "category": "genel",
+    "singular": "ذِئْبٌ",
+    "dual": "ذِئْبَانِ",
+    "plural": "ذِئَابٌ",
+    "meaning": "Vahşi yırtıcı sürü hayvanı",
+    "level": 5
+  },
+  {
+    "id": 701,
+    "category": "genel",
+    "singular": "ثَعْلَبٌ",
+    "dual": "ثَعْلَبَانِ",
+    "plural": "ثَعَالِبُ",
+    "meaning": "Kurnaz tüylü kuyruklu hayvan",
+    "level": 5
+  },
+  {
+    "id": 702,
+    "category": "genel",
+    "singular": "دُبٌّ",
+    "dual": "دُبَّانِ",
+    "plural": "دِبَبَةٌ",
+    "meaning": "İri yapılı kış uykusuna yatan hayvan",
+    "level": 5
+  },
+  {
+    "id": 703,
+    "category": "genel",
+    "singular": "فِيلٌ",
+    "dual": "فِيلَانِ",
+    "plural": "أَفْيَالٌ / فُيُولٌ",
+    "meaning": "Hortumlu iri cüsseli hayvan",
+    "level": 5
+  },
+  {
+    "id": 704,
+    "category": "genel",
+    "singular": "حِصَانٌ",
+    "dual": "حِصَانَانِ",
+    "plural": "أَحْصِنَةٌ",
+    "meaning": "Asil binek ve koşu hayvanı",
+    "level": 5
+  },
+  {
+    "id": 705,
+    "category": "genel",
+    "singular": "فَرَسٌ",
+    "dual": "فَرَسَانِ",
+    "plural": "أَفْرَاسٌ",
+    "meaning": "Hızlı koşan binek atı",
+    "level": 5
+  },
+  {
+    "id": 706,
+    "category": "genel",
+    "singular": "بَغْلٌ",
+    "dual": "بَغْلَانِ",
+    "plural": "بِغَالٌ",
+    "meaning": "Yük taşıyan dayanıklı melez hayvan",
+    "level": 5
+  },
+  {
+    "id": 707,
+    "category": "genel",
+    "singular": "حِمَارٌ",
+    "dual": "حِمَارَانِ",
+    "plural": "حَمِيرٌ / حُمُرٌ",
+    "meaning": "Yük taşıyan evcil hayvan",
+    "level": 5
+  },
+  {
+    "id": 708,
+    "category": "genel",
+    "singular": "جَمَلٌ",
+    "dual": "جَمَلَانِ",
+    "plural": "جِمَالٌ",
+    "meaning": "Çöl gemisi dayanıklı hayvan",
+    "level": 5
+  },
+  {
+    "id": 709,
+    "category": "genel",
+    "singular": "نَاقَةٌ",
+    "dual": "نَاقَتَانِ",
+    "plural": "نُوقٌ",
+    "meaning": "Sütü sağılan dişi deve",
+    "level": 5
+  },
+  {
+    "id": 710,
+    "category": "genel",
+    "singular": "بَقَرَةٌ",
+    "dual": "بَقَرَتَانِ",
+    "plural": "بَقَرَاتٌ / بَقَرٌ",
+    "meaning": "Süt ve et veren büyükbaş hayvan",
+    "level": 5
+  },
+  {
+    "id": 711,
+    "category": "genel",
+    "singular": "ثَوْرٌ",
+    "dual": "ثَوْرَانِ",
+    "plural": "ثِيرَانٌ",
+    "meaning": "Çift süren güçlü erkek sığır",
+    "level": 5
+  },
+  {
+    "id": 712,
+    "category": "genel",
+    "singular": "عِجْلٌ",
+    "dual": "عِجْلَانِ",
+    "plural": "عُجُولٌ",
+    "meaning": "İneğin küçük yavrusu",
+    "level": 5
+  },
+  {
+    "id": 713,
+    "category": "genel",
+    "singular": "خَرُوفٌ",
+    "dual": "خَرُوفَانِ",
+    "plural": "خِرْفَانٌ",
+    "meaning": "Koyunun sevimli yavrusu",
+    "level": 5
+  },
+  {
+    "id": 714,
+    "category": "genel",
+    "singular": "كَبْشٌ",
+    "dual": "كَبْشَانِ",
+    "plural": "كِبَاشٌ",
+    "meaning": "Boynuzlu erkek koyun",
+    "level": 5
+  },
+  {
+    "id": 715,
+    "category": "genel",
+    "singular": "شَاةٌ",
+    "dual": "شَاتَانِ",
+    "plural": "شِيَاهٌ",
+    "meaning": "Yün ve süt veren küçükbaş hayvan",
+    "level": 5
+  },
+  {
+    "id": 716,
+    "category": "genel",
+    "singular": "مَاعِزٌ",
+    "dual": "مَاعِزَانِ",
+    "plural": "مَوَاعِزُ",
+    "meaning": "Çevik tırmanıcı boynuzlu hayvan",
+    "level": 5
+  },
+  {
+    "id": 717,
+    "category": "genel",
+    "singular": "كَلْبٌ",
+    "dual": "كَلْبَانِ",
+    "plural": "كِلَابٌ",
+    "meaning": "Sadık bekçi ve av hayvanı",
+    "level": 5
+  },
+  {
+    "id": 718,
+    "category": "genel",
+    "singular": "قِطٌّ",
+    "dual": "قِطَّانِ",
+    "plural": "قِطَاطٌ",
+    "meaning": "Evcil sevimli temiz hayvan",
+    "level": 5
+  },
+  {
+    "id": 719,
+    "category": "genel",
+    "singular": "فَأْرٌ",
+    "dual": "فَأْرَانِ",
+    "plural": "فِئْرَانٌ",
+    "meaning": "Küçük kemirgen hayvan",
+    "level": 5
+  },
+  {
+    "id": 720,
+    "category": "genel",
+    "singular": "أَرْنَبٌ",
+    "dual": "أَرْنَبَانِ",
+    "plural": "أَرَانِبُ",
+    "meaning": "Uzun kulaklı hızlı kemirgen",
+    "level": 5
+  },
+  {
+    "id": 721,
+    "category": "genel",
+    "singular": "نَمْلَةٌ",
+    "dual": "نَمْلَتَانِ",
+    "plural": "نَمْلٌ / نِمَالٌ",
+    "meaning": "Çalışkan ibretli küçük böcek",
+    "level": 5
+  },
+  {
+    "id": 722,
+    "category": "genel",
+    "singular": "نَحْلَةٌ",
+    "dual": "نَحْلَتَانِ",
+    "plural": "نَحْلٌ",
+    "meaning": "İlahî ilhamla bal yapan arı",
+    "level": 5
+  },
+  {
+    "id": 723,
+    "category": "genel",
+    "singular": "ذُبَابٌ",
+    "dual": "ذُبَابَانِ",
+    "plural": "أَذِبَّةٌ",
+    "meaning": "Havada uçan küçük kanatlı",
+    "level": 5
+  },
+  {
+    "id": 724,
+    "category": "genel",
+    "singular": "بَعُوضَةٌ",
+    "dual": "بَعُوضَتَانِ",
+    "plural": "بَعُوضٌ",
+    "meaning": "İnce hortumlu küçük ibretli uçucu",
+    "level": 5
+  },
+  {
+    "id": 725,
+    "category": "genel",
+    "singular": "عَنْكَبُوتٌ",
+    "dual": "عَنْكَبُوتَانِ",
+    "plural": "عَنَاكِبُ",
+    "meaning": "Ağ ören sekiz bacaklı canlı",
+    "level": 5
+  },
+  {
+    "id": 726,
+    "category": "genel",
+    "singular": "عَقْرَبٌ",
+    "dual": "عَقْرَبَانِ",
+    "plural": "عَقَارِبُ",
+    "meaning": "Zehirli iğnesi olan kuyruklu hayvan",
+    "level": 5
+  },
+  {
+    "id": 727,
+    "category": "genel",
+    "singular": "حَيَّةٌ",
+    "dual": "حَيَّتَانِ",
+    "plural": "حَيَّاتٌ",
+    "meaning": "Sürünerek ilerleyen pullu hayvan",
+    "level": 5
+  },
+  {
+    "id": 728,
+    "category": "genel",
+    "singular": "ضِفْدَعٌ",
+    "dual": "ضِفْدَعَانِ",
+    "plural": "ضَفَادِعُ",
+    "meaning": "Suda ve karada zıplayan canlı",
+    "level": 5
+  },
+  {
+    "id": 729,
+    "category": "genel",
+    "singular": "دُودَةٌ",
+    "dual": "دُودَتَانِ",
+    "plural": "دِيدَانٌ",
+    "meaning": "Toprakta yaşayan omurgasız",
+    "level": 5
+  },
+  {
+    "id": 730,
+    "category": "genel",
+    "singular": "شَجَرَةٌ",
+    "dual": "شَجَرَتَانِ",
+    "plural": "أَشْجَارٌ",
+    "meaning": "Kökü yerde dalları gökte bitki",
+    "level": 5
+  },
+  {
+    "id": 731,
+    "category": "genel",
+    "singular": "غُصْنٌ",
+    "dual": "غُصْنَانِ",
+    "plural": "أَغْصَانٌ",
+    "meaning": "Ağacın yaprak ve meyve taşıyan kolu",
+    "level": 5
+  },
+  {
+    "id": 732,
+    "category": "genel",
+    "singular": "وَرَقَةُ شَجَرٍ",
+    "dual": "وَرَقَتَا شَجَرٍ",
+    "plural": "أَوْرَاقُ شَجَرٍ",
+    "meaning": "Ağacın yeşil örtüsü",
+    "level": 5
+  },
+  {
+    "id": 733,
+    "category": "genel",
+    "singular": "زَهْرَةٌ",
+    "dual": "زَهْرَتَانِ",
+    "plural": "أَزْهَارٌ / زُهُورٌ",
+    "meaning": "Güzel kokulu ve renkli bitki tacı",
+    "level": 5
+  },
+  {
+    "id": 734,
+    "category": "genel",
+    "singular": "شَوْكٌ",
+    "dual": "شَوْكَتَانِ",
+    "plural": "أَشْوَاكٌ",
+    "meaning": "Bitkilerin sivri koruyucu ucu",
+    "level": 5
+  },
+  {
+    "id": 735,
+    "category": "genel",
+    "singular": "جِذْعٌ",
+    "dual": "جِذْعَانِ",
+    "plural": "جُذُوعٌ",
+    "meaning": "Ağacın kalın ana direği",
+    "level": 5
+  },
+  {
+    "id": 736,
+    "category": "genel",
+    "singular": "عِرْقٌ",
+    "dual": "عِرْقَانِ",
+    "plural": "عُرُوقٌ",
+    "meaning": "Ağacın kökü; bedendeki kan damarı",
+    "level": 5
+  },
+  {
+    "id": 737,
+    "category": "genel",
+    "singular": "حَبَّةٌ",
+    "dual": "حَبَّتَانِ",
+    "plural": "حُبُوبٌ",
+    "meaning": "Bitkinin üreme çekirdeği",
+    "level": 5
+  },
+  {
+    "id": 738,
+    "category": "genel",
+    "singular": "نَوَاةٌ",
+    "dual": "نَوَاةَانِ",
+    "plural": "نَوَيَاتٌ",
+    "meaning": "Hurma ve zeytinin sert çekirdeği",
+    "level": 5
+  },
+  {
+    "id": 739,
+    "category": "genel",
+    "singular": "عَظْمٌ",
+    "dual": "عَظْمَانِ",
+    "plural": "عِظَامٌ",
+    "meaning": "Bedeni ayakta tutan sert iskelet",
+    "level": 5
+  },
+  {
+    "id": 740,
+    "category": "genel",
+    "singular": "دَمٌ",
+    "dual": "دَمَانِ",
+    "plural": "دِمَاءٌ",
+    "meaning": "Canlıya hayat taşıyan kırmızı sıvı",
+    "level": 5
+  },
+  {
+    "id": 741,
+    "category": "genel",
+    "singular": "جِلْدٌ",
+    "dual": "جِلْدَانِ",
+    "plural": "جُلُودٌ",
+    "meaning": "Bedeni kaplayan koruyucu ten",
+    "level": 5
+  },
+  {
+    "id": 742,
+    "category": "genel",
+    "singular": "شَعْرٌ",
+    "dual": "شَعْرَانِ",
+    "plural": "أَشْعَارٌ",
+    "meaning": "Başta ve bedende biten teller",
+    "level": 5
+  },
+  {
+    "id": 743,
+    "category": "genel",
+    "singular": "ظُفْرٌ",
+    "dual": "ظُفْرَانِ",
+    "plural": "أَظْفَارٌ",
+    "meaning": "Parmak uçlarındaki sert tabaka",
+    "level": 5
+  },
+  {
+    "id": 744,
+    "category": "genel",
+    "singular": "سِنٌّ",
+    "dual": "سِنَّانِ",
+    "plural": "أَسْنَانٌ",
+    "meaning": "Ağızdaki çiğneme organı; yaş",
+    "level": 5
+  },
+  {
+    "id": 745,
+    "category": "genel",
+    "singular": "ضِرْسٌ",
+    "dual": "ضِرْسَانِ",
+    "plural": "أَضْرَاسٌ",
+    "meaning": "Çenenin gerisindeki öğütücü diş",
+    "level": 5
+  },
+  {
+    "id": 746,
+    "category": "genel",
+    "singular": "رِيقٌ",
+    "dual": "رِيقَانِ",
+    "plural": "أَرْيَاقٌ",
+    "meaning": "Ağızdaki sindirici ıslaklık",
+    "level": 5
+  },
+  {
+    "id": 747,
+    "category": "genel",
+    "singular": "عَرَقٌ",
+    "dual": "عَرَقَانِ",
+    "plural": "أَعْرَاقٌ",
+    "meaning": "Bedenin sıcaktan salgıladığı su",
+    "level": 5
+  },
+  {
+    "id": 748,
+    "category": "genel",
+    "singular": "دَمْعٌ",
+    "dual": "دَمْعَانِ",
+    "plural": "دُمُوعٌ",
+    "meaning": "Gözden dökülen şeffaf damla",
+    "level": 5
+  },
+  {
+    "id": 749,
+    "category": "genel",
+    "singular": "بَسْمَةٌ",
+    "dual": "بَسْمَتَانِ",
+    "plural": "بَسَمَاتٌ",
+    "meaning": "Yüzdeki sevimli tatlı gülüş",
+    "level": 5
+  },
+  {
+    "id": 750,
+    "category": "genel",
+    "singular": "ضَحْكَةٌ",
+    "dual": "ضَحْكَتَانِ",
+    "plural": "ضَحَكَاتٌ",
+    "meaning": "Sesli sevinç gülüşü",
+    "level": 5
+  },
+  {
+    "id": 751,
+    "category": "soru",
+    "level": 1,
+    "singular": "مَا",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Ne? (soru edatı)"
+  },
+  {
+    "id": 752,
+    "category": "soru",
+    "level": 1,
+    "singular": "مَاذَا",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Ne?, Nedir? (fiillerden önce soru edatı)"
+  },
+  {
+    "id": 753,
+    "category": "soru",
+    "level": 1,
+    "singular": "مَنْ",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Kim? (şahıs soru edatı)"
+  },
+  {
+    "id": 754,
+    "category": "soru",
+    "level": 1,
+    "singular": "أَيْنَ",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Nerede?, Nereye? (mekân soru edatı)"
+  },
+  {
+    "id": 755,
+    "category": "soru",
+    "level": 1,
+    "singular": "هَلْ",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Mı?, Mi? (tasdik soru edatı)"
+  },
+  {
+    "id": 756,
+    "category": "edat",
+    "level": 1,
+    "singular": "أَوْ",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Veya, ya da (atıf harfi)"
+  },
+  {
+    "id": 757,
+    "category": "edat",
+    "level": 1,
+    "singular": "مَعَ",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "İle, beraber, birlikte (birliktelik zarfı)"
+  },
+  {
+    "id": 758,
+    "category": "genel",
+    "level": 1,
+    "singular": "أُسْرَةٌ",
+    "dual": "أُسْرَتَانِ",
+    "plural": "أُسَرٌ",
+    "meaning": "Aile, çekirdek aile"
+  },
+  {
+    "id": 759,
+    "category": "soru",
+    "level": 2,
+    "singular": "كَيْفَ",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Nasıl? (durum/hâl soru edatı)"
+  },
+  {
+    "id": 760,
+    "category": "soru",
+    "level": 2,
+    "singular": "كَمْ",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Kaç?, Ne kadar? (sayı/miktar soru edatı)"
+  },
+  {
+    "id": 761,
+    "category": "soru",
+    "level": 2,
+    "singular": "مَتَى",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Ne zaman? (vakit soru edatı)"
+  },
+  {
+    "id": 762,
+    "category": "soru",
+    "level": 2,
+    "singular": "لِمَاذَا",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Niçin?, Neden? (sebep soru edatı)"
+  },
+  {
+    "id": 763,
+    "category": "edat",
+    "level": 2,
+    "singular": "لِي",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Benim var, bana aittir"
+  },
+  {
+    "id": 764,
+    "category": "edat",
+    "level": 2,
+    "singular": "عِنْدِي",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Benim var, yanımda mevcuttur"
+  },
+  {
+    "id": 765,
+    "category": "edat",
+    "level": 2,
+    "singular": "لِـ",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "... için, ...-e ait (aitlik ve mülkiyet harfi)"
+  },
+  {
+    "id": 766,
+    "category": "genel",
+    "level": 2,
+    "singular": "جَوَّالٌ",
+    "dual": "جَوَّالَانِ",
+    "plural": "جَوَّالَاتٌ",
+    "meaning": "Cep telefonu, taşınabilir telefon"
+  },
+  {
+    "id": 767,
+    "category": "edat",
+    "level": 3,
+    "singular": "بَيْنَ",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Arasında, ortasında (konum zarfı)"
+  },
+  {
+    "id": 768,
+    "category": "gramer",
+    "level": 3,
+    "singular": "لَيْسَ",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Değildir, değil (olumsuzluk fiili)"
+  },
+  {
+    "id": 769,
+    "category": "gramer",
+    "level": 3,
+    "singular": "لَسْتُ",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Ben değilim (leyse'nin nefsi mütekellim vahde çekimi)"
+  },
+  {
+    "id": 770,
+    "category": "soru",
+    "level": 3,
+    "singular": "أَيُّ / أَيَّةُ",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Hangi? (belirteç soru edatı)"
+  },
+  {
+    "id": 771,
+    "category": "genel",
+    "level": 3,
+    "singular": "أَعْزَبُ",
+    "dual": "أَعْزَبَانِ",
+    "plural": "عُزَّابٌ",
+    "meaning": "Bekâr (evlenmemiş kimse)"
+  },
+  {
+    "id": 772,
+    "category": "genel",
+    "level": 3,
+    "singular": "مُتَزَوِّجٌ",
+    "dual": "مُتَزَوِّجَانِ",
+    "plural": "مُتَزَوِّجُونَ",
+    "meaning": "Evli (nikâhlı kimse)"
+  },
+  {
+    "id": 773,
+    "category": "genel",
+    "level": 4,
+    "singular": "مَخْطُوبٌ",
+    "dual": "مَخْطُوبَانِ",
+    "plural": "مَخْطُوبُونَ",
+    "meaning": "Nişanlı, sözlü kimse"
+  },
+  {
+    "id": 774,
+    "category": "genel",
+    "level": 4,
+    "singular": "مُطَلَّقٌ",
+    "dual": "مُطَلَّقَانِ",
+    "plural": "مُطَلَّقُونَ",
+    "meaning": "Boşanmış, ayrılmış kimse"
+  },
+  {
+    "id": 775,
+    "category": "genel",
+    "level": 4,
+    "singular": "لَقَبٌ",
+    "dual": "لَقَبَانِ",
+    "plural": "أَلْقَابٌ",
+    "meaning": "Soyadı, lakap, unvan"
+  },
+  {
+    "id": 776,
+    "category": "genel",
+    "level": 4,
+    "singular": "جِيئَةٌ",
+    "dual": "-",
+    "plural": "-",
+    "meaning": "Gelmek, geliş (mastar)"
+  },
+  {
+    "id": 777,
+    "category": "genel",
+    "level": 5,
+    "singular": "تَصْوِيرٌ",
+    "dual": "تَصْوِيرَانِ",
+    "plural": "تَصَاوِيرُ",
+    "meaning": "Fotoğraf çekmek, resmetmek, tasvir"
+  },
+  {
+    "id": 778,
+    "category": "genel",
+    "level": 5,
+    "singular": "سِبَاحَةٌ",
+    "dual": "سِبَاحَتَانِ",
+    "plural": "سِبَاحَاتٌ",
+    "meaning": "Yüzmek, yüzme sporu"
+  }
+]

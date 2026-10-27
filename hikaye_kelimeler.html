@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Arapça Hikaye Kelime Testi</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Naskh+Arabic:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #0a0e17;
+      --bg-card: rgba(19, 27, 46, 0.75);
+      --bg-card-hover: rgba(29, 41, 70, 0.85);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --accent-primary: #6366f1;
+      --accent-primary-hover: #4f46e5;
+      --accent-gold: #f59e0b;
+      --accent-success: #10b981;
+      --accent-danger: #ef4444;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-sub: #cbd5e1;
+      --font-arabic: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Ambient Glow */
+    .ambient-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 380px;
+      background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.16) 0%, rgba(245, 158, 11, 0.05) 55%, transparent 75%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Header */
+    header.app-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10, 14, 23, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .btn-header {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .btn-header:hover {
+      background: rgba(255, 255, 255, 0.16);
+      transform: translateY(-1px);
+    }
+
+    .header-title-box {
+      text-align: center;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .header-title-box h1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @media (max-width: 600px) {
+      header.app-header {
+        padding: 8px 10px;
+        gap: 6px;
+      }
+      .btn-header {
+        padding: 6px 9px;
+        font-size: 0.78rem;
+      }
+      .header-title-box h1 {
+        font-size: 0.88rem;
+      }
+    }
+
+    /* Main Container */
+    .main-container {
+      max-width: 760px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 18px 16px 32px;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Scope Card: 10'arlı Gruplar */
+    .scope-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      backdrop-filter: blur(12px);
+    }
+
+    .scope-label {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .select-scope {
+      background: rgba(10, 14, 23, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #fff;
+      padding: 9px 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      outline: none;
+      flex: 1;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .select-scope:focus {
+      border-color: var(--accent-primary);
+    }
+
+    /* Quiz Card */
+    .quiz-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(14px);
+    }
+
+    .quiz-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .badge-scope {
+      background: rgba(99, 102, 241, 0.18);
+      color: #c7d2fe;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    /* Arabic Word Presentation */
+    .arabic-display-box {
+      background: linear-gradient(180deg, rgba(14, 21, 38, 0.95) 0%, rgba(10, 15, 28, 0.98) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 170px;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .arabic-word-text {
+      font-family: var(--font-arabic);
+      font-size: 3.2rem;
+      line-height: 1.45;
+      font-weight: 700;
+      color: #ffffff;
+      direction: rtl;
+      text-shadow: 0 4px 18px rgba(99, 102, 241, 0.25);
+      cursor: default;
+      user-select: none;
+    }
+
+    /* Options Grid */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      .arabic-word-text {
+        font-size: 2.7rem;
+      }
+    }
+
+    .btn-option {
+      background: rgba(14, 21, 38, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+      padding: 15px 18px;
+      border-radius: 14px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-align: left;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+      min-height: 58px;
+      -webkit-tap-highlight-color: transparent;
+      outline: none !important;
+      user-select: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .btn-option:hover:not(:disabled):not(.correct):not(.wrong) {
+        background: var(--bg-card-hover);
+        border-color: rgba(99, 102, 241, 0.45);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    .btn-option:focus,
+    .btn-option:focus-visible,
+    .btn-option:active {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    .option-key {
+      background: rgba(255, 255, 255, 0.1);
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .option-text {
+      flex: 1;
+      line-height: 1.3;
+    }
+
+    /* Option States */
+    .btn-option.correct {
+      background: rgba(16, 185, 129, 0.25) !important;
+      border-color: #10b981 !important;
+      color: #6ee7b7 !important;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4) !important;
+    }
+
+    .btn-option.correct .option-key {
+      background: #10b981;
+      color: #fff;
+    }
+
+    .btn-option.wrong {
+      background: rgba(239, 68, 68, 0.25) !important;
+      border-color: #ef4444 !important;
+      color: #fca5a5 !important;
+      animation: shake 0.35s ease;
+    }
+
+    .btn-option.wrong .option-key {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    /* Clean Continue Action (Only on wrong answer) */
+    .continue-panel {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding-top: 6px;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-continue {
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      border: none;
+      color: #fff;
+      padding: 13px 36px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 18px rgba(99, 102, 241, 0.35);
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-continue:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(99, 102, 241, 0.5);
+    }
+
+    /* Loading state */
+    #loadingOverlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-main);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border: 3.5px solid rgba(255, 255, 255, 0.1);
+      border-top-color: var(--accent-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <!-- LOADING OVERLAY -->
+  <div id="loadingOverlay">
+    <div class="spinner"></div>
+    <div style="font-weight: 700; font-size: 1rem; color: #fff;">Hikaye Kelimeleri Yükleniyor...</div>
+  </div>
+
+  <!-- APP HEADER -->
+  <header class="app-header">
+    <button type="button" class="btn-header" onclick="goToMainMenu()" title="Ana Menüye Dön" style="background: rgba(239, 68, 68, 0.25); border: 1px solid rgba(239, 68, 68, 0.5); color: #fff; font-weight: 800;">
+      🏠 Ana Menü
+    </button>
+    <div class="header-title-box">
+      <h1>🎯 Kelime Testi</h1>
+    </div>
+    <button type="button" class="btn-header" onclick="goBackToStory()" title="Hikayeye Geri Dön">
+      ⬅️ Hikaye
+    </button>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <div class="main-container">
+
+    <!-- SCOPE: 10'ARLI SAYFALAR -->
+    <div class="scope-card">
+      <label for="scopeSelect" class="scope-label">📖 Kapsam:</label>
+      <select id="scopeSelect" class="select-scope" onchange="onScopeChange()">
+        <option value="all">📚 Tüm Hikaye (Sayfa 1 - 40)</option>
+        <option value="range_1_10">📦 Sayfa 1 - 10</option>
+        <option value="range_11_20">📦 Sayfa 11 - 20</option>
+        <option value="range_21_30">📦 Sayfa 21 - 30</option>
+        <option value="range_31_40">📦 Sayfa 31 - 40</option>
+      </select>
+    </div>
+
+    <!-- QUIZ CARD -->
+    <div class="quiz-card">
+      
+      <!-- Top info: Sadece kapsam bilgisi -->
+      <div class="quiz-card-top">
+        <span class="badge-scope" id="quizScopeBadge">Tüm Hikaye</span>
+      </div>
+
+      <!-- Arabic Presentation: SADECE Arapça kelime, ASLA anlam yazmaz -->
+      <div class="arabic-display-box">
+        <div class="arabic-word-text" id="quizArabicWord">--</div>
+      </div>
+
+      <!-- 4 Choices -->
+      <div class="options-grid" id="quizOptionsGrid">
+        <button type="button" class="btn-option" onclick="handleChoiceClick(0)">
+          <span class="option-key">1</span>
+          <span class="option-text" id="optText0">Seçenek 1</span>
+        </button>
+        <button type="button" class="btn-option" onclick="handleChoiceClick(1)">
+          <span class="option-key">2</span>
+          <span class="option-text" id="optText1">Seçenek 2</span>
+        </button>
+        <button type="button" class="btn-option" onclick="handleChoiceClick(2)">
+          <span class="option-key">3</span>
+          <span class="option-text" id="optText2">Seçenek 3</span>
+        </button>
+        <button type="button" class="btn-option" onclick="handleChoiceClick(3)">
+          <span class="option-key">4</span>
+          <span class="option-text" id="optText3">Seçenek 4</span>
+        </button>
+      </div>
+
+      <!-- Sadece Yanlış Yapınca Çıkan Temiz Devam Butonu -->
+      <div class="continue-panel" id="continuePanel">
+        <button type="button" class="btn-continue" onclick="nextQuestion()">
+          Devam Et ➡️
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- HIKAYE DATA SCRIPT -->
+  <script src="hikaye_data.js?v=40_pages_v2"></script>
+
+  <script>
+    // ==========================================
+    // DATA & GLOBAL STATE
+    // ==========================================
+    const LOCAL_STORAGE_KEY = 'story_vocab_adaptive_stats_v2';
+    
+    let allStoryWords = [];      // Array of unique clean Arabic word objects
+    let wordsByRange = {
+      '1_10': [],
+      '11_20': [],
+      '21_30': [],
+      '31_40': []
+    };
+    let userStats = {};          // Silent background adaptive stats
+    
+    let currentScope = 'all';    // 'all', 'range_1_10', 'range_11_20', etc.
+    let scopedWords = [];        // Filtered subset of allStoryWords for currentScope
+    
+    let currentQuizWord = null;
+    let currentOptions = [];
+    let isAnswering = false;
+    let lastWordId = null;
+
+    // Temizleme fonksiyonu: noktalama, sayılar, çizgiler hariç tutulur
+    function cleanArabicPunctuation(str) {
+      if (!str) return '';
+      return str.replace(/[.,،:؟!"«»؛\(\)\[\]\{\}0-9\s\-–—]/g, '').trim();
+    }
+
+    function isArabicWord(str) {
+      return /[\u0600-\u06FF]/.test(str);
+    }
+
+    // ==========================================
+    // INITIALIZATION
+    // ==========================================
+    window.addEventListener('DOMContentLoaded', () => {
+      loadStats();
+      initStoryVocabulary();
+      checkUrlParams();
+      updateScopeData();
+
+      // Keyboard shortcuts 1, 2, 3, 4, Space, Enter
+      window.addEventListener('keydown', handleKeyNavigation);
+
+      // Hide loading overlay
+      const overlay = document.getElementById('loadingOverlay');
+      if (overlay) {
+        setTimeout(() => {
+          overlay.style.opacity = '0';
+          setTimeout(() => overlay.style.display = 'none', 250);
+        }, 120);
+      }
+    });
+
+    function initStoryVocabulary() {
+      if (!window.STORY_PAGES || !Array.isArray(window.STORY_PAGES)) {
+        console.error('STORY_PAGES bulunamadı!');
+        return;
+      }
+
+      const uniqueDict = {};
+
+      window.STORY_PAGES.forEach(page => {
+        const pNum = page.pageNum;
+
+        // Belirle hangi 10'luk aralıkta
+        let rangeKey = '1_10';
+        if (pNum >= 11 && pNum <= 20) rangeKey = '11_20';
+        else if (pNum >= 21 && pNum <= 30) rangeKey = '21_30';
+        else if (pNum >= 31 && pNum <= 40) rangeKey = '31_40';
+
+        (page.paragraphs || []).forEach(para => {
+          (para.words || []).forEach(w => {
+            const rawAr = (w.ar || '').trim();
+            const cleanAr = cleanArabicPunctuation(rawAr);
+            const meaning = (w.meaning || '').trim();
+
+            // Sadece gerçek Arapça kelimeleri ve anlamı olanları al
+            if (!cleanAr || cleanAr.length < 2 || !isArabicWord(cleanAr) || !meaning) return;
+            if (/^[0-9\s.,-]+$/.test(meaning)) return;
+
+            const key = cleanAr;
+            if (!uniqueDict[key]) {
+              const wordObj = {
+                id: `hw_${Object.keys(uniqueDict).length + 1}`,
+                ar: cleanAr,
+                meaning: meaning,
+                pages: [pNum]
+              };
+              uniqueDict[key] = wordObj;
+
+              if (!wordsByRange[rangeKey].includes(wordObj)) {
+                wordsByRange[rangeKey].push(wordObj);
+              }
+            } else {
+              if (!uniqueDict[key].pages.includes(pNum)) {
+                uniqueDict[key].pages.push(pNum);
+              }
+              if (!wordsByRange[rangeKey].includes(uniqueDict[key])) {
+                wordsByRange[rangeKey].push(uniqueDict[key]);
+              }
+            }
+          });
+        });
+      });
+
+      allStoryWords = Object.values(uniqueDict);
+    }
+
+    function checkUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      const p = params.get('page');
+      if (p) {
+        const pageNum = parseInt(p, 10);
+        if (pageNum >= 1 && pageNum <= 10) currentScope = 'range_1_10';
+        else if (pageNum >= 11 && pageNum <= 20) currentScope = 'range_11_20';
+        else if (pageNum >= 21 && pageNum <= 30) currentScope = 'range_21_30';
+        else if (pageNum >= 31 && pageNum <= 40) currentScope = 'range_31_40';
+        
+        const select = document.getElementById('scopeSelect');
+        if (select) select.value = currentScope;
+      }
+    }
+
+    function onScopeChange() {
+      const select = document.getElementById('scopeSelect');
+      if (select) {
+        currentScope = select.value;
+        updateScopeData();
+      }
+    }
+
+    function updateScopeData() {
+      const badgeEl = document.getElementById('quizScopeBadge');
+
+      if (currentScope === 'all') {
+        scopedWords = [...allStoryWords];
+        if (badgeEl) badgeEl.textContent = 'Tüm Hikaye';
+      } else if (currentScope === 'range_1_10') {
+        scopedWords = [...wordsByRange['1_10']];
+        if (badgeEl) badgeEl.textContent = 'Sayfa 1 - 10';
+      } else if (currentScope === 'range_11_20') {
+        scopedWords = [...wordsByRange['11_20']];
+        if (badgeEl) badgeEl.textContent = 'Sayfa 11 - 20';
+      } else if (currentScope === 'range_21_30') {
+        scopedWords = [...wordsByRange['21_30']];
+        if (badgeEl) badgeEl.textContent = 'Sayfa 21 - 30';
+      } else if (currentScope === 'range_31_40') {
+        scopedWords = [...wordsByRange['31_40']];
+        if (badgeEl) badgeEl.textContent = 'Sayfa 31 - 40';
+      }
+
+      if (scopedWords.length === 0) {
+        scopedWords = [...allStoryWords];
+      }
+
+      nextQuestion();
+    }
+
+    // ==========================================
+    // SESSİZ ARKA PLAN ADAPTİF SİSTEMİ
+    // Kullanıcıya hiçbir yüzde veya istatistik gösterilmez
+    // ==========================================
+    function loadStats() {
+      try {
+        const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+        userStats = raw ? JSON.parse(raw) : {};
+      } catch (_) {
+        userStats = {};
+      }
+    }
+
+    function saveStats() {
+      try {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(userStats));
+      } catch (_) {}
+    }
+
+    function getWordWeight(wordId) {
+      const st = userStats[wordId];
+      const streak = (st && typeof st.streak === 'number') ? st.streak : 0;
+      if (streak <= 5) {
+        return 1.0;
+      }
+      const reduced = Math.pow(0.70, streak - 5);
+      return Math.max(0.02, reduced);
+    }
+
+    function recordWordAnswer(wordId, isCorrect) {
+      if (!userStats[wordId]) {
+        userStats[wordId] = { streak: 0 };
+      }
+      const entry = userStats[wordId];
+      if (isCorrect) {
+        entry.streak = (entry.streak || 0) + 1;
+      } else {
+        entry.streak = 0; // Yanlışta sıfırlanır
+      }
+      saveStats();
+    }
+
+    function pickNextWordIndex() {
+      if (!scopedWords || scopedWords.length === 0) return 0;
+      if (scopedWords.length === 1) return 0;
+
+      const weights = scopedWords.map(w => getWordWeight(w.id));
+      let totalWeight = 0;
+      for (let i = 0; i < weights.length; i++) {
+        if (lastWordId && scopedWords[i].id === lastWordId && scopedWords.length > 2) {
+          weights[i] *= 0.05; // Üst üste gelmeyi önle
+        }
+        totalWeight += weights[i];
+      }
+
+      if (totalWeight <= 0) {
+        return Math.floor(Math.random() * scopedWords.length);
+      }
+
+      const rand = Math.random() * totalWeight;
+      let cumulative = 0;
+      for (let i = 0; i < weights.length; i++) {
+        cumulative += weights[i];
+        if (rand <= cumulative) {
+          return i;
+        }
+      }
+      return scopedWords.length - 1;
+    }
+
+    // ==========================================
+    // SORU ÜRETİMİ VE CEVAP İŞLEME
+    // ==========================================
+    function nextQuestion() {
+      isAnswering = false;
+      const cPanel = document.getElementById('continuePanel');
+      if (cPanel) cPanel.style.display = 'none';
+
+      // Aktif odak ve şık sınıflarını kesin olarak temizle
+      if (document.activeElement && typeof document.activeElement.blur === 'function') {
+        try { document.activeElement.blur(); } catch (_) {}
+      }
+
+      // Şık butonlarını sıfırla
+      const buttons = document.querySelectorAll('.btn-option');
+      buttons.forEach(btn => {
+        btn.classList.remove('correct', 'wrong');
+        btn.disabled = false;
+        try { btn.blur(); } catch (_) {}
+      });
+
+      if (!scopedWords || scopedWords.length === 0) return;
+
+      const nextIdx = pickNextWordIndex();
+      currentQuizWord = scopedWords[nextIdx];
+      lastWordId = currentQuizWord.id;
+
+      // SADECE Arapça kelimeyi yaz (kesinlikle mana vb. altta yazmaz!)
+      const arEl = document.getElementById('quizArabicWord');
+      if (arEl) arEl.textContent = currentQuizWord.ar;
+
+      // 4 seçenek oluştur (1 doğru + 3 yanıltıcı)
+      const correctMeaning = currentQuizWord.meaning;
+      const distractors = [];
+      const pool = scopedWords.length >= 8 ? scopedWords : allStoryWords;
+
+      let safety = 0;
+      while (distractors.length < 3 && safety < 120) {
+        safety++;
+        const randItem = pool[Math.floor(Math.random() * pool.length)];
+        if (randItem.meaning !== correctMeaning && !distractors.includes(randItem.meaning)) {
+          distractors.push(randItem.meaning);
+        }
+      }
+
+      currentOptions = [correctMeaning, ...distractors].sort(() => Math.random() - 0.5);
+
+      for (let i = 0; i < 4; i++) {
+        const optText = document.getElementById(`optText${i}`);
+        if (optText) {
+          optText.textContent = currentOptions[i] || '---';
+        }
+      }
+    }
+
+    function handleChoiceClick(index) {
+      if (isAnswering || !currentQuizWord) return;
+      isAnswering = true;
+
+      const chosenMeaning = currentOptions[index];
+      const isCorrect = (chosenMeaning === currentQuizWord.meaning);
+      const buttons = document.querySelectorAll('.btn-option');
+
+      recordWordAnswer(currentQuizWord.id, isCorrect);
+
+      if (isCorrect) {
+        if (buttons[index]) buttons[index].classList.add('correct');
+        playAudioChime(true);
+
+        setTimeout(() => {
+          // Önce parlamayı ve tüm odakları tamamen kaldır
+          buttons.forEach(btn => {
+            btn.classList.remove('correct', 'wrong');
+            try { btn.blur(); } catch (_) {}
+          });
+          if (document.activeElement && typeof document.activeElement.blur === 'function') {
+            try { document.activeElement.blur(); } catch (_) {}
+          }
+
+          // Parlama sönüşü bittikten hemen sonra yeni soruyu yükle (artık önceki şık parlamaz)
+          setTimeout(() => {
+            nextQuestion();
+          }, 60);
+        }, 240);
+      } else {
+        // Yanlış tıklandı: Yanlış kırmızı, doğru yeşil
+        if (buttons[index]) buttons[index].classList.add('wrong');
+        playAudioChime(false);
+
+        buttons.forEach((btn, idx) => {
+          if (currentOptions[idx] === currentQuizWord.meaning) {
+            btn.classList.add('correct');
+          }
+        });
+
+        // SADECE "Devam Et ➡️" butonu çıksın ve diğer soruya yönlendirsin
+        const cPanel = document.getElementById('continuePanel');
+        if (cPanel) cPanel.style.display = 'flex';
+      }
+    }
+
+    // ==========================================
+    // SES VE SES EFEKTLERİ
+    // ==========================================
+    function speakCurrentWord() {
+      if (!currentQuizWord || !currentQuizWord.ar) return;
+      speakArabicText(currentQuizWord.ar);
+    }
+
+    function speakArabicText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ar-SA';
+        utterance.rate = 0.85;
+
+        const voices = window.speechSynthesis.getVoices();
+        const arVoice = voices.find(v => v.lang.startsWith('ar'));
+        if (arVoice) utterance.voice = arVoice;
+
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    function playAudioChime(isCorrect) {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        if (isCorrect) {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.16);
+          gain.gain.setValueAtTime(0.12, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+          osc.start(ctx.currentTime);
+          osc.stop(ctx.currentTime + 0.2);
+        } else {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(240, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.22);
+          gain.gain.setValueAtTime(0.14, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
+          osc.start(ctx.currentTime);
+          osc.stop(ctx.currentTime + 0.22);
+        }
+      } catch (_) {}
+    }
+
+    // ==========================================
+    // NAVİGASYON VE KLAVYE
+    // ==========================================
+    function goToMainMenu() {
+      if (window.parent && window.parent !== window) {
+        try {
+          window.parent.postMessage({ action: 'returnToMainMenu' }, '*');
+          return;
+        } catch (_) {}
+      }
+      window.location.href = "index.html";
+    }
+
+    function goBackToStory() {
+      if (window.parent && window.parent !== window && typeof window.parent.closeHikayeKelimelerModal === "function") {
+        try { window.parent.closeHikayeKelimelerModal(); return; } catch(e) {}
+      }
+      let pageNum = 1;
+      if (currentScope === 'range_11_20') pageNum = 11;
+      else if (currentScope === 'range_21_30') pageNum = 21;
+      else if (currentScope === 'range_31_40') pageNum = 31;
+      window.location.href = `hikaye.html?page=${pageNum}`;
+    }
+
+    function handleKeyNavigation(e) {
+      if (e.key === '1') handleChoiceClick(0);
+      else if (e.key === '2') handleChoiceClick(1);
+      else if (e.key === '3') handleChoiceClick(2);
+      else if (e.key === '4') handleChoiceClick(3);
+      else if (e.key === ' ' || e.key === 'Enter') {
+        const cPanel = document.getElementById('continuePanel');
+        if (cPanel && cPanel.style.display === 'flex') {
+          e.preventDefault();
+          nextQuestion();
+        }
+      }
+    }
+  </script>
+</body>
+</html>

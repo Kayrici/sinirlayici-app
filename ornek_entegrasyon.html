@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Örnek Entegrasyon Test Sayfası</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    p.desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    .btn-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .btn-feature {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-feature:hover {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateY(-2px);
+    }
+    .btn-feature:active {
+      transform: scale(0.98);
+    }
+    .btn-badge {
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(99,102,241,0.25);
+      color: #c7d2fe;
+    }
+    .toggle-section {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .code-box {
+      margin-top: 20px;
+      background: #090d16;
+      border-radius: 10px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #38bdf8;
+      text-align: left;
+      overflow-x: auto;
+    }
+  </style>
+
+  <!-- 1. ADIM: Sadece bu scripti ekleyin -->
+  <script src="feature_manager.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🧩 Ekstra Özellikler Paketi</h1>
+    <p class="desc">Aşağıdaki butonlara tıklayarak özellikleri istediğiniz an açabilir veya kapatabilirsiniz.</p>
+
+    <div class="btn-list">
+      <!-- 2. ADIM: İlgili butona FeatureManager.open('...') yazın -->
+      <button class="btn-feature" onclick="FeatureManager.open('hafiza')">
+        <span>🧠 Hafıza Oyunu</span>
+        <span class="btn-badge">Aç</span>
+      </button>
+
+      <button class="btn-feature" onclick="FeatureManager.open('dil_oyunu')">
+        <span>📖 Arapça Soru & Dil Oyunu</span>
+        <span class="btn-badge">Aç</span>
+      </button>
+
+      <button class="btn-feature" onclick="FeatureManager.open('admin')">
+        <span>⚙️ Arapça Admin Sayfası</span>
+        <span class="btn-badge">Aç</span>
+      </button>
+
+      <button class="btn-feature" onclick="FeatureManager.open('hikaye')">
+        <span>📜 Arapça Hikaye</span>
+        <span class="btn-badge">Aç</span>
+      </button>
+
+      <button class="btn-feature" onclick="FeatureManager.open('hikaye_kelimeler')">
+        <span>✍️ Hikaye Kelimeleri Testi</span>
+        <span class="btn-badge">Aç</span>
+      </button>
+    </div>
+
+    <div class="toggle-section">
+      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px;">Aç/Kapat (Toggle) Örneği:</p>
+      <button class="btn-feature" style="justify-content: center; background: #6366f1;" onclick="FeatureManager.toggle('hafiza')">
+        🔄 Hafıza Oyununu Aç / Kapat
+      </button>
+    </div>
+
+    <div class="code-box">
+      &lt;script src="feature_manager.js"&gt;&lt;/script&gt;<br>
+      &lt;button onclick="FeatureManager.open('hafiza')"&gt;Aç&lt;/button&gt;
+    </div>
+  </div>
+
+</body>
+</html>

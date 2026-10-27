@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0d0418">
+    <meta name="description" content="3D Hafıza Oyunu - Kart çevirme ve görsel hafıza geliştirme oyunu.">
+    <title>Hafıza Oyunu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="viewport-wrapper">
+        <main class="app-container" id="appContainer">
+            <!-- Telefon Hoparlör Çentiği -->
+            <div class="phone-notch-bar">
+                <div class="notch-speaker"></div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- 1. UYGULAMA ANA EKRANI VE KUTUCUK           -->
+            <!-- ========================================== -->
+            
+
+            <!-- ========================================== -->
+            <!-- 2. OYUN EKRANI KATMANI (KUTUCUKLA AÇILIR)   -->
+            <!-- ========================================== -->
+            <section class="game-screen-layer active" id="gameScreenLayer">
+                <!-- Oyun Üst Çubuğu -->
+                <header class="top-nav">
+                    <div class="top-nav-left">
+                        <button class="icon-btn back-btn" id="btnBackToApp" onclick="closeHafizaOyunu()" title="Uygulamaya Geri Dön">←</button>
+                        <div class="game-title">Hafıza</div>
+                    </div>
+                    <div class="nav-actions">
+                        <button class="icon-btn" id="soundBtn" title="Ses Aç/Kapat">🔊</button>
+                    </div>
+                </header>
+
+                <!-- Gösterge ve İstatistikler -->
+                <section class="stats-bar">
+                    <div class="stat-card">
+                        <div class="stat-label">BÖLÜM</div>
+                        <div class="stat-value highlight" id="levelDisplay">1</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">PUAN</div>
+                        <div class="stat-value" id="scoreDisplay">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">CAN</div>
+                        <div class="lives-container" id="livesDisplay">
+                            <span class="heart">❤️</span>
+                            <span class="heart">❤️</span>
+                            <span class="heart">❤️</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Durum Bilgisi ve Gözlem Zaman Çubuğu -->
+                <section class="status-section">
+                    <div class="status-badge memorize" id="statusBadge">
+                        <span id="statusText">👀 Kareler Dönüyor...</span>
+                    </div>
+                    <div class="timer-bar-container">
+                        <div class="timer-bar-fill" id="timerBarFill"></div>
+                    </div>
+                </section>
+
+                <!-- 3D KARE MATRİS OYUN ALANI -->
+                <section class="game-board-area">
+                    <div class="matrix-grid" id="matrixGrid" data-size="3">
+                        <!-- Dinamik kareler -->
+                    </div>
+                </section>
+
+                <!-- MODAL: Oyuna Başla (Start Game) -->
+                <div class="modal-overlay active" id="startGameModal">
+                    <button type="button" class="icon-btn back-btn modal-corner-back-btn" id="modalCornerBackBtn" onclick="closeHafizaOyunu()" title="Uygulamaya Geri Dön">←</button>
+                    <div class="modal-card">
+                        <div class="modal-icon">🧠</div>
+                        <h2 class="modal-title">Hafıza Oyunu</h2>
+                        <div style="color: var(--text-dim); font-size: 0.95rem; margin-top: -6px; margin-bottom: 22px; line-height: 1.5;">
+                            Kareler arkasını dönüp gösterdikten sonra doğru yerleri işaretle!
+                        </div>
+                        <button class="main-btn" id="startGameBtn" style="font-size: 1.2rem; padding: 16px 36px; box-shadow: 0 0 25px rgba(217, 70, 239, 0.65);">
+                            Başla ▶️
+                        </button>
+                        <button type="button" class="secondary-btn" id="cancelStartBtn" onclick="closeHafizaOyunu()">
+                            ← Ana Ekrana Dön
+                        </button>
+                    </div>
+                </div>
+
+                <!-- MODAL: Oyun Bitti (Game Over) -->
+                <div class="modal-overlay" id="gameOverModal">
+                    <div class="modal-card">
+                        <div class="modal-icon">💀</div>
+                        <h2 class="modal-title">Oyun Bitti!</h2>
+                        
+                        <div class="modal-stats">
+                            <div class="modal-stat-box">
+                                <div class="modal-stat-val" id="finalScore">0</div>
+                                <div class="modal-stat-lbl">Toplam Puan</div>
+                            </div>
+                            <div class="modal-stat-box">
+                                <div class="modal-stat-val" id="finalLevel">1</div>
+                                <div class="modal-stat-lbl">Ulaşılan Bölüm</div>
+                            </div>
+                            <div class="modal-stat-box">
+                                <div class="modal-stat-val" id="finalStreak">0</div>
+                                <div class="modal-stat-lbl">En İyi Seri</div>
+                            </div>
+                            <div class="modal-stat-box">
+                                <div class="modal-stat-val" id="highScoreDisplay">0</div>
+                                <div class="modal-stat-lbl">En Yüksek Skor</div>
+                            </div>
+                        </div>
+
+                        <button class="main-btn" id="restartBtn">
+                            Tekrar Oyna 🔄
+                        </button>
+                        <button type="button" class="secondary-btn" id="gameOverBackBtn" onclick="closeHafizaOyunu()" style="margin-top: 12px;">
+                            ← Ana Ekrana Dön
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+
+
+    <script src="audio.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

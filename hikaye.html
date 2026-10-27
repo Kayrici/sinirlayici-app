@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Arapça Hikaye</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #0a0e17;
+      --bg-book: #131b2e;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --accent-primary: #6366f1;
+      --accent-gold: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-arabic: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      --arabic-font-size: 2.2rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Üst Bar */
+    header.story-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10, 14, 23, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 7px 14px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-nav:hover {
+      background: rgba(255, 255, 255, 0.16);
+      transform: translateY(-1px);
+    }
+
+    .header-title-box h1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .header-title-box p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-font-size {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-font-size:hover {
+      background: rgba(99, 102, 241, 0.3);
+      border-color: #6366f1;
+    }
+
+    /* Ana Alan */
+    .story-container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 16px 140px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Sayfa Seçici Menüsü */
+    .page-nav-wrapper {
+      background: rgba(19, 27, 46, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 10px 14px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    .page-nav-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .page-chips {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(99, 102, 241, 0.3) transparent;
+    }
+
+    .page-chips::-webkit-scrollbar {
+      height: 4px;
+    }
+    .page-chips::-webkit-scrollbar-thumb {
+      background: rgba(99, 102, 241, 0.3);
+      border-radius: 4px;
+    }
+
+    .chip-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      padding: 6px 13px;
+      border-radius: 9px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .chip-btn:hover {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: rgba(99, 102, 241, 0.4);
+      color: #fff;
+    }
+
+    .chip-btn.active {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      border-color: #818cf8;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.45);
+    }
+
+    /* KİTAP SAYFASI FORMATI (NORMAL KİTAP GİBİ AKICI METİN) */
+    .book-page-sheet {
+      background: var(--bg-book);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 32px 30px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    /* Kitap Bölüm Başlığı */
+    .book-page-title-box {
+      text-align: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+
+    .book-page-title-box::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background: var(--accent-gold);
+      border-radius: 2px;
+    }
+
+    .book-page-title-ar {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #fbbf24;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    /* Akıcı Kitap Paragrafı */
+    .book-paragraph {
+      direction: rtl;
+      text-align: justify;
+      text-justify: inter-word;
+      font-family: var(--font-arabic);
+      font-size: var(--arabic-font-size);
+      line-height: 2.5;
+      color: #ffffff;
+      letter-spacing: 0.35px;
+      user-select: text;
+      word-spacing: 2px;
+    }
+
+    /* Tıklanabilir Kelimeler */
+    .ar-word {
+      display: inline;
+      cursor: pointer;
+      padding: 2px 4px;
+      margin: 0 1px;
+      border-radius: 6px;
+      transition: all 0.16s ease;
+      position: relative;
+    }
+
+    .ar-word:hover {
+      background: rgba(99, 102, 241, 0.3);
+      color: #c7d2fe;
+    }
+
+    .ar-word.selected {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.55), rgba(168, 85, 247, 0.5));
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+      border-bottom: 2px solid #a5b4fc;
+    }
+
+    /* Alt Sayfa Geçiş Butonları */
+    .page-footer-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 4px;
+    }
+
+    .btn-page-step {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 11px 22px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-page-step:hover:not(:disabled) {
+      background: rgba(99, 102, 241, 0.3);
+      border-color: #6366f1;
+      transform: translateY(-1px);
+    }
+
+    .btn-page-step:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    /* ALT SABİT KELİME ÇÖZÜMLEME DOCK'U (SADECE KELİME VE TAMLAMA MANASI) */
+    .word-dock {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%) translateY(140%);
+      width: calc(100% - 32px);
+      max-width: 760px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1.5px solid rgba(99, 102, 241, 0.55);
+      border-radius: 18px;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), 0 0 25px rgba(99, 102, 241, 0.3);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 100;
+      padding: 16px 20px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .word-dock.active {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dock-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 8px;
+    }
+
+    .dock-left-box {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .dock-word-ar {
+      font-family: var(--font-arabic);
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .dock-root-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .dock-root-badge .root-ar {
+      font-family: var(--font-arabic);
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .dock-type-badge {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      color: #a5b4fc;
+      padding: 3px 9px;
+      border-radius: 7px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .dock-close-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.35rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      line-height: 1;
+      transition: all 0.2s;
+    }
+
+    .dock-close-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .dock-body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dock-phrase-tr {
+      font-size: 1.22rem;
+      color: #f8fafc;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    /* Kullanıcının istediği altı çizili tamlama vurgusu */
+    .dock-phrase-tr u {
+      color: #38bdf8;
+      text-decoration-color: #38bdf8;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 5px;
+      font-weight: 800;
+    }
+
+    /* Mobil Uyumluluk */
+    @media (max-width: 600px) {
+      :root {
+        --arabic-font-size: 1.85rem;
+      }
+      .book-page-sheet {
+        padding: 22px 18px;
+      }
+      .book-paragraph {
+        line-height: 2.3;
+        text-align: right;
+      }
+      .dock-word-ar {
+        font-size: 1.75rem;
+      }
+      .word-dock {
+        bottom: 10px;
+        padding: 13px 16px;
+        width: calc(100% - 20px);
+      }
+      .dock-phrase-tr {
+        font-size: 1.05rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="story-header">
+    <div class="header-left">
+      <button type="button" class="btn-nav" onclick="goBack()" title="Ana Menüye Dön" style="background: rgba(239, 68, 68, 0.25); border: 1px solid rgba(239, 68, 68, 0.5); color: #fff; font-weight: 800;">
+        🏠 Ana Menü
+      </button>
+      <div class="header-title-box">
+        <h1>Arapça Hikaye</h1>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button type="button" class="btn-nav" onclick="goToWordPractice()" style="background: rgba(99, 102, 241, 0.22); border-color: #6366f1; color: #c7d2fe; font-weight: 700; padding: 6px 12px;" title="Kelime Alıştırması">
+        🎯 Kelime Alıştırması
+      </button>
+      <button type="button" class="btn-font-size" onclick="adjustFontSize(-0.15)" title="Yazıyı Küçült">A-</button>
+      <button type="button" class="btn-font-size" onclick="adjustFontSize(0.15)" title="Yazıyı Büyüt">A+</button>
+    </div>
+  </header>
+
+  <!-- ANA İÇERİK -->
+  <div class="story-container">
+    
+    <!-- SAYFA SEÇİCİ -->
+    <div class="page-nav-wrapper">
+      <div class="page-nav-header">
+        <span>📖 Sayfa:</span>
+        <span id="currentPageIndicator">1 / 40</span>
+      </div>
+      <div class="page-chips" id="pageChipsContainer">
+        <!-- JS ile sayfa butonları üretilir -->
+      </div>
+    </div>
+
+    <!-- HİKAYE KİTAP SAYFALARI ALANI -->
+    <div id="storyContentArea">
+      <!-- Normal kitap gibi akan paragraflar burada render edilir -->
+    </div>
+
+    <!-- ALT SAYFA GEÇİŞİ -->
+    <div class="page-footer-nav" id="pageFooterNav">
+      <button type="button" class="btn-page-step" id="btnPrevPage" onclick="changePage(-1)">
+        ⬅️ Önceki Sayfa
+      </button>
+      <button type="button" class="btn-page-step" id="btnNextPage" onclick="changePage(1)">
+        Sonraki Sayfa ➡️
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ALT KELİME ÇÖZÜMLEME DOCK'U (SADECE KELİME / TAMLAMA MANASI) -->
+  <div class="word-dock" id="wordDock">
+    <div class="dock-header">
+      <div class="dock-left-box">
+        <div class="dock-word-ar" id="dockWordAr">الكَبِيرَةِ</div>
+        <div class="dock-root-badge" id="dockRootBadge">
+          <span class="root-ar" id="dockRootAr">كَبِير</span>
+          <span class="root-tag">(kök)</span>
+        </div>
+        <div class="dock-type-badge" id="dockTypeBadge">Sıfat</div>
+      </div>
+      <button type="button" class="dock-close-btn" onclick="closeWordDock()" title="Kapat">✕</button>
+    </div>
+
+    <div class="dock-body">
+      <div class="dock-phrase-tr" id="dockPhraseTr">
+        <u>Büyük</u> Kaya Şehri'nde
+      </div>
+    </div>
+  </div>
+
+  <!-- HİKAYE VERİ SETİ (40 SAYFA, PARAGRAFLAR, KÖKLER, TAMLAMALAR) -->
+  <script src="hikaye_data.js?v=40_pages_v2"></script>
+
+  <script>
+    let activePageNumber = 1; // 1 to 40, or 'all'
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const pParam = urlParams.get('page');
+      if (pParam) {
+        if (pParam === 'all') activePageNumber = 'all';
+        else {
+          const num = parseInt(pParam, 10);
+          if (!isNaN(num) && num >= 1) activePageNumber = num;
+        }
+      }
+    } catch (_) {}
+    let currentFontSizeRem = 2.2;
+    let selectedWordId = null;
+
+    function goToWordPractice() {
+      const p = (activePageNumber === 'all') ? 'all' : (activePageNumber || 1);
+      window.location.href = `hikaye_kelimeler.html?page=${p}`;
+    }
+
+    function getStoryPages() {
+      if (typeof STORY_PAGES !== "undefined" && Array.isArray(STORY_PAGES) && STORY_PAGES.length) {
+        return STORY_PAGES;
+      }
+      if (typeof window.STORY_PAGES !== "undefined" && Array.isArray(window.STORY_PAGES) && window.STORY_PAGES.length) {
+        return window.STORY_PAGES;
+      }
+      return [];
+    }
+
+    // Sayfa butonlarını üret
+    function renderPageChips() {
+      const container = document.getElementById("pageChipsContainer");
+      if (!container) return;
+      const pages = getStoryPages();
+      if (!pages.length) return;
+      container.innerHTML = "";
+
+      const total = pages.length;
+
+      pages.forEach((page) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `chip-btn ${activePageNumber === page.pageNum ? "active" : ""}`;
+        btn.textContent = `${page.pageNum}`;
+        btn.title = `Sayfa ${page.pageNum}`;
+        btn.addEventListener("click", () => switchPage(page.pageNum));
+        container.appendChild(btn);
+      });
+
+      // 'Tüm Hikaye' butonu
+      const allBtn = document.createElement("button");
+      allBtn.type = "button";
+      allBtn.className = `chip-btn ${activePageNumber === 'all' ? "active" : ""}`;
+      allBtn.textContent = `📚 Tüm Hikaye (1-${total})`;
+      allBtn.addEventListener("click", () => switchPage('all'));
+      container.appendChild(allBtn);
+    }
+
+    function switchPage(target) {
+      activePageNumber = target;
+      renderPageChips();
+      renderStory();
+      updatePageFooterNav();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function changePage(delta) {
+      const pages = getStoryPages();
+      const total = pages.length || 20;
+      if (activePageNumber === 'all') {
+        switchPage(1);
+        return;
+      }
+      const newPage = activePageNumber + delta;
+      if (newPage >= 1 && newPage <= total) {
+        switchPage(newPage);
+      }
+    }
+
+    function updatePageFooterNav() {
+      const indicator = document.getElementById("currentPageIndicator");
+      const prevBtn = document.getElementById("btnPrevPage");
+      const nextBtn = document.getElementById("btnNextPage");
+      const pages = getStoryPages();
+      const total = pages.length || 20;
+
+      if (indicator) {
+        indicator.textContent = activePageNumber === 'all' ? `1 - ${total}` : `${activePageNumber} / ${total}`;
+      }
+
+      if (prevBtn) {
+        prevBtn.disabled = (activePageNumber === 1 || activePageNumber === 'all');
+      }
+      if (nextBtn) {
+        nextBtn.disabled = (activePageNumber === total || activePageNumber === 'all');
+      }
+    }
+
+    // Normal kitap sayfa formatında render et
+    function renderStory() {
+      const area = document.getElementById("storyContentArea");
+      if (!area) return;
+      const pages = getStoryPages();
+      if (!pages.length) {
+        area.innerHTML = `
+          <div style="text-align: center; padding: 40px; color: #94a3b8;">
+            <p style="font-size: 1.1rem; margin-bottom: 8px;">⏳ Hikaye yükleniyor...</p>
+            <p style="font-size: 0.85rem;">Lütfen sayfayı yenileyiniz.</p>
+          </div>
+        `;
+        return;
+      }
+      area.innerHTML = "";
+
+      const pagesToRender = activePageNumber === 'all'
+        ? pages
+        : pages.filter(p => p.pageNum === activePageNumber);
+
+      pagesToRender.forEach((page) => {
+        const sheet = document.createElement("div");
+        sheet.className = "book-page-sheet";
+        sheet.id = `bookPage_${page.pageNum}`;
+
+        // Kitap Sayfa Numarası (Sadece Sayı)
+        const titleBox = document.createElement("div");
+        titleBox.className = "book-page-title-box";
+        titleBox.innerHTML = `
+          <div class="book-page-title-ar">${page.pageNum}</div>
+        `;
+        sheet.appendChild(titleBox);
+
+        // Paragrafları al (paragraflar veya cümleler formatını destekle)
+        let paras = [];
+        if (page.paragraphs && Array.isArray(page.paragraphs)) {
+          paras = page.paragraphs;
+        } else if (page.sentences && Array.isArray(page.sentences)) {
+          const allWords = [];
+          page.sentences.forEach(s => {
+            if (s.words) allWords.push(...s.words);
+          });
+          paras = [{ words: allWords }];
+        }
+
+        // Akıcı Paragraflar
+        paras.forEach((paragraph) => {
+          if (!paragraph.words || !paragraph.words.length) return;
+          const pEl = document.createElement("p");
+          pEl.className = "book-paragraph";
+
+          paragraph.words.forEach((w) => {
+            const wSpan = document.createElement("span");
+            wSpan.className = "ar-word";
+            wSpan.id = `word_${w.id}`;
+            wSpan.textContent = w.ar;
+            wSpan.title = "Kök ve tamlama manası için tıklayın";
+            wSpan.addEventListener("click", () => selectWord(w));
+            pEl.appendChild(wSpan);
+            pEl.appendChild(document.createTextNode(" "));
+          });
+
+          sheet.appendChild(pEl);
+        });
+
+        area.appendChild(sheet);
+      });
+    }
+
+    // Kelime Seçme ve Alt Paneli Açma (Sadece kelime ve tamlama manası)
+    function selectWord(word) {
+      if (!word) return;
+      selectedWordId = word.id;
+
+      // Önceki seçili kelimelerden vurguyu kaldır
+      document.querySelectorAll(".ar-word").forEach(el => el.classList.remove("selected"));
+
+      // Yeni kelimeyi vurgula
+      const el = document.getElementById(`word_${word.id}`);
+      if (el) el.classList.add("selected");
+
+      // Dock alanını doldur
+      const dock = document.getElementById("wordDock");
+      const wordAr = document.getElementById("dockWordAr");
+      const rootAr = document.getElementById("dockRootAr");
+      const phraseTr = document.getElementById("dockPhraseTr");
+      const typeBadge = document.getElementById("dockTypeBadge");
+
+      if (wordAr) wordAr.textContent = word.ar;
+      if (rootAr) rootAr.textContent = word.root ? word.root : "—";
+      if (typeBadge) typeBadge.textContent = word.type || "Kelime";
+      
+      // SADECE ait olduğu tamlama veya kendi kelime manası (altı çizili)
+      if (phraseTr) {
+        phraseTr.innerHTML = word.phraseTr || `<u>${word.meaning || word.ar}</u>`;
+      }
+
+      if (dock) {
+        dock.classList.add("active");
+      }
+    }
+
+    function closeWordDock() {
+      const dock = document.getElementById("wordDock");
+      if (dock) dock.classList.remove("active");
+      document.querySelectorAll(".ar-word").forEach(el => el.classList.remove("selected"));
+      selectedWordId = null;
+    }
+
+    function adjustFontSize(delta) {
+      currentFontSizeRem = Math.max(1.4, Math.min(3.4, currentFontSizeRem + delta));
+      document.documentElement.style.setProperty('--arabic-font-size', `${currentFontSizeRem}rem`);
+    }
+
+    function goBack() {
+      if (window.parent && window.parent !== window) {
+        if (typeof window.parent.returnToMainMenuFromExtra === 'function') {
+          window.parent.returnToMainMenuFromExtra();
+          return;
+        }
+        if (typeof window.parent.closeHikayeModal === 'function') {
+          window.parent.closeHikayeModal();
+          return;
+        }
+        try {
+          window.parent.postMessage({ action: 'returnToMainMenu' }, '*');
+          return;
+        } catch (_) {}
+      }
+      window.location.href = "index.html";
+    }
+
+    // Güvenli başlatma döngüsü
+    let initAttempts = 0;
+    function initStoryApp() {
+      const pages = getStoryPages();
+      if (!pages.length && initAttempts < 20) {
+        initAttempts++;
+        setTimeout(initStoryApp, 50);
+        return;
+      }
+
+      renderPageChips();
+      renderStory();
+      updatePageFooterNav();
+
+      // İlk kelimeyi güvenli seç
+      try {
+        if (pages.length && pages[0]) {
+          const p1 = pages[0];
+          let firstWord = null;
+          if (p1.paragraphs && p1.paragraphs[0] && p1.paragraphs[0].words) {
+            firstWord = p1.paragraphs[0].words[0];
+          } else if (p1.sentences && p1.sentences[0] && p1.sentences[0].words) {
+            firstWord = p1.sentences[0].words[0];
+          }
+          if (firstWord) {
+            selectWord(firstWord);
+          }
+        }
+      } catch (e) {}
+    }
+
+    window.addEventListener("DOMContentLoaded", initStoryApp);
+    window.addEventListener("load", initStoryApp);
+  </script>
+</body>
+</html>
