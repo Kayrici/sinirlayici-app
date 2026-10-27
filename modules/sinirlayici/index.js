@@ -84,6 +84,22 @@
     }, 150);
   }
 
+  function syncAllLimitsToNative(context) {
+    if (!window.AndroidBridge || typeof window.AndroidBridge.saveLimit !== 'function') return;
+    const limits = context.storage.get('limits', []);
+    limits.forEach(item => {
+      try {
+        window.AndroidBridge.saveLimit(JSON.stringify({
+          packageName: item.id,
+          appName: item.name,
+          mode: 'daily',
+          dailyLimitMinutes: item.maxMinutes,
+          enabled: true
+        }));
+      } catch (e) {}
+    });
+  }
+
   const moduleDef = {
     id: 'sinirlayici',
     title: 'Sınırlayıcı',
@@ -93,6 +109,7 @@
       this.context = context;
       this.checkInterval = null;
       preloadAppsInBackground();
+      syncAllLimitsToNative(context);
       this.startMonitor(context);
     },
 
@@ -416,6 +433,9 @@
         const app = limits.find(l => l.id === id);
         if (!app) return;
         this.triggerEnforcement(app);
+        if (window.AndroidBridge && typeof window.AndroidBridge.showToast === 'function') {
+          try { window.AndroidBridge.showToast(`🛑 ${app.name} sınır testi: Kapatma uyarısı gönderildi!`); } catch (e) {}
+        }
       };
 
       // Sil
@@ -439,48 +459,73 @@
     startMonitor(context) {
       if (this.checkInterval) clearInterval(this.checkInterval);
 
-      // Performans Odaklı İzleme: Sadece değişen kartların DOM alanlarını günceller
+      // Performans Odaklı Canlı İzleme (getLimits + getTodayUsageSeconds çift yönlü senkronizasyonu)
       this.checkInterval = setInterval(() => {
         let limits = context.storage.get('limits', []);
         if (limits.length === 0) return;
 
         let changed = false;
 
-        if (window.AndroidBridge && typeof window.AndroidBridge.getTodayUsageSeconds === 'function') {
-          limits = limits.map(item => {
-            try {
-              const realSecs = window.AndroidBridge.getTodayUsageSeconds(item.id);
-              if (realSecs >= 0 && realSecs !== item.usedSeconds) {
-                changed = true;
-                const usedMin = Math.floor(realSecs / 60);
-                const percent = Math.min(100, Math.round((usedMin / item.maxMinutes) * 100));
-                const isReached = usedMin >= item.maxMinutes;
-
-                if (isReached && Math.floor((item.usedSeconds || 0) / 60) < item.maxMinutes) {
-                  this.triggerEnforcement(item);
-                }
-
-                // Yüksek Hızlı Hedefli DOM Güncellemesi (Repaint lag yok)
-                const card = document.getElementById(`limit-card-${item.id}`);
-                if (card) {
-                  const pBar = card.querySelector('.limit-progress-bar');
-                  const txt = card.querySelector('.limit-time-text');
-                  if (pBar) {
-                    pBar.style.width = percent + '%';
-                    pBar.style.background = isReached ? 'var(--accent-danger)' : 'var(--accent-primary)';
+        // Native depodan aktif tick ve kullanım sürelerini çek
+        let nativeMap = {};
+        if (window.AndroidBridge && typeof window.AndroidBridge.getLimits === 'function') {
+          try {
+            const raw = window.AndroidBridge.getLimits();
+            if (raw) {
+              const list = JSON.parse(raw);
+              if (Array.isArray(list)) {
+                list.forEach(nItem => {
+                  if (nItem.packageName) {
+                    nativeMap[nItem.packageName] = nItem;
                   }
-                  if (txt) {
-                    txt.textContent = `${usedMin} dk / ${item.maxMinutes} dk` + (isReached ? ' • Sınır Doldu' : '');
-                    txt.style.color = isReached ? 'var(--accent-danger)' : 'var(--text-muted)';
-                  }
-                }
-
-                return { ...item, usedSeconds: realSecs };
+                });
               }
-            } catch (e) {}
-            return item;
-          });
+            }
+          } catch (e) {}
         }
+
+        limits = limits.map(item => {
+          let realSecs = item.usedSeconds || 0;
+          const nativeItem = nativeMap[item.id];
+          if (nativeItem && typeof nativeItem.usedTodaySeconds === 'number') {
+            realSecs = Math.max(realSecs, nativeItem.usedTodaySeconds);
+          } else if (window.AndroidBridge && typeof window.AndroidBridge.getTodayUsageSeconds === 'function') {
+            try {
+              const s = window.AndroidBridge.getTodayUsageSeconds(item.id);
+              if (s >= 0) realSecs = Math.max(realSecs, s);
+            } catch (e) {}
+          }
+
+          if (realSecs !== item.usedSeconds) {
+            changed = true;
+            const usedMin = Math.floor(realSecs / 60);
+            const percent = Math.min(100, Math.round((usedMin / item.maxMinutes) * 100));
+            const isReached = usedMin >= item.maxMinutes;
+
+            if (isReached && Math.floor((item.usedSeconds || 0) / 60) < item.maxMinutes) {
+              this.triggerEnforcement(item);
+            }
+
+            // Canlı Repaint-free DOM Güncellemesi
+            const card = document.getElementById(`limit-card-${item.id}`);
+            if (card) {
+              const pBar = card.querySelector('.limit-progress-bar');
+              const txt = card.querySelector('.limit-time-text');
+              if (pBar) {
+                pBar.style.width = percent + '%';
+                pBar.style.background = isReached ? 'var(--accent-danger)' : 'var(--accent-primary)';
+              }
+              if (txt) {
+                const secDetail = realSecs < 60 ? ` (${realSecs} sn)` : '';
+                txt.textContent = `${usedMin} dk / ${item.maxMinutes} dk${secDetail}` + (isReached ? ' • Sınır Doldu' : '');
+                txt.style.color = isReached ? 'var(--accent-danger)' : 'var(--text-muted)';
+              }
+            }
+
+            return { ...item, usedSeconds: realSecs };
+          }
+          return item;
+        });
 
         if (changed) {
           context.storage.set('limits', limits);
@@ -491,12 +536,14 @@
     triggerEnforcement(app) {
       const toast = document.getElementById('floatingToast');
       if (toast) {
-        toast.textContent = `${app.name} sınırına ulaştınız!`;
+        toast.textContent = `🛑 ${app.name} sınırına ulaştınız!`;
         toast.style.display = 'block';
         setTimeout(() => { toast.style.display = 'none'; }, 3500);
       }
       if (window.AndroidBridge && typeof window.AndroidBridge.showToast === 'function') {
-        window.AndroidBridge.showToast(`${app.name} kullanım sınırına ulaşıldı!`);
+        try {
+          window.AndroidBridge.showToast(`🛑 ${app.name} günlük kullanım sınırına ulaşıldı!`);
+        } catch (e) {}
       }
     },
 

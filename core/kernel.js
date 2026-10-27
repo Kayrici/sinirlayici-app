@@ -39,6 +39,23 @@ class AppKernel {
     this.checkServiceStatus();
     setInterval(() => this.checkServiceStatus(), 2000);
 
+    // Global ayar köprüsü bağlantıları (Her zaman ve her modülde erişilebilir)
+    window.__openAccessibilitySettings = () => {
+      if (window.AndroidBridge && typeof window.AndroidBridge.openAccessibilitySettings === 'function') {
+        try { window.AndroidBridge.openAccessibilitySettings(); } catch (e) {}
+      }
+    };
+    window.__openAppDetailSettings = () => {
+      if (window.AndroidBridge && typeof window.AndroidBridge.openAppDetailSettings === 'function') {
+        try { window.AndroidBridge.openAppDetailSettings(); } catch (e) {}
+      }
+    };
+    window.__openBatterySettings = () => {
+      if (window.AndroidBridge && typeof window.AndroidBridge.openBatterySettings === 'function') {
+        try { window.AndroidBridge.openBatterySettings(); } catch (e) {}
+      }
+    };
+
     console.log('🚀 Hatırlatıcı Çekirdeği Başlatıldı.');
   }
 

@@ -46,6 +46,44 @@
   let editingReminderId = null;
   let formSelectedDays = [1, 2, 3, 4, 5];
 
+  function syncReminderToNative(r) {
+    if (!r || !window.AndroidBridge || typeof window.AndroidBridge.saveReminder !== 'function') return;
+    try {
+      const javaDaysList = (r.weekDays || [1, 2, 3, 4, 5, 6, 0]).map(dId => {
+        const found = DAYS_OF_WEEK.find(d => d.id === dId);
+        return found && found.javaDay ? found.javaDay : (dId === 0 ? 1 : dId + 1);
+      });
+      const daysStr = javaDaysList.join(',');
+      const nativeStopCondition = (r.endCondition === 'forever') ? 'never' : (r.endCondition || 'never');
+      const nativeMessage = r.desc || r.title || 'Hatırlatıcı vakti geldi!';
+
+      window.AndroidBridge.saveReminder(JSON.stringify({
+        id: r.id,
+        title: r.title,
+        message: nativeMessage,
+        icon: 'bell',
+        timeOfDay: r.time || '09:00',
+        type: r.scheduleType || 'daily',
+        daysOfWeek: daysStr,
+        dayOfMonth: r.monthDay || 1,
+        stopCondition: nativeStopCondition,
+        maxRepeats: r.maxRepeatCount || 0,
+        endDate: r.endDate || '',
+        enableTracking: r.askCompletion !== false,
+        askLater: r.askCompletion !== false,
+        askTimeOfDay: r.time || '09:00',
+        enabled: true
+      }));
+    } catch (e) {
+      console.warn('Native reminder sync hatası:', e);
+    }
+  }
+
+  function syncAllRemindersToNative(context) {
+    const list = getStoredReminders(context);
+    list.forEach(r => syncReminderToNative(r));
+  }
+
   const moduleDef = {
     id: 'hatirlatici',
     title: 'Hatırlatıcı',
@@ -55,6 +93,7 @@
       this.context = context;
       this.checkInterval = null;
       getStoredReminders(context);
+      syncAllRemindersToNative(context);
       this.startScheduler(context);
     },
 
@@ -448,6 +487,10 @@
             const item = list.find(r => r.id === id);
             if (!item) return;
 
+            // 1. Hatırlatıcının native depoda varlığını kesinleştir
+            syncReminderToNative(item);
+
+            // 2. Native bildirim mekanizmasını tetikle
             if (window.AndroidBridge && typeof window.AndroidBridge.triggerReminderNow === 'function') {
               try {
                 window.AndroidBridge.triggerReminderNow(id);
@@ -456,6 +499,14 @@
               }
             }
 
+            // 3. Ekranda anında native bildirim tostu göster
+            if (window.AndroidBridge && typeof window.AndroidBridge.showToast === 'function') {
+              try {
+                window.AndroidBridge.showToast(`🔔 ${item.title}: Bildirim tetiklendi!`);
+              } catch (e) {}
+            }
+
+            // 4. Etkileşimli uygulama içi bildirim modalını aç
             this.triggerInteractiveNotification(item, context);
             showToast('🔔 Test bildirimi cihaza gönderildi!');
           };
@@ -725,38 +776,9 @@
         context.storage.set('selected_group', 'Tümü'); // Yeni eklenen görünsün diye filtreyi Tümü yap
 
         // Native Android senkronizasyonu
-        if (window.AndroidBridge && typeof window.AndroidBridge.saveReminder === 'function') {
-          try {
-            // Java Calendar DAY_OF_WEEK: Sunday=1, Monday=2, Tuesday=3, Wednesday=4, Thursday=5, Friday=6, Saturday=7
-            const javaDaysList = (formSelectedDays || []).map(dId => {
-              const found = DAYS_OF_WEEK.find(d => d.id === dId);
-              return found && found.javaDay ? found.javaDay : (dId === 0 ? 1 : dId + 1);
-            });
-            const daysStr = javaDaysList.join(',');
-            const remId = editingReminderId || (list[0] ? list[0].id : 'rem_' + Date.now());
-            const nativeStopCondition = (endCondition === 'forever') ? 'never' : (endCondition || 'never');
-            const nativeMessage = finalDesc || finalTitle || 'Hatırlatıcı vakti geldi!';
-
-            window.AndroidBridge.saveReminder(JSON.stringify({
-              id: remId,
-              title: finalTitle,
-              message: nativeMessage,
-              icon: 'bell',
-              timeOfDay: time,
-              type: scheduleType,
-              daysOfWeek: daysStr,
-              dayOfMonth: monthDay,
-              stopCondition: nativeStopCondition,
-              maxRepeats: maxRepeatCount,
-              endDate: endDate,
-              enableTracking: askCompletion,
-              askLater: askCompletion,
-              askTimeOfDay: time,
-              enabled: true
-            }));
-          } catch (e) {
-            console.warn('Native saveReminder hatası:', e);
-          }
+        const savedItem = list.find(r => r.id === (editingReminderId || (list[0] ? list[0].id : ''))) || list[0];
+        if (savedItem) {
+          syncReminderToNative(savedItem);
         }
 
         // Listeye dön ve güncelle
@@ -872,6 +894,14 @@
 
             item.currentRepeatCount = (item.currentRepeatCount || 0) + 1;
             changed = true;
+
+            // Native bildirim ve toast tetikleyici
+            if (window.AndroidBridge && typeof window.AndroidBridge.triggerReminderNow === 'function') {
+              try { window.AndroidBridge.triggerReminderNow(item.id); } catch (e) {}
+            }
+            if (window.AndroidBridge && typeof window.AndroidBridge.showToast === 'function') {
+              try { window.AndroidBridge.showToast(`🔔 ${item.title}: Vakti geldi!`); } catch (e) {}
+            }
 
             if (item.askCompletion !== false) {
               this.triggerInteractiveNotification(item, context);
