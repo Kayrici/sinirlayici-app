@@ -139,6 +139,8 @@ class AppKernel {
     const mod = this.modules.get(moduleId);
 
     // Başlık güncelle
+    const headerTitle = document.getElementById('appHeaderTitle');
+    if (headerTitle) headerTitle.textContent = mod.title;
     const subtitle = document.getElementById('activeModuleSubtitle');
     if (subtitle) subtitle.textContent = mod.title;
 
