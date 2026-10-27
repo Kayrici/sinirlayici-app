@@ -23,7 +23,7 @@
       return `<img src="${src}" loading="lazy" style="width: 40px; height: 40px; border-radius: 12px; object-fit: contain; flex-shrink: 0; background: rgba(255,255,255,0.06); padding: 3px;">`;
     }
 
-    const name = typeof app === 'string' ? app : (app ? app.name : '?');
+    const name = typeof app === 'string' ? app : (app ? (app.name || app.appName) : '?');
     const initial = (name || '?').charAt(0).toUpperCase();
     const colors = [
       '#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4'
@@ -47,7 +47,8 @@
           const parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length > 0) {
             cachedInstalledApps = parsed.map(p => ({
-              id: p.packageName || p.id || '',
+              id: (p.packageName || p.id || '').trim(),
+              packageName: (p.packageName || p.id || '').trim(),
               name: p.appName || p.name || p.packageName || 'Uygulama',
               icon: p.icon || ''
             })).filter(a => !!a.id);
@@ -60,14 +61,14 @@
     }
 
     const fallbacks = [
-      { id: 'com.google.android.youtube', name: 'YouTube', icon: '' },
-      { id: 'com.instagram.android', name: 'Instagram', icon: '' },
-      { id: 'com.whatsapp', name: 'WhatsApp', icon: '' },
-      { id: 'com.zhiliaoapp.musically', name: 'TikTok', icon: '' },
-      { id: 'com.twitter.android', name: 'X (Twitter)', icon: '' },
-      { id: 'com.android.chrome', name: 'Google Chrome', icon: '' },
-      { id: 'com.netflix.mediaclient', name: 'Netflix', icon: '' },
-      { id: 'com.spotify.music', name: 'Spotify', icon: '' }
+      { id: 'com.google.android.youtube', packageName: 'com.google.android.youtube', name: 'YouTube', icon: '' },
+      { id: 'com.instagram.android', packageName: 'com.instagram.android', name: 'Instagram', icon: '' },
+      { id: 'com.whatsapp', packageName: 'com.whatsapp', name: 'WhatsApp', icon: '' },
+      { id: 'com.zhiliaoapp.musically', packageName: 'com.zhiliaoapp.musically', name: 'TikTok', icon: '' },
+      { id: 'com.twitter.android', packageName: 'com.twitter.android', name: 'X (Twitter)', icon: '' },
+      { id: 'com.android.chrome', packageName: 'com.android.chrome', name: 'Google Chrome', icon: '' },
+      { id: 'com.netflix.mediaclient', packageName: 'com.netflix.mediaclient', name: 'Netflix', icon: '' },
+      { id: 'com.spotify.music', packageName: 'com.spotify.music', name: 'Spotify', icon: '' }
     ];
     cachedInstalledApps = fallbacks;
     return fallbacks;
@@ -88,12 +89,14 @@
     if (!window.AndroidBridge || typeof window.AndroidBridge.saveLimit !== 'function') return;
     const limits = context.storage.get('limits', []);
     limits.forEach(item => {
+      const pkg = (item.id || item.packageName || '').trim();
+      if (!pkg) return;
       try {
         window.AndroidBridge.saveLimit(JSON.stringify({
-          packageName: item.id,
-          appName: item.name,
+          packageName: pkg,
+          appName: item.name || item.appName || pkg,
           mode: 'daily',
-          dailyLimitMinutes: item.maxMinutes,
+          dailyLimitMinutes: item.maxMinutes || item.dailyLimitMinutes || 30,
           enabled: true
         }));
       } catch (e) {}
@@ -109,6 +112,56 @@
       this.context = context;
       this.checkInterval = null;
       preloadAppsInBackground();
+
+      // Native depodaki limitler ile yerel depoyu eşitle (çift yönlü senkronizasyon)
+      if (window.AndroidBridge && typeof window.AndroidBridge.getLimits === 'function') {
+        try {
+          const raw = window.AndroidBridge.getLimits();
+          if (raw) {
+            const nativeList = JSON.parse(raw);
+            if (Array.isArray(nativeList) && nativeList.length > 0) {
+              let localLimits = context.storage.get('limits', []);
+              let localMap = new Map();
+              localLimits.forEach(l => {
+                const k = (l.id || l.packageName || '').trim();
+                if (k) localMap.set(k, l);
+              });
+
+              nativeList.forEach(nItem => {
+                const pkg = (nItem.packageName || '').trim();
+                if (!pkg) return;
+                const existing = localMap.get(pkg);
+                if (existing) {
+                  existing.id = pkg;
+                  existing.packageName = pkg;
+                  if (typeof nItem.dailyLimitMinutes === 'number' && nItem.dailyLimitMinutes > 0) {
+                    existing.maxMinutes = nItem.dailyLimitMinutes;
+                  }
+                  if (typeof nItem.usedTodaySeconds === 'number') {
+                    existing.usedSeconds = Math.max(existing.usedSeconds || 0, nItem.usedTodaySeconds);
+                  }
+                  if (nItem.appName && (!existing.name || existing.name === pkg)) {
+                    existing.name = nItem.appName;
+                  }
+                } else {
+                  localLimits.push({
+                    id: pkg,
+                    packageName: pkg,
+                    name: nItem.appName || pkg,
+                    icon: '',
+                    maxMinutes: nItem.dailyLimitMinutes || 30,
+                    usedSeconds: nItem.usedTodaySeconds || 0
+                  });
+                }
+              });
+              context.storage.set('limits', localLimits);
+            }
+          }
+        } catch (e) {
+          console.warn('Native getLimits sync hatası:', e);
+        }
+      }
+
       syncAllLimitsToNative(context);
       this.startMonitor(context);
     },
@@ -117,11 +170,13 @@
       const cycleStart = getCycleStartTimestamp();
       let storedCycle = context.storage.get('last_cycle_start', 0);
 
-      if (cycleStart > storedCycle) {
+      if (storedCycle > 0 && cycleStart > storedCycle) {
         context.storage.set('last_cycle_start', cycleStart);
         let currentLimits = context.storage.get('limits', []);
         currentLimits = currentLimits.map(item => ({ ...item, usedSeconds: 0 }));
         context.storage.set('limits', currentLimits);
+      } else if (!storedCycle) {
+        context.storage.set('last_cycle_start', cycleStart);
       }
 
       const isAccessEnabled = (window.AndroidBridge && typeof window.AndroidBridge.isAccessibilityServiceEnabled === 'function')
@@ -141,10 +196,10 @@
                   Uygulama kullanım sürelerinin sayılabilmesi ve limit dolunca kapatılabilmesi için <b>Erişilebilirlik İznini</b> açmanız gerekir.
                 </div>
                 <div style="display: flex; gap: 0.5rem; margin-top: 0.6rem; flex-wrap: wrap;">
-                  <button onclick="window.__openAccessibilitySettings()" style="background: #ef4444; border: none; color: #fff; padding: 0.45rem 0.85rem; border-radius: 10px; font-weight: 800; font-size: 0.78rem; cursor: pointer;">
+                  <button type="button" onclick="window.__openAccessibilitySettings()" style="background: #ef4444; border: none; color: #fff; padding: 0.45rem 0.85rem; border-radius: 10px; font-weight: 800; font-size: 0.78rem; cursor: pointer;">
                     ⚙️ Erişilebilirlik İznini Aç
                   </button>
-                  <button onclick="window.__openAppDetailSettings()" style="background: rgba(255,255,255,0.08); border: 1px solid var(--border-card); color: #fff; padding: 0.45rem 0.75rem; border-radius: 10px; font-weight: 700; font-size: 0.78rem; cursor: pointer;">
+                  <button type="button" onclick="window.__openAppDetailSettings()" style="background: rgba(255,255,255,0.08); border: 1px solid var(--border-card); color: #fff; padding: 0.45rem 0.75rem; border-radius: 10px; font-weight: 700; font-size: 0.78rem; cursor: pointer;">
                     📋 Kullanım & Bildirim İzinleri
                   </button>
                 </div>
@@ -157,7 +212,7 @@
               <h2 style="font-size: 1.15rem; font-weight: 800; color: #fff;">Uygulama Sınırları</h2>
               <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.1rem;">Gece 03:00 döngüsü ile kullanım kontrolü</div>
             </div>
-            <button id="btnOpenAddModal" style="background: var(--accent-primary); border: none; color: #fff; padding: 0.55rem 1rem; border-radius: 12px; font-weight: 700; font-size: 0.82rem; cursor: pointer; box-shadow: 0 4px 14px var(--accent-glow);">
+            <button type="button" id="btnOpenAddModal" style="background: var(--accent-primary); border: none; color: #fff; padding: 0.55rem 1rem; border-radius: 12px; font-weight: 700; font-size: 0.82rem; cursor: pointer; box-shadow: 0 4px 14px var(--accent-glow);">
               + Yeni Sınırlayıcı Ekle
             </button>
           </div>
@@ -171,7 +226,7 @@
             
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
               <h3 id="modalHeaderTitle" style="font-size: 1.1rem; font-weight: 700; color: #fff;">Uygulama Seçin</h3>
-              <button id="btnCloseModal" style="background: none; border: none; color: var(--text-muted); font-size: 1.4rem; cursor: pointer; padding: 0.2rem 0.5rem;">✕</button>
+              <button type="button" id="btnCloseModal" style="background: none; border: none; color: var(--text-muted); font-size: 1.4rem; cursor: pointer; padding: 0.2rem 0.5rem;">✕</button>
             </div>
 
             <!-- Adım 1: Uygulama Listesi ve Arama -->
@@ -213,10 +268,10 @@
               </div>
 
               <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-                <button id="btnBackToAppList" style="flex: 1; background: rgba(255,255,255,0.06); border: 1px solid var(--border-card); color: var(--text-secondary); padding: 0.8rem; border-radius: 12px; font-weight: 700; cursor: pointer;">
+                <button type="button" id="btnBackToAppList" style="flex: 1; background: rgba(255,255,255,0.06); border: 1px solid var(--border-card); color: var(--text-secondary); padding: 0.8rem; border-radius: 12px; font-weight: 700; cursor: pointer;">
                   Geri
                 </button>
-                <button id="btnConfirmSaveLimit" style="flex: 2; background: var(--accent-primary); border: none; color: #fff; padding: 0.8rem; border-radius: 12px; font-weight: 800; font-size: 0.95rem; cursor: pointer; box-shadow: 0 4px 14px var(--accent-glow);">
+                <button type="button" id="btnConfirmSaveLimit" style="flex: 2; background: var(--accent-primary); border: none; color: #fff; padding: 0.8rem; border-radius: 12px; font-weight: 800; font-size: 0.95rem; cursor: pointer; box-shadow: 0 4px 14px var(--accent-glow);">
                   Sınırı Başlat
                 </button>
               </div>
@@ -231,7 +286,7 @@
 
       window.__openAccessibilitySettings = () => {
         if (window.AndroidBridge && typeof window.AndroidBridge.openAccessibilitySettings === 'function') {
-          window.AndroidBridge.openAccessibilitySettings();
+          try { window.AndroidBridge.openAccessibilitySettings(); } catch (e) {}
         }
       };
 
@@ -241,6 +296,7 @@
 
     renderLimitsList(container, context) {
       const listEl = container.querySelector('#limitsListContainer');
+      if (!listEl) return;
       const limits = context.storage.get('limits', []);
 
       if (limits.length === 0) {
@@ -254,27 +310,33 @@
       }
 
       listEl.innerHTML = limits.map(item => {
-        const usedMin = Math.floor((item.usedSeconds || 0) / 60);
-        const percent = Math.min(100, Math.round((usedMin / item.maxMinutes) * 100));
-        const isReached = usedMin >= item.maxMinutes;
+        const pkgId = (item.id || item.packageName || '').trim();
+        const appName = item.name || item.appName || pkgId;
+        const maxMins = item.maxMinutes || item.dailyLimitMinutes || 30;
+        const usedSecs = item.usedSeconds || 0;
+        const totalSecs = maxMins * 60;
+        const usedMin = Math.floor(usedSecs / 60);
+        const percent = Math.min(100, Math.round((usedSecs / totalSecs) * 100));
+        const isReached = usedSecs >= totalSecs;
+        const secDetail = (usedSecs < 60 && usedSecs > 0) ? ` (${usedSecs} sn)` : '';
 
         return `
-          <div id="limit-card-${item.id}" class="card-panel" style="display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 0;">
+          <div id="limit-card-${pkgId}" class="card-panel" style="display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 0;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div style="display: flex; align-items: center; gap: 0.75rem;">
                 ${renderAppIcon(item)}
                 <div>
-                  <div style="font-weight: 700; font-size: 0.95rem; color: #ffffff;">${item.name}</div>
+                  <div style="font-weight: 700; font-size: 0.95rem; color: #ffffff;">${appName}</div>
                   <div class="limit-time-text" style="font-size: 0.75rem; color: ${isReached ? 'var(--accent-danger)' : 'var(--text-muted)'}; font-weight: 600;">
-                    ${usedMin} dk / ${item.maxMinutes} dk ${isReached ? '• Sınır Doldu' : ''}
+                    ${usedMin} dk / ${maxMins} dk${secDetail}${isReached ? ' • Sınır Doldu' : ''}
                   </div>
                 </div>
               </div>
               <div style="display: flex; align-items: center; gap: 0.4rem;">
-                <button onclick="window.__sinirlayiciTestClose('${item.id}')" title="Kapatma uyarısını test et" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); color: #fca5a5; font-size: 0.72rem; font-weight: 700; padding: 0.3rem 0.6rem; border-radius: 8px; cursor: pointer;">
+                <button type="button" onclick="window.__sinirlayiciTestClose('${pkgId}')" title="Kapatma uyarısını test et" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); color: #fca5a5; font-size: 0.72rem; font-weight: 700; padding: 0.3rem 0.6rem; border-radius: 8px; cursor: pointer;">
                   Kapatmayı Test Et
                 </button>
-                <button onclick="window.__sinirlayiciDelete('${item.id}')" style="background: none; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; padding: 0.4rem;">
+                <button type="button" onclick="window.__sinirlayiciDelete('${pkgId}')" title="Sınırı Sil" style="background: none; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; padding: 0.4rem;">
                   🗑️
                 </button>
               </div>
@@ -314,7 +376,7 @@
           return;
         }
 
-        // Render first 40 apps for 0ms lag
+        // 0ms gecikme için ilk 40 uygulamayı çiz
         const slice = filtered.slice(0, 40);
         stepAppList.innerHTML = slice.map(app => `
           <div class="selectable-app-card" onclick="window.__selectAppForLimit('${app.id}')"
@@ -334,8 +396,8 @@
       // Modal aç (Anında açılır, önceden hafızada)
       container.querySelector('#btnOpenAddModal').onclick = () => {
         const all = getAvailableApps();
-        const existing = context.storage.get('limits', []).map(l => l.id);
-        availableAppsList = all.filter(a => !existing.includes(a.id));
+        const existing = context.storage.get('limits', []).map(l => (l.id || l.packageName || '').trim());
+        availableAppsList = all.filter(a => !existing.includes(a.id.trim()));
 
         searchInput.value = '';
         renderAvailableList();
@@ -354,7 +416,7 @@
       // Doğrudan tıklama seçimi
       window.__selectAppForLimit = (appId) => {
         const all = getAvailableApps();
-        const found = all.find(a => a.id === appId);
+        const found = all.find(a => (a.id || a.packageName || '').trim() === String(appId).trim());
         if (!found) return;
 
         currentSelectedApp = found;
@@ -390,18 +452,26 @@
       container.querySelector('#btnConfirmSaveLimit').onclick = () => {
         if (!currentSelectedApp) return;
         const mins = parseInt(minutesInput.value, 10) || 30;
+        const pkgId = (currentSelectedApp.id || currentSelectedApp.packageName || '').trim();
+        if (!pkgId) return;
 
         let limits = context.storage.get('limits', []);
-        const existingIdx = limits.findIndex(l => l.id === currentSelectedApp.id);
+        const existingIdx = limits.findIndex(l => {
+          const lId = (l.id || l.packageName || '').trim();
+          return lId === pkgId;
+        });
+
         const limitObj = {
-          id: currentSelectedApp.id,
-          name: currentSelectedApp.name,
+          id: pkgId,
+          packageName: pkgId,
+          name: currentSelectedApp.name || pkgId,
           icon: currentSelectedApp.icon || '',
           maxMinutes: mins,
           usedSeconds: 0
         };
 
         if (existingIdx !== -1) {
+          limitObj.usedSeconds = limits[existingIdx].usedSeconds || 0;
           limits[existingIdx] = limitObj;
         } else {
           limits.push(limitObj);
@@ -412,8 +482,8 @@
         if (window.AndroidBridge && typeof window.AndroidBridge.saveLimit === 'function') {
           try {
             window.AndroidBridge.saveLimit(JSON.stringify({
-              packageName: currentSelectedApp.id,
-              appName: currentSelectedApp.name,
+              packageName: pkgId,
+              appName: currentSelectedApp.name || pkgId,
               mode: 'daily',
               dailyLimitMinutes: mins,
               enabled: true
@@ -430,7 +500,11 @@
       // Test Kapatma Aksiyonu
       window.__sinirlayiciTestClose = (id) => {
         const limits = context.storage.get('limits', []);
-        const app = limits.find(l => l.id === id);
+        const targetId = String(id || '').trim();
+        const app = limits.find(l => {
+          const lId = String(l.id || l.packageName || '').trim();
+          return lId === targetId;
+        });
         if (!app) return;
         this.triggerEnforcement(app);
         if (window.AndroidBridge && typeof window.AndroidBridge.showToast === 'function') {
@@ -440,18 +514,43 @@
 
       // Sil
       window.__sinirlayiciDelete = (id) => {
+        if (!id) return;
+        const targetId = String(id).trim();
+
+        // 1. Storage'dan hedefi kesin olarak temizle
         let limits = context.storage.get('limits', []);
-        limits = limits.filter(l => l.id !== id);
+        const toDelete = limits.find(l => {
+          const lId = String(l.id || l.packageName || '').trim();
+          const lPkg = String(l.packageName || l.id || '').trim();
+          return lId === targetId || lPkg === targetId;
+        });
+
+        limits = limits.filter(l => {
+          const lId = String(l.id || l.packageName || '').trim();
+          const lPkg = String(l.packageName || l.id || '').trim();
+          return lId !== targetId && lPkg !== targetId;
+        });
         context.storage.set('limits', limits);
 
+        // 2. Native Android Bridge'den sil
+        const nativePkg = toDelete ? (toDelete.packageName || toDelete.id || targetId) : targetId;
         if (window.AndroidBridge && typeof window.AndroidBridge.deleteLimit === 'function') {
           try {
-            window.AndroidBridge.deleteLimit(id);
+            window.AndroidBridge.deleteLimit(nativePkg.trim());
           } catch (e) {
             console.warn('Native deleteLimit hatası:', e);
           }
         }
 
+        // 3. Kullanıcıya bildirim ver
+        const appName = toDelete ? (toDelete.name || toDelete.appName || nativePkg) : 'Uygulama';
+        if (window.AndroidBridge && typeof window.AndroidBridge.showToast === 'function') {
+          try {
+            window.AndroidBridge.showToast(`🗑️ ${appName} sınırlayıcısı kaldırıldı.`);
+          } catch (e) {}
+        }
+
+        // 4. Listeyi yeniden çiz
         this.renderLimitsList(container, context);
       };
     },
@@ -475,8 +574,9 @@
               const list = JSON.parse(raw);
               if (Array.isArray(list)) {
                 list.forEach(nItem => {
-                  if (nItem.packageName) {
-                    nativeMap[nItem.packageName] = nItem;
+                  const pkg = (nItem.packageName || '').trim();
+                  if (pkg) {
+                    nativeMap[pkg] = nItem;
                   }
                 });
               }
@@ -485,46 +585,48 @@
         }
 
         limits = limits.map(item => {
+          const pkg = (item.id || item.packageName || '').trim();
           let realSecs = item.usedSeconds || 0;
-          const nativeItem = nativeMap[item.id];
+          const nativeItem = nativeMap[pkg];
           if (nativeItem && typeof nativeItem.usedTodaySeconds === 'number') {
             realSecs = Math.max(realSecs, nativeItem.usedTodaySeconds);
           } else if (window.AndroidBridge && typeof window.AndroidBridge.getTodayUsageSeconds === 'function') {
             try {
-              const s = window.AndroidBridge.getTodayUsageSeconds(item.id);
+              const s = window.AndroidBridge.getTodayUsageSeconds(pkg);
               if (s >= 0) realSecs = Math.max(realSecs, s);
             } catch (e) {}
           }
 
+          const maxMins = item.maxMinutes || item.dailyLimitMinutes || 30;
+          const totalSecs = maxMins * 60;
+          const usedMin = Math.floor(realSecs / 60);
+          const percent = Math.min(100, Math.round((realSecs / totalSecs) * 100));
+          const isReached = realSecs >= totalSecs;
+
+          // Canlı Repaint-free DOM Güncellemesi
+          const card = document.getElementById(`limit-card-${pkg}`);
+          if (card) {
+            const pBar = card.querySelector('.limit-progress-bar');
+            const txt = card.querySelector('.limit-time-text');
+            if (pBar) {
+              pBar.style.width = percent + '%';
+              pBar.style.background = isReached ? 'var(--accent-danger)' : 'var(--accent-primary)';
+            }
+            if (txt) {
+              const secDetail = (realSecs < 60 && realSecs > 0) ? ` (${realSecs} sn)` : '';
+              txt.textContent = `${usedMin} dk / ${maxMins} dk${secDetail}` + (isReached ? ' • Sınır Doldu' : '');
+              txt.style.color = isReached ? 'var(--accent-danger)' : 'var(--text-muted)';
+            }
+          }
+
           if (realSecs !== item.usedSeconds) {
             changed = true;
-            const usedMin = Math.floor(realSecs / 60);
-            const percent = Math.min(100, Math.round((usedMin / item.maxMinutes) * 100));
-            const isReached = usedMin >= item.maxMinutes;
-
-            if (isReached && Math.floor((item.usedSeconds || 0) / 60) < item.maxMinutes) {
+            if (isReached && Math.floor((item.usedSeconds || 0) / 60) < maxMins) {
               this.triggerEnforcement(item);
             }
-
-            // Canlı Repaint-free DOM Güncellemesi
-            const card = document.getElementById(`limit-card-${item.id}`);
-            if (card) {
-              const pBar = card.querySelector('.limit-progress-bar');
-              const txt = card.querySelector('.limit-time-text');
-              if (pBar) {
-                pBar.style.width = percent + '%';
-                pBar.style.background = isReached ? 'var(--accent-danger)' : 'var(--accent-primary)';
-              }
-              if (txt) {
-                const secDetail = realSecs < 60 ? ` (${realSecs} sn)` : '';
-                txt.textContent = `${usedMin} dk / ${item.maxMinutes} dk${secDetail}` + (isReached ? ' • Sınır Doldu' : '');
-                txt.style.color = isReached ? 'var(--accent-danger)' : 'var(--text-muted)';
-              }
-            }
-
-            return { ...item, usedSeconds: realSecs };
+            return { ...item, id: pkg, packageName: pkg, usedSeconds: realSecs };
           }
-          return item;
+          return { ...item, id: pkg, packageName: pkg };
         });
 
         if (changed) {
