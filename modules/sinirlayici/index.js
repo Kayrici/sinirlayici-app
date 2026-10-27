@@ -229,7 +229,8 @@
 
         <!-- Hızlı Uygulama Seçim Modalı -->
         <div id="addLimitModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; justify-content: center; align-items: flex-end;">
-          <div style="background: var(--bg-secondary); border-top: 1px solid var(--border-card); width: 100%; max-width: 480px; border-radius: 24px 24px 0 0; padding: 1.25rem; max-height: 85vh; display: flex; flex-direction: column;">
+          <div style="background: var(--bg-card); border-top: 1px solid var(--border-card); width: 100%; max-width: 480px; border-radius: 24px 24px 0 0; padding: 1.25rem; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 -10px 40px rgba(0,0,0,0.6);">
+            <div style="width: 36px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.2); margin: 0 auto 0.75rem auto;"></div>
             
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
               <h3 id="modalHeaderTitle" style="font-size: 1.1rem; font-weight: 700; color: #fff;">Uygulama Seçin</h3>

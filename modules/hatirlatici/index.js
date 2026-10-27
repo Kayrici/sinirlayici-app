@@ -186,12 +186,12 @@
             </div>
 
             <!-- 2. AÇIKLAMA (GÖZDEN KAÇMASI İMKANSIZ GENİŞ METİN ALANI) -->
-            <div class="card-panel" style="margin-bottom: 0; border: 1px solid rgba(99, 102, 241, 0.35); background: rgba(99, 102, 241, 0.04);">
+            <div class="card-panel" style="margin-bottom: 0; border: 1px solid rgba(249, 115, 22, 0.25); background: rgba(249, 115, 22, 0.04);">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
                 <label style="font-size: 0.88rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 0.4rem;">
                   <span>📝</span> Açıklama ve Notlar
                 </label>
-                <span style="font-size: 0.72rem; color: #818cf8; font-weight: 700;">Geniş Açıklama Alanı</span>
+                <span style="font-size: 0.72rem; color: var(--accent-primary); font-weight: 700;">Geniş Açıklama Alanı</span>
               </div>
               <div style="font-size: 0.76rem; color: var(--text-secondary); margin-bottom: 0.6rem;">
                 Hatırlatıcıyla ilgili açıklama, yapılacak işlerin detaylarını veya notlarınızı buraya yazın.
@@ -228,7 +228,7 @@
               <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.4rem; display: block;">
                 Tekrarlama Periyodu
               </label>
-              <select id="selectFormSchedule" style="width: 100%; padding: 0.8rem 1rem; border-radius: 12px; background: #131b2e; border: 1px solid var(--border-card); color: #fff; font-size: 0.95rem; font-weight: 700; outline: none; margin-bottom: 0.75rem;">
+              <select id="selectFormSchedule" style="width: 100%; padding: 0.8rem 1rem; border-radius: 12px; background: var(--bg-input); border: 1px solid var(--border-card); color: #fff; font-size: 0.95rem; font-weight: 700; outline: none; margin-bottom: 0.75rem;">
                 <option value="daily">Her Gün</option>
                 <option value="weekly">Haftanın Belirli Günleri</option>
                 <option value="monthly">Ayın Belirli Günleri</option>
@@ -261,7 +261,7 @@
               <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.4rem; display: block;">
                 Bitiş / Kaldırılma Kuralı
               </label>
-              <select id="selectFormEndCondition" style="width: 100%; padding: 0.8rem 1rem; border-radius: 12px; background: #131b2e; border: 1px solid var(--border-card); color: #fff; font-size: 0.95rem; font-weight: 700; outline: none;">
+              <select id="selectFormEndCondition" style="width: 100%; padding: 0.8rem 1rem; border-radius: 12px; background: var(--bg-input); border: 1px solid var(--border-card); color: #fff; font-size: 0.95rem; font-weight: 700; outline: none;">
                 <option value="never">Süresiz (Her Zaman Çalışsın)</option>
                 <option value="count">Belirli Tekrar Sayısından Sonra Kaldır</option>
                 <option value="date">Belirli Tarihten Sonra Kaldır</option>
@@ -323,7 +323,7 @@
           <div id="hatirlaticiToast" style="display: none; position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: #10b981; color: #fff; padding: 0.8rem 1.4rem; border-radius: 999px; font-size: 0.85rem; font-weight: 800; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 300;"></div>
 
           <!-- İnteraktif Görev Soru Bildirimi -->
-          <div id="hatirlaticiInteractiveNotif" style="display: none; position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%); width: 92%; max-width: 440px; background: #131b2e; border: 2px solid var(--accent-primary); border-radius: 20px; padding: 1.1rem 1.25rem; box-shadow: 0 16px 40px rgba(0,0,0,0.8); z-index: 200;">
+          <div id="hatirlaticiInteractiveNotif" style="display: none; position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%); width: 92%; max-width: 440px; background: var(--bg-card); border: 2px solid var(--accent-primary); border-radius: 20px; padding: 1.1rem 1.25rem; box-shadow: 0 16px 40px rgba(0,0,0,0.8); z-index: 200;">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem;">
               <div>
                 <div id="notifTaskMainTitle" style="font-weight: 800; font-size: 1rem; color: #fff;">Görevi Tamamladın mı?</div>
@@ -406,7 +406,7 @@
             <div class="card-panel" style="text-align: center; padding: 2.5rem 1rem;">
               <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🔔</div>
               <p style="color: var(--text-muted); font-size: 0.9rem;">Bu grupta henüz bir hatırlatıcı bulunmuyor.</p>
-              <button id="btnEmptyCreateRem" style="margin-top: 1rem; background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3); color: #818cf8; padding: 0.55rem 1.1rem; border-radius: 10px; font-weight: 700; font-size: 0.82rem; cursor: pointer;">
+              <button id="btnEmptyCreateRem" style="margin-top: 1rem; background: var(--accent-subtle); border: 1px solid rgba(249,115,22,0.3); color: var(--accent-primary); padding: 0.55rem 1.1rem; border-radius: 10px; font-weight: 700; font-size: 0.82rem; cursor: pointer;">
                 + Hatırlatıcı Oluştur
               </button>
             </div>
@@ -457,8 +457,8 @@
 
               <!-- GÖZDEN KAÇMASI İMKANSIZ BELİRGİN AÇIKLAMA NOT ALANI -->
               ${item.desc ? `
-                <div style="padding: 0.65rem 0.85rem; background: rgba(99, 102, 241, 0.08); border-left: 3px solid var(--accent-primary); border-radius: 8px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.45;">
-                  <span style="font-weight: 800; color: #818cf8; display: block; font-size: 0.7rem; margin-bottom: 0.2rem; letter-spacing: 0.5px;">AÇIKLAMA / NOT:</span>
+                <div style="padding: 0.65rem 0.85rem; background: var(--accent-subtle); border-left: 3px solid var(--accent-primary); border-radius: 8px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.45;">
+                  <span style="font-weight: 800; color: var(--accent-primary); display: block; font-size: 0.7rem; margin-bottom: 0.2rem; letter-spacing: 0.5px;">AÇIKLAMA / NOT:</span>
                   ${item.desc}
                 </div>
               ` : `
@@ -472,7 +472,7 @@
                   <button class="btn-item-edit" data-id="${item.id}" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-card); color: var(--text-primary); padding: 0.35rem 0.65rem; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.75rem;">
                     ✏️ Düzenle
                   </button>
-                  <button class="btn-item-anlz" data-id="${item.id}" style="background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3); color: #818cf8; padding: 0.35rem 0.65rem; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.75rem;">
+                  <button class="btn-item-anlz" data-id="${item.id}" style="background: var(--accent-subtle); border: 1px solid rgba(249,115,22,0.3); color: var(--accent-primary); padding: 0.35rem 0.65rem; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.75rem;">
                     📊 Analiz
                   </button>
                   <button class="btn-item-del" data-id="${item.id}" style="background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.35rem 0.45rem; font-size: 0.95rem;">
