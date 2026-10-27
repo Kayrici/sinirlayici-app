@@ -113,6 +113,28 @@
 
       container.innerHTML = `
         <div style="padding-top: 0.25rem; padding-bottom: 2.5rem;">
+
+          <!-- Erişilebilirlik Servis Uyarısı (Yalnızca servis kapalıysa şıkça görünür) -->
+          <div class="accessibility-warning-banner" style="display: ${isAccessEnabled ? 'none' : 'block'}; background: linear-gradient(135deg, rgba(239, 68, 68, 0.16), rgba(245, 158, 11, 0.16)); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 16px; padding: 0.9rem 1rem; margin-bottom: 1rem;">
+            <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+              <span style="font-size: 1.4rem; line-height: 1;">🛡️</span>
+              <div style="flex: 1;">
+                <div style="font-size: 0.9rem; font-weight: 800; color: #fff;">Sınırlayıcı ve Takip Servisi Kapalı</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1; margin-top: 0.2rem; line-height: 1.35;">
+                  Uygulama kullanım sürelerinin sayılabilmesi ve limit dolunca kapatılabilmesi için <b>Erişilebilirlik İznini</b> açmanız gerekir.
+                </div>
+                <div style="display: flex; gap: 0.5rem; margin-top: 0.6rem; flex-wrap: wrap;">
+                  <button onclick="window.__openAccessibilitySettings()" style="background: #ef4444; border: none; color: #fff; padding: 0.45rem 0.85rem; border-radius: 10px; font-weight: 800; font-size: 0.78rem; cursor: pointer;">
+                    ⚙️ Erişilebilirlik İznini Aç
+                  </button>
+                  <button onclick="window.__openAppDetailSettings()" style="background: rgba(255,255,255,0.08); border: 1px solid var(--border-card); color: #fff; padding: 0.45rem 0.75rem; border-radius: 10px; font-weight: 700; font-size: 0.78rem; cursor: pointer;">
+                    📋 Kullanım & Bildirim İzinleri
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
             <div>
               <h2 style="font-size: 1.15rem; font-weight: 800; color: #fff;">Uygulama Sınırları</h2>
@@ -231,9 +253,14 @@
                   </div>
                 </div>
               </div>
-              <button onclick="window.__sinirlayiciDelete('${item.id}')" style="background: none; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; padding: 0.4rem;">
-                🗑️
-              </button>
+              <div style="display: flex; align-items: center; gap: 0.4rem;">
+                <button onclick="window.__sinirlayiciTestClose('${item.id}')" title="Kapatma uyarısını test et" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); color: #fca5a5; font-size: 0.72rem; font-weight: 700; padding: 0.3rem 0.6rem; border-radius: 8px; cursor: pointer;">
+                  Kapatmayı Test Et
+                </button>
+                <button onclick="window.__sinirlayiciDelete('${item.id}')" style="background: none; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; padding: 0.4rem;">
+                  🗑️
+                </button>
+              </div>
             </div>
             <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden;">
               <div class="limit-progress-bar" style="width: ${percent}%; height: 100%; background: ${isReached ? 'var(--accent-danger)' : 'var(--accent-primary)'}; transition: width 0.2s ease;"></div>
@@ -348,13 +375,20 @@
         const mins = parseInt(minutesInput.value, 10) || 30;
 
         let limits = context.storage.get('limits', []);
-        limits.push({
+        const existingIdx = limits.findIndex(l => l.id === currentSelectedApp.id);
+        const limitObj = {
           id: currentSelectedApp.id,
           name: currentSelectedApp.name,
           icon: currentSelectedApp.icon || '',
           maxMinutes: mins,
           usedSeconds: 0
-        });
+        };
+
+        if (existingIdx !== -1) {
+          limits[existingIdx] = limitObj;
+        } else {
+          limits.push(limitObj);
+        }
         context.storage.set('limits', limits);
 
         // Native Android senkronizasyonu
@@ -363,6 +397,7 @@
             window.AndroidBridge.saveLimit(JSON.stringify({
               packageName: currentSelectedApp.id,
               appName: currentSelectedApp.name,
+              mode: 'daily',
               dailyLimitMinutes: mins,
               enabled: true
             }));
@@ -373,6 +408,14 @@
 
         modal.style.display = 'none';
         this.renderLimitsList(container, context);
+      };
+
+      // Test Kapatma Aksiyonu
+      window.__sinirlayiciTestClose = (id) => {
+        const limits = context.storage.get('limits', []);
+        const app = limits.find(l => l.id === id);
+        if (!app) return;
+        this.triggerEnforcement(app);
       };
 
       // Sil
@@ -461,6 +504,7 @@
       if (this.checkInterval) clearInterval(this.checkInterval);
       delete window.__sinirlayiciDelete;
       delete window.__selectAppForLimit;
+      delete window.__sinirlayiciTestClose;
       delete window.__openAccessibilitySettings;
     }
   };

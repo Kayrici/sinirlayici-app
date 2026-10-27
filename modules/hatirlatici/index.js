@@ -5,13 +5,13 @@
 (function() {
   const DEFAULT_GROUPS = ['Genel', 'İş', 'Ev', 'Sağlık', 'Kişisel'];
   const DAYS_OF_WEEK = [
-    { id: 1, name: 'Pzt' },
-    { id: 2, name: 'Sal' },
-    { id: 3, name: 'Çar' },
-    { id: 4, name: 'Per' },
-    { id: 5, name: 'Cum' },
-    { id: 6, name: 'Cmt' },
-    { id: 0, name: 'Paz' }
+    { id: 1, name: 'Pzt', javaDay: 2 },
+    { id: 2, name: 'Sal', javaDay: 3 },
+    { id: 3, name: 'Çar', javaDay: 4 },
+    { id: 4, name: 'Per', javaDay: 5 },
+    { id: 5, name: 'Cum', javaDay: 6 },
+    { id: 6, name: 'Cmt', javaDay: 7 },
+    { id: 0, name: 'Paz', javaDay: 1 }
   ];
 
   function getStoredReminders(context) {
@@ -27,7 +27,7 @@
           scheduleType: 'daily',
           weekDays: [1, 2, 3, 4, 5, 6, 0],
           monthDay: 1,
-          endCondition: 'forever',
+          endCondition: 'never',
           maxRepeatCount: 0,
           currentRepeatCount: 0,
           endDate: '',
@@ -61,9 +61,34 @@
     render(container, context) {
       this.context = context;
 
+      const isAccessEnabled = (window.AndroidBridge && typeof window.AndroidBridge.isAccessibilityServiceEnabled === 'function')
+        ? window.AndroidBridge.isAccessibilityServiceEnabled()
+        : true;
+
       container.innerHTML = `
         <div id="hatirlaticiModuleRoot" style="padding-top: 0.25rem; padding-bottom: 3rem;">
           
+          <!-- Erişilebilirlik Servis Uyarısı (Yalnızca servis kapalıysa şıkça görünür) -->
+          <div class="accessibility-warning-banner" style="display: ${isAccessEnabled ? 'none' : 'block'}; background: linear-gradient(135deg, rgba(239, 68, 68, 0.16), rgba(245, 158, 11, 0.16)); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 16px; padding: 0.9rem 1rem; margin-bottom: 1rem;">
+            <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+              <span style="font-size: 1.4rem; line-height: 1;">🛡️</span>
+              <div style="flex: 1;">
+                <div style="font-size: 0.9rem; font-weight: 800; color: #fff;">Hatırlatıcı ve Takip Servisi Kapalı</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1; margin-top: 0.2rem; line-height: 1.35;">
+                  Zamanı geldiğinde bildirim alabilmek ve sınırlayıcının çalışabilmesi için <b>Erişilebilirlik İznini</b> açmanız gerekmektedir.
+                </div>
+                <div style="display: flex; gap: 0.5rem; margin-top: 0.6rem; flex-wrap: wrap;">
+                  <button onclick="window.__openAccessibilitySettings()" style="background: #ef4444; border: none; color: #fff; padding: 0.45rem 0.85rem; border-radius: 10px; font-weight: 800; font-size: 0.78rem; cursor: pointer;">
+                    ⚙️ Erişilebilirlik İznini Aç
+                  </button>
+                  <button onclick="window.__openAppDetailSettings()" style="background: rgba(255,255,255,0.08); border: 1px solid var(--border-card); color: #fff; padding: 0.45rem 0.75rem; border-radius: 10px; font-weight: 700; font-size: 0.78rem; cursor: pointer;">
+                    📋 Bildirim İzinleri
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- ================= GÖRÜNÜM 1: HATIRLATICI LİSTESİ ================= -->
           <div id="remListViewArea" style="display: block;">
             <!-- Üst Başlık ve Yeni Ekle -->
@@ -190,7 +215,7 @@
                 Bitiş / Kaldırılma Kuralı
               </label>
               <select id="selectFormEndCondition" style="width: 100%; padding: 0.8rem 1rem; border-radius: 12px; background: #131b2e; border: 1px solid var(--border-card); color: #fff; font-size: 0.95rem; font-weight: 700; outline: none;">
-                <option value="forever">Süresiz (Her Zaman Çalışsın)</option>
+                <option value="never">Süresiz (Her Zaman Çalışsın)</option>
                 <option value="count">Belirli Tekrar Sayısından Sonra Kaldır</option>
                 <option value="date">Belirli Tarihten Sonra Kaldır</option>
               </select>
@@ -396,7 +421,10 @@
               <!-- Alt Kontroller -->
               <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-card); padding-top: 0.65rem; font-size: 0.75rem; color: var(--text-secondary);">
                 <span>${scheduleText}</span>
-                <div style="display: flex; gap: 0.45rem;">
+                <div style="display: flex; gap: 0.45rem; align-items: center;">
+                  <button class="btn-item-test" data-id="${item.id}" title="Bildirimi cihazda hemen test et" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.35); color: #34d399; padding: 0.35rem 0.65rem; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.75rem;">
+                    🔔 Test Et
+                  </button>
                   <button class="btn-item-edit" data-id="${item.id}" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-card); color: var(--text-primary); padding: 0.35rem 0.65rem; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.75rem;">
                     ✏️ Düzenle
                   </button>
@@ -411,6 +439,27 @@
             </div>
           `;
         }).join('');
+
+        // Test Bildirimi
+        cardsArea.querySelectorAll('.btn-item-test').forEach(btn => {
+          btn.onclick = () => {
+            const id = btn.dataset.id;
+            const list = getStoredReminders(context);
+            const item = list.find(r => r.id === id);
+            if (!item) return;
+
+            if (window.AndroidBridge && typeof window.AndroidBridge.triggerReminderNow === 'function') {
+              try {
+                window.AndroidBridge.triggerReminderNow(id);
+              } catch (e) {
+                console.warn('triggerReminderNow hatası:', e);
+              }
+            }
+
+            this.triggerInteractiveNotification(item, context);
+            showToast('🔔 Test bildirimi cihaza gönderildi!');
+          };
+        });
 
         // Düzenle
         cardsArea.querySelectorAll('.btn-item-edit').forEach(btn => {
@@ -678,20 +727,31 @@
         // Native Android senkronizasyonu
         if (window.AndroidBridge && typeof window.AndroidBridge.saveReminder === 'function') {
           try {
-            const daysStr = (formSelectedDays || []).join(',');
+            // Java Calendar DAY_OF_WEEK: Sunday=1, Monday=2, Tuesday=3, Wednesday=4, Thursday=5, Friday=6, Saturday=7
+            const javaDaysList = (formSelectedDays || []).map(dId => {
+              const found = DAYS_OF_WEEK.find(d => d.id === dId);
+              return found && found.javaDay ? found.javaDay : (dId === 0 ? 1 : dId + 1);
+            });
+            const daysStr = javaDaysList.join(',');
             const remId = editingReminderId || (list[0] ? list[0].id : 'rem_' + Date.now());
+            const nativeStopCondition = (endCondition === 'forever') ? 'never' : (endCondition || 'never');
+            const nativeMessage = finalDesc || finalTitle || 'Hatırlatıcı vakti geldi!';
+
             window.AndroidBridge.saveReminder(JSON.stringify({
               id: remId,
               title: finalTitle,
-              message: finalDesc,
+              message: nativeMessage,
+              icon: 'bell',
               timeOfDay: time,
               type: scheduleType,
               daysOfWeek: daysStr,
               dayOfMonth: monthDay,
-              stopCondition: endCondition,
+              stopCondition: nativeStopCondition,
               maxRepeats: maxRepeatCount,
               endDate: endDate,
               enableTracking: askCompletion,
+              askLater: askCompletion,
+              askTimeOfDay: time,
               enabled: true
             }));
           } catch (e) {

@@ -36,7 +36,24 @@ class AppKernel {
       this.switchModule(firstId);
     }
 
+    this.checkServiceStatus();
+    setInterval(() => this.checkServiceStatus(), 2000);
+
     console.log('🚀 Hatırlatıcı Çekirdeği Başlatıldı.');
+  }
+
+  checkServiceStatus() {
+    if (!window.AndroidBridge || typeof window.AndroidBridge.isAccessibilityServiceEnabled !== 'function') return;
+    try {
+      const isEnabled = window.AndroidBridge.isAccessibilityServiceEnabled();
+      const btnPerm = document.getElementById('btnHeaderPermAlert');
+      if (btnPerm) {
+        btnPerm.style.display = isEnabled ? 'none' : 'flex';
+      }
+      document.querySelectorAll('.accessibility-warning-banner').forEach(el => {
+        el.style.display = isEnabled ? 'none' : 'block';
+      });
+    } catch (e) {}
   }
 
   /**
@@ -323,6 +340,18 @@ class AppKernel {
   }
 }
 
+// Global Köprü Yardımcıları (Her yerden güvenle çağrılabilir)
+window.__openAccessibilitySettings = () => {
+  if (window.AndroidBridge && typeof window.AndroidBridge.openAccessibilitySettings === 'function') {
+    try { window.AndroidBridge.openAccessibilitySettings(); } catch (e) {}
+  }
+};
+window.__openAppDetailSettings = () => {
+  if (window.AndroidBridge && typeof window.AndroidBridge.openAppDetailSettings === 'function') {
+    try { window.AndroidBridge.openAppDetailSettings(); } catch (e) {}
+  }
+};
+
 // Global Çekirdek Örneği
 window.kernel = new AppKernel();
 
@@ -333,3 +362,4 @@ if (document.readyState === 'loading') {
 } else {
   window.kernel.init();
 }
+
