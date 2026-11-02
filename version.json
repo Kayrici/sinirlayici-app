@@ -1,7 +1,5 @@
 {
-  "version": "3.37",
-  "versionCode": 337,
-  "releaseUrl": "https://github.com/Kayrici/sinirlayici-app/releases/latest/download/Hatirlatici.apk",
+  "version": "1.43v",
   "directDownloadUrl": "https://kayrici.github.io/sinirlayici-app/Hatirlatici.apk",
-  "releaseNotes": "Sürüm 3.37: Uygulama izleme/sınırlama arka plan servisi, Pomodoro izin listesi, hatırlatıcı zamanlama/tetikleme ve grup kalıcılığı iyileştirildi; izole ekstra modüller (4444, 5555, 5556, 5557) eklendi."
+  "releaseUrl": "https://github.com/Kayrici/sinirlayici-app/releases/latest/download/Hatirlatici.apk"
 }

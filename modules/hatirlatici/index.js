@@ -3,8 +3,7 @@
  * Tamamen bağımsız, izole veri alanına sahip ve diğer modüllerle çatışmayan mimari.
  */
 (function() {
-  const DEFAULT_GROUPS = ['Genel', 'İş', 'Ev', 'Sağlık', 'Kişisel'];
-  const DAYS_OF_WEEK = [
+    const DAYS_OF_WEEK = [
     { id: 1, name: 'Pzt', javaDay: 2 },
     { id: 2, name: 'Sal', javaDay: 3 },
     { id: 3, name: 'Çar', javaDay: 4 },
@@ -22,7 +21,7 @@
           id: 'rem_default_1',
           title: 'Kitap Oku',
           desc: 'Her gün en az 20 sayfa kitap oku.',
-          group: 'Kişisel',
+          group: 'Genel',
           time: '21:00',
           scheduleType: 'daily',
           weekDays: [1, 2, 3, 4, 5, 6, 0],
@@ -32,14 +31,39 @@
           currentRepeatCount: 0,
           endDate: '',
           askCompletion: true,
-          history: {
-            '2026-10-25': true,
-            '2026-10-26': true
-          }
+          history: {}
         }
       ];
       context.storage.set('reminders', list);
     }
+
+    // Android Native'den durumları senkronize et (Bildirimden 'Yaptım/Yapmadım' işaretlendiyse)
+    if (window.AndroidBridge && typeof window.AndroidBridge.getRemindersJson === 'function') {
+      try {
+        const raw = window.AndroidBridge.getRemindersJson();
+        if (raw) {
+          const nativeList = JSON.parse(raw);
+          if (Array.isArray(nativeList)) {
+            let updated = false;
+            nativeList.forEach(nr => {
+              const local = list.find(l => l.id === nr.id);
+              if (local && nr.lastActionDate && nr.lastActionStatus) {
+                if (!local.history) local.history = {};
+                const newStatus = (nr.lastActionStatus === 'done');
+                if (local.history[nr.lastActionDate] !== newStatus) {
+                  local.history[nr.lastActionDate] = newStatus;
+                  updated = true;
+                }
+              }
+            });
+            if (updated) {
+              context.storage.set('reminders', list);
+            }
+          }
+        }
+      } catch (e) {}
+    }
+
     return list;
   }
 
@@ -149,8 +173,7 @@
               </button>
             </div>
 
-            <!-- Grup Filtre Çipleri -->
-            <div id="remGroupChips" style="display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.75rem; margin-bottom: 0.75rem; scrollbar-width: none;"></div>
+
 
             <!-- Hatırlatıcı Kartları -->
             <div id="remCardsContainer" style="display: flex; flex-direction: column; gap: 0.85rem;"></div>
@@ -200,24 +223,11 @@
                 style="width: 100%; padding: 0.85rem 1rem; border-radius: 12px; background: rgba(0,0,0,0.35); border: 1px solid var(--border-card); color: #fff; font-size: 0.92rem; font-family: inherit; line-height: 1.5; resize: vertical; outline: none;"></textarea>
             </div>
 
-            <!-- 3. KATEGORİ VE SAAT -->
+            <!-- 3. SAAT -->
             <div class="card-panel" style="margin-bottom: 0;">
-              <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.4rem; display: block;">
-                Kategori / Grup Seçimi
-              </label>
-              <div id="formPresetGroups" style="display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 0.75rem;">
-                ${DEFAULT_GROUPS.map(grp => `
-                  <button type="button" class="preset-grp-pill" data-grp="${grp}"
-                    style="padding: 0.4rem 0.85rem; border-radius: 999px; font-size: 0.78rem; font-weight: 700; border: 1px solid var(--border-card); background: rgba(255,255,255,0.06); color: var(--text-primary); cursor: pointer;">
-                    ${grp}
-                  </button>
-                `).join('')}
-              </div>
-              <input type="text" id="inputFormGroup" value="Genel" placeholder="Veya özel bir kategori adı yazın..." 
-                style="width: 100%; padding: 0.75rem 1rem; border-radius: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-card); color: #fff; font-size: 0.9rem; outline: none; margin-bottom: 1rem;">
-
-              <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.4rem; display: block;">
-                Hatırlatma Saati
+              <input type="hidden" id="inputFormGroup" value="Genel">
+              <label style="font-size: 0.85rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem;">
+                <span>⏰</span> Hatırlatma Saati
               </label>
               <input type="time" id="inputFormTime" value="09:00" 
                 style="width: 100%; padding: 0.8rem 1rem; border-radius: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-focus); color: #fff; font-size: 1.15rem; font-weight: 800; outline: none;">
@@ -308,7 +318,7 @@
 
             <div class="card-panel" style="margin-bottom: 0;">
               <div id="analyticsNameDisplay" style="font-size: 1.15rem; font-weight: 800; color: #fff;">Kitap Oku</div>
-              <div id="analyticsGroupDisplay" style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.2rem;">Kişisel • Son 14 Günlük Performans Özeti</div>
+              <div id="analyticsGroupDisplay" style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.2rem;">Son 14 Günlük Performans Özeti</div>
             </div>
 
             <div id="analyticsStatsGrid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;"></div>
@@ -375,37 +385,14 @@
       // 1. Liste Render Fonksiyonu
       const renderRemindersList = () => {
         const reminders = getStoredReminders(context);
-        const selectedGroup = context.storage.get('selected_group', 'Tümü');
-        const allGroups = ['Tümü', ...new Set([...DEFAULT_GROUPS, ...reminders.map(r => r.group).filter(Boolean)])];
-
-        // Grup çipleri
-        const chipsContainer = container.querySelector('#remGroupChips');
-        chipsContainer.innerHTML = allGroups.map(g => `
-          <button class="grp-chip-btn ${g === selectedGroup ? 'active' : ''}" data-group="${g}"
-            style="padding: 0.4rem 0.9rem; border-radius: 999px; font-size: 0.78rem; font-weight: 700; border: 1px solid var(--border-card); background: ${g === selectedGroup ? 'var(--accent-primary)' : 'rgba(255,255,255,0.05)'}; color: ${g === selectedGroup ? '#fff' : 'var(--text-secondary)'}; cursor: pointer; white-space: nowrap;">
-            ${g}
-          </button>
-        `).join('');
-
-        chipsContainer.querySelectorAll('.grp-chip-btn').forEach(btn => {
-          btn.onclick = () => {
-            context.storage.set('selected_group', btn.dataset.group);
-            renderRemindersList();
-          };
-        });
-
-        // Kartlar listesi
-        let filtered = reminders;
-        if (selectedGroup !== 'Tümü') {
-          filtered = filtered.filter(r => r.group === selectedGroup);
-        }
-
         const cardsArea = container.querySelector('#remCardsContainer');
-        if (filtered.length === 0) {
+        if (!cardsArea) return;
+
+        if (reminders.length === 0) {
           cardsArea.innerHTML = `
             <div class="card-panel" style="text-align: center; padding: 2.5rem 1rem;">
               <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🔔</div>
-              <p style="color: var(--text-muted); font-size: 0.9rem;">Bu grupta henüz bir hatırlatıcı bulunmuyor.</p>
+              <p style="color: var(--text-muted); font-size: 0.9rem;">Henüz bir hatırlatıcı eklenmedi.</p>
               <button id="btnEmptyCreateRem" style="margin-top: 1rem; background: var(--accent-subtle); border: 1px solid rgba(249,115,22,0.3); color: var(--accent-primary); padding: 0.55rem 1.1rem; border-radius: 10px; font-weight: 700; font-size: 0.82rem; cursor: pointer;">
                 + Hatırlatıcı Oluştur
               </button>
@@ -418,7 +405,7 @@
 
         const todayKey = new Date().toISOString().split('T')[0];
 
-        cardsArea.innerHTML = filtered.map(item => {
+        cardsArea.innerHTML = reminders.map(item => {
           const todayStatus = item.history ? item.history[todayKey] : null;
           let statusBadge = '<span style="color: var(--text-muted); font-size: 0.75rem;">Bugün Bekleniyor</span>';
           if (todayStatus === true) {
@@ -439,14 +426,11 @@
 
           return `
             <div class="card-panel" style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 0;">
-              <!-- Başlık, Kategori ve Saat -->
+              <!-- Başlık ve Saat -->
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
                   <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
                     <span style="font-weight: 800; font-size: 1.05rem; color: #fff;">${item.title}</span>
-                    <span style="background: rgba(255,255,255,0.06); padding: 0.15rem 0.55rem; border-radius: 6px; font-size: 0.72rem; color: var(--text-secondary); font-weight: 700;">
-                      ${item.group || 'Genel'}
-                    </span>
                   </div>
                 </div>
                 <div style="text-align: right;">
@@ -535,12 +519,7 @@
         const statusBox = container.querySelector('#formStatusBox');
         statusBox.style.display = 'none';
 
-        // Hazır butonları sıfırla
-        container.querySelectorAll('.preset-grp-pill').forEach(b => {
-          const match = b.dataset.grp === 'Genel';
-          b.style.background = match ? 'var(--accent-primary)' : 'rgba(255,255,255,0.06)';
-          b.style.color = match ? '#fff' : 'var(--text-primary)';
-        });
+
 
         switchSubView('form');
         container.querySelector('#inputFormTitle').focus();
@@ -597,11 +576,7 @@
 
         container.querySelector('#chkFormAskCompletion').checked = item.askCompletion !== false;
 
-        container.querySelectorAll('.preset-grp-pill').forEach(b => {
-          const match = b.dataset.grp === item.group;
-          b.style.background = match ? 'var(--accent-primary)' : 'rgba(255,255,255,0.06)';
-          b.style.color = match ? '#fff' : 'var(--text-primary)';
-        });
+
 
         const statusBox = container.querySelector('#formStatusBox');
         statusBox.style.display = 'none';
@@ -616,7 +591,7 @@
         if (!item) return;
 
         container.querySelector('#analyticsNameDisplay').textContent = item.title;
-        container.querySelector('#analyticsGroupDisplay').textContent = `${item.group || 'Genel'} • Son 14 Günlük Alışkanlık Takibi`;
+        container.querySelector('#analyticsGroupDisplay').textContent = 'Son 14 Günlük Alışkanlık Takibi';
 
         const history = item.history || {};
         let doneCount = 0;
@@ -746,7 +721,6 @@
 
         // Kesin Saklama
         context.storage.set('reminders', list);
-        context.storage.set('selected_group', 'Tümü'); // Yeni eklenen görünsün diye filtreyi Tümü yap
 
         // Native Android senkronizasyonu
         const savedItem = list.find(r => r.id === (editingReminderId || (list[0] ? list[0].id : ''))) || list[0];
@@ -768,17 +742,7 @@
       container.querySelector('#btnFormSaveTop').onclick = executeSave;
       container.querySelector('#btnFormSaveBottom').onclick = executeSave;
 
-      // Kategori hazır butonları
-      container.querySelectorAll('.preset-grp-pill').forEach(btn => {
-        btn.onclick = () => {
-          container.querySelector('#inputFormGroup').value = btn.dataset.grp;
-          container.querySelectorAll('.preset-grp-pill').forEach(b => {
-            const match = b === btn;
-            b.style.background = match ? 'var(--accent-primary)' : 'rgba(255,255,255,0.06)';
-            b.style.color = match ? '#fff' : 'var(--text-primary)';
-          });
-        };
-      });
+
 
       // Tekrarlama tipi
       const schedSelect = container.querySelector('#selectFormSchedule');
@@ -868,16 +832,9 @@
             item.currentRepeatCount = (item.currentRepeatCount || 0) + 1;
             changed = true;
 
-            // Native bildirim ve toast tetikleyici
+            // Tek bir native bildirim tetikle (Bildirim üzerinde '✅ Yaptım' ve '❌ Yapmadım' seçenekleri ile)
             if (window.AndroidBridge && typeof window.AndroidBridge.triggerReminderNow === 'function') {
               try { window.AndroidBridge.triggerReminderNow(item.id); } catch (e) {}
-            }
-            if (window.AndroidBridge && typeof window.AndroidBridge.showToast === 'function') {
-              try { window.AndroidBridge.showToast(`🔔 ${item.title}: Vakti geldi!`); } catch (e) {}
-            }
-
-            if (item.askCompletion !== false) {
-              this.triggerInteractiveNotification(item, context);
             }
           }
         });
