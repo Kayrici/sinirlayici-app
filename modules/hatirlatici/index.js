@@ -47,12 +47,28 @@
             let updated = false;
             nativeList.forEach(nr => {
               const local = list.find(l => l.id === nr.id);
-              if (local && nr.lastActionDate && nr.lastActionStatus) {
+              if (local) {
                 if (!local.history) local.history = {};
-                const newStatus = (nr.lastActionStatus === 'done');
-                if (local.history[nr.lastActionDate] !== newStatus) {
-                  local.history[nr.lastActionDate] = newStatus;
-                  updated = true;
+                if (nr.lastActionDate && nr.lastActionStatus) {
+                  const newStatus = (nr.lastActionStatus === 'done');
+                  if (local.history[nr.lastActionDate] !== newStatus) {
+                    local.history[nr.lastActionDate] = newStatus;
+                    updated = true;
+                  }
+                }
+                if (nr.trackingHistoryJson) {
+                  try {
+                    const th = typeof nr.trackingHistoryJson === 'string' ? JSON.parse(nr.trackingHistoryJson) : nr.trackingHistoryJson;
+                    if (th && typeof th === 'object') {
+                      Object.keys(th).forEach(dKey => {
+                        const st = (th[dKey] === 'done');
+                        if (local.history[dKey] !== st) {
+                          local.history[dKey] = st;
+                          updated = true;
+                        }
+                      });
+                    }
+                  } catch (e) {}
                 }
               }
             });
@@ -317,15 +333,26 @@
             </div>
 
             <div class="card-panel" style="margin-bottom: 0;">
-              <div id="analyticsNameDisplay" style="font-size: 1.15rem; font-weight: 800; color: #fff;">Kitap Oku</div>
-              <div id="analyticsGroupDisplay" style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.2rem;">Son 14 Günlük Performans Özeti</div>
+              <div id="analyticsNameDisplay" style="font-size: 1.15rem; font-weight: 800; color: #fff;">Hatırlatıcı</div>
+              <div id="analyticsGroupDisplay" style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.2rem;">Son 14 Günlük Alışkanlık Takibi & Çizgi Grafiği</div>
             </div>
 
             <div id="analyticsStatsGrid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;"></div>
 
-            <div class="card-panel" style="margin-bottom: 0;">
-              <div style="font-size: 0.85rem; font-weight: 800; color: #fff; margin-bottom: 0.8rem;">Günlük Durum Çizelgesi</div>
-              <div id="analyticsDaysGrid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.45rem;"></div>
+            <!-- Çizgi Grafik (Line Chart) Kartı -->
+            <div class="card-panel" style="margin-bottom: 0; padding: 1.1rem 0.85rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; padding: 0 0.25rem;">
+                <div>
+                  <div style="font-size: 0.95rem; font-weight: 800; color: #fff;">📈 Günlük Durum Çizgi Grafiği</div>
+                  <div style="font-size: 0.72rem; color: var(--text-secondary); margin-top: 0.15rem;">Y: Günler • X: Yapıldı / Yapılmadı</div>
+                </div>
+              </div>
+
+              <!-- Gün Detay Bilgi Kutucuğu (Tıklanan günün durumu) -->
+              <div id="analyticsSelectedDayInfo" style="padding: 0.55rem 0.85rem; border-radius: 10px; font-size: 0.78rem; margin-bottom: 0.75rem; transition: all 0.2s ease;"></div>
+
+              <!-- SVG Line Grafiği Konteyneri -->
+              <div id="analyticsLineChartContainer" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;"></div>
             </div>
           </div>
 
@@ -584,28 +611,57 @@
         switchSubView('form');
       };
 
-      // 4. Analiz Açma Mantığı
+      // 4. Analiz Açma Mantığı (Line Chart ile Günlük İlerleme)
       const openAnalytics = (id) => {
         const list = getStoredReminders(context);
         const item = list.find(r => r.id === id);
         if (!item) return;
 
         container.querySelector('#analyticsNameDisplay').textContent = item.title;
-        container.querySelector('#analyticsGroupDisplay').textContent = 'Son 14 Günlük Alışkanlık Takibi';
+        container.querySelector('#analyticsGroupDisplay').textContent = 'Son 14 Günlük Alışkanlık Takibi & Çizgi Grafiği';
 
         const history = item.history || {};
         let doneCount = 0;
         let missedCount = 0;
         const days = [];
 
+        const dayNamesTr = ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'];
+        const fullDayNamesTr = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+        const monthNamesTr = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+
+        // En eski günden (13 gün önce) bugüne (0) doğru sıralama (Y ekseni dikey akışı)
         for (let i = 13; i >= 0; i--) {
           const d = new Date();
           d.setDate(d.getDate() - i);
-          const key = d.toISOString().split('T')[0];
-          const val = history[key];
+          const yyyy = d.getFullYear();
+          const mm = String(d.getMonth() + 1).padStart(2, '0');
+          const dd = String(d.getDate()).padStart(2, '0');
+          const key = `${yyyy}-${mm}-${dd}`;
+          const val = history[key]; // true, false, or undefined
+
           if (val === true) doneCount++;
           if (val === false) missedCount++;
-          days.push({ key, val, label: `${d.getDate()}.${d.getMonth() + 1}` });
+
+          const isToday = (i === 0);
+          const isYesterday = (i === 1);
+          let labelText = `${d.getDate()} ${monthNamesTr[d.getMonth()]}`;
+          let dayNameStr = dayNamesTr[d.getDay()];
+          if (isToday) {
+            dayNameStr = 'Bugün';
+          } else if (isYesterday) {
+            dayNameStr = 'Dün';
+          }
+
+          days.push({
+            key,
+            val,
+            dayIndex: i,
+            dayName: dayNameStr,
+            fullDayName: fullDayNamesTr[d.getDay()],
+            labelText,
+            fullDateStr: `${d.getDate()} ${monthNamesTr[d.getMonth()]} ${yyyy}`,
+            isToday
+          });
         }
 
         const totalMarked = doneCount + missedCount;
@@ -617,31 +673,169 @@
             <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem;">Başarı Oranı</div>
           </div>
           <div class="card-panel" style="padding: 1rem; text-align: center; margin-bottom: 0;">
-            <div style="font-size: 1.6rem; font-weight: 800; color: #fff;">${doneCount}/${totalMarked}</div>
+            <div style="font-size: 1.6rem; font-weight: 800; color: #fff;">${doneCount}/${totalMarked || 14}</div>
             <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem;">Yapılan / Toplam</div>
           </div>
         `;
 
-        container.querySelector('#analyticsDaysGrid').innerHTML = days.map(day => {
-          let bg = 'rgba(255,255,255,0.05)';
-          let color = 'var(--text-muted)';
-          let icon = '-';
-          if (day.val === true) {
-            bg = 'rgba(16, 185, 129, 0.25)';
-            color = '#34d399';
-            icon = '✓';
-          } else if (day.val === false) {
-            bg = 'rgba(239, 68, 68, 0.25)';
-            color = '#f87171';
-            icon = '✕';
+        // SVG Line Graph Oluşturma
+        const padTop = 38;
+        const rowH = 32;
+        const padBot = 34;
+        const totalH = padTop + (days.length * rowH) + padBot;
+        const svgW = 350;
+        const xYapilmadi = 135;
+        const xYapildi = 285;
+        const xNotr = 210;
+
+        // Koordinatları hesapla
+        const points = [];
+        days.forEach((day, idx) => {
+          const y = padTop + (idx * rowH) + (rowH / 2);
+          let x = xNotr;
+          if (day.val === true) x = xYapildi;
+          else if (day.val === false) x = xYapilmadi;
+          points.push({ ...day, x, y });
+        });
+
+        // Çizgi grafiği path d (Smooth Bezier Curve)
+        let pathD = `M ${points[0].x} ${points[0].y}`;
+        for (let i = 1; i < points.length; i++) {
+          const prev = points[i - 1];
+          const curr = points[i];
+          const midY = (prev.y + curr.y) / 2;
+          pathD += ` C ${prev.x} ${midY}, ${curr.x} ${midY}, ${curr.x} ${curr.y}`;
+        }
+
+        // SVG Parçaları
+        const gridLines = points.map(p => `
+          <line x1="80" y1="${p.y}" x2="335" y2="${p.y}" stroke="rgba(255, 255, 255, 0.06)" stroke-width="1" />
+        `).join('');
+
+        const yAxisLabels = points.map(p => `
+          <g class="chart-y-row" onclick="window.__showChartDayInfo('${p.key}', '${p.fullDateStr}', '${p.dayName}', '${p.val}')" style="cursor: pointer;">
+            <text x="75" y="${p.y + 4}" text-anchor="end" fill="${p.isToday ? '#38bdf8' : (p.val === true ? '#34d399' : (p.val === false ? '#f87171' : 'var(--text-muted)'))}" font-size="11" font-weight="${p.isToday ? '800' : '600'}" font-family="inherit">
+              ${p.dayName} ${p.labelText}
+            </text>
+          </g>
+        `).join('');
+
+        const nodes = points.map(p => {
+          if (p.val === true) {
+            return `
+              <g class="chart-node" onclick="window.__showChartDayInfo('${p.key}', '${p.fullDateStr}', '${p.dayName}', 'true')" style="cursor: pointer;">
+                <circle cx="${p.x}" cy="${p.y}" r="9" fill="rgba(16, 185, 129, 0.25)" />
+                <circle cx="${p.x}" cy="${p.y}" r="5.5" fill="#10b981" stroke="#ffffff" stroke-width="1.8" />
+              </g>
+            `;
+          } else if (p.val === false) {
+            return `
+              <g class="chart-node" onclick="window.__showChartDayInfo('${p.key}', '${p.fullDateStr}', '${p.dayName}', 'false')" style="cursor: pointer;">
+                <circle cx="${p.x}" cy="${p.y}" r="9" fill="rgba(239, 68, 68, 0.25)" />
+                <circle cx="${p.x}" cy="${p.y}" r="5.5" fill="#ef4444" stroke="#ffffff" stroke-width="1.8" />
+              </g>
+            `;
+          } else {
+            return `
+              <g class="chart-node" onclick="window.__showChartDayInfo('${p.key}', '${p.fullDateStr}', '${p.dayName}', 'none')" style="cursor: pointer;">
+                <circle cx="${p.x}" cy="${p.y}" r="3.5" fill="rgba(255, 255, 255, 0.2)" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1" />
+              </g>
+            `;
           }
-          return `
-            <div style="background: ${bg}; border: 1px solid var(--border-card); border-radius: 8px; padding: 0.45rem 0.15rem; text-align: center;">
-              <div style="font-size: 0.65rem; color: var(--text-muted);">${day.label}</div>
-              <div style="font-size: 0.9rem; font-weight: 800; color: ${color}; margin-top: 0.1rem;">${icon}</div>
-            </div>
-          `;
         }).join('');
+
+        const svgContent = `
+          <svg viewBox="0 0 ${svgW} ${totalH}" style="width: 100%; height: auto; max-width: 440px; display: block; margin: 0 auto; user-select: none;">
+            <defs>
+              <linearGradient id="chartLineGrad" x1="${xYapilmadi}" y1="0" x2="${xYapildi}" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#ef4444" />
+                <stop offset="50%" stop-color="#8b5cf6" />
+                <stop offset="100%" stop-color="#10b981" />
+              </linearGradient>
+              <filter id="chartGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(16, 185, 129, 0.3)" />
+              </filter>
+            </defs>
+
+            <!-- X Ekseni Üst Etiketleri -->
+            <text x="${xYapilmadi}" y="20" text-anchor="middle" fill="#f87171" font-size="11.5" font-weight="800">❌ Yapılmadı</text>
+            <text x="${xYapildi}" y="20" text-anchor="middle" fill="#34d399" font-size="11.5" font-weight="800">✅ Yapıldı</text>
+
+            <!-- Kılavuz Dikey Çizgiler (X Ekseni Doğrultuları) -->
+            <line x1="${xYapilmadi}" y1="${padTop - 6}" x2="${xYapilmadi}" y2="${totalH - padBot + 6}" stroke="rgba(239, 68, 68, 0.22)" stroke-dasharray="4 4" stroke-width="1.5" />
+            <line x1="${xNotr}" y1="${padTop - 6}" x2="${xNotr}" y2="${totalH - padBot + 6}" stroke="rgba(255, 255, 255, 0.08)" stroke-dasharray="2 4" stroke-width="1" />
+            <line x1="${xYapildi}" y1="${padTop - 6}" x2="${xYapildi}" y2="${totalH - padBot + 6}" stroke="rgba(16, 185, 129, 0.22)" stroke-dasharray="4 4" stroke-width="1.5" />
+
+            <!-- Yatay Izgara ve Y Ekseni Gün Etiketleri -->
+            ${gridLines}
+            ${yAxisLabels}
+
+            <!-- Ana Çizgi Grafik (Line Path) -->
+            <path d="${pathD}" fill="none" stroke="url(#chartLineGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#chartGlow)" />
+
+            <!-- Noktalar / Düğümler -->
+            ${nodes}
+
+            <!-- X Ekseni Alt Etiketleri -->
+            <text x="${xYapilmadi}" y="${totalH - 12}" text-anchor="middle" fill="#f87171" font-size="11.5" font-weight="800">❌ Yapılmadı</text>
+            <text x="${xYapildi}" y="${totalH - 12}" text-anchor="middle" fill="#34d399" font-size="11.5" font-weight="800">✅ Yapıldı</text>
+          </svg>
+        `;
+
+        container.querySelector('#analyticsLineChartContainer').innerHTML = svgContent;
+
+        // Bilgi kutusunu hazırla (Varsayılan olarak bugünü gösterir)
+        const todayItem = points[points.length - 1];
+        let defStatusText = '⚪ Henüz işaretlenmedi';
+        let defStatusBg = 'rgba(255, 255, 255, 0.06)';
+        let defStatusBorder = 'var(--border-card)';
+        let defStatusColor = 'var(--text-secondary)';
+
+        if (todayItem && todayItem.val === true) {
+          defStatusText = '✅ Görev yapıldı olarak kaydedildi';
+          defStatusBg = 'rgba(16, 185, 129, 0.15)';
+          defStatusBorder = 'rgba(16, 185, 129, 0.3)';
+          defStatusColor = '#34d399';
+        } else if (todayItem && todayItem.val === false) {
+          defStatusText = '❌ Görev yapılmadı olarak kaydedildi';
+          defStatusBg = 'rgba(239, 68, 68, 0.15)';
+          defStatusBorder = 'rgba(239, 68, 68, 0.3)';
+          defStatusColor = '#f87171';
+        }
+
+        const infoBox = container.querySelector('#analyticsSelectedDayInfo');
+        if (infoBox) {
+          infoBox.style.background = defStatusBg;
+          infoBox.style.border = `1px solid ${defStatusBorder}`;
+          infoBox.style.color = defStatusColor;
+          infoBox.innerHTML = `<b>${todayItem ? todayItem.fullDateStr : 'Bugün'}:</b> ${defStatusText}`;
+        }
+
+        window.__showChartDayInfo = (key, dateStr, dayName, val) => {
+          let statusStr = '⚪ Kayıt yok';
+          let bg = 'rgba(255, 255, 255, 0.06)';
+          let border = 'var(--border-card)';
+          let color = 'var(--text-secondary)';
+
+          if (val === 'true' || val === true) {
+            statusStr = '✅ Görev Yapıldı';
+            bg = 'rgba(16, 185, 129, 0.15)';
+            border = 'rgba(16, 185, 129, 0.3)';
+            color = '#34d399';
+          } else if (val === 'false' || val === false) {
+            statusStr = '❌ Görev Yapılmadı';
+            bg = 'rgba(239, 68, 68, 0.15)';
+            border = 'rgba(239, 68, 68, 0.3)';
+            color = '#f87171';
+          }
+
+          if (infoBox) {
+            infoBox.style.background = bg;
+            infoBox.style.border = `1px solid ${border}`;
+            infoBox.style.color = color;
+            infoBox.innerHTML = `<b>${dateStr} (${dayName}):</b> ${statusStr}`;
+          }
+        };
 
         switchSubView('analytics');
       };

@@ -353,3 +353,18 @@ body {
   background: rgba(255, 255, 255, 0.12);
   border-radius: 4px;
 }
+
+/* Hatirlatici Line Chart Iyilestirmeleri */
+.chart-node {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  transform-origin: center;
+}
+.chart-node:active, .chart-node:hover {
+  transform: scale(1.25);
+}
+.chart-y-row text {
+  transition: fill 0.15s ease;
+}
+.chart-y-row:active text, .chart-y-row:hover text {
+  fill: #38bdf8 !important;
+}
