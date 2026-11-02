@@ -1,5 +1,7 @@
 {
-  "version": "1.42v",
+  "version": "3.35",
+  "versionCode": 335,
+  "releaseUrl": "https://github.com/Kayrici/sinirlayici-app/releases/latest/download/Hatirlatici.apk",
   "directDownloadUrl": "https://kayrici.github.io/sinirlayici-app/Hatirlatici.apk",
-  "releaseUrl": "https://github.com/Kayrici/sinirlayici-app/releases/latest/download/Hatirlatici.apk"
+  "releaseNotes": "Sürüm 3.35: Orijinal stabil çekirdek restore edildi. Ekstra modüller temizlendi. Gizli kod (2488, 6743, 8246) dokunmatik korumalı olarak entegre edildi."
 }

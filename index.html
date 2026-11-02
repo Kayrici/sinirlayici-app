@@ -3,124 +3,1134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Hatırlatıcı</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="core/style.css">
+  <title>Sınırlayıcı</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app" class="mobile-viewport">
-    <!-- Üst Mobil Bar (Header) -->
-    <header class="app-header">
-      <div class="header-left">
-        <div class="app-logo" title="Hatırlatıcı">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="clock-silhouette">
-            <circle cx="12" cy="12" r="9"></circle>
-            <polyline points="12 7 12 12 15 14"></polyline>
-          </svg>
+
+  <!-- Ekranda Yukarıdan Aşağı Kayan Bildirim (Heads-Up Dropdown Notification) -->
+  <div id="headsUpNotificationBanner" class="heads-up-banner" style="display: none;">
+    <div class="heads-up-card">
+      <div class="heads-up-top">
+        <div class="heads-up-brand">
+          <span class="heads-up-icon">🔔</span>
+          <span class="heads-up-app-title">Sınırlayıcı Hatırlatıcı</span>
         </div>
-        <div class="header-titles">
-          <h1 id="appHeaderTitle">Hatırlatıcı</h1>
-        </div>
+        <button class="heads-up-close" onclick="closeHeadsUpBanner()">✕</button>
       </div>
-      <div class="header-right" style="display: flex; align-items: center; gap: 0.5rem;">
-        <button id="btnHeaderPermAlert" onclick="window.__openAccessibilitySettings()" style="display: none; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); color: #fca5a5; padding: 0.35rem 0.65rem; border-radius: 999px; font-size: 0.72rem; font-weight: 800; cursor: pointer;">
-          ⚠️ İzin Ver
+      <div class="heads-up-body">
+        <h4 id="headsUpTitle" class="heads-up-msg">Hatırlatıcı Mesajı</h4>
+        <p id="headsUpSub" class="heads-up-sub">Planlanan zaman geldi</p>
+      </div>
+      <div class="heads-up-actions">
+        <button id="btnNotifDone" class="btn-notif-action done" onclick="handleNotificationAction(true)">
+          ✅ Yaptım
         </button>
-        <button id="btnHeaderSettings" class="btn-gear" onclick="window.kernel.openSettings()" title="Ayarlar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gear-icon">
-            <circle cx="12" cy="12" r="3"></circle>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-          </svg>
+        <button id="btnNotifNotDone" class="btn-notif-action not-done" onclick="handleNotificationAction(false)">
+          ❌ Yapmadım
         </button>
       </div>
-    </header>
-
-    <!-- Dinamik Modül Görüntüleme Alanı (Genişletilmiş Sayfa) -->
-    <main id="moduleContainer" class="module-container">
-      <!-- Modüller buraya izole olarak yüklenir -->
-    </main>
-
-    <!-- Alt Menü Sekmeleri (Mobil Standart Alt Navigasyon Barı) -->
-    <nav class="app-bottom-nav">
-      <div id="navItemsContainer" class="bottom-nav-wrapper">
-        <!-- Menü isimleri burada yer alır -->
-      </div>
-    </nav>
-
-    <!-- Ayarlar Ekranı (Şimdilik Boş ve Sade) -->
-    <section id="settingsView" class="settings-modal" style="display: none;">
-      <div class="settings-header">
-        <button class="btn-back" onclick="window.kernel.closeSettings()">←</button>
-        <h2>Ayarlar</h2>
-        <div style="width: 32px;"></div>
-      </div>
-      <div class="settings-content">
-        <!-- Ayarlar Listesi -->
-        <div id="settingsMainList">
-          <div class="settings-item" onclick="window.kernel.openProfile()">
-            <div class="settings-item-left">
-              <span class="settings-item-icon">👤</span>
-              <div>
-                <div class="settings-item-title">Profil</div>
-                <div id="profileUsernameDisplay" class="settings-item-subtitle">Kullanıcı adı belirlenmedi</div>
-              </div>
-            </div>
-            <span class="settings-item-arrow">→</span>
-          </div>
-          <div class="settings-item" onclick="window.__openAccessibilitySettings()">
-            <div class="settings-item-left">
-              <span class="settings-item-icon">🛡️</span>
-              <div>
-                <div class="settings-item-title">Erişilebilirlik İzni</div>
-                <div class="settings-item-subtitle">Süre bitiminde uygulamayı kapatma ve takip yetkisi</div>
-              </div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 0.3rem;">
-              <span id="settingsAccessibilityStatus" style="font-size: 0.78rem;"></span>
-              <span class="settings-item-arrow">→</span>
-            </div>
-          </div>
-          <div class="settings-item" onclick="window.__openAppDetailSettings()">
-            <div class="settings-item-left">
-              <span class="settings-item-icon">📋</span>
-              <div>
-                <div class="settings-item-title">Uygulama Bilgisi & İzinler</div>
-                <div class="settings-item-subtitle">Android 13+ kısıtlanmış ayarlar ve bildirim izinleri</div>
-              </div>
-            </div>
-            <span class="settings-item-arrow">→</span>
-          </div>
-        </div>
-
-        <!-- Profil Düzenleme Alt Ekranı -->
-        <div id="profileSubView" style="display: none; flex-direction: column; gap: 1rem;">
-          <div class="card-panel" style="margin-bottom: 0;">
-            <label style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.6rem;">
-              Kullanıcı Adı
-            </label>
-            <input type="text" id="usernameInput" placeholder="Kullanıcı adınızı girin..."
-              style="width: 100%; padding: 0.8rem 1rem; border-radius: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-card); color: #fff; font-size: 0.95rem; outline: none; margin-bottom: 1rem;">
-            <div style="display: flex; gap: 0.5rem;">
-              <button onclick="window.kernel.closeProfile()" 
-                style="flex: 1; background: rgba(255,255,255,0.06); border: 1px solid var(--border-card); color: var(--text-secondary); padding: 0.75rem; border-radius: 12px; font-weight: 600; cursor: pointer;">
-                İptal
-              </button>
-              <button onclick="window.kernel.saveUsername()" 
-                style="flex: 1; background: var(--accent-primary); border: none; color: #fff; padding: 0.75rem; border-radius: 12px; font-weight: 700; cursor: pointer;">
-                Kaydet
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
   </div>
 
-  <!-- Çekirdek Sistem ve Modüller (Doğrudan Sıralı Yükleme) -->
-  <script src="core/kernel.js"></script>
-  <script src="modules/hatirlatici/index.js"></script>
-  <script src="modules/sinirlayici/index.js"></script>
+
+  <!-- Üst Başlık (Header): Uygulama simgesi + Sınırlayıcı Başlığı (Altyazı kaldırıldı) + Ayarlar butonu -->
+  <header class="app-header">
+    <div class="brand-wrapper">
+      <div class="brand-icon" id="brandClockIcon" title="Hatırlatıcı" style="touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; cursor: pointer;">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>Sınırlayıcı</h1>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <div id="serviceStatusBadge" class="status-badge warning" onclick="handleServiceBadgeClick()">
+        <span class="status-dot"></span>
+        <span id="serviceStatusText">İzin Gerekli</span>
+      </div>
+      <button id="btnHeaderSettings" class="btn-header-gear" onclick="openSettingsView()" title="Ayarlar">
+        <span>⚙️ Ayarlar</span>
+        <span id="incomingBadge" class="tab-badge" style="display: none; background: #ef4444; margin-left: 4px;">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- İzin Eksikse Görünen Uyarı Kutusu -->
+  <div id="permissionBanner" class="permission-banner" style="display: none;">
+    <div class="banner-header">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+      </svg>
+      <span>Erişilebilirlik İzni Gerekli</span>
+    </div>
+    <div class="banner-desc">
+      Sınırlayıcının süre dolduğunda hedef uygulamayı veya küçük ekranı (PiP) kapatıp sizi ana ekrana atabilmesi için Erişilebilirlik Hizmetini açmanız gerekmektedir.
+    </div>
+    <button class="banner-btn" onclick="openAccessibilitySettings()">İzni Etkinleştir</button>
+  </div>
+
+  <!-- Ana Sekmeler (Tam olarak 3 Sekme - Sağa kaydırmasız tüm ekrana sığar) -->
+  <nav class="nav-tabs fixed-three-tabs">
+    <button class="tab-btn active" id="tabBtnLimits" onclick="switchTab('limits')">
+      <span>⏱️ Sınırlayıcı</span>
+      <span id="limitsCountBadge" class="tab-badge">0</span>
+    </button>
+    <button class="tab-btn pomodoro-tab" id="tabBtnPomodoro" onclick="switchTab('pomodoro')">
+      <span>📖 Pomodoro</span>
+    </button>
+    <button class="tab-btn" id="tabBtnReminders" onclick="switchTab('reminders')">
+      <span>🔔 Hatırlatıcı</span>
+      <span id="remindersCountBadge" class="tab-badge">0</span>
+    </button>
+  </nav>
+
+  <!-- ========================================== -->
+  <!-- 1. SEKME: SINIRLAYICI                       -->
+  <!-- ========================================== -->
+  <main id="tabLimits" class="tab-content active">
+    <div class="section-title">
+      <span>Aktif Sınırlar</span>
+      <button class="btn-primary-sm btn-add-limit-hold" id="btnAddLimitTop">
+        <span class="hold-progress-bar"></span>
+        <span class="btn-text">+ Yeni Uygulama Sınırla</span>
+      </button>
+    </div>
+
+    <!-- Zamanlanmış Kilit Uyarısı (Mod açık olduğunda ortada görünür) -->
+    <div id="scheduledLockBanner" class="scheduled-lock-center-banner" style="display: none;" onclick="openScheduledLockModal()">
+      <div class="scheduled-lock-icon-wrap">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" class="scheduled-lock-svg">
+          <rect x="3" y="11" width="18" height="11" rx="3" stroke="#ef4444" stroke-width="2" fill="rgba(239, 68, 68, 0.2)"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="16" r="1.5" fill="#ef4444"/>
+        </svg>
+      </div>
+      <div class="scheduled-lock-content">
+        <h3 id="scheduledLockBannerText" class="scheduled-lock-title">Tüm uygulamalar 07:00 saatine kadar sınırlandırılmıştır</h3>
+        <p id="scheduledLockBannerSub" class="scheduled-lock-subtitle">Pomodoro izinleri ve istisnalar haricindeki uygulamalara giriş yasaktır.</p>
+      </div>
+      <div class="scheduled-lock-chip">Düzenle ⏱️</div>
+    </div>
+    
+    <div id="limitsList" class="card-list">
+      <!-- Dinamik olarak JS ile doldurulur (Paket adları gizlenmiştir) -->
+    </div>
+
+    <div id="emptyLimitsState" class="empty-state" style="display: none;">
+      <div class="empty-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <h3>Henüz Sınır Eklenmedi</h3>
+      <p>Kullanımını kısıtlamak istediğiniz uygulamaları seçip günlük veya mola sınırları koyun.</p>
+      
+    </div>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- 2. SEKME: POMODORO (KİTAP SİMGESİ İLE)      -->
+  <!-- ========================================== -->
+  <main id="tabPomodoro" class="tab-content">
+    <div class="pomodoro-card">
+      <div class="pomodoro-timer-circle" id="pomodoroCircle">
+        <div id="pomodoroTimeDisplay" class="pomodoro-time-display">25:00</div>
+        <div id="pomodoroStatusText" class="pomodoro-status-text">Odaklanmaya Hazır</div>
+      </div>
+
+      <div id="pomodoroSetupControls" class="config-group">
+        <label style="margin-bottom: 6px;">Odaklanma Süresi:</label>
+        <div class="chip-row" style="justify-content: center;">
+          <button type="button" class="time-chip" onclick="selectPomodoroDuration(1)">1 dk (Test)</button>
+          <button type="button" class="time-chip" onclick="selectPomodoroDuration(15)">15 dk</button>
+          <button type="button" class="time-chip selected" onclick="selectPomodoroDuration(25)">25 dk</button>
+          <button type="button" class="time-chip" onclick="selectPomodoroDuration(45)">45 dk</button>
+          <button type="button" class="time-chip" onclick="selectPomodoroDuration(60)">60 dk</button>
+        </div>
+      </div>
+
+      <button id="btnPomodoroToggle" class="btn-pomodoro-toggle start" onclick="togglePomodoroState()">
+        <span>▶️ Odaklanmayı Başlat</span>
+      </button>
+    </div>
+
+    <div class="pomodoro-allowed-box">
+      <!-- Arama Çubuğu -->
+      <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+        <input type="text" id="pomodoroSearchInput" class="search-input" style="padding: 8px 12px; font-size: 0.8rem;" placeholder="Uygulama ara..." oninput="filterPomodoroApps()">
+        <button class="btn-icon-subtle" onclick="resetPomodoroExceptions()">Sıfırla</button>
+      </div>
+
+      <!-- 1. BÖLÜM: İZİN VERİLMEYEN UYGULAMALAR (KİLİTLENECEK) -->
+      <div class="pomodoro-section-block">
+        <div class="pomodoro-section-header">
+          <div class="pomodoro-section-title blocked">
+            <span>⛔ İzin Verilmeyen Uygulamalar</span>
+            <span id="pomodoroBlockedCountBadge" class="tab-badge" style="background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4);">0</span>
+          </div>
+        </div>
+        <p class="pomodoro-section-subtitle">
+          Pomodoro aktif edildiğinde bu uygulamaların açılması engellenir ve kilitlenir.
+        </p>
+        <div id="pomodoroBlockedAppsList" class="pomodoro-apps-list">
+          <!-- JS ile doldurulur: Kilitlenecek uygulamalar -->
+        </div>
+      </div>
+
+      <!-- 2. BÖLÜM: İZİN VERİLEN UYGULAMALAR -->
+      <div class="pomodoro-section-block" style="margin-top: 18px;">
+        <div class="pomodoro-section-header">
+          <div class="pomodoro-section-title allowed">
+            <span>✅ İzin Verilen Uygulamalar</span>
+            <span id="pomodoroAllowedCountBadge" class="tab-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4);">0</span>
+          </div>
+        </div>
+        <p class="pomodoro-section-subtitle">
+          Pomodoro sırasında serbest olan uygulamalar (İstisnalar, arama, mesajlaşma ve sınırlayıcı).
+        </p>
+        <div id="pomodoroAllowedAppsList" class="pomodoro-apps-list">
+          <!-- JS ile doldurulur: İzin verilen uygulamalar -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- 3. SEKME: HATIRLATICI                       -->
+  <!-- ========================================== -->
+  <main id="tabReminders" class="tab-content">
+    <!-- Hatırlatıcı Kapsam Seçimi: Kendim vs Başkası İçin -->
+    <div class="reminder-scope-switcher">
+      <button id="scopeBtnSelf" class="scope-btn active" onclick="switchReminderScope('self')">
+        <span>👤 Kendim</span>
+        <span id="scopeSelfBadge" class="tab-badge" style="display: none; background: #ef4444; margin-left: 6px;">0</span>
+      </button>
+      <button id="scopeBtnOthers" class="scope-btn" onclick="switchReminderScope('others')">
+        <span>👥 Başkası İçin</span>
+      </button>
+    </div>
+
+    <!-- 1. KENDİM İÇİN HATIRLATICILAR BÖLÜMÜ -->
+    <div id="selfRemindersSection">
+      <!-- Gelen İstek Bildirim Kutusu (Kendim Seçeneği Altında Kullanıcıya Sunulur: Kabul Et / Kabul Etme) -->
+      <div id="incomingNoticeCard" class="incoming-requests-card" style="display: none;">
+        <div class="incoming-card-header">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.3rem;">📬</span>
+            <div>
+              <span class="incoming-header-title">Size Gelen Hatırlatıcı İsteği</span>
+              <p class="incoming-header-sub">Başkası tarafından size bir görev tanımlandı</p>
+            </div>
+          </div>
+          <span id="incomingNoticeCount" class="tab-badge" style="background: #ef4444;">0</span>
+        </div>
+        <div id="incomingNoticeList" class="incoming-items-container"></div>
+      </div>
+
+
+
+      <div class="section-title">
+        <span>Hatırlatıcılarım</span>
+        <button id="btnHeaderAddReminder" class="btn-primary-sm" style="display: none;" onclick="openAddReminderModal()">+ Yeni Hatırlatıcı Ekle</button>
+      </div>
+
+      <div id="remindersList" class="card-list">
+        <!-- Dinamik olarak JS ile doldurulur -->
+      </div>
+
+      <div id="emptyRemindersState" class="empty-state" style="display: none;">
+        <div class="empty-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </div>
+        <h3>Henüz Hatırlatıcı Eklenmedi</h3>
+        <button class="btn-primary" style="margin-top: 14px;" onclick="openAddReminderModal()">+ Yeni Hatırlatıcı Ekle</button>
+      </div>
+    </div>
+
+    <!-- 2. BAŞKASI İÇİN HATIRLATICILAR & CANLI TAKİP BÖLÜMÜ -->
+    <div id="othersRemindersSection" style="display: none;">
+      <div class="section-title">
+        <span>Başkasına Gönderilenler & Canlı Takip</span>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-icon-subtle" onclick="loadSentRequests(true)">🔄 Yenile</button>
+          <button class="btn-primary-sm" onclick="openSettingsViewAndFocusTarget()">+ Görev Gönder</button>
+        </div>
+      </div>
+
+      <!-- Gönderilen İstekler Listesi (Canlı İlerleme, Yüzde, İstatistik ve Çizgi Grafiği Butonu) -->
+      <div id="sentRemindersList" class="card-list"></div>
+
+      <div id="emptySentRemindersState" class="empty-state" style="display: none;">
+        <div class="empty-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 2L11 13"></path>
+            <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+          </svg>
+        </div>
+        <h3>Henüz Başkasına Görev Gönderilmedi</h3>
+        <p>Başkalarına hatırlatıcı görevi gönderip, yapıp yapmadıklarını canlı grafik ve yüzdelerle takip edebilirsiniz.</p>
+        <button class="btn-primary" style="margin-top: 14px;" onclick="openSettingsViewAndFocusTarget()">+ Başkası İçin Hatırlatıcı Belirle</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODAL: YENİ UYGULAMA SEÇ VE SINIRLA        -->
+  <!-- ========================================== -->
+  <div id="appPickerModal" class="modal-overlay" onclick="handleAppPickerOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+      <div class="modal-header">
+        <div>
+          <h3>Sınırlanacak Uygulamayı Seçin</h3>
+          <p style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">Kısıtlamak istediğiniz uygulamaya dokunun</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeAppPickerModal()">✕</button>
+      </div>
+
+      <div class="search-wrapper" style="margin-bottom: 12px;">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="appSearchInput" class="search-input" placeholder="Uygulama ara (örn. YouTube, Instagram)..." oninput="filterApps()">
+      </div>
+
+      <div id="installedAppsList" class="card-list" style="max-height: 60vh; overflow-y: auto;">
+        <!-- JS ile doldurulur (Paket adları tamamen gizlidir) -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: SINIR AYARLAMA (GÜNLÜK / ARALIK)   -->
+  <!-- ========================================== -->
+  <div id="configModal" class="modal-overlay" onclick="handleModalOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <div id="modalAppAvatarContainer">
+            <div id="modalAppAvatar" class="app-avatar">A</div>
+          </div>
+          <div>
+            <h3 id="modalAppName">Uygulama Adı</h3>
+            <div id="modalTodayUsedBadge" class="badge-today-used">Bugün Kullanılan: 0 dk</div>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeConfigModal()">✕</button>
+      </div>
+
+      <!-- Mod Seçimi: Günlük veya Aralık/Mola -->
+      <div class="mode-selector">
+        <button id="modeTabDaily" class="mode-tab-btn active" onclick="setModalMode('daily')">1. Günlük Limit</button>
+        <button id="modeTabInterval" class="mode-tab-btn" onclick="setModalMode('interval')">2. Aralık / Mola Limiti</button>
+      </div>
+
+      <!-- GÜNLÜK LİMİT AYARLARI -->
+      <div id="modeDailySettings">
+        <div class="config-group">
+          <label>Günlük Toplam Kullanım Süresi:</label>
+          <div class="chip-row">
+            <button type="button" class="time-chip" onclick="selectDailyMinutes(1)">1 dk (Test)</button>
+            <button type="button" class="time-chip" onclick="selectDailyMinutes(5)">5 dk</button>
+            <button type="button" class="time-chip" onclick="selectDailyMinutes(15)">15 dk</button>
+            <button type="button" class="time-chip selected" onclick="selectDailyMinutes(30)">30 dk</button>
+            <button type="button" class="time-chip" onclick="selectDailyMinutes(45)">45 dk</button>
+            <button type="button" class="time-chip" onclick="selectDailyMinutes(60)">1 saat</button>
+            <button type="button" class="time-chip" onclick="selectDailyMinutes(120)">2 saat</button>
+          </div>
+          <div class="custom-input-row" style="margin-top: 10px;">
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Özel Süre:</span>
+            <input type="number" id="inputDailyCustom" class="number-input" value="30" min="1" max="1440" oninput="onCustomDailyInput()">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">dakika</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARALIKLI / MOLA LİMİTİ AYARLARI -->
+      <div id="modeIntervalSettings" style="display: none;">
+        <div class="config-group">
+          <label>Kullanım Süresi (Uygulama Kaç Dakika Açık Kalabilsin?):</label>
+          <div class="chip-row">
+            <button type="button" class="time-chip" onclick="selectIntervalActive(1)">1 dk (Test)</button>
+            <button type="button" class="time-chip" onclick="selectIntervalActive(2)">2 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalActive(3)">3 dk</button>
+            <button type="button" class="time-chip selected" onclick="selectIntervalActive(5)">5 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalActive(10)">10 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalActive(15)">15 dk</button>
+          </div>
+          <div class="custom-input-row" style="margin-top: 8px;">
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Özel:</span>
+            <input type="number" id="inputActiveCustom" class="number-input" value="5" min="1" max="180" oninput="onCustomActiveInput()">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">dakika kullanım</span>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <label>Mola Süresi (Uygulama Kaç Dakika Kilitlensin?):</label>
+          <div class="chip-row">
+            <button type="button" class="time-chip" onclick="selectIntervalCooldown(1)">1 dk (Test)</button>
+            <button type="button" class="time-chip" onclick="selectIntervalCooldown(2)">2 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalCooldown(15)">15 dk</button>
+            <button type="button" class="time-chip selected" onclick="selectIntervalCooldown(25)">25 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalCooldown(30)">30 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalCooldown(45)">45 dk</button>
+            <button type="button" class="time-chip" onclick="selectIntervalCooldown(60)">60 dk</button>
+          </div>
+          <div class="custom-input-row" style="margin-top: 8px;">
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Özel:</span>
+            <input type="number" id="inputCooldownCustom" class="number-input" value="25" min="1" max="1440" oninput="onCustomCooldownInput()">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">dakika mola</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dinamik Açıklama Kutusu -->
+      <div id="dynamicExplanation" class="explanation-box"></div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" onclick="closeConfigModal()">İptal</button>
+        <button type="button" class="btn-danger" id="btnDeleteLimitInModal" style="display: none;" onclick="deleteCurrentEditingLimit()">🗑️ Sınırı Kaldır</button>
+        <button type="button" class="btn-primary" id="btnSaveConfig" onclick="saveCurrentConfig()">Sınırlamayı Başlat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: HATIRLATICI EKLE / DÜZENLE         -->
+  <!-- ========================================== -->
+  <div id="reminderModal" class="modal-overlay" onclick="handleReminderModalOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="yellow-bell-badge">🔔</div>
+          <div>
+            <h3 id="reminderModalTitle">Yeni Hatırlatıcı Ekle</h3>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeReminderModal()">✕</button>
+      </div>
+
+      <input type="hidden" id="remInputId" value="">
+      <input type="hidden" id="remTargetUsername" value="">
+
+      <!-- Başkası İçin Hatırlatıcı İse Hedef Rozeti -->
+      <div id="remTargetUserNotice" style="display: none; background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.35); border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; font-size: 0.8rem; color: #cbd5e1; align-items: center; gap: 8px;">
+        <span style="font-size: 1.1rem;">👤</span>
+        <span>Bu hatırlatıcı <strong><span id="remTargetUserSpan" style="color: #38bdf8;">@hedef</span></strong> kullanıcısına gönderilecek ve onaylandığında onun telefonunda aktifleşecektir.</span>
+      </div>
+
+      <!-- 1. Hatırlatıcı Mesajı -->
+      <div class="config-group">
+        <label>Hatırlatma Mesajı:</label>
+        <textarea id="remInputMessage" class="text-input-field" rows="2" placeholder="Örn: Ders çalışmayı tamamla veya 2 bardak su iç!"></textarea>
+      </div>
+
+      <!-- 2. Tekrar Sıklığı Seçimi (4 Mod) -->
+      <div class="config-group">
+        <label>Hatırlatma Sıklığı:</label>
+        <div class="mode-grid-selector" style="grid-template-columns: repeat(4, 1fr);">
+          <button type="button" id="remTypePeriodic" class="mode-pill-btn" onclick="setReminderType('periodic')">
+            <span>⏱️ Aralıklı</span>
+          </button>
+          <button type="button" id="remTypeDaily" class="mode-pill-btn active" onclick="setReminderType('daily')">
+            <span>🌅 Her Gün</span>
+          </button>
+          <button type="button" id="remTypeWeekly" class="mode-pill-btn" onclick="setReminderType('weekly')">
+            <span>🗓️ Haftalık</span>
+          </button>
+          <button type="button" id="remTypeMonthly" class="mode-pill-btn" onclick="setReminderType('monthly')">
+            <span>📆 Her Ay</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3A. Periyodik Ayarlar -->
+      <div id="remPeriodicSettings" class="config-group" style="display: none;">
+        <label>Kaç Dakikada Bir Tekrarlansın?</label>
+        <div class="chip-row">
+          <button type="button" class="time-chip" onclick="selectReminderInterval(5)">5 dk (Test)</button>
+          <button type="button" class="time-chip" onclick="selectReminderInterval(15)">15 dk</button>
+          <button type="button" class="time-chip selected" onclick="selectReminderInterval(30)">30 dk</button>
+          <button type="button" class="time-chip" onclick="selectReminderInterval(60)">1 saat</button>
+          <button type="button" class="time-chip" onclick="selectReminderInterval(120)">2 saat</button>
+        </div>
+        <div class="custom-input-row" style="margin-top: 8px;">
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Özel Periyot:</span>
+          <input type="number" id="remInputIntervalCustom" class="number-input" value="30" min="1" max="1440">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">dakika</span>
+        </div>
+      </div>
+
+      <!-- 3B. Her Gün Ayarları -->
+      <div id="remDailySettings" class="config-group">
+        <label>Günün Hangi Saatinde Hatırlatılsın?</label>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <input type="time" id="remDailyTime" class="time-input-field" value="09:00">
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Her gün bu saatte bildirim gönderilir</span>
+        </div>
+      </div>
+
+      <!-- 3C. Haftalık Ayarları -->
+      <div id="remWeeklySettings" class="config-group" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <label style="margin-bottom: 0;">Haftanın Hangi Günleri?</label>
+          <div style="display: flex; gap: 6px;">
+            <button type="button" class="mini-tag-btn" onclick="setWeeklyPreset('weekdays')">Hafta İçi</button>
+            <button type="button" class="mini-tag-btn" onclick="setWeeklyPreset('weekend')">Hafta Sonu</button>
+            <button type="button" class="mini-tag-btn" onclick="setWeeklyPreset('all')">Tümü</button>
+          </div>
+        </div>
+        <div class="weekday-row">
+          <button type="button" class="weekday-btn selected" data-day="1" onclick="toggleWeeklyDay(1)">Pzt</button>
+          <button type="button" class="weekday-btn selected" data-day="2" onclick="toggleWeeklyDay(2)">Sal</button>
+          <button type="button" class="weekday-btn selected" data-day="3" onclick="toggleWeeklyDay(3)">Çar</button>
+          <button type="button" class="weekday-btn selected" data-day="4" onclick="toggleWeeklyDay(4)">Per</button>
+          <button type="button" class="weekday-btn selected" data-day="5" onclick="toggleWeeklyDay(5)">Cum</button>
+          <button type="button" class="weekday-btn" data-day="6" onclick="toggleWeeklyDay(6)">Cmt</button>
+          <button type="button" class="weekday-btn" data-day="7" onclick="toggleWeeklyDay(7)">Paz</button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;">
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-main);">Saat:</span>
+          <input type="time" id="remWeeklyTime" class="time-input-field" value="10:00">
+        </div>
+      </div>
+
+      <!-- 3D. Aylık Ayarları -->
+      <div id="remMonthlySettings" class="config-group" style="display: none;">
+        <label>Her Ayın Hangi Günü?</label>
+        <div style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+          <select id="remMonthlyDay" class="select-field" style="max-width: 180px;"></select>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-main);">Saat:</span>
+            <input type="time" id="remMonthlyTime" class="time-input-field" value="12:00">
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Durdurma & Sona Erme Ayarları -->
+      <div class="config-group">
+        <label>🛑 Hatırlatıcı Ne Zaman Dursun? (Sona Erme Kuralı):</label>
+        <div class="stop-rule-selector">
+          <button type="button" id="remStopCondNever" class="stop-rule-btn active" onclick="setReminderStopCondition('never')">
+            <span class="rule-icon">♾️</span>
+            <span class="rule-title">Süresiz</span>
+          </button>
+          <button type="button" id="remStopCondDate" class="stop-rule-btn" onclick="setReminderStopCondition('date')">
+            <span class="rule-icon">📅</span>
+            <span class="rule-title">..... Tarihine kadar</span>
+          </button>
+          <button type="button" id="remStopCondCount" class="stop-rule-btn" onclick="setReminderStopCondition('count')">
+            <span class="rule-icon">🔢</span>
+            <span class="rule-title">..... tekrarlanacak</span>
+          </button>
+        </div>
+
+        <!-- Tarih Paneli -->
+        <div id="remStopDatePanel" style="display: none; margin-top: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Hangi tarihe kadar:</span>
+            <input type="date" id="remStopDate" class="date-input-field">
+          </div>
+        </div>
+
+        <!-- Tekrar Sayısı Paneli -->
+        <div id="remStopCountPanel" style="display: none; margin-top: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Kaç tekrardan sonra dursun:</span>
+            <input type="number" id="remStopCount" class="number-input" value="5" min="1" max="500">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">tekrar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. İKİ AŞAMALI HATIRLATICI (Görevi Şimdi Hatırlat, Durumu İleri Saatte Sor) -->
+      <div class="config-group" style="margin-top: 10px;">
+        <div class="feature-toggle-card">
+          <div style="flex: 1;">
+            <div style="font-size: 0.84rem; font-weight: 700; color: #fff;">🕒 İki Aşamalı Hatırlatıcı</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.35; margin-top: 2px;">
+              Görevi saati geldiğinde hatırlatır; ileri bir saatte ise <em>"Görevi yaptınız mı?"</em> sorusuyla ikinci bildirim gönderir.
+            </div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="remAskLater" onchange="toggleAskLaterSection(this.checked)">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div id="askLaterTimePanel" style="display: none; margin-top: 10px; padding: 10px 12px; background: rgba(99,102,241,0.08); border-radius: 8px; border: 1px solid rgba(99,102,241,0.2);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-main);">Tamamlandı mı sorma saati:</span>
+            <input type="time" id="remAskTimeOfDay" class="time-input-field" value="18:00">
+          </div>
+          <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 6px;">
+            Örnek saat 14.00'da görevi hatırlatmak için bildirimi gelir, saat 18.00'da görevin yapılıp yapılmadığı ile ilgili bildirim gelir.
+          </p>
+        </div>
+      </div>
+
+      <!-- 6. Görev Yapıldığı Yapılmadığı Takibi -->
+      <div class="config-group" style="margin-top: 10px;">
+        <div class="feature-toggle-card">
+          <div style="flex: 1;">
+            <div style="font-size: 0.84rem; font-weight: 700; color: #fff;">📊 Görev Yapıldığı Yapılmadığı Takibi</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="remEnableTracking" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" onclick="closeReminderModal()">İptal</button>
+        <button type="button" id="btnSaveReminder" class="btn-primary" onclick="saveReminderFromModal()">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: DETAYLI İSTATİSTİK & ÇİZGİ GRAFİĞİ  -->
+  <!-- ========================================== -->
+  <div id="statsGraphModal" class="modal-overlay" onclick="handleGraphModalOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div>
+          <h3 id="graphModalReminderTitle">Hatırlatıcı Başarı Grafiği</h3>
+          <p id="graphModalSubtitle" style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">Gün gün tamamlanma durumu ve düşüş eğrileri</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeStatsGraphModal()">✕</button>
+      </div>
+
+      <!-- Bütüncül Yüzde ve Özet Rozeti -->
+      <div class="graph-summary-card">
+        <div class="graph-percentage-circle">
+          <span id="graphTotalPercentageText" class="pct-val">%0</span>
+          <span class="pct-lbl">Başarı</span>
+        </div>
+        <div class="graph-summary-details">
+          <div class="summary-stat-row">
+            <span class="stat-dot-green"></span>
+            <span id="graphDoneText">0 Gün Yapıldı</span>
+          </div>
+          <div class="summary-stat-row">
+            <span class="stat-dot-red"></span>
+            <span id="graphNotDoneText">0 Gün Yapılmadı (Düşüş Spike)</span>
+          </div>
+          <div id="graphTotalDaysText" style="font-size: 0.74rem; color: var(--text-sub); margin-top: 4px;">
+            Toplam 0 gün takip edildi
+          </div>
+        </div>
+      </div>
+
+      <!-- SVG Çizgi Grafiği Kutusu (Y-ekseni: Günler, X/Seviye: Yapıldı / Yapılmadı) -->
+      <div class="graph-viewport-box">
+        <div class="graph-y-labels">
+          <span class="y-lbl top">✅ Yapıldı</span>
+          <span class="y-lbl btm">❌ Yapılmadı</span>
+        </div>
+        <div id="graphSvgContainer" class="svg-chart-container">
+          <!-- JS ile dinamik SVG çizilir -->
+        </div>
+      </div>
+
+      <div id="graphRecentDaysList" class="graph-recent-days">
+        <!-- Son günlerin ayrıntılı listesi -->
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-primary" onclick="closeStatsGraphModal()">Kapat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- TAM EKRAN SAYFA: AYARLAR                   -->
+  <!-- ========================================== -->
+  <div id="settingsView" class="full-screen-page">
+    <div class="page-top-bar">
+      <button class="btn-page-back" onclick="closeSettingsView()" title="Geri">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <h2 class="page-title">Ayarlar</h2>
+      <button class="btn-page-profile" onclick="openProfileModal()" title="Profil & İzinler">
+        <span>👤 Profil</span>
+      </button>
+    </div>
+
+    <div class="page-scroll-content">
+      <!-- 1. İKİ KARE KUTUCUK (YAN YANA) -->
+      <div class="two-squares-grid" id="settingsTwoSquaresGrid">
+        <!-- Kare 1: Sınırlandırılmayacak Uygulamalar -->
+        <div class="square-nav-card" onclick="openWhitelistPage()">
+          <div class="square-icon-box green">🛡️</div>
+          <div class="square-card-label">Sınırlandırılmayacak Uygulamalar</div>
+          <div class="square-card-count" id="settingsWhitelistCount">0 İstisna</div>
+        </div>
+        <!-- Kare 2: Uygulama Hakkında -->
+        <div class="square-nav-card" onclick="openAboutPage()">
+          <div class="square-icon-box indigo">ℹ️</div>
+          <div class="square-card-label">Uygulama Hakkında</div>
+          <div class="square-card-count">İzin Rehberi</div>
+        </div>
+      </div>
+
+      <!-- 2. BAŞKASI İÇİN HATIRLATICI BELİRLE BÖLÜMÜ -->
+      <div class="settings-block">
+        <div class="settings-block-title-row">
+          <h3 class="settings-block-title">Başkası İçin Hatırlatıcı Belirle</h3>
+          <span id="remoteSystemStatusBadge" class="badge-status-pill active">Aktif</span>
+        </div>
+
+        <div class="target-user-card">
+          <label class="target-input-label">Hedef Kullanıcı Adı:</label>
+          <div class="target-input-group">
+            <div class="target-input-wrapper">
+              <span class="target-at-symbol">@</span>
+              <input type="text" id="targetUserInput" class="target-user-input" placeholder="kullanici_adi" oninput="onTargetUserInputChanged()">
+            </div>
+            <button id="btnTargetAction" class="btn-target-verify" onclick="handleTargetUserAction()">
+              Doğrula
+            </button>
+          </div>
+          <div id="targetUserFeedback" class="target-feedback-msg" style="display: none;"></div>
+        </div>
+      </div>
+
+      <!-- 3. HATIRLATICI GRUPLARIM BÖLÜMÜ -->
+      <div class="settings-block" style="margin-top: 22px;">
+        <div class="settings-block-title-row">
+          <h3 class="settings-block-title">Hatırlatıcı Gruplarım</h3>
+          <button class="btn-add-group-text" onclick="openCreateGroupModal()">+ Yeni Grup</button>
+        </div>
+        <div id="groupsListContainer" class="groups-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- TAM EKRAN SAYFA: SINIRLANDIRILMAYACAK UYGULAMALAR -->
+  <!-- ========================================== -->
+  <div id="whitelistView" class="full-screen-page">
+    <div class="page-top-bar">
+      <button class="btn-page-back" onclick="closeWhitelistPage()" title="Ayarlara Dön">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <h2 class="page-title">Sınırlandırılmayacak Uygulamalar</h2>
+      <div style="width: 38px;"></div>
+    </div>
+
+    <div class="page-scroll-content">
+      <div class="whitelist-page-banner">
+        <p>İşaretlenen uygulamalar hiçbir kurala takılmaz ve asla kapatılmaz. <strong>İşaretli uygulamalar listenin en başında yer alır.</strong></p>
+        <div class="whitelist-toolbar" style="margin-top: 10px;">
+          <button type="button" class="mini-btn-action" onclick="applyDefaultEssentialWhitelist()">✨ Temel Önerileri Seç</button>
+          <button type="button" class="mini-btn-action subtle" onclick="clearWhitelistSelection()">Temizle</button>
+        </div>
+      </div>
+
+      <div class="search-wrapper" style="margin: 12px 0;">
+        <input type="text" id="whitelistSearchInput" class="search-input" placeholder="Uygulama ara..." oninput="renderWhitelistPage()">
+      </div>
+
+      <!-- İşaretliler en başta, işaretlenmeyenler sonra -->
+      <div id="whitelistPageAppsList" class="whitelist-apps-container"></div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- TAM EKRAN SAYFA: UYGULAMA HAKKINDA          -->
+  <!-- ========================================== -->
+  <div id="aboutView" class="full-screen-page">
+    <div class="page-top-bar">
+      <button class="btn-page-back" onclick="closeAboutPage()" title="Ayarlara Dön">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <h2 class="page-title">Uygulama Hakkında</h2>
+      <div style="width: 38px;"></div>
+    </div>
+
+    <div class="page-scroll-content">
+      <!-- SİSTEM NASIL ÇALIŞIR BİLGİLENDİRMESİ -->
+      <div class="about-info-card">
+        <div class="about-card-header">
+          <span class="about-icon">⚡</span>
+          <h3>Sistem Nasıl Çalışır?</h3>
+        </div>
+        <p>
+          Sınırlayıcı, telefon kullanımınızı sağlıklı tutmak için tasarlanmıştır. Belirlediğiniz süre veya mola dolduğunda kısıtlanan uygulama otomatik olarak kapatılıp sizi ana ekrana yönlendirir. Arka planda güvenli ve pil dostu bir şekilde çalışır.
+        </p>
+      </div>
+
+      <div class="section-title" style="margin-top: 20px;">
+        <span>⚙️ İzin Rehberi</span>
+      </div>
+
+      <!-- REHBER 1: ERİŞİLEBİLİRLİK -->
+      <div class="guide-box">
+        <div class="guide-header">
+          <span class="guide-step-badge">1</span>
+          <strong>Erişilebilirlik Servisi İzni</strong>
+        </div>
+        <p class="guide-desc">
+          Süre dolduğunda uygulamanın kapatılıp ana ekrana yönlendirilebilmesi için zorunludur.
+        </p>
+        <div class="guide-steps-code">
+          <strong>Ayarlar</strong> ➔ <strong>Erişilebilirlik</strong> ➔ <strong>Yüklü Uygulamalar</strong> ➔ <strong>Sınırlayıcı</strong> ➔ <strong>"Açık"</strong> yapın.
+        </div>
+        <button class="btn-guide-action" onclick="openAccessibilitySettings()">Erişilebilirlik Ayarlarını Aç</button>
+      </div>
+
+      <!-- REHBER 2: PİL KULLANIMI KISITLAMA YOK -->
+      <div class="guide-box">
+        <div class="guide-header">
+          <span class="guide-step-badge">2</span>
+          <strong>Pil Kullanımı: "Kısıtlama Yok" (Sınırsız)</strong>
+        </div>
+        <p class="guide-desc">
+          Android'in arka planda zamanlayıcıları ve hatırlatıcıları durdurmaması için gereklidir.
+        </p>
+        <div class="guide-steps-code">
+          <strong>Ayarlar</strong> ➔ <strong>Uygulamalar</strong> ➔ <strong>Sınırlayıcı</strong> ➔ <strong>Pil / Pil Kullanımı</strong> ➔ <strong>"Kısıtlama Yok" (Sınırsız)</strong> seçin.
+        </div>
+        <button class="btn-guide-action" onclick="openBatterySettings()">Pil Kısıtlama Ayarlarını Aç</button>
+      </div>
+
+      <!-- REHBER 3: OTOMATİK BAŞLATMA -->
+      <div class="guide-box">
+        <div class="guide-header">
+          <span class="guide-step-badge">3</span>
+          <strong>Otomatik Başlatma & Arka Plan İzni</strong>
+        </div>
+        <p class="guide-desc">
+          Telefon yeniden başladığında servisin durmaması ve hatırlatıcıların aksamaması için gereklidir.
+        </p>
+        <div class="guide-steps-code">
+          <strong>Ayarlar</strong> ➔ <strong>Uygulamalar</strong> ➔ <strong>Sınırlayıcı</strong> ➔ <strong>Otomatik Başlatma</strong> ➔ <strong>"İzin Ver"</strong> yapın.
+        </div>
+        <button class="btn-guide-action" onclick="openAppDetailSettings()">Uygulama Bilgisi & İzinleri Aç</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: PROFİL & DIŞ HATIRLATICI İZNİ       -->
+  <!-- ========================================== -->
+  <div id="profileModal" class="modal-overlay" onclick="handleProfileOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.3rem;">👤</span>
+          <h3>Profil Ayarları</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeProfileModal()">✕</button>
+      </div>
+
+      <!-- KULLANICI ADI -->
+      <div class="settings-card" style="margin-top: 4px;">
+        <div class="settings-card-header">
+          <div class="settings-icon-circle">👤</div>
+          <div style="flex: 1;">
+            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 700;">Kullanıcı Adım</h4>
+            <p style="margin: 2px 0 0; font-size: 0.74rem; color: var(--text-muted);">
+              Diğer telefonların size hatırlatıcı gönderebilmesi için benzersiz adınız
+            </p>
+          </div>
+          <span id="currentUsernameBadge" class="badge-username">Tanımsız</span>
+        </div>
+        <div style="margin-top: 12px; display: flex; gap: 8px;">
+          <div style="flex: 1; position: relative;">
+            <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-weight: 700;">@</span>
+            <input type="text" id="inputUsername" class="search-input" style="padding-left: 28px;" placeholder="kullanici_adi (en az 3 harf)">
+          </div>
+          <button class="btn-primary" style="padding: 0 16px; white-space: nowrap;" onclick="saveUsernameClick()">Kaydet</button>
+        </div>
+        <div id="usernameFeedback" style="font-size: 0.76rem; margin-top: 6px; display: none;"></div>
+      </div>
+
+      <!-- BAŞKALARINDAN HATIRLATICI KABULÜ -->
+      <div class="settings-card" style="margin-top: 12px;">
+        <div class="settings-card-header" style="align-items: center;">
+          <div class="settings-icon-circle" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">🔒</div>
+          <div style="flex: 1;">
+            <h4 style="margin: 0; font-size: 0.92rem; font-weight: 700;">Dışarıdan Hatırlatıcı Kabulü</h4>
+            <p style="margin: 2px 0 0; font-size: 0.74rem; color: var(--text-muted);">
+              Başkaları tarafından size hatırlatıcı gönderilmesine izin verin
+            </p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="allowIncomingToggle" onchange="handleAllowIncomingToggle(this.checked)">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div id="allowIncomingNotice" class="allow-incoming-notice" style="margin-top: 8px;">
+          ⚠️ <strong>İzin Kapalı:</strong> Kimse size hatırlatıcı isteği gönderemez.
+        </div>
+      </div>
+
+      <div class="modal-actions" style="margin-top: 16px;">
+        <button type="button" class="btn-primary" onclick="closeProfileModal()">Tamam</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: ÖZEL SİLME ONAYI (file:// UYARISIZ) -->
+  <!-- ========================================== -->
+  <div id="customConfirmModal" class="modal-overlay" style="z-index: 100;">
+    <div class="custom-confirm-card">
+      <div class="confirm-icon">⚠️</div>
+      <h3 id="customConfirmMessage" class="confirm-msg">Bu hatırlatıcı silinecek</h3>
+      <div class="confirm-actions">
+        <button type="button" id="customConfirmCancelBtn" class="btn-secondary" onclick="closeCustomConfirm(false)">İptal</button>
+        <button type="button" id="customConfirmOkBtn" class="btn-danger" onclick="closeCustomConfirm(true)">Sil</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: UZAKTAN HATIRLATICI GÖNDERME        -->
+  <!-- ========================================== -->
+  <div id="remoteSendModal" class="modal-overlay" onclick="handleRemoteModalOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div>
+          <h3 id="remoteSendModalTitle">Hatırlatıcı İsteği Gönder</h3>
+          <p id="remoteSendTargetSubtitle" style="font-size: 0.75rem; color: var(--accent-primary); margin-top: 2px;">Hedef: @kullanici</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeRemoteSendModal()">✕</button>
+      </div>
+
+      <input type="hidden" id="remoteTargetType" value="user">
+      <input type="hidden" id="remoteTargetIdentifier" value="">
+
+      <div class="config-group">
+        <label>Hatırlatıcı Başlığı:</label>
+        <input type="text" id="remoteInputTitle" class="search-input" placeholder="Örn: Kitap Oku, Su İç, İlaç">
+      </div>
+
+      <div class="config-group">
+        <label>Hatırlatma Mesajı:</label>
+        <textarea id="remoteInputMessage" class="text-input-field" rows="2" placeholder="Örn: Akşam 20:00'de 30 sayfa kitap okumayı unutma!"></textarea>
+      </div>
+
+      <div class="config-group">
+        <label>Hatırlatma Saati & Sıklığı:</label>
+        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+          <input type="time" id="remoteInputTime" class="time-input-field" value="20:00">
+          <select id="remoteInputType" class="select-field" style="flex: 1;">
+            <option value="daily">🌅 Her Gün</option>
+            <option value="weekly">🗓️ Hafta İçi (Pzt-Cum)</option>
+            <option value="periodic">⏱️ Her 60 Dakikada Bir</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="config-group" style="margin-top: 8px;">
+        <div class="feature-toggle-card">
+          <div style="flex: 1;">
+            <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-main);">📊 "Yaptım / Yapmadım" Takibi</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Karşı tarafın durumunu canlı yüzde ve grafik ile takip edin</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="remoteEnableTracking" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" onclick="closeRemoteSendModal()">İptal</button>
+        <button type="button" class="btn-primary" onclick="submitRemoteSend()">🚀 İsteği Gönder</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: GRUP OLUŞTURMA                      -->
+  <!-- ========================================== -->
+  <div id="createGroupModal" class="modal-overlay" onclick="handleGroupModalOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div>
+          <h3>Yeni Hatırlatıcı Grubu</h3>
+          <p style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">Grup ismi ve üyeleri belirleyin</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeCreateGroupModal()">✕</button>
+      </div>
+
+      <div class="config-group">
+        <label>Grup İsmi:</label>
+        <input type="text" id="groupNameInput" class="search-input" placeholder="Örn: Çalışma Grubu, Aile, Ekip">
+      </div>
+
+      <div class="config-group">
+        <label>Grup Üyeleri (Kullanıcı Adları):</label>
+        <p style="font-size: 0.72rem; color: var(--text-sub); margin-bottom: 6px;">Kullanıcı adlarını virgülle ayırarak yazın (örn: ahmet, mehmet):</p>
+        <textarea id="groupMembersInput" class="text-input-field" rows="3" placeholder="ahmet, mehmet, ayse"></textarea>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" onclick="closeCreateGroupModal()">İptal</button>
+        <button type="button" class="btn-primary" onclick="submitCreateGroup()">Grubu Oluştur</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: ZAMANLANMIŞ KİLİT MODU (5 SN BASILI TUTUNCA) -->
+  <!-- ========================================== -->
+  <div id="scheduledLockModal" class="modal-overlay" onclick="handleScheduledLockOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-header">
+        <div>
+          <h3>⏱️ Zamanlanmış Kilit (Odak & Gece)</h3>
+          <p style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">Belirlenen saat aralığında tüm uygulamaları kilitler</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeScheduledLockModal()">✕</button>
+      </div>
+
+      <div class="config-group" style="margin-top: 6px;">
+        <div class="feature-toggle-card">
+          <div style="flex: 1;">
+            <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-main);">🔒 Zamanlanmış Kilit Modu</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">
+              Açıldığında başlangıç ve bitiş saatleri arasında otomatik kilitlenir.
+            </div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="scheduledLockEnabledToggle" onchange="onScheduledLockToggleChange()">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div id="scheduledLockTimeSection" class="config-group">
+        <label>Kilit Başlangıç ve Bitiş Saatleri:</label>
+        <div style="display: flex; gap: 12px; align-items: center; margin-top: 6px;">
+          <div style="flex: 1;">
+            <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">Başlangıç:</div>
+            <input type="time" id="scheduledLockStartTime" class="time-input-field" value="23:00">
+          </div>
+          <div style="font-size: 1.1rem; color: var(--text-sub); margin-top: 16px;">➔</div>
+          <div style="flex: 1;">
+            <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">Bitiş:</div>
+            <input type="time" id="scheduledLockEndTime" class="time-input-field" value="07:00">
+          </div>
+        </div>
+
+        <div style="margin-top: 12px;">
+          <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 6px;">Hızlı Saat Seçenekleri:</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <button type="button" class="time-chip" onclick="setScheduledLockPreset('23:00', '07:00')">🌙 Gece (23:00 - 07:00)</button>
+            <button type="button" class="time-chip" onclick="setScheduledLockPreset('09:00', '18:00')">💼 Çalışma (09:00 - 18:00)</button>
+            <button type="button" class="time-chip" onclick="setScheduledLockPreset('20:00', '23:00')">📚 Akşam (20:00 - 23:00)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-box" style="margin-top: 14px; background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 10px 12px; border-radius: 8px;">
+        <div style="font-size: 0.75rem; color: #fca5a5; line-height: 1.45;">
+          ℹ️ <strong>Kural:</strong> Belirlenen saatler arasında Pomodoro'da izin verdiğiniz ve istisna (Asla Sınırlanmayacak) olarak belirlediğiniz uygulamalar serbest kalır, diğer tüm uygulamalara giriş yasaklanır.
+        </div>
+      </div>
+
+      <div class="modal-actions" style="margin-top: 18px;">
+        <button type="button" class="btn-secondary" onclick="closeScheduledLockModal()">İptal</button>
+        <button type="button" class="btn-primary" onclick="saveScheduledLockSettings()">💾 Kaydet ve Uygula</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+
+  <!-- Gizli Kod / Menü Yönetim Modalı -->
+  <div id="secretCodeModal" class="modal-overlay" style="display: none; z-index: 120;">
+    <div class="custom-confirm-card secret-code-card">
+      <div class="confirm-icon" style="font-size: 2.2rem; margin-bottom: 6px;">🔐</div>
+      <h3 class="confirm-msg" style="margin-bottom: 6px; font-size: 1.05rem;">Güvenlik Kodu</h3>
+      <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 14px;">Lütfen 4 haneli şifreyi giriniz</p>
+      <input type="password" id="secretCodeInput" maxlength="6" inputmode="numeric" placeholder="••••" 
+             style="width: 140px; text-align: center; font-size: 1.5rem; letter-spacing: 6px; padding: 10px; margin: 0 auto 18px auto; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); background: rgba(15, 23, 42, 0.8); color: #fff; outline: none; display: block;" />
+      <div class="confirm-actions">
+        <button type="button" class="btn-secondary" onclick="closeSecretCodeModal()">İptal</button>
+        <button type="button" class="btn-primary" onclick="submitSecretCode()">Onayla</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 1. Grup İsim Belirleme ve Grubu Boz Modalı -->
+  <div id="groupNameModal" class="modal-overlay" style="display: none; z-index: 135;">
+    <div class="custom-confirm-card" style="max-width: 340px; padding: 22px 20px;">
+      <div class="confirm-icon" style="font-size: 2.2rem; margin-bottom: 6px;">📁</div>
+      <h3 class="confirm-msg" style="margin-bottom: 6px; font-size: 1.1rem;">Hatırlatıcı Grubu Oluştur</h3>
+      <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 14px;">
+        Seçilen iki hatırlatıcı birleştiriliyor. Grup için bir isim belirleyin:
+      </p>
+      <input type="text" id="groupNameInputModal" placeholder="Örn: Sabah Rutini, Dersler..." maxlength="30"
+             style="width: 100%; box-sizing: border-box; font-size: 1rem; font-weight: 600; padding: 12px 14px; margin-bottom: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); background: rgba(15, 23, 42, 0.85); color: #fff; outline: none;" />
+      <div class="confirm-actions" style="display: flex; gap: 10px; justify-content: center;">
+        <button type="button" class="btn-secondary" onclick="cancelGroupCreation()" style="flex: 1; padding: 10px; border-radius: 10px; color: #f87171; border-color: rgba(239,68,68,0.4);">
+          ✕ Grubu Boz
+        </button>
+        <button type="button" class="btn-primary" onclick="confirmGroupCreation()" style="flex: 1; padding: 10px; border-radius: 10px;">
+          ✓ Grubu Kaydet
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Grup Detay Modalı (Grup İçindeki Hatırlatıcılar) -->
+  <div id="groupDetailModal" class="modal-overlay" style="display: none; z-index: 125;">
+    <div class="modal-sheet" style="max-height: 85vh; display: flex; flex-direction: column;">
+      <div class="modal-drag-handle"></div>
+      <div class="modal-header" style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.4rem;">📁</span>
+          <h3 id="groupDetailTitle" style="font-size: 1.15rem; font-weight: 700; color: #fff; margin: 0;">Grup Adı</h3>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button type="button" class="btn-secondary" onclick="dissolveCurrentGroup()" style="font-size: 0.78rem; padding: 6px 12px; border-radius: 8px; color: #f87171; border-color: rgba(239,68,68,0.35);">
+            🗑️ Grubu Boz
+          </button>
+          <button type="button" class="btn-close-modal" onclick="closeGroupDetailModal()" style="font-size: 1.2rem; background: transparent; border: none; color: #94a3b8; cursor: pointer; padding: 4px 8px;">✕</button>
+        </div>
+      </div>
+      <div id="groupDetailList" style="flex: 1; overflow-y: auto; padding: 14px 2px; display: flex; flex-direction: column; gap: 12px;">
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
