@@ -1050,9 +1050,21 @@
             item.currentRepeatCount = (item.currentRepeatCount || 0) + 1;
             changed = true;
 
-            // Tek bir interaktif native bildirim tetikle ('✅ Yaptım' ve '❌ Yapmadım' butonları ile)
-            if (window.AndroidBridge && typeof window.AndroidBridge.triggerReminderNow === 'function') {
-              try { window.AndroidBridge.triggerReminderNow(item.id); } catch (e) {}
+            const notifTitle = `🔔 ${item.title || 'Hatırlatıcı'}`;
+            const notifMsg = item.desc || `${item.time} vakti geldi.`;
+
+            // Çok katmanlı bildirim tetikleme (Asla kaçırmaz)
+            if (window.AndroidBridge) {
+              let sent = false;
+              if (typeof window.AndroidBridge.showInteractiveNotification === 'function') {
+                try { sent = window.AndroidBridge.showInteractiveNotification(notifTitle, notifMsg, item.id); } catch (e) {}
+              }
+              if (!sent && typeof window.AndroidBridge.triggerReminderNow === 'function') {
+                try { sent = window.AndroidBridge.triggerReminderNow(item.id); } catch (e) {}
+              }
+              if (!sent && typeof window.AndroidBridge.showNotification === 'function') {
+                try { sent = window.AndroidBridge.showNotification(notifTitle, notifMsg); } catch (e) {}
+              }
             }
           }
         });
