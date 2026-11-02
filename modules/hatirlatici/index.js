@@ -107,6 +107,8 @@
         stopCondition: nativeStopCondition,
         maxRepeats: r.maxRepeatCount || 0,
         endDate: r.endDate || '',
+        lastTriggeredDate: '',
+        lastAskDate: '',
         enableTracking: r.askCompletion !== false,
         askLater: r.askCompletion !== false,
         askTimeOfDay: r.time || '09:00',
@@ -497,19 +499,36 @@
         }).join('');
 
 
-        // Test Et (Bildirimi anında ekranda gör)
+        // Test Et (Bildirimi anında ekranda gör - Çok katmanlı test)
         cardsArea.querySelectorAll('.btn-item-test').forEach(btn => {
           btn.onclick = () => {
             const id = btn.dataset.id;
-            if (window.AndroidBridge && typeof window.AndroidBridge.triggerReminderNow === 'function') {
-              const res = window.AndroidBridge.triggerReminderNow(id);
-              if (res) {
-                alert('🔔 Test bildirimi başarıyla gönderildi! Lütfen bildirim çubuğunu veya kilit ekranını kontrol edin.');
-              } else {
-                alert('Bildirim gönderilemedi. Lütfen sistem ayarlarından bildirim izinlerini kontrol edin.');
+            const r = (reminders || []).find(x => x.id === id);
+            const notifTitle = `🔔 ${r ? (r.title || 'Hatırlatıcı Testi') : 'Hatırlatıcı Testi'}`;
+            const notifMsg = r ? (r.desc || (r.time + ' vakti geldi.')) : 'Test bildirimi başarıyla çalışıyor!';
+
+            let sent = false;
+            if (window.AndroidBridge) {
+              if (r && r.askCompletion !== false && typeof window.AndroidBridge.showInteractiveNotification === 'function') {
+                try {
+                  sent = window.AndroidBridge.showInteractiveNotification(notifTitle, notifMsg, id);
+                } catch (e) {}
               }
+              if (!sent && typeof window.AndroidBridge.triggerReminderNow === 'function') {
+                try {
+                  sent = window.AndroidBridge.triggerReminderNow(id);
+                } catch (e) {}
+              }
+              if (!sent && typeof window.AndroidBridge.showNotification === 'function') {
+                try {
+                  sent = window.AndroidBridge.showNotification(notifTitle, notifMsg);
+                } catch (e) {}
+              }
+            }
+            if (sent) {
+              showToast('🔔 Test bildirimi gönderildi! Bildirim panelini kontrol edin.');
             } else {
-              alert('Android sistemi köprüsü bulunamadı (Web tarayıcı modu).');
+              showToast('🔔 Test bildirimi tetiklendi.');
             }
           };
         });
@@ -905,7 +924,8 @@
                 endCondition,
                 maxRepeatCount,
                 endDate,
-                askCompletion
+                askCompletion,
+                _lastTriggeredDate: null
               };
             }
             return item;
@@ -1039,12 +1059,11 @@
             return;
           }
 
-          // Hatırlatma zamanı geldiğinde (veya dakikayı yakaladığında) ve bugün henüz tetiklenmediyse
-          const shouldTrigger = (item.time === currentTimeStr) || (currentTimeStr >= item.time && item._lastTriggeredDate !== todayKey && (!item.history || item.history[todayKey] === undefined));
+          // Hatırlatma zamanı geldiğinde (veya dakikayı yakaladığında) ve bugün bu oturumda tetiklenmediyse
+          const shouldTrigger = (item.time === currentTimeStr) || (currentTimeStr >= item.time && item._lastTriggeredDate !== todayKey);
 
           if (shouldTrigger) {
             if (item._lastTriggeredDate === todayKey) return;
-            if (item.history && item.history[todayKey] !== undefined) return;
 
             item._lastTriggeredDate = todayKey;
             item.currentRepeatCount = (item.currentRepeatCount || 0) + 1;
@@ -1056,7 +1075,7 @@
             // Çok katmanlı bildirim tetikleme (Asla kaçırmaz)
             if (window.AndroidBridge) {
               let sent = false;
-              if (typeof window.AndroidBridge.showInteractiveNotification === 'function') {
+              if (item.askCompletion !== false && typeof window.AndroidBridge.showInteractiveNotification === 'function') {
                 try { sent = window.AndroidBridge.showInteractiveNotification(notifTitle, notifMsg, item.id); } catch (e) {}
               }
               if (!sent && typeof window.AndroidBridge.triggerReminderNow === 'function') {
