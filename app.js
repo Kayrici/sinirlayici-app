@@ -2837,6 +2837,22 @@ function openAccessibilitySettings() {
   }
 }
 
+function openBatterySettings() {
+  if (isAndroid && window.AndroidBridge.openBatterySettings) {
+    window.AndroidBridge.openBatterySettings();
+  } else {
+    showToast("Pil optimizasyon ayarları açılıyor...");
+  }
+}
+
+function openAppDetailSettings() {
+  if (isAndroid && window.AndroidBridge.openAppDetailSettings) {
+    window.AndroidBridge.openAppDetailSettings();
+  } else {
+    showToast("Uygulama bilgisi ve izin ayarları açılıyor...");
+  }
+}
+
 function getPomodoroStatusNative() {
   if (isAndroid && window.AndroidBridge.getPomodoroStatus) {
     try {
@@ -2925,6 +2941,15 @@ function deleteReminderNative(id) {
     return window.AndroidBridge.deleteReminder(id);
   }
   mockReminders = mockReminders.filter(x => x.id !== id);
+  return true;
+}
+
+function toggleReminderNative(id, enabled) {
+  if (isAndroid && window.AndroidBridge.toggleReminder) {
+    return window.AndroidBridge.toggleReminder(id, enabled);
+  }
+  const rem = (typeof mockReminders !== 'undefined' ? mockReminders : []).find(x => x.id === id);
+  if (rem) rem.enabled = enabled;
   return true;
 }
 
@@ -3308,7 +3333,13 @@ function setupBrandClockSecretHold() {
   }
 }
 
+let secretAutoSubmitTimer = null;
+
 function openSecretCodeModal() {
+  if (secretAutoSubmitTimer) {
+    clearTimeout(secretAutoSubmitTimer);
+    secretAutoSubmitTimer = null;
+  }
   const modal = document.getElementById("secretCodeModal");
   const input = document.getElementById("secretCodeInput");
   if (modal) {
@@ -3328,22 +3359,42 @@ function openSecretCodeModal() {
       }
     };
     input.oninput = () => {
+      if (secretAutoSubmitTimer) {
+        clearTimeout(secretAutoSubmitTimer);
+        secretAutoSubmitTimer = null;
+      }
       if (input.value.length === 4) {
-        setTimeout(submitSecretCode, 150);
+        secretAutoSubmitTimer = setTimeout(() => {
+          submitSecretCode();
+        }, 120);
       }
     };
   }
 }
 
 function closeSecretCodeModal() {
+  if (secretAutoSubmitTimer) {
+    clearTimeout(secretAutoSubmitTimer);
+    secretAutoSubmitTimer = null;
+  }
   const modal = document.getElementById("secretCodeModal");
+  const input = document.getElementById("secretCodeInput");
+  if (input) input.value = "";
   if (modal) modal.style.display = "none";
 }
 
 function submitSecretCode() {
+  if (secretAutoSubmitTimer) {
+    clearTimeout(secretAutoSubmitTimer);
+    secretAutoSubmitTimer = null;
+  }
   const input = document.getElementById("secretCodeInput");
   if (!input) return;
   const val = input.value.trim();
+  if (!val) return;
+
+  // Clear input immediately to prevent any double-submit race condition
+  input.value = "";
 
   if (val === "8246") {
     // 8246 KODU: 5 Günlük Katı Kilit Modu (Değiştirilemez & Silinemez)
