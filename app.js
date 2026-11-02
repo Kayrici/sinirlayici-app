@@ -36,6 +36,26 @@ Object.defineProperty(window, 'isAndroid', {
   configurable: true
 });
 
+function getLocalTodayStr(d) {
+  const dt = d || new Date();
+  const yyyy = dt.getFullYear();
+  const mm = String(dt.getMonth() + 1).padStart(2, '0');
+  const dd = String(dt.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+let _lastUniqueIdTs = 0;
+function generateUniqueReminderId() {
+  let now = Date.now();
+  if (now <= _lastUniqueIdTs) {
+    now = _lastUniqueIdTs + 1;
+  }
+  _lastUniqueIdTs = now;
+  return String(now);
+}
+
+let lastShownHeadsUpTriggerMap = {};
+
 // Mock veriler (Tarayıcı ortamında geliştirme için)
 const mockApps = [
   { packageName: "com.android.settings", appName: "Ayarlar", todayUsageSeconds: 120, icon: "" },
@@ -145,6 +165,13 @@ function loadData() {
   installedApps = getInstalledAppsNative();
   activeLimits = getLimitsNative();
   reminders = getRemindersNative();
+  if (Array.isArray(reminders)) {
+    reminders.forEach(r => {
+      if (r && r.id && r.lastTriggeredTime) {
+        lastShownHeadsUpTriggerMap[r.id] = r.lastTriggeredTime;
+      }
+    });
+  }
 
   const pomoStatus = getPomodoroStatusNative();
   pomodoroActive = pomoStatus.active;
@@ -222,8 +249,30 @@ function tickLiveUpdates() {
     updateScheduledLockBanner();
   }
 
-  // Hatırlatıcılar sekmesinde 'Kendim' açıkken yeni gelen hatırlatıcı isteklerini canlı tara
+  // Her 5 saniyede bir hatırlatıcıları ve gelen istekleri canlı tara
   if (liveTickCounter % 5 === 0) {
+    const freshReminders = getRemindersNative();
+    let newlyTriggeredRem = null;
+    const nowMs = Date.now();
+    freshReminders.forEach(r => {
+      if (r && r.id && r.lastTriggeredTime && (nowMs - r.lastTriggeredTime) < 15000) {
+        if (lastShownHeadsUpTriggerMap[r.id] !== r.lastTriggeredTime) {
+          lastShownHeadsUpTriggerMap[r.id] = r.lastTriggeredTime;
+          newlyTriggeredRem = r;
+        }
+      }
+    });
+    reminders = freshReminders;
+    updateRemindersBadge();
+
+    if (newlyTriggeredRem) {
+      triggerHeadsUpNotification(newlyTriggeredRem);
+      renderRemindersList();
+      if (typeof currentActiveViewingGroupId !== 'undefined' && currentActiveViewingGroupId) {
+        openGroupDetailModal(currentActiveViewingGroupId);
+      }
+    }
+
     const tabReminders = document.getElementById("tabReminders");
     if (tabReminders && tabReminders.classList.contains("active") && currentReminderScope === 'self') {
       loadIncomingNotice();
@@ -769,11 +818,11 @@ function openAddReminderModal() {
 
   const d = new Date();
   d.setDate(d.getDate() + 30);
-  const defDateStr = d.toISOString().split("T")[0];
+  const defDateStr = getLocalTodayStr(d);
   const stopDateInput = document.getElementById("remStopDate");
   if (stopDateInput) {
     stopDateInput.value = defDateStr;
-    stopDateInput.min = new Date().toISOString().split("T")[0];
+    stopDateInput.min = getLocalTodayStr();
   }
   setStopCountPreset(5);
 
@@ -884,7 +933,7 @@ function saveReminderFromModal() {
   const existing = currentEditingReminderId ? reminders.find(x => x.id === currentEditingReminderId) : null;
 
   const item = {
-    id: currentEditingReminderId || String(Date.now()),
+    id: currentEditingReminderId || generateUniqueReminderId(),
     type: currentReminderType,
     message: msg,
     icon: "bell", // Daima sarı çan simgesi
@@ -933,9 +982,37 @@ function saveReminderFromModal() {
     item.appUsageMinutes = Math.max(1, val);
   }
 
+  // Saat ve periyot başlangıç durumunu akıllıca hesapla (geçmiş saatli hatırlatıcının kaydedilir kaydedilmez yanlışlıkla çalmasını önle)
+  const nowDt = new Date();
+  const todayLocalStr = getLocalTodayStr(nowDt);
+  const curMinsOfDay = nowDt.getHours() * 60 + nowDt.getMinutes();
+
+  if (item.type === 'periodic') {
+    if (!existing || existing.type !== 'periodic' || existing.intervalMinutes !== item.intervalMinutes || !existing.lastTriggeredTime) {
+      item.lastTriggeredTime = Date.now();
+      lastShownHeadsUpTriggerMap[item.id] = item.lastTriggeredTime;
+    }
+  } else if (item.type === 'daily' || item.type === 'weekly' || item.type === 'monthly') {
+    const parts = (item.timeOfDay || "09:00").split(":");
+    const targetH = parseInt(parts[0], 10) || 0;
+    const targetM = parseInt(parts[1], 10) || 0;
+    const targetMinsOfDay = targetH * 60 + targetM;
+
+    if (curMinsOfDay > targetMinsOfDay) {
+      // Bugünkü saat zaten geçmiş -> bugün tetiklenmiş işaretle ki kaydeder kaydetmez anında bildirim atmasın, bir sonraki döngüyü beklesin
+      item.lastTriggeredDate = todayLocalStr;
+    } else {
+      // Bugünkü saat henüz gelmemiş -> eğer yeni oluşturuluyorsa veya saati/türü değiştirildiyse bugün o saatte çalabilmesi için sıfırla
+      if (!existing || existing.timeOfDay !== item.timeOfDay || existing.type !== item.type) {
+        item.lastTriggeredDate = "";
+      }
+    }
+  }
+
   const trackingCb = document.getElementById("remEnableTracking");
   item.enableTracking = item.askLater ? true : (trackingCb ? trackingCb.checked : true);
   if (existing) {
+    if (existing.groupId) item.groupId = existing.groupId;
     item.doneCount = existing.doneCount || 0;
     item.notDoneCount = existing.notDoneCount || 0;
     item.lastActionDate = existing.lastActionDate || "";
@@ -979,6 +1056,9 @@ function saveReminderFromModal() {
   closeReminderModal();
   reminders = getRemindersNative();
   renderRemindersList();
+  if (typeof currentActiveViewingGroupId !== 'undefined' && currentActiveViewingGroupId) {
+    openGroupDetailModal(currentActiveViewingGroupId);
+  }
   updateRemindersBadge();
   showToast(currentEditingReminderId ? "Hatırlatıcı güncellendi!" : "Hatırlatıcı başarıyla kaydedildi!");
 }
@@ -1116,6 +1196,9 @@ function toggleReminderState(id, enabled) {
   toggleReminderNative(id, enabled);
   reminders = getRemindersNative();
   renderRemindersList();
+  if (typeof currentActiveViewingGroupId !== 'undefined' && currentActiveViewingGroupId) {
+    openGroupDetailModal(currentActiveViewingGroupId);
+  }
   updateRemindersBadge();
 }
 
@@ -1130,6 +1213,9 @@ function deleteReminderItem(id) {
     deleteReminderNative(id);
     reminders = getRemindersNative();
     renderRemindersList();
+    if (typeof currentActiveViewingGroupId !== 'undefined' && currentActiveViewingGroupId) {
+      openGroupDetailModal(currentActiveViewingGroupId);
+    }
     updateRemindersBadge();
     showToast("Hatırlatıcı silindi.");
   });
@@ -1158,7 +1244,7 @@ function openStatsGraphModal(reminderId) {
   for (let i = 6; i >= 0; i--) {
     const d = new Date(now);
     d.setDate(d.getDate() - i);
-    const dateStr = d.toISOString().split("T")[0];
+    const dateStr = getLocalTodayStr(d);
     const status = history[dateStr] || null; // 'done', 'not_done' veya null
     const dayName = d.toLocaleDateString("tr-TR", { weekday: 'short', day: 'numeric', month: 'short' });
     daysList.push({ date: dateStr, label: dayName, status: status });
@@ -1221,7 +1307,7 @@ function openRemoteStatsGraphModal(requestId) {
   for (let i = 6; i >= 0; i--) {
     const d = new Date(now);
     d.setDate(d.getDate() - i);
-    const dateStr = d.toISOString().split("T")[0];
+    const dateStr = getLocalTodayStr(d);
     const status = history[dateStr] || null;
     const dayName = d.toLocaleDateString("tr-TR", { weekday: 'short', day: 'numeric', month: 'short' });
     daysList.push({ date: dateStr, label: dayName, status: status });
@@ -2558,7 +2644,7 @@ function loadSentRequests(manual) {
     }
 
     if (emptyState) emptyState.style.display = "none";
-    const todayStr = new Date().toISOString().split("T")[0];
+    const todayStr = getLocalTodayStr();
 
     container.innerHTML = sent.map(req => {
       const st = req.status || 'pending';
@@ -2866,6 +2952,14 @@ function getPomodoroStatusNative() {
 }
 
 function startPomodoroNative(mins, blockedList, allowedList) {
+  if (allowedList === undefined && Array.isArray(blockedList)) {
+    allowedList = blockedList;
+    const wlSet = getAppWhitelistSet();
+    const allowSet = new Set(allowedList);
+    blockedList = installedApps
+      .map(a => a.packageName)
+      .filter(pkg => pkg && pkg !== "com.sinirlayici.app" && !isEssentialApp(pkg) && !wlSet.has(pkg) && !allowSet.has(pkg));
+  }
   if (isAndroid && window.AndroidBridge.startPomodoro) {
     try {
       return window.AndroidBridge.startPomodoro(mins, JSON.stringify(blockedList || []), JSON.stringify(allowedList || []));
@@ -2911,6 +3005,28 @@ function saveRemindersOrder() {
   } catch (e) {}
 }
 
+function getReminderGroupMap() {
+  try {
+    const raw = localStorage.getItem("sinirlayici_reminder_group_map");
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function setReminderGroupIdInMap(remId, groupId) {
+  if (!remId) return;
+  try {
+    const map = getReminderGroupMap();
+    if (groupId) {
+      map[remId] = groupId;
+    } else {
+      delete map[remId];
+    }
+    localStorage.setItem("sinirlayici_reminder_group_map", JSON.stringify(map));
+  } catch (e) {}
+}
+
 function getRemindersNative() {
   let list = [];
   if (isAndroid && window.AndroidBridge.getReminders) {
@@ -2923,10 +3039,26 @@ function getRemindersNative() {
   } else {
     list = mockReminders;
   }
+  if (Array.isArray(list)) {
+    const grpMap = getReminderGroupMap();
+    const validGrpIds = new Set((typeof reminderGroups !== 'undefined' && Array.isArray(reminderGroups)) ? reminderGroups.map(g => g.id) : []);
+    list.forEach(r => {
+      if (!r) return;
+      const mappedGrp = r.groupId || grpMap[r.id];
+      if (mappedGrp && (validGrpIds.size === 0 || validGrpIds.has(mappedGrp))) {
+        r.groupId = mappedGrp;
+      } else {
+        delete r.groupId;
+      }
+    });
+  }
   return sortRemindersBySavedOrder(list);
 }
 
 function saveReminderNative(item) {
+  if (item && item.id) {
+    setReminderGroupIdInMap(item.id, item.groupId || null);
+  }
   if (isAndroid && window.AndroidBridge.saveReminder) {
     return window.AndroidBridge.saveReminder(JSON.stringify(item));
   }
@@ -2937,6 +3069,7 @@ function saveReminderNative(item) {
 }
 
 function deleteReminderNative(id) {
+  setReminderGroupIdInMap(id, null);
   if (isAndroid && window.AndroidBridge.deleteReminder) {
     return window.AndroidBridge.deleteReminder(id);
   }
@@ -3485,7 +3618,7 @@ function handleNotificationAction(isDone) {
   }
   
   const remId = currentActiveNotifReminderId;
-  const todayStr = new Date().toISOString().split("T")[0];
+  const todayStr = getLocalTodayStr();
 
   // Hatırlatıcı verisini güncelle
   const idx = reminders.findIndex(x => x.id === remId);
@@ -3654,7 +3787,7 @@ function confirmGroupCreation() {
   if (!input || !pendingGroupCard1Id || !pendingGroupCard2Id) return;
 
   const groupName = input.value.trim() || "Hatırlatıcı Grubu";
-  const newGroupId = "grp_" + Date.now();
+  const newGroupId = "grp_" + generateUniqueReminderId();
 
   reminderGroups.push({
     id: newGroupId,
@@ -3682,7 +3815,7 @@ function confirmGroupCreation() {
 // KARTLARI RENDER ETME YARDIMCISI
 // ==========================================
 function renderSingleReminderCardHtml(r, isInsideGroup = false) {
-  const todayStr = new Date().toISOString().split("T")[0];
+  const todayStr = getLocalTodayStr();
   const iconEmoji = "🔔";
 
   let scheduleText = "";
