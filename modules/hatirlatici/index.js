@@ -89,10 +89,8 @@
   function syncReminderToNative(r) {
     if (!r || !window.AndroidBridge || typeof window.AndroidBridge.saveReminder !== 'function') return;
     try {
-      const javaDaysList = (r.weekDays || [1, 2, 3, 4, 5, 6, 0]).map(dId => {
-        const found = DAYS_OF_WEEK.find(d => d.id === dId);
-        return found && found.javaDay ? found.javaDay : (dId === 0 ? 1 : dId + 1);
-      });
+      // Java tarafında: Mon=1, Tue=2, Wed=3, Thu=4, Fri=5, Sat=6, Sun=7
+      const javaDaysList = (r.weekDays || [1, 2, 3, 4, 5, 6, 0]).map(dId => (dId === 0 ? 7 : dId));
       const daysStr = javaDaysList.join(',');
       const nativeStopCondition = (r.endCondition === 'forever') ? 'never' : (r.endCondition || 'never');
       const nativeMessage = r.desc || r.title || 'Hatırlatıcı vakti geldi!';
@@ -480,6 +478,9 @@
               <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-card); padding-top: 0.65rem; font-size: 0.75rem; color: var(--text-secondary);">
                 <span>${scheduleText}</span>
                 <div style="display: flex; gap: 0.45rem; align-items: center;">
+                  <button class="btn-item-test" data-id="${item.id}" title="Bildirimi hemen test et" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; padding: 0.35rem 0.65rem; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.75rem;">
+                    🔔 Test Et
+                  </button>
                   <button class="btn-item-edit" data-id="${item.id}" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-card); color: var(--text-primary); padding: 0.35rem 0.65rem; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.75rem;">
                     ✏️ Düzenle
                   </button>
@@ -495,6 +496,23 @@
           `;
         }).join('');
 
+
+        // Test Et (Bildirimi anında ekranda gör)
+        cardsArea.querySelectorAll('.btn-item-test').forEach(btn => {
+          btn.onclick = () => {
+            const id = btn.dataset.id;
+            if (window.AndroidBridge && typeof window.AndroidBridge.triggerReminderNow === 'function') {
+              const res = window.AndroidBridge.triggerReminderNow(id);
+              if (res) {
+                alert('🔔 Test bildirimi başarıyla gönderildi! Lütfen bildirim çubuğunu veya kilit ekranını kontrol edin.');
+              } else {
+                alert('Bildirim gönderilemedi. Lütfen sistem ayarlarından bildirim izinlerini kontrol edin.');
+              }
+            } else {
+              alert('Android sistemi köprüsü bulunamadı (Web tarayıcı modu).');
+            }
+          };
+        });
 
         // Düzenle
         cardsArea.querySelectorAll('.btn-item-edit').forEach(btn => {
@@ -996,13 +1014,13 @@
     startScheduler(context) {
       if (this.checkInterval) clearInterval(this.checkInterval);
 
-      // Her 30 saniyede bir zaman kontrolü
+      // Her 15 saniyede bir zaman kontrolü
       this.checkInterval = setInterval(() => {
         const now = new Date();
         const currentHours = String(now.getHours()).padStart(2, '0');
         const currentMins = String(now.getMinutes()).padStart(2, '0');
         const currentTimeStr = `${currentHours}:${currentMins}`;
-        const todayKey = now.toISOString().split('T')[0];
+        const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
         const dayOfWeek = now.getDay();
         const dayOfMonth = now.getDate();
 
@@ -1010,6 +1028,7 @@
         let changed = false;
 
         reminders.forEach(item => {
+          if (item.enabled === false) return;
           if (item.endCondition === 'date' && item.endDate && todayKey > item.endDate) return;
           if (item.endCondition === 'count' && item.maxRepeatCount > 0 && item.currentRepeatCount >= item.maxRepeatCount) return;
 
@@ -1020,13 +1039,18 @@
             return;
           }
 
-          if (item.time === currentTimeStr) {
+          // Hatırlatma zamanı geldiğinde (veya dakikayı yakaladığında) ve bugün henüz tetiklenmediyse
+          const shouldTrigger = (item.time === currentTimeStr) || (currentTimeStr >= item.time && item._lastTriggeredDate !== todayKey && (!item.history || item.history[todayKey] === undefined));
+
+          if (shouldTrigger) {
+            if (item._lastTriggeredDate === todayKey) return;
             if (item.history && item.history[todayKey] !== undefined) return;
 
+            item._lastTriggeredDate = todayKey;
             item.currentRepeatCount = (item.currentRepeatCount || 0) + 1;
             changed = true;
 
-            // Tek bir native bildirim tetikle (Bildirim üzerinde '✅ Yaptım' ve '❌ Yapmadım' seçenekleri ile)
+            // Tek bir interaktif native bildirim tetikle ('✅ Yaptım' ve '❌ Yapmadım' butonları ile)
             if (window.AndroidBridge && typeof window.AndroidBridge.triggerReminderNow === 'function') {
               try { window.AndroidBridge.triggerReminderNow(item.id); } catch (e) {}
             }
@@ -1036,7 +1060,7 @@
         if (changed) {
           context.storage.set('reminders', reminders);
         }
-      }, 30000);
+      }, 15000);
     },
 
     triggerInteractiveNotification(item, context) {
