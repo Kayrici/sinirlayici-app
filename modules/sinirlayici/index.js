@@ -113,14 +113,34 @@
       this.checkInterval = null;
       preloadAppsInBackground();
 
+      // Kullanıcının belirttiği istenmeyen Chrome sınırını temizle (ilk açılışta veya güncellemede)
+      const isCleanupRun = !context.storage.get('chrome_cleaned_v144_done', false);
+      if (isCleanupRun) {
+        context.storage.set('chrome_cleaned_v144_done', true);
+        if (window.AndroidBridge && typeof window.AndroidBridge.deleteLimit === 'function') {
+          try {
+            window.AndroidBridge.deleteLimit('com.android.chrome');
+            window.AndroidBridge.deleteLimit('Google Chrome');
+            window.AndroidBridge.deleteLimit('Chrome');
+          } catch (e) {}
+        }
+      }
+
       // Native depodaki limitler ile yerel depoyu eşitle (çift yönlü senkronizasyon)
       if (window.AndroidBridge && typeof window.AndroidBridge.getLimits === 'function') {
         try {
           const raw = window.AndroidBridge.getLimits();
           if (raw) {
             const nativeList = JSON.parse(raw);
-            if (Array.isArray(nativeList) && nativeList.length > 0) {
+            if (Array.isArray(nativeList)) {
               let localLimits = context.storage.get('limits', []);
+              if (isCleanupRun) {
+                localLimits = localLimits.filter(l => {
+                  const id = String(l.id || l.packageName || '').toLowerCase();
+                  const name = String(l.name || l.appName || '').toLowerCase();
+                  return !id.includes('chrome') && !name.includes('chrome');
+                });
+              }
               let localMap = new Map();
               localLimits.forEach(l => {
                 const k = (l.id || l.packageName || '').trim();
@@ -130,6 +150,9 @@
               nativeList.forEach(nItem => {
                 const pkg = (nItem.packageName || '').trim();
                 if (!pkg) return;
+                if (isCleanupRun && (pkg.toLowerCase().includes('chrome') || (nItem.appName && nItem.appName.toLowerCase().includes('chrome')))) {
+                  return; // İstenmeyen Chrome sınırını geri yükleme
+                }
                 const existing = localMap.get(pkg);
                 if (existing) {
                   existing.id = pkg;
@@ -335,7 +358,7 @@
                 </div>
               </div>
               <div style="display: flex; align-items: center; gap: 0.4rem;">
-                <button type="button" onclick="window.__sinirlayiciDelete('${pkgId}')" title="Sınırı Sil" style="background: none; border: none; color: var(--text-muted); font-size: 1.15rem; cursor: pointer; padding: 0.4rem;">
+                <button type="button" class="btn-delete-limit" data-pkg="${pkgId}" onclick="window.__sinirlayiciDelete('${pkgId}', event)" title="Sınırı Sil" style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.25); color: #f87171; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; cursor: pointer; transition: all 0.15s ease;">
                   🗑️
                 </button>
               </div>
@@ -510,30 +533,42 @@
 
 
       // Sil
-      window.__sinirlayiciDelete = (id) => {
+      window.__sinirlayiciDelete = (id, event) => {
+        if (event) {
+          try { event.stopPropagation(); } catch (e) {}
+          try { event.preventDefault(); } catch (e) {}
+        }
         if (!id) return;
-        const targetId = String(id).trim();
+        const targetId = String(id).trim().toLowerCase();
 
-        // 1. Storage'dan hedefi kesin olarak temizle
+        // 1. Storage'dan hedefi kesin olarak temizle (id, packageName veya isim kontrolü)
         let limits = context.storage.get('limits', []);
         const toDelete = limits.find(l => {
-          const lId = String(l.id || l.packageName || '').trim();
-          const lPkg = String(l.packageName || l.id || '').trim();
-          return lId === targetId || lPkg === targetId;
+          const lId = String(l.id || '').trim().toLowerCase();
+          const lPkg = String(l.packageName || '').trim().toLowerCase();
+          const lName = String(l.name || l.appName || '').trim().toLowerCase();
+          return lId === targetId || lPkg === targetId || lName === targetId;
         });
 
         limits = limits.filter(l => {
-          const lId = String(l.id || l.packageName || '').trim();
-          const lPkg = String(l.packageName || l.id || '').trim();
-          return lId !== targetId && lPkg !== targetId;
+          const lId = String(l.id || '').trim().toLowerCase();
+          const lPkg = String(l.packageName || '').trim().toLowerCase();
+          const lName = String(l.name || l.appName || '').trim().toLowerCase();
+          return lId !== targetId && lPkg !== targetId && lName !== targetId;
         });
         context.storage.set('limits', limits);
 
-        // 2. Native Android Bridge'den sil
-        const nativePkg = toDelete ? (toDelete.packageName || toDelete.id || targetId) : targetId;
+        // 2. Native Android Bridge'den tüm olası varyasyonlarla sil
+        const nativePkg = toDelete ? (toDelete.packageName || toDelete.id || id) : id;
         if (window.AndroidBridge && typeof window.AndroidBridge.deleteLimit === 'function') {
           try {
-            window.AndroidBridge.deleteLimit(nativePkg.trim());
+            window.AndroidBridge.deleteLimit(String(nativePkg).trim());
+            if (toDelete && toDelete.id && toDelete.id !== nativePkg) {
+              window.AndroidBridge.deleteLimit(String(toDelete.id).trim());
+            }
+            if (String(id).trim() !== String(nativePkg).trim()) {
+              window.AndroidBridge.deleteLimit(String(id).trim());
+            }
           } catch (e) {
             console.warn('Native deleteLimit hatası:', e);
           }
@@ -543,7 +578,7 @@
         const appName = toDelete ? (toDelete.name || toDelete.appName || nativePkg) : 'Uygulama';
         if (window.AndroidBridge && typeof window.AndroidBridge.showToast === 'function') {
           try {
-            window.AndroidBridge.showToast(`🗑️ ${appName} sınırlayıcısı kaldırıldı.`);
+            window.AndroidBridge.showToast(`🗑️ ${appName} sınırı kaldırıldı.`);
           } catch (e) {}
         }
 
